@@ -1,5 +1,16 @@
 startup;
 
+%% ============================================================
+% Result persistence
+%
+% Creates results/exp03b_delay/<runId>/ and captures every line printed
+% below into console.log. Paired with the save block at the end.
+% ============================================================
+
+R = startExperiment('exp03b_delay');
+
+
+
 delayLevels = [
     0.00
     0.02
@@ -172,3 +183,18 @@ xlabel('Communication delay [ms]');
 ylabel('Minimum separation after 8 s [m]');
 
 title('EXP03B delay vs swarm separation');
+
+
+%% ============================================================
+% Persist results
+%
+% save() with no variable list stores the ENTIRE script workspace,
+% so every sweep axis and result array is preserved without having
+% to enumerate names.
+% ============================================================
+
+save(fullfile(R.dir,'workspace.mat'));
+
+saveAllFigures(R);
+
+finishExperiment(R);

@@ -1,5 +1,16 @@
 % EXP01C_DISTURBANCE Hover disturbance-rejection test.
 startup;
+
+%% ============================================================
+% Result persistence
+%
+% Creates results/exp01c_disturbance/<runId>/ and captures every line printed
+% below into console.log. Paired with the save block at the end.
+% ============================================================
+
+R = startExperiment('exp01c_disturbance');
+
+
 cfg = defaultConfig();
 cfg.single.T = 10.0;
 cfg.single.disturbanceFcn = @gustDisturbance;
@@ -79,3 +90,18 @@ for i = idx0:(numel(t)-windowN+1)
     end
 end
 end
+
+
+%% ============================================================
+% Persist results
+%
+% save() with no variable list stores the ENTIRE script workspace,
+% so every sweep axis and result array is preserved without having
+% to enumerate names.
+% ============================================================
+
+save(fullfile(R.dir,'workspace.mat'));
+
+saveAllFigures(R);
+
+finishExperiment(R);

@@ -40,6 +40,17 @@ startup;
 
 close all;
 
+%% ============================================================
+% Result persistence
+%
+% Creates results/exp05a_event_triggered/<runId>/ and captures every line printed
+% below into console.log. Paired with the save block at the end.
+% ============================================================
+
+R = startExperiment('exp05a_event_triggered');
+
+
+
 
 %% ============================================================
 % Network conditions
@@ -1045,3 +1056,18 @@ fprintf( ...
     'EXP05A completed.\n');
 
 fprintf('\n');
+
+
+%% ============================================================
+% Persist results
+%
+% save() with no variable list stores the ENTIRE script workspace,
+% so every sweep axis and result array is preserved without having
+% to enumerate names.
+% ============================================================
+
+save(fullfile(R.dir,'workspace.mat'));
+
+saveAllFigures(R);
+
+finishExperiment(R);

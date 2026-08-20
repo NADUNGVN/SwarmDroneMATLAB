@@ -33,9 +33,16 @@ for k = 1:n
     name = strtrim(f.Name);
 
     if isempty(name)
+        % Many scripts call bare figure(); fall back to the first
+        % axes title so the exported file is still identifiable.
+        name = localAxesTitle(f);
+    end
+
+    if isempty(name)
         base = sprintf('fig%02d', k);
     else
-        base = sprintf('fig%02d_%s', k, matlab.lang.makeValidName(name));
+        name = matlab.lang.makeValidName(name);
+        base = sprintf('fig%02d_%s', k, name(1:min(end,48)));
     end
 
     pngPath = fullfile(R.figDir, [base '.png']);
@@ -57,5 +64,39 @@ end
 
 
 fprintf('saveAllFigures: %d figure(s) written to %s\n', n, R.figDir);
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+% ============================================================
+
+function name = localAxesTitle(f)
+
+name = '';
+
+ax = findobj(f, 'Type', 'axes');
+
+if isempty(ax)
+    return;
+end
+
+% findobj returns axes in reverse creation order.
+ax = ax(end);
+
+try
+    name = strtrim(ax.Title.String);
+catch
+    name = '';
+end
+
+if iscell(name)
+    if isempty(name)
+        name = '';
+    else
+        name = name{1};
+    end
+end
 
 end

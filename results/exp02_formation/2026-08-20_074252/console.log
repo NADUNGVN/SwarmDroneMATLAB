@@ -1,0 +1,24 @@
+
+============================================================
+RUN  : exp02_formation
+ID   : 2026-08-20_074252
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp02_formation\2026-08-20_074252
+WHEN : 2026-08-20 07:42:52
+============================================================
+
+
+EXP02 ideal-communication formation results
+  Formation RMSE (t>=8 s) : 0.0162 m
+  Max formation error     : 0.0261 m
+  Min inter-agent distance: 0.2744 m
+  Velocity disagreement   : 0.0016 m/s
+  Formation settling time : 5.500 s
+  STATUS                  : PASS
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp02_formation\2026-08-20_074252\figures
+
+============================================================
+DONE : exp02_formation
+TIME : 7.6 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp02_formation\2026-08-20_074252
+============================================================

@@ -1,5 +1,16 @@
 % EXP01D_TRAJECTORY Smooth ascent followed by circular trajectory tracking.
 startup;
+
+%% ============================================================
+% Result persistence
+%
+% Creates results/exp01d_trajectory/<runId>/ and captures every line printed
+% below into console.log. Paired with the save block at the end.
+% ============================================================
+
+R = startExperiment('exp01d_trajectory');
+
+
 cfg = defaultConfig();
 cfg.single.T = 18.0;
 cfg.single.referenceFcn = @circleReference;
@@ -85,3 +96,18 @@ ref.vel = [r*w*sin(theta); r*w*cos(theta); 0];
 ref.acc = [r*w^2*cos(theta); -r*w^2*sin(theta); 0];
 ref.yaw = 0;
 end
+
+
+%% ============================================================
+% Persist results
+%
+% save() with no variable list stores the ENTIRE script workspace,
+% so every sweep axis and result array is preserved without having
+% to enumerate names.
+% ============================================================
+
+save(fullfile(R.dir,'workspace.mat'));
+
+saveAllFigures(R);
+
+finishExperiment(R);
