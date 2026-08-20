@@ -62,7 +62,7 @@ Margin dương nghĩa là Full-AoI tốt hơn ở cùng chi phí.
 | Scenario | Thắng periodic | Thắng state-event |
 |---|---|---|
 | Clean | 4/6 | 5/6 |
-| Moderate | 1/4 | 3/4 |
+| Moderate | 1/4 | 2/4 |
 | Stressed | 1/3 | 2/3 |
 
 **Kết luận thẳng thắn:** dưới Moderate và Stressed, một lịch periodic cố định *được chọn đúng
@@ -80,13 +80,17 @@ nhất của nó chấp nhận được).
 
 | Mean rate [Hz] | Full-AoI worst RMSE | Margin vs Periodic | Margin vs State-event |
 |---|---|---|---|
-| 15.93 | 0.1138 | **+0.0058** | **+0.0147** |
-| 11.80 | 0.1305 | **+0.0061** | **+0.0157** |
-| 8.25 | 0.1491 | **+0.0131** | **+0.0239** |
-| 6.50 | 0.1617 | **+0.0257** | **+0.0362** |
+| 15.93 | 0.1140 | **+0.0061** | **+0.0154** |
+| 11.81 | 0.1307 | **+0.0067** | **+0.0168** |
+| 8.25 | 0.1489 | **+0.0147** | **+0.0266** |
+| 6.51 | 0.1628 | **+0.0263** | **+0.0379** |
 
 **Full-AoI thắng 4/4 điểm so sánh được với periodic và 4/4 với state-event.** Biên độ thắng
 tăng dần khi tốc độ truyền giảm — tức lợi thế càng rõ ở chế độ tiết kiệm băng thông.
+
+Kết luận này bền vững: EXP05D được chạy hai lần với hai chuỗi RNG hoàn toàn khác nhau (trước và
+sau khi vá lỗi generator ở B14), và cả hai lần đều cho 4/4 với biên độ gần như trùng nhau
+(+0.0058/+0.0061/+0.0131/+0.0257 so với +0.0061/+0.0067/+0.0147/+0.0263).
 
 ### 1.3 Bằng chứng trực tiếp cho cơ chế
 
@@ -274,7 +278,28 @@ trúc**. Hiện vô hại vì mọi caller đặt `minInterTx = dt`, nhưng là 
 9.4 %" cần Wilcoxon signed-rank hoặc paired t-test kèm khoảng tin cậy.
 
 `tidy.csv` nay chứa giá trị **thô theo từng seed** cho mọi thực nghiệm Monte-Carlo, nên toàn bộ
-phần thống kê có thể tính lại **mà không cần chạy lại mô phỏng**.
+phần thống kê có thể tính lại **mà không cần chạy lại mô phỏng**. Ví dụ đã kiểm chứng, tính
+hoàn toàn từ `tidy.csv` (ghép cặp theo cột `seed`, Wilcoxon signed-rank, CI 95 % trên hiệu):
+
+*EXP05C, A3 (adaptive) → A4 (accepted-state feedback):*
+
+| Scenario | A3 RMSE | A4 RMSE | Δ | CI 95 % | p |
+|---|---|---|---|---|---|
+| Clean | 0.0377 | 0.0377 | +0.0000 | [0, 0] | — (khác biệt đúng bằng 0) |
+| Moderate | 0.1035 | 0.0976 | +0.0059 | [+0.0055, +0.0063] | 8.9 × 10⁻⁵ |
+| Stressed | 0.1556 | 0.1306 | +0.0250 | [+0.0234, +0.0266] | 8.9 × 10⁻⁵ |
+
+*EXP05D, Full-AoI so với State-event ở cùng `epsP`, mạng Stressed:*
+
+| epsP | Full-AoI | State-event | Δ | p |
+|---|---|---|---|---|
+| 0.030 | 0.1140 | 0.1886 | +0.0746 | 8.9 × 10⁻⁵ |
+| 0.050 | 0.1307 | 0.2573 | +0.1265 | 8.9 × 10⁻⁵ |
+| 0.080 | 0.1489 | 0.3511 | +0.2022 | 8.9 × 10⁻⁵ |
+
+`p = 8.9 × 10⁻⁵` là giá trị nhỏ nhất mà signrank có thể trả về với n = 20, tức mọi seed đều
+cùng chiều. Lưu ý kỹ thuật: phải ghép cặp theo cột `seed`, **không** được sort riêng hai vector
+giá trị — làm vậy sẽ phá vỡ tính ghép cặp và làm hẹp CI một cách giả tạo.
 
 ---
 
@@ -287,7 +312,7 @@ phần thống kê có thể tính lại **mà không cần chạy lại mô ph�
 | B3 | `defaultConfig.m` định nghĩa khối swarm+net **hai lần** (L26-61 rồi L67-134). Nguy hiểm: L44-55 định nghĩa `adjacency` là **ring + leader nối tất cả**, L94 định nghĩa `A` là **ring thuần**. Người đọc L44-55 sẽ hiểu sai topology. Rác: `kp/kv/leaderKp/leaderKv`, `adjacency`, `net.rateHz/delaySec/maxAoI`. | `configs/defaultConfig.m` | ⏸ |
 | B4 | Leader nhận gói **không bao giờ dùng**: `A(1,2)=A(1,5)=1` nên agent 1 nhận 2/12 channel ở N=5, nhưng controller hardcode `accCmd(1,:) = leader.acc'`. → **≈17 % số lần truyền được đếm ở N=5 là lãng phí thuần**, và `nChannels` (mẫu số chuẩn hoá ở khắp nơi) bao gồm chúng. Tỉ lệ co lại theo N (17 % ở N=5 → 1.6 % ở N=50). | `distributedFormationPolicy.m:23` | ⏸ |
 | B5 | `MINSEP` cấp phát nhưng **không bao giờ ghi** → cột "MinFull" in ra luôn bằng 0.0000. | `exp03a_packet_loss.m` | ✅ đã sửa |
-| B6 | `test_formation_error.m` **rỗng nghĩa**: so `offsets` với chính nó nên pass với mọi offsets; lại dùng index cột `offsets(:,i)` trên khối 3×5 đã chết. Không thể fail. | `tests/test_formation_error.m` | ⏸ |
+| B6 | `test_formation_error.m` hỏng hẳn: nó dùng index cột `offsets(:,i)` trên ma trận 5×3, nên **báo lỗi out-of-bounds** mỗi lần chạy — không phải chỉ vô nghĩa mà là không chạy được. Kể cả khi sửa index thì nó vẫn so `offsets` với chính nó nên không thể fail. | `tests/test_formation_error.m` | ✅ viết lại thành 4 ca kiểm thử đối chiếu với đáp án giải tích |
 | B7 | Min-separation O(K·N²) → ở N=50 là ~1.8 triệu lần `norm()` mỗi run × 640 run trong EXP06A. | `computeSwarmMetrics.m` | ✅ đã vector hoá (nhanh hơn 6–11×, khớp bit-for-bit) |
 | B8 | `ablationTriggerPolicy` (`simSwarmAoIAblation.m:782-978`) là bản sao gần nguyên văn của `aoiAwareTriggerPolicy` và **đã thiếu clamp `scaleMin`**. Hôm nay số vẫn trùng nhưng hai bản chỉ cách nhau một lần sửa là lệch. Thêm nữa **default AoI của hai sim khác nhau**: `AoIAware` là `0.04/0.08/0.16`, `AoIAblation` là `0.05/0.10/0.12`. | | ⏸ |
 | B9 | `net.valid` / `net.leaderValid` được ghi nhưng **không bao giờ đọc**. Vô hại hôm nay chỉ vì init gieo sẵn trạng thái thật tại t=0 → **mọi link khởi đầu với AoI=0 và thông tin hoàn hảo miễn phí**. Cửa sổ đánh giá t≥8 s che được, nhưng nên khẳng định chứ đừng giả định. | `initQueuedNetworkState.m` | ⏸ |

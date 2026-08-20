@@ -1,0 +1,120 @@
+
+============================================================
+RUN  : exp04b_rate_impairment
+ID   : 2026-08-20_113608
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp04b_rate_impairment\2026-08-20_113608
+WHEN : 2026-08-20 11:36:09
+============================================================
+
+
+============================================================
+EXP04B communication rate x network impairment
+============================================================
+
+Rates     : 5, 10, 20 Hz
+Loss      : 0, 20, 40 %
+Delay     : 0, 80, 120 ms
+Jitter    : 0 ms
+Seeds     : 20 per condition
+
+Rate =  5 Hz | Loss =  0 % | Delay =   0 ms
+Rate =  5 Hz | Loss =  0 % | Delay =  80 ms
+Rate =  5 Hz | Loss =  0 % | Delay = 120 ms
+Rate =  5 Hz | Loss = 20 % | Delay =   0 ms
+Rate =  5 Hz | Loss = 20 % | Delay =  80 ms
+Rate =  5 Hz | Loss = 20 % | Delay = 120 ms
+Rate =  5 Hz | Loss = 40 % | Delay =   0 ms
+Rate =  5 Hz | Loss = 40 % | Delay =  80 ms
+Rate =  5 Hz | Loss = 40 % | Delay = 120 ms
+Rate = 10 Hz | Loss =  0 % | Delay =   0 ms
+Rate = 10 Hz | Loss =  0 % | Delay =  80 ms
+Rate = 10 Hz | Loss =  0 % | Delay = 120 ms
+Rate = 10 Hz | Loss = 20 % | Delay =   0 ms
+Rate = 10 Hz | Loss = 20 % | Delay =  80 ms
+Rate = 10 Hz | Loss = 20 % | Delay = 120 ms
+Rate = 10 Hz | Loss = 40 % | Delay =   0 ms
+Rate = 10 Hz | Loss = 40 % | Delay =  80 ms
+Rate = 10 Hz | Loss = 40 % | Delay = 120 ms
+Rate = 20 Hz | Loss =  0 % | Delay =   0 ms
+Rate = 20 Hz | Loss =  0 % | Delay =  80 ms
+Rate = 20 Hz | Loss =  0 % | Delay = 120 ms
+Rate = 20 Hz | Loss = 20 % | Delay =   0 ms
+Rate = 20 Hz | Loss = 20 % | Delay =  80 ms
+Rate = 20 Hz | Loss = 20 % | Delay = 120 ms
+Rate = 20 Hz | Loss = 40 % | Delay =   0 ms
+Rate = 20 Hz | Loss = 40 % | Delay =  80 ms
+Rate = 20 Hz | Loss = 40 % | Delay = 120 ms
+
+============================================================
+EXP04B mean results over 20 Monte Carlo seeds
+============================================================
+
+Rate Loss Delay RMSE[m] StdRMSE MaxErr MinEval PDR AoI_sim AoI_th FormFail SafeFail
+---- ---- ----- ------- ------- ------ ------- --- ------- ------ -------- --------
+ 5Hz   0%   0ms  0.0698  0.0000  0.0892  0.5109  1.000  0.100   0.100    0.00     0.00
+ 5Hz   0%  80ms  0.1079  0.0000  0.1367  0.4653  1.000  0.180   0.180    1.00     0.00
+ 5Hz   0% 120ms  0.1317  0.0000  0.1678  0.4360  1.000  0.220   0.220    1.00     0.00
+ 5Hz  20%   0ms  0.1013  0.0036  0.1491  0.4642  0.799  0.150   0.150    0.60     0.00
+ 5Hz  20%  80ms  0.1389  0.0031  0.1929  0.4248  0.799  0.230   0.230    1.00     0.00
+ 5Hz  20% 120ms  0.1628  0.0030  0.2226  0.3960  0.798  0.270   0.270    1.00     0.00
+ 5Hz  40%   0ms  0.1515  0.0054  0.2314  0.3941  0.597  0.234   0.233    1.00     0.00
+ 5Hz  40%  80ms  0.1894  0.0060  0.2779  0.3556  0.602  0.314   0.313    1.00     0.00
+ 5Hz  40% 120ms  0.2109  0.0048  0.2992  0.3283  0.598  0.353   0.353    1.00     0.00
+10Hz   0%   0ms  0.0345  0.0000  0.0455  0.5549  1.000  0.050   0.050    0.00     0.00
+10Hz   0%  80ms  0.0803  0.0000  0.1013  0.4991  1.000  0.130   0.130    0.00     0.00
+10Hz   0% 120ms  0.1050  0.0000  0.1334  0.4684  1.000  0.170   0.170    1.00     0.00
+10Hz  20%   0ms  0.0492  0.0008  0.0703  0.5349  0.801  0.075   0.075    0.00     0.00
+10Hz  20%  80ms  0.0957  0.0012  0.1272  0.4793  0.799  0.155   0.155    0.00     0.00
+10Hz  20% 120ms  0.1205  0.0009  0.1597  0.4477  0.799  0.195   0.195    1.00     0.00
+10Hz  40%   0ms  0.0743  0.0021  0.1098  0.5019  0.599  0.117   0.117    0.00     0.00
+10Hz  40%  80ms  0.1209  0.0019  0.1682  0.4457  0.603  0.196   0.197    1.00     0.00
+10Hz  40% 120ms  0.1467  0.0019  0.2031  0.4129  0.601  0.237   0.237    1.00     0.00
+20Hz   0%   0ms  0.0212  0.0000  0.0306  0.5724  1.000  0.026   0.025    0.00     0.00
+20Hz   0%  80ms  0.0654  0.0000  0.0826  0.5175  1.000  0.106   0.105    0.00     0.00
+20Hz   0% 120ms  0.0901  0.0000  0.1138  0.4870  1.000  0.146   0.145    0.00     0.00
+20Hz  20%   0ms  0.0270  0.0003  0.0377  0.5642  0.801  0.038   0.037    0.00     0.00
+20Hz  20%  80ms  0.0731  0.0002  0.0942  0.5078  0.798  0.118   0.117    0.00     0.00
+20Hz  20% 120ms  0.0974  0.0004  0.1247  0.4777  0.801  0.158   0.158    0.00     0.00
+20Hz  40%   0ms  0.0382  0.0009  0.0555  0.5490  0.599  0.059   0.058    0.00     0.00
+20Hz  40%  80ms  0.0855  0.0007  0.1137  0.4927  0.601  0.139   0.138    0.00     0.00
+20Hz  40% 120ms  0.1101  0.0006  0.1431  0.4621  0.601  0.179   0.178    1.00     0.00
+
+Network analytical validation
+  Mean AoI error : 0.000388 s
+  Max  AoI error : 0.001004 s
+  Mean PDR error : 0.000857
+  Max  PDR error : 0.003167
+
+============================================================
+Minimum communication-rate frontier
+============================================================
+
+Loss Delay  MinMeanRate  MinRobustRate
+---- -----  -----------  -------------
+  0%   0ms         5 Hz           5 Hz
+  0%  80ms        10 Hz          10 Hz
+  0% 120ms        20 Hz          20 Hz
+ 20%   0ms        10 Hz          10 Hz
+ 20%  80ms        10 Hz          10 Hz
+ 20% 120ms        20 Hz          20 Hz
+ 40%   0ms        10 Hz          10 Hz
+ 40%  80ms        20 Hz          20 Hz
+ 40% 120ms       >20 Hz         >20 Hz
+
+Global AoI-RMSE relationship
+  Pearson correlation : 0.998114
+  Linear fit           : RMSE = 0.5880*AoI + 0.0054
+  Linear R^2           : 0.996231
+
+EXP04B completed.
+
+
+tidy.csv : 540 rows
+saveAllFigures: 6 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp04b_rate_impairment\2026-08-20_113608\figures
+
+============================================================
+DONE : exp04b_rate_impairment
+TIME : 3 m 58 s
+FIGS : 6
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp04b_rate_impairment\2026-08-20_113608
+============================================================

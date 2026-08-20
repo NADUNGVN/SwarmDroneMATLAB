@@ -1,0 +1,18 @@
+{
+  "experiment": "exp04b_rate_impairment",
+  "runId": "2026-08-20_113608",
+  "startedAt": "2026-08-20 11:36:09",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "1d30c4f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp04b_rate_impairment.m",
+  "finishedAt": "2026-08-20 11:40:07",
+  "elapsedSec": 238.0457069,
+  "elapsedText": "3 m 58 s",
+  "figureCount": 6,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

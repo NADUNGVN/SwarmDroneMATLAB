@@ -1,9 +1,9 @@
 
 ============================================================
 RUN  : exp05d_pareto_frontier
-ID   : 2026-08-20_080343
-DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05d_pareto_frontier\2026-08-20_080343
-WHEN : 2026-08-20 08:03:44
+ID   : 2026-08-20_114031
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05d_pareto_frontier\2026-08-20_114031
+WHEN : 2026-08-20 11:40:32
 ============================================================
 
 
@@ -77,47 +77,47 @@ Clean      Full-AoI     0.050 m       8.41   0.0377   0.0000    0.060     0.00
 Clean      Full-AoI     0.080 m       6.43   0.0501   0.0000    0.080     0.00
 Clean      Full-AoI     0.120 m       5.27   0.0635   0.0000    0.100     0.00
 
-Moderate   Periodic     2 Hz          2.00   0.2955   0.0097    0.459     1.00
-Moderate   Periodic     5 Hz          5.00   0.1393   0.0030    0.231     1.00
-Moderate   Periodic     8 Hz          8.00   0.1065   0.0018    0.175     1.00
-Moderate   Periodic     10 Hz        10.00   0.0959   0.0012    0.155     0.00
-Moderate   Periodic     15 Hz        15.00   0.0811   0.0006    0.131     0.00
-Moderate   Periodic     20 Hz        20.00   0.0730   0.0003    0.118     0.00
+Moderate   Periodic     2 Hz          2.00   0.2940   0.0087    0.457     1.00
+Moderate   Periodic     5 Hz          5.00   0.1389   0.0022    0.230     1.00
+Moderate   Periodic     8 Hz          8.00   0.1059   0.0010    0.174     1.00
+Moderate   Periodic     10 Hz        10.00   0.0953   0.0007    0.155     0.00
+Moderate   Periodic     15 Hz        15.00   0.0807   0.0004    0.131     0.00
+Moderate   Periodic     20 Hz        20.00   0.0727   0.0003    0.118     0.00
 
-Moderate   State-event  0.010 m      18.65   0.0775   0.0005    0.125     0.00
-Moderate   State-event  0.020 m      10.24   0.1005   0.0015    0.163     0.70
-Moderate   State-event  0.030 m       7.00   0.1235   0.0020    0.201     1.00
-Moderate   State-event  0.050 m       4.30   0.1682   0.0036    0.274     1.00
-Moderate   State-event  0.080 m       2.69   0.2379   0.0084    0.394     1.00
-Moderate   State-event  0.120 m       2.14   0.2771   0.0115    0.457     1.00
+Moderate   State-event  0.010 m      18.65   0.0773   0.0004    0.125     0.00
+Moderate   State-event  0.020 m      10.24   0.0998   0.0011    0.162     0.35
+Moderate   State-event  0.030 m       7.00   0.1235   0.0014    0.199     1.00
+Moderate   State-event  0.050 m       4.29   0.1675   0.0035    0.273     1.00
+Moderate   State-event  0.080 m       2.68   0.2381   0.0057    0.396     1.00
+Moderate   State-event  0.120 m       2.14   0.2789   0.0101    0.459     1.00
 
 Moderate   Full-AoI     0.010 m      29.36   0.0672   0.0002    0.108     0.00
-Moderate   Full-AoI     0.020 m      22.91   0.0747   0.0002    0.121     0.00
-Moderate   Full-AoI     0.030 m      17.17   0.0859   0.0004    0.139     0.00
-Moderate   Full-AoI     0.050 m      11.22   0.0978   0.0007    0.158     0.00
-Moderate   Full-AoI     0.080 m       7.76   0.1126   0.0011    0.182     1.00
-Moderate   Full-AoI     0.120 m       5.97   0.1248   0.0012    0.203     1.00
+Moderate   Full-AoI     0.020 m      22.86   0.0747   0.0004    0.121     0.00
+Moderate   Full-AoI     0.030 m      17.17   0.0859   0.0003    0.139     0.00
+Moderate   Full-AoI     0.050 m      11.21   0.0976   0.0004    0.158     0.00
+Moderate   Full-AoI     0.080 m       7.75   0.1121   0.0005    0.181     1.00
+Moderate   Full-AoI     0.120 m       5.97   0.1244   0.0009    0.202     1.00
 
-Stressed   Periodic     2 Hz          2.00   0.4119   0.0217    0.699     1.00
-Stressed   Periodic     5 Hz          5.00   0.2102   0.0070    0.350     1.00
-Stressed   Periodic     8 Hz          8.00   0.1647   0.0030    0.264     1.00
-Stressed   Periodic     10 Hz        10.00   0.1449   0.0021    0.235     1.00
-Stressed   Periodic     15 Hz        15.00   0.1218   0.0013    0.197     1.00
-Stressed   Periodic     20 Hz        20.00   0.1098   0.0007    0.178     1.00
+Stressed   Periodic     2 Hz          2.00   0.4151   0.0219    0.703     1.00
+Stressed   Periodic     5 Hz          5.00   0.2125   0.0054    0.354     1.00
+Stressed   Periodic     8 Hz          8.00   0.1660   0.0029    0.266     1.00
+Stressed   Periodic     10 Hz        10.00   0.1461   0.0021    0.237     1.00
+Stressed   Periodic     15 Hz        15.00   0.1223   0.0012    0.198     1.00
+Stressed   Periodic     20 Hz        20.00   0.1101   0.0007    0.179     1.00
 
-Stressed   State-event  0.010 m      18.54   0.1168   0.0009    0.189     1.00
-Stressed   State-event  0.020 m      10.07   0.1527   0.0026    0.249     1.00
-Stressed   State-event  0.030 m       6.93   0.1855   0.0040    0.304     1.00
-Stressed   State-event  0.050 m       4.21   0.2532   0.0109    0.423     1.00
-Stressed   State-event  0.080 m       2.64   0.3526   0.0200    0.603     1.00
-Stressed   State-event  0.120 m       2.13   0.4077   0.0175    0.697     1.00
+Stressed   State-event  0.010 m      18.55   0.1173   0.0009    0.190     1.00
+Stressed   State-event  0.020 m      10.06   0.1544   0.0025    0.251     1.00
+Stressed   State-event  0.030 m       6.92   0.1886   0.0042    0.308     1.00
+Stressed   State-event  0.050 m       4.21   0.2573   0.0075    0.424     1.00
+Stressed   State-event  0.080 m       2.64   0.3511   0.0171    0.603     1.00
+Stressed   State-event  0.120 m       2.13   0.4084   0.0199    0.702     1.00
 
-Stressed   Full-AoI     0.010 m      29.36   0.1010   0.0004    0.164     0.95
-Stressed   Full-AoI     0.020 m      29.28   0.1009   0.0004    0.164     1.00
-Stressed   Full-AoI     0.030 m      21.70   0.1138   0.0005    0.185     1.00
-Stressed   Full-AoI     0.050 m      15.77   0.1305   0.0008    0.212     1.00
-Stressed   Full-AoI     0.080 m      10.55   0.1491   0.0011    0.242     1.00
-Stressed   Full-AoI     0.120 m       8.26   0.1617   0.0018    0.264     1.00
+Stressed   Full-AoI     0.010 m      29.36   0.1010   0.0006    0.164     1.00
+Stressed   Full-AoI     0.020 m      29.28   0.1010   0.0004    0.164     1.00
+Stressed   Full-AoI     0.030 m      21.70   0.1140   0.0005    0.185     1.00
+Stressed   Full-AoI     0.050 m      15.80   0.1307   0.0006    0.212     1.00
+Stressed   Full-AoI     0.080 m      10.57   0.1489   0.0010    0.242     1.00
+Stressed   Full-AoI     0.120 m       8.31   0.1628   0.0015    0.264     1.00
 
 ============================================================
 Dominance of Full-AoI versus the baseline frontiers
@@ -140,21 +140,21 @@ Clean
 Moderate
   Rate[Hz]   AoI RMSE    vs Periodic vs State-event
      29.36     0.0672            NaN            NaN
-     22.91     0.0747            NaN            NaN
-     17.17     0.0859        -0.0083        -0.0044
-     11.22     0.0978        -0.0055        +0.0001
-      7.76     0.1126        -0.0035        +0.0055
-      5.97     0.1248        +0.0039        +0.0157
-  Full-AoI better at 1/4 comparable points vs Periodic, 3/4 vs State-event
+     22.86     0.0747            NaN            NaN
+     17.17     0.0859        -0.0086        -0.0046
+     11.21     0.0976        -0.0058        -0.0004
+      7.75     0.1121        -0.0035        +0.0059
+      5.97     0.1244        +0.0038        +0.0158
+  Full-AoI better at 1/4 comparable points vs Periodic, 2/4 vs State-event
 
 Stressed
   Rate[Hz]   AoI RMSE    vs Periodic vs State-event
      29.36     0.1010            NaN            NaN
-     29.28     0.1009            NaN            NaN
-     21.70     0.1138            NaN            NaN
-     15.77     0.1305        -0.0105        -0.0019
-     10.55     0.1491        -0.0068        +0.0016
-      8.26     0.1617        +0.0004        +0.0099
+     29.28     0.1010            NaN            NaN
+     21.70     0.1140            NaN            NaN
+     15.80     0.1307        -0.0104        -0.0015
+     10.57     0.1489        -0.0055        +0.0032
+      8.31     0.1628        +0.0001        +0.0106
   Full-AoI better at 1/3 comparable points vs Periodic, 2/3 vs State-event
 
 
@@ -163,37 +163,37 @@ One configuration across all network conditions
 ============================================================
 
 Family       Setting     MeanRate    WorstRMSE     MeanRMSE
-Periodic     2 Hz            2.00       0.4119       0.3017
-Periodic     5 Hz            5.00       0.2102       0.1397
-Periodic     8 Hz            8.00       0.1647       0.1047
-Periodic     10 Hz          10.00       0.1449       0.0917
-Periodic     15 Hz          15.00       0.1218       0.0760
-Periodic     20 Hz          20.00       0.1098       0.0680
+Periodic     2 Hz            2.00       0.4151       0.3023
+Periodic     5 Hz            5.00       0.2125       0.1404
+Periodic     8 Hz            8.00       0.1660       0.1049
+Periodic     10 Hz          10.00       0.1461       0.0920
+Periodic     15 Hz          15.00       0.1223       0.0760
+Periodic     20 Hz          20.00       0.1101       0.0680
 
-State-event  0.010 m        18.67       0.1168       0.0723
-State-event  0.020 m        10.28       0.1527       0.0957
-State-event  0.030 m         6.99       0.1855       0.1199
-State-event  0.050 m         4.28       0.2532       0.1669
-State-event  0.080 m         2.69       0.3526       0.2373
-State-event  0.120 m         2.15       0.4077       0.2843
+State-event  0.010 m        18.67       0.1173       0.0724
+State-event  0.020 m        10.28       0.1544       0.0961
+State-event  0.030 m         6.99       0.1886       0.1209
+State-event  0.050 m         4.28       0.2573       0.1680
+State-event  0.080 m         2.69       0.3511       0.2369
+State-event  0.120 m         2.14       0.4084       0.2852
 
 Full-AoI     0.010 m        25.76       0.1010       0.0635
-Full-AoI     0.020 m        20.91       0.1009       0.0701
-Full-AoI     0.030 m        15.93       0.1138       0.0792
-Full-AoI     0.050 m        11.80       0.1305       0.0887
-Full-AoI     0.080 m         8.25       0.1491       0.1040
-Full-AoI     0.120 m         6.50       0.1617       0.1167
+Full-AoI     0.020 m        20.89       0.1010       0.0702
+Full-AoI     0.030 m        15.93       0.1140       0.0792
+Full-AoI     0.050 m        11.81       0.1307       0.0887
+Full-AoI     0.080 m         8.25       0.1489       0.1037
+Full-AoI     0.120 m         6.51       0.1628       0.1169
 
 Margin on the single-configuration plane
 (baseline worst-case RMSE at equal mean rate) - (Full-AoI)
 
     MeanRate    AoI Worst    vs Periodic   vs State-event
        25.76       0.1010            NaN              NaN
-       20.91       0.1009            NaN              NaN
-       15.93       0.1138        +0.0058          +0.0147
-       11.80       0.1305        +0.0061          +0.0157
-        8.25       0.1491        +0.0131          +0.0239
-        6.50       0.1617        +0.0257          +0.0362
+       20.89       0.1010            NaN              NaN
+       15.93       0.1140        +0.0061          +0.0154
+       11.81       0.1307        +0.0067          +0.0168
+        8.25       0.1489        +0.0147          +0.0266
+        6.51       0.1628        +0.0263          +0.0379
 
   Full-AoI better at 4/4 comparable points vs Periodic, 4/4 vs State-event
 
@@ -207,9 +207,9 @@ Periodic     10 Hz          10.00      10.00       1.00
 Periodic     15 Hz          15.00      15.00       1.00
 Periodic     20 Hz          20.00      20.00       1.00
 
-State-event  0.010 m        18.82      18.54       0.99
-State-event  0.020 m        10.53      10.07       0.96
-State-event  0.030 m         7.06       6.93       0.98
+State-event  0.010 m        18.82      18.55       0.99
+State-event  0.020 m        10.53      10.06       0.95
+State-event  0.030 m         7.06       6.92       0.98
 State-event  0.050 m         4.33       4.21       0.97
 State-event  0.080 m         2.75       2.64       0.96
 State-event  0.120 m         2.16       2.13       0.99
@@ -217,25 +217,25 @@ State-event  0.120 m         2.16       2.13       0.99
 Full-AoI     0.010 m        18.56      29.36       1.58
 Full-AoI     0.020 m        10.52      29.28       2.78
 Full-AoI     0.030 m         8.91      21.70       2.44
-Full-AoI     0.050 m         8.41      15.77       1.88
-Full-AoI     0.080 m         6.43      10.55       1.64
-Full-AoI     0.120 m         5.27       8.26       1.57
+Full-AoI     0.050 m         8.41      15.80       1.88
+Full-AoI     0.080 m         6.43      10.57       1.64
+Full-AoI     0.120 m         5.27       8.31       1.58
 
 ============================================================
 ACK feedback integrity
 ============================================================
-  Accepted-state updates : 1456105
+  Accepted-state updates : 1456196
   Sync misses            : 0
   STATUS                 : OK
 
 tidy.csv : 1080 rows
 
 EXP05D completed.
-saveAllFigures: 5 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp05d_pareto_frontier\2026-08-20_080343\figures
+saveAllFigures: 5 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp05d_pareto_frontier\2026-08-20_114031\figures
 
 ============================================================
 DONE : exp05d_pareto_frontier
-TIME : 2 m 52 s
+TIME : 3 m 12 s
 FIGS : 5
-DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05d_pareto_frontier\2026-08-20_080343
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05d_pareto_frontier\2026-08-20_114031
 ============================================================
