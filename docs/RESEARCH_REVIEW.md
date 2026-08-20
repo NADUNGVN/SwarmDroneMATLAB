@@ -265,6 +265,33 @@ offset ngẫu nhiên cho từng link sẽ là baseline công bằng hơn — và
 vốn đã cạnh tranh tốt, việc này **có thể làm baseline mạnh lên nữa**. Cần biết trước khi nộp
 bài, chứ không phải để reviewer phát hiện.
 
+### A10. Baseline event-trigger chưa ở điểm vận hành của chính nó — ĐÃ GIẢI QUYẾT
+
+EXP05C cố ý dùng chung `epsP/epsV` cho mọi variant để tránh confound — hợp lý — nhưng như vậy
+baseline không nằm ở điểm tốt nhất của chính nó, và EXP05A chỉ quét profile trên mạng Clean.
+Với chỉ một điểm mỗi policy, khẳng định "tốt hơn X % với ít hơn Y % traffic" không chống được
+câu hỏi "nếu tune lại baseline thì sao?".
+
+Đây chính là lý do `EXP05D` được xây dựng. Xem §1 — và lưu ý §1.1 cho thấy câu hỏi đó **không
+phải là lo ngại thừa**: dưới Moderate/Stressed, periodic được tune riêng thực sự thắng.
+
+### A19. Bảng so sánh của EXP05B thiếu dòng Full-AoI ở Stressed — CHƯA SỬA
+
+Bảng "Method comparison at selected operating points" của EXP05B **không có dòng
+`Stressed / AoI-aware`**, trong khi vẫn in đầy đủ Periodic10, Periodic20 và Event cho Stressed.
+
+Nguyên nhân: vòng chọn "best robust operating point" lọc theo `robustFailureLimit = 0.05`, và
+ở Stressed thì Full-AoI có `FormFail = 1.00` nên bị loại → in ra *"No robust AoI-aware profile
+found"*. Nhưng **Periodic10 và Periodic20 ở Stressed cũng có `FormFail = 1.00`** mà vẫn được in.
+
+Nói cách khác, dưới Stressed **không method nào** đạt ngưỡng 0.10 m — ngưỡng đó đơn giản là quá
+chặt cho điều kiện mạng đó. Bộ lọc chỉ được áp cho method đề xuất, nên bảng tạo ấn tượng sai
+rằng phương pháp đề xuất "không có kết quả" ở Stressed trong khi baseline thì có.
+
+Số liệu thực tế vẫn nằm trong `workspace.mat` và `tidy.csv`
+(Full-AoI Stressed: RMSE 0.1310, 15.78 Hz). Cần hoặc áp bộ lọc cho **mọi** method, hoặc bỏ hẳn
+bộ lọc khỏi bảng so sánh và báo cáo `FormFail` như một cột.
+
 ### A11. Bất đối xứng refractory — CHƯA SỬA
 
 Policy AoI có `minInterTx` (`aoiAwareTriggerPolicy.m:422`), baseline `eventTriggerPolicy.m`

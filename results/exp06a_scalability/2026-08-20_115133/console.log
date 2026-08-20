@@ -1,0 +1,61 @@
+
+============================================================
+RUN  : exp06a_scalability
+ID   : 2026-08-20_115133
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp06a_scalability\2026-08-20_115133
+WHEN : 2026-08-20 11:51:33
+============================================================
+
+
+============================================================
+EXP06A swarm-size scalability
+============================================================
+
+Seeds          : 20
+Network scenarios:
+  Moderate   : loss 20 % | delay 80 ms
+  Stressed   : loss 40 % | delay 120 ms
+
+epsP           : 0.050 m
+epsV           : 0.100 m/s
+AoI threshold  : 0.120 s
+AoI cooldown   : 0.100 s
+
+ensureParallelPool: starting pool with 16 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+ensureParallelPool: pool ready (16 workers).
+
+============================================================
+Moderate network | loss 20 % | delay 80 ms
+============================================================
+------------------------------------------------------------
+N = 5 | channels = 12
+------------------------------------------------------------
+  Periodic10
+[Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp06a_scalability (line 371)] 
+  Periodic20
+  State-event
+  Full-AoI
+------------------------------------------------------------
+N = 10 | channels = 25
+------------------------------------------------------------
+  Periodic10
+  Periodic20
+  State-event
+  Full-AoI
+------------------------------------------------------------
+N = 20 | channels = 50
+------------------------------------------------------------
+  Periodic10
+  Periodic20
+  State-event
+  Full-AoI
+------------------------------------------------------------
+N = 50 | channels = 125
+------------------------------------------------------------
+  Periodic10
+  Periodic20
+  State-event
+  Full-AoI
