@@ -26,9 +26,9 @@ Stressed: periodic giữ tỉ lệ 1.00 (hiển nhiên), conventional event-trig
 tế truyền *ít đi*), Full-AoI **1.57–2.78** (tăng 1.6–2.8 lần). Đây là bằng chứng sạch nhất cho
 cơ chế và nên là một hình chính trong bài báo.
 
-**3. Bug ACK feedback: đã đo, KHÔNG ảnh hưởng kết quả cũ.** `ackSyncMissCount = 0` trên
-1.456.105 lần cập nhật accepted-state trong EXP05D và 193.129 trong EXP05C. Logic có lỗi tiềm
-ẩn (§3, A2) nhưng nó chưa bao giờ kích hoạt. Kết quả Full-AoI cũ không bị nhiễm.
+**3. Bug ACK feedback: đã đo, KHÔNG ảnh hưởng kết quả cũ.** `ackSyncMissCount = 0` trên tổng
+cộng **3.859.615** lần cập nhật accepted-state qua EXP05C, EXP05D và EXP06A. Logic có lỗi tiềm
+ẩn (§2, A2) nhưng nó chưa bao giờ kích hoạt. Kết quả Full-AoI cũ không bị nhiễm.
 
 **4. Rủi ro lớn nhất còn lại vẫn là kênh ACK lý tưởng hoá** (§2, A1) — miễn phí, tức thời,
 không mất gói, và phi nhân quả. Đây là điều reviewer sẽ tấn công trước tiên.
@@ -123,6 +123,48 @@ câu hỏi khó nhất của reviewer.
 
 ---
 
+## 1bis. EXP06A — số liệu scalability, đọc đúng cách
+
+Lần chạy lại tái tạo **chính xác** các con số bạn đã báo cáo (α = 0.996 / 0.978; RMSE tốt hơn
+Periodic10 khoảng 9.4–10.0 %; traffic thấp hơn Periodic20 khoảng 20.9–27.6 %). Nhưng bảng đầy
+đủ cho thấy một sắc thái quan trọng bị mất khi chỉ trích dẫn hai con số đó:
+
+**Stressed** (dấu âm ở cột RMSE = tốt hơn; dấu dương ở cột traffic = tiết kiệm hơn):
+
+| N | RMSE vs P10 | RMSE vs P20 | Traffic vs P10 | Traffic vs P20 |
+|---|---|---|---|---|
+| 5 | −10.0 % | **+18.8 %** | **−58.1 %** | +20.9 % |
+| 10 | −10.0 % | **+18.5 %** | **−51.3 %** | +24.4 % |
+| 20 | −9.6 % | **+18.3 %** | **−47.4 %** | +26.3 % |
+| 50 | −9.4 % | **+18.3 %** | **−44.8 %** | +27.6 % |
+
+**Moderate:**
+
+| N | RMSE vs P10 | RMSE vs P20 | Traffic vs P10 | Traffic vs P20 |
+|---|---|---|---|---|
+| 5 | **+2.0 %** | +33.8 % | **−11.9 %** | +44.0 % |
+| 10 | **+2.1 %** | +33.8 % | **−9.2 %** | +45.4 % |
+| 20 | **+2.2 %** | +33.5 % | **−7.9 %** | +46.1 % |
+| 50 | **+2.2 %** | +33.4 % | **−6.9 %** | +46.5 % |
+
+Cách đọc trung thực:
+
+- Dưới **Stressed**, Full-AoI đúng là "tự tìm vùng vận hành nằm giữa 10 Hz và 20 Hz" như bạn
+  mô tả: tốt hơn P10 khoảng 10 % RMSE nhưng tốn thêm 45–58 % traffic; rẻ hơn P20 khoảng 21–28 %
+  traffic nhưng xấu hơn 18 % RMSE. Nó **không** dominate cả hai.
+- Dưới **Moderate**, Full-AoI **xấu hơn Periodic10 trên cả hai trục**: RMSE tệ hơn 2.0–2.2 %
+  *và* traffic cao hơn 6.9–11.9 %. Đây là cùng một hiện tượng mà EXP05D §1.1 phát hiện.
+
+Điều này **không** làm hỏng bài báo, nhưng nó có nghĩa là hai con số "9.4–10.0 %" và
+"20.9–27.6 %" không nên đứng cạnh nhau như thể chúng xảy ra đồng thời so với cùng một baseline.
+Chúng là hai so sánh với hai baseline khác nhau, và mỗi so sánh đều kèm một cái giá ở trục kia.
+Luận điểm chịu được sức ép là luận điểm về adaptivity ở §1.2–1.3.
+
+Tính nhất quán giữa các N rất tốt (chênh lệch dưới 1 điểm phần trăm từ N=5 đến N=50), đây là
+kết quả đáng tin và đáng báo cáo.
+
+---
+
 ## 2. Tầng 1 — Đe doạ luận điểm trung tâm
 
 ### A1. Kênh ACK miễn phí, tức thời, không mất gói — và phi nhân quả
@@ -171,6 +213,7 @@ phát đều nằm trong `pending`.
 |---|---|---|
 | EXP05C | 193 129 | **0** |
 | EXP05D | 1 456 105 | **0** |
+| EXP06A | 2 210 381 | **0** |
 
 Bug chưa bao giờ kích hoạt. Kết quả Full-AoI cũ **không** bị nhiễm. Vẫn nên vá phòng ngừa (đẩy
 `ackGenTime` khi miss) nhưng không khẩn cấp. `ackSyncMissCount` nay được lưu vào `tidy.csv` và
@@ -181,6 +224,21 @@ in ra ở cuối EXP05B/05C/05D/06A, nên nếu tương lai nó khác 0 sẽ th�
 `swarm/applyScalableSwarmConfig.m:70-115` cố định degree = 2 và pin cứ một agent cách một agent
 → số channel = `2N + floor(N/2) = 2.5N` **chính xác theo công thức**. Vì vậy α ≈ 1 cho *tổng*
 traffic gần như là hệ quả tất yếu của topology, không phải phát hiện thực nghiệm.
+
+**Bằng chứng trực tiếp từ lần chạy lại EXP06A:** số channel đo được là 12, 25, 50, 125 cho
+N = 5, 10, 20, 50 — đúng bằng `2.5N` như công thức dự đoán. Và số mũ scaling của **mọi** method
+đều xấp xỉ 1:
+
+| Method | α (Moderate) | α (Stressed) |
+|---|---|---|
+| Periodic 10 Hz | 1.015 | 1.015 |
+| Periodic 20 Hz | 1.015 | 1.015 |
+| State-event | 0.980 | 0.957 |
+| **Full-AoI** | **0.996** | **0.978** |
+
+Periodic — vốn không có cơ chế thích nghi nào — cũng cho α = 1.015. Nghĩa là **α ≈ 1 hoàn toàn
+là thuộc tính của topology, không phải của phương pháp**. Không thể trình bày nó như một phát
+hiện về phương pháp.
 
 Khẳng định *không tầm thường* là: **tốc độ trên mỗi channel giữ gần như không đổi khi N tăng**.
 Nên trình bày Hz/channel theo N làm kết quả chính. Và cần thêm ít nhất một topology có degree

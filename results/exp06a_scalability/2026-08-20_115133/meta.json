@@ -1,0 +1,18 @@
+{
+  "experiment": "exp06a_scalability",
+  "runId": "2026-08-20_115133",
+  "startedAt": "2026-08-20 11:51:33",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "acdb9cb",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp06a_scalability.m",
+  "finishedAt": "2026-08-20 11:56:54",
+  "elapsedSec": 320.6691725,
+  "elapsedText": "5 m 21 s",
+  "figureCount": 8,
+  "hasWorkspace": true,
+  "hasTidy": true
+}
