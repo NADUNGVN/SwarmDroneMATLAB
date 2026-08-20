@@ -7,7 +7,7 @@ startup;
 % below into console.log. Paired with the save block at the end.
 % ============================================================
 
-R = startExperiment('exp03a_packet_loss');
+expRun = startExperiment('exp03a_packet_loss');
 
 
 
@@ -52,6 +52,9 @@ for q = 1:nL
         RMSE(s,q) = M.formationRMSE;
 
         MAXERR(s,q) = M.maxFormationError;
+
+        MINSEP(s,q) = ...
+            M.minSeparation;
 
         MINSEPEVAL(s,q) = ...
             M.minSeparationEval;
@@ -160,6 +163,30 @@ title('EXP03A measured packet delivery ratio');
 
 
 %% ============================================================
+% Long-format results table
+%
+% One row per (seed, packet-loss level), so means, confidence
+% intervals and paired tests can be recomputed later without
+% re-running the simulation.
+% ============================================================
+
+T = tidyFromArray( ...
+    struct( ...
+        'RMSE',       RMSE, ...
+        'MAXERR',     MAXERR, ...
+        'MINSEP',     MINSEP, ...
+        'MINSEPEVAL', MINSEPEVAL, ...
+        'PDR',        PDR, ...
+        'AOI',        AOI), ...
+    {'seed','packetLoss'}, ...
+    {1:numSeeds, lossLevels});
+
+writetable(T, fullfile(expRun.dir,'tidy.csv'));
+
+fprintf('\ntidy.csv : %d rows\n', height(T));
+
+
+%% ============================================================
 % Persist results
 %
 % save() with no variable list stores the ENTIRE script workspace,
@@ -167,8 +194,8 @@ title('EXP03A measured packet delivery ratio');
 % to enumerate names.
 % ============================================================
 
-save(fullfile(R.dir,'workspace.mat'));
+save(fullfile(expRun.dir,'workspace.mat'));
 
-saveAllFigures(R);
+saveAllFigures(expRun);
 
-finishExperiment(R);
+finishExperiment(expRun);

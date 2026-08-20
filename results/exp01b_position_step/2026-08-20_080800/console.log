@@ -1,0 +1,27 @@
+
+============================================================
+RUN  : exp01b_position_step
+ID   : 2026-08-20_080800
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01b_position_step\2026-08-20_080800
+WHEN : 2026-08-20 08:08:00
+============================================================
+
+
+EXP01B position-step results
+  Position RMSE (full)    : 0.4528 m
+  Position RMSE (t>=6 s) : 0.0042 m
+  Final position error    : 0.0004 m
+  Final yaw error         : 0.000 deg
+  Settling time (3 cm)    : 4.804 s
+  Peak |roll| / |pitch|   : 3.38 / 12.72 deg
+  Thrust saturation       : 0.00 %
+  Torque saturation       : 0.00 %
+  STATUS                   : PASS
+saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp01b_position_step\2026-08-20_080800\figures
+
+============================================================
+DONE : exp01b_position_step
+TIME : 9.7 s
+FIGS : 2
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01b_position_step\2026-08-20_080800
+============================================================

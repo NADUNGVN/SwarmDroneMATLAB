@@ -1,0 +1,59 @@
+
+============================================================
+RUN  : exp03d_jitter
+ID   : 2026-08-20_081538
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp03d_jitter\2026-08-20_081538
+WHEN : 2026-08-20 08:15:38
+============================================================
+
+
+============================================================
+EXP03D communication jitter / out-of-order sweep
+============================================================
+
+Base delay                  : 80 ms
+Packet loss                 : 0 %
+Monte Carlo seeds/condition : 20
+
+Jitter std =   0 ms
+Jitter std =  20 ms
+Jitter std =  40 ms
+Jitter std =  60 ms
+Jitter std =  80 ms
+Jitter std = 120 ms
+
+============================================================
+EXP03D mean results over 20 Monte Carlo seeds
+============================================================
+
+Jitter RMSE[m] StdRMSE MaxErr[m] MinFull MinEval AoImean AoIP95 AoImax PDR Arrival StaleDisc EffUpdate SafeFail FormFail
+------  ------- ------- --------- ------- ------- ------ --- --------- --------- -------- --------
+   0ms  0.0803  0.0000  0.1013   0.2540  0.4991  0.130   0.170   0.170   1.000   0.997   0.000     0.997      0.00     0.00
+  20ms  0.0869  0.0002  0.1110   0.2519  0.4907  0.140   0.162   0.177   1.000   0.996   0.000     0.996      0.00     0.00
+  40ms  0.0861  0.0004  0.1121   0.2525  0.4913  0.139   0.162   0.185   1.000   0.996   0.036     0.960      0.00     0.00
+  60ms  0.0853  0.0010  0.1126   0.2526  0.4914  0.138   0.166   0.191   1.000   0.996   0.103     0.893      0.00     0.00
+  80ms  0.0848  0.0006  0.1123   0.2540  0.4905  0.137   0.169   0.201   1.000   0.996   0.163     0.834      0.00     0.00
+ 120ms  0.0843  0.0011  0.1144   0.2543  0.4923  0.135   0.174   0.210   1.000   0.995   0.239     0.757      0.00     0.00
+
+Zero-jitter cross-validation
+  RMSE     : 0.0803 m
+  AoI      : 0.130 s
+  MinEval  : 0.4991 m
+  PDR      : 1.000
+  StaleDisc: 0.000
+
+AoI-RMSE relationship
+  Pearson correlation : 0.990602
+
+EXP03D completed.
+
+
+tidy.csv : 120 rows
+saveAllFigures: 8 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp03d_jitter\2026-08-20_081538\figures
+
+============================================================
+DONE : exp03d_jitter
+TIME : 1 m 26 s
+FIGS : 8
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp03d_jitter\2026-08-20_081538
+============================================================

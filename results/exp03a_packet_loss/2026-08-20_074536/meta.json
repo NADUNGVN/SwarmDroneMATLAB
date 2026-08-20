@@ -1,0 +1,18 @@
+{
+  "experiment": "exp03a_packet_loss",
+  "runId": "2026-08-20_074536",
+  "startedAt": "2026-08-20 07:45:36",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "1d30c4f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp03a_packet_loss.m",
+  "finishedAt": "2026-08-20 07:45:58",
+  "elapsedSec": 21.8945519,
+  "elapsedText": "21.9 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

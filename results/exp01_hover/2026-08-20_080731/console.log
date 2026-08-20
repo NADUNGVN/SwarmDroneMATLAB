@@ -1,0 +1,20 @@
+
+============================================================
+RUN  : exp01_hover
+ID   : 2026-08-20_080731
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01_hover\2026-08-20_080731
+WHEN : 2026-08-20 08:07:31
+============================================================
+
+
+EXP01 hover results
+  Position RMSE      : 0.2649 m
+  Final position err : 0.0000 m
+saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp01_hover\2026-08-20_080731\figures
+
+============================================================
+DONE : exp01_hover
+TIME : 9.4 s
+FIGS : 2
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01_hover\2026-08-20_080731
+============================================================

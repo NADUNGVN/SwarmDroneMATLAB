@@ -1,0 +1,18 @@
+{
+  "experiment": "exp01c_disturbance",
+  "runId": "2026-08-20_080829",
+  "startedAt": "2026-08-20 08:08:30",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "1d30c4f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp01c_disturbance.m",
+  "finishedAt": "2026-08-20 08:08:40",
+  "elapsedSec": 10.0200624,
+  "elapsedText": "10.0 s",
+  "figureCount": 2,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

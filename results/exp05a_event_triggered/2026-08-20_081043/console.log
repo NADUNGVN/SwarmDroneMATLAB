@@ -1,0 +1,83 @@
+
+============================================================
+RUN  : exp05a_event_triggered
+ID   : 2026-08-20_081043
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05a_event_triggered\2026-08-20_081043
+WHEN : 2026-08-20 08:10:43
+============================================================
+
+
+============================================================
+EXP05A baseline event-triggered communication
+============================================================
+
+Network conditions
+  Packet loss : 0 %
+  Delay       : 0 ms
+  Jitter      : 0 ms
+
+Directed communication channels : 12
+
+------------------------------------------------------------
+Periodic communication baselines
+------------------------------------------------------------
+Periodic rate = 5 Hz
+Periodic rate = 10 Hz
+Periodic rate = 20 Hz
+Periodic rate = 50 Hz
+
+------------------------------------------------------------
+Event-triggered policies
+------------------------------------------------------------
+Event profile 1 | epsP = 0.010 m | epsV = 0.020 m/s | maxSilence = 0.50 s
+Event profile 2 | epsP = 0.020 m | epsV = 0.040 m/s | maxSilence = 0.50 s
+Event profile 3 | epsP = 0.040 m | epsV = 0.080 m/s | maxSilence = 0.50 s
+Event profile 4 | epsP = 0.080 m | epsV = 0.160 m/s | maxSilence = 0.50 s
+
+============================================================
+Periodic baseline results
+============================================================
+
+Rate  RMSE[m] MaxErr[m] MinEval AoI[s] TxCount TxRate/ch CommRed CtrlRMS
+----  ------- --------- ------- ------ ------- --------- ------- -------
+  5Hz  0.0698   0.0892    0.5109  0.100     1800      5.00      90.0%  0.0685
+ 10Hz  0.0345   0.0455    0.5549  0.050     3600     10.00      80.0%  0.0490
+ 20Hz  0.0212   0.0306    0.5724  0.026     7200     20.00      60.0%  0.0430
+ 50Hz  0.0162   0.0261    0.5823  0.010    18000     50.00       0.0%  0.0405
+
+============================================================
+Event-triggered results
+============================================================
+
+ID epsP epsV RMSE[m] MaxErr MinEval AoImean AoIP95 TxRate/ch CommRed SaveVs10 Suppress PosTrig VelTrig Timeout FormFail SafeFail
+-- ---- ---- ------- ------ ------- ------- ------ --------- ------- -------- -------- ------- ------- ------- -------- --------
+ 1 0.010 0.020 0.0226  0.0321  0.5704  0.030   0.037     18.82      62.4%    -88.2%  0.624    0.966   0.034   0.000    0        0
+ 2 0.020 0.040 0.0340  0.0443  0.5562  0.053   0.073     10.53      78.9%     -5.3%  0.789    0.965   0.035   0.000    0        0
+ 3 0.040 0.080 0.0656  0.0830  0.5175  0.103   0.157      5.43      89.1%     45.7%  0.892    0.961   0.039   0.000    0        0
+ 4 0.080 0.160 0.1215  0.1736  0.4510  0.204   0.293      2.75      94.5%     72.5%  0.945    0.949   0.034   0.016    1        0
+
+============================================================
+Event-trigger resource-performance operating point
+============================================================
+
+Best valid event profile : 3
+  eps position           : 0.040 m
+  eps velocity           : 0.080 m/s
+  max silence            : 0.500 s
+  Formation RMSE         : 0.0656 m
+  Min separation         : 0.5175 m
+  Effective rate/channel : 5.43 Hz
+  Mean AoI               : 0.103 s
+  Reduction vs 50 Hz     : 89.1 %
+  Saving vs 10 Hz        : 45.7 %
+
+EXP05A completed.
+
+saveAllFigures: 6 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp05a_event_triggered\2026-08-20_081043\figures
+
+============================================================
+DONE : exp05a_event_triggered
+TIME : 19.8 s
+FIGS : 6
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05a_event_triggered\2026-08-20_081043
+============================================================

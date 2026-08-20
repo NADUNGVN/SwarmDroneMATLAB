@@ -7,7 +7,7 @@ startup;
 % below into console.log. Paired with the save block at the end.
 % ============================================================
 
-R = startExperiment('exp02_formation');
+expRun = startExperiment('exp02_formation');
 
 
 
@@ -174,8 +174,8 @@ end
 % to enumerate names.
 % ============================================================
 
-save(fullfile(R.dir,'workspace.mat'));
+save(fullfile(expRun.dir,'workspace.mat'));
 
-saveAllFigures(R);
+saveAllFigures(expRun);
 
-finishExperiment(R);
+finishExperiment(expRun);

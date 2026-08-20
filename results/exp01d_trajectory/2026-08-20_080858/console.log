@@ -1,0 +1,25 @@
+
+============================================================
+RUN  : exp01d_trajectory
+ID   : 2026-08-20_080858
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01d_trajectory\2026-08-20_080858
+WHEN : 2026-08-20 08:08:59
+============================================================
+
+
+EXP01D trajectory-tracking results
+  Tracking RMSE (t>=2 s) : 0.0104 m
+  Max tracking error      : 0.0408 m
+  Final position error    : 0.0032 m
+  Peak |roll| / |pitch|   : 3.98 / 1.75 deg
+  Thrust saturation       : 0.00 %
+  Torque saturation       : 0.00 %
+  STATUS                  : PASS
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp01d_trajectory\2026-08-20_080858\figures
+
+============================================================
+DONE : exp01d_trajectory
+TIME : 12.4 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01d_trajectory\2026-08-20_080858
+============================================================

@@ -81,20 +81,16 @@ for k = 1:d
 
     colName = matlab.lang.makeValidName(axisNames{k});
 
+    % Force a column before indexing. Indexing a ROW vector with a
+    % column index returns a row in MATLAB, which would not match the
+    % table height.
+    vals = vals(:);
+
     if iscell(vals) || isstring(vals)
-
         vals = cellstr(vals);
-
-        T.(colName) = vals(lin);
-        T.(colName) = T.(colName)(:);
-
-    else
-
-        vals = vals(:);
-
-        T.(colName) = vals(lin);
-
     end
+
+    T.(colName) = vals(lin);
 
 end
 

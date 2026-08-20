@@ -1,0 +1,157 @@
+
+============================================================
+RUN  : exp05b_aoi_aware
+ID   : 2026-08-20_075304
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05b_aoi_aware\2026-08-20_075304
+WHEN : 2026-08-20 07:53:05
+============================================================
+
+
+============================================================
+EXP05B AoI-aware event-triggered communication
+============================================================
+
+Seeds       : 20
+Event epsP  : 0.050 m
+Event epsV  : 0.100 m/s
+Max silence : 0.500 s
+
+Network scenarios
+  1. Clean      : loss 0 % | delay 0 ms
+  2. Moderate   : loss 20 % | delay 80 ms
+  3. Stressed   : loss 40 % | delay 120 ms
+
+------------------------------------------------------------
+Periodic baselines
+------------------------------------------------------------
+Clean      | periodic 10 Hz
+Clean      | periodic 20 Hz
+Moderate   | periodic 10 Hz
+Moderate   | periodic 20 Hz
+Stressed   | periodic 10 Hz
+Stressed   | periodic 20 Hz
+
+------------------------------------------------------------
+Conventional event-trigger baseline
+------------------------------------------------------------
+Clean      | conventional event trigger
+Moderate   | conventional event trigger
+Stressed   | conventional event trigger
+
+------------------------------------------------------------
+AoI-aware trigger sweep
+------------------------------------------------------------
+Clean      | epsP = 0.050 | epsV = 0.100 | AoI cooldown = 0.100 s
+Moderate   | epsP = 0.050 | epsV = 0.100 | AoI cooldown = 0.100 s
+Stressed   | epsP = 0.050 | epsV = 0.100 | AoI cooldown = 0.100 s
+
+============================================================
+Periodic baseline results
+============================================================
+
+Scenario   Rate RMSE[m] MaxErr MinEval AoI[s] TxRate PDR FormFail SafeFail
+---------- ---- ------- ------ ------- ------ ------ --- -------- --------
+Clean      10Hz 0.0345  0.0455  0.5549  0.050  10.00  1.000   0.00     0.00
+Clean      20Hz 0.0212  0.0306  0.5724  0.026  20.00  1.000   0.00     0.00
+Moderate   10Hz 0.0955  0.1256  0.4798  0.155  10.00  0.799   0.00     0.00
+Moderate   20Hz 0.0729  0.0935  0.5082  0.118  20.00  0.799   0.00     0.00
+Stressed   10Hz 0.1464  0.2029  0.4138  0.236  10.00  0.601   1.00     0.00
+Stressed   20Hz 0.1102  0.1432  0.4614  0.179  20.00  0.599   1.00     0.00
+
+============================================================
+Conventional event-trigger results
+============================================================
+
+Scenario   RMSE[m] StdRMSE MaxErr MinEval AoI[s] TxRate PDR FormFail SafeFail
+---------- ------- ------- ------ ------- ------ ------ --- -------- --------
+Clean      0.0792  0.0000  0.0996  0.5019  0.130   4.33  1.000   0.00     0.00
+Moderate   0.1682  0.0039  0.2374  0.3848  0.274   4.29  0.800   1.00     0.00
+Stressed   0.2579  0.0094  0.3971  0.2715  0.426   4.22  0.600   1.00     0.15
+
+============================================================
+AoI-aware event-trigger results
+============================================================
+
+Scenario   epsP epsV RMSE[m] StdRMSE MaxErr MinEval AoImean AoIP95 AoImax TxRate PDR Suppress Pos Vel AoI Timeout FormFail SafeFail
+---------- ----- ------- ------- ------ ------- ------- ------ ------ ------ --- -------- --- --- --- ------- -------- --------
+Clean      0.050 0.100 0.0377 0.0000  0.0491  0.5513  0.060   0.110  0.110   8.41  1.000  0.832  0.070 0.009 0.921 0.000   0.00     0.00
+Moderate   0.050 0.100 0.0976 0.0005  0.1267  0.4761  0.158   0.288  0.440  11.24  0.799  0.775  0.345 0.026 0.629 0.000   0.00     0.00
+Stressed   0.050 0.100 0.1310 0.0007  0.1721  0.4338  0.212   0.352  0.596  15.78  0.600  0.685  0.617 0.026 0.357 0.000   1.00     0.00
+
+============================================================
+Best robust AoI-aware operating points
+============================================================
+
+Clean
+  AoI threshold          : 0.120 s
+  Position threshold     : 0.050 m
+  Velocity threshold     : 0.100 m/s
+  Formation RMSE         : 0.0377 m
+  Min separation         : 0.5513 m
+  Mean AoI               : 0.060 s
+  Link-level P95 AoI     : 0.110 s
+  Effective rate/channel : 8.41 Hz
+  Saving vs periodic 10  : 15.9 %
+  Saving vs periodic 20  : 57.9 %
+  Rate change vs event   : +94.4 %
+  Formation failure      : 0.00
+  Safety failure         : 0.00
+
+Moderate
+  AoI threshold          : 0.120 s
+  Position threshold     : 0.050 m
+  Velocity threshold     : 0.100 m/s
+  Formation RMSE         : 0.0976 m
+  Min separation         : 0.4761 m
+  Mean AoI               : 0.158 s
+  Link-level P95 AoI     : 0.288 s
+  Effective rate/channel : 11.24 Hz
+  Saving vs periodic 10  : -12.4 %
+  Saving vs periodic 20  : 43.8 %
+  Rate change vs event   : +161.8 %
+  Formation failure      : 0.00
+  Safety failure         : 0.00
+
+Stressed
+  No robust AoI-aware profile found.
+
+============================================================
+Method comparison at selected operating points
+============================================================
+
+Scenario   Method       RMSE[m] TxRate AoI[s] MinEval FormFail
+---------- ------------ ------- ------ ------ ------- --------
+Clean      Periodic10   0.0345  10.00  0.050  0.5549   0.00
+Clean      Periodic20   0.0212  20.00  0.026  0.5724   0.00
+Clean      Event        0.0792   4.33  0.130  0.5019   0.00
+Clean      AoI-aware    0.0377   8.41  0.060  0.5513   0.00
+
+Moderate   Periodic10   0.0955  10.00  0.155  0.4798   0.00
+Moderate   Periodic20   0.0729  20.00  0.118  0.5082   0.00
+Moderate   Event        0.1682   4.29  0.274  0.3848   1.00
+Moderate   AoI-aware    0.0976  11.24  0.158  0.4761   0.00
+
+Stressed   Periodic10   0.1464  10.00  0.236  0.4138   1.00
+Stressed   Periodic20   0.1102  20.00  0.179  0.4614   1.00
+Stressed   Event        0.2579   4.22  0.426  0.2715   1.00
+
+
+EXP05B completed.
+
+
+============================================================
+ACK feedback integrity
+============================================================
+  Accepted-state updates : 193017
+  Sync misses            : 0
+  STATUS                 : OK
+
+tidy.csv : 240 rows
+saveAllFigures: 6 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp05b_aoi_aware\2026-08-20_075304\figures
+
+============================================================
+DONE : exp05b_aoi_aware
+TIME : 1 m 40 s
+FIGS : 6
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp05b_aoi_aware\2026-08-20_075304
+============================================================

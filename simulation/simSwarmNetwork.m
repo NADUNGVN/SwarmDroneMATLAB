@@ -1,6 +1,9 @@
 function out = simSwarmNetwork(cfg)
 
-rng(cfg.net.seed);
+% The generator is pinned explicitly. Parallel-pool workers default to a
+% different generator than the client, so rng(seed) alone would make
+% parfor results differ from the equivalent serial loop.
+rng(cfg.net.seed, 'twister');
 
 dt = cfg.swarm.dt;
 t = (0:dt:cfg.swarm.T)';

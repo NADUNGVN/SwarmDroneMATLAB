@@ -1,0 +1,25 @@
+
+============================================================
+RUN  : exp01c_disturbance
+ID   : 2026-08-20_080829
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01c_disturbance\2026-08-20_080829
+WHEN : 2026-08-20 08:08:30
+============================================================
+
+
+EXP01C disturbance-rejection results
+  Disturbance interval    : 5.00 -- 5.35 s
+  Max position deviation  : 0.1027 m
+  Recovery to 2 cm        : 2.412 s after disturbance
+  Final position error    : 0.0030 m
+  Peak |roll| / |pitch|   : 2.68 / 4.51 deg
+  Torque saturation       : 0.00 %
+  STATUS                  : PASS
+saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp01c_disturbance\2026-08-20_080829\figures
+
+============================================================
+DONE : exp01c_disturbance
+TIME : 10.0 s
+FIGS : 2
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp01c_disturbance\2026-08-20_080829
+============================================================

@@ -1,41 +1,75 @@
 SwarmDroneMATLAB/
+  .gitattributes
+  .gitignore
+  PROJECT_TREE.txt
   README.md
   run_all.m
   startup.m
   configs/
     defaultConfig.m
+  controllers/
+    quadCascadedController.m
+  docs/
+    ROADMAP.md
+  experiments/
+    exp01_hover.m
+    exp01b_position_step.m
+    exp01c_disturbance.m
+    exp01d_trajectory.m
+    exp02_formation.m
+    exp03_packet_loss_sweep.m
+    exp03a_packet_loss.m
+    exp03b_delay.m
+    exp03c_loss_delay.m
+    exp03d_jitter.m
+    exp04a_comm_rate.m
+    exp04b_rate_impairment.m
+    exp05a_event_triggered.m
+    exp05b_aoi_aware.m
+    exp05c_ablation.m
+    exp05d_pareto_frontier.m
+    exp06a_scalability.m
+  metrics/
+    computeSwarmMetrics.m
+  models/
+    quadrotor/
+      quad6dofDynamics.m
+  network/
+    aoiAwareTriggerPolicy.m
+    deliverNetworkPackets.m
+    enqueueNetworkPackets.m
+    enqueueTriggeredNetworkPackets.m
+    eventTriggerPolicy.m
+    initNetworkState.m
+    initQueuedNetworkState.m
+    simSwarmNetworkQueued.m
+    updateNetworkState.m
+  results/            (generated; one timestamped folder per run)
+  simulation/
+    simSingleDrone.m
+    simSwarm.m
+    simSwarmAoIAblation.m
+    simSwarmAoIAware.m
+    simSwarmEventTriggered.m
+    simSwarmNetwork.m
   swarm/
+    applyScalableSwarmConfig.m
     distributedFormationPolicy.m
     leaderReference.m
   tests/
     test_formation_error.m
     test_rotation.m
-  models/
-    quadrotor/
-      quad6dofDynamics.m
-  controllers/
-    quadCascadedController.m
+  utils/
+    ensureParallelPool.m
+    eulerRatesZYX.m
+    finishExperiment.m
+    projectRoot.m
+    rotmZYX.m
+    saturateNorm.m
+    saveAllFigures.m
+    startExperiment.m
+    tidyFromArray.m
+    vee.m
   visualization/
     plotSingleDrone.m
     plotSwarm.m
-  network/
-    initNetworkState.m
-    updateNetworkState.m
-  simulation/
-    simSingleDrone.m
-    simSwarm.m
-  experiments/
-    exp01_hover.m
-    exp02_formation.m
-    exp03_packet_loss_sweep.m
-  metrics/
-    computeSwarmMetrics.m
-  docs/
-    ROADMAP.md
-  utils/
-    eulerRatesZYX.m
-    rotmZYX.m
-    saturateNorm.m
-    vee.m
-  results/
-    .gitkeep

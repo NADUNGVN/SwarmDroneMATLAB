@@ -1,0 +1,18 @@
+{
+  "experiment": "exp01_hover",
+  "runId": "2026-08-20_080731",
+  "startedAt": "2026-08-20 08:07:31",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "1d30c4f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp01_hover.m",
+  "finishedAt": "2026-08-20 08:07:41",
+  "elapsedSec": 9.4369636,
+  "elapsedText": "9.4 s",
+  "figureCount": 2,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

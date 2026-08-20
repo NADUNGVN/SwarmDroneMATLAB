@@ -1,0 +1,57 @@
+
+============================================================
+RUN  : exp04a_comm_rate
+ID   : 2026-08-20_081001
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp04a_comm_rate\2026-08-20_081001
+WHEN : 2026-08-20 08:10:01
+============================================================
+
+
+============================================================
+EXP04A periodic communication-rate sweep
+============================================================
+
+Network conditions
+  Packet loss : 0 %
+  Delay       : 0 ms
+  Jitter      : 0 ms
+
+Requested communication rate = 2.0 Hz (Tc = 0.500 s)
+Requested communication rate = 5.0 Hz (Tc = 0.200 s)
+Requested communication rate = 10.0 Hz (Tc = 0.100 s)
+Requested communication rate = 20.0 Hz (Tc = 0.050 s)
+Requested communication rate = 50.0 Hz (Tc = 0.020 s)
+
+============================================================
+EXP04A communication-resource results
+============================================================
+
+Rate   MeasRate RMSE[m] MaxErr[m] MinFull MinEval AoImean AoIP95 TxCount CommRed EffUpdate CtrlRMS FormFail SafeFail
+-----  -------- ------- --------- ------- ------- ------- ------ ------- ------- --------- ------- -------- --------
+   2Hz     2.00  0.1979   0.2597   0.2049  0.3470  0.250   0.470      720     96.0%   1.000    0.1370    1        0
+   5Hz     5.00  0.0698   0.0892   0.2592  0.5109  0.100   0.190     1800     90.0%   1.000    0.0685    0        0
+  10Hz    10.00  0.0345   0.0455   0.2667  0.5549  0.050   0.090     3600     80.0%   1.000    0.0490    0        0
+  20Hz    20.00  0.0212   0.0306   0.2714  0.5724  0.026   0.050     7200     60.0%   1.000    0.0430    0        0
+  50Hz    50.00  0.0162   0.0261   0.2744  0.5823  0.010   0.010    18000      0.0%   1.000    0.0405    0        0
+
+AoI sanity validation
+  Mean |simulation - Tc/2| : 0.000264 s
+  Max  |simulation - Tc/2| : 0.000985 s
+
+Resource-performance operating point
+  Lowest tested valid rate : 5.0 Hz
+  Formation RMSE           : 0.0698 m
+  Min separation (eval)    : 0.5109 m
+  Mean AoI                 : 0.100 s
+  Communication reduction  : 90.0 % vs 50 Hz
+
+EXP04A completed.
+
+saveAllFigures: 7 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp04a_comm_rate\2026-08-20_081001\figures
+
+============================================================
+DONE : exp04a_comm_rate
+TIME : 18.0 s
+FIGS : 7
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp04a_comm_rate\2026-08-20_081001
+============================================================

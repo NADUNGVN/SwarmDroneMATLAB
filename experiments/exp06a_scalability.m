@@ -43,7 +43,7 @@ close all;
 % below into console.log. Paired with the save block at the end.
 % ============================================================
 
-R = startExperiment('exp06a_scalability');
+expRun = startExperiment('exp06a_scalability');
 
 
 
@@ -193,6 +193,22 @@ SAFEFAIL = ...
     false(numSeeds,nMethod,nSize,nScenario);
 
 
+%% ------------------------------------------------------------
+% ACK-feedback diagnostics
+%
+% Only the full AoI-aware method maintains accepted-state memory.
+% ackSyncMissCount counts occasions where the transmitter could not
+% match an acceptance to a pending attempt; it should be 0. It is
+% recorded here because nothing previously inspected it.
+% ------------------------------------------------------------
+
+ACKMISS = ...
+    zeros(numSeeds,nMethod,nSize,nScenario);
+
+ACKUPDATE = ...
+    zeros(numSeeds,nMethod,nSize,nScenario);
+
+
 CHANNELCOUNT = ...
     zeros(nSize,1);
 
@@ -256,6 +272,9 @@ fprintf( ...
 %% ============================================================
 % Experiment
 % ============================================================
+
+ensureParallelPool(numSeeds);
+
 
 for iS = 1:nScenario
 
@@ -335,7 +354,21 @@ for iS = 1:nScenario
             % Monte-Carlo seeds
             % ==================================================
 
-            for s = 1:numSeeds
+            % Sliced accumulators. parfor cannot slice a 4-D array,
+            % so each seed writes into a vector that is copied back
+            % into the result arrays after the loop.
+            rmseS     = zeros(numSeeds,1);
+            maxerrS   = zeros(numSeeds,1);
+            minevalS  = zeros(numSeeds,1);
+            aoiS      = zeros(numSeeds,1);
+            txcountS  = zeros(numSeeds,1);
+            txtotalS  = zeros(numSeeds,1);
+            pdrS      = zeros(numSeeds,1);
+            ackmS     = zeros(numSeeds,1);
+            ackuS     = zeros(numSeeds,1);
+
+
+            parfor s = 1:numSeeds
 
 
                 %% =============================================
@@ -513,15 +546,15 @@ for iS = 1:nScenario
                 % Formation performance
                 % ---------------------------------------------
 
-                RMSE(s,iM,iN,iS) = ...
+                rmseS(s) = ...
                     M.formationRMSE;
 
 
-                MAXERR(s,iM,iN,iS) = ...
+                maxerrS(s) = ...
                     M.maxFormationError;
 
 
-                MINEVAL(s,iM,iN,iS) = ...
+                minevalS(s) = ...
                     M.minSeparationEval;
 
 
@@ -529,7 +562,7 @@ for iS = 1:nScenario
                 % AoI
                 % ---------------------------------------------
 
-                AOI(s,iM,iN,iS) = ...
+                aoiS(s) = ...
                     mean( ...
                     out.meanAoI(idxEval));
 
@@ -543,45 +576,59 @@ for iS = 1:nScenario
                     - out.t(1);
 
 
-                TXCOUNT(s,iM,iN,iS) = ...
+                txcountS(s) = ...
                     out.txCount;
 
 
-                TXRATETOTAL(s,iM,iN,iS) = ...
+                txtotalS(s) = ...
                     out.txCount ...
                     / max(missionTime,eps);
 
 
-                TXRATECHANNEL(s,iM,iN,iS) = ...
-                    TXRATETOTAL(s,iM,iN,iS) ...
-                    / nChannels;
-
-
-                TXRATEAGENT(s,iM,iN,iS) = ...
-                    TXRATETOTAL(s,iM,iN,iS) ...
-                    / N;
-
-
-                PDR(s,iM,iN,iS) = ...
+                pdrS(s) = ...
                     out.PDR;
+
+
+                if isfield(out,'ackSyncMissCount')
+
+                    ackmS(s) = ...
+                        out.ackSyncMissCount;
+
+                    ackuS(s) = ...
+                        out.ackUpdateCount;
+
+                end
 
 
                 %% --------------------------------------------
                 % Failure metrics
                 % ---------------------------------------------
 
-                FORMFAIL(s,iM,iN,iS) = ...
-                    M.formationRMSE ...
-                    > formationThreshold;
-
-
-                SAFEFAIL(s,iM,iN,iS) = ...
-                    M.minSeparationEval ...
-                    < safetyThreshold;
-
-
             end
             % End seed loop
+
+
+            %% =================================================
+            % Copy the sliced results back
+            % ==================================================
+
+            RMSE(:,iM,iN,iS)    = rmseS;
+            MAXERR(:,iM,iN,iS)  = maxerrS;
+            MINEVAL(:,iM,iN,iS) = minevalS;
+            AOI(:,iM,iN,iS)     = aoiS;
+
+            TXCOUNT(:,iM,iN,iS)       = txcountS;
+            TXRATETOTAL(:,iM,iN,iS)   = txtotalS;
+            TXRATECHANNEL(:,iM,iN,iS) = txtotalS / nChannels;
+            TXRATEAGENT(:,iM,iN,iS)   = txtotalS / N;
+
+            PDR(:,iM,iN,iS) = pdrS;
+
+            ACKMISS(:,iM,iN,iS)   = ackmS;
+            ACKUPDATE(:,iM,iN,iS) = ackuS;
+
+            FORMFAIL(:,iM,iN,iS) = rmseS    > formationThreshold;
+            SAFEFAIL(:,iM,iN,iS) = minevalS < safetyThreshold;
 
 
         end
@@ -970,6 +1017,59 @@ fprintf('\nEXP06A completed.\n');
 
 
 %% ============================================================
+% ACK-feedback integrity check
+%
+% The accepted-state feedback path must never fail to match an
+% acceptance to a pending attempt. A non-zero total means the
+% transmitter's reference state froze on some link, which would
+% inflate that link's trigger rate.
+% ============================================================
+
+fprintf('\n');
+fprintf('============================================================\n');
+fprintf('ACK feedback integrity\n');
+fprintf('============================================================\n');
+
+fprintf('  Accepted-state updates : %d\n', sum(ACKUPDATE(:)));
+fprintf('  Sync misses            : %d\n', sum(ACKMISS(:)));
+
+if sum(ACKMISS(:)) == 0
+    fprintf('  STATUS                 : OK\n');
+else
+    fprintf('  STATUS                 : *** MISSES DETECTED ***\n');
+end
+
+
+%% ============================================================
+% Long-format results table
+%
+% One row per (seed, method, swarm size, network scenario).
+% ============================================================
+
+T = tidyFromArray( ...
+    struct( ...
+        'RMSE',          RMSE, ...
+        'MAXERR',        MAXERR, ...
+        'MINEVAL',       MINEVAL, ...
+        'AOI',           AOI, ...
+        'TXRATECHANNEL', TXRATECHANNEL, ...
+        'TXRATEAGENT',   TXRATEAGENT, ...
+        'TXRATETOTAL',   TXRATETOTAL, ...
+        'TXCOUNT',       TXCOUNT, ...
+        'PDR',           PDR, ...
+        'ACKUPDATE',     ACKUPDATE, ...
+        'ACKMISS',       ACKMISS, ...
+        'FORMFAIL',      double(FORMFAIL), ...
+        'SAFEFAIL',      double(SAFEFAIL)), ...
+    {'seed','method','N','scenario'}, ...
+    {1:numSeeds, methodNames, swarmSizes, scenarioNames});
+
+writetable(T, fullfile(expRun.dir,'tidy.csv'));
+
+fprintf('\ntidy.csv : %d rows\n', height(T));
+
+
+%% ============================================================
 % Persist results
 %
 % save() with no variable list stores the ENTIRE script workspace,
@@ -977,8 +1077,8 @@ fprintf('\nEXP06A completed.\n');
 % to enumerate names.
 % ============================================================
 
-save(fullfile(R.dir,'workspace.mat'));
+save(fullfile(expRun.dir,'workspace.mat'));
 
-saveAllFigures(R);
+saveAllFigures(expRun);
 
-finishExperiment(R);
+finishExperiment(expRun);

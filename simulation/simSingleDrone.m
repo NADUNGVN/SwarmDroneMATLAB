@@ -1,6 +1,9 @@
 function out = simSingleDrone(cfg)
 
-rng(cfg.seed);
+% The generator is pinned explicitly. Parallel-pool workers default to a
+% different generator than the client, so rng(seed) alone would make
+% parfor results differ from the equivalent serial loop.
+rng(cfg.seed, 'twister');
 
 dt = cfg.single.dt;
 t = (0:dt:cfg.single.T)';

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp03d_jitter",
+  "runId": "2026-08-20_081538",
+  "startedAt": "2026-08-20 08:15:38",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "1d30c4f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp03d_jitter.m",
+  "finishedAt": "2026-08-20 08:17:04",
+  "elapsedSec": 85.8624002,
+  "elapsedText": "1 m 26 s",
+  "figureCount": 8,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

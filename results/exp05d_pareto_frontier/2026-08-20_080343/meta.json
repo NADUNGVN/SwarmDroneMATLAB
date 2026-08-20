@@ -1,0 +1,18 @@
+{
+  "experiment": "exp05d_pareto_frontier",
+  "runId": "2026-08-20_080343",
+  "startedAt": "2026-08-20 08:03:44",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "1d30c4f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp05d_pareto_frontier.m",
+  "finishedAt": "2026-08-20 08:06:36",
+  "elapsedSec": 171.9405858,
+  "elapsedText": "2 m 52 s",
+  "figureCount": 5,
+  "hasWorkspace": true,
+  "hasTidy": true
+}
