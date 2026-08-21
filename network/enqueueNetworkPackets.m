@@ -19,6 +19,23 @@ N = cfg.swarm.N;
 
 
 % ============================================================
+% Broadcast accounting
+%
+% One radio transmission from node j reaches every neighbour that is
+% listening, so under broadcast accounting the unicast links from the
+% same sender in the same timestep collapse to one. The leader payload
+% carries acceleration as well, so it is a separate payload class even
+% when the physical sender is the same node.
+%
+% Recorded only; nothing here is read by any decision.
+% ============================================================
+
+senderFired = false(N,1);
+
+leaderFired = false;
+
+
+% ============================================================
 % Neighbor packets
 % ============================================================
 
@@ -31,6 +48,8 @@ for i = 1:N
         end
 
         net.txCount = net.txCount + 1;
+
+        senderFired(j) = true;
 
 
         % Packet loss
@@ -86,6 +105,8 @@ for i = 2:N
 
     net.txCount = net.txCount + 1;
 
+    leaderFired = true;
+
 
     if drawLoss(netTrace,k,i,1,true) < cfg.net.packetLoss
 
@@ -122,6 +143,9 @@ for i = 2:N
     net.leaderQueue{i} = q;
 
 end
+
+
+net.broadcastCount = net.broadcastCount + nnz(senderFired) + leaderFired;
 
 end
 

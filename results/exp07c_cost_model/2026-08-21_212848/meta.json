@@ -1,0 +1,18 @@
+{
+  "experiment": "exp07c_cost_model",
+  "runId": "2026-08-21_212848",
+  "startedAt": "2026-08-21 21:28:48",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "deb805d",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp07c_cost_model.m",
+  "finishedAt": "2026-08-21 21:29:35",
+  "elapsedSec": 46.8281908,
+  "elapsedText": "46.8 s",
+  "figureCount": 2,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

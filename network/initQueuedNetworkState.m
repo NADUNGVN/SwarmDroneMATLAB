@@ -73,6 +73,12 @@ end
 % Network statistics
 % ============================================================
 
+% Broadcast accounting (EXP07C). Counts unique
+% (timestep, physical sender, payload class) DATA transmissions. Purely
+% passive: it is written but never read by any decision, so enabling it
+% cannot change a run. tests/test_lock_regression proves that.
+net.broadcastCount = 0;
+
 net.txCount = 0;
 net.rxCount = 0;
 net.dropCount = 0;

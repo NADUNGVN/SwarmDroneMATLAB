@@ -48,6 +48,12 @@ end
 N = cfg.swarm.N;
 
 
+% Broadcast accounting (EXP07C). Passive; see initQueuedNetworkState.
+senderFired = false(N,1);
+
+leaderFired = false;
+
+
 %% ============================================================
 % Initialize transmitter-side memory if needed
 % ============================================================
@@ -195,6 +201,8 @@ for i = 1:N
 
         net.txCount = ...
             net.txCount + 1;
+
+        senderFired(j) = true;
 
 
         % Update transmitter memory immediately.
@@ -376,6 +384,8 @@ for i = 2:N
     net.txCount = ...
         net.txCount + 1;
 
+    leaderFired = true;
+
 
     txState.leaderLastPos(i,:) = ...
         currentPos;
@@ -457,6 +467,9 @@ for i = 2:N
         q;
 
 end
+
+
+net.broadcastCount = net.broadcastCount + nnz(senderFired) + leaderFired;
 
 end
 

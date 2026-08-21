@@ -54,6 +54,12 @@ N = cfg.swarm.N;
 
 dt = cfg.swarm.dt;
 
+
+% Broadcast accounting (EXP07C). Passive; see initQueuedNetworkState.
+senderFired = false(N,1);
+
+leaderFired = false;
+
 useAck      = cfg.causal.useAckFeedback;
 useV3       = cfg.causal.innovationPriority;
 triggerCfg  = cfg;
@@ -140,6 +146,8 @@ for i = 1:N
 
         net = incrementTriggerReason(net, reason, useV3);
 
+        senderFired(j) = true;
+
         [net, txState] = transmit( ...
             net, txState, i, j, tk, currentPos, currentVel, [], cfg, false, ...
             netTrace, k);
@@ -218,11 +226,16 @@ for i = 2:N
 
     net = incrementTriggerReason(net, reason, useV3);
 
+    leaderFired = true;
+
     [net, txState] = transmit( ...
         net, txState, i, 1, tk, currentPos, currentVel, leader.acc', cfg, true, ...
         netTrace, k);
 
 end
+
+
+net.broadcastCount = net.broadcastCount + nnz(senderFired) + leaderFired;
 
 end
 

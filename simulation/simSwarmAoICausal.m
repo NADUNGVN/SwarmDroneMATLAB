@@ -418,6 +418,10 @@ out.estimatedAoI = EstAoILog;
 % ============================================================
 
 out.txCount           = net.txCount;
+
+% Broadcast accounting (EXP07C): unique (timestep, sender, payload
+% class) DATA transmissions. Passive counter, never read by the sim.
+out.broadcastCount = net.broadcastCount;
 out.rxCount           = net.rxCount;
 out.dropCount         = net.dropCount;
 out.staleDiscardCount = net.staleDiscardCount;

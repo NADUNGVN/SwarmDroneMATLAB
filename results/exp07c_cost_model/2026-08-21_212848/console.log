@@ -1,0 +1,118 @@
+
+============================================================
+RUN  : exp07c_cost_model
+ID   : 2026-08-21_212848
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_212848
+WHEN : 2026-08-21 21:28:48
+============================================================
+
+
+============================================================
+EXP07C communication cost realism
+============================================================
+
+Seeds        : 3
+Channels     : 12
+Accounting   : passive only, no behaviour change
+ACK channel  : reliable, symmetric with the forward path
+CRN          : forward and reverse traces both on
+
+packet-w     : w = [0.1 0.25 0.5]
+airtime      : DATA 48 B, ACK 24 B
+broadcast    : unique (tick, sender, payload class); ACK unicast
+ensureParallelPool: starting pool with 3 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 3 workers.
+ensureParallelPool: pool ready (3 workers).
+
+------------------------------------------------------------
+Clean | loss 0 % | delay 0 ms
+------------------------------------------------------------
+  P10         [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp07c_cost_model (line 190)] 
+ done
+  P20          done
+  State-event  done
+  Causal-v3    done
+
+------------------------------------------------------------
+Moderate | loss 20 % | delay 80 ms
+------------------------------------------------------------
+  P10          done
+  P20          done
+  State-event  done
+  Causal-v3    done
+
+------------------------------------------------------------
+Stressed | loss 40 % | delay 120 ms
+------------------------------------------------------------
+  P10          done
+  P20          done
+  State-event  done
+  Causal-v3    done
+
+============================================================
+Passive-accounting invariants
+============================================================
+
+  ok   broadcast <= unicast everywhere
+  ok   broadcast >= unicast / maxFanout (2)
+  ok   baselines emit no ACK
+  ok   periodic broadcast exact: P10 1800, P20 3600 (6 payload classes)
+
+  Accounting invariants: PASS
+
+============================================================
+DATA / ACK / TOTAL accounting
+============================================================
+
+Scenario   Method            RMSE    DATA/s     ACK/s    BCAST/s  SafeFail
+Clean      P10             0.0345    120.00      0.00      60.00      0.00
+Clean      P20             0.0212    240.00      0.00     120.00      0.00
+Clean      State-event     0.0792     51.93      0.00      25.97      0.00
+Clean      Causal-v3       0.0383    101.27    101.27      50.63      0.00
+
+Moderate   P10             0.0961    120.00      0.00      60.00      0.00
+Moderate   P20             0.0730    240.00      0.00     120.00      0.00
+Moderate   State-event     0.1694     51.53      0.00      25.77      0.00
+Moderate   Causal-v3       0.0872    159.86    128.60     136.86      0.00
+
+Stressed   P10             0.1444    120.00      0.00      60.00      0.00
+Stressed   P20             0.1098    240.00      0.00     120.00      0.00
+Stressed   State-event     0.2500     50.64      0.00      25.32      0.00
+Stressed   Causal-v3       0.1165    218.98    131.74     109.49      0.00
+
+============================================================
+Pareto status of Causal-v3 under each cost model
+============================================================
+
+Cost variant              Clean       Moderate       Stressed
+packet-w 0.10           non-dom        non-dom        non-dom
+packet-w 0.25        dom by P10        non-dom     dom by P20
+packet-w 0.50        dom by P10        non-dom     dom by P20
+airtime              dom by P10        non-dom     dom by P20
+broadcast            dom by P20     dom by P20     dom by P20
+
+============================================================
+EXP07C acceptance gates
+============================================================
+
+  [PASS] Accounting invariants                          0 failure(s)
+  [FAIL] packet-w: non-dominated in >= 2/3 variants     1 of 3 variants
+  [FAIL] Stressed conclusion holds in >= 2/3 families   0 of 3 families ()
+
+  EXP07C GATES: 2 of 3 FAILED
+  Per the pre-registration, nothing is to be tuned.
+
+tidy.csv : 36 rows
+
+EXP07C completed.
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_212848\figures
+
+============================================================
+DONE : exp07c_cost_model
+TIME : 46.8 s
+FIGS : 2
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_212848
+============================================================
