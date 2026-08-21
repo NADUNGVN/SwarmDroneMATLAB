@@ -1,0 +1,38 @@
+
+============================================================
+RUN  : exp07a_causal_ack
+ID   : 2026-08-21_180805
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_180805
+WHEN : 2026-08-21 18:08:05
+============================================================
+
+
+============================================================
+EXP07A explicit causal ACK
+============================================================
+
+Seeds          : 3
+Channels       : 12
+epsP / epsV    : 0.050 m / 0.100 m/s
+AoI threshold  : 0.120 s
+AoI cooldown   : 0.100 s
+Max silence    : 0.500 s
+ACK channel    : symmetric with forward, no loss
+ensureParallelPool: starting pool with 3 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 3 workers.
+ensureParallelPool: pool ready (3 workers).
+
+------------------------------------------------------------
+Clean | loss 0 % | delay 0 ms
+------------------------------------------------------------
+  P10         [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp07a_causal_ack (line 230)] 
+ done
+  P20          done
+  State-event {Unrecognized field name "aoiTriggerRatio".
+
+Error in exp07a_causal_ack (line 230)
+        parfor s = 1:numSeeds
+        ^^^^^^^^^^^^^^^^^^^^^
+} 

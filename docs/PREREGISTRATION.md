@@ -146,9 +146,14 @@ So dấu của `r` và `s` trong 6-DOF với chính chúng trong double-integrat
 
 | Mức | ACK loss | ACK delay |
 |---|---|---|
-| reliable | 0 % | tối thiểu (1 timestep) |
-| moderate | 10 % | = delay DATA của scenario |
+| reliable | 0 % | = delay DATA của scenario (kênh đối xứng), sàn `dt` |
+| moderate | 10 % | = delay DATA của scenario, sàn `dt` |
 | severe | 20 % | = 2 × delay DATA của scenario |
+
+**`reliable` cũng chính là điểm vận hành của EXP07A.** Kênh ngược đi qua cùng một môi trường vật
+lý với kênh xuôi, nên độ trễ đối xứng là giả định mặc định; EXP07A cô lập *tính nhân quả*, còn
+EXP07B mới cô lập *suy giảm của kênh ACK*. Ở Stressed điều này cho RTT = 240 ms = 2 ×
+`aoiThreshold`.
 
 ### 2.8 Cost model (EXP07C)
 
@@ -514,3 +519,4 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-21 | §2.7 mức `reliable`: ACK delay đổi từ "tối thiểu (1 timestep)" sang "= delay DATA của scenario" | Bản chốt đầu tiên **không pin** ACK delay cho EXP07A; §2.7 chỉ định nghĩa thang cho EXP07B. Đây là lấp một chỗ chưa xác định, không phải đổi một ngưỡng đã chốt. Kênh ngược dùng cùng môi trường vật lý nên độ trễ đối xứng là giả định trung thực hơn. **Thay đổi này làm gate KHÓ hơn, không dễ hơn**: RTT ở Stressed tăng từ 140 ms lên 240 ms, khiến ước lượng AoI của sender cũ hơn, method truyền nhiều hơn, nên cả trần 20 Hz lẫn gate `RMSE < P10` đều khó đạt hơn. Ghi nhận trước khi tồn tại bất kỳ kết quả nào. | (branch `exp07a-causal-ack`) |

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp07a_causal_ack",
+  "runId": "2026-08-21_180948",
+  "startedAt": "2026-08-21 18:09:48",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "d2b332b",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp07a_causal_ack.m",
+  "finishedAt": "2026-08-21 18:10:31",
+  "elapsedSec": 42.919781,
+  "elapsedText": "42.9 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}
