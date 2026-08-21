@@ -1,0 +1,18 @@
+{
+  "experiment": "exp08a_topology",
+  "runId": "2026-08-21_220356",
+  "startedAt": "2026-08-21 22:03:57",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "03af557",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp08a_topology.m",
+  "finishedAt": "2026-08-21 22:14:08",
+  "elapsedSec": 611.2879055,
+  "elapsedText": "10 m 11 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

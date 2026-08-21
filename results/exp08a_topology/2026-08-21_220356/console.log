@@ -1,0 +1,249 @@
+
+============================================================
+RUN  : exp08a_topology
+ID   : 2026-08-21_220356
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp08a_topology\2026-08-21_220356
+WHEN : 2026-08-21 22:03:57
+============================================================
+
+
+============================================================
+EXP08A topology robustness
+============================================================
+
+Connectivity pre-check
+
+topology      N    edges   meanDeg   minDeg   lambda2  channels  connected
+ring2        10       13      2.60        2    0.6443        23          1
+ring2        20       28      2.80        2    0.4981        48          1
+ring2        50       73      2.92        2    0.4504       123          1
+sparse4      10       23      4.60        4    2.0646        41          1
+sparse4      20       48      4.80        4    0.8970        86          1
+sparse4      50      123      4.92        4    0.5153       221          1
+sparse6      10       31      6.20        6    4.3820        59          1
+sparse6      20       66      6.60        6    1.6124       124          1
+sparse6      50      171      6.84        6    0.6727       319          1
+geometric    10       14      2.80        1    0.9250        23          1
+geometric    20       35      3.50        1    0.6965        60          1
+geometric    50      103      4.12        1    0.5513       181          1
+
+  All 12 graphs connected. Proceeding.
+
+Seeds: 3 | total sims: 288
+ensureParallelPool: starting pool with 3 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 3 workers.
+ensureParallelPool: pool ready (3 workers).
+
+------------------------------------------------------------
+Moderate | loss 20 % | delay 80 ms
+------------------------------------------------------------
+  N=10  ring2     [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp08a_topology (line 223)] 
+  done
+  N=10  sparse4     done
+  N=10  sparse6     done
+  N=10  geometric   done
+  N=20  ring2       done
+  N=20  sparse4     done
+  N=20  sparse6     done
+  N=20  geometric   done
+  N=50  ring2       done
+  N=50  sparse4     done
+  N=50  sparse6     done
+  N=50  geometric   done
+
+------------------------------------------------------------
+Stressed | loss 40 % | delay 120 ms
+------------------------------------------------------------
+  N=10  ring2       done
+  N=10  sparse4     done
+  N=10  sparse6     done
+  N=10  geometric   done
+  N=20  ring2       done
+  N=20  sparse4     done
+  N=20  sparse6     done
+  N=20  geometric   done
+  N=50  ring2       done
+  N=50  sparse4     done
+  N=50  sparse6     done
+  N=50  geometric   done
+
+============================================================
+Results by condition
+============================================================
+
+Scenario   Topology      N Method            RMSE       AoI     cost/s  FormFail  SafeFail
+Moderate   ring2        10 P10             0.1508     0.155     230.00      1.00      0.00
+Moderate   ring2        10 P20             0.1149     0.118     460.00      1.00      0.00
+Moderate   ring2        10 State-event     0.2615     0.274      94.53      1.00      0.33
+Moderate   ring2        10 Causal-v3       0.1371     0.141     364.64      1.00      0.00
+
+Moderate   sparse4      10 P10             0.1701     0.155     410.00      1.00      0.00
+Moderate   sparse4      10 P20             0.1282     0.118     820.00      1.00      0.00
+Moderate   sparse4      10 State-event     0.3059     0.281     164.28      1.00      1.00
+Moderate   sparse4      10 Causal-v3       0.1574     0.143     637.14      1.00      0.00
+
+Moderate   sparse6      10 P10             0.1788     0.155     590.00      1.00      0.00
+Moderate   sparse6      10 P20             0.1342     0.118    1180.00      1.00      0.00
+Moderate   sparse6      10 State-event     0.3243     0.280     234.64      1.00      1.00
+Moderate   sparse6      10 Causal-v3       0.1674     0.144     908.77      1.00      0.00
+
+Moderate   geometric    10 P10             0.1004     0.155     230.00      0.67      0.00
+Moderate   geometric    10 P20             0.0762     0.118     460.00      0.00      0.00
+Moderate   geometric    10 State-event     0.1778     0.275      97.54      1.00      0.00
+Moderate   geometric    10 Causal-v3       0.0922     0.143     364.76      0.00      0.00
+
+Moderate   ring2        20 P10             0.1791     0.155     480.00      1.00      0.00
+Moderate   ring2        20 P20             0.1371     0.119     960.00      1.00      0.00
+Moderate   ring2        20 State-event     0.3102     0.278     192.47      1.00      0.33
+Moderate   ring2        20 Causal-v3       0.1626     0.141     759.12      1.00      0.00
+
+Moderate   sparse4      20 P10             0.2574     0.155     860.00      1.00      0.00
+Moderate   sparse4      20 P20             0.1957     0.118    1720.00      1.00      0.00
+Moderate   sparse4      20 State-event     0.4546     0.291     317.92      1.00      1.00
+Moderate   sparse4      20 Causal-v3       0.2400     0.144    1300.03      1.00      0.00
+
+Moderate   sparse6      20 P10             0.2892     0.155    1240.00      1.00      0.00
+Moderate   sparse6      20 P20             0.2200     0.118    2480.00      1.00      0.00
+Moderate   sparse6      20 State-event     0.5140     0.296     438.82      1.00      1.00
+Moderate   sparse6      20 Causal-v3       0.2728     0.144    1850.14      1.00      0.00
+
+Moderate   geometric    20 P10             0.1692     0.155     600.00      1.00      0.00
+Moderate   geometric    20 P20             0.1286     0.118    1200.00      1.00      0.00
+Moderate   geometric    20 State-event     0.2980     0.279     241.52      1.00      0.00
+Moderate   geometric    20 Causal-v3       0.1551     0.142     947.42      1.00      0.00
+
+Moderate   ring2        50 P10             0.1931     0.155    1230.00      1.00      0.00
+Moderate   ring2        50 P20             0.1477     0.118    2460.00      1.00      0.00
+Moderate   ring2        50 State-event     0.3329     0.277     484.76      1.00      0.33
+Moderate   ring2        50 Causal-v3       0.1755     0.141    1940.31      1.00      0.00
+
+Moderate   sparse4      50 P10             0.3125     0.155    2210.00      1.00      0.00
+Moderate   sparse4      50 P20             0.2401     0.118    4420.00      1.00      0.00
+Moderate   sparse4      50 State-event     0.5490     0.302     765.02      1.00      1.00
+Moderate   sparse4      50 Causal-v3       0.2937     0.144    3282.46      1.00      0.00
+
+Moderate   sparse6      50 P10             0.3868     0.155    3190.00      1.00      0.00
+Moderate   sparse6      50 P20             0.3000     0.118    6380.00      1.00      0.00
+Moderate   sparse6      50 State-event     0.6874     0.328     983.38      1.00      1.00
+Moderate   sparse6      50 Causal-v3       0.3674     0.144    4679.81      1.00      0.00
+
+Moderate   geometric    50 P10             0.2518     0.155    1810.00      1.00      0.00
+Moderate   geometric    50 P20             0.1922     0.118    3620.00      1.00      0.00
+Moderate   geometric    50 State-event     0.4422     0.289     672.26      1.00      1.00
+Moderate   geometric    50 Causal-v3       0.2331     0.143    2765.84      1.00      0.00
+
+Stressed   ring2        10 P10             0.2281     0.237     230.00      1.00      0.00
+Stressed   ring2        10 P20             0.1734     0.179     460.00      1.00      0.00
+Stressed   ring2        10 State-event     0.4009     0.440      90.30      1.00      1.00
+Stressed   ring2        10 Causal-v3       0.1844     0.190     467.04      1.00      0.00
+
+Stressed   sparse4      10 P10             0.2604     0.236     410.00      1.00      0.00
+Stressed   sparse4      10 P20             0.1963     0.178     820.00      1.00      0.00
+Stressed   sparse4      10 State-event     0.4602     0.453     154.81      1.00      1.00
+Stressed   sparse4      10 Causal-v3       0.2105     0.190     825.86      1.00      0.00
+
+Stressed   sparse6      10 P10             0.2770     0.236     590.00      1.00      0.00
+Stressed   sparse6      10 P20             0.2081     0.179    1180.00      1.00      0.00
+Stressed   sparse6      10 State-event     0.4895     0.454     218.20      1.00      1.00
+Stressed   sparse6      10 Causal-v3       0.2223     0.191    1186.06      1.00      0.00
+
+Stressed   geometric    10 P10             0.1536     0.236     230.00      1.00      0.00
+Stressed   geometric    10 P20             0.1155     0.178     460.00      1.00      0.00
+Stressed   geometric    10 State-event     0.2737     0.436      95.20      1.00      0.33
+Stressed   geometric    10 Causal-v3       0.1232     0.190     477.19      1.00      0.00
+
+Stressed   ring2        20 P10             0.2670     0.235     480.00      1.00      0.00
+Stressed   ring2        20 P20             0.2050     0.179     960.00      1.00      0.00
+Stressed   ring2        20 State-event     0.4668     0.453     180.04      1.00      1.00
+Stressed   ring2        20 Causal-v3       0.2182     0.191     964.62      1.00      0.00
+
+Stressed   sparse4      20 P10             0.3823     0.237     860.00      1.00      1.00
+Stressed   sparse4      20 P20             0.2949     0.179    1720.00      1.00      0.00
+Stressed   sparse4      20 State-event     0.6555     0.490     281.94      1.00      1.00
+Stressed   sparse4      20 Causal-v3       0.3131     0.190    1702.04      1.00      0.00
+
+Stressed   sparse6      20 P10             0.4316     0.237    1240.00      1.00      1.00
+Stressed   sparse6      20 P20             0.3326     0.179    2480.00      1.00      0.00
+Stressed   sparse6      20 State-event     0.7447     0.524     374.09      1.00      1.00
+Stressed   sparse6      20 Causal-v3       0.3539     0.190    2444.48      1.00      1.00
+
+Stressed   geometric    20 P10             0.2554     0.236     600.00      1.00      0.00
+Stressed   geometric    20 P20             0.1942     0.179    1200.00      1.00      0.00
+Stressed   geometric    20 State-event     0.4442     0.448     228.02      1.00      1.00
+Stressed   geometric    20 Causal-v3       0.2071     0.190    1207.16      1.00      0.00
+
+Stressed   ring2        50 P10             0.2878     0.236    1230.00      1.00      0.00
+Stressed   ring2        50 P20             0.2212     0.179    2460.00      1.00      0.00
+Stressed   ring2        50 State-event     0.4964     0.453     451.29      1.00      1.00
+Stressed   ring2        50 Causal-v3       0.2348     0.190    2460.19      1.00      0.00
+
+Stressed   sparse4      50 P10             0.4557     0.237    2210.00      1.00      1.00
+Stressed   sparse4      50 P20             0.3569     0.179    4420.00      1.00      0.00
+Stressed   sparse4      50 State-event     0.7771     0.534     647.37      1.00      1.00
+Stressed   sparse4      50 Causal-v3       0.3775     0.190    4315.54      1.00      0.00
+
+Stressed   sparse6      50 P10             0.5529     0.236    3190.00      1.00      1.00
+Stressed   sparse6      50 P20             0.4397     0.179    6380.00      1.00      0.33
+Stressed   sparse6      50 State-event     0.9419     0.601     808.13      1.00      1.00
+Stressed   sparse6      50 Causal-v3       0.4683     0.191    6044.73      1.00      1.00
+
+Stressed   geometric    50 P10             0.3732     0.236    1810.00      1.00      0.00
+Stressed   geometric    50 P20             0.2887     0.179    3620.00      1.00      0.00
+Stressed   geometric    50 State-event     0.6407     0.484     597.13      1.00      1.00
+Stressed   geometric    50 Causal-v3       0.3063     0.190    3583.38      1.00      0.00
+
+============================================================
+Advantage at Stressed, per connected condition
+============================================================
+
+Topology      N  RMSE causal     RMSE P10  cost causal     cost P20  advantage
+ring2        10       0.1844       0.2281       467.04       460.00       RMSE
+sparse4      10       0.2105       0.2604       825.86       820.00       RMSE
+sparse6      10       0.2223       0.2770      1186.06      1180.00       RMSE
+geometric    10       0.1232       0.1536       477.19       460.00       RMSE
+ring2        20       0.2182       0.2670       964.62       960.00       RMSE
+sparse4      20       0.3131       0.3823      1702.04      1720.00       both
+sparse6      20       0.3539       0.4316      2444.48      2480.00       both
+geometric    20       0.2071       0.2554      1207.16      1200.00       RMSE
+ring2        50       0.2348       0.2878      2460.19      2460.00       RMSE
+sparse4      50       0.3775       0.4557      4315.54      4420.00       both
+sparse6      50       0.4683       0.5529      6044.73      6380.00       both
+geometric    50       0.3063       0.3732      3583.38      3620.00       both
+
+  Advantage in 12 of 12 connected conditions (100.0 %)
+
+============================================================
+Leave-one-topology-out
+============================================================
+
+  drop ring2      -> 9 of 9 (100.0 %)
+  drop sparse4    -> 9 of 9 (100.0 %)
+  drop sparse6    -> 9 of 9 (100.0 %)
+  drop geometric  -> 9 of 9 (100.0 %)
+
+============================================================
+EXP08A acceptance gates
+============================================================
+
+  [PASS] Pre-check: all graphs connected                      12 of 12 connected
+  [PASS] Causality invariants = 0                             0 violation(s)
+  [FAIL] SafeFail <= 5% where P20 is also safe                1 of 23 comparable conditions breached
+  [PASS] Stressed advantage in >= 80% of conditions           100.0 % (12 of 12)
+  [PASS] No single topology carries it (leave-one-out >= 80%) worst 100.0 %
+
+  EXP08A GATES: 1 of 5 FAILED
+  Per the pre-registration, nothing is to be tuned.
+
+tidy.csv : 288 rows
+
+EXP08A completed.
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp08a_topology\2026-08-21_220356\figures
+
+============================================================
+DONE : exp08a_topology
+TIME : 10 m 11 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp08a_topology\2026-08-21_220356
+============================================================
