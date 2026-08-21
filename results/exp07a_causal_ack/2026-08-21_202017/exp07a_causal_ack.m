@@ -36,11 +36,11 @@ expRun = startExperiment('exp07a_causal_ack');
 %% ============================================================
 % Monte Carlo
 %
-% 3 for the debug pass, 20 for the final pass. The pre-registration
-% requires the debug pass to be verified before the final one runs.
+% Final pass. The 3-seed debug pass was verified first, as the
+% pre-registration requires; no parameter changed between the two.
 % ============================================================
 
-numSeeds = 3;
+numSeeds = 20;
 
 
 %% ============================================================

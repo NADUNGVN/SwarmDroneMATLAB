@@ -1,9 +1,9 @@
 
 ============================================================
 RUN  : exp07a_causal_ack
-ID   : 2026-08-21_195540
-DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_195540
-WHEN : 2026-08-21 19:55:40
+ID   : 2026-08-21_202017
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_202017
+WHEN : 2026-08-21 20:20:17
 ============================================================
 
 
@@ -11,23 +11,25 @@ WHEN : 2026-08-21 19:55:40
 EXP07A explicit causal ACK
 ============================================================
 
-Seeds          : 3
+Seeds          : 20
 Channels       : 12
 epsP / epsV    : 0.050 m / 0.100 m/s
 AoI threshold  : 0.120 s
 AoI cooldown   : 0.100 s
 Max silence    : 0.500 s
 ACK channel    : symmetric with forward, no loss
-ensureParallelPool: starting pool with 3 workers...
+ensureParallelPool: starting pool with 16 workers...
 Starting parallel pool (parpool) using the 'Processes' profile ...
-Connected to parallel pool with 3 workers.
-ensureParallelPool: pool ready (3 workers).
+
+ensureParallelPool: unavailable (Parallel pool failed to start with the following error. For more detailed information, validate the profile 'Processes' in the Cluster Profile Manager.). Running serially.
 
 ------------------------------------------------------------
 Clean | loss 0 % | delay 0 ms
 ------------------------------------------------------------
   P10         [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
 [> In exp07a_causal_ack (line 276)] 
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
  done
   P20          done
   A1 State-event done
@@ -75,23 +77,23 @@ Clean      A3c Adapt-OL   0.0377   0.0000      8.41      8.41    0.060     0.00 
 Clean      A4c Dual-mem   0.0377   0.0000      8.41      8.41    0.060     0.00     0.00
 Clean      A5c Innov-pri   0.0383   0.0000      8.44      8.44    0.060     0.00     0.00
 
-Moderate   P10            0.0952   0.0010     10.00      0.00    0.155     0.00     0.00
-Moderate   P20            0.0728   0.0003     20.00      0.00    0.118     0.00     0.00
-Moderate   A1 State-event   0.1669   0.0052      4.29      0.00    0.271     1.00     0.00
-Moderate   Ideal-AoI      0.0977   0.0004     11.22      0.00    0.158     0.00     0.00
-Moderate   A2c Fixed-OL   0.1136   0.0018      7.49      5.98    0.184     1.00     0.00
-Moderate   A3c Adapt-OL   0.1046   0.0012      8.31      6.61    0.171     1.00     0.00
-Moderate   A4c Dual-mem   0.1004   0.0006      9.07      7.23    0.163     0.67     0.00
-Moderate   A5c Innov-pri   0.0873   0.0004     13.34     10.69    0.142     0.00     0.00
+Moderate   P10            0.0956   0.0011     10.00      0.00    0.155     0.00     0.00
+Moderate   P20            0.0729   0.0003     20.00      0.00    0.118     0.00     0.00
+Moderate   A1 State-event   0.1670   0.0036      4.29      0.00    0.274     1.00     0.00
+Moderate   Ideal-AoI      0.0976   0.0006     11.20      0.00    0.158     0.00     0.00
+Moderate   A2c Fixed-OL   0.1135   0.0017      7.47      5.97    0.184     1.00     0.00
+Moderate   A3c Adapt-OL   0.1059   0.0013      8.29      6.60    0.172     1.00     0.00
+Moderate   A4c Dual-mem   0.1010   0.0012      9.07      7.23    0.164     0.85     0.00
+Moderate   A5c Innov-pri   0.0875   0.0006     13.35     10.67    0.142     0.00     0.00
 
-Stressed   P10            0.1469   0.0024     10.00      0.00    0.236     1.00     0.00
-Stressed   P20            0.1106   0.0006     20.00      0.00    0.179     1.00     0.00
-Stressed   A1 State-event   0.2562   0.0135      4.21      0.00    0.425     1.00     0.00
-Stressed   Ideal-AoI      0.1302   0.0006     15.75      0.00    0.212     1.00     0.00
-Stressed   A2c Fixed-OL   0.1742   0.0024      7.48      4.49    0.284     1.00     0.00
-Stressed   A3c Adapt-OL   0.1635   0.0024      8.16      4.91    0.263     1.00     0.00
-Stressed   A4c Dual-mem   0.1546   0.0041      9.07      5.48    0.248     1.00     0.00
-Stressed   A5c Innov-pri   0.1163   0.0005     18.24     10.95    0.189     1.00     0.00
+Stressed   P10            0.1462   0.0023     10.00      0.00    0.237     1.00     0.00
+Stressed   P20            0.1101   0.0009     20.00      0.00    0.179     1.00     0.00
+Stressed   A1 State-event   0.2581   0.0093      4.21      0.00    0.429     1.00     0.05
+Stressed   Ideal-AoI      0.1306   0.0005     15.80      0.00    0.212     1.00     0.00
+Stressed   A2c Fixed-OL   0.1719   0.0034      7.47      4.49    0.280     1.00     0.00
+Stressed   A3c Adapt-OL   0.1612   0.0030      8.16      4.90    0.263     1.00     0.00
+Stressed   A4c Dual-mem   0.1545   0.0025      9.07      5.46    0.248     1.00     0.00
+Stressed   A5c Innov-pri   0.1170   0.0011     18.24     10.94    0.189     1.00     0.00
 
 ============================================================
 Causality invariants (Causal-AoI)
@@ -120,8 +122,8 @@ Clean      A5c Innov-pri      0.070      0.904      0.496      0.060      0.080
 Moderate   Ideal-AoI         0.342      0.631      0.407      0.158        NaN
 Moderate   A5c Innov-pri      0.000      0.996      0.283      0.142      0.221
 
-Stressed   Ideal-AoI         0.613      0.360      0.331      0.212        NaN
-Stressed   A5c Innov-pri      0.000      0.997      0.202      0.189      0.310
+Stressed   Ideal-AoI         0.617      0.357      0.331      0.212        NaN
+Stressed   A5c Innov-pri      0.000      0.997      0.202      0.189      0.309
 
 
 ============================================================
@@ -133,13 +135,13 @@ Clean      A2c Fixed-OL           0.000       0.000          0      1.000       
 Clean      A3c Adapt-OL           0.000       0.000          0      1.001         0
 Clean      A5c Innov-pri          0.000       0.000          0      1.002         0
 
-Moderate   A2c Fixed-OL           0.334       1.299          6      1.254         0
-Moderate   A3c Adapt-OL           0.342       1.406          8      1.256         0
-Moderate   A5c Innov-pri          0.144       2.093         10      1.248         0
+Moderate   A2c Fixed-OL           0.336       1.293          8      1.252         0
+Moderate   A3c Adapt-OL           0.342       1.405          9      1.254         0
+Moderate   A5c Innov-pri          0.144       2.099         10      1.250         0
 
-Stressed   A2c Fixed-OL           0.769       2.310         12      1.660         0
-Stressed   A3c Adapt-OL           0.803       2.438         11      1.655         0
-Stressed   A5c Innov-pri          0.623       4.639         17      1.664         0
+Stressed   A2c Fixed-OL           0.769       2.293         14      1.661         0
+Stressed   A3c Adapt-OL           0.802       2.435         12      1.661         0
+Stressed   A5c Innov-pri          0.623       4.649         19      1.665         0
 
 
 ============================================================
@@ -148,8 +150,8 @@ v3 branch composition (A5c)
 
 Scenario     hardInn  adaptNew   refresh   timeout    cdBlocked  inFlightBlk
 Clean          0.079     0.904     0.017     0.000            0            0
-Moderate       0.004     0.996     0.000     0.000        10224        10226
-Stressed       0.003     0.997     0.000     0.000         7461         7461
+Moderate       0.004     0.996     0.000     0.000        10236        10238
+Stressed       0.003     0.997     0.000     0.000         7457         7457
 
   aoiMinInterTx still regulates refresh: OK
 ============================================================
@@ -163,16 +165,16 @@ Clean
   A4c -> A5c innovation split  RMSE   -1.52 % | rate  +0.03 Hz
 
 Moderate
-  A1 -> A2c  AoI coupling      RMSE  +31.95 % | rate  +3.20 Hz
-  A2c -> A3c adaptive scale    RMSE   +7.91 % | rate  +0.81 Hz
-  A3c -> A4c real feedback     RMSE   +4.01 % | rate  +0.76 Hz
-  A4c -> A5c innovation split  RMSE  +13.01 % | rate  +4.27 Hz
+  A1 -> A2c  AoI coupling      RMSE  +32.02 % | rate  +3.18 Hz
+  A2c -> A3c adaptive scale    RMSE   +6.70 % | rate  +0.82 Hz
+  A3c -> A4c real feedback     RMSE   +4.63 % | rate  +0.78 Hz
+  A4c -> A5c innovation split  RMSE  +13.41 % | rate  +4.28 Hz
 
 Stressed
-  A1 -> A2c  AoI coupling      RMSE  +32.01 % | rate  +3.28 Hz
-  A2c -> A3c adaptive scale    RMSE   +6.12 % | rate  +0.68 Hz
-  A3c -> A4c real feedback     RMSE   +5.46 % | rate  +0.91 Hz
-  A4c -> A5c innovation split  RMSE  +24.80 % | rate  +9.17 Hz
+  A1 -> A2c  AoI coupling      RMSE  +33.38 % | rate  +3.26 Hz
+  A2c -> A3c adaptive scale    RMSE   +6.24 % | rate  +0.69 Hz
+  A3c -> A4c real feedback     RMSE   +4.14 % | rate  +0.91 Hz
+  A4c -> A5c innovation split  RMSE  +24.29 % | rate  +9.17 Hz
 
 
 ============================================================
@@ -181,24 +183,24 @@ EXP07A acceptance gates
 
   [PASS] Causality: 6 invariants = 0                0 violation(s)
   [PASS] Clean: |Causal-Ideal|/Ideal <= 2%          1.515 %
-  [PASS] Moderate: Causal <= 1.10 x P10             0.0873 vs 0.0952  (ratio 0.917)
-  [PASS] Stressed: Causal < P10                     0.1163 vs 0.1469
-  [PASS] Moderate: Causal < State-event             0.0873 vs 0.1669
-  [PASS] Stressed: Causal < State-event             0.1163 vs 0.2562
-  [PASS] Rate ordering: Clean < Moderate < Stressed 8.44 < 13.34 < 18.24 Hz
+  [PASS] Moderate: Causal <= 1.10 x P10             0.0875 vs 0.0956  (ratio 0.915)
+  [PASS] Stressed: Causal < P10                     0.1170 vs 0.1462
+  [PASS] Moderate: Causal < State-event             0.0875 vs 0.1670
+  [PASS] Stressed: Causal < State-event             0.1170 vs 0.2581
+  [PASS] Rate ordering: Clean < Moderate < Stressed 8.44 < 13.35 < 18.24 Hz
   [PASS] Rate ceiling: Stressed data rate <= 20 Hz  18.24 Hz
   [PASS] Safety: SafeFail = 0 in all scenarios      max 0.00
 
   EXP07A GATES: ALL PASS (9/9)
 
-tidy.csv : 72 rows
+tidy.csv : 480 rows
 
 EXP07A completed.
-saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_195540\figures
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_202017\figures
 
 ============================================================
 DONE : exp07a_causal_ack
-TIME : 36.4 s
+TIME : 2 m 13 s
 FIGS : 3
-DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_195540
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07a_causal_ack\2026-08-21_202017
 ============================================================

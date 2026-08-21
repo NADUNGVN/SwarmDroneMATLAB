@@ -698,6 +698,72 @@ ablation dẫn tới protocol v3 — chứ không phải hai lần tune hỏng.
 
 ---
 
+## 8quater. Causal-AoI-v3 — kết quả final 20 seeds, EXP07A LOCKED
+
+Final pass 20 seeds, CRN thật, không đổi tham số nào so với debug pass.
+**Toàn bộ 9 gate PASS.**
+
+```
+[PASS] Causality: 8 invariants = 0                0
+[PASS] Clean    : |Causal-Ideal|/Ideal            1.515 %
+[PASS] Moderate : Causal <= 1.10 x P10            0.0875 vs 0.0956  (0.915)
+[PASS] Stressed : Causal <  P10                   0.1170 vs 0.1462
+[PASS] Moderate : Causal <  State-event           0.0875 vs 0.1670
+[PASS] Stressed : Causal <  State-event           0.1170 vs 0.2581
+[PASS] Rate ordering                              8.44 < 13.35 < 18.24 Hz
+[PASS] Rate ceiling <= 20 Hz                      18.24 Hz
+[PASS] Safety: SafeFail = 0                       0.00
+```
+
+### Ba phiên bản trên cùng một bộ tham số khoá
+
+| | rate Clean / Moderate / Stressed | Stressed RMSE | Gate |
+|---|---|---|---|
+| v1 | 8.41 / 15.86 / **26.19** | 0.1049 | 8/9 — vỡ trần tài nguyên |
+| v2 | 8.41 / **9.07 / 9.07** | 0.1536 | 7/9 — mất khả năng thích nghi |
+| **v3** | **8.44 / 13.35 / 18.24** | **0.1170** | **9/9** |
+
+v1 và v2 là hai **failed design ablation**, không phải hai lần tune hỏng: cả ba dùng đúng
+`epsP=0.05, epsV=0.10, aoiThreshold=0.12, aoiMinInterTx=0.10, maxSilence=0.50`.
+
+### Ablation A1 → A5c (20 seeds)
+
+| Bước | Clean | Moderate | Stressed |
+|---|---|---|---|
+| A1 → A2c AoI coupling | +43.93 % | +32.02 % | +33.38 % |
+| A2c → A3c adaptive scale | +15.04 % | +6.70 % | +6.24 % |
+| A3c → A4c real feedback | +0.00 % | +4.63 % | +4.14 % |
+| **A4c → A5c innovation split** | −1.52 % | **+13.41 %** | **+24.29 %** |
+
+Tách "thông tin mới" khỏi "refresh traffic" là bước đóng góp lớn thứ hai của cả chuỗi, chỉ
+sau AoI coupling. Ở Clean nó hơi âm (−1.52 %) vì không có delay nên phân biệt này gần như
+không có ý nghĩa — ghi nhận đúng như vậy.
+
+### Đóng góp thật của feedback, đo dưới điều kiện nhân quả
+
+`A3c → A4c` cho **+4.63 % / +4.14 %** (Moderate / Stressed), so với **+5.71 % / +16.07 %**
+của chuỗi ideal-feedback. Ở Stressed, bản oracle đã phóng đại đóng góp của accepted-state
+feedback khoảng **3.9 lần**.
+
+### Điểm cần nêu trong bài báo
+
+`A5c` là phương án duy nhất đạt `FormFail = 0` ở Moderate (0.0875 < ngưỡng 0.10); `A4c` còn
+0.85 và `A2c/A3c` còn 1.00. Ở Stressed không phương án nào đạt ngưỡng 0.10 — kể cả P20 —
+nên ngưỡng đó đơn giản là quá chặt cho điều kiện mạng ấy, và điều này phải nói rõ thay vì
+chỉ báo cáo `FormFail = 1`.
+
+`A1 State-event` vẫn có `SafeFail = 0.05` ở Stressed; A5c là 0.
+
+### Chi phí ACK
+
+A5c ở Stressed: DATA 18.24 Hz + ACK 10.94 Hz. Dưới cost model giữa (`w = 0.25`) tổng là
+20.98 Hz-equivalent, tức nhỉnh hơn P20 (20 Hz) khoảng 5 % nhưng RMSE tốt hơn 6 %. Đánh giá
+Pareto đầy đủ thuộc về EXP07C.
+
+**EXP07A LOCKED.**
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.
