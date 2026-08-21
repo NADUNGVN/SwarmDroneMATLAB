@@ -965,6 +965,70 @@ nhau** và sẽ bóp méo đúng phép so sánh chi phí mà gate advantage dự
 
 ---
 
+## 8octies. EXP08A-D — chẩn đoán degree normalization (pre-register trước khi chạy)
+
+### Vị thế của EXP08A
+
+EXP08A được khoá tại `dce0170`, tag `exp08a-locked-partial`, là **partial result**:
+
+- **Chấp nhận:** relative advantage 12/12 ở Stressed, leave-one-topology-out 100 %.
+- **Bác bỏ:** claim về safety generalization — một điều kiện so sánh được thất bại một cách
+  hệ thống (Stressed / sparse6 / N=20, **0/20 seed** vượt ngưỡng).
+
+Cách phát biểu bắt buộc trong bài báo: thất bại an toàn được mô tả là
+**"consistent with degree-dependent unnormalized consensus gain"** — **KHÔNG** được mô tả là
+đã chứng minh nguyên nhân do controller. Bằng chứng hiện tại là tương quan đơn điệu qua P10,
+không phải can thiệp có đối chứng.
+
+EXP08A-D tồn tại để biến tương quan đó thành can thiệp. **Nó không được phép thay đổi hồi tố
+bất kỳ gate nào của EXP08A.**
+
+### Can thiệp
+
+Chuẩn hoá **chỉ ở controller**: nhân tổng consensus vị trí và vận tốc của các neighbour với
+
+```
+2 / d_i        d_i = số neighbour mà follower i tiêu thụ = nnz(A(i,:))
+```
+
+- Ở `d_i = 2` — degree mà `Kp = 1.8, Kv = 2.2` được tune trên đó — hệ số bằng **đúng 1**, nên
+  hành vi trên ring không đổi. Đây là lý do chọn `2/d_i` thay vì `1/d_i`.
+- Ở `d_i = 6`, hệ số bằng 1/3.
+
+**Số hạng leader pinning (`KpLeader`, `KvLeader`, feed-forward `leaderAcc`) KHÔNG đổi.**
+
+Cả hai controller được giữ lại. Cài bằng flag additive `cfg.swarm.normalizeConsensusDegree`,
+mặc định `false`, kèm regression chứng minh EXP07/EXP08A tái tạo nguyên vẹn khi tắt.
+
+### Thống kê in-degree phải tách khỏi λ₂ / degree cấu trúc
+
+`graphConnectivity` báo degree **cấu trúc** trên đồ thị đã đối xứng hoá và **đã gộp cạnh leader
+pin**. Đó không phải đại lượng mà controller nhìn thấy.
+
+Từ EXP08A-D trở đi phải báo cáo **riêng**:
+
+- **structural**: `numEdges`, `meanDegree`, `minDegree`, `λ₂` — thuộc tính đồ thị
+- **consensus in-degree**: `d_i = nnz(A(i,:))` chỉ trên follower `i ≥ 2`, báo mean/min/max —
+  đại lượng thực sự nhân vào gain
+
+Ví dụ tại ring2 N=10: structural meanDegree = 2.60 (có pin), nhưng consensus in-degree = 2.00
+đúng bằng nhau ở mọi follower. Trộn hai thứ này lại sẽ làm sai lệch chính hệ số chuẩn hoá đang
+được kiểm tra.
+
+### Điều cần quan sát
+
+1. Dưới controller đã chuẩn hoá, RMSE của **P10** có còn tăng đơn điệu theo consensus in-degree
+   không? P10 truyền cố định 10 Hz nên communication giống hệt trên mọi topology; nếu xu hướng
+   biến mất thì degree gain là nguyên nhân, nếu vẫn còn thì không phải.
+2. Điều kiện Stressed / sparse6 / N=20 có còn vi phạm an toàn không?
+
+### Phạm vi
+
+Chỉ **3 seeds**, dừng để review. Đây là **chẩn đoán**, không phải experiment có gate.
+Nó không sinh ra claim mới cho bài báo, và không sửa Causal-AoI-v3.
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.
