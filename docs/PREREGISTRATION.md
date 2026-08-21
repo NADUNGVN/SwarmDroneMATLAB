@@ -947,9 +947,15 @@ vẫn tăng đơn điệu theo mean degree:
 | N=50 (2.92/4.92/6.84/4.12) | 0.2886 | 0.4550 | **0.5540** | 0.3738 |
 
 `swarm/distributedFormationPolicy.m` cộng các số hạng consensus trên các neighbour **mà không
-chuẩn hoá theo degree**, nên đồ thị degree ~7 chạy với loop gain gấp khoảng **3.4 lần** mức mà
+chuẩn hoá theo degree**, nên với **consensus in-degree** `d_i = nnz(A(i,:))` — trên `sparse6`
+đúng bằng **6** — loop gain gấp **3.0 lần** mức mà
 `Kp = 1.8, Kv = 2.2` được tune cho degree 2. Mọi method đều suy giảm; chỉ P20 (tần suất cập
 nhật cao nhất) giữ được khoảng cách an toàn.
+
+**Đính chính:** bản ghi đầu tiên viết "degree ~7, gấp 3.4 lần", lấy nhầm **structural degree**
+6.84 (đã đối xứng hoá và gộp cạnh leader-pin). Đại lượng nhân vào gain là **consensus
+in-degree**, trên `sparse6` đúng bằng **6**, cho hệ số **3.0 lần**. Sai sót trong comment,
+không ảnh hưởng số liệu hay gate; không chạy lại.
 
 **Đây là giới hạn thiết kế controller do EXP08A phơi bày, không phải phát hiện về
 communication.** Không tune. Nếu muốn gate an toàn này nói được điều gì về communication thì
@@ -1029,6 +1035,29 @@ Nó không sinh ra claim mới cho bài báo, và không sửa Causal-AoI-v3.
 
 ---
 
+## 8nonies. EXP08A-D — verdict: LOCKED DIAGNOSTIC (tag `exp08ad-locked-diagnostic`)
+
+Can thiệp có đối chứng **đủ** để quy phần lớn suy giảm ở degree cao của EXP08A cho
+**degree-dependent amplification của các số hạng neighbour-consensus không chuẩn hoá**.
+
+**Không** thay đổi hồi tố EXP08A; EXP08A vẫn khoá ở `exp08a-locked-partial`.
+
+### `2/d_i` là REFERENCE-DEGREE normalization, KHÔNG phải giải pháp phổ quát
+
+Phải mô tả đúng như vậy trong bài báo. Hệ số lấy `d = 2` làm degree tham chiếu:
+
+| | hiệu ứng |
+|---|---|
+| `d_i > 2` | giảm gain, có lợi — sparse6 N=50: **−47.5 %** |
+| `d_i = 2` | không đổi gì — ring2: **0.0 %** ở mọi size |
+| `d_i < 2` | **tăng gain, có hại** |
+
+**Phản ví dụ phải giữ lại:** `geometric N=10` **xấu đi +8.3 %** (0.1536 → 0.1664). Đồ thị này
+có consensus in-degree **min = 1**, và tại `d_i = 1` hệ số `2/1 = 2` **nhân đôi** gain. Không
+được lược bỏ ca này, vì nó xác định đúng phạm vi áp dụng của hệ số.
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.
@@ -1037,6 +1066,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-21 | Đính chính comment: "degree 7 → 3.4 lần" nhầm structural degree 6.84 thành consensus in-degree; đúng là 6 → 3.0 lần | Structural degree đã đối xứng hoá và gộp cạnh leader-pin, không phải đại lượng nhân vào gain. Sai sót comment, không ảnh hưởng số liệu hay gate. Không chạy lại. | (branch `exp08b-link-failure`) |
 | 2026-08-21 | Thêm §8ter: pre-register Causal-AoI-v3 (innovation-priority) + ablation A5c + invariant mới | v2 bị đóng băng ở 7/9 vì `aoiMinInterTx` vô tình trở thành trần cho thông tin mới. v3 **không đổi giá trị** tham số nào; nó chỉ tách ngữ nghĩa "thông tin mới" khỏi "refresh", và cooldown chỉ áp cho refresh. Chín gate giữ nguyên. Pre-register trước khi chạy. | (branch `exp07a-causal-v3`) |
 | 2026-08-21 | §3.1 trần 20 Hz: **giữ nguyên**, chỉ đính chính phần lý do | Lý do ban đầu ("trên 20 Hz thì P20 dominate hoàn toàn") đã bị dữ liệu v1 **bác bỏ**: ở 26.19 Hz, Causal-AoI-v1 có RMSE 0.1049 tốt hơn P20 (0.1102), nên P20 không dominate. **Ngưỡng KHÔNG đổi.** Nó vẫn đứng vững với vai trò ràng buộc tài nguyên chống brute-force: nếu không có trần, một phiên bản chỉ cần truyền thật nhiều là pass mọi gate còn lại. Gate v1 không bị sửa hồi tố; commit a554163 giữ nguyên là thất bại 8/9 hợp lệ. | (branch `exp07a-causal-ack`) |
 | 2026-08-21 | §2.7 mức `reliable`: ACK delay đổi từ "tối thiểu (1 timestep)" sang "= delay DATA của scenario" | Bản chốt đầu tiên **không pin** ACK delay cho EXP07A; §2.7 chỉ định nghĩa thang cho EXP07B. Đây là lấp một chỗ chưa xác định, không phải đổi một ngưỡng đã chốt. Kênh ngược dùng cùng môi trường vật lý nên độ trễ đối xứng là giả định trung thực hơn. **Thay đổi này làm gate KHÓ hơn, không dễ hơn**: RTT ở Stressed tăng từ 140 ms lên 240 ms, khiến ước lượng AoI của sender cũ hơn, method truyền nhiều hơn, nên cả trần 20 Hz lẫn gate `RMSE < P10` đều khó đạt hơn. Ghi nhận trước khi tồn tại bất kỳ kết quả nào. | (branch `exp07a-causal-ack`) |

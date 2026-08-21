@@ -16,8 +16,14 @@ Kv  = cfg.swarm.Kv;
 % Optional consensus degree normalisation (EXP08A-D)
 %
 % The neighbour consensus terms are SUMS, so effective loop gain
-% scales with a follower's in-degree. At degree 7 that is roughly
-% 3.4x the gain Kp/Kv were tuned for at degree 2.
+% scales with a follower's CONSENSUS IN-DEGREE d_i = nnz(A(i,:)).
+% On sparse6 that is exactly 6, so the gain is 3.0x what Kp/Kv were
+% tuned for at degree 2.
+%
+% Not to be confused with the structural degree reported by
+% graphConnectivity, which is 6.84 on the same graph because it
+% symmetrises and folds in leader-pin edges. The controller sees
+% neither, so 6.84 is the wrong number to reason about here.
 %
 % When enabled, the neighbour sums are scaled by 2/d_i. The factor is
 % exactly 1 at d_i = 2, so ring behaviour is unchanged; that is why

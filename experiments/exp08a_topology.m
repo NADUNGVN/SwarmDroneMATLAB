@@ -497,8 +497,13 @@ end
 %
 % This matters for reading the safety gate: distributedFormationPolicy
 % sums the consensus terms over neighbours WITHOUT normalising by
-% degree, so effective loop gain scales with |N_i|. A degree-7 graph
-% runs roughly 3.4x the gain the gains were tuned for at degree 2.
+% degree, so effective loop gain scales with the CONSENSUS IN-DEGREE
+% d_i = nnz(A(i,:)). On sparse6 that is exactly 6, giving 3.0x the gain
+% Kp and Kv were tuned for at degree 2.
+%
+% The structural mean degree printed above is 6.84 on the same graph,
+% because it symmetrises and includes leader-pin edges. That figure is
+% not what multiplies the gain and must not be used for this argument.
 % ============================================================
 
 fprintf('\n');

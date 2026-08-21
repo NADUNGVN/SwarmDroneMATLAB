@@ -205,6 +205,12 @@ for i = 1:N
         senderFired(j) = true;
 
 
+        if linkIsDown(cfg, i, j, tk)
+            net.dropCount = net.dropCount + 1;
+            continue;
+        end
+
+
         % Update transmitter memory immediately.
         %
         % This occurs even if the channel later drops
@@ -385,6 +391,12 @@ for i = 2:N
         net.txCount + 1;
 
     leaderFired = true;
+
+
+    if linkIsDown(cfg, i, 1, tk)
+        net.dropCount = net.dropCount + 1;
+        continue;
+    end
 
 
     txState.leaderLastPos(i,:) = ...
@@ -592,5 +604,31 @@ elseif isLeader
 else
     z = netTrace.jitterZ(k,i,j);
 end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Delivery-layer link failure. Returns true when link (i,j) is dead
+% at time tk. The transmitter is never told: it still transmits, the
+% packet is still counted, and it is then lost. cfg.swarm.A is not
+% touched anywhere.
+% ============================================================
+
+function isDown = linkIsDown(cfg, i, j, tk)
+
+isDown = false;
+
+if ~isfield(cfg,'fault') || isempty(cfg.fault)
+    return;
+end
+
+if ~cfg.fault.down(i,j)
+    return;
+end
+
+isDown = (tk >= cfg.fault.tStart) && (tk <= cfg.fault.tEnd);
 
 end

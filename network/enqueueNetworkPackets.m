@@ -52,6 +52,14 @@ for i = 1:N
         senderFired(j) = true;
 
 
+        % Delivery-layer link failure. Counted as a transmission that
+        % was lost, because the sender cannot know the link is dead.
+        if linkIsDown(cfg, i, j, tk)
+            net.dropCount = net.dropCount + 1;
+            continue;
+        end
+
+
         % Packet loss
         if drawLoss(netTrace,k,i,j,false) < cfg.net.packetLoss
 
@@ -106,6 +114,12 @@ for i = 2:N
     net.txCount = net.txCount + 1;
 
     leaderFired = true;
+
+
+    if linkIsDown(cfg, i, 1, tk)
+        net.dropCount = net.dropCount + 1;
+        continue;
+    end
 
 
     if drawLoss(netTrace,k,i,1,true) < cfg.net.packetLoss
@@ -179,5 +193,31 @@ elseif isLeader
 else
     z = netTrace.jitterZ(k,i,j);
 end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Delivery-layer link failure. Returns true when link (i,j) is dead
+% at time tk. The transmitter is never told: it still transmits, the
+% packet is still counted, and it is then lost. cfg.swarm.A is not
+% touched anywhere.
+% ============================================================
+
+function isDown = linkIsDown(cfg, i, j, tk)
+
+isDown = false;
+
+if ~isfield(cfg,'fault') || isempty(cfg.fault)
+    return;
+end
+
+if ~cfg.fault.down(i,j)
+    return;
+end
+
+isDown = (tk >= cfg.fault.tStart) && (tk <= cfg.fault.tEnd);
 
 end

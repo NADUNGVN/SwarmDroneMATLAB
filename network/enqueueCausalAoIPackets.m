@@ -298,6 +298,22 @@ rec.dropped = false;
 % "ACK for dropped data" is detectable rather than merely unlikely.
 % ------------------------------------------------------------
 
+% Delivery-layer link failure. The outstanding record is still kept,
+% exactly as for a channel drop, so the sender remains unaware and
+% recovery still runs through maxSilence.
+if linkIsDown(cfg, i, j, tk)
+
+    net.dropCount = net.dropCount + 1;
+
+    rec.dropped = true;
+
+    txState = pushOutstanding(txState, i, j, rec, isLeaderLink);
+
+    return;
+
+end
+
+
 if drawLoss(netTrace,k,i,j,isLeaderLink) < cfg.net.packetLoss
 
     net.dropCount = net.dropCount + 1;
@@ -513,5 +529,31 @@ elseif isLeader
 else
     z = netTrace.jitterZ(k,i,j);
 end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Delivery-layer link failure. Returns true when link (i,j) is dead
+% at time tk. The transmitter is never told: it still transmits, the
+% packet is still counted, and it is then lost. cfg.swarm.A is not
+% touched anywhere.
+% ============================================================
+
+function isDown = linkIsDown(cfg, i, j, tk)
+
+isDown = false;
+
+if ~isfield(cfg,'fault') || isempty(cfg.fault)
+    return;
+end
+
+if ~cfg.fault.down(i,j)
+    return;
+end
+
+isDown = (tk >= cfg.fault.tStart) && (tk <= cfg.fault.tEnd);
 
 end
