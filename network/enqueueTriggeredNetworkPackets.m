@@ -5,7 +5,21 @@ function [net, txState] = enqueueTriggeredNetworkPackets( ...
     V, ...
     leader, ...
     tk, ...
-    cfg)
+    cfg, ...
+    netTrace, ...
+    k)
+
+% netTrace and k are optional. With a trace supplied the channel outcome
+% is read at (k,i,j) rather than drawn inline, so every method meets the
+% same realisation. Omitting them reproduces the original behaviour.
+
+if nargin < 8
+    netTrace = [];
+end
+
+if nargin < 9
+    k = 0;
+end
 
 % ============================================================
 % ENQUEUETRIGGEREDNETWORKPACKETS
@@ -201,7 +215,7 @@ for i = 1:N
         % Packet loss
         % -----------------------------------------------------
 
-        if rand < cfg.net.packetLoss
+        if drawLoss(netTrace,k,i,j,false) < cfg.net.packetLoss
 
             net.dropCount = ...
                 net.dropCount + 1;
@@ -224,7 +238,7 @@ for i = 1:N
             delay = ...
                 delay ...
                 + cfg.net.jitterStd ...
-                * randn;
+                * drawJitter(netTrace,k,i,j,false);
 
         end
 
@@ -377,7 +391,7 @@ for i = 2:N
     % Packet loss
     % ---------------------------------------------------------
 
-    if rand < cfg.net.packetLoss
+    if drawLoss(netTrace,k,i,1,true) < cfg.net.packetLoss
 
         net.dropCount = ...
             net.dropCount + 1;
@@ -400,7 +414,7 @@ for i = 2:N
         delay = ...
             delay ...
             + cfg.net.jitterStd ...
-            * randn;
+            * drawJitter(netTrace,k,i,1,true);
 
     end
 
@@ -531,6 +545,39 @@ for i = 2:N
     txState.leaderLastTxTime(i) = ...
         0;
 
+end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTIONS
+%
+% Read the pre-drawn outcome when a trace is present, otherwise fall
+% back to the inline draw the locked experiments used.
+% ============================================================
+
+function u = drawLoss(netTrace,k,i,j,isLeader)
+
+if isempty(netTrace)
+    u = rand;
+elseif isLeader
+    u = netTrace.leaderLossU(k,i);
+else
+    u = netTrace.lossU(k,i,j);
+end
+
+end
+
+
+function z = drawJitter(netTrace,k,i,j,isLeader)
+
+if isempty(netTrace)
+    z = randn;
+elseif isLeader
+    z = netTrace.leaderJitterZ(k,i);
+else
+    z = netTrace.jitterZ(k,i,j);
 end
 
 end

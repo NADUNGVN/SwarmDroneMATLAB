@@ -12,6 +12,34 @@ K = numel(t);
 
 N = cfg.swarm.N;
 
+%% ============================================================
+% Common random numbers (legacy default OFF)
+%
+% With cfg.net.useTrace true, channel outcomes come from a
+% pre-drawn realisation indexed by (link, timestep) instead of from
+% inline rand/randn. Every method then meets the same channel at the
+% same instant, which sharing a seed alone does not achieve.
+%
+% Default false reproduces the locked behaviour exactly.
+% ============================================================
+
+if ~isfield(cfg.net,'useTrace')
+    cfg.net.useTrace = false;
+end
+
+if cfg.net.useTrace
+    netTrace = generateNetworkTrace(cfg);
+else
+    netTrace = [];
+end
+
+% Per-link phase offset for periodic transmission (legacy default OFF).
+% Without it every channel fires on one global clock forever, which
+% flatters no method in particular but is not how real nodes behave.
+if ~isfield(cfg.net,'phaseOffset')
+    cfg.net.phaseOffset = false;
+end
+
 
 P = cfg.swarm.initialPositions;
 V = cfg.swarm.initialVelocities;
@@ -33,7 +61,18 @@ net = initQueuedNetworkState( ...
 
 
 % Initial state at t=0 is considered already transmitted.
-nextCommTime = cfg.net.commPeriod;
+%
+% With phaseOffset enabled each link gets its own deterministic offset
+% inside one period, so the swarm does not transmit in lockstep.
+if cfg.net.phaseOffset
+    linkPhase = mod((0:N*N-1)' * cfg.net.commPeriod / max(N*N,1), ...
+        cfg.net.commPeriod);
+    linkPhase = reshape(linkPhase, N, N);
+    nextCommTime = cfg.net.commPeriod;
+else
+    linkPhase = zeros(N,N);
+    nextCommTime = cfg.net.commPeriod;
+end
 
 
 for k = 1:K
@@ -58,7 +97,7 @@ for k = 1:K
     if tk >= nextCommTime - 1e-12
 
         net = enqueueNetworkPackets( ...
-            net,P,V,leader,tk,cfg);
+            net,P,V,leader,tk,cfg,netTrace,k);
 
         nextCommTime = ...
             nextCommTime + ...

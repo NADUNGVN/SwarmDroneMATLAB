@@ -1,4 +1,11 @@
 function net = deliverNetworkPackets(net, tk, cfg)
+%DELIVERNETWORKPACKETS Deliver due packets, newest-generation-wins.
+%
+% Additive change for the causal ACK protocol: if a packet carries a
+% sequence number in its header, the accepted sequence number is recorded
+% at the receiver. Senders that do not set pkt.seq are unaffected, which
+% is every locked simulator, so EXP05x and EXP06A reproduce bit-identically.
+% tests/test_lock_regression proves that rather than asserting it.
 
 N = cfg.swarm.N;
 
@@ -93,6 +100,14 @@ for i = 1:N
         
                 net.valid(i,j) = true;
         
+                % Sequence numbers are part of the packet header. Only
+                % senders that put one there get it propagated, so the
+                % locked periodic and event-triggered simulators -- which
+                % never set pkt.seq -- are bit-for-bit unaffected.
+                if isfield(pkt,'seq')
+                    net.acceptedSeq(i,j) = pkt.seq;
+                end
+        
             else
         
                 % Packet arrived, but its information is older than
@@ -183,6 +198,10 @@ for i = 2:N
                 pkt.genTime;
     
             net.leaderValid(i) = true;
+    
+            if isfield(pkt,'seq')
+                net.leaderAcceptedSeq(i) = pkt.seq;
+            end
     
         else
     

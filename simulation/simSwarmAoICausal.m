@@ -142,6 +142,21 @@ LeaderAoILog   = nan(K,N);
 EstAoILog = nan(K,N,N);
 
 
+%% ============================================================
+% Common random numbers (legacy default OFF)
+% ============================================================
+
+if ~isfield(cfg.net,'useTrace')
+    cfg.net.useTrace = false;
+end
+
+if cfg.net.useTrace
+    netTrace = generateNetworkTrace(cfg);
+else
+    netTrace = [];
+end
+
+
 leader = leaderReference(0);
 
 net = initQueuedNetworkState(P, V, leader, cfg);
@@ -220,7 +235,7 @@ for k = 1:K
     % ---------------------------------------------------------
 
     [net, txState] = enqueueCausalAoIPackets( ...
-        net, txState, P, V, leader, tk, cfg);
+        net, txState, P, V, leader, tk, cfg, netTrace, k);
 
 
     %% --------------------------------------------------------
@@ -481,6 +496,12 @@ nChannels = nnz(cfg.swarm.A) + sum(cfg.swarm.pin);
 
 out.txRateTotal      = net.txCount / max(missionTime,eps);
 out.txRatePerChannel = out.txRateTotal / max(nChannels,1);
+
+if ~isempty(netTrace)
+    out.traceHash = netTrace.hash;
+else
+    out.traceHash = NaN;
+end
 
 out.ackRateTotal      = net.ackTxCount / max(missionTime,eps);
 out.ackRatePerChannel = out.ackRateTotal / max(nChannels,1);

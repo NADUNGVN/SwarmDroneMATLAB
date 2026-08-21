@@ -8,6 +8,9 @@ function net = deliverDataWithAck(net, tk, cfg)
 % experiments; this project already carries one silently drifted duplicate
 % of a policy function, and that is not a mistake worth repeating.
 %
+% The sequence number is carried in the packet header and recorded by
+% deliverNetworkPackets, so nothing here consults a side table.
+%
 % ACK semantics (v2): CUMULATIVE. A receiver emits at most one ACK per link
 % per sampling tick, naming the NEWEST packet it has accepted. If several
 % packets landed in the same tick, the single ACK confirms all of them.
@@ -60,10 +63,17 @@ for i = 1:N
             net.futureGenTimeCount = net.futureGenTimeCount + 1;
         end
 
-        [seq, covered, net] = resolveWireSeq( ...
-            net, i, j, acceptedGenTime, genTimeBefore(i,j), false);
+        % The sequence number came in the packet header and was stored
+        % by deliverNetworkPackets. No side-channel lookup.
+        seq = net.acceptedSeq(i,j);
 
-        net.ackCoveredCount = net.ackCoveredCount + covered;
+        % Cumulative: this one ACK retires everything the receiver has
+        % accepted since it last acknowledged.
+        covered = seq - net.lastAckSeqSent(i,j);
+
+        net.lastAckSeqSent(i,j) = seq;
+
+        net.ackCoveredCount = net.ackCoveredCount + max(covered,0);
 
         net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, false);
 
@@ -92,63 +102,16 @@ for i = 2:N
         net.futureGenTimeCount = net.futureGenTimeCount + 1;
     end
 
-    [seq, covered, net] = resolveWireSeq( ...
-        net, i, 1, acceptedGenTime, leaderGenTimeBefore(i), true);
+    seq = net.leaderAcceptedSeq(i);
 
-    net.ackCoveredCount = net.ackCoveredCount + covered;
+    covered = seq - net.leaderLastAckSeqSent(i);
+
+    net.leaderLastAckSeqSent(i) = seq;
+
+    net.ackCoveredCount = net.ackCoveredCount + max(covered,0);
 
     net = pushAck(net, i, 1, acceptedGenTime, seq, tk, cfg, true);
 
-end
-
-end
-
-
-%% ============================================================
-% LOCAL FUNCTION
-%
-% Look up the sequence number of the accepted packet, and count how
-% many earlier packets this cumulative ACK also confirms.
-% ============================================================
-
-function [seq, covered, net] = resolveWireSeq( ...
-    net, i, j, acceptedGenTime, previousGenTime, isLeaderLink)
-
-tol = 1e-12;
-
-if isLeaderLink
-    tbl = net.leaderWireSeq{i};
-else
-    tbl = net.wireSeq{i,j};
-end
-
-seq = NaN;
-
-covered = 0;
-
-if ~isempty(tbl)
-
-    hit = find(abs(tbl(:,1) - acceptedGenTime) <= tol, 1, 'last');
-
-    if ~isempty(hit)
-        seq = tbl(hit,2);
-    end
-
-    % Everything generated after the previously confirmed packet and no
-    % later than this one is covered by this single cumulative ACK.
-    covered = sum( ...
-        tbl(:,1) > previousGenTime + tol & ...
-        tbl(:,1) <= acceptedGenTime + tol);
-
-    % Entries at or below the accepted time can never be named again.
-    tbl = tbl(tbl(:,1) > acceptedGenTime + tol, :);
-
-end
-
-if isLeaderLink
-    net.leaderWireSeq{i} = tbl;
-else
-    net.wireSeq{i,j} = tbl;
 end
 
 end

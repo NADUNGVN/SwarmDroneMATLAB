@@ -40,6 +40,21 @@ K = numel(t);
 N = cfg.swarm.N;
 
 
+%% ============================================================
+% Common random numbers (legacy default OFF)
+% ============================================================
+
+if ~isfield(cfg.net,'useTrace')
+    cfg.net.useTrace = false;
+end
+
+if cfg.net.useTrace
+    netTrace = generateNetworkTrace(cfg);
+else
+    netTrace = [];
+end
+
+
 P = ...
     cfg.swarm.initialPositions;
 
@@ -130,7 +145,9 @@ for k = 1:K
         V, ...
         leader, ...
         tk, ...
-        cfg);
+        cfg, ...
+        netTrace, ...
+        k);
 
 
     %% --------------------------------------------------------

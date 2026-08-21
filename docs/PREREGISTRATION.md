@@ -511,6 +511,63 @@ simulation-v1.0
 
 ---
 
+## 8bis. Kết quả EXP07A đã đóng băng
+
+### Causal-AoI-v1 — commit `a554163`, 8/9 gate
+
+Bộ nhớ đơn: innovation và freshness đều lấy từ trạng thái đã được ACK. Trong một
+round-trip, innovation không bao giờ có vẻ nhỏ đi, nên sender liên tục gửi lại thông
+tin đang bay trên đường.
+
+Trượt gate **Rate ceiling**: 26.19 Hz / 20 Hz. Ở Stressed, hard position trigger chiếm
+**97.6 %** số lần truyền và nhánh AoI sụp còn **0.3 %**.
+
+### Causal-AoI-v2 — commit `28759f2`, 7/9 gate
+
+Bộ nhớ kép (innovation theo trạng thái *đã phát*, freshness theo trạng thái *đã được
+ACK*), seq thật nằm trong header gói tin, ACK cộng dồn. In-flight suppression hoạt động
+đúng: `supprInFlight = 0.742` ở Stressed, `meanOutstanding = 2.64`.
+
+Trượt hai gate:
+
+```
+Stressed: Causal < P10            0.1536 vs 0.1455
+Rate ordering: Clean<Mod<Stress   8.41 < 9.07 < 9.07 Hz
+```
+
+**Nguyên nhân — ràng buộc chặn là `aoiMinInterTx`, một tham số ĐÃ KHOÁ.**
+
+Suppression loại gần hết hard state trigger (posTrig 3.7 %), nên hầu như toàn bộ lưu
+lượng chuyển sang nhánh AoI (aoiTrig 95.5 %). Nhưng nhánh AoI bị `aoiMinInterTx = 0.10 s`
+chặn cứng ở **10 Hz**. Vì thế rate bão hoà ở 9.07 Hz tại **cả** Moderate lẫn Stressed:
+phương pháp mất khả năng tăng tải khi mạng xấu đi, đúng cái tính chất mà nó tồn tại để
+thể hiện.
+
+v1 truyền quá nhiều (26.19 Hz, không suppression). v2 truyền quá ít (9.07 Hz, đụng trần
+cooldown). Không phiên bản nào được tune; cả hai đều chạy đúng bộ tham số đã khoá.
+
+**v2 được đóng băng làm negative result hợp lệ.** Đây là kết quả khoa học, không phải
+thất bại kỹ thuật: nó xác định chính xác tham số nào đang giới hạn phương pháp dưới điều
+kiện nhân quả, và tham số đó không được phép chỉnh trong phạm vi pre-registration hiện tại.
+
+### Chuỗi ablation nhân quả — đóng góp thật của feedback
+
+| Bước | Clean | Moderate | Stressed |
+|---|---|---|---|
+| A1 → A2c  AoI coupling | +43.93 % | +31.73 % | +33.46 % |
+| A2c → A3c adaptive scale | +15.04 % | +6.07 % | +5.40 % |
+| **A3c → A4c real feedback** | **+0.00 %** | **+4.92 %** | **+4.88 %** |
+
+So với chuỗi ideal-feedback (0.00 / 5.71 / **16.07**): dưới ACK thật, đóng góp của
+accepted-state feedback ở Stressed **giảm từ 16.07 % xuống 4.88 %**, tức bản ideal đã
+phóng đại khoảng **3.3 lần**.
+
+Ngược lại, `A1 → A2c` gần như không đổi (33.46 so với 32.89). **Cơ chế AoI coupling là
+phần vững chắc nhất của phương pháp và không phụ thuộc vào oracle.** Đây là kết luận nên
+mang vào bài báo.
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.

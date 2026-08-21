@@ -1,5 +1,5 @@
 function [net, txState] = enqueueCausalAoIPackets( ...
-    net, txState, P, V, leader, tk, cfg)
+    net, txState, P, V, leader, tk, cfg, netTrace, k)
 %ENQUEUECAUSALAOIPACKETS Causal AoI-aware transmission decision (v2).
 %
 %   [net, txState] = enqueueCausalAoIPackets(net, txState, P, V, leader, tk, cfg)
@@ -41,6 +41,14 @@ function [net, txState] = enqueueCausalAoIPackets( ...
 % This function must never read net.genTime, net.leaderGenTime, net.Pij,
 % net.Vij, net.leaderPos, net.leaderVel or net.valid.
 % tests/test_causal_invariants enforces that statically.
+
+if nargin < 8
+    netTrace = [];
+end
+
+if nargin < 9
+    k = 0;
+end
 
 N = cfg.swarm.N;
 
@@ -122,7 +130,8 @@ for i = 1:N
         net = incrementTriggerReason(net, reason);
 
         [net, txState] = transmit( ...
-            net, txState, i, j, tk, currentPos, currentVel, [], cfg, false);
+            net, txState, i, j, tk, currentPos, currentVel, [], cfg, false, ...
+            netTrace, k);
 
     end
 
@@ -189,7 +198,8 @@ for i = 2:N
     net = incrementTriggerReason(net, reason);
 
     [net, txState] = transmit( ...
-        net, txState, i, 1, tk, currentPos, currentVel, leader.acc', cfg, true);
+        net, txState, i, 1, tk, currentPos, currentVel, leader.acc', cfg, true, ...
+        netTrace, k);
 
 end
 
@@ -205,7 +215,8 @@ end
 % ============================================================
 
 function [net, txState] = transmit( ...
-    net, txState, i, j, tk, currentPos, currentVel, leaderAcc, cfg, isLeaderLink)
+    net, txState, i, j, tk, currentPos, currentVel, leaderAcc, cfg, isLeaderLink, ...
+    netTrace, k)
 
 net.txCount = net.txCount + 1;
 
@@ -241,7 +252,7 @@ rec.dropped = false;
 % "ACK for dropped data" is detectable rather than merely unlikely.
 % ------------------------------------------------------------
 
-if rand < cfg.net.packetLoss
+if drawLoss(netTrace,k,i,j,isLeaderLink) < cfg.net.packetLoss
 
     net.dropCount = net.dropCount + 1;
 
@@ -256,8 +267,6 @@ end
 
 txState = pushOutstanding(txState, i, j, rec, isLeaderLink);
 
-net = publishWireSeq(net, i, j, tk, seq, isLeaderLink);
-
 
 %% ------------------------------------------------------------
 % Delay and jitter
@@ -266,13 +275,16 @@ net = publishWireSeq(net, i, j, tk, seq, isLeaderLink);
 packetDelay = cfg.net.delay;
 
 if cfg.net.jitterStd > 0
-    packetDelay = packetDelay + cfg.net.jitterStd * randn;
+    packetDelay = packetDelay + ...
+        cfg.net.jitterStd * drawJitter(netTrace,k,i,j,isLeaderLink);
 end
 
 packetDelay = max(packetDelay, 0);
 
 
+% seq is a header field: it travels with the packet.
 pkt.genTime     = tk;
+pkt.seq         = seq;
 pkt.arrivalTime = tk + packetDelay;
 pkt.pos         = currentPos;
 pkt.vel         = currentVel;
@@ -311,17 +323,6 @@ else
     q = txState.outstanding{i,j};
     if isempty(q), q = rec; else, q(end+1) = rec; end
     txState.outstanding{i,j} = q;
-end
-
-end
-
-
-function net = publishWireSeq(net, i, j, genTime, seq, isLeaderLink)
-
-if isLeaderLink
-    net.leaderWireSeq{i} = [net.leaderWireSeq{i}; genTime seq];
-else
-    net.wireSeq{i,j} = [net.wireSeq{i,j}; genTime seq];
 end
 
 end
@@ -373,6 +374,39 @@ switch reason
         net.aoiTriggerCount = net.aoiTriggerCount + 1;
     case 4
         net.timeoutTriggerCount = net.timeoutTriggerCount + 1;
+end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTIONS
+%
+% Read the pre-drawn outcome when a trace is present, otherwise fall
+% back to the inline draw the locked experiments used.
+% ============================================================
+
+function u = drawLoss(netTrace,k,i,j,isLeader)
+
+if isempty(netTrace)
+    u = rand;
+elseif isLeader
+    u = netTrace.leaderLossU(k,i);
+else
+    u = netTrace.lossU(k,i,j);
+end
+
+end
+
+
+function z = drawJitter(netTrace,k,i,j,isLeader)
+
+if isempty(netTrace)
+    z = randn;
+elseif isLeader
+    z = netTrace.leaderJitterZ(k,i);
+else
+    z = netTrace.jitterZ(k,i,j);
 end
 
 end

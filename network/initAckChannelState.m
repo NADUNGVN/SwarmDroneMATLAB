@@ -48,27 +48,21 @@ end
 
 
 %% ============================================================
-% Wire sequence table
+% Receiver-side sequence state
 %
-% [genTime seq] for every packet currently on the wire. The sequence
-% number is part of the packet header, so both endpoints legitimately
-% know it; this table is what lets the receiver name the packet it is
-% acknowledging without duplicating the locked delivery function.
+% acceptedSeq is written by deliverNetworkPackets straight from the
+% packet header, so the sequence number travels with the packet like
+% a real header field. lastAckSeqSent is what the receiver has
+% already acknowledged, which is what makes an ACK cumulative.
 % ============================================================
 
-net.wireSeq = cell(N,N);
+net.acceptedSeq = zeros(N,N);
 
-for i = 1:N
-    for j = 1:N
-        net.wireSeq{i,j} = zeros(0,2);
-    end
-end
+net.leaderAcceptedSeq = zeros(N,1);
 
-net.leaderWireSeq = cell(N,1);
+net.lastAckSeqSent = zeros(N,N);
 
-for i = 1:N
-    net.leaderWireSeq{i} = zeros(0,2);
-end
+net.leaderLastAckSeqSent = zeros(N,1);
 
 
 %% ============================================================

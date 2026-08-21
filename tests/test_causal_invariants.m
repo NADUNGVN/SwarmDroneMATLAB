@@ -72,7 +72,13 @@ for f = 1:numel(guardedFiles)
 
         for q = 1:numel(forbidden)
 
-            if contains(line, forbidden{q})
+            % Whole-identifier match. A plain substring test would flag
+            % net.leaderAcceptedSeq as net.leaderAcc, which is a
+            % different field entirely.
+            pattern = [regexptranslate('escape', forbidden{q}) ...
+                '(?![A-Za-z0-9_])'];
+
+            if ~isempty(regexp(line, pattern, 'once'))
 
                 fprintf('    FAIL %s%s:%d  uses %s\n', ...
                     name, ext, L, forbidden{q});

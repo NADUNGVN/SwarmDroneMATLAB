@@ -1,5 +1,19 @@
 function net = enqueueNetworkPackets( ...
-    net, P, V, leader, tk, cfg)
+    net, P, V, leader, tk, cfg, netTrace, k)
+%ENQUEUENETWORKPACKETS Periodic packet generation.
+%
+% netTrace and k are optional. When a trace is supplied the channel
+% outcome is read from it at (k,i,j) instead of drawn inline, so every
+% method sees the same realisation. Omitting them reproduces the
+% original behaviour exactly.
+
+if nargin < 7
+    netTrace = [];
+end
+
+if nargin < 8
+    k = 0;
+end
 
 N = cfg.swarm.N;
 
@@ -20,7 +34,7 @@ for i = 1:N
 
 
         % Packet loss
-        if rand < cfg.net.packetLoss
+        if drawLoss(netTrace,k,i,j,false) < cfg.net.packetLoss
 
             net.dropCount = net.dropCount + 1;
             continue;
@@ -34,7 +48,7 @@ for i = 1:N
         if cfg.net.jitterStd > 0
 
             delay = delay + ...
-                cfg.net.jitterStd * randn;
+                cfg.net.jitterStd * drawJitter(netTrace,k,i,j,false);
 
         end
 
@@ -73,7 +87,7 @@ for i = 2:N
     net.txCount = net.txCount + 1;
 
 
-    if rand < cfg.net.packetLoss
+    if drawLoss(netTrace,k,i,1,true) < cfg.net.packetLoss
 
         net.dropCount = net.dropCount + 1;
         continue;
@@ -86,7 +100,7 @@ for i = 2:N
     if cfg.net.jitterStd > 0
 
         delay = delay + ...
-            cfg.net.jitterStd * randn;
+            cfg.net.jitterStd * drawJitter(netTrace,k,i,1,true);
 
     end
 
@@ -107,6 +121,39 @@ for i = 2:N
 
     net.leaderQueue{i} = q;
 
+end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTIONS
+%
+% Read the pre-drawn outcome when a trace is present, otherwise fall
+% back to the inline draw that the locked experiments used.
+% ============================================================
+
+function u = drawLoss(netTrace,k,i,j,isLeader)
+
+if isempty(netTrace)
+    u = rand;
+elseif isLeader
+    u = netTrace.leaderLossU(k,i);
+else
+    u = netTrace.lossU(k,i,j);
+end
+
+end
+
+
+function z = drawJitter(netTrace,k,i,j,isLeader)
+
+if isempty(netTrace)
+    z = randn;
+elseif isLeader
+    z = netTrace.leaderJitterZ(k,i);
+else
+    z = netTrace.jitterZ(k,i,j);
 end
 
 end
