@@ -895,7 +895,24 @@ EXP07C **không** phủ nhận EXP07A/07B. Nó xác định rằng luận điể
 (non-dominated 4/5 variant). Ở **Stressed** — nơi bài báo muốn tuyên bố mạnh nhất — nó không
 đứng vững khi tính đủ chi phí ACK.
 
-Không đề xuất thay đổi nào. v4 / piggyback / aggregation chưa được thiết kế.
+### Verdict: LOCKED NEGATIVE RESULT (tag `exp07c-locked-negative`, commit `03af557`)
+
+Causal-AoI-v3 **không** được sửa. v4 / piggyback / aggregation **không** được thiết kế.
+
+Phạm vi claim của bài báo, chốt tại đây:
+
+- **Được khẳng định:** adaptive causal communication — một bộ tham số duy nhất tự điều chỉnh
+  tải truyền theo chất lượng mạng (8.44 → 13.35 → 18.24 Hz), với ACK nhân quả thật và toàn bộ
+  invariant bằng 0.
+- **Được khẳng định:** Pareto efficiency ở **Moderate** — non-dominated 4/5 cost variant.
+- **BỊ BÁC BỎ TƯỜNG MINH:** Pareto superiority ở **Stressed** khi tính đủ chi phí ACK. Đây là
+  **operating limitation** được giữ lại và phải nêu trong bài, không phải điều cần khắc phục
+  trong phạm vi hiện tại.
+
+Lý do phải phát biểu như vậy: ở Stressed, P20 tốt hơn về RMSE đúng **5.75 %** dưới *mọi* cost
+variant — con số đó độc lập với cost model. Cost model chỉ quyết định điều đó có thành
+dominance chính thức hay không. Vì thế không được mô tả limitation này là "ACK quá đắt"; nó là
+**giới hạn về độ chính xác ở mạng xấu**, và chi phí chỉ làm lộ ra.
 
 ---
 
