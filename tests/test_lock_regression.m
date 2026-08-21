@@ -48,7 +48,7 @@ for iS = 1:3
 
     acc = zeros(numSeeds,5);
 
-    for s = 1:numSeeds
+    parfor s = 1:numSeeds
 
         cfg = defaultConfig();
 
@@ -150,14 +150,17 @@ for iS = 1:2
 
         acc = zeros(numSeeds,1);
 
-        for s = 1:numSeeds
+        parfor s = 1:numSeeds
 
             cfg = applyScalableSwarmConfig(defaultConfig(), swarmSizes(iN));
 
             cfg.net.packetLoss = scLoss(iS);
             cfg.net.delay      = scDelay(iS);
             cfg.net.jitterStd  = 0;
-            cfg.net.seed       = 1100000 + 100000*(iS+1) + 10000*iN + s;
+            % Must match exp06a exactly: iS is 1 for Moderate, 2 for
+            % Stressed. Using a different family would still "pass" under
+            % a loose tolerance while verifying nothing.
+            cfg.net.seed       = 1100000 + 100000*iS + 10000*iN + s;
 
             cfg.aoiEvent.posThreshold      = 0.05;
             cfg.aoiEvent.velThreshold      = 0.10;
@@ -183,9 +186,11 @@ for iS = 1:2
 
     alpha = pf(1);
 
+    % The published values are quoted to three decimals, so this is as
+    % tight as the reference allows.
     d = abs(alpha - expectedAlpha(iS));
 
-    if d < 0.002
+    if d < 5e-4
         status = 'ok  ';
     else
         status = 'FAIL';
