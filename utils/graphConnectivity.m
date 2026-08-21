@@ -71,4 +71,33 @@ info.connected = info.lambda2 > 1e-9;
 
 info.adjacency = Adj;
 
+
+%% ============================================================
+% Consensus in-degree
+%
+% Reported SEPARATELY from the structural degree above. The
+% structural figure symmetrises the graph and folds in leader-pin
+% edges; the controller sees neither. What multiplies its gain is
+% d_i = nnz(A(i,:)) over followers only.
+%
+% At ring2 N=10 the two differ: structural 2.60 against consensus
+% 2.00. Conflating them would misstate the normalisation factor.
+% ============================================================
+
+if N >= 2
+
+    d = sum(A(2:N,:) ~= 0, 2);
+
+    info.consensusInDegreeMean = mean(d);
+    info.consensusInDegreeMin  = min(d);
+    info.consensusInDegreeMax  = max(d);
+
+else
+
+    info.consensusInDegreeMean = 0;
+    info.consensusInDegreeMin  = 0;
+    info.consensusInDegreeMax  = 0;
+
+end
+
 end

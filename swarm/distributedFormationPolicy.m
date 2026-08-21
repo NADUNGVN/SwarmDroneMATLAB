@@ -11,6 +11,27 @@ pin     = cfg.swarm.pin;
 Kp  = cfg.swarm.Kp;
 Kv  = cfg.swarm.Kv;
 
+
+% ============================================================
+% Optional consensus degree normalisation (EXP08A-D)
+%
+% The neighbour consensus terms are SUMS, so effective loop gain
+% scales with a follower's in-degree. At degree 7 that is roughly
+% 3.4x the gain Kp/Kv were tuned for at degree 2.
+%
+% When enabled, the neighbour sums are scaled by 2/d_i. The factor is
+% exactly 1 at d_i = 2, so ring behaviour is unchanged; that is why
+% 2/d_i and not 1/d_i. Leader pinning is deliberately untouched.
+%
+% Default off, so every locked experiment reproduces unchanged.
+% ============================================================
+
+if isfield(cfg.swarm,'normalizeConsensusDegree')
+    normalizeDegree = cfg.swarm.normalizeConsensusDegree;
+else
+    normalizeDegree = false;
+end
+
 KpL = cfg.swarm.KpLeader;
 KvL = cfg.swarm.KvLeader;
 
@@ -64,9 +85,26 @@ for i = 2:N
             (V(i,:) - Vj);
     end
 
+    if normalizeDegree
+
+        di = nnz(A(i,:));
+
+        if di > 0
+            degreeScale = 2 / di;
+        else
+            degreeScale = 1;
+        end
+
+    else
+
+        degreeScale = 1;
+
+    end
+
+
     ai = ...
-        -Kp * formationTerm ...
-        -Kv * velocityTerm;
+        -Kp * degreeScale * formationTerm ...
+        -Kv * degreeScale * velocityTerm;
 
 
     % ========================================================

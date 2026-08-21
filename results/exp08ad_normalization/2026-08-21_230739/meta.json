@@ -1,0 +1,18 @@
+{
+  "experiment": "exp08ad_normalization",
+  "runId": "2026-08-21_230739",
+  "startedAt": "2026-08-21 23:07:40",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "eaa030d",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp08ad_normalization.m",
+  "finishedAt": "2026-08-21 23:35:34",
+  "elapsedSec": 1674.3438009,
+  "elapsedText": "27 m 54 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}
