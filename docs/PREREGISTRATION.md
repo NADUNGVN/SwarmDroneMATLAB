@@ -568,6 +568,136 @@ mang vào bài báo.
 
 ---
 
+## 8ter. Causal-AoI-v3 — Innovation-priority causal communication
+
+Pre-register **trước khi chạy**. Không tham số nào thay đổi so với v1/v2.
+
+### Chẩn đoán dẫn tới v3
+
+v2 thất bại vì `aoiMinInterTx = 0.10 s` vô tình trở thành **trần cho thông tin mới**, chứ
+không phải cho việc lặp lại. Sau khi in-flight suppression loại gần hết hard trigger, hầu
+như toàn bộ lưu lượng đi qua nhánh AoI, mà nhánh đó bị cooldown chặn ở 10 Hz. Kết quả là
+rate bão hoà 9.07 Hz ở cả Moderate lẫn Stressed.
+
+v3 **không đổi giá trị** `aoiMinInterTx`. Nó chỉ trả tham số này về đúng vai trò: điều tiết
+**refresh/retransmission**, không điều tiết **thông tin mới**.
+
+```
+new information  ≠  retransmission
+```
+
+### Bốn nhánh quyết định
+
+Tại sender, với `lastSentPos/Vel` (bộ nhớ innovation) và `lastAckedGenTime` (bộ nhớ freshness):
+
+```
+dp    = norm(currentPos - lastSentPos)
+dv    = norm(currentVel - lastSentVel)
+aoiEst = tk - lastAckedGenTime + 0.5*dt
+scale  = adaptiveScale(aoiEst)          % công thức hiện có, không đổi
+```
+
+**1. HARD NEW INFORMATION**
+`dp >= epsP OR dv >= epsV`
+→ truyền. Chỉ chịu `minInterTx = dt`.
+
+**2. FRESHNESS-ADAPTIVE NEW INFORMATION**
+`aoiEst >= aoiThreshold AND (dp >= scale*epsP OR dv >= scale*epsV)`
+→ truyền. Chỉ chịu `minInterTx = dt`. **KHÔNG chịu `aoiMinInterTx`.**
+Đây là điểm sửa cốt lõi: trạng thái đã thay đổi đủ so với gói đã phát gần nhất thì đó là
+thông tin mới, không phải bản sao.
+
+**3. REFRESH / RETRANSMISSION**
+Stale nhưng innovation chưa đủ.
+→ **chịu `aoiMinInterTx = 0.10 s`**, và
+→ **không được gửi nếu vẫn còn packet outstanding/in-flight.**
+
+**4. MAX-SILENCE**
+`maxSilence = 0.50 s` là cơ chế recovery cuối cùng.
+
+### Quy tắc bắt buộc của nhánh refresh
+
+> Nhánh refresh **không được** phát nếu còn một packet outstanding chưa được ACK.
+
+Nếu packet đó đã mất và không bao giờ được ACK, `maxSilence = 0.50 s` là cơ chế phục hồi.
+
+**Không thêm RTO mới trong v3.** Không `RTT × 1.5`, không `outstandingThreshold`, không
+window size. v3 tồn tại để kiểm tra xem **chỉ riêng việc sửa ngữ nghĩa** đã đủ hay chưa.
+
+Ràng buộc nhân quả: quyết định refresh chỉ được nhìn *có hay không* packet outstanding.
+Nó **không** được nhìn `rec.dropped` — sender thật không biết gói của mình có bị rơi hay
+không. `dropped` chỉ dùng cho counter kiểm chứng.
+
+### Ablation mở rộng: A5c
+
+```
+A1   State-event
+A2c  + causal AoI coupling
+A3c  + adaptive scale
+A4c  + causal ACK / dual memory          = v2
+A5c  + innovation/refresh separation     = v3
+```
+
+A4c → A5c trả lời đúng một câu hỏi cơ chế: **tách "thông tin trạng thái mới" khỏi "lưu
+lượng refresh" mang lại bao nhiêu cải thiện?**
+
+### Gate — giữ nguyên cả 9, không đổi vì v1/v2 trượt
+
+```
+[1] Causality invariants = 0
+[2] Clean    : |Causal - Ideal| / Ideal <= 2 %
+[3] Moderate : Causal RMSE <= 1.10 x P10
+[4] Stressed : Causal RMSE <  P10
+[5] Moderate : Causal RMSE <  State-event
+[6] Stressed : Causal RMSE <  State-event
+[7] Adaptive rate  : Clean < Moderate < Stressed
+[8] Resource ceiling: Stressed DATA rate <= 20 Hz/channel
+[9] Safety   : SafeFail = 0
+```
+
+### Invariant bổ sung (không phải performance gate)
+
+```
+newInfoBypassWithoutInnovation   = 0   nhánh 1/2 phát mà không có innovation thật
+refreshWhileUsefulPacketInFlight = 0   nhánh 3 phát khi còn packet outstanding
+senderRollbackCount              = 0
+unknownSeqAckCount               = 0
+ackForDroppedDataCount           = 0
+futureGenTimeCount               = 0
+seqGenTimeMismatchCount          = 0
+staleAckAcceptedCount            = 0
+ackBeforeAcceptCount             = 0
+```
+
+`aoiMinInterTx` phải **vẫn thực sự hoạt động** trong v3, và phải có counter
+`refreshCooldownBlockedCount > 0` để chứng minh nó vẫn điều tiết refresh. Nếu counter này
+bằng 0 thì tham số đã trở thành code chết và kết quả không hợp lệ.
+
+### CRN thật, bắt buộc từ v3
+
+`cfg.net.useTrace = true` cho **Periodic10, Periodic20, State-event, Causal-v3**, dùng chung
+trace theo `scenario × seed × time × directed-link`. Method không phát ở một slot thì không
+tiêu thụ outcome ở slot đó.
+
+`phaseOffset` giữ **OFF** ở EXP07A-v3, để không đồng thời thay đổi thêm một yếu tố của
+periodic baseline. Phase-offset fairness để dành cho EXP10A.
+
+Ideal-AoI giữ đường legacy vì nó chỉ là reference; ở Clean không có RNG nào được tiêu thụ
+(loss = 0, jitter = 0) nên gate [2] không bị ảnh hưởng.
+
+### Tiêu chí thành công thực sự
+
+Điều cần thấy không phải một con số rate cụ thể, mà là **cơ chế tự sinh ra**:
+
+```
+R_Clean < R_Moderate < R_Stressed <= 20 Hz     và     RMSE_Causal < RMSE_P10 ở Stressed
+```
+
+Nếu đạt được mà **không đổi một threshold nào**, thì v1 và v2 trở thành hai failed design
+ablation dẫn tới protocol v3 — chứ không phải hai lần tune hỏng.
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.
@@ -576,5 +706,6 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-21 | Thêm §8ter: pre-register Causal-AoI-v3 (innovation-priority) + ablation A5c + invariant mới | v2 bị đóng băng ở 7/9 vì `aoiMinInterTx` vô tình trở thành trần cho thông tin mới. v3 **không đổi giá trị** tham số nào; nó chỉ tách ngữ nghĩa "thông tin mới" khỏi "refresh", và cooldown chỉ áp cho refresh. Chín gate giữ nguyên. Pre-register trước khi chạy. | (branch `exp07a-causal-v3`) |
 | 2026-08-21 | §3.1 trần 20 Hz: **giữ nguyên**, chỉ đính chính phần lý do | Lý do ban đầu ("trên 20 Hz thì P20 dominate hoàn toàn") đã bị dữ liệu v1 **bác bỏ**: ở 26.19 Hz, Causal-AoI-v1 có RMSE 0.1049 tốt hơn P20 (0.1102), nên P20 không dominate. **Ngưỡng KHÔNG đổi.** Nó vẫn đứng vững với vai trò ràng buộc tài nguyên chống brute-force: nếu không có trần, một phiên bản chỉ cần truyền thật nhiều là pass mọi gate còn lại. Gate v1 không bị sửa hồi tố; commit a554163 giữ nguyên là thất bại 8/9 hợp lệ. | (branch `exp07a-causal-ack`) |
 | 2026-08-21 | §2.7 mức `reliable`: ACK delay đổi từ "tối thiểu (1 timestep)" sang "= delay DATA của scenario" | Bản chốt đầu tiên **không pin** ACK delay cho EXP07A; §2.7 chỉ định nghĩa thang cho EXP07B. Đây là lấp một chỗ chưa xác định, không phải đổi một ngưỡng đã chốt. Kênh ngược dùng cùng môi trường vật lý nên độ trễ đối xứng là giả định trung thực hơn. **Thay đổi này làm gate KHÓ hơn, không dễ hơn**: RTT ở Stressed tăng từ 140 ms lên 240 ms, khiến ước lượng AoI của sender cũ hơn, method truyền nhiều hơn, nên cả trần 20 Hz lẫn gate `RMSE < P10` đều khó đạt hơn. Ghi nhận trước khi tồn tại bất kỳ kết quả nào. | (branch `exp07a-causal-ack`) |
