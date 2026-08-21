@@ -49,6 +49,12 @@ function out = simSwarmAoICausal(cfg)
 %       position triggers to 98% of transmissions and collapsed the AoI
 %       branch to 0.3%, breaching the 20 Hz ceiling at 26.19 Hz.
 %   v2  dual memory plus real sequence numbers and cumulative ACKs.
+%       Failed the rate-ordering gate: once suppression removed the hard
+%       triggers, all traffic ran through the AoI branch and its 0.10 s
+%       cooldown pinned the rate at ~9 Hz in every network.
+%   v3  cfg.causal.innovationPriority. Separates new information from
+%       refresh, so aoiMinInterTx governs repetition only. No parameter
+%       value changed.
 
 rng(cfg.net.seed, 'twister');
 
@@ -84,6 +90,12 @@ end
 
 if ~isfield(cfg.causal,'useAckFeedback'),   cfg.causal.useAckFeedback = true;   end
 if ~isfield(cfg.causal,'useAdaptiveScale'), cfg.causal.useAdaptiveScale = true; end
+
+% v3: separate genuine new information from refresh traffic. Default
+% false keeps v2 semantics exactly reproducible.
+if ~isfield(cfg.causal,'innovationPriority')
+    cfg.causal.innovationPriority = false;
+end
 
 
 %% ============================================================
@@ -178,6 +190,21 @@ net.timeoutTriggerCount      = 0;
 net.adaptiveScaleSum         = 0;
 net.adaptiveScaleCount       = 0;
 net.adaptiveScaleMinObserved = inf;
+
+
+%% ============================================================
+% v3 branch counters and protocol invariants
+% ============================================================
+
+net.hardInnovationCount   = 0;
+net.adaptiveNewInfoCount  = 0;
+net.refreshCount          = 0;
+
+net.refreshCooldownBlockedCount = 0;
+net.refreshInFlightBlockedCount = 0;
+
+net.newInfoBypassWithoutInnovationCount   = 0;
+net.refreshWhileUsefulPacketInFlightCount = 0;
 
 
 %% ============================================================
@@ -444,6 +471,31 @@ out.unknownSeqAckCount     = net.unknownSeqAckCount;
 
 out.seqGenTimeMismatchCount = net.seqGenTimeMismatchCount;
 
+out.newInfoBypassWithoutInnovationCount = ...
+    net.newInfoBypassWithoutInnovationCount;
+
+out.refreshWhileUsefulPacketInFlightCount = ...
+    net.refreshWhileUsefulPacketInFlightCount;
+
+
+%% ============================================================
+% v3 branch composition
+%
+% refreshCooldownBlockedCount must be > 0 in v3, otherwise
+% aoiMinInterTx has become dead code and the run is not valid.
+% ============================================================
+
+out.hardInnovationCount  = net.hardInnovationCount;
+out.adaptiveNewInfoCount = net.adaptiveNewInfoCount;
+out.refreshCount         = net.refreshCount;
+
+out.refreshCooldownBlockedCount = net.refreshCooldownBlockedCount;
+out.refreshInFlightBlockedCount = net.refreshInFlightBlockedCount;
+
+out.hardInnovationRatio  = net.hardInnovationCount  / max(net.txCount,1);
+out.adaptiveNewInfoRatio = net.adaptiveNewInfoCount / max(net.txCount,1);
+out.refreshRatio         = net.refreshCount         / max(net.txCount,1);
+
 out.invariantViolations = ...
     net.ackBeforeAcceptCount ...
     + net.ackForDroppedDataCount ...
@@ -451,7 +503,9 @@ out.invariantViolations = ...
     + net.futureGenTimeCount ...
     + net.staleAckAcceptedCount ...
     + net.unknownSeqAckCount ...
-    + net.seqGenTimeMismatchCount;
+    + net.seqGenTimeMismatchCount ...
+    + net.newInfoBypassWithoutInnovationCount ...
+    + net.refreshWhileUsefulPacketInFlightCount;
 
 
 %% ============================================================

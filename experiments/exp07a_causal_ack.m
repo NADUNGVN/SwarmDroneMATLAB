@@ -79,7 +79,8 @@ nScenario = numel(scenarioNames);
 %   A1  = State-event   state innovation only, no AoI branch
 %   A2c = + AoI coupling, FIXED scale, freshness estimated OPEN LOOP
 %   A3c = + ADAPTIVE scale,            freshness estimated OPEN LOOP
-%   A4c = + real ACK feedback          freshness from acknowledgements
+%   A4c = + real ACK feedback          freshness from acknowledgements  (v2)
+%   A5c = + innovation/refresh split   cooldown governs repetition only (v3)
 %
 % A3c -> A4c is therefore the value of genuine feedback, measured
 % without the oracle that made the ideal chain's 16.07% possible.
@@ -90,7 +91,8 @@ methodNames = {
     'Ideal-AoI'
     'A2c Fixed-OL'
     'A3c Adapt-OL'
-    'A4c Causal-AoI'
+    'A4c Dual-mem'
+    'A5c Innov-pri'
 };
 
 nMethod = numel(methodNames);
@@ -101,7 +103,8 @@ IDX_EVENT  = 3;
 IDX_IDEAL  = 4;
 IDX_A2C    = 5;
 IDX_A3C    = 6;
-IDX_CAUSAL = 7;
+IDX_A4C    = 7;
+IDX_CAUSAL = 8;   % A5c, the proposed method the gates evaluate
 
 
 %% ============================================================
@@ -184,6 +187,15 @@ MAXOUTST      = nan(numSeeds,nMethod,nScenario);
 ACKCUMGAIN    = nan(numSeeds,nMethod,nScenario);
 DUPACK        = nan(numSeeds,nMethod,nScenario);
 
+% v3 branch composition.
+HARDRATIO    = nan(numSeeds,nMethod,nScenario);
+ADAPTRATIO   = nan(numSeeds,nMethod,nScenario);
+REFRESHRATIO = nan(numSeeds,nMethod,nScenario);
+CDBLOCKED    = nan(numSeeds,nMethod,nScenario);
+INFLBLOCKED  = nan(numSeeds,nMethod,nScenario);
+VIOL_NEWINFO = zeros(numSeeds,nMethod,nScenario);
+VIOL_REFRESH = zeros(numSeeds,nMethod,nScenario);
+
 
 %% ============================================================
 % Header
@@ -253,6 +265,13 @@ for iS = 1:nScenario
         xOut    = nan(numSeeds,1);
         cGain   = nan(numSeeds,1);
         dAck    = nan(numSeeds,1);
+        hR      = nan(numSeeds,1);
+        aR      = nan(numSeeds,1);
+        rR      = nan(numSeeds,1);
+        cdB     = nan(numSeeds,1);
+        ifB     = nan(numSeeds,1);
+        vNew    = zeros(numSeeds,1);
+        vRef    = zeros(numSeeds,1);
 
         parfor s = 1:numSeeds
 
@@ -279,6 +298,14 @@ for iS = 1:nScenario
             cfg.aoiEvent.aoiStateScaleBase = 0.50;
             cfg.aoiEvent.aoiStateScaleMin  = 0.20;
             cfg.aoiEvent.aoiAdaptRange     = 1.00;
+
+            % True common random numbers: every method indexes the same
+            % pre-drawn realisation by (link, timestep), so a method that
+            % stays silent consumes nothing. The ideal reference keeps the
+            % legacy path; at Clean it draws no randomness at all, so the
+            % Clean equivalence gate is unaffected.
+            cfg.net.useTrace    = (iM ~= IDX_IDEAL);
+            cfg.net.phaseOffset = false;
 
             % Reverse channel: same medium as the forward path.
             cfg.ack.loss             = 0.0;
@@ -312,9 +339,16 @@ for iS = 1:nScenario
                     cfg.causal.useAckFeedback   = false;
                     out = simSwarmAoICausal(cfg);
 
+                case IDX_A4C
+                    cfg.causal.useAdaptiveScale   = true;
+                    cfg.causal.useAckFeedback     = true;
+                    cfg.causal.innovationPriority = false;
+                    out = simSwarmAoICausal(cfg);
+
                 case IDX_CAUSAL
-                    cfg.causal.useAdaptiveScale = true;
-                    cfg.causal.useAckFeedback   = true;
+                    cfg.causal.useAdaptiveScale   = true;
+                    cfg.causal.useAckFeedback     = true;
+                    cfg.causal.innovationPriority = true;
                     out = simSwarmAoICausal(cfg);
 
             end
@@ -370,6 +404,19 @@ for iS = 1:nScenario
                 dAck(s)  = out.duplicateAckCount;
             end
 
+            if isfield(out,'hardInnovationRatio')
+                hR(s)  = out.hardInnovationRatio;
+                aR(s)  = out.adaptiveNewInfoRatio;
+                rR(s)  = out.refreshRatio;
+                cdB(s) = out.refreshCooldownBlockedCount;
+                ifB(s) = out.refreshInFlightBlockedCount;
+            end
+
+            if isfield(out,'newInfoBypassWithoutInnovationCount')
+                vNew(s) = out.newInfoBypassWithoutInnovationCount;
+                vRef(s) = out.refreshWhileUsefulPacketInFlightCount;
+            end
+
             if isfield(out,'invariantViolations')
                 vTot(s)  = out.invariantViolations;
                 vBef(s)  = out.ackBeforeAcceptCount;
@@ -415,6 +462,14 @@ for iS = 1:nScenario
         MAXOUTST(:,iM,iS)      = xOut;
         ACKCUMGAIN(:,iM,iS)    = cGain;
         DUPACK(:,iM,iS)        = dAck;
+
+        HARDRATIO(:,iM,iS)    = hR;
+        ADAPTRATIO(:,iM,iS)   = aR;
+        REFRESHRATIO(:,iM,iS) = rR;
+        CDBLOCKED(:,iM,iS)    = cdB;
+        INFLBLOCKED(:,iM,iS)  = ifB;
+        VIOL_NEWINFO(:,iM,iS) = vNew;
+        VIOL_REFRESH(:,iM,iS) = vRef;
 
         FORMFAIL(:,iM,iS) = rmseS  > formationThreshold;
         SAFEFAIL(:,iM,iS) = minevS < safetyThreshold;
@@ -480,6 +535,8 @@ invNames = {
     'futureGenTimeCount'
     'staleAckAcceptedCount'
     'unknownSeqAckCount'
+    'newInfoBypassWithoutInnovation'
+    'refreshWhileUsefulPacketInFlight'
 };
 
 invTotals = [
@@ -489,6 +546,8 @@ invTotals = [
     sum(sum(VIOL_FUTURE(:,IDX_CAUSAL,:)))
     sum(sum(VIOL_STALEACC(:,IDX_CAUSAL,:)))
     sum(sum(VIOL_UNKNOWNSEQ(:,IDX_CAUSAL,:)))
+    sum(sum(VIOL_NEWINFO(:,IDX_CAUSAL,:)))
+    sum(sum(VIOL_REFRESH(:,IDX_CAUSAL,:)))
 ];
 
 for q = 1:numel(invNames)
@@ -512,6 +571,7 @@ fprintf('  %-26s %d\n', 'staleAckDiscarded (expected>0 only under jitter)', ...
 
 meanPOSTRIG   = reshape(mean(POSTRIG,1),   nMethod,nScenario);
 meanAOITRIG   = reshape(mean(AOITRIG,1),   nMethod,nScenario);
+meanTIMEOUT   = reshape(mean(TIMEOUTTRIG,1), nMethod,nScenario);
 meanMEANSCALE = reshape(mean(MEANSCALE,1), nMethod,nScenario);
 meanESTAOI    = reshape(mean(ESTAOI,1),    nMethod,nScenario);
 
@@ -568,6 +628,43 @@ end
 
 
 %% ============================================================
+% v3 branch composition
+%
+% aoiMinInterTx must still regulate the refresh branch. If
+% refreshCooldownBlocked is zero the parameter has become dead code
+% and the run is not a valid test of the semantic correction.
+% ============================================================
+
+meanHARD    = reshape(mean(HARDRATIO,1),    nMethod,nScenario);
+meanADAPT   = reshape(mean(ADAPTRATIO,1),   nMethod,nScenario);
+meanREFRESH = reshape(mean(REFRESHRATIO,1), nMethod,nScenario);
+meanCDB     = reshape(mean(CDBLOCKED,1),    nMethod,nScenario);
+meanIFB     = reshape(mean(INFLBLOCKED,1),  nMethod,nScenario);
+
+fprintf('\n');
+fprintf('============================================================\n');
+fprintf('v3 branch composition (A5c)\n');
+fprintf('============================================================\n\n');
+
+fprintf('%-10s %9s %9s %9s %9s %12s %12s\n', ...
+    'Scenario','hardInn','adaptNew','refresh','timeout','cdBlocked','inFlightBlk');
+
+for iS = 1:nScenario
+    fprintf('%-10s %9.3f %9.3f %9.3f %9.3f %12.0f %12.0f\n', ...
+        scenarioNames{iS}, ...
+        meanHARD(IDX_CAUSAL,iS), meanADAPT(IDX_CAUSAL,iS), ...
+        meanREFRESH(IDX_CAUSAL,iS), meanTIMEOUT(IDX_CAUSAL,iS), ...
+        meanCDB(IDX_CAUSAL,iS), meanIFB(IDX_CAUSAL,iS));
+end
+
+if all(meanCDB(IDX_CAUSAL,2:3) > 0)
+    fprintf('\n  aoiMinInterTx still regulates refresh: OK\n');
+else
+    fprintf('\n  *** aoiMinInterTx never blocked a refresh: dead parameter ***\n');
+end
+
+
+%% ============================================================
 % Causal ablation chain
 % ============================================================
 
@@ -575,19 +672,22 @@ fprintf('============================================================\n');
 fprintf('Causal ablation: A1 -> A2c -> A3c -> A4c\n');
 fprintf('============================================================\n\n');
 
-chain = [IDX_EVENT IDX_A2C IDX_A3C IDX_CAUSAL];
+chain = [IDX_EVENT IDX_A2C IDX_A3C IDX_A4C IDX_CAUSAL];
 chainNames = {'A1 -> A2c  AoI coupling', ...
               'A2c -> A3c adaptive scale', ...
-              'A3c -> A4c real feedback'};
+              'A3c -> A4c real feedback', ...
+              'A4c -> A5c innovation split'};
 
-gainCausal = nan(3,nScenario);
-rateCausal = nan(3,nScenario);
+nStep = numel(chainNames);
+
+gainCausal = nan(nStep,nScenario);
+rateCausal = nan(nStep,nScenario);
 
 for iS = 1:nScenario
 
     fprintf('%s\n', scenarioNames{iS});
 
-    for c = 1:3
+    for c = 1:nStep
         a = chain(c);
         b = chain(c+1);
         gainCausal(c,iS) = 100*(meanRMSE(a,iS)-meanRMSE(b,iS))/meanRMSE(a,iS);
@@ -763,6 +863,11 @@ T = tidyFromArray( ...
         'MAXOUTST',      MAXOUTST, ...
         'ACKCUMGAIN',    ACKCUMGAIN, ...
         'DUPACK',        DUPACK, ...
+        'HARDRATIO',     HARDRATIO, ...
+        'ADAPTRATIO',    ADAPTRATIO, ...
+        'REFRESHRATIO',  REFRESHRATIO, ...
+        'CDBLOCKED',     CDBLOCKED, ...
+        'INFLBLOCKED',   INFLBLOCKED, ...
         'STALEACKDISC',STALEACKDISC, ...
         'FORMFAIL',    double(FORMFAIL), ...
         'SAFEFAIL',    double(SAFEFAIL)), ...

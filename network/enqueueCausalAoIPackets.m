@@ -55,6 +55,7 @@ N = cfg.swarm.N;
 dt = cfg.swarm.dt;
 
 useAck      = cfg.causal.useAckFeedback;
+useV3       = cfg.causal.innovationPriority;
 triggerCfg  = cfg;
 
 if ~cfg.causal.useAdaptiveScale
@@ -96,18 +97,28 @@ for i = 1:N
 
         timeSinceLastTx = tk - txState.lastTxTime(i,j);
 
-        [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
-            currentPos, ...
-            currentVel, ...
-            sentPos, ...
-            sentVel, ...
-            estimatedAoI, ...
-            timeSinceLastTx, ...
-            triggerCfg);
+        nOutstanding = numel(txState.outstanding{i,j});
+
+        if useV3
+            [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
+                currentPos, currentVel, sentPos, sentVel, ...
+                estimatedAoI, timeSinceLastTx, nOutstanding, triggerCfg);
+            net = accountV3Branch(net, triggerInfo, ...
+                cfg, currentPos, currentVel, sentPos, sentVel, nOutstanding);
+        else
+            [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
+                currentPos, ...
+                currentVel, ...
+                sentPos, ...
+                sentVel, ...
+                estimatedAoI, ...
+                timeSinceLastTx, ...
+                triggerCfg);
+        end
 
         net = accumulateAdaptiveStats(net, triggerInfo);
 
-        net = accountOutstanding(net, numel(txState.outstanding{i,j}));
+        net = accountOutstanding(net, nOutstanding);
 
         if ~sendPacket
 
@@ -127,7 +138,7 @@ for i = 1:N
 
         end
 
-        net = incrementTriggerReason(net, reason);
+        net = incrementTriggerReason(net, reason, useV3);
 
         [net, txState] = transmit( ...
             net, txState, i, j, tk, currentPos, currentVel, [], cfg, false, ...
@@ -166,18 +177,28 @@ for i = 2:N
 
     timeSinceLastTx = tk - txState.leaderLastTxTime(i);
 
-    [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
-        currentPos, ...
-        currentVel, ...
-        sentPos, ...
-        sentVel, ...
-        estimatedAoI, ...
-        timeSinceLastTx, ...
-        triggerCfg);
+    nOutstanding = numel(txState.leaderOutstanding{i});
+
+    if useV3
+        [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
+            currentPos, currentVel, sentPos, sentVel, ...
+            estimatedAoI, timeSinceLastTx, nOutstanding, triggerCfg);
+        net = accountV3Branch(net, triggerInfo, ...
+            cfg, currentPos, currentVel, sentPos, sentVel, nOutstanding);
+    else
+        [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
+            currentPos, ...
+            currentVel, ...
+            sentPos, ...
+            sentVel, ...
+            estimatedAoI, ...
+            timeSinceLastTx, ...
+            triggerCfg);
+    end
 
     net = accumulateAdaptiveStats(net, triggerInfo);
 
-    net = accountOutstanding(net, numel(txState.leaderOutstanding{i}));
+    net = accountOutstanding(net, nOutstanding);
 
     if ~sendPacket
 
@@ -195,7 +216,7 @@ for i = 2:N
 
     end
 
-    net = incrementTriggerReason(net, reason);
+    net = incrementTriggerReason(net, reason, useV3);
 
     [net, txState] = transmit( ...
         net, txState, i, 1, tk, currentPos, currentVel, leader.acc', cfg, true, ...
@@ -363,7 +384,27 @@ end
 end
 
 
-function net = incrementTriggerReason(net, reason)
+function net = incrementTriggerReason(net, reason, useV3)
+
+if useV3
+    % v3 branch codes: 1/2 hard, 3 adaptive new info, 4 refresh, 5 timeout.
+    switch reason
+        case 1
+            net.positionTriggerCount = net.positionTriggerCount + 1;
+            net.hardInnovationCount  = net.hardInnovationCount + 1;
+        case 2
+            net.velocityTriggerCount = net.velocityTriggerCount + 1;
+            net.hardInnovationCount  = net.hardInnovationCount + 1;
+        case 3
+            net.aoiTriggerCount        = net.aoiTriggerCount + 1;
+            net.adaptiveNewInfoCount   = net.adaptiveNewInfoCount + 1;
+        case 4
+            net.refreshCount = net.refreshCount + 1;
+        case 5
+            net.timeoutTriggerCount = net.timeoutTriggerCount + 1;
+    end
+    return;
+end
 
 switch reason
     case 1
@@ -374,6 +415,45 @@ switch reason
         net.aoiTriggerCount = net.aoiTriggerCount + 1;
     case 4
         net.timeoutTriggerCount = net.timeoutTriggerCount + 1;
+end
+
+end
+
+
+function net = accountV3Branch(net, info, cfg, cp, cv, sp, sv, nOutstanding)
+%ACCOUNTV3BRANCH Branch bookkeeping and the two v3 protocol invariants.
+
+if info.refreshCooldownBlocked
+    net.refreshCooldownBlockedCount = net.refreshCooldownBlockedCount + 1;
+end
+
+if info.refreshInFlightBlocked
+    net.refreshInFlightBlockedCount = net.refreshInFlightBlockedCount + 1;
+end
+
+% INVARIANT: a branch that claims to carry new information must actually
+% have innovation against the last SENT state. Checked independently of
+% the policy rather than trusting its own flags.
+if info.branch >= 1 && info.branch <= 3
+
+    dp = norm(cp(:) - sp(:));
+    dv = norm(cv(:) - sv(:));
+
+    floorP = cfg.aoiEvent.aoiStateScaleMin * cfg.aoiEvent.posThreshold;
+    floorV = cfg.aoiEvent.aoiStateScaleMin * cfg.aoiEvent.velThreshold;
+
+    if dp < floorP && dv < floorV
+        net.newInfoBypassWithoutInnovationCount = ...
+            net.newInfoBypassWithoutInnovationCount + 1;
+    end
+
+end
+
+% INVARIANT: the refresh branch must never fire while a packet is still
+% outstanding, otherwise it is duplicating something already in flight.
+if info.branch == 4 && nOutstanding > 0
+    net.refreshWhileUsefulPacketInFlightCount = ...
+        net.refreshWhileUsefulPacketInFlightCount + 1;
 end
 
 end
