@@ -1,7 +1,13 @@
-function net = deliverDataWithAck(net, tk, cfg)
+function net = deliverDataWithAck(net, tk, cfg, ackTrace, k)
 %DELIVERDATAWITHACK Deliver DATA and emit one CUMULATIVE ACK per link per tick.
 %
-%   net = deliverDataWithAck(net, tk, cfg)
+%   net = deliverDataWithAck(net, tk, cfg, ackTrace, k)
+%
+% ackTrace and k are optional. When a reverse trace is supplied the ACK
+% loss and jitter outcomes are read from it at (k,i,j) instead of drawn
+% from net.ackStream, so every ACK impairment cell for a given scenario and
+% seed sits on the same reverse realisation. Omitting them reproduces the
+% original RandStream behaviour exactly.
 %
 % Thin wrapper around the locked deliverNetworkPackets. Reusing it rather
 % than copying keeps the forward path byte-identical to the locked
@@ -23,6 +29,14 @@ function net = deliverDataWithAck(net, tk, cfg)
 % Reading net.genTime here is legitimate: ACK generation is receiver-side,
 % and the receiver is the node deciding what to acknowledge. The transmitter
 % learns none of it except through an ACK that actually arrives.
+
+if nargin < 4
+    ackTrace = [];
+end
+
+if nargin < 5
+    k = 0;
+end
 
 N = cfg.swarm.N;
 
@@ -75,7 +89,8 @@ for i = 1:N
 
         net.ackCoveredCount = net.ackCoveredCount + max(covered,0);
 
-        net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, false);
+        net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, false, ...
+            ackTrace, k);
 
     end
 
@@ -110,7 +125,8 @@ for i = 2:N
 
     net.ackCoveredCount = net.ackCoveredCount + max(covered,0);
 
-    net = pushAck(net, i, 1, acceptedGenTime, seq, tk, cfg, true);
+    net = pushAck(net, i, 1, acceptedGenTime, seq, tk, cfg, true, ...
+        ackTrace, k);
 
 end
 
@@ -124,12 +140,13 @@ end
 % delay and jitter.
 % ============================================================
 
-function net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, isLeaderLink)
+function net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, isLeaderLink, ...
+    ackTrace, k)
 
 net.ackTxCount = net.ackTxCount + 1;
 
 
-if rand(net.ackStream) < cfg.ack.loss
+if drawAckLoss(net, ackTrace, k, i, j, isLeaderLink) < cfg.ack.loss
 
     net.ackDropCount = net.ackDropCount + 1;
 
@@ -141,7 +158,8 @@ end
 ackDelay = cfg.ack.delay;
 
 if cfg.ack.jitterStd > 0
-    ackDelay = ackDelay + cfg.ack.jitterStd * randn(net.ackStream);
+    ackDelay = ackDelay + ...
+        cfg.ack.jitterStd * drawAckJitter(net, ackTrace, k, i, j, isLeaderLink);
 end
 
 % Floored at one timestep: the receiver only decides at its own sampling
@@ -168,6 +186,43 @@ else
     q{end+1} = ack;
     net.ackQueue{i,j} = q;
 
+end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTIONS
+%
+% Read the pre-drawn reverse outcome when a trace is present,
+% otherwise fall back to the dedicated RandStream. The stream is
+% deliberately NOT consumed in trace mode: drawing from it as well
+% would make the realisation depend on how many ACKs a particular
+% impairment cell happened to generate, which is the coupling the
+% trace exists to remove.
+% ============================================================
+
+function u = drawAckLoss(net, ackTrace, k, i, j, isLeaderLink)
+
+if isempty(ackTrace)
+    u = rand(net.ackStream);
+elseif isLeaderLink
+    u = ackTrace.leaderLossU(k,i);
+else
+    u = ackTrace.lossU(k,i,j);
+end
+
+end
+
+
+function z = drawAckJitter(net, ackTrace, k, i, j, isLeaderLink)
+
+if isempty(ackTrace)
+    z = randn(net.ackStream);
+elseif isLeaderLink
+    z = ackTrace.leaderJitterZ(k,i);
+else
+    z = ackTrace.jitterZ(k,i,j);
 end
 
 end

@@ -288,6 +288,209 @@ end
 
 
 %% ============================================================
+% 5. EXP07A locked values, with the ACK trace available but OFF
+%
+% Adding cfg.ack.useTrace must not disturb the run that produced the
+% locked EXP07A result.
+% ============================================================
+
+fprintf('\n[5] EXP07A Causal-AoI-v3 locked values (3 seeds, ack trace OFF)\n');
+
+v3Names = {'Clean','Moderate','Stressed'};
+v3Loss  = [0.00 0.20 0.40];
+v3Delay = [0.00 0.08 0.12];
+
+expectedV3RMSE = [0.0383 0.0873 0.1163];
+expectedV3Rate = [8.44   13.34  18.24];
+
+for iS = 1:3
+
+    r = zeros(3,1);
+    t = zeros(3,1);
+
+    for sd = 1:3
+
+        cfg = defaultConfig();
+
+        cfg.net.packetLoss = v3Loss(iS);
+        cfg.net.delay      = v3Delay(iS);
+        cfg.net.jitterStd  = 0;
+        cfg.net.seed       = 1400000 + 10000*iS + sd;
+        cfg.net.useTrace   = true;
+
+        cfg.aoiEvent.posThreshold      = 0.05;
+        cfg.aoiEvent.velThreshold      = 0.10;
+        cfg.aoiEvent.aoiThreshold      = 0.12;
+        cfg.aoiEvent.maxSilence        = 0.50;
+        cfg.aoiEvent.minInterTx        = cfg.swarm.dt;
+        cfg.aoiEvent.aoiMinInterTx     = 0.10;
+        cfg.aoiEvent.aoiStateScaleBase = 0.50;
+        cfg.aoiEvent.aoiStateScaleMin  = 0.20;
+        cfg.aoiEvent.aoiAdaptRange     = 1.00;
+
+        cfg.ack.loss  = 0;
+        cfg.ack.delay = v3Delay(iS);
+
+        cfg.causal.innovationPriority = true;
+
+        out = simSwarmAoICausal(cfg);
+        M   = computeSwarmMetrics(out, cfg);
+
+        r(sd) = M.formationRMSE;
+        t(sd) = out.txRatePerChannel;
+
+    end
+
+    dR = abs(mean(r) - expectedV3RMSE(iS));
+    dT = abs(mean(t) - expectedV3Rate(iS));
+
+    if dR < 5e-5 && dT < 5e-3
+        status = 'ok  ';
+    else
+        status = 'FAIL';
+        failures = failures + 1;
+    end
+
+    fprintf('    %s %-9s RMSE %.4f (exp %.4f) | rate %.2f (exp %.2f)\n', ...
+        status, v3Names{iS}, mean(r), expectedV3RMSE(iS), ...
+        mean(t), expectedV3Rate(iS));
+
+end
+
+
+%% ============================================================
+% 6. Reverse-channel trace
+%
+% The property that matters for EXP07B: one scenario and seed must
+% give ONE reverse realisation shared by every impairment cell. If the
+% trace moved with ackLoss or ackJitter, differences between cells
+% would mix the impairment with the draw.
+% ============================================================
+
+fprintf('\n[6] Reverse-channel ACK trace\n');
+
+cfg = defaultConfig();
+cfg.net.seed = 424242;
+
+cfg.ack.loss      = 0.10;
+cfg.ack.delay     = 0.08;
+cfg.ack.jitterStd = 0.04;
+
+tA = generateAckTrace(cfg);
+
+% Same seed, completely different impairment settings.
+cfgB = cfg;
+cfgB.ack.loss      = 0.20;
+cfgB.ack.delay     = 0.24;
+cfgB.ack.jitterStd = 0.08;
+
+tB = generateAckTrace(cfgB);
+
+if tA.hash == tB.hash
+    fprintf('    ok   trace is invariant to ACK impairment settings\n');
+else
+    fprintf('    FAIL trace changes with impairment: cells are not comparable\n');
+    failures = failures + 1;
+end
+
+tA2 = generateAckTrace(cfg);
+
+if tA.hash == tA2.hash
+    fprintf('    ok   trace is reproducible (hash %.0f)\n', tA.hash);
+else
+    fprintf('    FAIL trace is not reproducible\n');
+    failures = failures + 1;
+end
+
+cfgC = cfg;
+cfgC.net.seed = 424243;
+
+tC = generateAckTrace(cfgC);
+
+if tC.hash ~= tA.hash
+    fprintf('    ok   a different seed gives a different realisation\n');
+else
+    fprintf('    FAIL different seeds collide\n');
+    failures = failures + 1;
+end
+
+% Independent of the forward trace, not a shifted copy of it.
+fwd = generateNetworkTrace(cfg);
+
+if fwd.hash ~= tA.hash
+    fprintf('    ok   reverse trace is independent of the forward trace\n');
+else
+    fprintf('    FAIL forward and reverse traces are identical\n');
+    failures = failures + 1;
+end
+
+
+%% ============================================================
+% 7. cfg.ack.useTrace defaults off, and is live when on
+% ============================================================
+
+fprintf('\n[7] ACK trace default and effect\n');
+
+cfg = defaultConfig();
+cfg.net.packetLoss = 0.40;
+cfg.net.delay      = 0.12;
+cfg.net.seed       = 771001;
+cfg.net.useTrace   = true;
+
+cfg.aoiEvent.posThreshold      = 0.05;
+cfg.aoiEvent.velThreshold      = 0.10;
+cfg.aoiEvent.aoiThreshold      = 0.12;
+cfg.aoiEvent.maxSilence        = 0.50;
+cfg.aoiEvent.minInterTx        = cfg.swarm.dt;
+cfg.aoiEvent.aoiMinInterTx     = 0.10;
+cfg.aoiEvent.aoiStateScaleBase = 0.50;
+cfg.aoiEvent.aoiStateScaleMin  = 0.20;
+cfg.aoiEvent.aoiAdaptRange     = 1.00;
+
+cfg.ack.loss      = 0.20;
+cfg.ack.delay     = 0.12;
+cfg.ack.jitterStd = 0.04;
+
+cfg.causal.innovationPriority = true;
+
+legacyAck = simSwarmAoICausal(cfg);
+
+if isnan(legacyAck.ackTraceHash)
+    fprintf('    ok   cfg.ack.useTrace defaults off\n');
+else
+    fprintf('    FAIL ACK trace active by default\n');
+    failures = failures + 1;
+end
+
+cfg.ack.useTrace = true;
+
+tracedAck = simSwarmAoICausal(cfg);
+
+if ~isnan(tracedAck.ackTraceHash)
+    fprintf('    ok   ACK trace active when requested (hash %.0f)\n', ...
+        tracedAck.ackTraceHash);
+else
+    fprintf('    FAIL ACK trace requested but inactive\n');
+    failures = failures + 1;
+end
+
+if legacyAck.ackDropCount ~= tracedAck.ackDropCount
+    fprintf('    ok   trace produces its own realisation (%d vs %d ACK drops)\n', ...
+        legacyAck.ackDropCount, tracedAck.ackDropCount);
+else
+    fprintf('    note ACK drop counts coincide; not conclusive on its own\n');
+end
+
+if tracedAck.invariantViolations == 0
+    fprintf('    ok   causality invariants hold under ACK trace mode\n');
+else
+    fprintf('    FAIL %d invariant violation(s) in ACK trace mode\n', ...
+        tracedAck.invariantViolations);
+    failures = failures + 1;
+end
+
+
+%% ============================================================
 % Verdict
 % ============================================================
 

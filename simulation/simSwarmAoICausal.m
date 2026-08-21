@@ -76,6 +76,12 @@ if ~isfield(cfg.ack,'jitterStd'),        cfg.ack.jitterStd = 0.0;            end
 if ~isfield(cfg.ack,'seedOffset'),       cfg.ack.seedOffset = 987654;        end
 if ~isfield(cfg.ack,'assertInvariants'), cfg.ack.assertInvariants = false;   end
 
+% Reverse-channel common random numbers. Default off preserves the
+% RandStream behaviour the earlier results were produced with.
+if ~isfield(cfg.ack,'useTrace')
+    cfg.ack.useTrace = false;
+end
+
 
 %% ============================================================
 % Ablation switches
@@ -168,6 +174,15 @@ else
     netTrace = [];
 end
 
+% The reverse trace depends only on seed, N and horizon, never on the
+% ACK impairment settings, so every impairment cell for one scenario
+% and seed shares a single reverse realisation.
+if cfg.ack.useTrace
+    ackTrace = generateAckTrace(cfg);
+else
+    ackTrace = [];
+end
+
 
 leader = leaderReference(0);
 
@@ -255,7 +270,7 @@ for k = 1:K
     % reverse queue, arriving no earlier than tk + dt.
     % ---------------------------------------------------------
 
-    net = deliverDataWithAck(net, tk, cfg);
+    net = deliverDataWithAck(net, tk, cfg, ackTrace, k);
 
 
     %% --------------------------------------------------------
@@ -285,7 +300,7 @@ for k = 1:K
     % tk + dt, so causality is preserved.
     % ---------------------------------------------------------
 
-    net = deliverDataWithAck(net, tk, cfg);
+    net = deliverDataWithAck(net, tk, cfg, ackTrace, k);
 
 
     %% --------------------------------------------------------
@@ -560,6 +575,12 @@ if ~isempty(netTrace)
     out.traceHash = netTrace.hash;
 else
     out.traceHash = NaN;
+end
+
+if ~isempty(ackTrace)
+    out.ackTraceHash = ackTrace.hash;
+else
+    out.ackTraceHash = NaN;
 end
 
 out.ackRateTotal      = net.ackTxCount / max(missionTime,eps);

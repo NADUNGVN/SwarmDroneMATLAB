@@ -297,6 +297,12 @@ for iS = 1:nScenario
                 cfg.aoiEvent.aoiStateScaleMin  = 0.20;
                 cfg.aoiEvent.aoiAdaptRange     = 1.00;
 
+                % Reverse-channel CRN. The trace depends only on scenario
+                % and seed, never on the impairment settings, so all 12 ACK
+                % cells sit on one reverse realisation and a difference
+                % between cells is the impairment rather than the draw.
+                cfg.ack.useTrace = true;
+
                 cfg.ack.loss             = ackLoss(iA);
                 cfg.ack.delay            = thisAckDelay;
                 cfg.ack.jitterStd        = ackJitter(iA);
