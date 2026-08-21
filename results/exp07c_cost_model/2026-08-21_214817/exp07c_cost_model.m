@@ -50,11 +50,12 @@ expRun = startExperiment('exp07c_cost_model');
 %% ============================================================
 % Monte Carlo
 %
-% Debug pass. Reviewed before the 20-seed final pass, as the
-% pre-registration requires.
+% Final pass. The 3-seed debug pass was reviewed first. Gate logic,
+% cost models, the Pareto definition and the accounting are unchanged
+% from commit 14701ff; only the reporting below was extended.
 % ============================================================
 
-numSeeds = 3;
+numSeeds = 20;
 
 
 %% ============================================================
@@ -346,6 +347,7 @@ end
 % ============================================================
 
 meanRMSE = reshape(mean(RMSE,1), nMethod,nScenario);
+stdRMSE  = reshape(std(RMSE,0,1), nMethod,nScenario);
 meanData = reshape(mean(NDATA,1), nMethod,nScenario);
 meanAck  = reshape(mean(NACK,1), nMethod,nScenario);
 meanBc   = reshape(mean(NBROADCAST,1), nMethod,nScenario);
@@ -380,14 +382,14 @@ fprintf('============================================================\n');
 fprintf('DATA / ACK / TOTAL accounting\n');
 fprintf('============================================================\n\n');
 
-fprintf('%-10s %-12s %9s %9s %9s %10s %9s\n', ...
-    'Scenario','Method','RMSE','DATA/s','ACK/s','BCAST/s','SafeFail');
+fprintf('%-10s %-12s %9s %8s %9s %9s %10s %9s\n', ...
+    'Scenario','Method','RMSE','stdRMSE','DATA/s','ACK/s','BCAST/s','SafeFail');
 
 for iS = 1:nScenario
     for iM = 1:nMethod
-        fprintf('%-10s %-12s %9.4f %9.2f %9.2f %10.2f %9.2f\n', ...
+        fprintf('%-10s %-12s %9.4f %8.4f %9.2f %9.2f %10.2f %9.2f\n', ...
             scenarioNames{iS}, methodNames{iM}, ...
-            meanRMSE(iM,iS), ...
+            meanRMSE(iM,iS), stdRMSE(iM,iS), ...
             meanData(iM,iS)/meanMis(iM,iS), ...
             meanAck(iM,iS)/meanMis(iM,iS), ...
             meanBc(iM,iS)/meanMis(iM,iS), ...
@@ -471,6 +473,79 @@ for iV = 1:nVariant
         else
             fprintf(' %14s', 'non-dom');
         end
+
+    end
+
+    fprintf('\n');
+
+end
+
+
+
+%% ============================================================
+% Dominance margins
+%
+% The matrix above says whether Causal-v3 is dominated. It does not
+% say by how much, and a cell that fails by half a percent is a very
+% different finding from one that fails by twenty.
+%
+% For each cell the nearest rival is reported: the method with the
+% smallest worst-axis ratio against Causal-v3. Positive figures mean
+% the rival is ahead on that axis. Domination needs BOTH above the
+% pre-registered 1 % margin, so the smaller of the two is what
+% decides the cell.
+% ============================================================
+
+fprintf('\n');
+fprintf('============================================================\n');
+fprintf('Dominance margins versus the nearest rival\n');
+fprintf('============================================================\n\n');
+
+fprintf('%-16s %-10s %-12s %12s %12s %10s\n', ...
+    'Cost variant','Scenario','Rival','RMSE better','cost lower','verdict');
+
+for iV = 1:nVariant
+
+    C = variantCost{iV};
+
+    for iS = 1:nScenario
+
+        bestScore = -inf;
+        bestM     = 0;
+
+        for iM = 1:nMethod
+
+            if iM == IDX_CAUSAL
+                continue;
+            end
+
+            rGain = 1 - meanRMSE(iM,iS)/meanRMSE(IDX_CAUSAL,iS);
+            cGain = 1 - C(iM,iS)/C(IDX_CAUSAL,iS);
+
+            % A rival dominates only if it leads on BOTH axes, so its
+            % weaker axis is what counts. Ranking by that picks the
+            % rival that comes closest to dominating.
+            score = min(rGain, cGain);
+
+            if score > bestScore
+                bestScore = score;
+                bestM     = iM;
+            end
+
+        end
+
+        rGain = 1 - meanRMSE(bestM,iS)/meanRMSE(IDX_CAUSAL,iS);
+        cGain = 1 - C(bestM,iS)/C(IDX_CAUSAL,iS);
+
+        if nonDominated(iV,iS)
+            verdict = 'non-dom';
+        else
+            verdict = 'DOMINATED';
+        end
+
+        fprintf('%-16s %-10s %-12s %11.2f%% %11.2f%% %10s\n', ...
+            variantNames{iV}, scenarioNames{iS}, methodNames{bestM}, ...
+            100*rGain, 100*cGain, verdict);
 
     end
 

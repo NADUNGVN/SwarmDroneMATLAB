@@ -817,6 +817,88 @@ và phải được nêu khi báo cáo.
 
 ---
 
+## 8sexies. EXP07C — kết quả final 20 seeds: GATE KHOA HỌC KHÔNG ĐẠT
+
+Accounting-only. Không đổi policy, threshold, ACK, CRN, cost model, định nghĩa Pareto hay
+accounting. Logic y hệt commit `14701ff`; chỉ mở rộng phần báo cáo.
+
+```
+[PASS] Accounting invariants                        0 failure(s)
+[FAIL] packet-w: non-dominated in >= 2/3 variants   1 of 3
+[FAIL] Stressed conclusion holds in >= 2/3 families 0 of 3
+```
+
+**Implementation PASS, gate khoa học FAIL. Không tune gì.**
+
+### Chi phí đo được
+
+| Scenario | Method | RMSE | std | DATA/s | ACK/s | BCAST/s |
+|---|---|---|---|---|---|---|
+| Stressed | P10 | 0.1456 | 0.0022 | 120.00 | 0 | 60.00 |
+| Stressed | **P20** | **0.1103** | 0.0008 | 240.00 | 0 | 120.00 |
+| Stressed | State-event | 0.2571 | 0.0071 | 50.59 | 0 | 25.30 |
+| Stressed | **Causal-v3** | **0.1170** | 0.0010 | 218.86 | **130.70** | 109.43 |
+
+### Ma trận dominance
+
+| Cost variant | Clean | Moderate | Stressed |
+|---|---|---|---|
+| packet-w 0.10 | non-dom | non-dom | **non-dom** |
+| packet-w 0.25 | dom by P10 | non-dom | **dom by P20** |
+| packet-w 0.50 | dom by P10 | non-dom | **dom by P20** |
+| airtime | dom by P10 | non-dom | **dom by P20** |
+| broadcast | dom by P20 | dom by P20 | **dom by P20** |
+
+### Biên độ dominance ở Stressed, so với P20
+
+| Cost variant | RMSE P20 tốt hơn | Chi phí P20 thấp hơn | Verdict |
+|---|---|---|---|
+| packet-w 0.10 | 5.75 % | **−3.48 %** | non-dom |
+| packet-w 0.25 | 5.75 % | 4.58 % | DOMINATED |
+| packet-w 0.50 | 5.75 % | 15.55 % | DOMINATED |
+| airtime | 5.75 % | 15.55 % | DOMINATED |
+| broadcast | 5.75 % | **50.03 %** | DOMINATED |
+
+Biên độ này là thông tin quan trọng nhất của bảng: **RMSE của P20 tốt hơn 5.75 % ở mọi
+variant** — con số đó không phụ thuộc cost model. Điều duy nhất thay đổi là chi phí. Ở
+`packet-w 0.10`, Causal-v3 thoát dominance **chỉ nhờ rẻ hơn 3.48 %**; chỉ cần định giá ACK
+nhỉnh hơn 1/10 gói dữ liệu là biên đó đảo dấu.
+
+Nói cách khác: Causal-v3 ở Stressed **không** thua vì chi phí. Nó thua vì **RMSE vốn đã kém
+P20 5.75 %**, và chi phí chỉ quyết định xem điều đó có thành dominance hay không.
+
+### Broadcast là model khắc nghiệt nhất
+
+Tỉ lệ dedup: periodic và state-event đạt **chính xác 0.500** vì mọi link từ cùng một sender
+bắn đồng thời. Causal-v3 chỉ đạt **0.853** ở Moderate vì mỗi link giữ `ackGenTime` riêng nên
+bắn lệch pha. Dưới broadcast, Causal-v3 bị dominate ở **cả ba** scenario, với biên chi phí
+50.03 % ở Stressed.
+
+Đây đúng là rủi ro mà `docs/RESEARCH_REVIEW.md` §A14 nêu từ phiên rà soát đầu tiên: mô hình
+unicast-per-link đang tâng bốc phương pháp đề xuất.
+
+### Kiểm chứng accounting
+
+```
+ok  broadcast <= unicast ở mọi nơi
+ok  broadcast >= unicast / maxFanout (2)
+ok  baseline không phát ACK nào
+ok  periodic broadcast chính xác: P10 1800, P20 3600 (6 payload class)
+```
+
+Con số periodic khớp dạng đóng `ticks × payload classes`, là bằng chứng mạnh nhất rằng counter
+đúng.
+
+### Ý nghĩa
+
+EXP07C **không** phủ nhận EXP07A/07B. Nó xác định rằng luận điểm chỉ đứng vững ở **Moderate**
+(non-dominated 4/5 variant). Ở **Stressed** — nơi bài báo muốn tuyên bố mạnh nhất — nó không
+đứng vững khi tính đủ chi phí ACK.
+
+Không đề xuất thay đổi nào. v4 / piggyback / aggregation chưa được thiết kế.
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.

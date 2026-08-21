@@ -1,9 +1,9 @@
 
 ============================================================
 RUN  : exp07c_cost_model
-ID   : 2026-08-21_212848
-DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_212848
-WHEN : 2026-08-21 21:28:48
+ID   : 2026-08-21_214817
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_214817
+WHEN : 2026-08-21 21:48:18
 ============================================================
 
 
@@ -11,7 +11,7 @@ WHEN : 2026-08-21 21:28:48
 EXP07C communication cost realism
 ============================================================
 
-Seeds        : 3
+Seeds        : 20
 Channels     : 12
 Accounting   : passive only, no behaviour change
 ACK channel  : reliable, symmetric with the forward path
@@ -20,16 +20,18 @@ CRN          : forward and reverse traces both on
 packet-w     : w = [0.1 0.25 0.5]
 airtime      : DATA 48 B, ACK 24 B
 broadcast    : unique (tick, sender, payload class); ACK unicast
-ensureParallelPool: starting pool with 3 workers...
+ensureParallelPool: starting pool with 16 workers...
 Starting parallel pool (parpool) using the 'Processes' profile ...
-Connected to parallel pool with 3 workers.
-ensureParallelPool: pool ready (3 workers).
+
+ensureParallelPool: unavailable (Parallel pool failed to start with the following error. For more detailed information, validate the profile 'Processes' in the Cluster Profile Manager.). Running serially.
 
 ------------------------------------------------------------
 Clean | loss 0 % | delay 0 ms
 ------------------------------------------------------------
   P10         [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
-[> In exp07c_cost_model (line 190)] 
+[> In exp07c_cost_model (line 191)] 
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
  done
   P20          done
   State-event  done
@@ -66,21 +68,21 @@ Passive-accounting invariants
 DATA / ACK / TOTAL accounting
 ============================================================
 
-Scenario   Method            RMSE    DATA/s     ACK/s    BCAST/s  SafeFail
-Clean      P10             0.0345    120.00      0.00      60.00      0.00
-Clean      P20             0.0212    240.00      0.00     120.00      0.00
-Clean      State-event     0.0792     51.93      0.00      25.97      0.00
-Clean      Causal-v3       0.0383    101.27    101.27      50.63      0.00
+Scenario   Method            RMSE  stdRMSE    DATA/s     ACK/s    BCAST/s  SafeFail
+Clean      P10             0.0345   0.0000    120.00      0.00      60.00      0.00
+Clean      P20             0.0212   0.0000    240.00      0.00     120.00      0.00
+Clean      State-event     0.0792   0.0000     51.93      0.00      25.97      0.00
+Clean      Causal-v3       0.0383   0.0000    101.27    101.27      50.63      0.00
 
-Moderate   P10             0.0961    120.00      0.00      60.00      0.00
-Moderate   P20             0.0730    240.00      0.00     120.00      0.00
-Moderate   State-event     0.1694     51.53      0.00      25.77      0.00
-Moderate   Causal-v3       0.0872    159.86    128.60     136.86      0.00
+Moderate   P10             0.0958   0.0008    120.00      0.00      60.00      0.00
+Moderate   P20             0.0729   0.0003    240.00      0.00     120.00      0.00
+Moderate   State-event     0.1673   0.0050     51.55      0.00      25.77      0.00
+Moderate   Causal-v3       0.0873   0.0005    160.09    128.19     136.48      0.00
 
-Stressed   P10             0.1444    120.00      0.00      60.00      0.00
-Stressed   P20             0.1098    240.00      0.00     120.00      0.00
-Stressed   State-event     0.2500     50.64      0.00      25.32      0.00
-Stressed   Causal-v3       0.1165    218.98    131.74     109.49      0.00
+Stressed   P10             0.1456   0.0022    120.00      0.00      60.00      0.00
+Stressed   P20             0.1103   0.0008    240.00      0.00     120.00      0.00
+Stressed   State-event     0.2571   0.0071     50.59      0.00      25.30      0.15
+Stressed   Causal-v3       0.1170   0.0010    218.86    130.70     109.43      0.00
 
 ============================================================
 Pareto status of Causal-v3 under each cost model
@@ -94,6 +96,32 @@ airtime              dom by P10        non-dom     dom by P20
 broadcast            dom by P20     dom by P20     dom by P20
 
 ============================================================
+Dominance margins versus the nearest rival
+============================================================
+
+Cost variant     Scenario   Rival         RMSE better   cost lower    verdict
+packet-w 0.10    Clean      P10                 9.90%       -7.73%    non-dom
+packet-w 0.10    Moderate   P10                -9.65%       30.60%    non-dom
+packet-w 0.10    Stressed   P20                 5.75%       -3.48%    non-dom
+
+packet-w 0.25    Clean      P10                 9.90%        5.20%  DOMINATED
+packet-w 0.25    Moderate   P10                -9.65%       37.54%    non-dom
+packet-w 0.25    Stressed   P20                 5.75%        4.58%  DOMINATED
+
+packet-w 0.50    Clean      P10                 9.90%       21.00%  DOMINATED
+packet-w 0.50    Moderate   P20                16.49%       -7.06%    non-dom
+packet-w 0.50    Stressed   P20                 5.75%       15.55%  DOMINATED
+
+airtime          Clean      P10                 9.90%       21.00%  DOMINATED
+airtime          Moderate   P20                16.49%       -7.06%    non-dom
+airtime          Stressed   P20                 5.75%       15.55%  DOMINATED
+
+broadcast        Clean      P20                44.77%       21.00%  DOMINATED
+broadcast        Moderate   P20                16.49%       54.66%  DOMINATED
+broadcast        Stressed   P20                 5.75%       50.03%  DOMINATED
+
+
+============================================================
 EXP07C acceptance gates
 ============================================================
 
@@ -104,15 +132,14 @@ EXP07C acceptance gates
   EXP07C GATES: 2 of 3 FAILED
   Per the pre-registration, nothing is to be tuned.
 
-tidy.csv : 36 rows
+tidy.csv : 240 rows
 
 EXP07C completed.
-[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
-saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_212848\figures
+saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_214817\figures
 
 ============================================================
 DONE : exp07c_cost_model
-TIME : 46.8 s
+TIME : 1 m 48 s
 FIGS : 2
-DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_212848
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07c_cost_model\2026-08-21_214817
 ============================================================
