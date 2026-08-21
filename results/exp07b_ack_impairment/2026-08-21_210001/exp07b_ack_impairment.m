@@ -45,11 +45,11 @@ expRun = startExperiment('exp07b_ack_impairment');
 %% ============================================================
 % Monte Carlo
 %
-% Debug pass. The pre-registration requires this to be reviewed
-% before the 20-seed final pass runs.
+% Final pass. The 3-seed debug pass was reviewed first, as the
+% pre-registration requires. Nothing else changed between the two.
 % ============================================================
 
-numSeeds = 3;
+numSeeds = 20;
 
 
 %% ============================================================

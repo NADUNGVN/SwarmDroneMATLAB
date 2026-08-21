@@ -764,6 +764,59 @@ Pareto đầy đủ thuộc về EXP07C.
 
 ---
 
+## 8quinquies. EXP07B — kết quả final 20 seeds
+
+Reverse-channel CRN bật (`cfg.ack.useTrace`), forward CRN bật, policy và grid không đổi.
+**Cả 5 gate PASS.**
+
+```
+[PASS] Protocol: invariants = 0 trong 24 cell      0
+[PASS] Protocol: no deadlock                       0.120 s vs maxSilence 0.50 s
+[PASS] Moderate degradation <= 10 %                0.00 %
+[PASS] Severe   degradation <= 25 %                0.00 %
+[PASS] Moderate SafeFail <= 5 %                    0.00
+```
+
+### Cảnh báo bắt buộc khi trích dẫn: 0.00 % là BÃO HOÀ, không phải robustness
+
+`adaptiveScale` bị ghim ở sàn 0.20 trong **11/12 cell Stressed** và **4/12 cell Moderate**.
+Ở Stressed, `estAoI` chạy từ 0.310 tới 0.454 s qua các cell nhưng RMSE và rate **giống hệt
+nhau tới bốn chữ số** (0.1173 / 18.24 Hz). Khi scale đã ở sàn, trigger không phân biệt được
+mức độ cũ của thông tin, nên suy giảm ACK không đổi được bất kỳ quyết định nào.
+
+Vì vậy phải phát biểu là: *protocol không hỏng dưới suy giảm ACK — không deadlock, không vi
+phạm nhân quả, không mất an toàn — nhưng ở Stressed nó cũng không còn phân giải được mức độ
+suy giảm.* Phần robustness **chỉ được chứng minh ở Moderate**.
+
+Nguyên nhân cơ chế: `aoiAdaptRange = 1.00` khiến scale bão hoà ở 2 × `aoiThreshold` = 0.24 s.
+Với RTT ≥ 0.24 s ở Stressed, ước lượng AoI vượt ngưỡng đó ngay lập tức. Đây là tham số khoá,
+không được chỉnh trong phạm vi pre-registration hiện tại.
+
+### Ở Moderate cơ chế thật sự hoạt động — nhưng trả bằng băng thông
+
+| ACK cell | scale | rate [Hz] | RMSE | degradation |
+|---|---|---|---|---|
+| reliable | 0.283 | 13.38 | 0.0877 | 0.00 % |
+| L10 D0 (moderate) | 0.278 | 13.87 | 0.0862 | −1.71 % |
+| L20 D=fwd (severe) | 0.202 | 18.34 | 0.0772 | **−11.97 %** |
+
+Degradation **âm**: ACK xấu đi → `estAoI` tăng → scale giảm → nhạy hơn → truyền nhiều hơn
+(13.38 → 18.34 Hz, **+37 %**) → RMSE tốt lên. Phương pháp **đổi suy giảm ACK lấy băng thông**.
+Gate chỉ ràng buộc RMSE nên nó pass dễ dàng; cái giá 37 % băng thông không nằm trong gate nào
+và phải được nêu khi báo cáo.
+
+### Kiểm chứng phụ
+
+- **Baseline invariance**: P10/P20 có RMSE spread = `0.000e+00` qua cả 12 ACK cell ở cả hai
+  scenario — cấu hình ACK không rò rỉ sang method không có kênh ngược.
+- **Reordering được test thật**: 2777 stale ACK bị loại dưới jitter (503/1039 ở Moderate,
+  392/844 ở Stressed). Với jitter = 0 kênh ngược là FIFO nên stale = 0, đúng như dự kiến.
+- **Liveness**: khoảng lặng lớn nhất trên mọi link là 0.120 s, so với `maxSilence` 0.50 s.
+
+**EXP07B LOCKED.**
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.
