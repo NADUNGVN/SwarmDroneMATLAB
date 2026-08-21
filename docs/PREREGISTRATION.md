@@ -105,7 +105,25 @@ Nếu điều kiện không bao giờ đạt trong thời gian còn lại của 
 
 ### 2.3 Peak error after fault
 
-`E_max` = `max e(t)` trên khoảng `[thời điểm lỗi bắt đầu, hết run]`.
+`E_max` = `max e(t)` trên khoảng `[max(thời điểm lỗi bắt đầu, 8 s), hết run]`.
+
+**Peak AoI dùng đúng cửa sổ này.**
+
+*Sửa đổi 2026-08-22 (đo lường, không phải tuning).* Định nghĩa ban đầu lấy mốc là thời điểm lỗi
+bắt đầu. Với **permanent fault**, lỗi bắt đầu tại `t = 0`, nên cửa sổ nuốt trọn transient khởi
+động và `E_max` đo transient chứ không đo phản ứng với lỗi. Bằng chứng: trong cùng một seed,
+`E_max` **trùng khít tới từng chữ số** giữa P10, P20 và Causal-v3 (`2.356607` cho cả ba tại
+ring2 / Moderate / perm 20 %) — dấu hiệu của một đại lượng không phụ thuộc phương thức truyền
+tin. Gate `E_max(Causal) ≤ 1.25 × E_max(P10)` vì thế pass một cách vô nghĩa ở 16/24 condition.
+
+Mốc `8 s` là đầu evaluation window đã dùng cho **mọi** metric khác trong dự án, nên đây là việc
+áp lại một quy ước sẵn có, không phải đưa ra một hằng số mới.
+
+**Burst fault không đổi hành vi**: burst bắt đầu tại `t = 12 s > 8 s`, nên `max(tFault, 8) =
+tFault`. Sửa đổi này chỉ tác động tới permanent fault và condition `none`.
+
+Sửa đổi làm gate **khó hơn**, không dễ hơn: bỏ transient đi thì `E_max` mới thực sự phân biệt
+được các phương thức, và một PASS trước đây có thể lật thành FAIL.
 
 ### 2.4 Connectivity (EXP08)
 
@@ -315,6 +333,39 @@ Safety   : SafeFail ≤ 5 %
 Recovery : T_recovery(Causal-AoI) ≤ 1.25 × T_recovery(P20)
 Peak     : E_max(Causal-AoI)      ≤ 1.25 × E_max(P10)
 ```
+
+Ba gate và ba tỉ số **giữ nguyên**. Gate Safety là **tuyệt đối** và áp cho **mọi** connected
+condition; **không** thêm điều kiện phụ kiểu "chỉ tại condition mà P20 cũng safe".
+
+**Khả năng đánh giá của gate Safety** *(ghi rõ 2026-08-22)*. Ngưỡng 5 % chỉ phân giải được khi
+số seed đủ lớn. Ở 3 seeds, tỉ lệ khác 0 nhỏ nhất đo được là 1/3 ≈ 33 %, nên "≤ 5 %" thoái hoá
+thành "= 0" và mọi verdict sẽ phản ánh số seed chứ không phản ánh phương thức. Vì vậy:
+
+- **3 seeds** → gate Safety báo cáo là **DEFERRED / NOT EVALUABLE**. Số breach vẫn được in ra
+  làm chẩn đoán, nhưng **không** được coi là PASS hay FAIL.
+- **20 seeds** → gate Safety được đánh giá. `0/20` và `1/20` PASS; `≥ 2/20` FAIL. Đây đúng bằng
+  ngưỡng 5 % đã chốt, không phải một ngưỡng mới.
+
+**Chẩn đoán bắt buộc kèm theo (không gate):**
+
+- `minSepDuringFault` — khoảng cách nhỏ nhất **trong lúc lỗi đang hoạt động**. `minSeparationEval`
+  trải trên cả evaluation window nên không nói được lần áp sát xảy ra trong hay sau outage.
+- `traffic response` — số DATA/s **bên trong cửa sổ lỗi**, lấy từ log tích luỹ thụ động. Tổng cả
+  run không phân giải được: một policy tăng vọt khi mất kết nối và một policy đi ngang có thể
+  cho cùng một trung bình.
+- **Số seed-condition có `E_max` trùng nhau giữa mọi method.** Follower mất sạch consensus
+  in-link chỉ còn leader pin dẫn dắt, nên quỹ đạo của nó **trùng khít** dưới mọi policy; khi nó
+  đồng thời là follower tệ nhất thì `E_max` không phân biệt được method và gate Peak không mang
+  thông tin tại đúng những điểm đó. Ở bản 3 seeds: 13/69 connected seed-condition rơi vào trường
+  hợp này, và **cả 13** đều có ≥ 1 isolated follower, trong khi **không** trường hợp nào có
+  `isolated = 0` bị trùng. Đây là hiện tượng vật lý, không phải lỗi đo; ghi nhận chứ không sửa gate.
+- **SafeFail theo từng method** trên các connected condition. Một breach mà *mọi* method đều mắc
+  là tính chất của condition, không phải của policy; riêng gate không phân biệt được hai điều đó.
+
+**Connectivity**: giữ nguyên phân loại λ₂ trên đồ thị đối xứng hoá ở §2.4. Báo cáo **kèm theo**
+(không thay thế) `activeInDegreeMean` và `isolatedFollowers`, vì λ₂ có thể gần như mù với hỏng
+hóc một chiều — ring2 giữ λ₂ = 0.4981 qua **mọi** mức fault, trong khi active consensus
+in-degree đi 2.00 → 1.42.
 
 Nếu graph thực sự disconnected: **không dùng condition đó để kết luận policy fail**. Ghi riêng
 vào connectivity impossibility region.
@@ -1066,6 +1117,10 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-22 | §2.3: `E_max` (và peak AoI) đổi mốc từ `thời điểm lỗi bắt đầu` sang `max(thời điểm lỗi bắt đầu, 8 s)` | **Sửa lỗi đo lường, không phải tuning.** Permanent fault bắt đầu tại `t = 0` nên cửa sổ cũ đo transient khởi động: trong cùng seed, `E_max` trùng khít giữa P10/P20/Causal-v3 (2.356607 tại ring2/Moderate/perm 20 %), tức đại lượng không phụ thuộc phương thức, khiến gate pass vô nghĩa ở 16/24 condition. Mốc 8 s là evaluation window đã dùng cho mọi metric khác. Burst (bắt đầu 12 s) **không đổi**. Sửa đổi làm gate **khó hơn**. Không đổi Causal-v3, controller, threshold, fault grid, CRN, fault realization hay tỉ số gate. | (branch `exp08b-link-failure`) |
+| 2026-08-22 | §4.2: gate Safety giữ nguyên tuyệt đối ≤ 5 %, nhưng chỉ **đánh giá ở 20 seeds**; ở 3 seeds báo cáo DEFERRED | Ở 3 seeds tỉ lệ khác 0 nhỏ nhất là 1/3, nên "≤ 5 %" thoái hoá thành "= 0" và verdict sẽ đo số seed chứ không đo phương thức. Ở 20 seeds: 0/20 và 1/20 PASS, ≥ 2/20 FAIL — đúng ngưỡng 5 % đã chốt. **Không** thêm điều kiện phụ "P20 cũng safe". | (branch `exp08b-link-failure`) |
+| 2026-08-22 | §2.4 áp dụng: phân loại connectivity tính **trên realization thực sự được mô phỏng** (theo từng seed), thay vì một seed đại diện | **Sửa lỗi đo lường.** Bản chạy đầu phân loại bằng `cfg.net.seed = 1800000`, không phải seed nào trong tập chạy, và kết luận "connected, isolated = 0" cho mọi condition. Realization thật lại có λ₂ = 0 (ring2 / perm 30 % và cả hai burst / Moderate / seed 1) và tới 3 isolated follower. Exclusion vì thế đã áp cho sai đồ thị. **Tiêu chuẩn phân loại không đổi** (§2.4, đồ thị đối xứng hoá, λ₂ > 1e-9); chỉ đối tượng được phân loại là đúng lại. Loại trừ nay theo từng seed; condition không còn seed connected nào thì loại toàn bộ. | (branch `exp08b-link-failure`) |
+| 2026-08-22 | §4.2: thêm chẩn đoán thụ động `minSepDuringFault`, DATA/s trong cửa sổ lỗi, và SafeFail theo từng method | §4.2 vốn đã yêu cầu "min separation during failure" và "traffic response"; bản chạy đầu chưa đo đúng cửa sổ. Cả ba đều **chỉ báo cáo, không gate**. Thêm log truyền tin tích luỹ thụ động vào ba simulator (ghi nhưng không bao giờ đọc trong sim); `test_lock_regression` chứng minh mọi giá trị LOCK tái tạo nguyên vẹn. | (branch `exp08b-link-failure`) |
 | 2026-08-21 | Đính chính comment: "degree 7 → 3.4 lần" nhầm structural degree 6.84 thành consensus in-degree; đúng là 6 → 3.0 lần | Structural degree đã đối xứng hoá và gộp cạnh leader-pin, không phải đại lượng nhân vào gain. Sai sót comment, không ảnh hưởng số liệu hay gate. Không chạy lại. | (branch `exp08b-link-failure`) |
 | 2026-08-21 | Thêm §8ter: pre-register Causal-AoI-v3 (innovation-priority) + ablation A5c + invariant mới | v2 bị đóng băng ở 7/9 vì `aoiMinInterTx` vô tình trở thành trần cho thông tin mới. v3 **không đổi giá trị** tham số nào; nó chỉ tách ngữ nghĩa "thông tin mới" khỏi "refresh", và cooldown chỉ áp cho refresh. Chín gate giữ nguyên. Pre-register trước khi chạy. | (branch `exp07a-causal-v3`) |
 | 2026-08-21 | §3.1 trần 20 Hz: **giữ nguyên**, chỉ đính chính phần lý do | Lý do ban đầu ("trên 20 Hz thì P20 dominate hoàn toàn") đã bị dữ liệu v1 **bác bỏ**: ở 26.19 Hz, Causal-AoI-v1 có RMSE 0.1049 tốt hơn P20 (0.1102), nên P20 không dominate. **Ngưỡng KHÔNG đổi.** Nó vẫn đứng vững với vai trò ràng buộc tài nguyên chống brute-force: nếu không có trần, một phiên bản chỉ cần truyền thật nhiều là pass mọi gate còn lại. Gate v1 không bị sửa hồi tố; commit a554163 giữ nguyên là thất bại 8/9 hợp lệ. | (branch `exp07a-causal-ack`) |

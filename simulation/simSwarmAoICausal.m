@@ -152,6 +152,12 @@ LeaderVel = zeros(K,3);
 
 MeanAoILog = zeros(K,1);
 
+% Passive cumulative transmission log. Written but never read by the
+% simulator, so it cannot influence any result. Used only to measure
+% traffic inside a fault window, which a run total cannot resolve.
+TxCountLog = zeros(K,1);
+
+
 NeighborAoILog = nan(K,N,N);
 LeaderAoILog   = nan(K,N);
 
@@ -373,6 +379,9 @@ for k = 1:K
     end
 
 
+    TxCountLog(k) = net.txCount;
+
+
     if k == K
         break;
     end
@@ -389,6 +398,7 @@ for k = 1:K
         P(i,:) = P(i,:) + dt*V(i,:);
 
     end
+
 
 end
 
@@ -418,6 +428,7 @@ out.estimatedAoI = EstAoILog;
 % ============================================================
 
 out.txCount           = net.txCount;
+out.txCountLog        = TxCountLog;
 
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.

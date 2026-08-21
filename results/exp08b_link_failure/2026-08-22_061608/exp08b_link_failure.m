@@ -529,42 +529,6 @@ for iM = 1:nMethod
     fprintf('    %-12s %d of %d\n', methodNames{iM}, c, safeCount);
 end
 
-
-% Passive diagnostic. A follower holding zero consensus in-links is
-% driven by its leader pin alone, so its trajectory is bit-identical
-% under every policy. When it is also the worst follower, E_max is the
-% same for all methods and the Peak gate cannot discriminate. Counting
-% these tells the reader how much of that gate actually carried
-% information. Reported only; the gate is unchanged.
-degen = 0; degenIso = 0; conSeeds = 0;
-
-for iS = 1:nScenario
-    for iT = 1:nTopo
-        for iF = 1:nFault
-            for s = 1:numSeeds
-
-                if ~CONNSEED(s,iF,iT,iS)
-                    continue;
-                end
-
-                conSeeds = conSeeds + 1;
-
-                pk = PEAKERR(s,:,iF,iT,iS);
-
-                if (max(pk) - min(pk)) < 1e-6
-                    degen = degen + 1;
-                    degenIso = degenIso + (ISOSEED(s,iF,iT,iS) > 0);
-                end
-
-            end
-        end
-    end
-end
-
-fprintf(['\n  Peak error identical across all methods: %d of %d ' ...
-         'connected seed-conditions\n'], degen, conSeeds);
-fprintf('    of which with >=1 isolated follower: %d\n', degenIso);
-
 nFailed = sum(strcmp(gateStatus,'FAIL'));
 nDefer  = sum(strcmp(gateStatus,'DEFER'));
 

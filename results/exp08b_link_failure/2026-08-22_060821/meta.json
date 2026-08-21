@@ -1,0 +1,18 @@
+{
+  "experiment": "exp08b_link_failure",
+  "runId": "2026-08-22_060821",
+  "startedAt": "2026-08-22 06:08:22",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "49c28ea",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp08b_link_failure.m",
+  "finishedAt": "2026-08-22 06:13:58",
+  "elapsedSec": 335.9746184,
+  "elapsedText": "5 m 36 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

@@ -90,78 +90,44 @@ safetyThreshold = 0.25;
 
 %% ============================================================
 % Fault classification, before any simulation
-%
-% Classification must be done on the realization that is actually
-% simulated. The fault draw depends on cfg.net.seed, so it varies with
-% seed, topology and scenario; classifying one representative seed and
-% applying the verdict to all of them would exclude, or fail to
-% exclude, the wrong runs.
-%
-% The classification itself is unchanged: symmetrised graph including
-% leader-pin edges, connected <=> lambda2 > 1e-9, per section 2.4.
-% Active consensus in-degree and isolated followers are reported
-% ALONGSIDE it, not in place of it.
 % ============================================================
-
-CONNSEED = false(numSeeds, nFault, nTopo, nScenario);
-L2SEED   = zeros(numSeeds, nFault, nTopo, nScenario);
-ISOSEED  = zeros(numSeeds, nFault, nTopo, nScenario);
-DEGSEED  = zeros(numSeeds, nFault, nTopo, nScenario);
-
-for iS = 1:nScenario
-    for iT = 1:nTopo
-        for iF = 1:nFault
-            for s = 1:numSeeds
-
-                cfgT = applyTopologyConfig(defaultConfig(), swarmN, topologyNames{iT});
-                cfgT.net.seed = 1800000 + 10000*iS + 1000*iT + s;
-
-                f = generateFaultRealization(cfgT, faultTypes{iF}, faultLevels(iF));
-                g = graphConnectivity(f.activeA, cfgT.swarm.pin);
-
-                CONNSEED(s,iF,iT,iS) = g.connected;
-                L2SEED(s,iF,iT,iS)   = g.lambda2;
-                ISOSEED(s,iF,iT,iS)  = f.isolatedFollowers;
-                DEGSEED(s,iF,iT,iS)  = f.activeInDegreeMean;
-
-            end
-        end
-    end
-end
-
-nConn = squeeze(sum(CONNSEED,1));
 
 fprintf('\n');
 fprintf('============================================================\n');
 fprintf('EXP08B link failure and burst outage\n');
 fprintf('============================================================\n\n');
 
-fprintf('%-10s %-10s %-10s %9s %9s %10s %9s %12s\n', ...
-    'Scenario','Topology','Fault','minL2','maxL2','connected','maxIso','activeInDeg');
+fprintf('%-10s %-10s %9s %10s %11s %12s\n', ...
+    'topology','fault','lambda2','connected','isolated','activeInDeg');
 
-for iS = 1:nScenario
-    for iT = 1:nTopo
-        for iF = 1:nFault
+LAMBDA2  = zeros(nTopo,nFault);
+ISOLATED = zeros(nTopo,nFault);
+ACTIVEDEG = zeros(nTopo,nFault);
+CONNECTED = false(nTopo,nFault);
 
-            l2 = L2SEED(:,iF,iT,iS);
+for iT = 1:nTopo
+    for iF = 1:nFault
 
-            fprintf('%-10s %-10s %-10s %9.4f %9.4f %6d /%2d %9d %12.2f\n', ...
-                scenarioNames{iS}, topologyNames{iT}, faultNames{iF}, ...
-                min(l2), max(l2), nConn(iF,iT,iS), numSeeds, ...
-                max(ISOSEED(:,iF,iT,iS)), mean(DEGSEED(:,iF,iT,iS)));
+        cfgT = applyTopologyConfig(defaultConfig(), swarmN, topologyNames{iT});
+        cfgT.net.seed = 1800000;
 
-        end
+        f = generateFaultRealization(cfgT, faultTypes{iF}, faultLevels(iF));
+        g = graphConnectivity(f.activeA, cfgT.swarm.pin);
+
+        LAMBDA2(iT,iF)   = g.lambda2;
+        CONNECTED(iT,iF) = g.connected;
+        ISOLATED(iT,iF)  = f.isolatedFollowers;
+        ACTIVEDEG(iT,iF) = f.activeInDegreeMean;
+
+        fprintf('%-10s %-10s %9.4f %10d %11d %12.2f\n', ...
+            topologyNames{iT}, faultNames{iF}, ...
+            g.lambda2, g.connected, f.isolatedFollowers, f.activeInDegreeMean);
+
     end
 end
 
-fprintf(['\n  Seeds with lambda2 = 0 belong to the connectivity\n' ...
-         '  impossibility region and are excluded from gate arithmetic.\n' ...
-         '  A condition with no connected seed is excluded entirely.\n']);
-
-fprintf(['\n  isolated = followers holding zero consensus in-links while\n' ...
-         '  lambda2 may still be positive through the leader pin. Such a\n' ...
-         '  follower has no relative information at all, so its trajectory\n' ...
-         '  is identical under every communication policy.\n']);
+fprintf(['\n  Conditions with lambda2 = 0 belong to the connectivity\n' ...
+         '  impossibility region and are excluded from gate arithmetic.\n']);
 
 
 %% ============================================================
@@ -336,59 +302,20 @@ for iS = 1:nScenario
 end
 
 
-% Every aggregate is taken over the CONNECTED seeds of that condition
-% only. A seed whose active graph fell apart is in the connectivity
-% impossibility region, and a policy is not judged on it. Because the
-% fault draw varies with seed, this mask is per seed, not per
-% condition.
+meanRMSE = squeeze(mean(RMSE,1));
+meanMIN  = squeeze(mean(MINEVAL,1));
+meanPEAK = squeeze(mean(PEAKERR,1));
+meanAOIP = squeeze(mean(PEAKAOI,1));
+safeRate = squeeze(mean(SAFEFAIL,1));
+rateData = squeeze(mean(NDATA,1)) ./ squeeze(mean(MISSION,1));
 
-dims = [nMethod nFault nTopo nScenario];
+meanMSF  = squeeze(mean(MINSEPFAULT,1));
+meanTXF  = squeeze(mean(TXFAULT,1));
 
-meanRMSE  = nan(dims);
-meanMIN   = nan(dims);
-meanPEAK  = nan(dims);
-meanAOIP  = nan(dims);
-safeRate  = nan(dims);
-rateData  = nan(dims);
-meanMSF   = nan(dims);
-meanTXF   = nan(dims);
-meanRECOV = nan(dims);
-anyNaNRec = false(dims);
-
-for iS = 1:nScenario
-    for iT = 1:nTopo
-        for iF = 1:nFault
-
-            m = CONNSEED(:,iF,iT,iS);
-
-            if ~any(m)
-                continue;
-            end
-
-            for iM = 1:nMethod
-
-                meanRMSE(iM,iF,iT,iS) = mean(RMSE(m,iM,iF,iT,iS));
-                meanMIN(iM,iF,iT,iS)  = mean(MINEVAL(m,iM,iF,iT,iS));
-                meanPEAK(iM,iF,iT,iS) = mean(PEAKERR(m,iM,iF,iT,iS));
-                meanAOIP(iM,iF,iT,iS) = mean(PEAKAOI(m,iM,iF,iT,iS));
-                safeRate(iM,iF,iT,iS) = mean(SAFEFAIL(m,iM,iF,iT,iS));
-                meanMSF(iM,iF,iT,iS)  = mean(MINSEPFAULT(m,iM,iF,iT,iS));
-                meanTXF(iM,iF,iT,iS)  = mean(TXFAULT(m,iM,iF,iT,iS));
-
-                rateData(iM,iF,iT,iS) = ...
-                    mean(NDATA(m,iM,iF,iT,iS)) / mean(MISSION(m,iM,iF,iT,iS));
-
-                % Recovery may be NaN when the run never returns to
-                % baseline. NaN counts as a failure per section 2.2, so
-                % it is carried through rather than averaged away.
-                meanRECOV(iM,iF,iT,iS) = mean(RECOVERY(m,iM,iF,iT,iS));
-                anyNaNRec(iM,iF,iT,iS) = any(isnan(RECOVERY(m,iM,iF,iT,iS)));
-
-            end
-
-        end
-    end
-end
+% Recovery may be NaN when the run never returns to baseline; NaN counts
+% as a failure, so it is kept rather than averaged away.
+meanRECOV = squeeze(mean(RECOVERY,1));
+anyNaNRec = squeeze(any(isnan(RECOVERY),1));
 
 
 %% ============================================================
@@ -400,20 +327,19 @@ fprintf('============================================================\n');
 fprintf('Results\n');
 fprintf('============================================================\n\n');
 
-fprintf('%-10s %-10s %-10s %-12s %8s %8s %8s %9s %9s %8s %10s %11s %7s %7s\n', ...
+fprintf('%-10s %-10s %-10s %-12s %8s %8s %8s %9s %9s %8s %10s %11s\n', ...
     'Scenario','Topology','Fault','Method','RMSE','minSep','peakErr','recovery','peakAoI','DATA/s', ...
-    'minSepFlt','fltDATA/s','nConn','maxIso');
+    'minSepFlt','fltDATA/s');
 
 for iS = 1:nScenario
     for iT = 1:nTopo
         for iF = 1:nFault
             for iM = 1:nMethod
-                fprintf('%-10s %-10s %-10s %-12s %8.4f %8.4f %8.4f %9.3f %9.3f %8.1f %10.4f %11.1f %7d %7d\n', ...
+                fprintf('%-10s %-10s %-10s %-12s %8.4f %8.4f %8.4f %9.3f %9.3f %8.1f %10.4f %11.1f\n', ...
                     scenarioNames{iS}, topologyNames{iT}, faultNames{iF}, methodNames{iM}, ...
                     meanRMSE(iM,iF,iT,iS), meanMIN(iM,iF,iT,iS), meanPEAK(iM,iF,iT,iS), ...
                     meanRECOV(iM,iF,iT,iS), meanAOIP(iM,iF,iT,iS), rateData(iM,iF,iT,iS), ...
-                    meanMSF(iM,iF,iT,iS), meanTXF(iM,iF,iT,iS), ...
-                    nConn(iF,iT,iS), max(ISOSEED(:,iF,iT,iS)));
+                    meanMSF(iM,iF,iT,iS), meanTXF(iM,iF,iT,iS));
             end
             fprintf('\n');
         end
@@ -441,18 +367,15 @@ safeBreach = 0; safeCount = 0;
 recBreach  = 0; recCount  = 0;
 peakBreach = 0; peakCount = 0;
 excluded   = 0;
-partial    = 0;
 
 for iS = 1:nScenario
     for iT = 1:nTopo
         for iF = 1:nFault
 
-            if ~any(CONNSEED(:,iF,iT,iS))
+            if ~CONNECTED(iT,iF)
                 excluded = excluded + 1;
                 continue;
             end
-
-            partial = partial + (nConn(iF,iT,iS) < numSeeds);
 
             safeCount = safeCount + 1;
             if safeRate(IDX_CAUSAL,iF,iT,iS) > 0.05
@@ -506,8 +429,7 @@ for q = 1:numel(gateNames)
     fprintf('  [%-5s] %-38s %s\n', gateStatus{q}, gateNames{q}, gateValues{q});
 end
 
-fprintf('\n  Excluded entirely (impossibility region): %d condition(s)\n', excluded);
-fprintf('  Partially excluded (some seeds disconnected): %d condition(s)\n', partial);
+fprintf('\n  Excluded (impossibility region): %d condition(s)\n', excluded);
 
 
 % Passive diagnostic. A breach shared by every method is a property of
@@ -520,7 +442,7 @@ for iM = 1:nMethod
     for iS = 1:nScenario
         for iT = 1:nTopo
             for iF = 1:nFault
-                if any(CONNSEED(:,iF,iT,iS)) && safeRate(iM,iF,iT,iS) > 0.05
+                if CONNECTED(iT,iF) && safeRate(iM,iF,iT,iS) > 0.05
                     c = c + 1;
                 end
             end
@@ -528,42 +450,6 @@ for iM = 1:nMethod
     end
     fprintf('    %-12s %d of %d\n', methodNames{iM}, c, safeCount);
 end
-
-
-% Passive diagnostic. A follower holding zero consensus in-links is
-% driven by its leader pin alone, so its trajectory is bit-identical
-% under every policy. When it is also the worst follower, E_max is the
-% same for all methods and the Peak gate cannot discriminate. Counting
-% these tells the reader how much of that gate actually carried
-% information. Reported only; the gate is unchanged.
-degen = 0; degenIso = 0; conSeeds = 0;
-
-for iS = 1:nScenario
-    for iT = 1:nTopo
-        for iF = 1:nFault
-            for s = 1:numSeeds
-
-                if ~CONNSEED(s,iF,iT,iS)
-                    continue;
-                end
-
-                conSeeds = conSeeds + 1;
-
-                pk = PEAKERR(s,:,iF,iT,iS);
-
-                if (max(pk) - min(pk)) < 1e-6
-                    degen = degen + 1;
-                    degenIso = degenIso + (ISOSEED(s,iF,iT,iS) > 0);
-                end
-
-            end
-        end
-    end
-end
-
-fprintf(['\n  Peak error identical across all methods: %d of %d ' ...
-         'connected seed-conditions\n'], degen, conSeeds);
-fprintf('    of which with >=1 isolated follower: %d\n', degenIso);
 
 nFailed = sum(strcmp(gateStatus,'FAIL'));
 nDefer  = sum(strcmp(gateStatus,'DEFER'));
@@ -585,22 +471,11 @@ end
 % Table
 % ============================================================
 
-% Connectivity is a property of the fault realization, not of the
-% method, so it is replicated across the method dimension to travel
-% with every row.
-CONNCOL = repmat(reshape(double(CONNSEED), [numSeeds 1 nFault nTopo nScenario]), ...
-    [1 nMethod 1 1 1]);
-ISOCOL  = repmat(reshape(ISOSEED,          [numSeeds 1 nFault nTopo nScenario]), ...
-    [1 nMethod 1 1 1]);
-L2COL   = repmat(reshape(L2SEED,           [numSeeds 1 nFault nTopo nScenario]), ...
-    [1 nMethod 1 1 1]);
-
 T = tidyFromArray( ...
     struct('RMSE',RMSE,'MINEVAL',MINEVAL,'PEAKERR',PEAKERR, ...
            'RECOVERY',RECOVERY,'PEAKAOI',PEAKAOI,'NDATA',NDATA, ...
            'NACK',NACK,'MISSION',MISSION,'SAFEFAIL',double(SAFEFAIL), ...
-           'MINSEPFAULT',MINSEPFAULT,'TXFAULT',TXFAULT, ...
-           'CONNECTED',CONNCOL,'ISOLATED',ISOCOL,'LAMBDA2',L2COL), ...
+           'MINSEPFAULT',MINSEPFAULT,'TXFAULT',TXFAULT), ...
     {'seed','method','fault','topology','scenario'}, ...
     {1:numSeeds, methodNames, faultNames, topologyNames, scenarioNames});
 

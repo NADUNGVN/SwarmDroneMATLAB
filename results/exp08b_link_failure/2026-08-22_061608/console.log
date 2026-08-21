@@ -1,0 +1,240 @@
+
+============================================================
+RUN  : exp08b_link_failure
+ID   : 2026-08-22_061608
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp08b_link_failure\2026-08-22_061608
+WHEN : 2026-08-22 06:16:09
+============================================================
+
+
+============================================================
+EXP08B link failure and burst outage
+============================================================
+
+Scenario   Topology   Fault          minL2     maxL2  connected    maxIso  activeInDeg
+Moderate   ring2      none          0.4981    0.4981      3 / 3         0         2.00
+Moderate   ring2      perm 10%      0.4155    0.4981      3 / 3         1         1.79
+Moderate   ring2      perm 20%      0.3820    0.4155      3 / 3         2         1.58
+Moderate   ring2      perm 30%      0.0000    0.4038      2 / 3         3         1.42
+Moderate   ring2      burst 2s      0.0000    0.4038      2 / 3         3         1.42
+Moderate   ring2      burst 5s      0.0000    0.4038      2 / 3         3         1.42
+Moderate   sparse4    none          0.8970    0.8970      3 / 3         0         4.00
+Moderate   sparse4    perm 10%      0.7924    0.8970      3 / 3         0         3.58
+Moderate   sparse4    perm 20%      0.7920    0.8718      3 / 3         0         3.21
+Moderate   sparse4    perm 30%      0.5968    0.7573      3 / 3         1         2.79
+Moderate   sparse4    burst 2s      0.5968    0.7573      3 / 3         1         2.79
+Moderate   sparse4    burst 5s      0.5968    0.7573      3 / 3         1         2.79
+Stressed   ring2      none          0.4981    0.4981      3 / 3         0         2.00
+Stressed   ring2      perm 10%      0.4981    0.4981      3 / 3         0         1.79
+Stressed   ring2      perm 20%      0.4137    0.4981      3 / 3         1         1.58
+Stressed   ring2      perm 30%      0.3820    0.4213      3 / 3         3         1.42
+Stressed   ring2      burst 2s      0.3820    0.4213      3 / 3         3         1.42
+Stressed   ring2      burst 5s      0.3820    0.4213      3 / 3         3         1.42
+Stressed   sparse4    none          0.8970    0.8970      3 / 3         0         4.00
+Stressed   sparse4    perm 10%      0.8970    0.8970      3 / 3         0         3.58
+Stressed   sparse4    perm 20%      0.8093    0.8970      3 / 3         0         3.21
+Stressed   sparse4    perm 30%      0.7604    0.8568      3 / 3         0         2.79
+Stressed   sparse4    burst 2s      0.7604    0.8568      3 / 3         0         2.79
+Stressed   sparse4    burst 5s      0.7604    0.8568      3 / 3         0         2.79
+
+  Seeds with lambda2 = 0 belong to the connectivity
+  impossibility region and are excluded from gate arithmetic.
+  A condition with no connected seed is excluded entirely.
+
+  isolated = followers holding zero consensus in-links while
+  lambda2 may still be positive through the leader pin. Such a
+  follower has no relative information at all, so its trajectory
+  is identical under every communication policy.
+
+Seeds 3 | sims 288
+ensureParallelPool: starting pool with 3 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 3 workers.
+ensureParallelPool: pool ready (3 workers).
+
+--- Moderate ---
+  ring2      none      [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp08b_link_failure (line 219)] 
+  done
+  ring2      perm 10%    done
+  ring2      perm 20%    done
+  ring2      perm 30%    done
+  ring2      burst 2s    done
+  ring2      burst 5s    done
+  sparse4    none        done
+  sparse4    perm 10%    done
+  sparse4    perm 20%    done
+  sparse4    perm 30%    done
+  sparse4    burst 2s    done
+  sparse4    burst 5s    done
+
+--- Stressed ---
+  ring2      none        done
+  ring2      perm 10%    done
+  ring2      perm 20%    done
+  ring2      perm 30%    done
+  ring2      burst 2s    done
+  ring2      burst 5s    done
+  sparse4    none        done
+  sparse4    perm 10%    done
+  sparse4    perm 20%    done
+  sparse4    perm 30%    done
+  sparse4    burst 2s    done
+  sparse4    burst 5s    done
+
+============================================================
+Results
+============================================================
+
+Scenario   Topology   Fault      Method           RMSE   minSep  peakErr  recovery   peakAoI   DATA/s  minSepFlt   fltDATA/s   nConn  maxIso
+Moderate   ring2      none       P10            0.1785   0.4041   0.2504       NaN     0.223    480.0     0.4041       480.0       3       0
+Moderate   ring2      none       P20            0.1365   0.4508   0.1933       NaN     0.153    960.0     0.4508       960.0       3       0
+Moderate   ring2      none       State-event    0.3136   0.2653   0.4300       NaN     0.378    192.1     0.2653       182.4       3       0
+Moderate   ring2      none       Causal-v3      0.1623   0.4214   0.2273       NaN     0.165    633.0     0.4214       601.7       3       0
+
+Moderate   ring2      perm 10%   P10            0.7715   0.2724   2.2584       NaN     2.881    480.0     0.2724       480.0       3       1
+Moderate   ring2      perm 10%   P20            0.7659   0.2729   2.2583       NaN     2.830    960.0     0.2729       960.0       3       1
+Moderate   ring2      perm 10%   State-event    0.8061   0.2522   2.2592       NaN     3.050    368.2     0.2522       360.5       3       1
+Moderate   ring2      perm 10%   Causal-v3      0.7700   0.2724   2.2584       NaN     2.855    554.4     0.2724       520.5       3       1
+
+Moderate   ring2      perm 20%   P10            1.0298   0.2498   2.2584       NaN     5.363    480.0     0.2498       480.0       3       2
+Moderate   ring2      perm 20%   P20            1.0281   0.2494   2.2583       NaN     5.313    960.0     0.2494       960.0       3       2
+Moderate   ring2      perm 20%   State-event    1.0485   0.2380   2.2592       NaN     5.545    533.6     0.2380       528.1       3       2
+Moderate   ring2      perm 20%   Causal-v3      1.0298   0.2496   2.2584       NaN     5.339    489.9     0.2496       456.4       3       2
+
+Moderate   ring2      perm 30%   P10            1.2172   0.2577   2.3297       NaN     7.328    480.0     0.2577       480.0       2       3
+Moderate   ring2      perm 30%   P20            1.2164   0.2576   2.3297       NaN     7.285    960.0     0.2576       960.0       2       3
+Moderate   ring2      perm 30%   State-event    1.2279   0.2501   2.3297       NaN     7.464    674.6     0.2501       671.4       2       3
+Moderate   ring2      perm 30%   Causal-v3      1.2174   0.2582   2.3297       NaN     7.320    454.5     0.2582       421.0       2       3
+
+Moderate   ring2      burst 2s   P10            0.2003   0.3725   0.3966     3.950     0.702    480.0     0.3829       480.0       2       3
+Moderate   ring2      burst 2s   P20            0.1577   0.4039   0.3412     3.940     0.632    960.0     0.4164       960.0       2       3
+Moderate   ring2      burst 2s   State-event    0.3260   0.2377   0.5412     3.550     0.840    225.5     0.2890       668.2       2       3
+Moderate   ring2      burst 2s   Causal-v3      0.1830   0.3897   0.3705     4.060     0.633    636.4     0.3995       569.8       2       3
+
+Moderate   ring2      burst 5s   P10            0.2935   0.1749   0.9029     4.270     1.409    480.0     0.2020       480.0       2       3
+Moderate   ring2      burst 5s   P20            0.2554   0.2180   0.8614     4.160     1.348    960.0     0.2393       960.0       2       3
+Moderate   ring2      burst 5s   State-event    0.4045   0.0997   0.9908     4.130     1.591    279.6     0.1656       670.3       2       3
+Moderate   ring2      burst 5s   Causal-v3      0.2771   0.1988   0.8686     4.020     1.375    635.1     0.2194       486.7       2       3
+
+Moderate   sparse4    none       P10            0.2572   0.3370   0.3539       NaN     0.213    860.0     0.3370       860.0       3       0
+Moderate   sparse4    none       P20            0.1956   0.4011   0.2789       NaN     0.150   1720.0     0.4011      1720.0       3       0
+Moderate   sparse4    none       State-event    0.4513   0.1505   0.6131       NaN     0.376    318.9     0.1505       308.7       3       0
+Moderate   sparse4    none       Causal-v3      0.2401   0.3533   0.3333       NaN     0.164   1084.2     0.3533      1032.5       3       0
+
+Moderate   sparse4    perm 10%   P10            0.9361   0.2750   1.6557       NaN     2.968    860.0     0.2750       860.0       3       0
+Moderate   sparse4    perm 10%   P20            0.9321   0.2759   1.6530       NaN     2.912   1720.0     0.2759      1720.0       3       0
+Moderate   sparse4    perm 10%   State-event    0.9834   0.2624   1.6977       NaN     3.226    609.6     0.2624       599.6       3       0
+Moderate   sparse4    perm 10%   Causal-v3      0.9371   0.2744   1.6566       NaN     2.945    848.7     0.2744       801.8       3       0
+
+Moderate   sparse4    perm 20%   P10            1.2826   0.2741   2.0622       NaN     5.507    860.0     0.2741       860.0       3       0
+Moderate   sparse4    perm 20%   P20            1.2815   0.2740   2.0614       NaN     5.453   1720.0     0.2740      1720.0       3       0
+Moderate   sparse4    perm 20%   State-event    1.3006   0.2758   2.0744       NaN     5.768    941.3     0.2758       936.0       3       0
+Moderate   sparse4    perm 20%   Causal-v3      1.2836   0.2742   2.0630       NaN     5.508    726.4     0.2742       679.9       3       0
+
+Moderate   sparse4    perm 30%   P10            1.5016   0.2826   2.2250       NaN     8.392    860.0     0.2826       860.0       3       1
+Moderate   sparse4    perm 30%   P20            1.5012   0.2824   2.2248       NaN     8.346   1720.0     0.2824      1720.0       3       1
+Moderate   sparse4    perm 30%   State-event    1.5085   0.2838   2.2280       NaN     8.630   1329.8     0.2838      1330.7       3       1
+Moderate   sparse4    perm 30%   Causal-v3      1.5023   0.2822   2.2254       NaN     8.407    641.5     0.2822       594.6       3       1
+
+Moderate   sparse4    burst 2s   P10            0.2897   0.3344   0.5586     4.707     0.776    860.0     0.3762       860.0       3       1
+Moderate   sparse4    burst 2s   P20            0.2266   0.4002   0.4732     4.493     0.702   1720.0     0.4189      1720.0       3       1
+Moderate   sparse4    burst 2s   State-event    0.4813   0.1346   0.8073     4.433     0.930    386.4     0.2553      1313.8       3       1
+Moderate   sparse4    burst 2s   Causal-v3      0.2682   0.3498   0.5369     4.273     0.707   1102.5     0.3929       952.0       3       1
+
+Moderate   sparse4    burst 5s   P10            0.4057   0.0804   1.0275     4.980     1.598    860.0     0.0983       860.0       3       1
+Moderate   sparse4    burst 5s   P20            0.3476   0.0242   0.9569     4.680     1.527   1720.0     0.0361      1720.0       3       1
+Moderate   sparse4    burst 5s   State-event    0.5643   0.1223   1.1659     4.373     1.782    497.9     0.1966      1322.9       3       1
+Moderate   sparse4    burst 5s   Causal-v3      0.3840   0.0644   1.0109     4.347     1.590   1097.4     0.0670       755.5       3       1
+
+Stressed   ring2      none       P10            0.2690   0.3037   0.3504       NaN     0.316    480.0     0.3037       480.0       3       0
+Stressed   ring2      none       P20            0.2058   0.3745   0.2780       NaN     0.223    960.0     0.3745       960.0       3       0
+Stressed   ring2      none       State-event    0.4720   0.1077   0.7911       NaN     0.642    180.0     0.1077       172.8       3       0
+Stressed   ring2      none       Causal-v3      0.2186   0.3621   0.2915       NaN     0.230    839.5     0.3621       800.3       3       0
+
+Stressed   ring2      perm 10%   P10            0.8011   0.2827   1.7618       NaN     2.750    480.0     0.2827       480.0       3       0
+Stressed   ring2      perm 10%   P20            0.7917   0.2817   1.7568       NaN     2.681    960.0     0.2817       960.0       3       0
+Stressed   ring2      perm 10%   State-event    0.8676   0.1871   1.8088       NaN     3.061    339.0     0.1871       332.5       3       0
+Stressed   ring2      perm 10%   Causal-v3      0.7961   0.2812   1.7602       NaN     2.710    676.9     0.2812       634.7       3       0
+
+Stressed   ring2      perm 20%   P10            1.1051   0.2974   2.3140       NaN     5.430    480.0     0.2974       480.0       3       1
+Stressed   ring2      perm 20%   P20            1.1014   0.3058   2.3140       NaN     5.369    960.0     0.3058       960.0       3       1
+Stressed   ring2      perm 20%   State-event    1.1414   0.2660   2.3140       NaN     5.730    530.4     0.2660       525.7       3       1
+Stressed   ring2      perm 20%   Causal-v3      1.1042   0.3008   2.3140       NaN     5.418    574.7     0.3008       530.0       3       1
+
+Stressed   ring2      perm 30%   P10            1.2417   0.3236   2.3338       NaN     7.288    480.0     0.3236       480.0       3       3
+Stressed   ring2      perm 30%   P20            1.2395   0.3295   2.3338       NaN     7.230    960.0     0.3295       960.0       3       3
+Stressed   ring2      perm 30%   State-event    1.2650   0.3071   2.3338       NaN     7.609    669.2     0.3071       666.2       3       3
+Stressed   ring2      perm 30%   Causal-v3      1.2417   0.3259   2.3338       NaN     7.294    531.2     0.3259       486.8       3       3
+
+Stressed   ring2      burst 2s   P10            0.2934   0.3033   0.5850     4.467     0.766    480.0     0.3601       480.0       3       3
+Stressed   ring2      burst 2s   P20            0.2288   0.3736   0.4897     4.267     0.677    960.0     0.4081       960.0       3       3
+Stressed   ring2      burst 2s   State-event    0.4888   0.0734   0.8296     3.580     1.091    213.3     0.1363       657.3       3       3
+Stressed   ring2      burst 2s   Causal-v3      0.2422   0.3541   0.5133     4.320     0.699    834.0     0.3995       711.7       3       3
+
+Stressed   ring2      burst 5s   P10            0.3796   0.0545   1.0888     4.760     1.497    480.0     0.0961       480.0       3       3
+Stressed   ring2      burst 5s   P20            0.3211   0.0593   1.0130     4.520     1.402    960.0     0.0770       960.0       3       3
+Stressed   ring2      burst 5s   State-event    0.5565   0.0655   1.2326     4.173     1.792    265.9     0.1299       662.5       3       3
+Stressed   ring2      burst 5s   Causal-v3      0.3315   0.0473   1.0243     4.233     1.432    829.9     0.0643       588.6       3       3
+
+Stressed   sparse4    none       P10            0.3844   0.2173   0.5184       NaN     0.317    860.0     0.2173       860.0       3       0
+Stressed   sparse4    none       P20            0.2954   0.2996   0.3979       NaN     0.216   1720.0     0.2996      1720.0       3       0
+Stressed   sparse4    none       State-event    0.6571   0.0275   0.9140       NaN     0.664    281.2     0.0275       274.7       3       0
+Stressed   sparse4    none       Causal-v3      0.3138   0.2802   0.4173       NaN     0.219   1480.9     0.2802      1433.7       3       0
+
+Stressed   sparse4    perm 10%   P10            0.9668   0.2945   1.6141       NaN     3.042    860.0     0.2945       860.0       3       0
+Stressed   sparse4    perm 10%   P20            0.9577   0.2976   1.6079       NaN     2.968   1720.0     0.2976      1720.0       3       0
+Stressed   sparse4    perm 10%   State-event    1.0591   0.2915   1.6914       NaN     3.401    600.9     0.2915       593.0       3       0
+Stressed   sparse4    perm 10%   Causal-v3      0.9658   0.2947   1.6149       NaN     3.015    998.4     0.2947       934.2       3       0
+
+Stressed   sparse4    perm 20%   P10            1.2792   0.3271   1.8586       NaN     5.575    860.0     0.3271       860.0       3       0
+Stressed   sparse4    perm 20%   P20            1.2765   0.3274   1.8560       NaN     5.506   1720.0     0.3274      1720.0       3       0
+Stressed   sparse4    perm 20%   State-event    1.3142   0.3090   1.9043       NaN     5.908    936.9     0.3090       933.2       3       0
+Stressed   sparse4    perm 20%   Causal-v3      1.2806   0.3263   1.8612       NaN     5.595    805.4     0.3263       738.4       3       0
+
+Stressed   sparse4    perm 30%   P10            1.4720   0.3527   2.1380       NaN     8.341    860.0     0.3527       860.0       3       0
+Stressed   sparse4    perm 30%   P20            1.4711   0.3526   2.1374       NaN     8.278   1720.0     0.3526      1720.0       3       0
+Stressed   sparse4    perm 30%   State-event    1.4844   0.3569   2.1491       NaN     8.634   1315.3     0.3569      1316.2       3       0
+Stressed   sparse4    perm 30%   Causal-v3      1.4734   0.3519   2.1401       NaN     8.402    692.3     0.3519       625.5       3       0
+
+Stressed   sparse4    burst 2s   P10            0.4149   0.2166   0.7008     5.000     0.843    860.0     0.3037       860.0       3       0
+Stressed   sparse4    burst 2s   P20            0.3258   0.2990   0.5852     4.773     0.754   1720.0     0.3691      1720.0       3       0
+Stressed   sparse4    burst 2s   State-event    0.6879   0.0248   1.0461     3.667     1.190    345.2     0.1090      1269.7       3       0
+Stressed   sparse4    burst 2s   Causal-v3      0.3479   0.2759   0.6214     5.160     0.783   1448.5     0.3547      1162.5       3       0
+
+Stressed   sparse4    burst 5s   P10            0.5139   0.1069   1.1068     5.407     1.670    860.0     0.2271       860.0       3       0
+Stressed   sparse4    burst 5s   P20            0.4338   0.0889   1.0255     5.093     1.573   1720.0     0.1266      1720.0       3       0
+Stressed   sparse4    burst 5s   State-event    0.7489   0.0478   1.3331     4.320     2.053    454.1     0.0783      1296.9       3       0
+Stressed   sparse4    burst 5s   Causal-v3      0.4529   0.1084   1.0552     4.787     1.684   1437.6     0.1472       865.0       3       0
+
+============================================================
+EXP08B acceptance gates
+============================================================
+
+  [DEFER] SafeFail <= 5% (connected)             11 of 24 conditions with >5% at 3 seeds - NOT EVALUABLE
+  [PASS ] Recovery <= 1.25 x P20 (burst)         0 of 8 breached
+  [PASS ] Peak error <= 1.25 x P10               0 of 24 breached
+
+  Excluded entirely (impossibility region): 0 condition(s)
+  Partially excluded (some seeds disconnected): 3 condition(s)
+
+  SafeFail > 5% per method, over connected conditions:
+    P10          13 of 24
+    P20          10 of 24
+    State-event  19 of 24
+    Causal-v3    11 of 24
+
+  EXP08B GATES: 2 PASS, 0 FAIL, 1 DEFERRED to the 20-seed run
+  No EXP08B verdict follows from this run.
+
+tidy.csv : 288 rows
+
+EXP08B completed.
+saveAllFigures: no open figures.
+
+============================================================
+DONE : exp08b_link_failure
+TIME : 6 m 24 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp08b_link_failure\2026-08-22_061608
+============================================================
