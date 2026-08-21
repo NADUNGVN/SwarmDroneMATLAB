@@ -72,12 +72,25 @@ nScenario = numel(scenarioNames);
 % Methods
 % ============================================================
 
+% A1..A4c form the causal ablation chain. Each arm adds exactly one
+% mechanism to the one before it, so a difference between neighbours
+% is attributable to that mechanism alone:
+%
+%   A1  = State-event   state innovation only, no AoI branch
+%   A2c = + AoI coupling, FIXED scale, freshness estimated OPEN LOOP
+%   A3c = + ADAPTIVE scale,            freshness estimated OPEN LOOP
+%   A4c = + real ACK feedback          freshness from acknowledgements
+%
+% A3c -> A4c is therefore the value of genuine feedback, measured
+% without the oracle that made the ideal chain's 16.07% possible.
 methodNames = {
     'P10'
     'P20'
-    'State-event'
+    'A1 State-event'
     'Ideal-AoI'
-    'Causal-AoI'
+    'A2c Fixed-OL'
+    'A3c Adapt-OL'
+    'A4c Causal-AoI'
 };
 
 nMethod = numel(methodNames);
@@ -86,7 +99,9 @@ IDX_P10    = 1;
 IDX_P20    = 2;
 IDX_EVENT  = 3;
 IDX_IDEAL  = 4;
-IDX_CAUSAL = 5;
+IDX_A2C    = 5;
+IDX_A3C    = 6;
+IDX_CAUSAL = 7;
 
 
 %% ============================================================
@@ -162,6 +177,13 @@ MINSCALE  = nan(numSeeds,nMethod,nScenario);
 % arm that has no AoI estimate.
 ESTAOI = nan(numSeeds,nMethod,nScenario);
 
+% v2 protocol diagnostics.
+SUPPRINFLIGHT = nan(numSeeds,nMethod,nScenario);
+MEANOUTST     = nan(numSeeds,nMethod,nScenario);
+MAXOUTST      = nan(numSeeds,nMethod,nScenario);
+ACKCUMGAIN    = nan(numSeeds,nMethod,nScenario);
+DUPACK        = nan(numSeeds,nMethod,nScenario);
+
 
 %% ============================================================
 % Header
@@ -226,6 +248,11 @@ for iS = 1:nScenario
         mScale  = nan(numSeeds,1);
         nScale  = nan(numSeeds,1);
         eAoI    = nan(numSeeds,1);
+        sInfl   = nan(numSeeds,1);
+        mOut    = nan(numSeeds,1);
+        xOut    = nan(numSeeds,1);
+        cGain   = nan(numSeeds,1);
+        dAck    = nan(numSeeds,1);
 
         parfor s = 1:numSeeds
 
@@ -275,7 +302,19 @@ for iS = 1:nScenario
                 case IDX_IDEAL
                     out = simSwarmAoIAware(cfg);
 
+                case IDX_A2C
+                    cfg.causal.useAdaptiveScale = false;
+                    cfg.causal.useAckFeedback   = false;
+                    out = simSwarmAoICausal(cfg);
+
+                case IDX_A3C
+                    cfg.causal.useAdaptiveScale = true;
+                    cfg.causal.useAckFeedback   = false;
+                    out = simSwarmAoICausal(cfg);
+
                 case IDX_CAUSAL
+                    cfg.causal.useAdaptiveScale = true;
+                    cfg.causal.useAckFeedback   = true;
                     out = simSwarmAoICausal(cfg);
 
             end
@@ -323,6 +362,14 @@ for iS = 1:nScenario
                 eAoI(s) = mean(e(~isnan(e)));
             end
 
+            if isfield(out,'suppressedInFlightRatio')
+                sInfl(s) = out.suppressedInFlightRatio;
+                mOut(s)  = out.meanOutstanding;
+                xOut(s)  = out.maxOutstanding;
+                cGain(s) = out.ackCumulativeGain;
+                dAck(s)  = out.duplicateAckCount;
+            end
+
             if isfield(out,'invariantViolations')
                 vTot(s)  = out.invariantViolations;
                 vBef(s)  = out.ackBeforeAcceptCount;
@@ -362,6 +409,12 @@ for iS = 1:nScenario
         MEANSCALE(:,iM,iS)   = mScale;
         MINSCALE(:,iM,iS)    = nScale;
         ESTAOI(:,iM,iS)      = eAoI;
+
+        SUPPRINFLIGHT(:,iM,iS) = sInfl;
+        MEANOUTST(:,iM,iS)     = mOut;
+        MAXOUTST(:,iM,iS)      = xOut;
+        ACKCUMGAIN(:,iM,iS)    = cGain;
+        DUPACK(:,iM,iS)        = dAck;
 
         FORMFAIL(:,iM,iS) = rmseS  > formationThreshold;
         SAFEFAIL(:,iM,iS) = minevS < safetyThreshold;
@@ -478,6 +531,73 @@ for iS = 1:nScenario
             meanMEANSCALE(iM,iS), meanAOI(iM,iS), meanESTAOI(iM,iS));
     end
     fprintf('\n');
+end
+
+
+%% ============================================================
+% Protocol diagnostics (v2)
+%
+% These are what distinguish v2 from v1. suppressedInFlight counts
+% occasions where v1's single-memory rule would have transmitted but
+% the innovation was already on the wire.
+% ============================================================
+
+meanSUPPR   = reshape(mean(SUPPRINFLIGHT,1), nMethod,nScenario);
+meanOUTST   = reshape(mean(MEANOUTST,1),     nMethod,nScenario);
+maxOUTST    = reshape(max(MAXOUTST,[],1),    nMethod,nScenario);
+meanCUMGAIN = reshape(mean(ACKCUMGAIN,1),    nMethod,nScenario);
+meanDUPACK  = reshape(mean(DUPACK,1),        nMethod,nScenario);
+
+fprintf('\n');
+fprintf('============================================================\n');
+fprintf('Protocol diagnostics (causal arms)\n');
+fprintf('============================================================\n\n');
+
+fprintf('%-10s %-16s %11s %11s %10s %10s %9s\n', ...
+    'Scenario','Method','supprInFlt','meanOutst','maxOutst','ackCumGain','dupAck');
+
+for iS = 1:nScenario
+    for iM = [IDX_A2C IDX_A3C IDX_CAUSAL]
+        fprintf('%-10s %-16s %11.3f %11.3f %10d %10.3f %9.0f\n', ...
+            scenarioNames{iS}, methodNames{iM}, ...
+            meanSUPPR(iM,iS), meanOUTST(iM,iS), maxOUTST(iM,iS), ...
+            meanCUMGAIN(iM,iS), meanDUPACK(iM,iS));
+    end
+    fprintf('\n');
+end
+
+
+%% ============================================================
+% Causal ablation chain
+% ============================================================
+
+fprintf('============================================================\n');
+fprintf('Causal ablation: A1 -> A2c -> A3c -> A4c\n');
+fprintf('============================================================\n\n');
+
+chain = [IDX_EVENT IDX_A2C IDX_A3C IDX_CAUSAL];
+chainNames = {'A1 -> A2c  AoI coupling', ...
+              'A2c -> A3c adaptive scale', ...
+              'A3c -> A4c real feedback'};
+
+gainCausal = nan(3,nScenario);
+rateCausal = nan(3,nScenario);
+
+for iS = 1:nScenario
+
+    fprintf('%s\n', scenarioNames{iS});
+
+    for c = 1:3
+        a = chain(c);
+        b = chain(c+1);
+        gainCausal(c,iS) = 100*(meanRMSE(a,iS)-meanRMSE(b,iS))/meanRMSE(a,iS);
+        rateCausal(c,iS) = meanTXRATE(b,iS)-meanTXRATE(a,iS);
+        fprintf('  %-28s RMSE %+7.2f %% | rate %+6.2f Hz\n', ...
+            chainNames{c}, gainCausal(c,iS), rateCausal(c,iS));
+    end
+
+    fprintf('\n');
+
 end
 
 
@@ -600,7 +720,9 @@ legend([methodNames; {'Causal ACK'}],'Location','northwest');
 
 figure('Name','EXP07A cost versus error');
 hold on; grid on;
-markers = {'o','s','^','d','p'};
+% Cycle markers so the list cannot fall behind the arm count.
+markerPool = {'o','s','^','d','p','h','v','>','<','*'};
+markers = markerPool(mod(0:nMethod-1, numel(markerPool)) + 1);
 for iM = 1:nMethod
     plot(meanTXRATE(iM,:), meanRMSE(iM,:), ['-' markers{iM}], ...
         'LineWidth', 1.3, 'MarkerSize', 8);
@@ -635,7 +757,12 @@ T = tidyFromArray( ...
         'TIMEOUTTRIG', TIMEOUTTRIG, ...
         'MEANSCALE',   MEANSCALE, ...
         'MINSCALE',    MINSCALE, ...
-        'ESTAOI',      ESTAOI, ...
+        'ESTAOI',        ESTAOI, ...
+        'SUPPRINFLIGHT', SUPPRINFLIGHT, ...
+        'MEANOUTST',     MEANOUTST, ...
+        'MAXOUTST',      MAXOUTST, ...
+        'ACKCUMGAIN',    ACKCUMGAIN, ...
+        'DUPACK',        DUPACK, ...
         'STALEACKDISC',STALEACKDISC, ...
         'FORMFAIL',    double(FORMFAIL), ...
         'SAFEFAIL',    double(SAFEFAIL)), ...

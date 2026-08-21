@@ -1,29 +1,30 @@
 function net = deliverDataWithAck(net, tk, cfg)
-%DELIVERDATAWITHACK Deliver DATA packets and emit an ACK for each acceptance.
+%DELIVERDATAWITHACK Deliver DATA and emit one CUMULATIVE ACK per link per tick.
 %
 %   net = deliverDataWithAck(net, tk, cfg)
 %
-% Thin wrapper around the locked deliverNetworkPackets. It records which
-% links advanced their accepted-generation timestamp during this delivery and
-% pushes one ACK per acceptance onto the reverse queue.
+% Thin wrapper around the locked deliverNetworkPackets. Reusing it rather
+% than copying keeps the forward path byte-identical to the locked
+% experiments; this project already carries one silently drifted duplicate
+% of a policy function, and that is not a mistake worth repeating.
 %
-% Reusing deliverNetworkPackets rather than copying it is deliberate: this
-% project already has one silently drifted duplicate of a policy function
-% (ablationTriggerPolicy vs aoiAwareTriggerPolicy, missing a clamp), and the
-% forward delivery path must stay byte-identical to the locked experiments.
+% ACK semantics (v2): CUMULATIVE. A receiver emits at most one ACK per link
+% per sampling tick, naming the NEWEST packet it has accepted. If several
+% packets landed in the same tick, the single ACK confirms all of them.
 %
-% ACK generation is receiver-side, so reading net.genTime here is legitimate:
-% the receiver is the node that decides to acknowledge. The transmitter never
-% sees any of this except through an ACK that actually arrives.
+% That matters well beyond saving ACK traffic. Under jitter a burst can
+% arrive out of order within one tick; a per-packet ACK scheme would then
+% put several ACKs on the reverse path whose relative order carries no
+% useful information. A cumulative ACK is order-insensitive by construction.
+%
+% Reading net.genTime here is legitimate: ACK generation is receiver-side,
+% and the receiver is the node deciding what to acknowledge. The transmitter
+% learns none of it except through an ACK that actually arrives.
 
 N = cfg.swarm.N;
 
 tol = 1e-12;
 
-
-%% ============================================================
-% What the receivers held before this delivery
-% ============================================================
 
 genTimeBefore = net.genTime;
 
@@ -38,7 +39,7 @@ net = deliverNetworkPackets(net, tk, cfg);
 
 
 %% ============================================================
-% Neighbour links: one ACK per acceptance
+% Neighbour links
 % ============================================================
 
 for i = 1:N
@@ -55,12 +56,16 @@ for i = 1:N
             continue;
         end
 
-        % A receiver can never accept a packet stamped in the future.
         if acceptedGenTime > tk + tol
             net.futureGenTimeCount = net.futureGenTimeCount + 1;
         end
 
-        net = pushAck(net, i, j, acceptedGenTime, tk, cfg, false);
+        [seq, covered, net] = resolveWireSeq( ...
+            net, i, j, acceptedGenTime, genTimeBefore(i,j), false);
+
+        net.ackCoveredCount = net.ackCoveredCount + covered;
+
+        net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, false);
 
     end
 
@@ -87,7 +92,12 @@ for i = 2:N
         net.futureGenTimeCount = net.futureGenTimeCount + 1;
     end
 
-    net = pushAck(net, i, 1, acceptedGenTime, tk, cfg, true);
+    [seq, covered, net] = resolveWireSeq( ...
+        net, i, 1, acceptedGenTime, leaderGenTimeBefore(i), true);
+
+    net.ackCoveredCount = net.ackCoveredCount + covered;
+
+    net = pushAck(net, i, 1, acceptedGenTime, seq, tk, cfg, true);
 
 end
 
@@ -97,18 +107,64 @@ end
 %% ============================================================
 % LOCAL FUNCTION
 %
-% Build one ACK and place it on the reverse queue, subject to the
-% reverse channel's own loss, delay and jitter.
+% Look up the sequence number of the accepted packet, and count how
+% many earlier packets this cumulative ACK also confirms.
 % ============================================================
 
-function net = pushAck(net, i, j, acceptedGenTime, tk, cfg, isLeaderLink)
+function [seq, covered, net] = resolveWireSeq( ...
+    net, i, j, acceptedGenTime, previousGenTime, isLeaderLink)
+
+tol = 1e-12;
+
+if isLeaderLink
+    tbl = net.leaderWireSeq{i};
+else
+    tbl = net.wireSeq{i,j};
+end
+
+seq = NaN;
+
+covered = 0;
+
+if ~isempty(tbl)
+
+    hit = find(abs(tbl(:,1) - acceptedGenTime) <= tol, 1, 'last');
+
+    if ~isempty(hit)
+        seq = tbl(hit,2);
+    end
+
+    % Everything generated after the previously confirmed packet and no
+    % later than this one is covered by this single cumulative ACK.
+    covered = sum( ...
+        tbl(:,1) > previousGenTime + tol & ...
+        tbl(:,1) <= acceptedGenTime + tol);
+
+    % Entries at or below the accepted time can never be named again.
+    tbl = tbl(tbl(:,1) > acceptedGenTime + tol, :);
+
+end
+
+if isLeaderLink
+    net.leaderWireSeq{i} = tbl;
+else
+    net.wireSeq{i,j} = tbl;
+end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Place one ACK on the reverse path, subject to its own loss,
+% delay and jitter.
+% ============================================================
+
+function net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, isLeaderLink)
 
 net.ackTxCount = net.ackTxCount + 1;
 
-
-%% ------------------------------------------------------------
-% Reverse-channel loss
-% ------------------------------------------------------------
 
 if rand(net.ackStream) < cfg.ack.loss
 
@@ -119,31 +175,23 @@ if rand(net.ackStream) < cfg.ack.loss
 end
 
 
-%% ------------------------------------------------------------
-% Reverse-channel delay
-%
-% Floored at one timestep: the receiver only decides at its own
-% sampling instant, so a same-timestep ACK is not physical. This
-% floor is what prevents the oracle from being reintroduced.
-% ------------------------------------------------------------
-
 ackDelay = cfg.ack.delay;
 
 if cfg.ack.jitterStd > 0
     ackDelay = ackDelay + cfg.ack.jitterStd * randn(net.ackStream);
 end
 
+% Floored at one timestep: the receiver only decides at its own sampling
+% instant, so a same-tick ACK is not physical. This floor is what keeps
+% the oracle from creeping back in.
 ackDelay = max(ackDelay, cfg.swarm.dt);
 
 
 ack.ackedGenTime = acceptedGenTime;
+ack.ackedSeq     = seq;
 ack.acceptTime   = tk;
 ack.arrivalTime  = tk + ackDelay;
 
-
-%% ------------------------------------------------------------
-% Queue on the reverse path
-% ------------------------------------------------------------
 
 if isLeaderLink
 

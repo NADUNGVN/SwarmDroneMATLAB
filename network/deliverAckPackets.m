@@ -1,15 +1,21 @@
 function [net, txState] = deliverAckPackets(net, txState, tk, cfg)
-%DELIVERACKPACKETS Apply ACKs that have arrived, and enforce causality.
+%DELIVERACKPACKETS Apply arrived ACKs and enforce causality (v2).
 %
 %   [net, txState] = deliverAckPackets(net, txState, tk, cfg)
 %
-% This is the ONLY function that may advance txState.ackPos / ackVel /
-% ackGenTime. Everything the transmitter believes about the receiver enters
-% through here, from an ACK packet that actually arrived.
+% The only function permitted to advance txState.ackGenTime / ackSeq /
+% ackPos / ackVel. Everything the transmitter believes about the receiver
+% enters here, from an ACK that actually arrived.
 %
-% Every one of the six causality invariants is checked here. With
-% cfg.ack.assertInvariants true a violation raises immediately rather than
-% being counted and ignored.
+% v2 matches outstanding packets by SEQUENCE NUMBER, with genTime kept as an
+% independent consistency check: a header whose seq and genTime disagree
+% indicates a corrupted or fabricated ACK and is counted, never applied.
+%
+% ACKs are cumulative, so one ACK retires every outstanding packet up to and
+% including the acknowledged sequence number.
+%
+% With cfg.ack.assertInvariants true, any violation raises immediately
+% instead of being counted and ignored.
 
 N = cfg.swarm.N;
 
@@ -28,39 +34,7 @@ for i = 1:N
             continue;
         end
 
-        q = net.ackQueue{i,j};
-
-        if isempty(q)
-            continue;
-        end
-
-        arrivalTimes = cellfun(@(a) a.arrivalTime, q);
-
-        dueIdx = find(arrivalTimes <= tk + tol);
-
-        if isempty(dueIdx)
-            continue;
-        end
-
-        % Process in arrival order so an out-of-order ACK is seen as such.
-        [~, order] = sort(arrivalTimes(dueIdx));
-
-        dueIdx = dueIdx(order);
-
-        keep = true(size(q));
-
-        for m = 1:numel(dueIdx)
-
-            n = dueIdx(m);
-
-            keep(n) = false;
-
-            [net, txState] = applyAck( ...
-                net, txState, q{n}, i, j, tk, cfg, false);
-
-        end
-
-        net.ackQueue{i,j} = q(keep);
+        [net, txState] = drainAckQueue(net, txState, i, j, tk, cfg, false);
 
     end
 
@@ -77,38 +51,7 @@ for i = 2:N
         continue;
     end
 
-    q = net.leaderAckQueue{i};
-
-    if isempty(q)
-        continue;
-    end
-
-    arrivalTimes = cellfun(@(a) a.arrivalTime, q);
-
-    dueIdx = find(arrivalTimes <= tk + tol);
-
-    if isempty(dueIdx)
-        continue;
-    end
-
-    [~, order] = sort(arrivalTimes(dueIdx));
-
-    dueIdx = dueIdx(order);
-
-    keep = true(size(q));
-
-    for m = 1:numel(dueIdx)
-
-        n = dueIdx(m);
-
-        keep(n) = false;
-
-        [net, txState] = applyAck( ...
-            net, txState, q{n}, i, 1, tk, cfg, true);
-
-    end
-
-    net.leaderAckQueue{i} = q(keep);
+    [net, txState] = drainAckQueue(net, txState, i, 1, tk, cfg, true);
 
 end
 
@@ -117,8 +60,61 @@ end
 
 %% ============================================================
 % LOCAL FUNCTION
+% ============================================================
+
+function [net, txState] = drainAckQueue(net, txState, i, j, tk, cfg, isLeaderLink)
+
+tol = 1e-10;
+
+if isLeaderLink
+    q = net.leaderAckQueue{i};
+else
+    q = net.ackQueue{i,j};
+end
+
+if isempty(q)
+    return;
+end
+
+arrivalTimes = cellfun(@(a) a.arrivalTime, q);
+
+dueIdx = find(arrivalTimes <= tk + tol);
+
+if isempty(dueIdx)
+    return;
+end
+
+% Process in arrival order, so an ACK overtaken under jitter is seen
+% as the late arrival it is.
+[~, order] = sort(arrivalTimes(dueIdx));
+
+dueIdx = dueIdx(order);
+
+keep = true(size(q));
+
+for m = 1:numel(dueIdx)
+
+    n = dueIdx(m);
+
+    keep(n) = false;
+
+    [net, txState] = applyAck(net, txState, q{n}, i, j, tk, cfg, isLeaderLink);
+
+end
+
+if isLeaderLink
+    net.leaderAckQueue{i} = q(keep);
+else
+    net.ackQueue{i,j} = q(keep);
+end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
 %
-% Validate one ACK against all six invariants, then apply it.
+% Validate one ACK against every invariant, then apply it.
 % ============================================================
 
 function [net, txState] = applyAck(net, txState, ack, i, j, tk, cfg, isLeaderLink)
@@ -137,8 +133,7 @@ if ack.arrivalTime < ack.acceptTime - tol
     net.ackBeforeAcceptCount = net.ackBeforeAcceptCount + 1;
 
     reportViolation(cfg, 'ackBeforeAccept', ...
-        'ACK arrived at %.6f but was created at %.6f', ...
-        ack.arrivalTime, ack.acceptTime);
+        'arrived %.6f, created %.6f', ack.arrivalTime, ack.acceptTime);
 
 end
 
@@ -152,52 +147,58 @@ if ack.ackedGenTime > tk + tol
     net.futureGenTimeCount = net.futureGenTimeCount + 1;
 
     reportViolation(cfg, 'futureGenTime', ...
-        'ACK at t=%.6f acknowledges genTime %.6f', tk, ack.ackedGenTime);
+        'at t=%.6f acknowledges genTime %.6f', tk, ack.ackedGenTime);
 
 end
 
 
 %% ------------------------------------------------------------
-% Locate the attempt this ACK refers to.
+% Current transmitter belief
 % ------------------------------------------------------------
 
 if isLeaderLink
-    pend = txState.leaderPending{i};
-    currentAckGenTime = txState.leaderAckGenTime(i);
+    outst      = txState.leaderOutstanding{i};
+    currentGen = txState.leaderAckGenTime(i);
+    currentSeq = txState.leaderAckSeq(i);
 else
-    pend = txState.pending{i,j};
-    currentAckGenTime = txState.ackGenTime(i,j);
-end
-
-
-idx = [];
-
-if ~isempty(pend)
-    genTimes = [pend.genTime];
-    idx = find(abs(genTimes - ack.ackedGenTime) <= tol, 1, 'last');
+    outst      = txState.outstanding{i,j};
+    currentGen = txState.ackGenTime(i,j);
+    currentSeq = txState.ackSeq(i,j);
 end
 
 
 %% ------------------------------------------------------------
-% INVARIANT 3: the ACK must match an attempt the sender actually made.
+% Match by SEQUENCE NUMBER.
+% ------------------------------------------------------------
+
+idx = [];
+
+if ~isempty(outst) && ~isnan(ack.ackedSeq)
+    idx = find([outst.seq] == ack.ackedSeq, 1, 'last');
+end
+
+
+%% ------------------------------------------------------------
+% INVARIANT 3: the ACK must name a packet the sender actually sent.
 %
-% A stale ACK whose attempt was already pruned is NOT a violation, so
-% only flag when the acknowledged time is newer than what we hold.
+% A cumulative ACK for something already retired is a normal late
+% duplicate, not a violation.
 % ------------------------------------------------------------
 
 if isempty(idx)
 
-    if ack.ackedGenTime > currentAckGenTime + tol
+    if ack.ackedSeq > currentSeq
 
         net.unknownSeqAckCount = net.unknownSeqAckCount + 1;
 
         reportViolation(cfg, 'unknownSeqAck', ...
-            'ACK for genTime %.6f on link (%d,%d) matches no attempt', ...
-            ack.ackedGenTime, i, j);
+            'seq %g on link (%d,%d) matches no outstanding packet', ...
+            ack.ackedSeq, i, j);
 
     else
 
-        % Late duplicate for something already superseded. Expected.
+        net.duplicateAckCount = net.duplicateAckCount + 1;
+
         net.staleAckDiscardedCount = net.staleAckDiscardedCount + 1;
 
     end
@@ -208,27 +209,45 @@ end
 
 
 %% ------------------------------------------------------------
-% INVARIANT 4: the channel cannot acknowledge a packet it dropped.
+% CONSISTENCY: seq and genTime must describe the same packet.
+%
+% Matching on seq alone would accept a header whose two identifiers
+% disagree; checking both is what makes the sequence number load
+% bearing rather than decorative.
 % ------------------------------------------------------------
 
-if pend(idx).dropped
+if abs(outst(idx).genTime - ack.ackedGenTime) > tol
 
-    net.ackForDroppedDataCount = net.ackForDroppedDataCount + 1;
+    net.seqGenTimeMismatchCount = net.seqGenTimeMismatchCount + 1;
 
-    reportViolation(cfg, 'ackForDroppedData', ...
-        'ACK for dropped packet genTime %.6f on link (%d,%d)', ...
-        ack.ackedGenTime, i, j);
+    reportViolation(cfg, 'seqGenTimeMismatch', ...
+        'seq %g carries genTime %.6f but sender recorded %.6f', ...
+        ack.ackedSeq, ack.ackedGenTime, outst(idx).genTime);
+
+    return;
 
 end
 
 
 %% ------------------------------------------------------------
-% INVARIANT 5: the sender never rolls back to older information.
-%
-% A superseded ACK is discarded, not applied.
+% INVARIANT 4: the channel cannot acknowledge a packet it dropped.
 % ------------------------------------------------------------
 
-if ack.ackedGenTime <= currentAckGenTime + tol
+if outst(idx).dropped
+
+    net.ackForDroppedDataCount = net.ackForDroppedDataCount + 1;
+
+    reportViolation(cfg, 'ackForDroppedData', ...
+        'seq %g on link (%d,%d) was dropped in flight', ack.ackedSeq, i, j);
+
+end
+
+
+%% ------------------------------------------------------------
+% INVARIANT 5: never roll back to older information.
+% ------------------------------------------------------------
+
+if ack.ackedGenTime <= currentGen + tol
 
     net.staleAckDiscardedCount = net.staleAckDiscardedCount + 1;
 
@@ -238,30 +257,30 @@ end
 
 
 %% ------------------------------------------------------------
-% Apply: this is the only place transmitter belief advances.
+% Apply. Cumulative: retire everything up to this sequence number.
 % ------------------------------------------------------------
 
 if isLeaderLink
 
-    txState.leaderAckPos(i,:) = pend(idx).pos;
-    txState.leaderAckVel(i,:) = pend(idx).vel;
+    txState.leaderAckPos(i,:)   = outst(idx).pos;
+    txState.leaderAckVel(i,:)   = outst(idx).vel;
     txState.leaderAckGenTime(i) = ack.ackedGenTime;
+    txState.leaderAckSeq(i)     = ack.ackedSeq;
 
-    keep = [pend.genTime] > ack.ackedGenTime + tol;
-    txState.leaderPending{i} = pend(keep);
+    txState.leaderOutstanding{i} = outst([outst.seq] > ack.ackedSeq);
 
-    newAckGenTime = txState.leaderAckGenTime(i);
+    newGen = txState.leaderAckGenTime(i);
 
 else
 
-    txState.ackPos(i,j,:) = pend(idx).pos;
-    txState.ackVel(i,j,:) = pend(idx).vel;
+    txState.ackPos(i,j,:)   = outst(idx).pos;
+    txState.ackVel(i,j,:)   = outst(idx).vel;
     txState.ackGenTime(i,j) = ack.ackedGenTime;
+    txState.ackSeq(i,j)     = ack.ackedSeq;
 
-    keep = [pend.genTime] > ack.ackedGenTime + tol;
-    txState.pending{i,j} = pend(keep);
+    txState.outstanding{i,j} = outst([outst.seq] > ack.ackedSeq);
 
-    newAckGenTime = txState.ackGenTime(i,j);
+    newGen = txState.ackGenTime(i,j);
 
 end
 
@@ -270,29 +289,25 @@ net.ackUpdateCount = net.ackUpdateCount + 1;
 
 %% ------------------------------------------------------------
 % INVARIANT 6: post-conditions on the update just applied.
-%
-% Checked after the write rather than before it, so these catch a
-% bug in the update itself and not merely a bad input.
 % ------------------------------------------------------------
 
-if newAckGenTime < currentAckGenTime - tol
+if newGen < currentGen - tol
 
     net.senderRollbackCount = net.senderRollbackCount + 1;
 
     reportViolation(cfg, 'senderRollback', ...
         'ackGenTime moved %.6f -> %.6f on link (%d,%d)', ...
-        currentAckGenTime, newAckGenTime, i, j);
+        currentGen, newGen, i, j);
 
 end
 
-
-if newAckGenTime <= currentAckGenTime + tol
+if newGen <= currentGen + tol
 
     net.staleAckAcceptedCount = net.staleAckAcceptedCount + 1;
 
     reportViolation(cfg, 'staleAckAccepted', ...
         'update did not advance belief: %.6f -> %.6f on link (%d,%d)', ...
-        currentAckGenTime, newAckGenTime, i, j);
+        currentGen, newGen, i, j);
 
 end
 

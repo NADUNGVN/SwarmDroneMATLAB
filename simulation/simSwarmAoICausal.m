@@ -1,5 +1,5 @@
 function out = simSwarmAoICausal(cfg)
-%SIMSWARMAOICAUSAL AoI-aware swarm with an explicit, causal ACK protocol.
+%SIMSWARMAOICAUSAL AoI-aware swarm with an explicit, causal ACK protocol (v2).
 %
 %   out = simSwarmAoICausal(cfg)
 %
@@ -36,6 +36,19 @@ function out = simSwarmAoICausal(cfg)
 %   cfg.ack.jitterStd         reverse-channel jitter [s]
 %   cfg.ack.seedOffset        offset for the independent ACK RNG stream
 %   cfg.ack.assertInvariants  raise on any causality violation
+%
+% Ablation switches (defaults give the full method, A4c):
+%
+%   cfg.causal.useAckFeedback    false -> freshness estimated open loop
+%   cfg.causal.useAdaptiveScale  false -> adaptive threshold pinned to base
+%
+% Version history:
+%   v1  single memory: innovation and freshness both from the acked state.
+%       Under a round trip the innovation never shrank, so the transmitter
+%       re-sent state already in flight. At Stressed that drove hard
+%       position triggers to 98% of transmissions and collapsed the AoI
+%       branch to 0.3%, breaching the 20 Hz ceiling at 26.19 Hz.
+%   v2  dual memory plus real sequence numbers and cumulative ACKs.
 
 rng(cfg.net.seed, 'twister');
 
@@ -56,6 +69,21 @@ if ~isfield(cfg.ack,'delay'),            cfg.ack.delay = cfg.net.delay;      end
 if ~isfield(cfg.ack,'jitterStd'),        cfg.ack.jitterStd = 0.0;            end
 if ~isfield(cfg.ack,'seedOffset'),       cfg.ack.seedOffset = 987654;        end
 if ~isfield(cfg.ack,'assertInvariants'), cfg.ack.assertInvariants = false;   end
+
+
+%% ============================================================
+% Ablation switches
+%
+% Defaults select the full method. Each switch removes exactly one
+% mechanism, so the arms differ by one thing at a time.
+% ============================================================
+
+if ~isfield(cfg,'causal')
+    cfg.causal = struct();
+end
+
+if ~isfield(cfg.causal,'useAckFeedback'),   cfg.causal.useAckFeedback = true;   end
+if ~isfield(cfg.causal,'useAdaptiveScale'), cfg.causal.useAdaptiveScale = true; end
 
 
 %% ============================================================
@@ -256,7 +284,11 @@ for k = 1:K
 
             NeighborAoILog(k,i,j) = age;
 
-            EstAoILog(k,i,j) = tk - txState.ackGenTime(i,j) + 0.5*dt;
+            if cfg.causal.useAckFeedback
+                EstAoILog(k,i,j) = tk - txState.ackGenTime(i,j) + 0.5*dt;
+            else
+                EstAoILog(k,i,j) = tk - txState.sentGenTime(i,j) + 0.5*dt;
+            end
 
             ageSamples(end+1) = age; %#ok<AGROW>
 
@@ -355,6 +387,32 @@ out.staleAckDiscardedCount = net.staleAckDiscardedCount;
 
 out.ackDeliveryRatio = net.ackRxCount / max(net.ackTxCount,1);
 
+out.ackCoveredCount = net.ackCoveredCount;
+
+% Packets confirmed per ACK. Above 1 means cumulative ACKs are
+% genuinely retiring more than one packet at a time.
+out.ackCumulativeGain = ...
+    net.ackCoveredCount / max(net.ackUpdateCount,1);
+
+out.duplicateAckCount = net.duplicateAckCount;
+
+%% ============================================================
+% In-flight suppression and outstanding packets
+% ============================================================
+
+% Occasions where v1's single-memory rule would have transmitted but
+% v2 correctly stayed silent because the innovation was already on
+% the wire. This is the mechanism the version change was made for.
+out.suppressedInFlightCount = net.suppressedInFlightCount;
+
+out.suppressedInFlightRatio = ...
+    net.suppressedInFlightCount / max(net.triggerCheckCount,1);
+
+out.meanOutstanding = ...
+    net.outstandingSum / max(net.outstandingCount,1);
+
+out.maxOutstanding = net.outstandingMax;
+
 
 %% ============================================================
 % Causality invariants
@@ -369,13 +427,16 @@ out.futureGenTimeCount     = net.futureGenTimeCount;
 out.staleAckAcceptedCount  = net.staleAckAcceptedCount;
 out.unknownSeqAckCount     = net.unknownSeqAckCount;
 
+out.seqGenTimeMismatchCount = net.seqGenTimeMismatchCount;
+
 out.invariantViolations = ...
     net.ackBeforeAcceptCount ...
     + net.ackForDroppedDataCount ...
     + net.senderRollbackCount ...
     + net.futureGenTimeCount ...
     + net.staleAckAcceptedCount ...
-    + net.unknownSeqAckCount;
+    + net.unknownSeqAckCount ...
+    + net.seqGenTimeMismatchCount;
 
 
 %% ============================================================
