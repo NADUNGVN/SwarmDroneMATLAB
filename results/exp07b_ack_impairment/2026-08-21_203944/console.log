@@ -1,0 +1,191 @@
+
+============================================================
+RUN  : exp07b_ack_impairment
+ID   : 2026-08-21_203944
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07b_ack_impairment\2026-08-21_203944
+WHEN : 2026-08-21 20:39:44
+============================================================
+
+
+============================================================
+EXP07B ACK channel impairment
+============================================================
+
+Seeds        : 3
+ACK cells    : 12 per scenario
+Total sims   : 216
+
+Policy is LOCKED and identical everywhere:
+  epsP 0.05 | epsV 0.10 | AoIth 0.12 | cooldown 0.10 | maxSilence 0.50
+
+ensureParallelPool: starting pool with 3 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 3 workers.
+ensureParallelPool: pool ready (3 workers).
+
+------------------------------------------------------------
+Moderate | DATA loss 20 % | DATA delay 80 ms
+------------------------------------------------------------
+  reliable      ackLoss   0% ackDelay    80 ms jitter   0 ms[Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp07b_ack_impairment (line 274)] 
+  done
+  L0  D40       ackLoss   0% ackDelay   120 ms jitter   0 ms  done
+  L0  D80       ackLoss   0% ackDelay   160 ms jitter   0 ms  done
+  L10 D0        ackLoss  10% ackDelay    80 ms jitter   0 ms  done
+  L10 D40       ackLoss  10% ackDelay   120 ms jitter   0 ms  done
+  L10 D80       ackLoss  10% ackDelay   160 ms jitter   0 ms  done
+  L20 D0        ackLoss  20% ackDelay    80 ms jitter   0 ms  done
+  L20 D40       ackLoss  20% ackDelay   120 ms jitter   0 ms  done
+  L20 D80       ackLoss  20% ackDelay   160 ms jitter   0 ms  done
+  L20 D=fwd     ackLoss  20% ackDelay   160 ms jitter   0 ms  done
+  L10 D40 J40   ackLoss  10% ackDelay   120 ms jitter  40 ms  done
+  L10 D40 J80   ackLoss  10% ackDelay   120 ms jitter  80 ms  done
+
+------------------------------------------------------------
+Stressed | DATA loss 40 % | DATA delay 120 ms
+------------------------------------------------------------
+  reliable      ackLoss   0% ackDelay   120 ms jitter   0 ms  done
+  L0  D40       ackLoss   0% ackDelay   160 ms jitter   0 ms  done
+  L0  D80       ackLoss   0% ackDelay   200 ms jitter   0 ms  done
+  L10 D0        ackLoss  10% ackDelay   120 ms jitter   0 ms  done
+  L10 D40       ackLoss  10% ackDelay   160 ms jitter   0 ms  done
+  L10 D80       ackLoss  10% ackDelay   200 ms jitter   0 ms  done
+  L20 D0        ackLoss  20% ackDelay   120 ms jitter   0 ms  done
+  L20 D40       ackLoss  20% ackDelay   160 ms jitter   0 ms  done
+  L20 D80       ackLoss  20% ackDelay   200 ms jitter   0 ms  done
+  L20 D=fwd     ackLoss  20% ackDelay   240 ms jitter   0 ms  done
+  L10 D40 J40   ackLoss  10% ackDelay   160 ms jitter  40 ms  done
+  L10 D40 J80   ackLoss  10% ackDelay   160 ms jitter  80 ms  done
+
+============================================================
+Causal-v3 under ACK impairment
+============================================================
+
+Scenario   ACK cell          RMSE  Data[Hz]  ACK[Hz] ackDeliv   estAoI  staleAck FormFail SafeFail
+Moderate   reliable        0.0875     13.37    10.68    0.998    0.221         0     0.00     0.00
+Moderate   L0  D40         0.0775     17.45    13.97    0.996    0.245         0     0.00     0.00
+Moderate   L0  D80         0.0776     18.34    14.63    0.995    0.285         0     0.00     0.00
+Moderate   L10 D0          0.0863     13.85    11.05    0.898    0.230         0     0.00     0.00
+Moderate   L10 D40         0.0774     17.51    14.00    0.897    0.253         0     0.00     0.00
+Moderate   L10 D80         0.0776     18.34    14.63    0.897    0.293         0     0.00     0.00
+Moderate   L20 D0          0.0853     14.35    11.44    0.801    0.240         0     0.00     0.00
+Moderate   L20 D40         0.0772     17.60    14.12    0.801    0.263         0     0.00     0.00
+Moderate   L20 D80         0.0776     18.34    14.63    0.801    0.304         0     0.00     0.00
+Moderate   L20 D=fwd       0.0776     18.34    14.63    0.801    0.304         0     0.00     0.00
+Moderate   L10 D40 J40     0.0809     16.40    13.11    0.900    0.266       509     0.00     0.00
+Moderate   L10 D40 J80     0.0820     15.71    12.51    0.900    0.260      1044     0.00     0.00
+
+Stressed   reliable        0.1178     18.23    10.82    0.996    0.311         0     1.00     0.00
+Stressed   L0  D40         0.1178     18.23    10.82    0.995    0.351         0     1.00     0.00
+Stressed   L0  D80         0.1178     18.23    10.82    0.994    0.391         0     1.00     0.00
+Stressed   L10 D0          0.1178     18.23    10.82    0.900    0.322         0     1.00     0.00
+Stressed   L10 D40         0.1178     18.23    10.82    0.898    0.362         0     1.00     0.00
+Stressed   L10 D80         0.1178     18.23    10.82    0.897    0.402         0     1.00     0.00
+Stressed   L20 D0          0.1178     18.23    10.82    0.801    0.336         0     1.00     0.00
+Stressed   L20 D40         0.1178     18.23    10.82    0.800    0.376         0     1.00     0.00
+Stressed   L20 D80         0.1178     18.23    10.82    0.798    0.416         0     1.00     0.00
+Stressed   L20 D=fwd       0.1178     18.23    10.82    0.798    0.457         0     1.00     0.00
+Stressed   L10 D40 J40     0.1170     18.18    10.88    0.896    0.370       410     1.00     0.00
+Stressed   L10 D40 J80     0.1177     17.70    10.59    0.897    0.360       852     1.00     0.00
+
+============================================================
+Baseline invariance across ACK cells
+============================================================
+
+  Moderate   P10        RMSE spread across 12 ACK cells: 0.000e+00
+  Moderate   P20        RMSE spread across 12 ACK cells: 0.000e+00
+  Stressed   P10        RMSE spread across 12 ACK cells: 0.000e+00
+  Stressed   P20        RMSE spread across 12 ACK cells: 0.000e+00
+
+  Baselines are bit-identical everywhere: ACK settings do not leak.
+
+============================================================
+RMSE degradation versus reliable ACK
+============================================================
+
+ACK cell          Moderate     Stressed
+reliable             0.00%        0.00%
+L0  D40            -11.41%        0.00%
+L0  D80            -11.31%        0.00%
+L10 D0              -1.36%        0.00%
+L10 D40            -11.56%        0.00%
+L10 D80            -11.31%        0.00%
+L20 D0              -2.50%        0.00%
+L20 D40            -11.78%        0.00%
+L20 D80            -11.31%        0.00%
+L20 D=fwd          -11.31%        0.00%
+L10 D40 J40         -7.55%       -0.63%
+L10 D40 J80         -6.24%       -0.04%
+
+============================================================
+Adaptive-scale saturation
+============================================================
+
+Scenario   ACK cell         estAoI     scale  saturated
+Moderate   reliable          0.221     0.283          -
+Moderate   L0  D40           0.245     0.229          -
+Moderate   L0  D80           0.285     0.202        YES
+Moderate   L10 D0            0.230     0.278          -
+Moderate   L10 D40           0.253     0.227          -
+Moderate   L10 D80           0.293     0.202        YES
+Moderate   L20 D0            0.240     0.272          -
+Moderate   L20 D40           0.263     0.224          -
+Moderate   L20 D80           0.304     0.202        YES
+Moderate   L20 D=fwd         0.304     0.202        YES
+Moderate   L10 D40 J40       0.266     0.234          -
+Moderate   L10 D40 J80       0.260     0.260          -
+  Moderate: 4 of 12 cells saturated
+
+Stressed   reliable          0.311     0.202        YES
+Stressed   L0  D40           0.351     0.202        YES
+Stressed   L0  D80           0.391     0.202        YES
+Stressed   L10 D0            0.322     0.202        YES
+Stressed   L10 D40           0.362     0.202        YES
+Stressed   L10 D80           0.402     0.202        YES
+Stressed   L20 D0            0.336     0.202        YES
+Stressed   L20 D40           0.376     0.202        YES
+Stressed   L20 D80           0.416     0.202        YES
+Stressed   L20 D=fwd         0.457     0.202        YES
+Stressed   L10 D40 J40       0.370     0.203        YES
+Stressed   L10 D40 J80       0.360     0.211          -
+  Stressed: 11 of 12 cells saturated
+
+
+============================================================
+EXP07B acceptance gates
+============================================================
+
+  [PASS] Protocol: invariants = 0 in every ACK cell    0 violation(s) over 24 cells
+  [PASS] Protocol: no deadlock (gap <= maxSilence)     worst link silence 0.120 s vs 0.50 s
+  [PASS] Moderate ACK impairment: degradation <= 10%   0.00 % (worst scenario)
+  [PASS] Severe ACK impairment: degradation <= 25%     0.00 % (worst scenario)
+  [PASS] Moderate ACK impairment: SafeFail <= 5%       0.00
+
+  EXP07B GATES: ALL PASS (5/5)
+
+============================================================
+Reordering subtest (ACK jitter)
+============================================================
+
+Scenario   ACK cell        staleAck     dupAck       RMSE   Data[Hz]
+Moderate   L10 D0                 0          0     0.0863      13.85
+Moderate   L10 D40 J40          509        509     0.0809      16.40
+Moderate   L10 D40 J80         1044       1044     0.0820      15.71
+
+Stressed   L10 D0                 0          0     0.1178      18.23
+Stressed   L10 D40 J40          410        410     0.1170      18.18
+Stressed   L10 D40 J80          852        852     0.1177      17.70
+
+  Reordering path exercised: 2816 stale ACKs discarded.
+
+tidy.csv : 216 rows
+
+EXP07B completed.
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp07b_ack_impairment\2026-08-21_203944\figures
+
+============================================================
+DONE : exp07b_ack_impairment
+TIME : 1 m 30 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp07b_ack_impairment\2026-08-21_203944
+============================================================

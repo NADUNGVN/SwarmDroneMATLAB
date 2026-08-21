@@ -206,6 +206,9 @@ net.refreshInFlightBlockedCount = 0;
 net.newInfoBypassWithoutInnovationCount   = 0;
 net.refreshWhileUsefulPacketInFlightCount = 0;
 
+% Largest observed silence on any link. Must not exceed maxSilence.
+net.maxInterTxGap = 0;
+
 
 %% ============================================================
 % Reverse ACK channel
@@ -488,6 +491,8 @@ out.refreshWhileUsefulPacketInFlightCount = ...
 out.hardInnovationCount  = net.hardInnovationCount;
 out.adaptiveNewInfoCount = net.adaptiveNewInfoCount;
 out.refreshCount         = net.refreshCount;
+
+out.maxInterTxGap = net.maxInterTxGap;
 
 out.refreshCooldownBlockedCount = net.refreshCooldownBlockedCount;
 out.refreshInFlightBlockedCount = net.refreshInFlightBlockedCount;

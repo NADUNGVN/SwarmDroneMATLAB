@@ -242,6 +242,18 @@ function [net, txState] = transmit( ...
 net.txCount = net.txCount + 1;
 
 
+% Liveness diagnostic. maxSilence guarantees no link stays quiet longer
+% than 0.50 s, so the largest observed gap is a direct test of that
+% guarantee and of the absence of deadlock. Recorded, never consulted.
+if isLeaderLink
+    prevTx = txState.leaderLastTxTime(i);
+else
+    prevTx = txState.lastTxTime(i,j);
+end
+
+net.maxInterTxGap = max(net.maxInterTxGap, tk - prevTx);
+
+
 if isLeaderLink
     seq = txState.leaderSentSeq(i) + 1;
     txState.leaderSentSeq(i)     = seq;

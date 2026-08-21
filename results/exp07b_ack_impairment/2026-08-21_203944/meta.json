@@ -1,0 +1,18 @@
+{
+  "experiment": "exp07b_ack_impairment",
+  "runId": "2026-08-21_203944",
+  "startedAt": "2026-08-21 20:39:44",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "af8174f",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp07b_ack_impairment.m",
+  "finishedAt": "2026-08-21 20:41:15",
+  "elapsedSec": 90.4373891,
+  "elapsedText": "1 m 30 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}
