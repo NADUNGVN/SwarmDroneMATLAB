@@ -39,10 +39,11 @@ expRun = startExperiment('exp08a_topology');
 %% ============================================================
 % Monte Carlo
 %
-% Debug pass. Reviewed before the 20-seed final pass.
+% Final pass. The 3-seed debug pass was reviewed first, as the
+% pre-registration requires. Nothing else changed between the two.
 % ============================================================
 
-numSeeds = 3;
+numSeeds = 20;
 
 
 %% ============================================================

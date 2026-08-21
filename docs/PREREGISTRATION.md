@@ -899,6 +899,72 @@ Không đề xuất thay đổi nào. v4 / piggyback / aggregation chưa đượ
 
 ---
 
+## 8septies. EXP08A — kết quả final 20 seeds
+
+Protocol Causal-AoI-v3 đông cứng. Chỉ thêm topology generator và helper đo λ₂.
+
+```
+[PASS] Pre-check: 12/12 graph connected
+[PASS] Causality invariants = 0
+[FAIL] SafeFail <= 5 % ở nơi P20 cũng safe    1 / 23 điều kiện
+[PASS] Stressed advantage >= 80 %             100.0 % (12/12)
+[PASS] Leave-one-topology-out >= 80 %         worst 100.0 %
+```
+
+Kết quả 20 seeds **trùng khớp hoàn toàn** với 3 seeds. Không cell nào lật.
+
+### Kết quả tích cực: cái ring KHÔNG gánh kết luận
+
+Causal-v3 thắng P10 về RMSE **hoặc** thắng P20 về chi phí ở **toàn bộ 12/12** điều kiện
+connected ở Stressed. Bỏ bất kỳ topology nào ra vẫn còn **100 %**.
+
+Đây là bác bỏ trực tiếp mối lo A3 trong `docs/RESEARCH_REVIEW.md`: kết luận không phụ thuộc
+vào topology degree-2 mà phương pháp được phát triển trên đó. Bốn topology có mean degree từ
+2.60 tới 6.84 và λ₂ từ 0.450 tới 4.382.
+
+### Gate an toàn thất bại: Stressed / sparse6 / N=20
+
+| Method | RMSE | sd | minSep | sd | SafeFail |
+|---|---|---|---|---|---|
+| P10 | 0.4317 | 0.0012 | **0.1664** | 0.0038 | 1.00 |
+| P20 | 0.3329 | 0.0005 | 0.2667 | 0.0017 | 0.00 |
+| State-event | 0.7450 | 0.0058 | **0.0302** | 0.0101 | 1.00 |
+| **Causal-v3** | 0.3541 | 0.0011 | **0.2446** | 0.0026 | 1.00 |
+
+Causal-v3 hụt ngưỡng 0.25 khoảng **2 %**, và là phương án **tốt thứ hai**; P10 và State-event
+hỏng nặng hơn nhiều. Nhưng **0/20 seed** vượt ngưỡng, sd chỉ 0.0026 — đây là thất bại **hệ
+thống**, không phải xui xẻo thống kê. Không được diễn giải theo hướng "sát ngưỡng nên bỏ qua".
+
+### Nguyên nhân là CONTROLLER, không phải communication policy
+
+P10 truyền cố định 10 Hz nên communication **giống hệt nhau** trên mọi topology. RMSE của nó
+vẫn tăng đơn điệu theo mean degree:
+
+| Stressed | ring2 | sparse4 | sparse6 | geometric |
+|---|---|---|---|---|
+| N=10 (deg 2.60/4.60/6.20/2.80) | 0.2290 | 0.2603 | 0.2769 | 0.1535 |
+| N=20 (2.80/4.80/6.60/3.50) | 0.2681 | 0.3824 | 0.4317 | 0.2562 |
+| N=50 (2.92/4.92/6.84/4.12) | 0.2886 | 0.4550 | **0.5540** | 0.3738 |
+
+`swarm/distributedFormationPolicy.m` cộng các số hạng consensus trên các neighbour **mà không
+chuẩn hoá theo degree**, nên đồ thị degree ~7 chạy với loop gain gấp khoảng **3.4 lần** mức mà
+`Kp = 1.8, Kv = 2.2` được tune cho degree 2. Mọi method đều suy giảm; chỉ P20 (tần suất cập
+nhật cao nhất) giữ được khoảng cách an toàn.
+
+**Đây là giới hạn thiết kế controller do EXP08A phơi bày, không phải phát hiện về
+communication.** Không tune. Nếu muốn gate an toàn này nói được điều gì về communication thì
+phải tách khỏi hiệu ứng degree-gain — nhưng đó là quyết định pre-registration mới.
+
+### Thay đổi cấu hình cần ghi nhận
+
+`A(1,:) = 0`: leader nhận các in-link mà nó không bao giờ đọc (vấn đề B4). Ở EXP06A đó là 17 %
+lãng phí cố định nên vô hại; ở đây tỉ lệ lãng phí **khác nhau giữa các topology có degree khác
+nhau** và sẽ bóp méo đúng phép so sánh chi phí mà gate advantage dựa vào.
+
+→ **Số liệu EXP08A không so trực tiếp được với EXP06A/EXP07.**
+
+---
+
 ## 9. Nhật ký thay đổi tài liệu này
 
 Mọi thay đổi sau khi tag `prereg-exp07-exp10` phải được ghi ở đây, kèm lý do và commit hash.

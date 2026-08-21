@@ -39,10 +39,11 @@ expRun = startExperiment('exp08a_topology');
 %% ============================================================
 % Monte Carlo
 %
-% Debug pass. Reviewed before the 20-seed final pass.
+% Final pass. The 3-seed debug pass was reviewed first, as the
+% pre-registration requires. Nothing else changed between the two.
 % ============================================================
 
-numSeeds = 3;
+numSeeds = 20;
 
 
 %% ============================================================
@@ -484,6 +485,63 @@ for iS = 1:nScenario
         end
     end
 end
+
+
+%% ============================================================
+% Degree sensitivity of the CONTROLLER, isolated
+%
+% P10 transmits at a fixed 10 Hz on every topology, so its
+% communication is identical across the sweep. Any change in its RMSE
+% is therefore attributable to the graph acting through the
+% controller, not through the communication policy.
+%
+% This matters for reading the safety gate: distributedFormationPolicy
+% sums the consensus terms over neighbours WITHOUT normalising by
+% degree, so effective loop gain scales with |N_i|. A degree-7 graph
+% runs roughly 3.4x the gain the gains were tuned for at degree 2.
+% ============================================================
+
+fprintf('\n');
+fprintf('============================================================\n');
+fprintf('Degree sensitivity of the controller (P10, identical comms)\n');
+fprintf('============================================================\n\n');
+
+fprintf('%-10s %4s', 'Scenario', 'N');
+for iT = 1:nTopo
+    fprintf(' %11s', topologyNames{iT});
+end
+fprintf('\n');
+
+for iS = 1:nScenario
+    for iN = 1:nSize
+        fprintf('%-10s %4d', scenarioNames{iS}, swarmSizes(iN));
+        for iT = 1:nTopo
+            if CONNECTED(iT,iN)
+                fprintf(' %11.4f', meanRMSE(IDX_P10,iT,iN,iS));
+            else
+                fprintf(' %11s', '-');
+            end
+        end
+        fprintf('\n');
+    end
+end
+
+fprintf('\nmean degree:\n');
+fprintf('%-10s %4s', '', 'N');
+for iT = 1:nTopo
+    fprintf(' %11s', topologyNames{iT});
+end
+fprintf('\n');
+for iN = 1:nSize
+    fprintf('%-10s %4d', '', swarmSizes(iN));
+    for iT = 1:nTopo
+        fprintf(' %11.2f', MEANDEG(iT,iN));
+    end
+    fprintf('\n');
+end
+
+fprintf(['\n  If P10 degrades monotonically with degree, the graph is acting\n' ...
+         '  through the controller and not through the communication policy.\n']);
 
 
 %% ============================================================
