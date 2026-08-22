@@ -337,14 +337,31 @@ Peak     : E_max(Causal-AoI)      ≤ 1.25 × E_max(P10)
 Ba gate và ba tỉ số **giữ nguyên**. Gate Safety là **tuyệt đối** và áp cho **mọi** connected
 condition; **không** thêm điều kiện phụ kiểu "chỉ tại condition mà P20 cũng safe".
 
-**Khả năng đánh giá của gate Safety** *(ghi rõ 2026-08-22)*. Ngưỡng 5 % chỉ phân giải được khi
-số seed đủ lớn. Ở 3 seeds, tỉ lệ khác 0 nhỏ nhất đo được là 1/3 ≈ 33 %, nên "≤ 5 %" thoái hoá
-thành "= 0" và mọi verdict sẽ phản ánh số seed chứ không phản ánh phương thức. Vì vậy:
+**Mẫu số của gate Safety** *(làm rõ 2026-08-22, không đổi gate)*. Với mỗi condition:
+
+```
+SafeFail = (số seed CONNECTED bị unsafe) / (số seed CONNECTED)  ≤  5 %
+```
+
+Mẫu số là **số seed connected của chính condition đó**, không phải số seed yêu cầu. Một seed có
+đồ thị active đứt thuộc impossibility region nên bị loại khỏi **cả tử số lẫn mẫu số**: nó không
+thể gây ra fail, và cũng không thể che một fail.
+
+Điều này quan trọng khi một condition mất seed. Nếu **cả 20 seed đều connected**: `0/20` và
+`1/20` PASS, `2/20` FAIL. Nếu chỉ còn **19 seed connected**: `1/19 = 5.26 %` đã **FAIL**. Không
+được đọc luật này thành "luôn được phép một seed hỏng" — thứ bị chặn ở 5 % là **tỉ lệ**, không
+phải số đếm.
+
+**Khả năng đánh giá của gate Safety.** Ngưỡng 5 % chỉ phân giải được khi số seed đủ lớn. Ở 3
+seeds, tỉ lệ khác 0 nhỏ nhất đo được là 1/3 ≈ 33 %, nên "≤ 5 %" thoái hoá thành "= 0" và mọi
+verdict sẽ phản ánh số seed chứ không phản ánh phương thức. Vì vậy:
 
 - **3 seeds** → gate Safety báo cáo là **DEFERRED / NOT EVALUABLE**. Số breach vẫn được in ra
   làm chẩn đoán, nhưng **không** được coi là PASS hay FAIL.
-- **20 seeds** → gate Safety được đánh giá. `0/20` và `1/20` PASS; `≥ 2/20` FAIL. Đây đúng bằng
-  ngưỡng 5 % đã chốt, không phải một ngưỡng mới.
+- **20 seeds** → gate Safety được đánh giá theo tỉ lệ ở trên.
+
+**Báo cáo bắt buộc:** mỗi condition phải in `nConnected` và `nDisconnected`, để mẫu số của mọi
+tỉ lệ đều kiểm chứng được từ log.
 
 **Chẩn đoán bắt buộc kèm theo (không gate):**
 
@@ -1119,6 +1136,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
 | 2026-08-22 | §2.3: `E_max` (và peak AoI) đổi mốc từ `thời điểm lỗi bắt đầu` sang `max(thời điểm lỗi bắt đầu, 8 s)` | **Sửa lỗi đo lường, không phải tuning.** Permanent fault bắt đầu tại `t = 0` nên cửa sổ cũ đo transient khởi động: trong cùng seed, `E_max` trùng khít giữa P10/P20/Causal-v3 (2.356607 tại ring2/Moderate/perm 20 %), tức đại lượng không phụ thuộc phương thức, khiến gate pass vô nghĩa ở 16/24 condition. Mốc 8 s là evaluation window đã dùng cho mọi metric khác. Burst (bắt đầu 12 s) **không đổi**. Sửa đổi làm gate **khó hơn**. Không đổi Causal-v3, controller, threshold, fault grid, CRN, fault realization hay tỉ số gate. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.2: gate Safety giữ nguyên tuyệt đối ≤ 5 %, nhưng chỉ **đánh giá ở 20 seeds**; ở 3 seeds báo cáo DEFERRED | Ở 3 seeds tỉ lệ khác 0 nhỏ nhất là 1/3, nên "≤ 5 %" thoái hoá thành "= 0" và verdict sẽ đo số seed chứ không đo phương thức. Ở 20 seeds: 0/20 và 1/20 PASS, ≥ 2/20 FAIL — đúng ngưỡng 5 % đã chốt. **Không** thêm điều kiện phụ "P20 cũng safe". | (branch `exp08b-link-failure`) |
+| 2026-08-22 | §4.2: nói rõ mẫu số gate Safety là **số seed connected của từng condition** (`unsafe connected / connected ≤ 5 %`) | **Làm rõ, không đổi gate.** Code đã tính đúng như vậy từ đầu (trung bình `SAFEFAIL` chỉ trên seed connected), nhưng cả §4.2 lẫn comment đều không nói ra, nên câu "0/20 và 1/20 PASS" dễ bị đọc thành "luôn được phép một seed hỏng". Câu đó chỉ đúng khi **cả 20 seed đều connected**; với 19 seed connected thì `1/19 = 5.26 %` **FAIL**. Thứ bị chặn ở 5 % là tỉ lệ, không phải số đếm. Bắt buộc in `nConnected`/`nDisconnected` cho mọi condition. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §2.4 áp dụng: phân loại connectivity tính **trên realization thực sự được mô phỏng** (theo từng seed), thay vì một seed đại diện | **Sửa lỗi đo lường.** Bản chạy đầu phân loại bằng `cfg.net.seed = 1800000`, không phải seed nào trong tập chạy, và kết luận "connected, isolated = 0" cho mọi condition. Realization thật lại có λ₂ = 0 (ring2 / perm 30 % và cả hai burst / Moderate / seed 1) và tới 3 isolated follower. Exclusion vì thế đã áp cho sai đồ thị. **Tiêu chuẩn phân loại không đổi** (§2.4, đồ thị đối xứng hoá, λ₂ > 1e-9); chỉ đối tượng được phân loại là đúng lại. Loại trừ nay theo từng seed; condition không còn seed connected nào thì loại toàn bộ. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.2: thêm chẩn đoán thụ động `minSepDuringFault`, DATA/s trong cửa sổ lỗi, và SafeFail theo từng method | §4.2 vốn đã yêu cầu "min separation during failure" và "traffic response"; bản chạy đầu chưa đo đúng cửa sổ. Cả ba đều **chỉ báo cáo, không gate**. Thêm log truyền tin tích luỹ thụ động vào ba simulator (ghi nhưng không bao giờ đọc trong sim); `test_lock_regression` chứng minh mọi giá trị LOCK tái tạo nguyên vẹn. | (branch `exp08b-link-failure`) |
 | 2026-08-21 | Đính chính comment: "degree 7 → 3.4 lần" nhầm structural degree 6.84 thành consensus in-degree; đúng là 6 → 3.0 lần | Structural degree đã đối xứng hoá và gộp cạnh leader-pin, không phải đại lượng nhân vào gain. Sai sót comment, không ảnh hưởng số liệu hay gate. Không chạy lại. | (branch `exp08b-link-failure`) |

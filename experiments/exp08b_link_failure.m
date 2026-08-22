@@ -44,7 +44,7 @@ expRun = startExperiment('exp08b_link_failure');
 % Scope
 % ============================================================
 
-numSeeds = 3;
+numSeeds = 20;
 
 topologyNames = {'ring2'; 'sparse4'};
 
@@ -136,8 +136,8 @@ fprintf('============================================================\n');
 fprintf('EXP08B link failure and burst outage\n');
 fprintf('============================================================\n\n');
 
-fprintf('%-10s %-10s %-10s %9s %9s %10s %9s %12s\n', ...
-    'Scenario','Topology','Fault','minL2','maxL2','connected','maxIso','activeInDeg');
+fprintf('%-10s %-10s %-10s %9s %9s %6s %6s %8s %12s\n', ...
+    'Scenario','Topology','Fault','minL2','maxL2','nConn','nDisc','maxIso','activeInDeg');
 
 for iS = 1:nScenario
     for iT = 1:nTopo
@@ -145,9 +145,10 @@ for iS = 1:nScenario
 
             l2 = L2SEED(:,iF,iT,iS);
 
-            fprintf('%-10s %-10s %-10s %9.4f %9.4f %6d /%2d %9d %12.2f\n', ...
+            fprintf('%-10s %-10s %-10s %9.4f %9.4f %6d %6d %8d %12.2f\n', ...
                 scenarioNames{iS}, topologyNames{iT}, faultNames{iF}, ...
-                min(l2), max(l2), nConn(iF,iT,iS), numSeeds, ...
+                min(l2), max(l2), nConn(iF,iT,iS), ...
+                numSeeds - nConn(iF,iT,iS), ...
                 max(ISOSEED(:,iF,iT,iS)), mean(DEGSEED(:,iF,iT,iS)));
 
         end
@@ -429,12 +430,25 @@ fprintf('============================================================\n');
 fprintf('EXP08B acceptance gates\n');
 fprintf('============================================================\n\n');
 
-% The SafeFail gate is only evaluable once the seed count can resolve
-% 5 %. At 3 seeds the finest non-zero rate is 1/3, so "<= 5 %" would
-% collapse into "= 0", and any verdict would report the seed count
-% rather than the method. At 20 seeds 0/20 and 1/20 pass while 2/20 or
-% more fails, which is exactly the intended threshold. The gate itself
-% is unchanged: absolute, and applied to every connected condition.
+% The Safety gate is, per condition:
+%
+%     unsafe connected seeds / connected seeds  <=  5 %
+%
+% The denominator is the CONNECTED seeds of that condition, never the
+% requested seed count. A seed whose active graph fell apart is in the
+% impossibility region and is removed from both sides of the ratio, so
+% it can neither cause nor excuse a failure.
+%
+% This matters whenever a condition loses seeds. With all 20 connected,
+% 0/20 and 1/20 pass and 2/20 fails. With 19 connected, 1/19 = 5.26 %
+% already FAILS. Reading the rule as "one bad seed is always allowed"
+% would be wrong: it is the ratio that is capped at 5 %, not the count.
+%
+% The gate is only evaluated once the seed count can resolve 5 %. At 3
+% seeds the finest non-zero rate is 1/3, so the gate would collapse
+% into "= 0" and any verdict would report the seed count rather than
+% the method. The gate itself is unchanged: absolute, and applied to
+% every condition that retains at least one connected seed.
 safeEvaluable = numSeeds >= 20;
 
 safeBreach = 0; safeCount = 0;
@@ -454,9 +468,16 @@ for iS = 1:nScenario
 
             partial = partial + (nConn(iF,iT,iS) < numSeeds);
 
+            % safeRate is already unsafe/connected for this condition:
+            % the aggregation above averages SAFEFAIL over the connected
+            % seeds only.
             safeCount = safeCount + 1;
             if safeRate(IDX_CAUSAL,iF,iT,iS) > 0.05
                 safeBreach = safeBreach + 1;
+                fprintf('    breach: %-9s %-8s %-9s  %d/%d connected = %.2f%%\n', ...
+                    scenarioNames{iS}, topologyNames{iT}, faultNames{iF}, ...
+                    round(safeRate(IDX_CAUSAL,iF,iT,iS)*nConn(iF,iT,iS)), ...
+                    nConn(iF,iT,iS), 100*safeRate(IDX_CAUSAL,iF,iT,iS));
             end
 
             peakCount = peakCount + 1;
@@ -477,7 +498,7 @@ for iS = 1:nScenario
     end
 end
 
-gateNames  = {'SafeFail <= 5% (connected)', ...
+gateNames  = {'unsafe/connected seeds <= 5%', ...
               'Recovery <= 1.25 x P20 (burst)', ...
               'Peak error <= 1.25 x P10'};
 gatePass   = [safeBreach == 0, recBreach == 0, peakBreach == 0];
