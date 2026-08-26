@@ -47,7 +47,19 @@ for i = 1:N
             continue;
         end
 
-        net.txCount = net.txCount + 1;
+        % Blackout: the sender's radio is off, or the receiver's is.
+        % Nothing leaves the antenna, so nothing is counted as sent.
+        if nodeIsDark(cfg, j, tk) || nodeIsDark(cfg, i, tk)
+            continue;
+        end
+
+
+        if nodeIsDark(cfg, 1, tk) || nodeIsDark(cfg, i, tk)
+        continue;
+    end
+
+
+    net.txCount = net.txCount + 1;
 
         senderFired(j) = true;
 
@@ -219,5 +231,34 @@ if ~cfg.fault.down(i,j)
 end
 
 isDown = (tk >= cfg.fault.tStart) && (tk <= cfg.fault.tEnd);
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Node communication blackout. Returns true when node n has its radio
+% off at time tk. A dark node cannot send DATA, receive DATA, send ACK
+% or receive ACK; its dynamics and controller are untouched, and
+% cfg.swarm.A is never modified.
+%
+% Unlike a dead link, the node knows its own radio is off, so it does
+% not transmit and nothing is counted as sent.
+% ============================================================
+
+function dark = nodeIsDark(cfg, n, tk)
+
+dark = false;
+
+if ~isfield(cfg,'blackout') || isempty(cfg.blackout)
+    return;
+end
+
+if ~cfg.blackout.node(n)
+    return;
+end
+
+dark = (tk >= cfg.blackout.tStart) && (tk <= cfg.blackout.tEnd);
 
 end

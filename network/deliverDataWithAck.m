@@ -143,6 +143,15 @@ end
 function net = pushAck(net, i, j, acceptedGenTime, seq, tk, cfg, isLeaderLink, ...
     ackTrace, k)
 
+% Blackout: node i cannot send an ACK, or node j cannot receive one.
+% The radio is off, so nothing is transmitted and nothing is counted.
+% The data sender simply never hears back, which is exactly what it
+% would experience in the field.
+if nodeIsDark(cfg, i, tk) || nodeIsDark(cfg, j, tk)
+    return;
+end
+
+
 net.ackTxCount = net.ackTxCount + 1;
 
 
@@ -224,5 +233,29 @@ elseif isLeaderLink
 else
     z = ackTrace.jitterZ(k,i,j);
 end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Node communication blackout. True when node n has its radio off at
+% time tk. See utils/generateBlackoutRealization.m.
+% ============================================================
+
+function dark = nodeIsDark(cfg, n, tk)
+
+dark = false;
+
+if ~isfield(cfg,'blackout') || isempty(cfg.blackout)
+    return;
+end
+
+if ~cfg.blackout.node(n)
+    return;
+end
+
+dark = (tk >= cfg.blackout.tStart) && (tk <= cfg.blackout.tEnd);
 
 end

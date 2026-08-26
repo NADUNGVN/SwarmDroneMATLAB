@@ -157,6 +157,11 @@ MeanAoILog = zeros(K,1);
 % traffic inside a fault window, which a run total cannot resolve.
 TxCountLog = zeros(K,1);
 
+% Passive cumulative ACK log, same contract as TxCountLog: written,
+% never read by the simulation. Needed to measure reverse-channel
+% traffic inside a blackout window.
+AckCountLog = zeros(K,1);
+
 
 NeighborAoILog = nan(K,N,N);
 LeaderAoILog   = nan(K,N);
@@ -379,7 +384,8 @@ for k = 1:K
     end
 
 
-    TxCountLog(k) = net.txCount;
+    TxCountLog(k)  = net.txCount;
+    AckCountLog(k) = net.ackTxCount;
 
 
     if k == K
@@ -429,6 +435,7 @@ out.estimatedAoI = EstAoILog;
 
 out.txCount           = net.txCount;
 out.txCountLog        = TxCountLog;
+out.ackCountLog       = AckCountLog;
 
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.

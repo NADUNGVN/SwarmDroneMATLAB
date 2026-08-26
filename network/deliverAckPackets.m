@@ -78,6 +78,30 @@ end
 
 arrivalTimes = cellfun(@(a) a.arrivalTime, q);
 
+% Blackout: node j is the ACK's destination, and its radio is off. An
+% ACK already in flight when the outage began arrives to a dead antenna
+% and is lost. Holding it back to be applied after the node returns
+% would let the transmitter learn something it never actually heard.
+if nodeIsDark(cfg, j, tk)
+
+    due = arrivalTimes <= tk + tol;
+
+    if any(due)
+
+        net.ackDropCount = net.ackDropCount + nnz(due);
+
+        if isLeaderLink
+            net.leaderAckQueue{i} = q(~due);
+        else
+            net.ackQueue{i,j} = q(~due);
+        end
+
+    end
+
+    return;
+
+end
+
 dueIdx = find(arrivalTimes <= tk + tol);
 
 if isempty(dueIdx)
@@ -327,5 +351,29 @@ if isfield(cfg,'ack') && isfield(cfg.ack,'assertInvariants') ...
         ['CAUSALITY VIOLATION [%s]: ' fmt], name, varargin{:});
 
 end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Node communication blackout. True when node n has its radio off at
+% time tk. See utils/generateBlackoutRealization.m.
+% ============================================================
+
+function dark = nodeIsDark(cfg, n, tk)
+
+dark = false;
+
+if ~isfield(cfg,'blackout') || isempty(cfg.blackout)
+    return;
+end
+
+if ~cfg.blackout.node(n)
+    return;
+end
+
+dark = (tk >= cfg.blackout.tStart) && (tk <= cfg.blackout.tEnd);
 
 end

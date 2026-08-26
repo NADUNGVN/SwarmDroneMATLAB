@@ -389,14 +389,69 @@ vào connectivity impossibility region.
 
 ### 4.3 EXP08C — Node communication dropout
 
-Blackout 1 node / 2 node, thời lượng 2 s / 5 s, khôi phục sau đó. `N ∈ {10, 20}`.
+Blackout 1 node / 2 node, thời lượng 2 s / 5 s, khôi phục sau đó. `N ∈ {10, 20}`,
+topology ∈ {ring2, sparse4}, scenario ∈ {Moderate, Stressed}, method ∈ {P10, P20, State-event,
+Causal-v3}. Blackout bắt đầu tại `t = 12 s`.
+
+**Ngữ nghĩa fault (communication layer only).** Trong blackout, follower được chọn:
+không gửi được DATA, không nhận được DATA, không gửi được ACK, không nhận được ACK.
+Dynamics và controller **vẫn chạy bình thường**; `cfg.swarm.A` **không bị sửa**.
+
+Khác với link failure của EXP08B ở một điểm ảnh hưởng tới kế toán traffic: ở đó sender không thể
+biết link đã chết nên vẫn phát, gói vẫn được đếm rồi mới rớt. Ở đây **chính radio của node tắt**,
+nên nó không phát và không có gì được đếm. Cả hai đều vật lý, chỉ là hai loại lỗi khác nhau.
+
+**Không blackout leader** trong main experiment: mất leader là mất tham chiếu tuyệt đối duy nhất
+của đội hình, đó là một thí nghiệm khác.
+
+Node được chọn **pre-generated theo fault seed**, độc lập với method, để mọi policy gặp đúng
+cùng những node tắt tại cùng thời điểm.
+
+**Eligibility theo matched no-fault run.** Một seed chỉ được tính vào gate Safety nếu run
+**no-fault tương ứng** (cùng method / scenario / topology / N / seed) đã **safe trước khi có
+lỗi**. Nếu không, cấu hình đó vốn đã unsafe và blackout không phải nguyên nhân.
 
 ```
-1-node Moderate  : SafeFail = 0
-1-node Stressed  : SafeFail ≤ 5 %
-Recovery         : T_recovery ≤ 5 s cho single-node blackout khi graph vẫn connected
-2-node           : nếu làm graph disconnect thì phải DETECT và LABEL đúng
+eligible          = matched no-fault run của cùng method/scenario/topology/N/seed đã safe
+fault-induced SafeFail = nUnsafeAfterFault / nEligibleNoFaultSafe
 ```
+
+**Gate chính (1-node blackout):**
+```
+Moderate : fault-induced SafeFail = 0 %
+Stressed : fault-induced SafeFail ≤ 5 %
+Recovery : T_recovery ≤ 5 s, chỉ áp khi graph reconnect/recoverable sau blackout
+```
+
+**Chẩn đoán so sánh (báo cáo cùng gate, không thay thế gate):**
+```
+Trec(Causal-v3) ≤ 1.25 × Trec(P20)
+```
+
+**2-node blackout là severe / characterization region.** **Không** dùng nó để thay đổi main
+claim. Nếu báo target phụ thì giữ `≤ 10 %` và **phải ghi rõ là secondary**.
+
+**Connectivity.** Node đang tắt bị cắt khỏi mạng **theo định nghĩa của can thiệp**, không phải
+do bất khả thi. Nếu đưa nó vào đồ thị thì λ₂ = 0 ở **mọi** condition và phân loại không mang
+thông tin gì. Vì vậy λ₂ được tính trên **đồ thị con cảm sinh bởi các node còn phát sóng**
+(vẫn theo §2.4: đối xứng hoá, gộp cạnh leader-pin, connected ⟺ λ₂ > 1e-9). Câu hỏi đúng là:
+*phần còn lại của đội hình có còn liên thông sau khi bỏ node tắt ra không.*
+
+Realization nào **disconnected** phải được **detect và gán nhãn DISCONNECTED / impossibility
+region**, và **không** được tính thành communication-policy failure.
+
+**Metric bắt buộc:** RMSE; peak formation error during blackout; minSepDuringBlackout;
+true/estimated/peak AoI; DATA/s và ACK/s ở **pre / during / post** blackout; outstanding
+mean/max; maxSilence probes; recovery time; `nEligibleNoFaultSafe`; `nUnsafeAfterFault`;
+fault-induced SafeFail rate; λ₂; active consensus in-degree mean/min; isolated follower count;
+disconnected duration; và
+
+```
+trafficRatio = DATA_rate_during_blackout / nominal_DATA_rate
+```
+
+để kiểm tra phát hiện **implicit failure-responsive suppression** của EXP08B (Causal-v3 giảm
+còn 0.59–0.90× trong outage, State-event tăng 3.5–4.6×) có lặp lại dưới node blackout không.
 
 EXP08 kết thúc khi có thể phát biểu: *phương pháp không phụ thuộc vào một sparse-ring topology
 cố định duy nhất, và suy giảm một cách có kiểm soát dưới lỗi kết nối tạm thời.*
@@ -1136,6 +1191,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
 | 2026-08-22 | §2.3: `E_max` (và peak AoI) đổi mốc từ `thời điểm lỗi bắt đầu` sang `max(thời điểm lỗi bắt đầu, 8 s)` | **Sửa lỗi đo lường, không phải tuning.** Permanent fault bắt đầu tại `t = 0` nên cửa sổ cũ đo transient khởi động: trong cùng seed, `E_max` trùng khít giữa P10/P20/Causal-v3 (2.356607 tại ring2/Moderate/perm 20 %), tức đại lượng không phụ thuộc phương thức, khiến gate pass vô nghĩa ở 16/24 condition. Mốc 8 s là evaluation window đã dùng cho mọi metric khác. Burst (bắt đầu 12 s) **không đổi**. Sửa đổi làm gate **khó hơn**. Không đổi Causal-v3, controller, threshold, fault grid, CRN, fault realization hay tỉ số gate. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.2: gate Safety giữ nguyên tuyệt đối ≤ 5 %, nhưng chỉ **đánh giá ở 20 seeds**; ở 3 seeds báo cáo DEFERRED | Ở 3 seeds tỉ lệ khác 0 nhỏ nhất là 1/3, nên "≤ 5 %" thoái hoá thành "= 0" và verdict sẽ đo số seed chứ không đo phương thức. Ở 20 seeds: 0/20 và 1/20 PASS, ≥ 2/20 FAIL — đúng ngưỡng 5 % đã chốt. **Không** thêm điều kiện phụ "P20 cũng safe". | (branch `exp08b-link-failure`) |
+| 2026-08-22 | §4.3 EXP08C: pre-register đầy đủ **trước khi chạy** — ngữ nghĩa fault communication-layer, matched no-fault eligibility, gate chính 1-node, 2-node là secondary/characterization, connectivity trên đồ thị con của các node còn phát, danh sách metric bắt buộc | Bản chốt đầu chỉ có 4 dòng gate và để ngỏ ba chỗ có thể diễn giải lại sau khi nhìn số: (1) mẫu số của SafeFail — nay chốt là **matched no-fault eligible seeds**, để không tính vào blackout những cấu hình vốn đã unsafe; (2) vai trò của 2-node — nay chốt là **secondary**, không được dùng để đổi main claim; (3) λ₂ khi node tắt — node tắt luôn làm λ₂ = 0 nếu đưa vào đồ thị, khiến mọi condition bị loại, nên phân loại chuyển sang **đồ thị con cảm sinh bởi các node còn phát sóng**, tiêu chuẩn §2.4 giữ nguyên. Ghi trước khi tồn tại bất kỳ kết quả EXP08C nào. | (branch `exp08c-node-blackout`) |
 | 2026-08-22 | §4.2: nói rõ mẫu số gate Safety là **số seed connected của từng condition** (`unsafe connected / connected ≤ 5 %`) | **Làm rõ, không đổi gate.** Code đã tính đúng như vậy từ đầu (trung bình `SAFEFAIL` chỉ trên seed connected), nhưng cả §4.2 lẫn comment đều không nói ra, nên câu "0/20 và 1/20 PASS" dễ bị đọc thành "luôn được phép một seed hỏng". Câu đó chỉ đúng khi **cả 20 seed đều connected**; với 19 seed connected thì `1/19 = 5.26 %` **FAIL**. Thứ bị chặn ở 5 % là tỉ lệ, không phải số đếm. Bắt buộc in `nConnected`/`nDisconnected` cho mọi condition. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §2.4 áp dụng: phân loại connectivity tính **trên realization thực sự được mô phỏng** (theo từng seed), thay vì một seed đại diện | **Sửa lỗi đo lường.** Bản chạy đầu phân loại bằng `cfg.net.seed = 1800000`, không phải seed nào trong tập chạy, và kết luận "connected, isolated = 0" cho mọi condition. Realization thật lại có λ₂ = 0 (ring2 / perm 30 % và cả hai burst / Moderate / seed 1) và tới 3 isolated follower. Exclusion vì thế đã áp cho sai đồ thị. **Tiêu chuẩn phân loại không đổi** (§2.4, đồ thị đối xứng hoá, λ₂ > 1e-9); chỉ đối tượng được phân loại là đúng lại. Loại trừ nay theo từng seed; condition không còn seed connected nào thì loại toàn bộ. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.2: thêm chẩn đoán thụ động `minSepDuringFault`, DATA/s trong cửa sổ lỗi, và SafeFail theo từng method | §4.2 vốn đã yêu cầu "min separation during failure" và "traffic response"; bản chạy đầu chưa đo đúng cửa sổ. Cả ba đều **chỉ báo cáo, không gate**. Thêm log truyền tin tích luỹ thụ động vào ba simulator (ghi nhưng không bao giờ đọc trong sim); `test_lock_regression` chứng minh mọi giá trị LOCK tái tạo nguyên vẹn. | (branch `exp08b-link-failure`) |

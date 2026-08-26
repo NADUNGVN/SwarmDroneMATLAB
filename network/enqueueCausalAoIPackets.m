@@ -252,6 +252,14 @@ function [net, txState] = transmit( ...
     net, txState, i, j, tk, currentPos, currentVel, leaderAcc, cfg, isLeaderLink, ...
     netTrace, k)
 
+% Blackout: either radio is off. The transmitter memory is deliberately
+% NOT advanced and no outstanding record is created, because nothing was
+% transmitted. The trigger simply re-evaluates on the next tick.
+if nodeIsDark(cfg, j, tk) || nodeIsDark(cfg, i, tk)
+    return;
+end
+
+
 net.txCount = net.txCount + 1;
 
 
@@ -555,5 +563,34 @@ if ~cfg.fault.down(i,j)
 end
 
 isDown = (tk >= cfg.fault.tStart) && (tk <= cfg.fault.tEnd);
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Node communication blackout. Returns true when node n has its radio
+% off at time tk. A dark node cannot send DATA, receive DATA, send ACK
+% or receive ACK; its dynamics and controller are untouched, and
+% cfg.swarm.A is never modified.
+%
+% Unlike a dead link, the node knows its own radio is off, so it does
+% not transmit and nothing is counted as sent.
+% ============================================================
+
+function dark = nodeIsDark(cfg, n, tk)
+
+dark = false;
+
+if ~isfield(cfg,'blackout') || isempty(cfg.blackout)
+    return;
+end
+
+if ~cfg.blackout.node(n)
+    return;
+end
+
+dark = (tk >= cfg.blackout.tStart) && (tk <= cfg.blackout.tEnd);
 
 end

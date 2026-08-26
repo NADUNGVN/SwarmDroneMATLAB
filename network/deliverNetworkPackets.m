@@ -18,6 +18,26 @@ tol = 1e-12;
 
 for i = 1:N
 
+    % Blackout: receiver i has its radio off. Anything already in flight
+    % when the outage began arrives to a dead antenna and is lost, not
+    % held back to be applied late after the node returns.
+    if nodeIsDark(cfg, i, tk)
+
+        for j = 1:N
+            q = net.queue{i,j};
+            if isempty(q)
+                continue;
+            end
+            at  = cellfun(@(pkt) pkt.arrivalTime, q);
+            due = at <= tk + tol;
+            net.dropCount = net.dropCount + nnz(due);
+            net.queue{i,j} = q(~due);
+        end
+
+        continue;
+
+    end
+
     for j = 1:N
 
         if cfg.swarm.A(i,j) == 0
@@ -140,6 +160,14 @@ for i = 2:N
 
     q = net.leaderQueue{i};
 
+    if nodeIsDark(cfg, i, tk) && ~isempty(q)
+        at  = cellfun(@(pkt) pkt.arrivalTime, q);
+        due = at <= tk + tol;
+        net.dropCount = net.dropCount + nnz(due);
+        net.leaderQueue{i} = q(~due);
+        continue;
+    end
+
     if isempty(q)
         continue;
     end
@@ -216,5 +244,29 @@ for i = 2:N
     net.leaderQueue{i} = q(keep);
 
 end
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Node communication blackout. True when node n has its radio off at
+% time tk. See utils/generateBlackoutRealization.m.
+% ============================================================
+
+function dark = nodeIsDark(cfg, n, tk)
+
+dark = false;
+
+if ~isfield(cfg,'blackout') || isempty(cfg.blackout)
+    return;
+end
+
+if ~cfg.blackout.node(n)
+    return;
+end
+
+dark = (tk >= cfg.blackout.tStart) && (tk <= cfg.blackout.tEnd);
 
 end
