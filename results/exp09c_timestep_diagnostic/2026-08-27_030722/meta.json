@@ -1,0 +1,18 @@
+{
+  "experiment": "exp09c_timestep_diagnostic",
+  "runId": "2026-08-27_030722",
+  "startedAt": "2026-08-27 03:07:22",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "e91c084",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp09c_timestep_diagnostic.m",
+  "finishedAt": "2026-08-27 03:10:44",
+  "elapsedSec": 201.7559342,
+  "elapsedText": "3 m 22 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

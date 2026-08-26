@@ -1,0 +1,101 @@
+
+============================================================
+RUN  : exp09c_timestep_diagnostic
+ID   : 2026-08-27_030722
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp09c_timestep_diagnostic\2026-08-27_030722
+WHEN : 2026-08-27 03:07:22
+============================================================
+
+
+============================================================
+EXP09C timestep diagnostic
+============================================================
+
+inner 500 Hz fixed | physical-time CRN at 0.010 s
+Seeds 20 | sims 360
+ensureParallelPool: starting pool with 16 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+ensureParallelPool: pool ready (16 workers).
+
+--- Moderate ---
+  dt = 0.01  done
+  dt = 0.02  done
+  dt = 0.04  done
+
+--- Stressed ---
+  dt = 0.01  done
+  dt = 0.02  done
+  dt = 0.04  done
+
+============================================================
+CRN alignment across dt
+============================================================
+
+  physical-time trace hash identical across dt : 1
+
+============================================================
+Results
+============================================================
+
+Scenario       dt Method            RMSE    minSep   DATA Hz    trueAoI     nDiv
+Moderate     0.01 P10             0.1008    0.4723    100.00     0.1548        0
+Moderate     0.01 P20             0.0779    0.5013    200.00     0.1174        0
+Moderate     0.01 Causal-v3       0.0869    0.4902    155.61     0.1324        0
+Moderate     0.02 P10             0.0976    0.4761    100.00     0.1548        0
+Moderate     0.02 P20             0.0753    0.5041    200.00     0.1181        0
+Moderate     0.02 Causal-v3       0.0894    0.4872    134.74     0.1417        0
+Moderate     0.04 P10             0.0918    0.4832    100.00     0.1557        0
+Moderate     0.04 P20             0.0702    0.5106    200.00     0.1200        0
+Moderate     0.04 Causal-v3       0.0906    0.4854    111.54     0.1539        0
+
+Stressed     0.01 P10             0.1510    0.4104    100.00     0.2372        0
+Stressed     0.01 P20             0.1150    0.4552    200.00     0.1781        0
+Stressed     0.01 Causal-v3       0.1179    0.4521    202.89     0.1839        0
+Stressed     0.02 P10             0.1479    0.4141    100.00     0.2372        0
+Stressed     0.02 P20             0.1122    0.4584    200.00     0.1789        0
+Stressed     0.02 Causal-v3       0.1194    0.4484    182.91     0.1905        0
+Stressed     0.04 P10             0.1416    0.4220    100.00     0.2374        0
+Stressed     0.04 P20             0.1066    0.4652    200.00     0.1801        0
+Stressed     0.04 Causal-v3       0.1267    0.4398    133.03     0.2127        0
+
+  Scheduler sanity check - realized periodic rates:
+    Moderate  dt 0.01 : P10 100.00 Hz | P20 200.00 Hz
+    Moderate  dt 0.02 : P10 100.00 Hz | P20 200.00 Hz
+    Moderate  dt 0.04 : P10 100.00 Hz | P20 200.00 Hz
+    Stressed  dt 0.01 : P10 100.00 Hz | P20 200.00 Hz
+    Stressed  dt 0.02 : P10 100.00 Hz | P20 200.00 Hz
+    Stressed  dt 0.04 : P10 100.00 Hz | P20 200.00 Hz
+
+============================================================
+Timestep gate (dt 0.01 vs 0.02, Causal-v3)
+============================================================
+
+  Moderate  RMSE 0.0869 vs 0.0894 -> 2.86% | DATA 155.61 vs 134.74 -> 14.37%
+  Stressed  RMSE 0.1179 vs 0.1194 -> 1.26% | DATA 202.89 vs 182.91 -> 10.36%
+
+  [PASS] RMSE difference <= 5%            0 of 2 scenarios breached
+  [FAIL] DATA-rate difference <= 5%       2 of 2 scenarios breached
+
+  dt = 0.04 BOUNDARY CHARACTERIZATION (not a gate):
+    Moderate  vs dt 0.02 : RMSE +1.33% | DATA +18.84% | SafeFail 0.0% | nDiv 0
+    Stressed  vs dt 0.02 : RMSE +5.96% | DATA +31.57% | SafeFail 0.0% | nDiv 0
+
+    If dt = 0.04 breaks, the conclusion is that the method needs an
+    outer rate of at least 25 Hz. The scheduler is not modified to
+    make it look better.
+
+  TIMESTEP GATE: 1 of 2 FAILED
+  Per the pre-registration, nothing is to be tuned.
+
+tidy.csv : 360 rows
+
+EXP09C timestep diagnostic completed.
+saveAllFigures: no open figures.
+
+============================================================
+DONE : exp09c_timestep_diagnostic
+TIME : 3 m 22 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp09c_timestep_diagnostic\2026-08-27_030722
+============================================================
