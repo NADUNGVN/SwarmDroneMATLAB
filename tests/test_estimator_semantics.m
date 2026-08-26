@@ -210,7 +210,10 @@ idx = oS.t >= 8;
 
 Pe = oS.P(idx,:,:);
 
-for a = 2:size(Pe,2)-1
+% All pairs including the leader, matching triu(true(N),1) in
+% computeSwarmMetrics. Starting at 2 would silently compare a
+% follower-only minimum against a metric that includes the leader.
+for a = 1:size(Pe,2)-1
     for b = a+1:size(Pe,2)
         d = sqrt(sum((Pe(:,a,:) - Pe(:,b,:)).^2, 3));
         sepDirect = min(sepDirect, min(d));

@@ -452,6 +452,9 @@ out.txCountLog        = TxCountLog;
 
 % 6-DOF bookkeeping. Empty when cfg.sixdof.enable is off.
 out.six = sixState;
+
+% Synthetic estimator bookkeeping. Empty when inert.
+out.est = estState;
 out.ackCountLog       = AckCountLog;
 
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload

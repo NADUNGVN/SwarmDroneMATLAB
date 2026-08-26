@@ -338,6 +338,9 @@ out.txCountLog = TxCountLog;
 % 6-DOF bookkeeping. Empty when cfg.sixdof.enable is off.
 out.six = sixState;
 
+% Synthetic estimator bookkeeping. Empty when inert.
+out.est = estState;
+
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.
 out.broadcastCount = net.broadcastCount;

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp09c_synthetic_estimator",
+  "runId": "2026-08-27_024310",
+  "startedAt": "2026-08-27 02:43:11",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "d266db2",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp09c_synthetic_estimator.m",
+  "finishedAt": "2026-08-27 02:48:54",
+  "elapsedSec": 343.203367,
+  "elapsedText": "5 m 43 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

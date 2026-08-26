@@ -1,0 +1,125 @@
+
+============================================================
+RUN  : exp09c_synthetic_estimator
+ID   : 2026-08-27_024310
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp09c_synthetic_estimator\2026-08-27_024310
+WHEN : 2026-08-27 02:43:11
+============================================================
+
+
+============================================================
+EXP09C synthetic swarm-state estimator robustness
+============================================================
+
+N = 5 | ring2 | 6-DOF | noise at source only | true-state safety
+Seeds 3 | sims 252
+ensureParallelPool: starting pool with 3 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 3 workers.
+ensureParallelPool: pool ready (3 workers).
+
+--- Clean ---
+  N0 noiseless    done
+  N1 .01/.02      done
+  N2 .03/.05      done
+  N3 .05/.10      done
+  L50  0/0        done
+  L100 0/0        done
+  C3 combined     done
+
+--- Moderate ---
+  N0 noiseless    done
+  N1 .01/.02      done
+  N2 .03/.05      done
+  N3 .05/.10      done
+  L50  0/0        done
+  L100 0/0        done
+  C3 combined     done
+
+--- Stressed ---
+  N0 noiseless    done
+  N1 .01/.02      done
+  N2 .03/.05      done
+  N3 .05/.10      done
+  L50  0/0        done
+  L100 0/0        done
+  C3 combined     done
+
+============================================================
+Structured sweep - Causal-v3
+============================================================
+
+Scenario   Arm                 RMSE    minSep    estErr   posNoise   velNoise   DATA Hz     x N0    hardR    refrR
+Clean      N0 noiseless      0.0414    0.5456    0.0000     0.0000     0.0000     84.47     1.00    0.085    0.014
+Clean      N1 .01/.02        0.0397    0.5449    0.0173     0.0100     0.0200     87.61     1.04    0.197    0.069
+Clean      N2 .03/.05        0.0307    0.5537    0.0520     0.0300     0.0501    197.56     2.34    0.840    0.000
+Clean      N3 .05/.10        0.0412    0.5330    0.0867     0.0501     0.1002    209.32     2.48    0.850    0.000
+Clean      L50  0/0          0.0330    0.5546    0.0126     0.0000     0.0000     84.60     1.00    0.087    0.011
+Clean      L100 0/0          0.0345    0.5507    0.0292     0.0000     0.0000     94.77     1.12    0.516    0.006
+Clean      C3 combined       0.0262    0.5591    0.0535     0.0300     0.0501    197.11     2.33    0.840    0.000
+
+Moderate   N0 noiseless      0.0892    0.4880    0.0000     0.0000     0.0000    134.86     1.00    0.001    0.000
+Moderate   N1 .01/.02        0.0765    0.5015    0.0173     0.0100     0.0199    218.97     1.62    0.018    0.000
+Moderate   N2 .03/.05        0.0782    0.4926    0.0519     0.0299     0.0498    227.48     1.69    0.684    0.000
+Moderate   N3 .05/.10        0.0840    0.4748    0.0864     0.0499     0.0996    227.61     1.69    0.770    0.000
+Moderate   L50  0/0          0.0794    0.4987    0.0123     0.0000     0.0000    135.10     1.00    0.001    0.001
+Moderate   L100 0/0          0.0875    0.4640    0.0334     0.0000     0.0000    204.44     1.52    0.001    0.001
+Moderate   C3 combined       0.0688    0.5003    0.0534     0.0299     0.0498    227.47     1.69    0.681    0.000
+
+Stressed   N0 noiseless      0.1186    0.4437    0.0000     0.0000     0.0000    182.93     1.00    0.001    0.000
+Stressed   N1 .01/.02        0.1082    0.4561    0.0172     0.0099     0.0200    248.21     1.36    0.014    0.000
+Stressed   N2 .03/.05        0.1099    0.4444    0.0517     0.0298     0.0499    249.08     1.36    0.625    0.000
+Stressed   N3 .05/.10        0.1155    0.4275    0.0861     0.0497     0.0998    249.27     1.36    0.703    0.000
+Stressed   L50  0/0          0.1093    0.4629    0.0122     0.0000     0.0000    184.64     1.01    0.001    0.001
+Stressed   L100 0/0          0.1163    0.4087    0.0349     0.0000     0.0000    245.71     1.34    0.001    0.001
+Stressed   C3 combined       0.1002    0.4543    0.0531     0.0298     0.0499    249.11     1.36    0.622    0.000
+
+============================================================
+C3 combined medium - all methods
+============================================================
+
+Scenario   Method         N0 RMSE   C3 RMSE    delta%    minSep  SafeFail   N0 DATA   C3 DATA    ratio
+Clean      P10             0.0361    0.0421     16.84    0.5409       0.0    100.00    100.00     1.00
+Clean      P20             0.0254    0.0302     19.21    0.5570       0.0    200.00    200.00     1.00
+Clean      State-event     0.0823    0.0304    -63.02    0.5563       0.0     43.43    280.84     6.47
+Clean      Causal-v3       0.0414    0.0262    -36.74    0.5591       0.0     84.47    197.11     2.33
+
+Moderate   P10             0.0977    0.0931     -4.68    0.4632       0.0    100.00    100.00     1.00
+Moderate   P20             0.0755    0.0698     -7.56    0.4935       0.0    200.00    200.00     1.00
+Moderate   State-event     0.1724    0.0891    -48.33    0.4843       0.0     43.14    278.99     6.47
+Moderate   Causal-v3       0.0892    0.0688    -22.94    0.5003       0.0    134.86    227.47     1.69
+
+Stressed   P10             0.1479    0.1457     -1.45    0.3961       0.0    100.00    100.00     1.00
+Stressed   P20             0.1120    0.1073     -4.23    0.4535       0.0    200.00    200.00     1.00
+Stressed   State-event     0.2583    0.1366    -47.10    0.4188       0.0     42.59    280.66     6.59
+Stressed   Causal-v3       0.1186    0.1002    -15.53    0.4543       0.0    182.93    249.11     1.36
+
+============================================================
+EXP09C acceptance gates (C3 combined medium)
+============================================================
+
+    G3 breach: Clean     Causal 197.11 Hz vs 84.47 Hz noiseless (2.33x)
+  [PASS ] G1 0 NaN / 0 DIVERGED                  0 diverged of 36 C3 runs
+  [DEFER] G2 SafeFail <= 5%                      0 of 12 cells breached at 3 seeds - NOT EVALUABLE
+  [FAIL ] G3 Causal DATA < 2x noiseless          1 of 3 scenarios breached
+  [PASS ] G4 causal invariants = 0               0 violations
+
+  FALSE-TRIGGER MECHANISM (reported, not gated):
+    Scenario        hardR     adaptR      refrR  DATA x N0
+    Clean          0.8401     0.1599     0.0000       2.33
+    Moderate       0.6813     0.3187     0.0000       1.69
+    Stressed       0.6224     0.3776     0.0000       1.36
+
+  EXP09C GATES: 2 PASS, 1 FAIL, 1 DEFERRED to the 20-seed run
+
+tidy.csv : 252 rows
+
+EXP09C completed.
+saveAllFigures: no open figures.
+
+============================================================
+DONE : exp09c_synthetic_estimator
+TIME : 5 m 43 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp09c_synthetic_estimator\2026-08-27_024310
+============================================================
