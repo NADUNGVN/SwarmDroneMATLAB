@@ -283,7 +283,7 @@ for k = 1:K
     % Follower integration. cfg.sixdof.enable off (default) reproduces the
     % locked semi-implicit Euler exactly; on, each follower is a 6-DOF
     % quadrotor driven through the analytic command-consistent reference.
-    [P, V, sixState] = integrateFollowers(P, V, accCmd, sixState, cfg);
+    [P, V, sixState] = integrateFollowers(P, V, accCmd, sixState, cfg, tk);
 
 
 end

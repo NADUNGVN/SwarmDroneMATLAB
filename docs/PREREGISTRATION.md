@@ -569,46 +569,113 @@ divergence co dau hieu implementation bug. Neu implementation sach ma scientific
 N=10 characterization mat duoi khoang 30 phut thi duoc chay them nhu **secondary
 characterization**, khong dua vao gate chinh.
 
-### 5.2 EXP09B - Disturbance + model mismatch
+### 5.2 EXP09B - Disturbance + plant mismatch
 
-**Chot truoc khi chay (2026-08-26).** Ke thua toan bo kien truc 6-DOF da khoa o 5.1:
-N = 5, ring2, outer 50 Hz / inner 500 Hz, analytic command-consistent reference, ZOH control
-qua 4 stage RK4, leader kinematic. Causal-v3 va communication thresholds giu nguyen.
+**Chot truoc khi chay (2026-08-27, sua thuat ngu va sweep).** Ke thua toan bo kien truc 6-DOF
+da khoa o 5.1: N = 5, ring2, outer 50 Hz / inner 500 Hz, analytic command-consistent reference,
+ZOH control qua 4 stage RK4, leader kinematic. Causal-v3, swarm controller, quad controller,
+communication thresholds, CRN/network deu frozen.
 
-**Diem cot loi: controller VAN dung nominal model. KHONG retune.** Mismatch chi duoc dat vao
-`quad` cua *dynamics*; `cfg.quad` ma `quadCascadedController` doc van la nominal. Neu retune
-controller theo tung muc mismatch thi thi nghiem se do chat luong cua viec tune, khong do
-robustness cua communication policy.
+**Controller LUON doc nominal `cfg.quad`.** Perturbation chi vao **true plant** (`cfg.quadTrue`,
+chi duoc `quad6dofDynamics` doc). Neu retune controller theo tung muc mismatch thi thi nghiem se
+do chat luong cua viec tune, khong do robustness cua communication policy.
 
-**Perturbation grid.**
+#### Thuat ngu - sua truoc khi chay
+
+Nhieu loan ngoai **KHONG duoc goi la aerodynamic wind model**. Ten dung:
+
+> **world-frame external-force / wind proxy**
+
+Hien thuc:
 ```
-wind / external force : 0, 0.5, 1.0 m/s^2 tuong duong (luc the gioi, huong co dinh + gust)
-true mass             : nominal, +10 %, -10 %
-true drag             : nominal, +20 %, -20 %
-actuator lag          : 0 ms (bat buoc); 20 ms, 50 ms (optional, first-order lag tren thrust/torque)
-```
-
-Muc **medium** dung cho gate: wind 0.5 m/s^2, mass +10 %, drag +20 %, actuator lag 0 ms.
-Cac muc con lai la characterization.
-
-**CRN.** Wind/gust duoc pre-generate theo `seed x time`, doc lap voi so lan trigger, cung mot
-`RandStream` rieng (offset 70240001). Moi method gap **cung mot chuoi nhieu vat ly** o cung
-seed; neu khong, khac biet giua cac method se lan voi may man cua gio.
-
-**Gate (muc medium):**
-```
-RMSE_perturbed <= 1.25 x RMSE_nominal      (cung method, cung scenario, cung seed set)
-SafeFail       <= 5 %
-saturation     <= 5 %
-Direction      : xu huong "network worsens -> communication increases" van ton tai
+Fext = cfg.quad.m_nominal * aExtWorld;      % cong vao translational dynamics
 ```
 
-`Direction` duoc kiem tra dinh luong: `rate(Clean) < rate(Moderate) < rate(Stressed)` cho
-Causal-v3 duoi perturbation, giong dinh nghia rate-ordering da dung tu EXP07A.
+Do do cac muc `0.5` va `1.0 m/s^2` la **nominal-mass equivalent external acceleration**, KHONG
+phai toc do gio. **Limitation nay phai ghi ro trong prereg va trong paper**: day la mot proxy
+luc, khong phai mo hinh khi dong hoc; no khong phu thuoc van toc tuong doi cua vehicle, khong co
+he so can khi dong, va khong scale theo dien tich hay huong bay.
 
-**Metric bat buoc:** toan bo diagnostics cua 5.1, cong them: wind magnitude thuc te,
-mass/drag ratio thuc te, actuator lag, va `deltaRMSE` / `deltaSaturation` / `deltaDataRate`
-so voi nominal cung seed.
+Vi `Fext` dung `m_nominal`, gia toc thuc ma vehicle cam nhan la `Fext / m_true`, nen o arm mass
+`+10 %` gia toc ngoai thuc te nho hon muc danh nghia khoang 9 %. Day la he qua co y cua dinh
+nghia, duoc bao cao chu khong bu tru.
+
+#### Disturbance realization
+
+```
+aExtWorld(t) = mean horizontal vector  +  bounded / filtered zero-mean gust
+```
+
+Khong tao turbulence model moi. Gust la nhieu trang loc thong thap (tuong quan ~1 s), zero-mean,
+bi chan.
+
+**CRN:** pre-generate theo `seed x physical time` tren luoi `baseDt = 0.01 s`, tra cuu theo thoi
+gian vat ly. **Cung mot realization cho moi method.** **Khong** dung randomness danh chi so theo
+so lan goi trigger: neu vay, method truyen nhieu hon se tieu thu chuoi nhanh hon va gap mot
+realization khac, khien so sanh mat y nghia.
+
+#### Ma tran - structured sweep, KHONG full Cartesian
+
+```
+B0  nominal
+B1  wind proxy 0.5
+B2  wind proxy 1.0
+B3  mass +10 %
+B4  mass -10 %
+B5  drag +20 %
+B6  drag -20 %
+B7  COMBINED MEDIUM : wind 0.5 + mass +10 % + drag +20 % + actuator lag 0
+B8  actuator lag 20 ms
+B9  actuator lag 50 ms
+```
+
+Moi arm chay tren Clean / Moderate / Stressed x P10 / P20 / State-event / Causal-v3.
+
+**B7 la main gated condition.** B1-B6, B8, B9 la **attribution / characterization**, khong dung
+de doi ket luan chinh.
+
+#### Actuator lag
+
+First-order lag tren thrust/torque **da lenh**, `tau = 20` hoac `50 ms`. Command cua controller
+**van clip theo existing physical limits TRUOC lag**, va **khong doi controller gains**.
+
+Log rieng: `command saturation`, `actual actuator state`, `command-to-actuator tracking error`.
+
+Gate saturation tiep tuc dung **cung semantics EXP09A**: **command-saturation fraction** tren
+follower-inner samples. Giu nguyen de metric khong doi giua A va B - neu doi sang do bao hoa cua
+actuator state thi so cua EXP09A va EXP09B se khong con so sanh duoc.
+
+#### Gate - tai B7, cho tung scenario/method
+
+```
+G1  0 NaN / 0 DIVERGED
+G2  RMSE_perturbed <= 1.25 x RMSE_nominal    (cung method, cung scenario, cung seed set)
+G3  SafeFail   <= 5 %
+G4  saturation <= 5 %
+G5  Causal adaptive-rate direction : rate(Clean) < rate(Moderate) < rate(Stressed)
+```
+
+**Comparative diagnostic (khong phai gate moi):** `RMSE(Causal) < RMSE(State-event)`?
+`sign(Causal - P10)` va `sign(Causal - P20)` co giu nguyen so voi nominal khong?
+
+#### Output bat buoc
+
+scenario; method; perturbation arm; RMSE mean/std; deltaRMSE %; minSep; SafeFail;
+roll/pitch peak; command saturation; control effort; actuator lag tracking error;
+DATA Hz; ACK Hz; delta DATA %; trueAoI; estimatedAoI; actual mass ratio; actual drag ratio;
+`aExt` RMS va peak; toan bo invariant counters.
+
+**Attribution table bat buoc:**
+```
+Arm | Causal RMSE | delta nominal | DATA Hz | minSep | sat%
+```
+
+#### Execution
+
+3 seeds internal. STOP neu gap: regression / causality / CRN / passive-flag failure; sai tach
+true-vs-nominal; wind realization khac nhau giua cac method; actuator semantics ambiguity.
+Neu implementation sach, ke ca gate FAIL, chay thang 20 seeds unchanged va tag theo ket qua
+thuc te (positive / partial / negative). **Khong sua algorithm.**
 
 **Divergence semantics giu nguyen 5.1**: DIVERGED = stability FAIL va unsafe, loai khoi
 continuous mean, bao rieng trong denominator.
@@ -1338,6 +1405,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-27 | 5.2 EXP09B: sua thuat ngu disturbance va chot structured sweep B0-B9 truoc khi chay | Goi nhieu loan ngoai la "aerodynamic wind model" la sai su that: no khong phu thuoc van toc tuong doi, khong co he so can khi dong, khong scale theo dien tich hay huong bay. Ten dung la **world-frame external-force / wind proxy**, va muc 0.5 / 1.0 m/s^2 la **nominal-mass equivalent external acceleration** vi `Fext = m_nominal * aExtWorld`. He qua co y: o arm mass +10 %% gia toc ngoai thuc te nho hon danh nghia ~9 %%, duoc bao cao chu khong bu tru. Sweep chuyen sang structured B0-B9 (khong full Cartesian) voi **B7 la main gated condition**, cac arm con lai la attribution. Gate saturation giu nguyen semantics command-saturation cua EXP09A de so cua A va B con so sanh duoc. Ghi truoc khi ton tai bat ky ket qua EXP09B nao. | (branch `exp09b-physical-mismatch`) |
 | 2026-08-26 | 5.2 EXP09B va 5.3 EXP09C: pre-register day du truoc khi chay | EXP09B: chot mismatch chi dat vao dynamics, controller van dung nominal model va **khong retune** - neu retune theo tung muc mismatch thi thi nghiem do chat luong cua viec tune chu khong do robustness; wind CRN theo `seed x time`, doc lap so lan trigger. EXP09C: chot noise dat o lop cam bien/estimator chu khong phai lop mang, va minSep van do tren **trang thai that** - neu do tren trang thai bi nhieu thi mot policy co the "an toan" chi vi no khong nhin thay va cham; noise CRN chi so hoa theo `seed x time x agent` **khong** theo so lan goi trigger, vi neu rut nhieu tai thoi diem trigger thi policy truyen nhieu hon se gap mot realization khac va so sanh mat y nghia; communication timing khong doi theo outer dt vi do la tham so vat ly cua giao thuc. Ghi truoc khi ton tai bat ky ket qua EXP09B/C nao. | (branch `exp09a-multiuav-6dof`) |
 | 2026-08-26 | 5.1 EXP09A: chot toan bo truoc khi chay - N=5/ring2, timing 10:1, analytic command-consistent reference, ZOH control qua 4 stage RK4, dinh nghia saturation tren follower-inner samples, hard divergence semantics, gate G1-G7, danh sach validation va diagnostics | Ban chot dau chi mo ta kien truc o muc y tuong va de ngo ba cho co the dien giai lai sau khi nhin so: (1) reference giai tich **khong** bit-identical voi semi-implicit Euler - lech dung `0.5*dt^2*a` moi buoc, nay ghi ro va co check duong trong `test_setpoint_interface`, de chenh lech DI-6DOF khong bi gan nham cho dong luc hoc; (2) mau so cua saturation - nay chot la follower-inner samples, kem per-drone peak; (3) run DIVERGED - nay tinh la stability FAIL **va** unsafe, loai khoi continuous mean nhung phai bao rieng trong denominator, vi trung binh hoa mot run phan ky bien that bai thanh mot so huu han lon. Ghi truoc khi ton tai bat ky ket qua EXP09A nao. | (branch `exp09a-multiuav-6dof`) |
 | 2026-08-22 | §2.3: `E_max` (và peak AoI) đổi mốc từ `thời điểm lỗi bắt đầu` sang `max(thời điểm lỗi bắt đầu, 8 s)` | **Sửa lỗi đo lường, không phải tuning.** Permanent fault bắt đầu tại `t = 0` nên cửa sổ cũ đo transient khởi động: trong cùng seed, `E_max` trùng khít giữa P10/P20/Causal-v3 (2.356607 tại ring2/Moderate/perm 20 %), tức đại lượng không phụ thuộc phương thức, khiến gate pass vô nghĩa ở 16/24 condition. Mốc 8 s là evaluation window đã dùng cho mọi metric khác. Burst (bắt đầu 12 s) **không đổi**. Sửa đổi làm gate **khó hơn**. Không đổi Causal-v3, controller, threshold, fault grid, CRN, fault realization hay tỉ số gate. | (branch `exp08b-link-failure`) |

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp09b_physical_mismatch",
+  "runId": "2026-08-27_021119",
+  "startedAt": "2026-08-27 02:11:19",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "452af01",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp09b_physical_mismatch.m",
+  "finishedAt": "2026-08-27 02:19:03",
+  "elapsedSec": 463.3422706,
+  "elapsedText": "7 m 43 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

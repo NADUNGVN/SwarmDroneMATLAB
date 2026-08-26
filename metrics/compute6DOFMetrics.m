@@ -35,6 +35,19 @@ Q.perDronePeakSat = [];
 
 Q.controlEffort = NaN;
 
+Q.lagErrMean = NaN;
+Q.lagErrMax  = NaN;
+
+% True-vs-nominal plant ratios, reported so a perturbation arm can never
+% be confused with the nominal one when reading a results table.
+Q.massRatio = 1;
+Q.dragRatio = 1;
+
+if isfield(cfg,'quadTrue') && ~isempty(cfg.quadTrue)
+    Q.massRatio = cfg.quadTrue.m / cfg.quad.m;
+    Q.dragRatio = cfg.quadTrue.linearDrag / cfg.quad.linearDrag;
+end
+
 if ~isfield(out,'six') || isempty(out.six) || ~isfield(out.six,'x')
     return;
 end
@@ -77,6 +90,11 @@ if six.effortN > 0
         (six.thrustSq / six.effortN) / hover^2 + ...
         (six.torqueSq / six.effortN);
 
+end
+
+if isfield(six,'lagErrN') && six.lagErrN > 0
+    Q.lagErrMean = six.lagErrSum / six.lagErrN;
+    Q.lagErrMax  = six.lagErrMax;
 end
 
 Q.diverged = six.diverged || ~all(isfinite(six.x(:)));
