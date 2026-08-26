@@ -1,0 +1,18 @@
+{
+  "experiment": "exp08c_node_blackout",
+  "runId": "2026-08-26_173420",
+  "startedAt": "2026-08-26 17:34:20",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "e8c4017",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp08c_node_blackout.m",
+  "finishedAt": "2026-08-26 18:01:00",
+  "elapsedSec": 1599.9775204,
+  "elapsedText": "26 m 40 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

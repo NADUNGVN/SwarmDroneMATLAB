@@ -1,0 +1,360 @@
+
+============================================================
+RUN  : exp08c_node_blackout
+ID   : 2026-08-26_173420
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp08c_node_blackout\2026-08-26_173420
+WHEN : 2026-08-26 17:34:20
+============================================================
+
+
+============================================================
+EXP08C node communication blackout
+============================================================
+
+   N Topology   Fault          minL2     maxL2  nConn  nDisc   maxIso  inDegMean  inDegMin  discDur
+  10 ring2      none          0.6443    0.6443     20      0        0       2.00         2      0.0
+  10 ring2      1node 2s      0.3820    0.7530     20      0        0       1.77         1      0.0
+  10 ring2      1node 5s      0.3820    0.7530     20      0        0       1.77         1      0.0
+  10 ring2      2node 2s     -0.0000    0.7715     18      2        1       1.51         0      0.2
+  10 ring2      2node 5s     -0.0000    0.7715     18      2        1       1.51         0      0.5
+  10 sparse4    none          2.0646    2.0646     20      0        0       4.00         4      0.0
+  10 sparse4    1node 2s      1.5461    1.9139     20      0        0       3.58         3      0.0
+  10 sparse4    1node 5s      1.5461    1.9139     20      0        0       3.58         3      0.0
+  10 sparse4    2node 2s      1.1691    1.8366     20      0        0       3.15         2      0.0
+  10 sparse4    2node 5s      1.1691    1.8366     20      0        0       3.15         2      0.0
+  20 ring2      none          0.4981    0.4981     20      0        0       2.00         2      0.0
+  20 ring2      1node 2s      0.3820    0.5267     20      0        0       1.90         1      0.0
+  20 ring2      1node 5s      0.3820    0.5267     20      0        0       1.90         1      0.0
+  20 ring2      2node 2s      0.0000    0.5023     19      1        1       1.79         0      0.1
+  20 ring2      2node 5s      0.0000    0.5023     19      1        1       1.79         0      0.2
+  20 sparse4    none          0.8970    0.8970     20      0        0       4.00         4      0.0
+  20 sparse4    1node 2s      0.7455    0.9106     20      0        0       3.79         3      0.0
+  20 sparse4    1node 5s      0.7455    0.9106     20      0        0       3.79         3      0.0
+  20 sparse4    2node 2s      0.6518    0.9640     20      0        0       3.61         2      0.0
+  20 sparse4    2node 5s      0.6518    0.9640     20      0        0       3.61         2      0.0
+
+  lambda2 is computed on the subgraph induced by the nodes still
+  radiating. Seeds with lambda2 = 0 are labelled DISCONNECTED and
+  belong to the impossibility region, not to policy failure.
+
+Seeds 20 | sims 3200
+ensureParallelPool: starting pool with 16 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+ensureParallelPool: pool ready (16 workers).
+
+--- Moderate | N=10 | ring2 ---
+  none      [Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In exp08c_node_blackout (line 209)] 
+  done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Moderate | N=10 | sparse4 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Moderate | N=20 | ring2 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Moderate | N=20 | sparse4 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Stressed | N=10 | ring2 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Stressed | N=10 | sparse4 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Stressed | N=20 | ring2 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+--- Stressed | N=20 | sparse4 ---
+  none        done
+  1node 2s    done
+  1node 5s    done
+  2node 2s    done
+  2node 5s    done
+
+============================================================
+Results (means over connected seeds)
+============================================================
+
+Scen        N Topo      Fault     Method           RMSE   minSep  peakErr  minSepBO  recovery   preD/s   durD/s  postD/s   ratio
+Moderate   10 ring2     none      P10            0.1502   0.4106   0.2130    0.4106       NaN    230.0    230.0      NaN    1.00
+Moderate   10 ring2     none      P20            0.1148   0.4539   0.1605    0.4539       NaN    460.0    460.0      NaN    1.00
+Moderate   10 ring2     none      State-event    0.2632   0.2695   0.3850    0.2695       NaN     84.1     88.0      NaN    1.05
+Moderate   10 ring2     none      Causal-v3      0.1369   0.4266   0.1908    0.4266       NaN    293.3    286.7      NaN    0.98
+
+Moderate   10 ring2     1node 2s  P10            0.1626   0.3927   0.3802    0.4196     3.519    228.7    192.0    230.0    0.83
+Moderate   10 ring2     1node 2s  P20            0.1267   0.4179   0.3396    0.4401     3.403    458.7    384.0    460.0    0.83
+Moderate   10 ring2     1node 2s  State-event    0.2728   0.2614   0.4765    0.3226     3.418     87.7     69.9     88.5    0.83
+Moderate   10 ring2     1node 2s  Causal-v3      0.1482   0.4044   0.3615    0.4255     3.334    287.1    224.5    288.6    0.77
+
+Moderate   10 ring2     1node 5s  P10            0.2201   0.2454   0.9169    0.2833     3.891    228.7    192.0    230.0    0.83
+Moderate   10 ring2     1node 5s  P20            0.1880   0.2696   0.8826    0.3029     3.646    458.7    384.0    460.0    0.83
+Moderate   10 ring2     1node 5s  State-event    0.3183   0.1936   0.9945    0.2341     3.496     87.7     65.5     92.0    0.78
+Moderate   10 ring2     1node 5s  Causal-v3      0.2059   0.2549   0.9059    0.2890     3.451    287.1    215.0    297.8    0.73
+
+Moderate   10 ring2     2node 2s  P10            0.1750   0.3757   0.4120    0.3943     4.089    227.5    155.6    230.0    0.68
+Moderate   10 ring2     2node 2s  P20            0.1384   0.4016   0.3651    0.4205     3.863    457.5    311.1    460.0    0.68
+Moderate   10 ring2     2node 2s  State-event    0.2849   0.2581   0.5458    0.3041     4.161     87.6     52.9     89.4    0.63
+Moderate   10 ring2     2node 2s  Causal-v3      0.1593   0.3859   0.3909    0.4029     3.760    286.5    169.4    291.6    0.58
+
+Moderate   10 ring2     2node 5s  P10            0.2749   0.1658   0.9455    0.1872     4.392    227.5    155.6    230.0    0.68
+Moderate   10 ring2     2node 5s  P20            0.2424   0.1955   0.9039    0.2139     3.937    457.5    311.1    460.0    0.68
+Moderate   10 ring2     2node 5s  State-event    0.3652   0.1299   1.0422    0.1676     3.686     87.6     47.5     95.9    0.56
+Moderate   10 ring2     2node 5s  Causal-v3      0.2586   0.1788   0.9276    0.1961     3.697    286.5    158.1    307.8    0.54
+
+Moderate   10 sparse4   none      P10            0.1701   0.3876   0.2223    0.3876       NaN    410.0    410.0      NaN    1.00
+Moderate   10 sparse4   none      P20            0.1281   0.4400   0.1660    0.4400       NaN    820.0    820.0      NaN    1.00
+Moderate   10 sparse4   none      State-event    0.3046   0.2207   0.4165    0.2207       NaN    141.1    154.3      NaN    1.09
+Moderate   10 sparse4   none      Causal-v3      0.1574   0.4032   0.2020    0.4032       NaN    516.7    496.7      NaN    0.96
+
+Moderate   10 sparse4   1node 2s  P10            0.1831   0.3785   0.3884    0.4205     3.434    407.6    336.5    410.0    0.82
+Moderate   10 sparse4   1node 2s  P20            0.1407   0.4240   0.3470    0.4488     3.408    817.5    673.0    820.0    0.82
+Moderate   10 sparse4   1node 2s  State-event    0.3159   0.2223   0.4972    0.3088     2.203    155.6    118.7    155.6    0.84
+Moderate   10 sparse4   1node 2s  Causal-v3      0.1685   0.3945   0.3730    0.4292     3.264    493.1    383.0    506.2    0.74
+
+Moderate   10 sparse4   1node 5s  P10            0.2442   0.2826   0.9260    0.3199     3.983    407.6    336.5    410.0    0.82
+Moderate   10 sparse4   1node 5s  P20            0.2058   0.3032   0.8900    0.3312     3.809    817.5    673.0    820.0    0.82
+Moderate   10 sparse4   1node 5s  State-event    0.3647   0.1917   1.0149    0.2616     3.393    155.6    106.5    162.5    0.75
+Moderate   10 sparse4   1node 5s  Causal-v3      0.2295   0.2901   0.9161    0.3218     3.493    493.1    360.8    530.4    0.70
+
+Moderate   10 sparse4   2node 2s  P10            0.1938   0.3768   0.4146    0.4030     3.919    405.4    270.5    410.0    0.66
+Moderate   10 sparse4   2node 2s  P20            0.1511   0.4199   0.3685    0.4342     3.785    815.4    541.0    820.0    0.66
+Moderate   10 sparse4   2node 2s  State-event    0.3252   0.2205   0.5420    0.2967     3.199    155.6     88.2    156.9    0.63
+Moderate   10 sparse4   2node 2s  Causal-v3      0.1779   0.3928   0.3953    0.4131     3.565    492.5    286.7    512.3    0.55
+
+Moderate   10 sparse4   2node 5s  P10            0.2956   0.2365   0.9463    0.2707     4.275    405.4    270.5    410.0    0.66
+Moderate   10 sparse4   2node 5s  P20            0.2575   0.2590   0.9066    0.2940     4.012    815.4    541.0    820.0    0.66
+Moderate   10 sparse4   2node 5s  State-event    0.4069   0.1671   1.0480    0.2235     3.599    155.6     75.4    168.9    0.53
+Moderate   10 sparse4   2node 5s  Causal-v3      0.2792   0.2475   0.9338    0.2776     3.675    492.5    260.4    547.0    0.50
+
+Moderate   20 ring2     none      P10            0.1786   0.4044   0.2486    0.4044       NaN    480.0    480.0      NaN    1.00
+Moderate   20 ring2     none      P20            0.1366   0.4501   0.1927    0.4501       NaN    960.0    960.0      NaN    1.00
+Moderate   20 ring2     none      State-event    0.3111   0.2566   0.4349    0.2566       NaN    171.1    182.4      NaN    1.07
+Moderate   20 ring2     none      Causal-v3      0.1624   0.4207   0.2281    0.4207       NaN    604.8    602.6      NaN    1.00
+
+Moderate   20 ring2     1node 2s  P10            0.1853   0.3923   0.4117    0.4324     3.314    478.7    442.0    480.0    0.92
+Moderate   20 ring2     1node 2s  P20            0.1431   0.4253   0.3676    0.4566     3.259    958.7    884.0    960.0    0.92
+Moderate   20 ring2     1node 2s  State-event    0.3164   0.2505   0.5350    0.3287     2.515    183.2    164.8    182.8    0.96
+Moderate   20 ring2     1node 2s  Causal-v3      0.1688   0.4060   0.3921    0.4420     3.162    608.3    540.1    603.2    0.89
+
+Moderate   20 ring2     1node 5s  P10            0.2161   0.3171   0.9482    0.3393     3.707    478.7    442.0    480.0    0.92
+Moderate   20 ring2     1node 5s  P20            0.1769   0.3371   0.9101    0.3539     3.602    958.7    884.0    960.0    0.92
+Moderate   20 ring2     1node 5s  State-event    0.3402   0.2131   1.0395    0.2594     3.200    183.2    157.8    186.5    0.92
+Moderate   20 ring2     1node 5s  Causal-v3      0.2001   0.3250   0.9352    0.3442     3.458    608.3    525.2    613.6    0.87
+
+Moderate   20 ring2     2node 2s  P10            0.1915   0.3844   0.4440    0.4145     3.866    477.5    405.3    480.0    0.84
+Moderate   20 ring2     2node 2s  P20            0.1490   0.4135   0.3930    0.4392     3.709    957.5    810.5    960.0    0.84
+Moderate   20 ring2     2node 2s  State-event    0.3226   0.2573   0.5800    0.3204     3.511    183.1    146.8    183.5    0.86
+Moderate   20 ring2     2node 2s  Causal-v3      0.1744   0.3972   0.4211    0.4238     3.636    608.1    480.0    606.0    0.79
+
+Moderate   20 ring2     2node 5s  P10            0.2472   0.2484   0.9755    0.2777     4.029    477.5    405.3    480.0    0.84
+Moderate   20 ring2     2node 5s  P20            0.2089   0.2696   0.9327    0.2982     3.874    957.5    810.5    960.0    0.84
+Moderate   20 ring2     2node 5s  State-event    0.3658   0.1739   1.0815    0.2255     3.563    183.1    137.9    190.3    0.81
+Moderate   20 ring2     2node 5s  Causal-v3      0.2308   0.2615   0.9589    0.2876     3.687    608.1    459.7    625.5    0.76
+
+Moderate   20 sparse4   none      P10            0.2570   0.3377   0.3552    0.3377       NaN    860.0    860.0      NaN    1.00
+Moderate   20 sparse4   none      P20            0.1957   0.4002   0.2798    0.4002       NaN   1720.0   1720.0      NaN    1.00
+Moderate   20 sparse4   none      State-event    0.4527   0.1411   0.6205    0.1411       NaN    283.9    307.7      NaN    1.08
+Moderate   20 sparse4   none      Causal-v3      0.2399   0.3547   0.3344    0.3547       NaN   1032.9   1031.9      NaN    1.00
+
+Moderate   20 sparse4   1node 2s  P10            0.2653   0.3326   0.4805    0.3959     2.506    857.4    782.0    860.0    0.91
+Moderate   20 sparse4   1node 2s  P20            0.2038   0.3883   0.4213    0.4327     2.781   1717.4   1564.0   1720.0    0.91
+Moderate   20 sparse4   1node 2s  State-event    0.4604   0.1393   0.6887    0.2569     1.084    305.0    277.9    309.0    0.98
+Moderate   20 sparse4   1node 2s  Causal-v3      0.2462   0.3479   0.4591    0.4060     2.552   1047.8    912.9   1044.7    0.88
+
+Moderate   20 sparse4   1node 5s  P10            0.2994   0.2290   1.0088    0.2575     3.768    857.4    782.0    860.0    0.91
+Moderate   20 sparse4   1node 5s  P20            0.2413   0.2590   0.9591    0.2737     3.722   1717.4   1564.0   1720.0    0.91
+Moderate   20 sparse4   1node 5s  State-event    0.4861   0.1070   1.1308    0.1849     3.263    305.0    257.1    315.0    0.91
+Moderate   20 sparse4   1node 5s  Causal-v3      0.2799   0.2380   0.9916    0.2610     3.470   1047.8    885.0   1076.8    0.86
+
+Moderate   20 sparse4   2node 2s  P10            0.2718   0.3254   0.5138    0.3696     3.551    855.1    713.0    860.0    0.83
+Moderate   20 sparse4   2node 2s  P20            0.2101   0.3736   0.4477    0.4028     3.597   1715.1   1426.0   1720.0    0.83
+Moderate   20 sparse4   2node 2s  State-event    0.4652   0.1381   0.7229    0.2385     2.229    304.9    246.2    310.2    0.87
+Moderate   20 sparse4   2node 2s  Causal-v3      0.2518   0.3393   0.4911    0.3769     3.450   1047.2    813.4   1053.5    0.79
+
+Moderate   20 sparse4   2node 5s  P10            0.3303   0.1871   1.0342    0.2212     4.324    855.1    713.0    860.0    0.83
+Moderate   20 sparse4   2node 5s  P20            0.2734   0.2035   0.9805    0.2183     4.167   1715.1   1426.0   1720.0    0.83
+Moderate   20 sparse4   2node 5s  State-event    0.5087   0.0928   1.1727    0.1513     3.869    304.9    221.0    320.9    0.78
+Moderate   20 sparse4   2node 5s  Causal-v3      0.3097   0.1921   1.0180    0.2207     3.856   1047.2    768.3   1103.6    0.74
+
+Stressed   10 ring2     none      P10            0.2273   0.3122   0.3151    0.3122       NaN    230.0    230.0      NaN    1.00
+Stressed   10 ring2     none      P20            0.1731   0.3801   0.2425    0.3801       NaN    460.0    460.0      NaN    1.00
+Stressed   10 ring2     none      State-event    0.3936   0.1021   0.5866    0.1021       NaN     77.7     85.3      NaN    1.10
+Stressed   10 ring2     none      Causal-v3      0.1835   0.3674   0.2583    0.3674       NaN    383.3    383.4      NaN    1.00
+
+Stressed   10 ring2     1node 2s  P10            0.2400   0.3070   0.4701    0.3536     3.632    228.7    192.0    230.0    0.83
+Stressed   10 ring2     1node 2s  P20            0.1850   0.3701   0.4032    0.4047     3.567    458.7    384.0    460.0    0.83
+Stressed   10 ring2     1node 2s  State-event    0.4084   0.0896   0.6804    0.1799     2.143     84.9     68.9     85.8    0.89
+Stressed   10 ring2     1node 2s  Causal-v3      0.1954   0.3590   0.4148    0.3952     3.365    382.8    304.8    385.8    0.80
+
+Stressed   10 ring2     1node 5s  P10            0.2911   0.2129   0.9886    0.2537     4.275    228.7    192.0    230.0    0.83
+Stressed   10 ring2     1node 5s  P20            0.2395   0.2369   0.9364    0.2757     3.966    458.7    384.0    460.0    0.83
+Stressed   10 ring2     1node 5s  State-event    0.4465   0.0692   1.1129    0.1532     3.951     84.9     64.4     88.6    0.83
+Stressed   10 ring2     1node 5s  Causal-v3      0.2487   0.2329   0.9522    0.2739     3.682    382.8    292.5    395.9    0.76
+
+Stressed   10 ring2     2node 2s  P10            0.2532   0.3011   0.5172    0.3316     4.386    227.5    155.6    230.0    0.68
+Stressed   10 ring2     2node 2s  P20            0.1968   0.3585   0.4354    0.3792     4.136    457.5    311.1    460.0    0.68
+Stressed   10 ring2     2node 2s  State-event    0.4188   0.0987   0.7282    0.1668     4.418     84.7     52.4     86.4    0.67
+Stressed   10 ring2     2node 2s  Causal-v3      0.2071   0.3471   0.4515    0.3702     3.954    382.3    231.1    388.5    0.60
+
+Stressed   10 ring2     2node 5s  P10            0.3448   0.1434   1.0294    0.1740     4.668    227.5    155.6    230.0    0.68
+Stressed   10 ring2     2node 5s  P20            0.2927   0.1586   0.9668    0.1791     4.336    457.5    311.1    460.0    0.68
+Stressed   10 ring2     2node 5s  State-event    0.4855   0.0546   1.1603    0.1254     3.929     84.7     47.3     91.7    0.61
+Stressed   10 ring2     2node 5s  Causal-v3      0.3015   0.1594   0.9783    0.1812     3.999    382.3    210.3    407.6    0.55
+
+Stressed   10 sparse4   none      P10            0.2608   0.2756   0.3399    0.2756       NaN    410.0    410.0      NaN    1.00
+Stressed   10 sparse4   none      P20            0.1969   0.3551   0.2558    0.3551       NaN    820.0    820.0      NaN    1.00
+Stressed   10 sparse4   none      State-event    0.4594   0.0375   0.6423    0.0375       NaN    129.6    146.7      NaN    1.13
+Stressed   10 sparse4   none      Causal-v3      0.2101   0.3379   0.2733    0.3379       NaN    682.9    683.6      NaN    1.00
+
+Stressed   10 sparse4   1node 2s  P10            0.2739   0.2734   0.4818    0.3425     3.402    407.6    336.5    410.0    0.82
+Stressed   10 sparse4   1node 2s  P20            0.2094   0.3486   0.4155    0.3993     3.437    817.5    673.0    820.0    0.82
+Stressed   10 sparse4   1node 2s  State-event    0.4705   0.0359   0.6858    0.1604     0.937    144.6    118.0    148.0    0.91
+Stressed   10 sparse4   1node 2s  Causal-v3      0.2228   0.3333   0.4270    0.3888     3.355    682.1    530.9    684.1    0.78
+
+Stressed   10 sparse4   1node 5s  P10            0.3280   0.2302   1.0049    0.2866     4.227    407.6    336.5    410.0    0.82
+Stressed   10 sparse4   1node 5s  P20            0.2673   0.2732   0.9501    0.3144     4.040    817.5    673.0    820.0    0.82
+Stressed   10 sparse4   1node 5s  State-event    0.5123   0.0293   1.1191    0.1516     3.493    144.6    105.2    151.8    0.81
+Stressed   10 sparse4   1node 5s  Causal-v3      0.2800   0.2666   0.9612    0.3106     3.746    682.1    481.8    711.2    0.71
+
+Stressed   10 sparse4   2node 2s  P10            0.2853   0.2723   0.5215    0.3303     4.128    405.4    270.5    410.0    0.66
+Stressed   10 sparse4   2node 2s  P20            0.2200   0.3479   0.4458    0.3863     4.003    815.4    541.0    820.0    0.66
+Stressed   10 sparse4   2node 2s  State-event    0.4800   0.0388   0.7406    0.1449     2.580    144.4     87.8    148.9    0.68
+Stressed   10 sparse4   2node 2s  Causal-v3      0.2332   0.3333   0.4584    0.3768     3.898    681.1    391.5    686.9    0.57
+
+Stressed   10 sparse4   2node 5s  P10            0.3778   0.1950   1.0364    0.2407     4.674    405.4    270.5    410.0    0.66
+Stressed   10 sparse4   2node 5s  P20            0.3177   0.2312   0.9748    0.2660     4.386    815.4    541.0    820.0    0.66
+Stressed   10 sparse4   2node 5s  State-event    0.5507   0.0230   1.1618    0.1426     3.853    144.4     75.5    156.5    0.58
+Stressed   10 sparse4   2node 5s  Causal-v3      0.3289   0.2272   0.9886    0.2601     3.962    681.1    333.8    734.6    0.49
+
+Stressed   20 ring2     none      P10            0.2679   0.3042   0.3552    0.3042       NaN    480.0    480.0      NaN    1.00
+Stressed   20 ring2     none      P20            0.2049   0.3750   0.2792    0.3750       NaN    960.0    960.0      NaN    1.00
+Stressed   20 ring2     none      State-event    0.4629   0.0850   0.6780    0.0850       NaN    160.2    173.3      NaN    1.08
+Stressed   20 ring2     none      Causal-v3      0.2176   0.3618   0.2939    0.3618       NaN    799.9    800.1      NaN    1.00
+
+Stressed   20 ring2     1node 2s  P10            0.2746   0.2983   0.5115    0.3614     3.101    478.7    442.0    480.0    0.92
+Stressed   20 ring2     1node 2s  P20            0.2113   0.3681   0.4391    0.4149     3.222    958.7    884.0    960.0    0.92
+Stressed   20 ring2     1node 2s  State-event    0.4669   0.0776   0.7380    0.1781     2.214    172.4    159.5    174.2    1.00
+Stressed   20 ring2     1node 2s  Causal-v3      0.2240   0.3555   0.4560    0.4053     3.105    799.5    720.7    802.0    0.90
+
+Stressed   20 ring2     1node 5s  P10            0.3005   0.2538   1.0251    0.2941     3.779    478.7    442.0    480.0    0.92
+Stressed   20 ring2     1node 5s  P20            0.2402   0.3046   0.9713    0.3286     3.770    958.7    884.0    960.0    0.92
+Stressed   20 ring2     1node 5s  State-event    0.4846   0.0851   1.1569    0.1666     3.526    172.4    152.8    177.0    0.95
+Stressed   20 ring2     1node 5s  Causal-v3      0.2524   0.2926   0.9931    0.3193     3.572    799.5    705.0    814.0    0.88
+
+Stressed   20 ring2     2node 2s  P10            0.2807   0.2975   0.5568    0.3505     3.854    477.5    405.3    480.0    0.84
+Stressed   20 ring2     2node 2s  P20            0.2171   0.3620   0.4774    0.3991     3.809    957.5    810.5    960.0    0.84
+Stressed   20 ring2     2node 2s  State-event    0.4702   0.0958   0.7829    0.1687     2.993    172.2    143.0    175.1    0.89
+Stressed   20 ring2     2node 2s  Causal-v3      0.2298   0.3511   0.4922    0.3908     3.704    798.9    644.4    804.0    0.81
+
+Stressed   20 ring2     2node 5s  P10            0.3293   0.1984   1.0708    0.2387     4.183    477.5    405.3    480.0    0.84
+Stressed   20 ring2     2node 5s  P20            0.2702   0.2369   1.0086    0.2683     4.115    957.5    810.5    960.0    0.84
+Stressed   20 ring2     2node 5s  State-event    0.5101   0.0696   1.2337    0.1466     4.006    172.2    134.0    178.8    0.84
+Stressed   20 ring2     2node 5s  Causal-v3      0.2824   0.2265   1.0256    0.2590     3.898    798.9    616.6    826.2    0.77
+
+Stressed   20 sparse4   none      P10            0.3816   0.2091   0.5078    0.2091       NaN    860.0    860.0      NaN    1.00
+Stressed   20 sparse4   none      P20            0.2949   0.2986   0.3980    0.2986       NaN   1720.0   1720.0      NaN    1.00
+Stressed   20 sparse4   none      State-event    0.6565   0.0194   0.9296    0.0194       NaN    250.4    275.0      NaN    1.10
+Stressed   20 sparse4   none      Causal-v3      0.3132   0.2801   0.4175    0.2801       NaN   1431.8   1433.6      NaN    1.00
+
+Stressed   20 sparse4   1node 2s  P10            0.3896   0.2075   0.6176    0.3131     1.887    857.4    782.0    860.0    0.91
+Stressed   20 sparse4   1node 2s  P20            0.3028   0.2948   0.5191    0.3706     2.214   1717.4   1564.0   1720.0    0.91
+Stressed   20 sparse4   1node 2s  State-event    0.6644   0.0220   0.9725    0.1264     0.689    270.1    256.4    274.7    1.02
+Stressed   20 sparse4   1node 2s  Causal-v3      0.3212   0.2769   0.5368    0.3581     2.271   1432.5   1265.8   1431.6    0.88
+
+Stressed   20 sparse4   1node 5s  P10            0.4178   0.1658   1.1088    0.2196     3.773    857.4    782.0    860.0    0.91
+Stressed   20 sparse4   1node 5s  P20            0.3348   0.2127   1.0386    0.2490     3.793   1717.4   1564.0   1720.0    0.91
+Stressed   20 sparse4   1node 5s  State-event    0.6824   0.0296   1.2632    0.1020     2.278    270.1    242.0    275.2    0.97
+Stressed   20 sparse4   1node 5s  Causal-v3      0.3523   0.2026   1.0503    0.2413     3.718   1432.5   1202.2   1456.0    0.84
+
+Stressed   20 sparse4   2node 2s  P10            0.3961   0.2051   0.6578    0.2905     3.421    855.1    713.0    860.0    0.83
+Stressed   20 sparse4   2node 2s  P20            0.3091   0.2902   0.5563    0.3441     3.376   1715.1   1426.0   1720.0    0.83
+Stressed   20 sparse4   2node 2s  State-event    0.6699   0.0173   1.0017    0.1178     1.336    270.0    227.7    275.1    0.91
+Stressed   20 sparse4   2node 2s  Causal-v3      0.3277   0.2747   0.5749    0.3331     3.487   1431.7   1121.4   1428.8    0.78
+
+Stressed   20 sparse4   2node 5s  P10            0.4456   0.1433   1.1469    0.1960     4.542    855.1    713.0    860.0    0.83
+Stressed   20 sparse4   2node 5s  P20            0.3642   0.1768   1.0691    0.2241     4.401   1715.1   1426.0   1720.0    0.83
+Stressed   20 sparse4   2node 5s  State-event    0.7004   0.0393   1.3200    0.0806     3.520    270.0    209.7    279.5    0.84
+Stressed   20 sparse4   2node 5s  Causal-v3      0.3815   0.1667   1.0827    0.2192     4.279   1431.7   1022.7   1476.6    0.71
+
+============================================================
+EXP08C acceptance gates
+============================================================
+
+    1-node Moderate breach: N=10 ring2    1node 5s   7/20 = 35.0%
+    1-node Moderate breach: N=10 sparse4  1node 5s   3/20 = 15.0%
+    1-node Moderate breach: N=20 ring2    1node 5s   3/20 = 15.0%
+    1-node Moderate breach: N=20 sparse4  1node 5s   8/20 = 40.0%
+    1-node Stressed breach: N=10 ring2    1node 5s   8/20 = 40.0%
+    1-node Stressed breach: N=10 sparse4  1node 5s   3/20 = 15.0%
+    1-node Stressed breach: N=20 ring2    1node 5s   3/20 = 15.0%
+    1-node Stressed breach: N=20 sparse4  1node 5s   10/20 = 50.0%
+  [FAIL ] 1-node Moderate fault-SafeFail = 0       4 of 8 breached
+  [FAIL ] 1-node Stressed fault-SafeFail <= 5%     4 of 8 breached
+  [PASS ] 1-node recovery <= 5 s                   0 of 16 breached
+
+  SECONDARY (characterization only, never moves the main claim):
+    2-node fault-SafeFail <= 10%: 8 of 16 breached
+
+  COMPARATIVE DIAGNOSTIC (not a gate):
+    Trec(Causal) <= 1.25 x Trec(P20): 0 of 32 breached
+
+  DISCONNECTED / impossibility region:
+    conditions excluded entirely      : 0
+    conditions partially excluded     : 8
+    individual seed-conditions dropped: 12
+    method-cells with no eligible seed: 28
+
+  Fault-induced SafeFail > 0 per method (1-node conditions):
+    P10          8 of 14 cells
+    P20          8 of 16 cells
+    State-event  4 of 4 cells
+    Causal-v3    9 of 16 cells
+    Denominators differ by method: a cell counts only when that
+    method had at least one matched no-fault safe seed. A method
+    already unsafe without any fault therefore contributes fewer
+    cells, not fewer failures.
+
+  EXP08C GATES: 2 of 3 FAILED
+  Per the pre-registration, nothing is to be tuned.
+
+tidy.csv : 3200 rows
+
+EXP08C completed.
+saveAllFigures: no open figures.
+
+============================================================
+DONE : exp08c_node_blackout
+TIME : 26 m 40 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp08c_node_blackout\2026-08-26_173420
+============================================================
