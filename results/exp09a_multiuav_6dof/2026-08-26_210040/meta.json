@@ -1,0 +1,18 @@
+{
+  "experiment": "exp09a_multiuav_6dof",
+  "runId": "2026-08-26_210040",
+  "startedAt": "2026-08-26 21:00:40",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "e0f9e0b",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp09a_multiuav_6dof.m",
+  "finishedAt": "2026-08-26 21:01:53",
+  "elapsedSec": 72.6482529,
+  "elapsedText": "1 m 13 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

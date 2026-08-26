@@ -157,6 +157,9 @@ MeanAoILog = zeros(K,1);
 % traffic inside a fault window, which a run total cannot resolve.
 TxCountLog = zeros(K,1);
 
+% 6-DOF follower state, created lazily on the first integration call.
+sixState = [];
+
 % Passive cumulative ACK log, same contract as TxCountLog: written,
 % never read by the simulation. Needed to measure reverse-channel
 % traffic inside a blackout window.
@@ -397,13 +400,10 @@ for k = 1:K
     % Double-integrator followers
     % ---------------------------------------------------------
 
-    for i = 2:N
-
-        V(i,:) = V(i,:) + dt*accCmd(i,:);
-
-        P(i,:) = P(i,:) + dt*V(i,:);
-
-    end
+    % Follower integration. cfg.sixdof.enable off (default) reproduces the
+    % locked semi-implicit Euler exactly; on, each follower is a 6-DOF
+    % quadrotor driven through the analytic command-consistent reference.
+    [P, V, sixState] = integrateFollowers(P, V, accCmd, sixState, cfg);
 
 
 end
@@ -435,6 +435,9 @@ out.estimatedAoI = EstAoILog;
 
 out.txCount           = net.txCount;
 out.txCountLog        = TxCountLog;
+
+% 6-DOF bookkeeping. Empty when cfg.sixdof.enable is off.
+out.six = sixState;
 out.ackCountLog       = AckCountLog;
 
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload

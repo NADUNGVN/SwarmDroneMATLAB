@@ -460,30 +460,114 @@ cố định duy nhất, và suy giảm một cách có kiểm soát dưới l�
 
 ## 5. EXP09 — Đưa communication policy trở lại vật lý UAV
 
-### 5.1 EXP09A — Networked multi-UAV 6-DOF
+### 5.1 EXP09A - Networked multi-UAV 6-DOF
 
-Thay double integrator bằng:
-```
-formation policy → desired acceleration → cascaded quadrotor controller → 6-DOF dynamics
-```
-
-`N = 5` (bắt buộc), `N = 10` (nếu runtime hợp lý). 3 scenario × 4 method
-(P10, P20, State-event, Causal-AoI).
-
-Metric thêm: position RMSE, formation RMSE, roll/pitch peak, thrust saturation, torque
-saturation, control effort, MinSep, AoI, communication cost.
+**Chot truoc khi chay (2026-08-26).** Causal-v3, swarm controller, communication thresholds,
+ACK/CRN giu nguyen. Khong tune sau debug.
 
 ```
-Stability        : mọi drone ổn định, không NaN, không divergence
-Clean + Moderate : SafeFail = 0
-Stressed         : SafeFail ≤ 5 %
-Saturation       : nominal < 1 %; Stressed < 5 %
-Advantage        : Causal-AoI vẫn tốt hơn State-event
-Consistency      : ranking với P10/P20 không bị đảo hoàn toàn (§2.6)
+N          = 5
+topology   = ring2          (leader incoming links removed)
+scenario   = Clean, Moderate, Stressed
+method     = P10, P20, State-event, Causal-v3
+chay ca    : locked double-integrator comparator  VA  6-DOF followers
+leader     : van kinematic
 ```
 
-**Đây là major gate.** Nếu communication claim chỉ tồn tại trên double-integrator nhưng biến mất
-với 6-DOF thì phải điều tra, không được bỏ qua.
+**Timing hierarchy.**
+```
+outer loop / network / policy = 50 Hz   (dt   = 0.02 s)
+inner quad / controller       = 500 Hz  (dtIn = 0.002 s)
+ratio                         = 10 : 1
+```
+
+**Interface 6-DOF.** `accCmd` tu swarm policy duoc **ZOH** trong moi outer interval; voi
+`tau` trong `[0, dt)`:
+```
+ref.acc      = accCmd
+ref.vel(tau) = v_k + accCmd*tau
+ref.pos(tau) = p_k + v_k*tau + 0.5*accCmd*tau^2
+```
+
+Day la **analytic command-consistent reference**. **KHONG** duoc mo ta la bit-identical voi
+semi-implicit Euler cua double-integrator da khoa: Euler ban an cho
+`p_{k+1} = p_k + v_k*dt + dt^2*a_k`, con reference giai tich cho
+`p_k + v_k*dt + 0.5*dt^2*a_k`; hai ben lech **dung `0.5*dt^2*a_k` moi buoc** theo cau tao.
+`test_setpoint_interface` khang dinh dieu nay nhu mot check duong.
+
+**Khong freeze `ref.pos` / `ref.vel`.** Neu dong bang, `ep = ref.pos - p` tro thanh am cua chinh
+do dich chuyen cua drone va `KpPos*ep` keo nguoc lai chong gia toc vua lenh; vong ngoai cua quad
+bien thanh bo dieu tiet thu hai dau voi formation policy, va chenh lech do duoc se la loi giao
+dien chu khong phai dong luc hoc 6-DOF.
+
+**RK4 / ZOH.** Trong moi inner step, `u` duoc tinh **mot lan** o dau buoc va **ZOH qua ca 4 stage
+RK4**.
+
+**Validation bat buoc truoc khi tin bat ky so nao:**
+```
+test_rotation
+test_setpoint_interface
+test_causal_invariants
+test_lock_regression
+
+simSwarm6DOF(enable = false)  ==  simSwarmAoICausal   (bit-identical)
+P10 / P20 periodic schedule exact under 6-DOF
+forward CRN trace hash   DI == 6DOF
+reverse CRN trace hash   DI == 6DOF
+```
+**Khong** yeu cau Event/Causal `txCount` giong DI: quy dao vat ly khac duoc phep lam trigger
+decision khac. Khac biet do **phai duoc do va bao cao**, khong duoc coi la loi.
+
+**Saturation.** Dem tren **follower-inner samples** (mot mau cho moi follower o moi inner step;
+leader kinematic khong dong gop):
+```
+thrustSat  = saturated follower-inner samples / total follower-inner samples
+torqueSat  = follower-inner samples co >= 1 truc torque bao hoa / total
+saturation = max(thrustSat, torqueSat)
+```
+Luu them **per-drone peak saturation**: trung binh toan dan co the che mot vehicle nam sat gioi
+han trong khi so con lai thoai mai.
+
+**Hard divergence semantics.**
+```
+NaN hoac DIVERGED  =>  stability FAIL
+DIVERGED cung tinh la UNSAFE
+run divergent KHONG vao continuous mean (RMSE, control effort)
+nhung PHAI bao rieng trong denominator
+```
+Dieu kien DIVERGED: state khong huu han, hoac follower ra khoi qua cau 50 m quanh leader, hoac
+`|roll|` / `|pitch| > 80` do.
+
+**Gate - co dinh truoc data:**
+```
+G1 Stability : 0 NaN, 0 DIVERGED
+G2 Clean     : SafeFail = 0
+G3 Moderate  : SafeFail = 0
+G4 Stressed  : SafeFail <= 5 %
+G5 Saturation: Clean < 1 %,  Stressed < 5 %
+G6 Proposed-vs-event : RMSE(Causal-v3) < RMSE(State-event) o Clean + Moderate + Stressed
+G7 DI->6DOF consistency :
+     sign(RMSE_Causal - RMSE_P10) preserved >= 2/3 scenario
+     AND sign(RMSE_Causal - RMSE_P20) preserved >= 2/3 scenario
+```
+**Khong them absolute RMSE gate sau khi nhin debug.**
+
+**Diagnostics bat buoc:** formation RMSE mean/std, max error, minSep, SafeFail, rollPeak,
+pitchPeak, thrustSat, torqueSat, perDronePeakSat, controlEffort, DATA rate, ACK rate, trueAoI,
+estimatedAoI, hardInnovationRatio, adaptiveNewInfoRatio, refreshRatio, traceHash, ackTraceHash,
+va DI-vs-6DOF: deltaRMSE, deltaDataRate, deltaAoI.
+
+**Bang bat buoc:**
+```
+Scenario | Method | DI RMSE | 6DOF RMSE | delta% | DI DATA Hz | 6DOF DATA Hz | delta%
+```
+
+**Execution.** 3 seeds debug; STOP chi khi gap implementation/interface ambiguity, measurement
+bug, regression failure, causality violation, CRN mismatch, scheduler/timing error, hoac Clean
+divergence co dau hieu implementation bug. Neu implementation sach ma scientific gate FAIL thi
+**khong tune, khong hoi**, chay thang 20 seeds unchanged. Sau final N=5, neu runtime cho thay
+N=10 characterization mat duoi khoang 30 phut thi duoc chay them nhu **secondary
+characterization**, khong dua vao gate chinh.
 
 ### 5.2 EXP09B — Disturbance + model mismatch
 
@@ -1189,6 +1273,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-26 | 5.1 EXP09A: chot toan bo truoc khi chay - N=5/ring2, timing 10:1, analytic command-consistent reference, ZOH control qua 4 stage RK4, dinh nghia saturation tren follower-inner samples, hard divergence semantics, gate G1-G7, danh sach validation va diagnostics | Ban chot dau chi mo ta kien truc o muc y tuong va de ngo ba cho co the dien giai lai sau khi nhin so: (1) reference giai tich **khong** bit-identical voi semi-implicit Euler - lech dung `0.5*dt^2*a` moi buoc, nay ghi ro va co check duong trong `test_setpoint_interface`, de chenh lech DI-6DOF khong bi gan nham cho dong luc hoc; (2) mau so cua saturation - nay chot la follower-inner samples, kem per-drone peak; (3) run DIVERGED - nay tinh la stability FAIL **va** unsafe, loai khoi continuous mean nhung phai bao rieng trong denominator, vi trung binh hoa mot run phan ky bien that bai thanh mot so huu han lon. Ghi truoc khi ton tai bat ky ket qua EXP09A nao. | (branch `exp09a-multiuav-6dof`) |
 | 2026-08-22 | §2.3: `E_max` (và peak AoI) đổi mốc từ `thời điểm lỗi bắt đầu` sang `max(thời điểm lỗi bắt đầu, 8 s)` | **Sửa lỗi đo lường, không phải tuning.** Permanent fault bắt đầu tại `t = 0` nên cửa sổ cũ đo transient khởi động: trong cùng seed, `E_max` trùng khít giữa P10/P20/Causal-v3 (2.356607 tại ring2/Moderate/perm 20 %), tức đại lượng không phụ thuộc phương thức, khiến gate pass vô nghĩa ở 16/24 condition. Mốc 8 s là evaluation window đã dùng cho mọi metric khác. Burst (bắt đầu 12 s) **không đổi**. Sửa đổi làm gate **khó hơn**. Không đổi Causal-v3, controller, threshold, fault grid, CRN, fault realization hay tỉ số gate. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.2: gate Safety giữ nguyên tuyệt đối ≤ 5 %, nhưng chỉ **đánh giá ở 20 seeds**; ở 3 seeds báo cáo DEFERRED | Ở 3 seeds tỉ lệ khác 0 nhỏ nhất là 1/3, nên "≤ 5 %" thoái hoá thành "= 0" và verdict sẽ đo số seed chứ không đo phương thức. Ở 20 seeds: 0/20 và 1/20 PASS, ≥ 2/20 FAIL — đúng ngưỡng 5 % đã chốt. **Không** thêm điều kiện phụ "P20 cũng safe". | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.3 EXP08C: pre-register đầy đủ **trước khi chạy** — ngữ nghĩa fault communication-layer, matched no-fault eligibility, gate chính 1-node, 2-node là secondary/characterization, connectivity trên đồ thị con của các node còn phát, danh sách metric bắt buộc | Bản chốt đầu chỉ có 4 dòng gate và để ngỏ ba chỗ có thể diễn giải lại sau khi nhìn số: (1) mẫu số của SafeFail — nay chốt là **matched no-fault eligible seeds**, để không tính vào blackout những cấu hình vốn đã unsafe; (2) vai trò của 2-node — nay chốt là **secondary**, không được dùng để đổi main claim; (3) λ₂ khi node tắt — node tắt luôn làm λ₂ = 0 nếu đưa vào đồ thị, khiến mọi condition bị loại, nên phân loại chuyển sang **đồ thị con cảm sinh bởi các node còn phát sóng**, tiêu chuẩn §2.4 giữ nguyên. Ghi trước khi tồn tại bất kỳ kết quả EXP08C nào. | (branch `exp08c-node-blackout`) |
