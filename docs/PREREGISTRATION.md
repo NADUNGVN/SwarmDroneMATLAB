@@ -680,61 +680,155 @@ thuc te (positive / partial / negative). **Khong sua algorithm.**
 **Divergence semantics giu nguyen 5.1**: DIVERGED = stability FAIL va unsafe, loai khoi
 continuous mean, bao rieng trong denominator.
 
-### 5.3 EXP09C - Sensor noise + estimator latency + numerical sensitivity
+### 5.3 EXP09C - Synthetic swarm-state estimator robustness study
 
-**Chot truoc khi chay (2026-08-26).** Day la **synthetic robustness study**. **KHONG duoc goi
-la measured sensor model** trong paper: cac gia tri sigma va latency la gia dinh tham so, khong
-phai do tu phan cung.
+**Chot truoc khi chay (2026-08-27).** Day la **synthetic swarm-state estimator robustness
+study**. **KHONG duoc goi la measured sensor model**: cac gia tri sigma va latency la gia dinh
+tham so, khong phai do tu phan cung.
 
-**Grid.**
+Ke thua kien truc 6-DOF da khoa o 5.1. Causal-v3, controller gains, thresholds giu nguyen.
+
+#### Noise chi xuat hien MOT LAN, tai source estimate
+
+Moi follower `i` tai physical time `t` co:
 ```
-position noise sigma  = 0, 0.01, 0.03, 0.05 m
-velocity noise sigma  = 0, 0.02, 0.05, 0.10 m/s
-estimator latency     = 0, 50, 100 ms
+pHat_i(t) = pTrue_i(t - latency) + nP_i(t)
+vHat_i(t) = vTrue_i(t - latency) + nV_i(t)
 ```
 
-Nhieu duoc them vao **thong tin ma node phat di va thong tin ma node doc ve hang xom**, tuc o
-lop cam bien/estimator, khong phai o lop mang. Trang thai vat ly that khong bi nhieu; chi cai
-ma policy nhin thay moi bi nhieu. Metric an toan (minSep) van do tren **trang thai that**, neu
-khong thi mot policy co the "an toan" chi vi no khong nhin thay va cham.
+`pHat` / `vHat` duoc dung cho **ba** thu, va chi ba thu:
+- self-state cua local swarm formation policy
+- event / Causal trigger
+- **state payload ma chinh follower do phat di**
 
-**Noise CRN.** Chi so hoa theo `seed x time x agent`, **khong** phu thuoc so lan goi trigger.
-Day la diem de sai nhat: neu rut nhieu tai thoi diem trigger thi mot policy truyen nhieu hon se
-tieu thu chuoi ngau nhien nhanh hon va gap mot realization khac, khien so sanh mat y nghia.
-Dedicated `RandStream`, offset 80240001.
+Receiver nhan **dung payload noisy do** sau network delay/loss. Receiver **KHONG cong noise lan
+thu hai**. Neu cong hai lan thi mot gia tri di qua mang se mang phuong sai gap doi mot gia tri
+dung tai cho, va nhieu se bi tinh nham thanh chi phi cua viec truyen tin.
 
-**Estimator latency** hien thuc bang ring buffer: gia tri doc ve o thoi diem `t` la gia tri that
-tai `t - latency`, lay tu bang tra theo bước outer. Latency 50 ms = 2.5 outer step nen phai noi
-suy hoac lam tron **mot cach nhat quan**; chot: lam tron xuong boi so cua `dt` gan nhat, va ghi
+**minSep va formation RMSE van do tren TRANG THAI THAT.** Neu do tren trang thai bi nhieu thi
+mot policy co the "an toan" chi vi no khong nhin thay va cham. Bao cao them
+`estimator error RMS` de doc gia tri quan sat duoc rieng.
+
+**Leader / reference giu noise-free** trong EXP09C, vi leader hien van la kinematic reference.
+Day la **scope choice**, phai ghi ro trong paper.
+
+#### Inner flight controller khong bi nhieu
+
+`quadCascadedController` tiep tuc dung **true plant state**. **Khong** dua sensor noise vao inner
+attitude/position controller trong EXP09C. Muc tieu la co lap **swarm estimator / communication
+trigger robustness**, khong tron them low-level flight-estimator robustness. Scope nay phai ghi
 ro trong paper.
 
-**Outer dt diagnostic.**
-```
-outer dt = 0.01, 0.02, 0.04 s
-```
-Inner step giu 500 Hz, nen ratio thanh 5 : 1, 10 : 1, 20 : 1. Communication timing
-(`commPeriod`, `minInterTx`, `aoiMinInterTx`, `maxSilence`) **khong doi theo dt**: chung la
-tham so vat ly cua giao thuc, khong phai boi so cua buoc tich phan.
+#### Estimator latency - hien thuc chinh xac
 
-**Gate (muc medium: pos 0.03 m, vel 0.05 m/s, latency 50 ms):**
+**Khong lam tron** `50 ms` xuong `40 ms`. Lam tron theo boi so cua `dt` se lam latency hieu dung
+thay doi theo `dt` va **confound** thang timestep study.
+
+Truy van tai dung `t_query = t - latency` bang **linear interpolation** giua hai outer-history
+sample gan nhat:
 ```
-SafeFail            <= 5 %
-Causal DATA rate    <  2 x noiseless rate
+stateDelayed = interp(stateHistory, t_query);
+```
+Khoi dong: `t_query < 0` -> dung initial state.
+
+Do do `50 ms` thuc su la `50 ms` va `100 ms` thuc su la `100 ms` **o moi outer dt**.
+
+#### Structured sweep - KHONG full Cartesian
+
+Cac mang duoi day **khong** phai tich Descartes 4 x 4 x 3.
+
+```
+C1  noise sweep, latency = 0
+    N0 : pos 0     vel 0
+    N1 : pos .01   vel .02
+    N2 : pos .03   vel .05
+    N3 : pos .05   vel .10
+
+C2  latency sweep, noise = 0
+    L0   = 0 ms
+    L50  = 50 ms
+    L100 = 100 ms
+
+C3  combined medium - MAIN GATE
+    pos sigma = .03 m
+    vel sigma = .05 m/s
+    latency   = 50 ms
 ```
 
-Gate thu hai bat dung mot che that: nhieu lam innovation gia tang lien tuc, va mot event-trigger
-ngay tho se phan ung bang cach truyen lien tuc. Neu Causal-v3 vuot 2x thi no dang do nhieu chu
-khong do thong tin, va do la mot gioi han phai ghi nhan chu khong phai tune di.
+C1 / C2 / C3 chay tren Clean / Moderate / Stressed x P10 / P20 / State-event / Causal-v3.
 
-**Timestep gate:**
+#### Noise CRN
+
+Sinh tren **common physical-time master grid**:
 ```
-dt 0.01 vs 0.02 : RMSE difference      <= 5 %
-                  DATA-rate difference <= 5 %
-dt 0.04         : boundary characterization (khong gate)
+baseNoiseDt = 0.01 s
+noiseTrace  = seed x masterTime x agent x component
+```
+O `dt = .02` dung moi sample thu hai; o `dt = .04` dung moi sample thu tu. Nho vay **cung mot
+realization theo thoi gian vat ly** o moi muc dt.
+
+**Khong** sinh nhieu theo so buoc outer mot cach doc lap cho tung dt, va **khong** rut nhieu tai
+thoi diem goi trigger: neu vay, mot policy truyen nhieu hon se tieu thu chuoi nhanh hon va gap
+mot realization khac, khien so sanh mat y nghia.
+
+#### Gate chinh - tai C3
+
+```
+G1  0 NaN / 0 DIVERGED
+G2  SafeFail <= 5 %
+G3  Causal DATA Hz  <  2 x matched noiseless Causal DATA Hz
+G4  causal invariants = 0
 ```
 
-`dt 0.04` duoc bao cao nhu bien; neu no vo thi ket luan la "phuong phap can outer rate >= 25 Hz",
-mot phat bieu huu ich, khong phai mot that bai can sua.
+Bao cao co che false-trigger bang `hardInnovationRatio`, `adaptiveNewInfoRatio`, `refreshRatio`
+va muc tang DATA rate. **Khong retune threshold.**
+
+#### Timestep diagnostic - CRN phai can theo thoi gian vat ly
+
+```
+outer dt = .01 / .02 / .04     inner dt = .002 co dinh
+scenario = Moderate + Stressed
+plant    = 6DOF
+estimator= nominal
+```
+
+**Van de CRN.** Trace hien tai danh chi so theo outer timestep, nen **khong the dung nguyen** qua
+cac dt khac nhau. Them mot **additive physical-time trace mode**:
+```
+traceBaseDt = 0.01
+master trace indexed by  seed x master physical-time slot x directed link
+kMaster = round(t / traceBaseDt) + 1
+```
+Ap dung nhu nhau cho ACK trace. **Default historical behavior giu OFF / inert**, va regression
+bat buoc: **moi locked experiment tai tao khong doi**.
+
+**Timing gate** (Causal, dt .01 vs .02), dung **symmetric relative difference**, khong chon mau
+so sau khi nhin ket qua:
+```
+d(x01, x02) = abs(x01 - x02) / ((x01 + x02)/2)
+
+RMSE difference      <= 5 %
+DATA-rate difference <= 5 %
+```
+
+`dt = .04`: **characterization only, khong gate**. Neu no vo thi ket luan la "phuong phap can
+outer rate >= 25 Hz", mot phat bieu huu ich chu khong phai mot that bai can sua.
+
+Log **exact realized** `P10 rate` va `P20 rate` o moi dt lam scheduler sanity check.
+**Khong sua historical scheduler chi de ep dt = .04 trong dep.**
+
+#### Output bat buoc
+
+true RMSE; true minSep; SafeFail; measurement RMSE / estimator error RMS; position noise realized
+RMS; velocity noise realized RMS; effective latency check; DATA Hz; ACK Hz; AoI; estAoI;
+hard/adaptive/refresh trigger composition; false-trigger proxy; dt; trace hashes; noise trace
+hash; toan bo causal invariants.
+
+#### Execution
+
+3 seeds internal; chi STOP khi co technical ambiguity/bug. Scientific FAIL -> chay 20 seeds
+unchanged. **Khong tune** `epsP`, `epsV`, AoI thresholds, cooldown, `scaleMin`, `maxSilence`,
+controller gains.
 
 **Divergence semantics va reporting giu nguyen 5.1.**
 
@@ -1405,6 +1499,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-27 | 5.3 EXP09C: sua ba diem truoc khi chay - noise chi cong MOT LAN tai source estimate, latency hien thuc bang interpolation tai dung `t - latency`, va sweep la structured C1/C2/C3 chu khong phai full Cartesian | (1) Wording cu co the doc thanh "cong nhieu ca luc sender do va luc receiver doc"; neu vay mot gia tri di qua mang se mang phuong sai gap doi mot gia tri dung tai cho, va nhieu bi tinh nham thanh chi phi cua viec truyen tin. Nay chot: sender do mot lan, phat dung payload noisy do, receiver khong cong them. (2) Lam tron latency theo boi so cua `dt` (50 ms -> 40 ms) se lam latency hieu dung thay doi theo dt va **confound** thang timestep study; nay dung linear interpolation tai dung `t - latency` nen 50 ms la 50 ms o moi dt. Ghi amendment nay truoc khi chay. (3) Ngoai ra chot: `minSep` va RMSE do tren **trang thai that** - do tren trang thai nhieu se cho mot policy "an toan" chi vi no khong nhin thay va cham; inner flight controller khong bi nhieu, de co lap swarm-estimator robustness; leader noise-free la scope choice. Ghi truoc khi ton tai bat ky ket qua EXP09C nao. | (branch `exp09c-synthetic-estimator`) |
 | 2026-08-27 | 5.2 EXP09B: sua thuat ngu disturbance va chot structured sweep B0-B9 truoc khi chay | Goi nhieu loan ngoai la "aerodynamic wind model" la sai su that: no khong phu thuoc van toc tuong doi, khong co he so can khi dong, khong scale theo dien tich hay huong bay. Ten dung la **world-frame external-force / wind proxy**, va muc 0.5 / 1.0 m/s^2 la **nominal-mass equivalent external acceleration** vi `Fext = m_nominal * aExtWorld`. He qua co y: o arm mass +10 %% gia toc ngoai thuc te nho hon danh nghia ~9 %%, duoc bao cao chu khong bu tru. Sweep chuyen sang structured B0-B9 (khong full Cartesian) voi **B7 la main gated condition**, cac arm con lai la attribution. Gate saturation giu nguyen semantics command-saturation cua EXP09A de so cua A va B con so sanh duoc. Ghi truoc khi ton tai bat ky ket qua EXP09B nao. | (branch `exp09b-physical-mismatch`) |
 | 2026-08-26 | 5.2 EXP09B va 5.3 EXP09C: pre-register day du truoc khi chay | EXP09B: chot mismatch chi dat vao dynamics, controller van dung nominal model va **khong retune** - neu retune theo tung muc mismatch thi thi nghiem do chat luong cua viec tune chu khong do robustness; wind CRN theo `seed x time`, doc lap so lan trigger. EXP09C: chot noise dat o lop cam bien/estimator chu khong phai lop mang, va minSep van do tren **trang thai that** - neu do tren trang thai bi nhieu thi mot policy co the "an toan" chi vi no khong nhin thay va cham; noise CRN chi so hoa theo `seed x time x agent` **khong** theo so lan goi trigger, vi neu rut nhieu tai thoi diem trigger thi policy truyen nhieu hon se gap mot realization khac va so sanh mat y nghia; communication timing khong doi theo outer dt vi do la tham so vat ly cua giao thuc. Ghi truoc khi ton tai bat ky ket qua EXP09B/C nao. | (branch `exp09a-multiuav-6dof`) |
 | 2026-08-26 | 5.1 EXP09A: chot toan bo truoc khi chay - N=5/ring2, timing 10:1, analytic command-consistent reference, ZOH control qua 4 stage RK4, dinh nghia saturation tren follower-inner samples, hard divergence semantics, gate G1-G7, danh sach validation va diagnostics | Ban chot dau chi mo ta kien truc o muc y tuong va de ngo ba cho co the dien giai lai sau khi nhin so: (1) reference giai tich **khong** bit-identical voi semi-implicit Euler - lech dung `0.5*dt^2*a` moi buoc, nay ghi ro va co check duong trong `test_setpoint_interface`, de chenh lech DI-6DOF khong bi gan nham cho dong luc hoc; (2) mau so cua saturation - nay chot la follower-inner samples, kem per-drone peak; (3) run DIVERGED - nay tinh la stability FAIL **va** unsafe, loai khoi continuous mean nhung phai bao rieng trong denominator, vi trung binh hoa mot run phan ky bien that bai thanh mot so huu han lon. Ghi truoc khi ton tai bat ky ket qua EXP09A nao. | (branch `exp09a-multiuav-6dof`) |

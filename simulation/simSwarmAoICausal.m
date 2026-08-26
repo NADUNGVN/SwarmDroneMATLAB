@@ -160,6 +160,9 @@ TxCountLog = zeros(K,1);
 % 6-DOF follower state, created lazily on the first integration call.
 sixState = [];
 
+% Synthetic estimator state, created lazily. Empty when inert.
+estState = [];
+
 % Passive cumulative ACK log, same contract as TxCountLog: written,
 % never read by the simulation. Needed to measure reverse-channel
 % traffic inside a blackout window.
@@ -261,10 +264,21 @@ for k = 1:K
 
     tk = t(k);
 
+
     leader = leaderReference(tk);
 
     P(1,:) = leader.pos';
     V(1,:) = leader.vel';
+
+    % Synthetic swarm-state estimate, once per outer step. PHat/VHat feed
+    % the policy self-state, the trigger and the transmitted payload; the
+    % TRUE P/V stay what the dynamics integrate and what safety is
+    % measured on. Inert when cfg.estimator is absent.
+    [PHat, VHat, estState] = applyEstimator(P, V, estState, cfg, tk);
+
+    % CRN slot. Identical to k unless the physical-time trace mode is on.
+    kTrace = traceIndex(cfg, tk, k);
+
 
 
     %% --------------------------------------------------------
@@ -284,7 +298,7 @@ for k = 1:K
     % reverse queue, arriving no earlier than tk + dt.
     % ---------------------------------------------------------
 
-    net = deliverDataWithAck(net, tk, cfg, ackTrace, k);
+    net = deliverDataWithAck(net, tk, cfg, ackTrace, kTrace);
 
 
     %% --------------------------------------------------------
@@ -294,7 +308,7 @@ for k = 1:K
     % ---------------------------------------------------------
 
     [net, txState] = enqueueCausalAoIPackets( ...
-        net, txState, P, V, leader, tk, cfg, netTrace, k);
+        net, txState, PHat, VHat, leader, tk, cfg, netTrace, kTrace);
 
 
     %% --------------------------------------------------------
@@ -314,14 +328,14 @@ for k = 1:K
     % tk + dt, so causality is preserved.
     % ---------------------------------------------------------
 
-    net = deliverDataWithAck(net, tk, cfg, ackTrace, k);
+    net = deliverDataWithAck(net, tk, cfg, ackTrace, kTrace);
 
 
     %% --------------------------------------------------------
     % Formation control
     % ---------------------------------------------------------
 
-    accCmd = distributedFormationPolicy(P, V, leader, cfg, net);
+    accCmd = distributedFormationPolicy(PHat, VHat, leader, cfg, net);
 
 
     %% --------------------------------------------------------

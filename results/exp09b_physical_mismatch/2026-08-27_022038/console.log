@@ -1,0 +1,155 @@
+
+============================================================
+RUN  : exp09b_physical_mismatch
+ID   : 2026-08-27_022038
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp09b_physical_mismatch\2026-08-27_022038
+WHEN : 2026-08-27 02:20:39
+============================================================
+
+
+============================================================
+EXP09B disturbance and plant mismatch
+============================================================
+
+N = 5 | ring2 | 6-DOF | controller reads NOMINAL plant only
+Seeds 20 | sims 2400
+ensureParallelPool: starting pool with 16 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+ensureParallelPool: pool ready (16 workers).
+
+--- Clean ---
+  B0 nominal     done
+  B1 wind 0.5    done
+  B2 wind 1.0    done
+  B3 mass +10%   done
+  B4 mass -10%   done
+  B5 drag +20%   done
+  B6 drag -20%   done
+  B7 combined    done
+  B8 lag 20ms    done
+  B9 lag 50ms    done
+
+--- Moderate ---
+  B0 nominal     done
+  B1 wind 0.5    done
+  B2 wind 1.0    done
+  B3 mass +10%   done
+  B4 mass -10%   done
+  B5 drag +20%   done
+  B6 drag -20%   done
+  B7 combined    done
+  B8 lag 20ms    done
+  B9 lag 50ms    done
+
+--- Stressed ---
+  B0 nominal     done
+  B1 wind 0.5    done
+  B2 wind 1.0    done
+  B3 mass +10%   done
+  B4 mass -10%   done
+  B5 drag +20%   done
+  B6 drag -20%   done
+  B7 combined    done
+  B8 lag 20ms    done
+  B9 lag 50ms    done
+
+============================================================
+Attribution: Causal-v3 across perturbation arms
+============================================================
+
+Scenario   Arm           CausalRMSE     deltaB0%    DATA Hz    minSep     sat%  aExtRMS    massR
+Clean      B0 nominal        0.0414         0.00      84.47    0.5456    0.000    0.000     1.00
+Clean      B1 wind 0.5       0.2666       544.25      84.58    0.2692    0.000    0.409     1.00
+Clean      B2 wind 1.0       0.5292      1178.97      84.95    0.1142    0.000    0.818     1.00
+Clean      B3 mass +10%      0.6738      1528.41      83.80    0.7494    0.000    0.000     1.10
+Clean      B4 mass -10%      0.6729      1526.26      86.43    0.7523    0.000    0.000     0.90
+Clean      B5 drag +20%      0.0809        95.46      84.20    0.4979    0.000    0.000     1.00
+Clean      B6 drag -20%      0.0328       -20.76      84.87    0.5548    0.000    0.000     1.00
+Clean      B7 combined       0.7238      1649.27      83.87    0.6597    0.000    0.409     1.10
+Clean      B8 lag 20ms       0.0413        -0.10      84.40    0.5457    0.000    0.000     1.00
+Clean      B9 lag 50ms       0.0415         0.21      84.53    0.5455    0.000    0.000     1.00
+
+Moderate   B0 nominal        0.0892         0.00     134.69    0.4871    0.000    0.000     1.00
+Moderate   B1 wind 0.5       0.2680       200.44     137.96    0.2541    0.000    0.403     1.00
+Moderate   B2 wind 1.0       0.5183       481.07     144.56    0.1231    0.000    0.807     1.00
+Moderate   B3 mass +10%      0.6784       660.60     131.81    0.7343    0.000    0.000     1.10
+Moderate   B4 mass -10%      0.6774       659.46     136.64    0.7372    0.000    0.000     0.90
+Moderate   B5 drag +20%      0.1318        47.81     130.94    0.4343    0.000    0.000     1.00
+Moderate   B6 drag -20%      0.0517       -42.00     137.48    0.5346    0.000    0.000     1.00
+Moderate   B7 combined       0.7309       719.40     132.69    0.6455    0.000    0.403     1.10
+Moderate   B8 lag 20ms       0.0892         0.03     134.75    0.4870    0.000    0.000     1.00
+Moderate   B9 lag 50ms       0.0891        -0.13     135.03    0.4872    0.000    0.000     1.00
+
+Stressed   B0 nominal        0.1189         0.00     182.87    0.4513    0.000    0.000     1.00
+Stressed   B1 wind 0.5       0.3034       155.09     188.57    0.1961    0.000    0.419     1.00
+Stressed   B2 wind 1.0       0.5648       374.85     197.42    0.0980    0.000    0.838     1.00
+Stressed   B3 mass +10%      0.6829       474.20     176.69    0.7268    0.000    0.000     1.10
+Stressed   B4 mass -10%      0.6821       473.50     188.72    0.7298    0.000    0.000     0.90
+Stressed   B5 drag +20%      0.1606        35.00     179.48    0.3993    0.000    0.000     1.00
+Stressed   B6 drag -20%      0.0792       -33.43     186.14    0.4989    0.000    0.000     1.00
+Stressed   B7 combined       0.7502       530.79     179.57    0.6697    0.000    0.419     1.10
+Stressed   B8 lag 20ms       0.1192         0.23     183.05    0.4516    0.000    0.000     1.00
+Stressed   B9 lag 50ms       0.1195         0.50     183.29    0.4505    0.000    0.000     1.00
+
+============================================================
+B7 combined medium - all methods
+============================================================
+
+Scenario   Method         B0 RMSE   B7 RMSE    delta%    minSep  SafeFail     sat%   DATA Hz    dDATA%   estAoI   lagErr
+Clean      P10             0.0361    0.7235   1906.10    0.6602       0.0    0.000    100.00      0.00      NaN      NaN
+Clean      P20             0.0254    0.7227   2748.08    0.6600       0.0    0.000    200.00      0.00      NaN      NaN
+Clean      State-event     0.0823    0.7284    784.95    0.6560       0.0    0.000     42.42     -2.33      NaN      NaN
+Clean      Causal-v3       0.0414    0.7238   1649.27    0.6597       0.0    0.000     83.87     -0.71   0.0800      NaN
+
+Moderate   P10             0.0976    0.7321    650.45    0.6442       0.0    0.000    100.00      0.00      NaN      NaN
+Moderate   P20             0.0753    0.7290    868.70    0.6482       0.0    0.000    200.00      0.00      NaN      NaN
+Moderate   State-event     0.1686    0.7465    342.89    0.6259       0.0    0.000     41.55     -3.85      NaN      NaN
+Moderate   Causal-v3       0.0892    0.7309    719.40    0.6455       0.0    0.000    132.69     -1.48   0.2204      NaN
+
+Stressed   P10             0.1468    0.7567    415.45    0.6627       0.0    0.000    100.00      0.00      NaN      NaN
+Stressed   P20             0.1126    0.7485    565.02    0.6717       0.0    0.000    200.00      0.00      NaN      NaN
+Stressed   State-event     0.2579    0.7911    206.73    0.6371       0.0    0.000     41.00     -3.63      NaN      NaN
+Stressed   Causal-v3       0.1189    0.7502    530.79    0.6697       0.0    0.000    179.57     -1.81   0.3104      NaN
+
+============================================================
+EXP09B acceptance gates (B7 combined medium)
+============================================================
+
+    G2 breach: Clean     P10          0.0361 -> 0.7235  (20.06x)
+    G2 breach: Clean     P20          0.0254 -> 0.7227  (28.48x)
+    G2 breach: Clean     State-event  0.0823 -> 0.7284  (8.85x)
+    G2 breach: Clean     Causal-v3    0.0414 -> 0.7238  (17.49x)
+    G2 breach: Moderate  P10          0.0976 -> 0.7321  (7.50x)
+    G2 breach: Moderate  P20          0.0753 -> 0.7290  (9.69x)
+    G2 breach: Moderate  State-event  0.1686 -> 0.7465  (4.43x)
+    G2 breach: Moderate  Causal-v3    0.0892 -> 0.7309  (8.19x)
+    G2 breach: Stressed  P10          0.1468 -> 0.7567  (5.15x)
+    G2 breach: Stressed  P20          0.1126 -> 0.7485  (6.65x)
+    G2 breach: Stressed  State-event  0.2579 -> 0.7911  (3.07x)
+    G2 breach: Stressed  Causal-v3    0.1189 -> 0.7502  (6.31x)
+  [PASS ] G1 0 NaN / 0 DIVERGED                    0 diverged of 240 B7 runs
+  [FAIL ] G2 RMSE_pert <= 1.25 x RMSE_nominal      12 of 12 cells breached
+  [PASS ] G3 SafeFail <= 5%                        0 of 12 cells breached
+  [PASS ] G4 saturation <= 5%                      0 of 12 cells breached
+  [PASS ] G5 Causal rate Clean<Moderate<Stressed   83.87 < 132.69 < 179.57 Hz
+
+  COMPARATIVE DIAGNOSTICS (not gates):
+    Causal < State-event at B7 : 0 of 3 scenarios fail
+    sign preserved B0 -> B7    : P10 3/3, P20 3/3
+    causal invariant violations: 0 total
+
+  EXP09B GATES: 1 of 5 FAILED
+  Per the pre-registration, nothing is to be tuned.
+
+tidy.csv : 2400 rows
+
+EXP09B completed.
+saveAllFigures: no open figures.
+
+============================================================
+DONE : exp09b_physical_mismatch
+TIME : 19 m 29 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp09b_physical_mismatch\2026-08-27_022038
+============================================================

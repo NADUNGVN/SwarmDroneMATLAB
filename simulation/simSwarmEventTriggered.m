@@ -86,6 +86,9 @@ TxCountLog = zeros(K,1);
 % 6-DOF follower state, created lazily on the first integration call.
 sixState = [];
 
+% Synthetic estimator state, created lazily. Empty when inert.
+estState = [];
+
 
 
 %% ============================================================
@@ -118,6 +121,7 @@ for k = 1:K
     tk = t(k);
 
 
+
     %% --------------------------------------------------------
     % Leader reference
     % ---------------------------------------------------------
@@ -138,6 +142,17 @@ for k = 1:K
     V(1,:) = ...
         leader.vel';
 
+    % Synthetic swarm-state estimate, once per outer step. PHat/VHat feed
+    % the policy self-state, the trigger and the transmitted payload; the
+    % TRUE P/V stay what the dynamics integrate and what safety is
+    % measured on. Inert when cfg.estimator is absent.
+    [PHat, VHat, estState] = applyEstimator(P, V, estState, cfg, tk);
+
+    % CRN slot. Identical to k unless the physical-time trace mode is on.
+    kTrace = traceIndex(cfg, tk, k);
+
+
+
 
     %% --------------------------------------------------------
     % Event-triggered packet generation
@@ -150,13 +165,13 @@ for k = 1:K
         enqueueTriggeredNetworkPackets( ...
         net, ...
         txState, ...
-        P, ...
-        V, ...
+        PHat, ...
+        VHat, ...
         leader, ...
         tk, ...
         cfg, ...
         netTrace, ...
-        k);
+        kTrace);
 
 
     %% --------------------------------------------------------
@@ -176,7 +191,7 @@ for k = 1:K
 
     accCmd = ...
         distributedFormationPolicy( ...
-        P,V,leader,cfg,net);
+        PHat,VHat,leader,cfg,net);
 
 
     %% --------------------------------------------------------

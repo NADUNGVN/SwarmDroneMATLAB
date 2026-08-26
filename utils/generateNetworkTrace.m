@@ -30,7 +30,16 @@ function trace = generateNetworkTrace(cfg)
 
 N = cfg.swarm.N;
 
-K = numel(0:cfg.swarm.dt:cfg.swarm.T);
+% Trace length. By default one slot per outer step, exactly as every
+% locked experiment has used it. With cfg.net.traceBaseDt set, the trace
+% lives on a master physical-time grid instead, so runs at different
+% outer dt meet the same channel realization at the same instant.
+if isfield(cfg,'net') && isfield(cfg.net,'traceBaseDt') ...
+        && ~isempty(cfg.net.traceBaseDt) && cfg.net.traceBaseDt > 0
+    K = numel(0:cfg.net.traceBaseDt:cfg.swarm.T) + 1;
+else
+    K = numel(0:cfg.swarm.dt:cfg.swarm.T);
+end
 
 
 %% ============================================================
