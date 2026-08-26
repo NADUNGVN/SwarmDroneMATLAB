@@ -569,42 +569,107 @@ divergence co dau hieu implementation bug. Neu implementation sach ma scientific
 N=10 characterization mat duoi khoang 30 phut thi duoc chay them nhu **secondary
 characterization**, khong dua vao gate chinh.
 
-### 5.2 EXP09B — Disturbance + model mismatch
+### 5.2 EXP09B - Disturbance + model mismatch
 
-Wind / external force; mass mismatch ±10 %; drag mismatch ±20 %; optional actuator lag 20–50 ms.
-**Không tune controller theo từng mismatch.**
+**Chot truoc khi chay (2026-08-26).** Ke thua toan bo kien truc 6-DOF da khoa o 5.1:
+N = 5, ring2, outer 50 Hz / inner 500 Hz, analytic command-consistent reference, ZOH control
+qua 4 stage RK4, leader kinematic. Causal-v3 va communication thresholds giu nguyen.
 
-Ở mức perturbation trung bình:
+**Diem cot loi: controller VAN dung nominal model. KHONG retune.** Mismatch chi duoc dat vao
+`quad` cua *dynamics*; `cfg.quad` ma `quadCascadedController` doc van la nominal. Neu retune
+controller theo tung muc mismatch thi thi nghiem se do chat luong cua viec tune, khong do
+robustness cua communication policy.
+
+**Perturbation grid.**
 ```
-RMSE_perturbed ≤ 1.25 × RMSE_nominal
-SafeFail   ≤ 5 %
-Saturation ≤ 5 %
-Direction  : "network worsens → communication increases" vẫn phải tồn tại
-```
-
-### 5.3 EXP09C — Sensor noise + estimator latency + numerical sensitivity
-
-**Đây là synthetic robustness study. KHÔNG được gọi là measured sensor model.**
-
-Position noise σ ∈ {0, 0.01, 0.03, 0.05} m; velocity noise σ ∈ {0, 0.02, 0.05, 0.10} m/s;
-estimator latency ∈ {0, 50, 100} ms.
-
-Quan sát đặc biệt: **false triggering**, vì trigger phụ thuộc `Δp`, `Δv`.
-
-Ở mức medium-noise:
-```
-SafeFail   ≤ 5 %
-TxRate     tăng < 2× so với noiseless
+wind / external force : 0, 0.5, 1.0 m/s^2 tuong duong (luc the gioi, huong co dinh + gust)
+true mass             : nominal, +10 %, -10 %
+true drag             : nominal, +20 %, -20 %
+actuator lag          : 0 ms (bat buoc); 20 ms, 50 ms (optional, first-order lag tren thrust/torque)
 ```
 
-Numerical convergence, `dt ∈ {0.01, 0.02, 0.04}` s. Giữa 0.01 và 0.02:
-```
-RMSE difference   ≤ 5 %
-TxRate difference ≤ 5 %
-```
-`dt = 0.04` có thể degrade; mục đích là xác định boundary, không ép PASS.
+Muc **medium** dung cho gate: wind 0.5 m/s^2, mass +10 %, drag +20 %, actuator lag 0 ms.
+Cac muc con lai la characterization.
 
----
+**CRN.** Wind/gust duoc pre-generate theo `seed x time`, doc lap voi so lan trigger, cung mot
+`RandStream` rieng (offset 70240001). Moi method gap **cung mot chuoi nhieu vat ly** o cung
+seed; neu khong, khac biet giua cac method se lan voi may man cua gio.
+
+**Gate (muc medium):**
+```
+RMSE_perturbed <= 1.25 x RMSE_nominal      (cung method, cung scenario, cung seed set)
+SafeFail       <= 5 %
+saturation     <= 5 %
+Direction      : xu huong "network worsens -> communication increases" van ton tai
+```
+
+`Direction` duoc kiem tra dinh luong: `rate(Clean) < rate(Moderate) < rate(Stressed)` cho
+Causal-v3 duoi perturbation, giong dinh nghia rate-ordering da dung tu EXP07A.
+
+**Metric bat buoc:** toan bo diagnostics cua 5.1, cong them: wind magnitude thuc te,
+mass/drag ratio thuc te, actuator lag, va `deltaRMSE` / `deltaSaturation` / `deltaDataRate`
+so voi nominal cung seed.
+
+**Divergence semantics giu nguyen 5.1**: DIVERGED = stability FAIL va unsafe, loai khoi
+continuous mean, bao rieng trong denominator.
+
+### 5.3 EXP09C - Sensor noise + estimator latency + numerical sensitivity
+
+**Chot truoc khi chay (2026-08-26).** Day la **synthetic robustness study**. **KHONG duoc goi
+la measured sensor model** trong paper: cac gia tri sigma va latency la gia dinh tham so, khong
+phai do tu phan cung.
+
+**Grid.**
+```
+position noise sigma  = 0, 0.01, 0.03, 0.05 m
+velocity noise sigma  = 0, 0.02, 0.05, 0.10 m/s
+estimator latency     = 0, 50, 100 ms
+```
+
+Nhieu duoc them vao **thong tin ma node phat di va thong tin ma node doc ve hang xom**, tuc o
+lop cam bien/estimator, khong phai o lop mang. Trang thai vat ly that khong bi nhieu; chi cai
+ma policy nhin thay moi bi nhieu. Metric an toan (minSep) van do tren **trang thai that**, neu
+khong thi mot policy co the "an toan" chi vi no khong nhin thay va cham.
+
+**Noise CRN.** Chi so hoa theo `seed x time x agent`, **khong** phu thuoc so lan goi trigger.
+Day la diem de sai nhat: neu rut nhieu tai thoi diem trigger thi mot policy truyen nhieu hon se
+tieu thu chuoi ngau nhien nhanh hon va gap mot realization khac, khien so sanh mat y nghia.
+Dedicated `RandStream`, offset 80240001.
+
+**Estimator latency** hien thuc bang ring buffer: gia tri doc ve o thoi diem `t` la gia tri that
+tai `t - latency`, lay tu bang tra theo bước outer. Latency 50 ms = 2.5 outer step nen phai noi
+suy hoac lam tron **mot cach nhat quan**; chot: lam tron xuong boi so cua `dt` gan nhat, va ghi
+ro trong paper.
+
+**Outer dt diagnostic.**
+```
+outer dt = 0.01, 0.02, 0.04 s
+```
+Inner step giu 500 Hz, nen ratio thanh 5 : 1, 10 : 1, 20 : 1. Communication timing
+(`commPeriod`, `minInterTx`, `aoiMinInterTx`, `maxSilence`) **khong doi theo dt**: chung la
+tham so vat ly cua giao thuc, khong phai boi so cua buoc tich phan.
+
+**Gate (muc medium: pos 0.03 m, vel 0.05 m/s, latency 50 ms):**
+```
+SafeFail            <= 5 %
+Causal DATA rate    <  2 x noiseless rate
+```
+
+Gate thu hai bat dung mot che that: nhieu lam innovation gia tang lien tuc, va mot event-trigger
+ngay tho se phan ung bang cach truyen lien tuc. Neu Causal-v3 vuot 2x thi no dang do nhieu chu
+khong do thong tin, va do la mot gioi han phai ghi nhan chu khong phai tune di.
+
+**Timestep gate:**
+```
+dt 0.01 vs 0.02 : RMSE difference      <= 5 %
+                  DATA-rate difference <= 5 %
+dt 0.04         : boundary characterization (khong gate)
+```
+
+`dt 0.04` duoc bao cao nhu bien; neu no vo thi ket luan la "phuong phap can outer rate >= 25 Hz",
+mot phat bieu huu ich, khong phai mot that bai can sua.
+
+**Divergence semantics va reporting giu nguyen 5.1.**
 
 ## 6. EXP10 — Final scientific validation
 
@@ -1273,6 +1338,7 @@ Một pre-registration bị sửa mà không ghi nhật ký là một pre-regist
 | Ngày | Mục thay đổi | Lý do | Commit |
 |---|---|---|---|
 | 2026-08-21 | — | Bản chốt đầu tiên | (tag `prereg-exp07-exp10`) |
+| 2026-08-26 | 5.2 EXP09B va 5.3 EXP09C: pre-register day du truoc khi chay | EXP09B: chot mismatch chi dat vao dynamics, controller van dung nominal model va **khong retune** - neu retune theo tung muc mismatch thi thi nghiem do chat luong cua viec tune chu khong do robustness; wind CRN theo `seed x time`, doc lap so lan trigger. EXP09C: chot noise dat o lop cam bien/estimator chu khong phai lop mang, va minSep van do tren **trang thai that** - neu do tren trang thai bi nhieu thi mot policy co the "an toan" chi vi no khong nhin thay va cham; noise CRN chi so hoa theo `seed x time x agent` **khong** theo so lan goi trigger, vi neu rut nhieu tai thoi diem trigger thi policy truyen nhieu hon se gap mot realization khac va so sanh mat y nghia; communication timing khong doi theo outer dt vi do la tham so vat ly cua giao thuc. Ghi truoc khi ton tai bat ky ket qua EXP09B/C nao. | (branch `exp09a-multiuav-6dof`) |
 | 2026-08-26 | 5.1 EXP09A: chot toan bo truoc khi chay - N=5/ring2, timing 10:1, analytic command-consistent reference, ZOH control qua 4 stage RK4, dinh nghia saturation tren follower-inner samples, hard divergence semantics, gate G1-G7, danh sach validation va diagnostics | Ban chot dau chi mo ta kien truc o muc y tuong va de ngo ba cho co the dien giai lai sau khi nhin so: (1) reference giai tich **khong** bit-identical voi semi-implicit Euler - lech dung `0.5*dt^2*a` moi buoc, nay ghi ro va co check duong trong `test_setpoint_interface`, de chenh lech DI-6DOF khong bi gan nham cho dong luc hoc; (2) mau so cua saturation - nay chot la follower-inner samples, kem per-drone peak; (3) run DIVERGED - nay tinh la stability FAIL **va** unsafe, loai khoi continuous mean nhung phai bao rieng trong denominator, vi trung binh hoa mot run phan ky bien that bai thanh mot so huu han lon. Ghi truoc khi ton tai bat ky ket qua EXP09A nao. | (branch `exp09a-multiuav-6dof`) |
 | 2026-08-22 | §2.3: `E_max` (và peak AoI) đổi mốc từ `thời điểm lỗi bắt đầu` sang `max(thời điểm lỗi bắt đầu, 8 s)` | **Sửa lỗi đo lường, không phải tuning.** Permanent fault bắt đầu tại `t = 0` nên cửa sổ cũ đo transient khởi động: trong cùng seed, `E_max` trùng khít giữa P10/P20/Causal-v3 (2.356607 tại ring2/Moderate/perm 20 %), tức đại lượng không phụ thuộc phương thức, khiến gate pass vô nghĩa ở 16/24 condition. Mốc 8 s là evaluation window đã dùng cho mọi metric khác. Burst (bắt đầu 12 s) **không đổi**. Sửa đổi làm gate **khó hơn**. Không đổi Causal-v3, controller, threshold, fault grid, CRN, fault realization hay tỉ số gate. | (branch `exp08b-link-failure`) |
 | 2026-08-22 | §4.2: gate Safety giữ nguyên tuyệt đối ≤ 5 %, nhưng chỉ **đánh giá ở 20 seeds**; ở 3 seeds báo cáo DEFERRED | Ở 3 seeds tỉ lệ khác 0 nhỏ nhất là 1/3, nên "≤ 5 %" thoái hoá thành "= 0" và verdict sẽ đo số seed chứ không đo phương thức. Ở 20 seeds: 0/20 và 1/20 PASS, ≥ 2/20 FAIL — đúng ngưỡng 5 % đã chốt. **Không** thêm điều kiện phụ "P20 cũng safe". | (branch `exp08b-link-failure`) |
