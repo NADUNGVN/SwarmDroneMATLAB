@@ -1,0 +1,366 @@
+
+============================================================
+RUN  : exp11_dynamic_network
+ID   : 2026-08-27_174026
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp11_dynamic_network\2026-08-27_174026
+WHEN : 2026-08-27 17:40:26
+============================================================
+
+
+============================================================
+EXP11  within-run network switching
+============================================================
+Scenario : N=5 ring2 6-DOF, T=83 s, outer dt=0.02 s
+Timeline : 0-23 Clean  23-38 Moderate  38-53 Stressed  53-68 Moderate  68-83 Clean
+Switches : [23 38 53 68]
+Metrics  : t in [8, 83], five 15 s segments
+Methods  : P5, P10, P12.5, P20, P25, StateEvent, Causal, OraclePeriodic
+Seeds    : 50 holdout (26000001..26000050)
+Runs     : 400
+
+------------------------------------------------------------
+EXP11 holdout seed assertion
+------------------------------------------------------------
+  EXP11 block          : 26000001..26000050 (50 seeds)
+  EXP01-10 seed values : 93420 enumerated across 21 families
+  [PASS ] no EXP11 seed appears in any prior family
+  [PASS ] the master realizations are independent streams
+  [INFO ] 160 cross-experiment cross-type stream coincidence(s) -- harmless, see assertExp10Seeds header
+           ack: 40 stream seed(s) coincide with a locked stream
+           link: 40 stream seed(s) coincide with a locked stream
+           blackout: 40 stream seed(s) coincide with a locked stream
+           extForce: 40 stream seed(s) coincide with a locked stream
+ensureParallelPool: starting pool with 16 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+ensureParallelPool: pool ready (16 workers).
+
+--- [1/8] P5               ..................................................  done (0.8 min elapsed)
+--- [2/8] P10              ..................................................  done (1.5 min elapsed)
+--- [3/8] P12.5            ..................................................  done (2.3 min elapsed)
+--- [4/8] P20              ..................................................  done (3.0 min elapsed)
+--- [5/8] P25              ..................................................  done (3.7 min elapsed)
+--- [6/8] StateEvent       ..................................................  done (4.5 min elapsed)
+--- [7/8] Causal           ..................................................  done (5.6 min elapsed)
+--- [8/8] OraclePeriodic   ..................................................  done (6.4 min elapsed)
+
+Sweep complete: 400 runs in 6.4 min
+
+============================================================
+GATES
+============================================================
+
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp11_regime_semantics
+============================================================
+
+    ok   netParamsAt returns only channel parameters
+    ok   ackParamsAt returns only channel parameters
+    ok   the Stressed segment resolves to the locked Stressed channel
+    ok   the reverse channel follows the forward delay at zero loss
+    ok   no trigger, adaptive-scale, cooldown or plant parameter moves with the regime
+    ok   no controller gain or geometry parameter moves with the regime
+    ok   the fixed periodic period does not move with the regime
+    ok   no regime field is attached to any policy or controller struct
+    ok   only the channel layer and the EXP11 driver read a regime
+    ok   a constant regime leaves the trajectory bit-identical to a static channel
+    ok   a constant regime leaves DATA count identical to a static channel
+    ok   a constant regime leaves ACK count identical to a static channel
+    ok   a constant regime consumes the same channel realization
+    ok   changing the regime does not perturb the forward realization
+    ok   changing the regime does not perturb the reverse realization
+    ok   the worse regime does drop more packets, so the threshold is live
+    ok   no fixed periodic method changed rate at any channel switch
+    ok   the oracle switched only at preregistered regime boundaries
+    ok   the oracle switched at exactly the boundaries inside the horizon
+    ok   the oracle took the preregistered rates P10 then P20
+    ok   the EXP11 seed block is disjoint from EXP01-EXP10
+    ok   the schedule has exactly the four preregistered switch instants
+    ok   the five metric segments start at t = 8 and end at t = 83
+    ok   the three quality levels are the locked EXP05-EXP10 values
+
+test_exp11_regime_semantics: PASS (24 checks)
+  [PASS ] G1 zero causal invariant violations                        0 violation(s) across 400 runs
+  [PASS ] G2 no divergence and no unexplained NaN                    0 diverged, 0 non-finite RMSE outside divergence
+  [PASS ] G3 one channel realization per seed, across all methods    forward yes, reverse yes
+  [PASS ] G4 every seed present exactly once for every method        50 seeds x 8 methods
+  [PASS ] G5 fixed periodic rates unchanged across all switches      0 rate change(s) recorded across the five fixed methods
+  [PASS ] G6 oracle switched only at the four registered boundaries  4 switches per run, all on a boundary: yes
+  [PASS ] G7 regime reaches the channel only (negative control)      test_exp11_regime_semantics PASS
+
+  Gates: 7 of 7 pass
+
+============================================================
+H1  within-run adaptivity  (DATA rate, adjacent segments)
+============================================================
+
+  Causal
+    Moderate_1 - Clean_1     > 0  mean  +39.965  CI [ +39.743,  +40.188]  n=50  SUPPORTED
+    Stressed - Moderate_1    > 0  mean  +43.095  CI [ +42.870,  +43.320]  n=50  SUPPORTED
+    Moderate_2 - Stressed    < 0  mean  -41.404  CI [ -41.583,  -41.225]  n=50  SUPPORTED
+    Clean_2 - Moderate_2     < 0  mean  -41.594  CI [ -41.771,  -41.417]  n=50  SUPPORTED
+
+  StateEvent
+    Moderate_1 - Clean_1     > 0  mean   -0.189  CI [  -0.213,   -0.166]  n=50  NOT SUPPORTED
+    Stressed - Moderate_1    > 0  mean   -0.284  CI [  -0.345,   -0.223]  n=50  NOT SUPPORTED
+    Moderate_2 - Stressed    < 0  mean   +1.333  CI [  +1.244,   +1.423]  n=50  NOT SUPPORTED
+    Clean_2 - Moderate_2     < 0  mean   +0.177  CI [  +0.121,   +0.232]  n=50  NOT SUPPORTED
+
+  P10
+    Moderate_1 - Clean_1     > 0  mean   +0.000  CI [  +0.000,   +0.000]  n=50  NOT SUPPORTED
+    Stressed - Moderate_1    > 0  mean   +0.000  CI [  +0.000,   +0.000]  n=50  NOT SUPPORTED
+    Moderate_2 - Stressed    < 0  mean   +0.000  CI [  +0.000,   +0.000]  n=50  NOT SUPPORTED
+    Clean_2 - Moderate_2     < 0  mean   +0.011  CI [  -0.026,   +0.047]  n=50  NOT SUPPORTED
+
+  P20
+    Moderate_1 - Clean_1     > 0  mean   +0.000  CI [  +0.000,   +0.000]  n=50  NOT SUPPORTED
+    Stressed - Moderate_1    > 0  mean   +0.000  CI [  +0.000,   +0.000]  n=50  NOT SUPPORTED
+    Moderate_2 - Stressed    < 0  mean   +0.000  CI [  +0.000,   +0.000]  n=50  NOT SUPPORTED
+    Clean_2 - Moderate_2     < 0  mean   -0.008  CI [  -0.048,   +0.032]  n=50  NOT SUPPORTED
+
+  OraclePeriodic
+    Moderate_1 - Clean_1     > 0  mean  +49.856  CI [ +49.819,  +49.893]  n=50  SUPPORTED
+    Stressed - Moderate_1    > 0  mean  +99.885  CI [ +99.860,  +99.910]  n=50  SUPPORTED
+    Moderate_2 - Stressed    < 0  mean  -99.885  CI [ -99.910,  -99.860]  n=50  SUPPORTED
+    Clean_2 - Moderate_2     < 0  mean  -49.923  CI [ -49.959,  -49.886]  n=50  SUPPORTED
+
+  H1 verdict for Causal-v3: SUPPORTED
+
+============================================================
+H2  Causal-v3 against the fixed rates
+============================================================
+
+  H2a  RMSE(Causal - P10)       mean  -0.01081  CI [ -0.01106,  -0.01057]  n=50  SUPPORTED
+  H2b  Tot_w025(Causal - P20)   mean  -60.4598  CI [ -60.5173,  -60.4024]  n=50  SUPPORTED
+
+  Reference means over 50 seeds:
+    RMSE      Causal 0.08147   P10 0.09228   P20 0.07040
+    Tot_w025  Causal 139.539   P10 100.002   P20 199.998
+
+============================================================
+H3  fixed-periodic Pareto frontier  (RMSE vs Total_w025)
+============================================================
+
+  method                 RMSE     Tot_w025
+  ---------------- ---------- ------------
+  P5                  0.13766       50.003
+  P10                 0.09228      100.002
+  P12.5               0.08342      125.007
+  P20                 0.07040      199.998
+  P25                 0.06573      249.995
+  StateEvent          0.16454       38.514
+  Causal              0.08147      139.539
+  OraclePeriodic      0.08931       99.864   (non-causal / regime-aware reference)
+
+  Causal-v3 vs the fixed-periodic frontier: NON-DOMINATED
+  Non-dominated fixed rates: P5, P10, P12.5, P20, P25
+
+============================================================
+H4  gap to Oracle-periodic  (non-causal reference, no gate)
+============================================================
+
+  RMSE(Causal - Oracle)      mean  -0.00784  CI [ -0.00798,  -0.00770]  n=50
+  Tot_w025(Causal - Oracle)  mean  +39.6746  CI [ +39.6168,  +39.7323]  n=50
+
+  Oracle schedule: Clean->P5, Moderate->P10, Stressed->P20,
+  switching at [23 38 53 68] s. Pre-registered before any run.
+
+============================================================
+FIVE-SEGMENT TABLE  (seed means, n=50)
+============================================================
+
+  P5
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.06444     50.00      0.00      50.00    0.1000    0.518
+    Moderate_1  Moderate    0.13540     50.00      0.00      50.00    0.2295    0.476
+    Stressed    Stressed    0.20783     50.00      0.00      50.00    0.3518    0.326
+    Moderate_2  Moderate    0.15314     50.00      0.00      50.00    0.2297    0.405
+    Clean_2     Clean       0.07480     50.02      0.00      50.02    0.1004    0.504
+
+  P10
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.03620    100.00      0.00     100.00    0.0500    0.552
+    Moderate_1  Moderate    0.09199    100.00      0.00     100.00    0.1545    0.514
+    Stressed    Stressed    0.14136    100.00      0.00     100.00    0.2350    0.415
+    Moderate_2  Moderate    0.10419    100.00      0.00     100.00    0.1559    0.477
+    Clean_2     Clean       0.04441    100.01      0.00     100.01    0.0502    0.533
+
+  P12.5
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.03130    125.03      0.00     125.03    0.0400    0.559
+    Moderate_1  Moderate    0.08360    124.97      0.00     124.97    0.1397    0.519
+    Stressed    Stressed    0.12836    125.03      0.00     125.03    0.2126    0.432
+    Moderate_2  Moderate    0.09401    124.97      0.00     124.97    0.1405    0.489
+    Clean_2     Clean       0.03893    125.03      0.00     125.03    0.0402    0.536
+
+  P20
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.02546    200.00      0.00     200.00    0.0260    0.568
+    Moderate_1  Moderate    0.07114    200.00      0.00     200.00    0.1180    0.527
+    Stressed    Stressed    0.10820    200.00      0.00     200.00    0.1783    0.460
+    Moderate_2  Moderate    0.07971    200.00      0.00     200.00    0.1185    0.510
+    Clean_2     Clean       0.03189    199.99      0.00     199.99    0.0261    0.541
+
+  P25
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.02353    250.00      0.00     250.00    0.0200    0.573
+    Moderate_1  Moderate    0.06646    250.00      0.00     250.00    0.1098    0.530
+    Stressed    Stressed    0.10111    250.00      0.00     250.00    0.1661    0.469
+    Moderate_2  Moderate    0.07445    250.00      0.00     250.00    0.1103    0.517
+    Clean_2     Clean       0.02943    249.98      0.00     249.98    0.0201    0.544
+
+  StateEvent
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.08217     38.27      0.00      38.27    0.1301    0.497
+    Moderate_1  Moderate    0.16191     38.08      0.00      38.08    0.2764    0.444
+    Stressed    Stressed    0.24809     37.79      0.00      37.79    0.4293    0.254
+    Moderate_2  Moderate    0.17960     39.13      0.00      39.13    0.2727    0.364
+    Clean_2     Clean       0.09227     39.30      0.00      39.30    0.1280    0.485
+
+  Causal
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.04142     83.33     83.33     104.17    0.0600    0.546
+    Moderate_1  Moderate    0.08555    123.30     97.93     147.78    0.1424    0.519
+    Stressed    Stressed    0.11558    166.39     99.93     191.38    0.1892    0.451
+    Moderate_2  Moderate    0.09250    124.99    100.30     150.06    0.1415    0.503
+    Clean_2     Clean       0.04734     83.40     83.83     104.35    0.0601    0.534
+
+  OraclePeriodic
+    segment     regime         RMSE   DATA Hz    ACK Hz   Tot_w025       AoI   minSep
+    Clean_1     Clean       0.06444     50.00      0.00      50.00    0.1000    0.518
+    Moderate_1  Moderate    0.09444     99.86      0.00      99.86    0.1552    0.514
+    Stressed    Stressed    0.11060    199.74      0.00     199.74    0.1789    0.460
+    Moderate_2  Moderate    0.09954     99.86      0.00      99.86    0.1555    0.509
+    Clean_2     Clean       0.06834     49.93      0.00      49.93    0.1003    0.520
+
+============================================================
+TRANSITION DIAGNOSTICS  (seed means, n=50)
+============================================================
+
+  Causal
+    switch / window                      DATA Hz       dHz       dAoI      dRMSE
+    t23:Clean->Moderate:0-1s              123.94    +40.34    +0.0822    +0.0046
+    t23:Clean->Moderate:1-3s              118.84    +35.24    +0.0852    +0.0327
+    t23:Clean->Moderate:3-5s              121.74    +38.14    +0.0833    +0.0499
+    t23:Clean->Moderate:remainder         124.44    +40.84    +0.0819    +0.0482
+    t38:Moderate->Stressed:0-1s           162.66    +38.36    +0.0445    +0.0023
+    t38:Moderate->Stressed:1-3s           166.62    +42.32    +0.0467    +0.0176
+    t38:Moderate->Stressed:3-5s           166.31    +42.01    +0.0468    +0.0285
+    t38:Moderate->Stressed:remainder      166.74    +42.44    +0.0480    +0.0296
+    t53:Stressed->Moderate:0-1s           132.22    -34.43    -0.0456    -0.0029
+    t53:Stressed->Moderate:1-3s           126.62    -40.03    -0.0486    -0.0194
+    t53:Stressed->Moderate:3-5s           125.49    -41.16    -0.0483    -0.0303
+    t53:Stressed->Moderate:remainder      123.84    -42.81    -0.0477    -0.0296
+    t68:Moderate->Clean:0-1s               84.08    -39.95    -0.0798    -0.0049
+    t68:Moderate->Clean:1-3s               82.96    -41.07    -0.0817    -0.0341
+    t68:Moderate->Clean:3-5s               83.68    -40.35    -0.0818    -0.0481
+    t68:Moderate->Clean:remainder          83.26    -40.77    -0.0817    -0.0480
+
+  StateEvent
+    switch / window                      DATA Hz       dHz       dAoI      dRMSE
+    t23:Clean->Moderate:0-1s               37.94     -0.46    +0.1251    +0.0061
+    t23:Clean->Moderate:1-3s               35.68     -2.72    +0.1658    +0.0510
+    t23:Clean->Moderate:3-5s               38.04     -0.36    +0.1538    +0.0911
+    t23:Clean->Moderate:remainder          38.58     +0.18    +0.1422    +0.0874
+    t38:Moderate->Stressed:0-1s            38.18     -0.24    +0.1143    +0.0041
+    t38:Moderate->Stressed:1-3s            35.72     -2.70    +0.1728    +0.0426
+    t38:Moderate->Stressed:3-5s            35.49     -2.93    +0.1732    +0.0878
+    t38:Moderate->Stressed:remainder       38.63     +0.21    +0.1536    +0.0909
+    t53:Stressed->Moderate:0-1s            40.50     +2.46    -0.1202    -0.0071
+    t53:Stressed->Moderate:1-3s            40.71     +2.67    -0.1686    -0.0511
+    t53:Stressed->Moderate:3-5s            40.12     +2.08    -0.1576    -0.0907
+    t53:Stressed->Moderate:remainder       38.47     +0.44    -0.1553    -0.0892
+    t68:Moderate->Clean:0-1s               41.60     +3.06    -0.1445    -0.0082
+    t68:Moderate->Clean:1-3s               43.33     +4.79    -0.1556    -0.0603
+    t68:Moderate->Clean:3-5s               39.62     +1.08    -0.1446    -0.0916
+    t68:Moderate->Clean:remainder          38.25     -0.29    -0.1431    -0.0859
+
+  P20
+    switch / window                      DATA Hz       dHz       dAoI      dRMSE
+    t23:Clean->Moderate:0-1s              200.00     +0.00    +0.0887    +0.0040
+    t23:Clean->Moderate:1-3s              200.00     +0.00    +0.0922    +0.0328
+    t23:Clean->Moderate:3-5s              200.00     +0.00    +0.0920    +0.0505
+    t23:Clean->Moderate:remainder         200.00     +0.00    +0.0923    +0.0502
+    t38:Moderate->Stressed:0-1s           200.00     +0.00    +0.0540    +0.0025
+    t38:Moderate->Stressed:1-3s           200.00     +0.00    +0.0598    +0.0219
+    t38:Moderate->Stressed:3-5s           200.00     +0.00    +0.0601    +0.0358
+    t38:Moderate->Stressed:remainder      200.00     +0.00    +0.0608    +0.0369
+    t53:Stressed->Moderate:0-1s           200.00     +0.00    -0.0542    -0.0031
+    t53:Stressed->Moderate:1-3s           200.00     +0.00    -0.0615    -0.0237
+    t53:Stressed->Moderate:3-5s           200.00     +0.00    -0.0606    -0.0374
+    t53:Stressed->Moderate:remainder      200.00     +0.00    -0.0608    -0.0371
+    t68:Moderate->Clean:0-1s              200.00     +0.00    -0.0909    -0.0060
+    t68:Moderate->Clean:1-3s              200.00     +0.00    -0.0920    -0.0382
+    t68:Moderate->Clean:3-5s              200.00     +0.00    -0.0920    -0.0491
+    t68:Moderate->Clean:remainder         200.00     +0.00    -0.0920    -0.0500
+
+  OraclePeriodic
+    switch / window                      DATA Hz       dHz       dAoI      dRMSE
+    t23:Clean->Moderate:0-1s               97.84    +47.84    +0.0613    +0.0040
+    t23:Clean->Moderate:1-3s              100.00    +50.00    +0.0548    +0.0230
+    t23:Clean->Moderate:3-5s              100.00    +50.00    +0.0540    +0.0330
+    t23:Clean->Moderate:remainder         100.00    +50.00    +0.0550    +0.0330
+    t38:Moderate->Stressed:0-1s           196.12    +96.12    +0.0256    +0.0019
+    t38:Moderate->Stressed:1-3s           200.00   +100.00    +0.0230    +0.0095
+    t38:Moderate->Stressed:3-5s           200.00   +100.00    +0.0233    +0.0143
+    t38:Moderate->Stressed:remainder      200.00   +100.00    +0.0240    +0.0148
+    t53:Stressed->Moderate:0-1s            97.84   -102.16    -0.0196    -0.0012
+    t53:Stressed->Moderate:1-3s           100.00   -100.00    -0.0238    -0.0087
+    t53:Stressed->Moderate:3-5s           100.00   -100.00    -0.0226    -0.0142
+    t53:Stressed->Moderate:remainder      100.00   -100.00    -0.0238    -0.0145
+    t68:Moderate->Clean:0-1s               48.74    -51.26    -0.0501    -0.0031
+    t68:Moderate->Clean:1-3s               50.00    -50.00    -0.0552    -0.0222
+    t68:Moderate->Clean:3-5s               50.00    -50.00    -0.0552    -0.0337
+    t68:Moderate->Clean:remainder          50.00    -50.00    -0.0552    -0.0336
+
+============================================================
+SAFETY  (min pairwise separation < 0.25 m on t in [8, 83])
+============================================================
+
+  method             failures  minSep mean minSep worst
+  P5                    1/50         0.326        0.233
+  P10                   0/50         0.415        0.381
+  P12.5                 0/50         0.432        0.421
+  P20                   0/50         0.460        0.451
+  P25                   0/50         0.469        0.463
+  StateEvent           18/50         0.254        0.183
+  Causal                0/50         0.451        0.436
+  OraclePeriodic        0/50         0.460        0.450
+
+============================================================
+COUNTERS
+============================================================
+
+  method             invariants        drops rate changes     diverged
+  P5                          0        29951            0            0
+  P10                         0        59698            0            0
+  P12.5                       0        74993            0            0
+  P20                         0       119967            0            0
+  P25                         0       149386            0            0
+  StateEvent                  0        22700            0            0
+  Causal                      0        86985            0            0
+  OraclePeriodic              0        89884          200            0
+
+Wrote 400 rows to D:\Research\Drone\SwarmDroneMATLAB\results\exp11_dynamic_network\2026-08-27_174026\tidy.csv
+
+============================================================
+EXP11 SUMMARY
+============================================================
+
+  Runs           : 400 (50 seeds x 8 methods) in 6.4 min
+  Gates          : 7 of 7 PASS
+  H1 adaptivity  : SUPPORTED
+  H2a RMSE<P10   : SUPPORTED  (mean -0.01081, CI [-0.01106, -0.01057])
+  H2b cost<P20   : SUPPORTED  (mean -60.4598, CI [-60.5173, -60.4024])
+  H3 Pareto      : NON-DOMINATED
+  H4 oracle gap  : RMSE -0.00784, cost +39.6746 (reported, no gate)
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp11_dynamic_network\2026-08-27_174026\figures
+
+============================================================
+DONE : exp11_dynamic_network
+TIME : 8 m 15 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp11_dynamic_network\2026-08-27_174026
+============================================================

@@ -68,38 +68,12 @@ regime = networkRegimeSchedule('exp11');
 exp11Seeds = 26000001:26000050;
 
 % Debug hook. Section 11 of the pre-registration requires three seeds to
-% be run first, and STOPS on a technical or infrastructure bug rather than
-% on a bad scientific result.
-%
-% The selector is an ENVIRONMENT VARIABLE, not a base-workspace variable.
-% A base-workspace variable does not survive: this file is a script, so it
-% shares the caller's workspace and the `clear` above deletes the very hook
-% it is then asked to read. That is not hypothetical - it is exactly how the
-% first EXP11 execution skipped its own debug pass and went straight to 50
-% seeds. An environment variable is immune to `clear`.
-%
-%   setenv('EXP11_SMOKE_SEEDS', '26000001:26000003')
-%
-% Accepts a colon range or a comma/space separated list. It selects seeds
-% and changes nothing else about the experiment.
-smokeSpec = strtrim(getenv('EXP11_SMOKE_SEEDS'));
-
-if ~isempty(smokeSpec)
-
-    smokeSeeds = localParseSeedSpec(smokeSpec);
-
-    % The debug pass must be a SUBSET of the pre-registered block. Letting
-    % it introduce seeds of its own would make the debug run evidence about
-    % a different sample than the one that was registered.
-    assert(all(ismember(smokeSeeds, exp11Seeds)), ...
-        ['exp11: EXP11_SMOKE_SEEDS must be a subset of the pre-registered ' ...
-         'block %d..%d.'], min(exp11Seeds), max(exp11Seeds));
-
-    exp11Seeds = smokeSeeds;
-
-    fprintf('\n*** DEBUG RUN: %d seed(s) [%s] ***\n', ...
-        numel(exp11Seeds), smokeSpec);
-
+% be run first and STOPS on a technical or infrastructure bug rather than
+% on a bad scientific result. Set this in the base workspace before
+% running to take that path; it changes nothing else.
+if evalin('base', 'exist(''exp11SmokeSeeds'',''var'')')
+    exp11Seeds = evalin('base', 'exp11SmokeSeeds');
+    fprintf('\n*** DEBUG RUN: %d seed(s) ***\n', numel(exp11Seeds));
 end
 
 numSeeds = numel(exp11Seeds);
@@ -1089,24 +1063,4 @@ if f
 else
     s = 'NON-DOMINATED';
 end
-end
-
-
-function v = localParseSeedSpec(spec)
-%LOCALPARSESEEDSPEC Parse "a:b" or a comma/space separated seed list.
-
-if contains(spec, ':')
-    parts = strsplit(spec, ':');
-    assert(numel(parts) == 2, ...
-        'exp11: EXP11_SMOKE_SEEDS range must be "first:last".');
-    v = str2double(parts{1}) : str2double(parts{2});
-else
-    v = str2double(strsplit(strrep(spec, ',', ' ')));
-end
-
-v = v(:)';
-
-assert(~isempty(v) && all(isfinite(v)) && all(v == round(v)), ...
-    'exp11: EXP11_SMOKE_SEEDS did not parse to integer seeds: "%s"', spec);
-
 end
