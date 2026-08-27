@@ -52,17 +52,17 @@ is re-tested away later in the campaign; `docs/FINAL_CLAIMS.md` and the
 | exp09b_physical_mismatch | `exp09b-locked-partial` | 452af01 | `results/exp09b_physical_mismatch/2026-08-27_022038` | PARTIAL | 4/5; G2 absolute-RMSE fails on a **controller** limit, not a communication one |
 | exp09c_synthetic_estimator | `exp09c-locked-partial` | e91c084 | `results/exp09c_synthetic_estimator/2026-08-27_025437` | PARTIAL | 3/4; Clean C3 DATA-rate gate fails on noise-driven hard triggers |
 | exp09c_timestep_diagnostic | `exp09c-locked-partial` | e91c084 | `results/exp09c_timestep_diagnostic/2026-08-27_030722` | DIAGNOSTIC | RMSE stable across outer dt, but **DATA-rate dt-invariance rejected** |
-| exp10a_final_validation | `simulation-v1.0` | 9372170 | `results/exp10a_final_validation/2026-08-27_081056` | POSITIVE | 50 holdout seeds, 3400 runs, 5/5 infrastructure gates; K1 SUPPORTED, K2 reported without direction |
-| exp10b_unified_matrix | `simulation-v1.0` | 3307fcc | `results/exp10b_unified_matrix/2026-08-27_084853` | PARTIAL | Moderate criterion MET at w = 0.25 (87.5 %); Causal-v3 dominated in 75 % of Moderate cells under **broadcast** accounting, and Stressed non-dominance falls to 37.5 % at w = 0.50, airtime and broadcast |
-| simulation_v1_validation | `simulation-v1.0` | see manifest | `results/simulation_v1_validation/<LATEST>` | POSITIVE | EXP10C: test suite, tag and config hashes, hash re-verification, serial-versus-parallel bit-identity, environment manifest |
+| exp10a_final_validation | `simulation-v1.0` | f23c8c2 | `results/exp10a_final_validation/2026-08-27_091546` | POSITIVE | 50 holdout seeds, 3400 runs, 5/5 infrastructure gates; K1 SUPPORTED, K2 reported without direction |
+| exp10b_unified_matrix | `simulation-v1.0` | f23c8c2 | `results/exp10b_unified_matrix/2026-08-27_095330` | PARTIAL | Moderate criterion MET at w = 0.25 (87.5 %); Causal-v3 dominated in 75 % of Moderate cells under **broadcast** accounting, and Stressed non-dominance falls to 37.5 % at w = 0.50, airtime and broadcast |
+| simulation_v1_validation | `simulation-v1.0` | see manifest | `results/simulation_v1_validation/2026-08-27_094912` | POSITIVE | EXP10C: test suite, tag and config hashes, hash re-verification, serial-versus-parallel bit-identity, environment manifest |
 
 Superseded or debug runs that the curated map deliberately does **not** point at:
 
 | Run | Why it is not the run that counts |
 |---|---|
-| `results/exp10a_final_validation/2026-08-27_075759` | 3-seed infrastructure smoke, run before the holdout sweep. Its console log states so, and every row of its `tidy.csv` carries only 3 seeds. |
+| `results/exp10a_final_validation/2026-08-27_075759` (3-seed smoke), `2026-08-27_081056` (superseded 50-seed run) | The smoke is a 3-seed infrastructure run. The 081056 run is a complete, valid 50-seed sweep whose recorded metrics are IDENTICAL to the final one row by row; it is superseded only because its `PHASEHASH`, `FAULTHASH` and `BLACKHASH` columns predate the exact-checksum fix. Comparing the two is the campaign strongest reproducibility datapoint, run before the holdout sweep. Its console log states so, and every row of its `tidy.csv` carries only 3 seeds. |
 | `results/exp10b_unified_matrix/2026-08-27_0841*, _0843*, _0844*` | earlier aggregations of the same dataset, before the empty-denominator section and the warning-free table construction were added. The numbers are identical; the reports are less complete. |
-| `results/simulation_v1_validation/2026-08-27_084500` | abandoned attempt. A pool worker was killed by memory starvation while the finished sweep's pool was still shutting down, so `test_lock_regression` could not start its `parfor`. An environment failure, not a regression: the same test passes in the recorded run and in the clean clone. |
+| `results/simulation_v1_validation/2026-08-27_084500`, `_084932`, `_090539` | abandoned attempts. A pool worker was killed by memory starvation while the finished sweep's pool was still shutting down, so `test_lock_regression` could not start its `parfor`. An environment failure, not a regression: the same test passes in the recorded run and in the clean clone. |
 
 ## Auto-generated run log
 
@@ -120,3 +120,5 @@ superseded runs; the curated map above names the run that counts.
 | 2026-08-27_085455 | exp10b_unified_matrix | 1 m 04 s | 4 | yes | yes | (R2025a) | 3307fcc |
 | 2026-08-27_091546 | exp10a_final_validation | 31 m 20 s | 3 | yes | yes | (R2025a) | 3307fcc |
 | 2026-08-27_094814 | exp10b_unified_matrix | 11.3 s | 4 | yes | yes | (R2025a) | 3307fcc |
+| 2026-08-27_095330 | exp10b_unified_matrix | 16.0 s | 4 | yes | yes | (R2025a) | f23c8c2 |
+| 2026-08-27_094912 | simulation_v1_validation | 5 m 41 s | 0 | yes | - | (R2025a) | f23c8c2 |

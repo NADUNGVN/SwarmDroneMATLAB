@@ -1,0 +1,18 @@
+{
+  "experiment": "simulation_v1_validation",
+  "runId": "2026-08-27_094912",
+  "startedAt": "2026-08-27 09:49:12",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "f23c8c2",
+  "notes": "",
+  "sourceFile": "",
+  "finishedAt": "2026-08-27 09:54:53",
+  "elapsedSec": 340.5376169,
+  "elapsedText": "5 m 41 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

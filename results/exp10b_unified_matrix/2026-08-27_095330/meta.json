@@ -1,0 +1,18 @@
+{
+  "experiment": "exp10b_unified_matrix",
+  "runId": "2026-08-27_095330",
+  "startedAt": "2026-08-27 09:53:31",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "f23c8c2",
+  "notes": "",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp10b_unified_matrix.m",
+  "finishedAt": "2026-08-27 09:53:47",
+  "elapsedSec": 16.0445347,
+  "elapsedText": "16.0 s",
+  "figureCount": 4,
+  "hasWorkspace": true,
+  "hasTidy": true
+}
