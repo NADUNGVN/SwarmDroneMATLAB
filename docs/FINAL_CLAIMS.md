@@ -59,7 +59,7 @@ Pre-registered claim **K1**, on holdout seeds, directional.
 | pairs | 50 / 50 |
 | verdict | interval entirely below zero → **SUPPORTED** |
 
-- **Evidence** EXP10A — `results/exp10a_final_validation/2026-08-27_081056`
+- **Evidence** EXP10A — `results/exp10a_final_validation/2026-08-27_091546`
 
 ### S3 — Lower mean RMSE than State-event throughout the final matrix
 
@@ -67,7 +67,7 @@ Causal-v3 has lower mean formation RMSE than State-event in **all 17
 cells**. The statement is permitted by the rule fixed in `EXP10_PLAN.md`
 §12 before the data existed, not asserted in advance.
 
-- **Evidence** EXP10B — `results/exp10b_unified_matrix/2026-08-27_084853`
+- **Evidence** EXP10B — `results/exp10b_unified_matrix/2026-08-27_095330`
 - **Read with L11**: part of this margin is State-event failing safety
   outright at N = 20 and N = 50.
 
@@ -145,11 +145,14 @@ fraction is 25 %.
 - serial versus parallel execution compared **bit-identically** — every
   counter, every exact realization hash and the full trajectory, with no
   tolerance applied
-- a fresh `git clone` reproduces the test suite, the unified matrix
-  rebuilt from persisted tidy files, and one re-simulated seed
+- a fresh `git clone` of HEAD reproduces, in a MATLAB process that has
+  never seen the working tree: the whole test suite including
+  `test_lock_regression`; the unified matrix, rebuilt from persisted tidy
+  files and **identical** to this one; and seed 25000001 re-simulated
+  **bit-identically** across all 68 of its point-scenario-method rows
 - **Evidence** EXP10C — `experiments/run_simulation_v1_validation.m`,
   `experiments/run_clean_clone_check.m`,
-  `results/simulation_v1_validation/<LATEST>` incl. `manifest.json` and
+  `results/simulation_v1_validation/2026-08-27_094912` incl. `manifest.json` and
   `trace_hashes.csv`
 
 **One caveat, stated rather than buried.** The *locked* trace-generator
@@ -415,8 +418,9 @@ EXP10 ran dt = 0.02 s only, so the rejection stands untouched.
 | Artefact | Location |
 |---|---|
 | pre-registration | `docs/PREREGISTRATION.md`, `docs/EXP10_PLAN.md` |
-| holdout dataset | `results/exp10a_final_validation/2026-08-27_081056/tidy.csv` (3400 rows) |
-| unified matrix | `results/exp10b_unified_matrix/2026-08-27_084853/tidy.csv` (68 rows) |
-| freeze validation | `results/simulation_v1_validation/<LATEST>/` |
+| holdout dataset | `results/exp10a_final_validation/2026-08-27_091546/tidy.csv` (3400 rows) |
+| unified matrix | `results/exp10b_unified_matrix/2026-08-27_095330/tidy.csv` (68 rows) |
+| freeze validation | `results/simulation_v1_validation/2026-08-27_094912/` |
 | run index | `results/INDEX.md` |
+| clean-clone check | `experiments/run_clean_clone_check.m`, PASS |
 | tag | `simulation-v1.0` |
