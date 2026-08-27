@@ -1,0 +1,73 @@
+# Citation metadata for the SOFTWARE ARTIFACT only.
+#
+# This file describes the simulation code and its frozen release. It
+# deliberately contains NO paper DOI, no journal, no volume and no
+# publication date, because the manuscript built on this artifact is
+# unpublished. Inventing publication metadata for an unsubmitted paper
+# would be a fabrication that survives in every downstream citation.
+#
+# When the manuscript is published, add a `preferred-citation` block with
+# the real DOI and venue, and only then.
+
+cff-version: 1.2.0
+message: >-
+  If you use this software or its frozen simulation results, please cite the
+  software release below.
+
+title: >-
+  SwarmDroneMATLAB: a pre-registered simulation campaign for causal
+  ACK-assisted, AoI-aware event-triggered UAV swarm communication
+
+abstract: >-
+  MATLAB simulation campaign for communication policies in multi-UAV
+  formation control. Implements periodic, state-event, acausal
+  oracle-AoI and causal ACK-assisted AoI-aware event-triggered
+  communication over a network model with loss, delay, jitter and
+  out-of-order delivery, against double-integrator and 6-DOF quadrotor
+  followers. The release is frozen and includes the persisted results of a
+  pre-registered validation over 50 holdout seeds and 3400 runs, common
+  random number infrastructure, nine runtime protocol invariants, a
+  nine-file test suite, and single-command reproduction and clean-clone
+  verification. Seven pre-registered claims that were tested and rejected
+  are preserved as part of the release.
+
+type: software
+
+authors:
+  - name: "SwarmDroneMATLAB contributors"
+    # Individual authors are withheld in this draft, consistent with the
+    # anonymised manuscript. Replace with named authors and ORCIDs before
+    # any public release.
+
+version: "simulation-v1.0"
+
+commit: "32858b1"
+
+repository-code: "https://github.com/NADUNGVN/SwarmDroneMATLAB"
+
+license-url: "https://github.com/NADUNGVN/SwarmDroneMATLAB"
+# No SPDX license identifier is asserted here because no LICENSE file is
+# present in the repository. Add one, then set `license:` to its SPDX id.
+# Claiming a license this repository does not carry would be worse than
+# leaving the field out.
+
+keywords:
+  - age of information
+  - event-triggered communication
+  - multi-agent formation control
+  - unmanned aerial vehicles
+  - networked control systems
+  - reproducible research
+  - pre-registered simulation study
+
+references:
+  - type: generic
+    title: >-
+      Frozen result set, pre-registration and final claim ledger for
+      simulation-v1.0
+    notes: >-
+      In-repository documentation rather than an external publication:
+      docs/PREREGISTRATION.md, docs/EXP10_PLAN.md, docs/FINAL_CLAIMS.md,
+      results/INDEX.md, ARTIFACT_README.md.
+    authors:
+      - name: "SwarmDroneMATLAB contributors"

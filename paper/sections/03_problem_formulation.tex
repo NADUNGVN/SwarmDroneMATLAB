@@ -59,7 +59,9 @@ larger-swarm studies.
 
 The \textbf{6-DOF quadrotor} plant gives each follower full translational
 and rotational dynamics with thrust and torque limits, driven through a
-cascaded attitude controller at a $10{:}1$ inner-to-outer step ratio. The
+cascaded attitude controller at a $10{:}1$ inner-to-outer step ratio,
+following the standard geometric and differentially flat quadrotor
+formulations~\cite{lee2010geometric,mellinger2011minimum}. The
 commanded acceleration becomes a reference the vehicle must actually
 achieve. A run is declared \emph{diverged} if any state becomes
 non-finite, if a follower leaves a $50$~m ball around the leader, or if
@@ -115,7 +117,7 @@ derivable from that sender's own state history and from packets that have
 \end{quote}
 
 An acausal AoI-aware policy is a legitimate object of study --- we use one
-as an upper reference --- but it is not implementable, and its efficiency
+as an ideal-feedback reference --- but it is not implementable, and its efficiency
 must not be reported as achievable. What a real sender can maintain is an
 \emph{estimate} $\Aoihat_{ij}(t)$ built from acknowledgements, and the gap
 between $\Aoihat_{ij}$ and $A_{ij}$ is a modelling consequence of the

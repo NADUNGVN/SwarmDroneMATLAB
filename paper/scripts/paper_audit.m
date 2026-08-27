@@ -422,6 +422,189 @@ end
 
 
 %% ============================================================
+% RULE C1..C5 - citation integrity
+%
+% Added for paper-v2, when the bibliography stopped being empty. An
+% unverified or dangling citation is the one manuscript defect a reader
+% cannot detect and cannot forgive.
+% ============================================================
+
+bibPath   = fullfile(paperDir,'references.bib');
+auditPath = fullfile(paperDir,'REFERENCE_AUDIT.csv');
+
+haveBib = exist(bibPath,'file')==2 && exist(auditPath,'file')==2;
+
+if haveBib
+
+    bibTxt = fileread(bibPath);
+
+    bibKeys = regexp(bibTxt, '@(?:article|inproceedings|book|inbook|misc)\{([A-Za-z0-9_]+),', 'tokens');
+    bibKeys = unique(cellfun(@(c) c{1}, bibKeys, 'UniformOutput', false));
+
+    citeRaw = regexp(prose, '\cite\{([^}]*)\}', 'tokens');
+
+    citeKeys = {};
+
+    for k = 1:numel(citeRaw)
+        parts = strsplit(citeRaw{k}{1}, ',');
+        for q = 1:numel(parts)
+            key = strtrim(parts{q});
+            if ~isempty(key)
+                citeKeys{end+1} = key;   %#ok<AGROW>
+            end
+        end
+    end
+
+    citeKeys = unique(citeKeys);
+
+    % ---- C1: every \cite key exists in the bib ----
+    dangling = setdiff(citeKeys, bibKeys);
+
+    addRule('C1','every cite key exists in references.bib', ...
+        isempty(dangling), ...
+        sprintf('%d keys cited, %d defined, %d dangling%s', ...
+            numel(citeKeys), numel(bibKeys), numel(dangling), ...
+            localFirstFew(dangling)), ...
+        ['A dangling citekey renders as a bold [?] and tells a reviewer ' ...
+         'the bibliography was never built.']);
+
+    % ---- C2: DOIs unique ----
+    doiTok = regexp(bibTxt, 'doi\s*=\s*\{([^}]*)\}', 'tokens');
+    dois = lower(cellfun(@(c) strtrim(c{1}), doiTok, 'UniformOutput', false));
+
+    [uq, ~, idx] = unique(dois);
+    counts = accumarray(idx(:), 1);
+    dupDoi = uq(counts > 1);
+
+    addRule('C2','bibliography DOIs are unique', ...
+        isempty(dupDoi), ...
+        sprintf('%d DOIs, %d duplicated%s', numel(dois), numel(dupDoi), ...
+            localFirstFew(dupDoi)), ...
+        ['A duplicated DOI means the same work is cited twice under two ' ...
+         'keys, which inflates the reference count and misleads a reader ' ...
+         'about coverage.']);
+
+    % ---- C3: no placeholder citation anywhere ----
+    placeholders = {'\cite{}', 'TODO citation', 'CITATION NEEDED', ...
+                    'RELATED_WORK_NEEDS', 'CITE?', '\cite{TODO}', ...
+                    '\cite{xxx}', 'FIXME'};
+
+    foundPh = {};
+
+    for k = 1:numel(placeholders)
+        if contains(prose, placeholders{k})
+            foundPh{end+1} = placeholders{k};   %#ok<AGROW>
+        end
+    end
+
+    addRule('C3','no placeholder citation or TODO marker in the manuscript', ...
+        isempty(foundPh), ...
+        sprintf('%d placeholder marker(s)%s', numel(foundPh), ...
+            localFirstFew(foundPh)), ...
+        ['A placeholder that survives to submission is indistinguishable ' ...
+         'from an oversight, and RELATED_WORK_NEEDS is a planning file ' ...
+         'that must never appear in the prose.']);
+
+    % ---- C4: every cited paper is in REFERENCE_AUDIT.csv ----
+    A = readtable(auditPath, 'TextType','char', 'Delimiter',',');
+
+    auditKeys = A.citekey;
+
+    if ~iscell(auditKeys)
+        auditKeys = cellstr(auditKeys);
+    end
+
+    notAudited  = setdiff(citeKeys, auditKeys);
+    notInBib    = setdiff(auditKeys', bibKeys);
+
+    addRule('C4','every cited and every bib entry appears in REFERENCE_AUDIT.csv', ...
+        isempty(notAudited) && isempty(notInBib), ...
+        sprintf('%d audit rows; %d cited-but-unaudited, %d audited-but-absent-from-bib%s%s', ...
+            numel(auditKeys), numel(notAudited), numel(notInBib), ...
+            localFirstFew(notAudited), localFirstFew(notInBib)), ...
+        ['The audit CSV is where the verification status and the supported ' ...
+         'claim live. A reference missing from it has neither.']);
+
+    % ---- C5: every audit row is VERIFIED ----
+    stat = A.verificationStatus;
+
+    if ~iscell(stat)
+        stat = cellstr(stat);
+    end
+
+    notVerified = auditKeys(~startsWith(stat, 'VERIFIED'));
+
+    if ~iscell(notVerified)
+        notVerified = cellstr(notVerified);
+    end
+
+    addRule('C5','every bibliography entry has verificationStatus VERIFIED', ...
+        isempty(notVerified), ...
+        sprintf('%d of %d rows not VERIFIED%s', numel(notVerified), ...
+            numel(auditKeys), localFirstFew(notVerified)), ...
+        ['An unverified reference is a reference whose author list, year, ' ...
+         'venue or DOI nobody has checked against the publisher record. ' ...
+         'Nine given names were wrong before this check existed.']);
+
+    % ---- C6: unused verified references WARN, never FAIL ----
+    unusedRef = setdiff(bibKeys, citeKeys);
+
+    if isempty(unusedRef)
+        st6 = 'PASS';
+    else
+        st6 = 'WARN';
+    end
+
+    addRule('C6','no verified reference is left uncited', st6, ...
+        sprintf('%d verified but uncited%s', numel(unusedRef), ...
+            localFirstFew(unusedRef)), ...
+        ['A verified-but-uncited entry is bibliography padding rather than ' ...
+         'an error, so this warns and does not fail.']);
+
+    % ---- C7: no "first" claim ----
+    firstClaims = {};
+
+    sentF = localSentences(prose);
+
+    % Precise priority phrasings only. An earlier version matched
+    % 'the first ' and flagged "the first two numbers" and "on the first
+    % transmission", neither of which is a priority claim. A rule that
+    % cries wolf on ordinary ordinals gets switched off, so it is narrowed
+    % to constructions that actually assert precedence.
+    firstPatterns = {'first-ever', 'first ever', ...
+                     'we are the first', 'are the first to', ...
+                     'is the first to', 'the first work', ...
+                     'the first paper', 'the first method', ...
+                     'the first policy', 'the first approach', ...
+                     'for the first time'};
+
+    for s7 = 1:numel(sentF)
+        for k = 1:numel(firstPatterns)
+            if contains(lower(sentF{s7}), firstPatterns{k}) && ...
+                    ~localDenies(sentF{s7}, firstPatterns{k})
+                firstClaims{end+1} = localTrim(sentF{s7});   %#ok<AGROW>
+            end
+        end
+    end
+
+    addRule('C8','no priority ("first") claim', ...
+        isempty(firstClaims), ...
+        sprintf('%d priority claim(s)%s', numel(firstClaims), ...
+            localFirstFew(firstClaims)), ...
+        ['A Crossref-indexed, English-language keyword search cannot ' ...
+         'support a priority claim, and NOVELTY_GAP_REVIEW.md records that ' ...
+         'explicitly.']);
+
+else
+
+    addRule('C1','citation integrity', false, ...
+        'references.bib or REFERENCE_AUDIT.csv is missing', ...
+        'Citation integrity cannot be checked without both files.');
+
+end
+
+
+%% ============================================================
 % RULE 10 - the frozen simulation source is untouched
 % ============================================================
 
@@ -457,9 +640,13 @@ addRule('A11','both rate normalisations are labelled', ...
 % ============================================================
 
 addRule('M1','no fabricated citation', 'MANUAL', ...
-    'the draft contains no bibliography by design; see RELATED_WORK_NEEDS.md', ...
-    ['A plausible-looking reference is worse than an empty section: a ' ...
-     'reader cannot tell it from a real one.']);
+    ['48 references, each verified against publisher-deposited metadata ' ...
+     '(REFERENCE_AUDIT.csv); C1-C5 check integrity mechanically, but ' ...
+     '"this record describes a real paper" needs a human'], ...
+    ['A plausible-looking reference is worse than an absent one: a reader ' ...
+     'cannot tell it from a real one. Nine given names were wrong before ' ...
+     'the verification pass, which is why this stays a MANUAL rule even ' ...
+     'though the mechanical checks pass.']);
 
 addRule('M2','figure content matches its caption claim', 'MANUAL', ...
     '11 figures generated from frozen files; visual review required', ...
@@ -615,7 +802,8 @@ if nargin >= 2 && ~isempty(phrase)
 
     at = strfind(low, lower(phrase));
 
-    negations = {'no ', 'not ', 'never ', 'without ', 'nor '};
+    negations = {'no ', 'not ', 'never ', 'without ', 'nor ', ...
+                 'nothing ', 'none ', 'neither '};
 
     for k = 1:numel(at)
 

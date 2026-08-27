@@ -128,6 +128,11 @@ saturated at $0.20$. The saturation is not incidental --- it is what makes
 the policy's response to severe reverse-channel impairment flat, which we
 return to in Section~\ref{sec:discussion}.
 
+Dynamic rather than fixed thresholds are established in event-triggered
+control~\cite{girard2015dynamic,yi2017distributed}; what differs here is
+the modulating signal, which refers to another agent's state of knowledge
+rather than to an internal variable.
+
 Innovation magnitudes are measured against the transmitted memory:
 \begin{equation}
 \Delta p(t) = \| \pos(t) - \pos^{\mathrm{sent}} \|, \qquad
@@ -309,7 +314,8 @@ $\pos^{\mathrm{sent}},\vel^{\mathrm{sent}},g^{\mathrm{ack}},
 
 Three properties of Algorithm~\ref{alg:receiver} matter for correctness.
 
-\textbf{Cumulative acknowledgement.} One ACK names the newest accepted
+\textbf{Cumulative acknowledgement}, as used in ACK-driven AoI
+scheduling~\cite{ceran2019average}. One ACK names the newest accepted
 packet and retires every outstanding sequence number up to it. This bounds
 reverse traffic at one frame per link per tick regardless of how many DATA
 packets arrived in that tick, and it makes recovery from a lost ACK

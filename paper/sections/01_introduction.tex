@@ -13,8 +13,9 @@ Two answers dominate practice, and each fails in a way the other does not.
 to schedule. Its weakness is that the rate must be chosen in advance, for a
 network whose quality is generally unknown and often changing. Choose a
 low rate and the formation degrades exactly when the channel degrades;
-choose a high rate and the radio is busy paying for margin it does not
-need. In our own frozen results this is visible directly: a $10$~Hz
+choose a high rate and the radio is busy paying for margin it does not need ---
+and in a UAV swarm that margin is contested airtime rather than spare
+capacity~\cite{gupta2016survey,campion2019uavswarm}. In our own frozen results this is visible directly: a $10$~Hz
 periodic baseline transmits \MetricDataPtenClean{}~Hz in a clean network
 and the same \MetricDataPtenStressed{}~Hz in a heavily impaired one, while
 its formation error grows from \MetricRmsePtenClean{}~m to
@@ -22,7 +23,8 @@ its formation error grows from \MetricRmsePtenClean{}~m to
 changed.
 
 \textbf{Conventional event-triggered communication} transmits when the
-local state has moved far enough to be worth reporting. This does save
+local state has moved far enough to be worth
+reporting~\cite{tabuada2007event,dimarogonas2012distributed}. This does save
 traffic, and substantially: our state-event baseline runs at
 \MetricDataEventStressed{}~Hz in the Stressed condition against
 \MetricDataPtwentyStressed{}~Hz for $20$~Hz periodic. But a pure state
@@ -32,52 +34,53 @@ trigger --- while the receiver's copy grows arbitrarily stale. The
 resulting error is severe: \MetricRmseEventStressed{}~m, worse than either
 periodic baseline.
 
-The missing quantity is \emph{age of information}: not how much the
+The missing quantity is \emph{age of
+information}~\cite{kaul2012realtime,yates2021aoisurvey}: not how much the
 sender's state has changed, but how old the receiver's copy of it is. Using
 it, however, raises a problem that is easy to state and easy to get wrong.
 \textbf{A sender cannot observe the age of information at a receiver.} It
 can only infer it, and only from something that comes back.
 
-\subsection*{What this paper contributes}
+\subsection*{Contributions}
 
-We present a \emph{causal ACK-assisted, AoI-aware event-triggered
-communication policy} for multi-UAV formation control. The name is
-deliberately narrow. The policy is decentralised in that each sender
-decides alone, using only locally held quantities; it is \emph{not}
-feedback-free, and we do not describe it as such. Its estimate of receiver
-freshness comes entirely from cumulative acknowledgements that traverse a
-reverse channel with its own delay, jitter and loss. There is no
-same-timestep read of receiver state anywhere in the implementation, and
-nine protocol invariants are checked at runtime to keep it that way.
+\paragraph{C1 --- Method.} A \emph{causal acknowledgement-assisted
+(ACK-assisted), AoI-aware
+event-triggered communication policy} that separates new-information
+transmission from refresh/retransmission while using only causally
+available sender knowledge. The sender maintains two distinct memories ---
+the last state it \emph{transmitted}, which defines innovation, and the
+last state a cumulative acknowledgement has \emph{confirmed}, which
+defines estimated freshness --- and lets the freshness estimate scale the
+innovation threshold rather than trigger on its own. A repetition cooldown
+and in-flight suppression apply to refresh traffic alone. The policy is
+decentralised in that each sender decides locally; it is \emph{not}
+feedback-free, and we do not describe it as such. Nine protocol invariants
+are asserted at runtime to keep any same-timestep read of receiver state
+out of the implementation.
 
-Three design elements carry the result:
+\paragraph{C2 --- Mechanism and design evidence.} A controlled development
+and ablation study, measured on common random numbers, showing \emph{why}
+each element is required: why naive causal feedback over-transmits (an
+innovation measured against the last \emph{acknowledged} state cannot
+shrink for a full round trip, so the sender re-sends state already in
+flight), why adding in-flight suppression without a semantic split
+over-suppresses (a cooldown intended for repetition becomes a ceiling on
+new information, pinning the rate at \MetricSevenAfourcModerateRate{}~Hz
+in two different networks), and why innovation-priority resolves the
+conflict \emph{without retuning any threshold} --- no parameter value
+differs between the failing and working variants. The same study shows
+that an acausal oracle transmits \emph{less} and is \emph{less} accurate
+than the causal policy, which makes oracle feedback an information-%
+efficiency reference rather than an accuracy bound.
 
-\begin{enumerate}
-\item \textbf{Dual sender memory.} The sender keeps the last state it
-      \emph{transmitted}, which defines innovation, separately from the
-      last state an acknowledgement has \emph{confirmed}, which defines
-      estimated freshness. Conflating the two is not a shortcut; it makes
-      the policy re-send state that is already in flight.
-\item \textbf{Freshness-adaptive thresholds.} As the estimated age of the
-      receiver's copy grows past a threshold, the state-change threshold
-      required to transmit is reduced continuously toward a floor. Age
-      alone never triggers a transmission; it only makes the sender easier
-      to trigger.
-\item \textbf{Separation of new information from refresh.} A repetition
-      cooldown governs only repetition. Traffic that carries genuinely new
-      information is not subject to it, and refresh traffic is additionally
-      forbidden while any packet remains unacknowledged, so the policy does
-      not add a duplicate to something already on the wire.
-\end{enumerate}
-
-The third element is the one the design history turns on, and we present
-that history rather than hiding it. Two earlier versions of this policy
-failed for opposite reasons --- one over-transmitted until it breached its
-resource ceiling, the other over-suppressed until it lost adaptivity
-entirely --- and both failures are reported in
-Section~\ref{sec:results} as an ablation chain measured on frozen data.
-Neither was repaired by tuning a parameter. No parameter value differs
-between the failing and working variants.
+\paragraph{C3 --- Evaluation.} A pre-registered simulation campaign
+spanning network impairment, ACK impairment, five cost-accounting models,
+topology and swarm size, permanent link failure and node blackout,
+six-degree-of-freedom (6-DOF) quadrotor dynamics, plant mismatch and synthetic estimator error, ending
+in a \MetricSeeds{}-seed holdout validation of \MetricRuns{} runs with
+paired confidence intervals --- while preserving, rather than re-testing
+away, the seven operating boundaries at which pre-registered claims were
+rejected.
 
 \subsection*{What we claim, and what we do not}
 

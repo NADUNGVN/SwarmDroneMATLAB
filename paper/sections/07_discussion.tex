@@ -27,8 +27,8 @@ receiver, the lower the bar for saying something again.
 \subsection{Why oracle feedback overstates efficiency}
 
 An acausal AoI policy reads the receiver's true age directly. It is the
-natural upper reference, and our results show that reading it as a
-performance ceiling is a mistake.
+natural ideal-feedback reference, and our results show that reading it
+as an accuracy bound is a mistake.
 
 The oracle transmits \MetricSevenIdealStressedRate{}~Hz per channel for
 \MetricSevenIdealStressedRmse{}~m; the causal policy transmits
@@ -51,8 +51,8 @@ actually costs.
 
 The first iteration used a single memory: both innovation and freshness
 were measured against the last \emph{acknowledged} state. Under a round
-trip the innovation then cannot shrink for at least one RTT after every
-transmission, because the reference point does not move until the ACK
+trip the innovation then cannot shrink for at least one round-trip time
+(RTT) after every transmission, because the reference point does not move until the ACK
 returns. The sender therefore re-transmits state that is already in
 flight, hard triggers dominate, and the design breached its
 pre-registered resource ceiling.

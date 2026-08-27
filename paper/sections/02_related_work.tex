@@ -1,119 +1,186 @@
 \section{Related Work}
 \label{sec:related}
 
-\noindent\textbf{Status of this section.} This draft contains \emph{no
-citations}. That is deliberate and temporary. The literature groups this
-work must be positioned against, the specific claim each group is needed to
-support, and the differentiation we intend to argue are enumerated in
-\texttt{paper/RELATED\_WORK\_NEEDS.md}. Populating them requires a
-verification pass against the actual literature, and inventing plausible
-references to fill the slots would make the section worse than empty: a
-fabricated citation is not a placeholder, it is an error that survives
-review.
+This section is written from the reference-to-claim matrix in
+\texttt{paper/RELATED\_WORK\_MATRIX.md}, and every reference was verified
+against publisher-deposited metadata (\texttt{paper/REFERENCE\_AUDIT.csv}).
+Where a body of work contains exceptions to a generalisation we might
+otherwise draw, the exception is stated and the generalisation weakened
+accordingly.
 
-What follows is therefore the \emph{argument structure} the section will
-carry once the references are verified, written so that the gap each
-citation must close is explicit.
+\subsection{Event-triggered multi-agent communication}
+\label{sec:rel_etc}
 
-\subsection{Age of information in networked control}
+Event-triggered control replaces periodic sampling with a condition on
+locally measurable error. The canonical formulation transmits when the
+state has drifted past a threshold from the last transmitted value, with a
+minimum inter-event time to exclude Zeno behaviour~\cite{tabuada2007event},
+and the event-versus-periodic comparison goes back
+further~\cite{astrom2002riemann}; \cite{heemels2012introduction} gives the
+standard taxonomy separating event-triggered from self-triggered designs.
+The multi-agent extension is
+mature: \cite{dimarogonas2012distributed} establishes distributed
+event-triggered control from local state error,
+\cite{seyboth2013eventbased} gives event-based broadcasting for average
+consensus with an explicit broadcast count, and \cite{nowzari2019eventtriggered}
+surveys the area. Thresholds need not be static: dynamic triggering
+introduces an auxiliary variable that modulates the threshold over
+time~\cite{girard2015dynamic,yi2017distributed}, and recent surveys
+document how far that idea has been
+carried~\cite{chen2020howoften,ge2021dynamic,zhang2025overview}.
 
-AoI originated as a freshness metric for status-update systems, where the
-question is how stale a monitor's information is rather than how much
-throughput a link carries. Its migration into control is the relevant
-thread: minimising average age is not the same objective as minimising
-control error, and a policy that optimises age alone can transmit when
-nothing has changed.
+This machinery has already been applied to multi-UAV formations, and we
+state that plainly because it bounds what we can claim. Event-based
+formation control has been developed for directed
+topologies~\cite{yin2023eventbased}, under communication delay and
+external disturbances~\cite{ji2023dynamic}, for formation tracking with
+unknown disturbances~\cite{chen2024distributed}, and for swarm target
+fencing with connectivity and collision
+constraints~\cite{yang2025fencing}. \textbf{The gap this paper addresses is
+therefore not the absence of event-triggered UAV formation control.}
 
-\emph{What we need from this group:} that age-based scheduling is
-established as distinct from rate- or throughput-based scheduling, and that
-the age-versus-control-cost mismatch is a known issue rather than our
-observation.
+What these designs share is the quantity their trigger reads. It is a
+local error --- the difference between an agent's current state and the
+state it last sent --- and it is blind to what the receiver actually holds.
+When a packet is lost or badly delayed, a sender whose own state is steady
+generates no event while the receiver's copy ages without bound. Dynamic
+thresholds do not close this gap either: their modulating signal is
+internal to the sender.
 
-\emph{Where we differ:} age never triggers a transmission in our policy.
-It modulates the state-change threshold that does. The composition is
-multiplicative on the threshold, not additive on the decision.
+\subsection{Age of information and freshness in networked control}
+\label{sec:rel_aoi}
 
-\subsection{Event-triggered and self-triggered multi-agent control}
+Age of information supplies the missing quantity. Introduced as a freshness
+metric for status-update systems~\cite{kaul2012realtime}, it measures how
+old a receiver's copy is rather than how much traffic crossed the link, and
+optimising it is not the same as transmitting as often as
+possible~\cite{sun2017update}. The area is now
+surveyed at length~\cite{yates2021aoisurvey,yang2025aoiperspective}, with
+extensions to multi-node dissemination~\cite{kaswan2025gossip}.
 
-Event-triggered control replaces periodic sampling with a
-condition on local error, and the multi-agent literature extends this to
-consensus and formation problems, typically with guarantees that exclude
-Zeno behaviour.
+Two results from this literature shaped our design directly. First, age
+alone is a poor proxy for control cost: \cite{ayan2019aoivoi} shows that
+scheduling on value-of-information rather than age changes the outcome for
+networked control loops. Our policy accordingly never lets age trigger a
+transmission by itself --- age only lowers the bar that a genuine state
+change must clear. Second, going beyond pure age is not new:
+\cite{rajaraman2021notjustage} already combines age with a
+content-quality term, so our composition of innovation with freshness is
+not the first attempt in that direction.
 
-\emph{What we need from this group:} the standard state-error trigger form
-we use as a baseline, and the accepted treatment of a minimum inter-event
-time.
+Closest to our combination is \cite{mamduhi2020freshness}, which co-designs
+control and networking policy for multi-loop systems using a mixture of
+age-of-information and event-based metrics. The setting, however, is a
+network scheduler arbitrating among independent control loops. There is no
+sender that maintains its own estimate of a particular receiver's
+freshness, and no distinction between traffic that carries new information
+and traffic that repeats it.
 
-\emph{Where we differ:} our trigger reads an estimate of what the
-\emph{receiver} holds, which a purely local error trigger cannot access.
-The comparison in this paper is against precisely that conventional local
-trigger, and the gap is large (Section~\ref{sec:results}).
+\subsection{Feedback- and ACK-aware communication and scheduling}
+\label{sec:rel_ack}
 
-\subsection{AoI-aware and event-triggered wireless control}
+A sender cannot observe the age of information at a receiver; it can only
+infer it from what comes back. That inference is established in the
+AoI-scheduling literature: \cite{ceran2019average} drives AoI-optimal
+transmission from acknowledgement/negative-acknowledgement feedback with
+hybrid automatic repeat request (ARQ) under a resource constraint, with no oracle knowledge of future outcomes. We therefore do
+not claim ACK-based causal freshness estimation as novel in itself; we
+claim its use inside a distributed multi-agent trigger.
 
-The closest body of work combines freshness with triggering. Two
-assumptions recur and both matter to us: that the sender knows the
-receiver's age exactly, and that acknowledgements are free or ideal.
+The contrast class is centralised and index-based: \cite{tang2022whittle}
+schedules to minimise an age cost with a Whittle-index policy. Such
+policies evaluate globally and periodically, where our policy decides
+locally and asynchronously. Radio resources being a first-class design
+variable in wireless control~\cite{gatsis2014optimal,park2018wireless} is
+why we price the reverse channel rather than treating acknowledgements as
+free, and delay and dropout affecting closed-loop
+behaviour~\cite{walsh2002stability,hespanha2007survey} is why our network
+model carries loss, delay, jitter and out-of-order delivery together.
 
-\emph{What we need from this group:} evidence that the oracle-freshness
-assumption is common, so that removing it is a contribution rather than a
-self-imposed handicap.
+Event-triggered mechanisms continue to be surveyed
+actively~\cite{li2026impulsive}, which is one reason we position against
+the current state of the field rather than against its founding papers
+alone.
 
-\emph{Where we differ:} we remove it, and we measure the cost. Our frozen
-ablation includes an acausal oracle variant as an explicit upper reference,
-and the comparison is more interesting than expected: the causal policy
-reaches \emph{lower} Stressed error than the oracle
-(\MetricSevenAfivecStressedRmse{}~m against
-\MetricSevenIdealStressedRmse{}~m) by transmitting more
-(\MetricSevenAfivecStressedRate{}~Hz against
-\MetricSevenIdealStressedRate{}~Hz per channel). The oracle is not a
-performance ceiling; it is an \emph{efficiency} ceiling, and treating it as
-the former overstates what free freshness information buys.
+One difference in mechanism is worth noting here. \cite{ceran2019average}
+recovers from loss with an explicit ARQ scheme. Our policy introduces no
+retransmission timeout, no round-trip-time estimator and no window: an
+unacknowledged packet remains outstanding, outstanding packets forbid
+refresh traffic, and a max-silence backstop provides the floor.
 
-\subsection{UAV swarm communication constraints}
+\subsection{UAV-swarm communication and control co-design}
+\label{sec:rel_uav}
 
-Field-relevant constraints --- limited airtime, shared medium, duty-cycle
-and energy budgets, degradation with swarm size --- motivate why trading
-formation accuracy for fewer transmissions is worth doing at all.
+The constraints that make fewer transmissions worth paying accuracy for
+are documented
+in the UAV networking literature: limited bandwidth, contested airtime and
+reliability limits~\cite{gupta2016survey,zeng2016wireless},
+with tutorial treatments of the design
+space~\cite{mozaffari2019tutorial,zeng2019accessing} and evidence that
+swarm architectures degrade as neighbour count
+grows~\cite{campion2019uavswarm}. Age of information is used actively as a
+design objective in this setting~\cite{amodu2023aoiuav}.
 
-\emph{What we need from this group:} realistic airtime and duty-cycle
-figures for the radios such a swarm would use, and evidence on how neighbour
-count limits sustainable rates.
+It has also reached hardware. \cite{tripathi2023wiswarm} demonstrates
+AoI-based wireless networking for collaborative teams of UAVs on a real
+platform, using a centralised scheduler to allocate the channel. That work
+is both the nearest neighbour to ours on the application side and the
+honest benchmark for our principal limitation: \textbf{our results are
+simulation only}. Deployed aerial swarms
+exist~\cite{vasarhelyi2018optimized,zhou2022swarm}, and a simulation-only
+contribution must be positioned against them rather than beside them.
 
-\emph{Where we differ, and where we are weak:} we price communication with
-three packet-count cost models, an airtime proxy and a broadcast proxy, but
-we measure no physical airtime or energy. This is stated as a limitation
-(Section~\ref{sec:limitations}) and is the first thing the hardware
-roadmap addresses.
+That communication constraints fundamentally limit achievable control
+performance is long
+established~\cite{tatikonda2004control,nair2007feedback}, and it is the
+reason sending fewer packets is worth paying accuracy for at all.
 
-\subsection{Acknowledgement- and feedback-aware scheduling}
+On the control side we deliberately change nothing. The formation law is a
+standard consensus-style interaction over a neighbour
+graph~\cite{olfatisaber2006flocking,oh2015survey}, and the 6-DOF follower
+model uses the usual cascaded attitude-thrust structure and the
+acceleration-to-attitude reference
+mapping~\cite{lee2010geometric,mellinger2011minimum}. Freezing the
+controller is what allows the communication policy to be the only variable
+--- and it is also why several failures we report are attributed to the
+controller rather than to our contribution. Joint controller-and-trigger
+design~\cite{molin2013optimality} and state-based
+scheduling~\cite{ramesh2013design} are established alternatives that we do
+not pursue; the communication-versus-control-cost trade-off they address is
+studied explicitly in~\cite{demirel2017tradeoff}, which is our reason for
+reporting cost under several models rather than one.
 
-Protocol-level work on ACK-aware scheduling, cumulative acknowledgement and
-retransmission logic is directly relevant, because our reverse channel is
-not an abstraction: it has delay, jitter and loss, and its traffic is
-priced.
+\subsection{Gap addressed by this work}
+\label{sec:rel_gap}
 
-\emph{What we need from this group:} standard cumulative-ACK semantics, and
-prior treatment of the cost of the reverse channel in control-oriented
-scheduling.
+Reading across the four subsections:
 
-\emph{Where we differ:} our loss recovery introduces no retransmission
-timeout at all. An unacknowledged packet remains outstanding, outstanding
-packets forbid refresh, and the max-silence backstop then fires. Whether
-that semantic correction alone suffices was the question the third design
-iteration existed to answer.
+\begin{itemize}
+\item event-triggered multi-agent designs, \emph{including recent UAV
+      formation work}, trigger on locally measurable error and do not model
+      receiver staleness (\S\ref{sec:rel_etc});
+\item AoI-aware control designs do model staleness, but generally place the
+      decision in a scheduler that is assumed to know the age, and address
+      multi-loop or single-link settings rather than a formation
+      (\S\ref{sec:rel_aoi});
+\item ACK-driven causal freshness estimation exists, in single-link
+      AoI-optimal scheduling, without a state-innovation trigger
+      (\S\ref{sec:rel_ack});
+\item UAV-swarm work supplies the constraints, and has reached hardware
+      with a \emph{centralised} AoI scheduler (\S\ref{sec:rel_uav}).
+\end{itemize}
 
-\subsection{Resource-aware formation control and co-design}
+The combination that remains is a \emph{distributed sender in a formation}
+that estimates its own receiver's freshness \emph{only} from cumulative
+acknowledgements, uses that estimate to modulate a \emph{state-innovation}
+threshold, and separates \emph{new information from refresh} so that a
+repetition cooldown governs only repetition. That combination is what this
+paper addresses.
 
-Finally, the co-design view: communication and control designed together
-rather than layered. Our results speak to a specific asymmetry within it.
-Several of our rejected claims are \emph{control} limitations that no
-communication policy could remove --- a steady offset under mass mismatch,
-safety failures shared identically across all four methods under link and
-node faults.
-
-\emph{What we need from this group:} the framing that separates
-communication-attributable from controller-attributable degradation.
-
-\emph{Where we differ:} we attribute explicitly, and in the cases above the
-attribution is not to our contribution.
+We are explicit about the strength of this statement. Each individual
+ingredient is precedented, and we found no prior work combining them in
+this way --- which is a claim about our search, not a proof of absence. The
+search boundary, the fifteen nearest neighbours with a per-element
+comparison, and the conditions that would overturn the assessment are
+recorded in \texttt{paper/NOVELTY\_GAP\_REVIEW.md}. Nothing in this paper
+is described as first or first-ever.

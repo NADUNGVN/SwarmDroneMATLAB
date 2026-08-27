@@ -1,0 +1,99 @@
+{
+  "_comment": [
+    "Machine-readable identity of the frozen simulation release that this",
+    "paper package describes. paper_guard and paper_audit read this file",
+    "rather than hard-coding the values, so the anchor lives in exactly one",
+    "place.",
+    "",
+    "The SHA is authoritative, not the tag. The tag is a convenience label",
+    "that may be missing from a remote or, in a damaged repository, may point",
+    "somewhere else; the commit it must point to is fixed here. Verification",
+    "is therefore anchored to the SHA even while the remote tag is absent.",
+    "",
+    "DO NOT move, recreate or re-point the tag to satisfy a check. A missing",
+    "remote tag is a release-publication blocker requiring owner action, not",
+    "a scientific or audit failure, and the two must not be conflated."
+  ],
+
+  "frozenRelease": {
+    "tag": "simulation-v1.0",
+    "sha": "32858b1",
+    "shaFull": "32858b1",
+    "tagType": "annotated",
+    "note": [
+      "Because the tag is annotated, 'git rev-parse simulation-v1.0' returns",
+      "the TAG OBJECT sha (ba8ddcc), not the commit. Resolve with",
+      "'git rev-parse simulation-v1.0^{commit}' or 'git rev-list -n1'.",
+      "A checker that compares rev-parse output directly against the commit",
+      "sha will report a spurious mismatch."
+    ]
+  },
+
+  "paperPackage": {
+    "branch": "paper-v1",
+    "paperBaseCommit": "8c79ee0",
+    "relationshipToFrozen": "descendant",
+    "note": [
+      "paperBaseCommit is the accepted paper-v1 package commit. It is a",
+      "descendant of the frozen sha, so the frozen tree is reachable and",
+      "every frozen path can be diffed against it."
+    ]
+  },
+
+  "releaseBoundary": {
+    "includedUpToAndIncluding": "32858b1",
+    "excludedPostTagCommits": [
+      {
+        "sha": "3266030",
+        "subject": "Record the confirmation validation run at the simulation-v1.0 tree",
+        "why": [
+          "This commit records a second validation pass executed AGAINST the",
+          "tagged tree. It is evidence about the release, not part of it.",
+          "Committing a validation log necessarily moves HEAD past the commit",
+          "the log describes, so the log can only ever live after the tag.",
+          "The release boundary must not be moved to swallow it."
+        ]
+      }
+    ]
+  },
+
+  "readOnlyPaths": [
+    "simulation/",
+    "network/",
+    "controllers/",
+    "swarm/",
+    "models/",
+    "experiments/",
+    "metrics/",
+    "configs/",
+    "utils/",
+    "tests/",
+    "run_all.m",
+    "startup.m"
+  ],
+
+  "writablePaths": [
+    "paper/generated/",
+    "paper/tables/",
+    "paper/figures/",
+    "paper/",
+    "docs/"
+  ],
+
+  "remoteTag": {
+    "expectedOnRemote": true,
+    "verifyCommand": "git ls-remote --tags origin simulation-v1.0",
+    "publishCommand": "git push origin simulation-v1.0",
+    "statusAtLastCheck": "ABSENT",
+    "classification": "RELEASE_BLOCKER / OWNER_ACTION",
+    "note": [
+      "A push of this tag was attempted and denied by the environment's",
+      "permission classifier. It was not retried and must not be worked",
+      "around. Until the tag is on the remote, a fresh clone of the paper",
+      "branch cannot resolve 'simulation-v1.0' and must fall back to",
+      "verifying against the sha directly, which paper_guard supports."
+    ]
+  },
+
+  "schemaVersion": 1
+}
