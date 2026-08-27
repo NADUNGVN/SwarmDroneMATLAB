@@ -375,11 +375,29 @@ end
 
 
 function f = localDatasetTidy(rootDir, seedValue)
-%LOCALDATASETTIDY The EXP10A dataset that CONTAINS the given seed.
+%LOCALDATASETTIDY The EXP10A dataset to compare the clone against.
 %
-% Not simply LATEST: a smoke run may have written a later directory, and
-% comparing against a 1-seed smoke instead of the 50-seed dataset would
-% make the check trivially pass.
+% Selection order, and each clause is here because getting it wrong
+% produces a WRONG VERDICT rather than an error:
+%
+%   1  the run LATEST.txt names, if it contains the seed. That is the
+%      dataset every other artefact in the repo describes, so it is the
+%      one a reproduction claim is about.
+%   2  otherwise the run with the most seeds, breaking ties on the NEWEST
+%      directory name.
+%
+% Not simply LATEST unconditionally: a smoke run writes LATEST.txt too,
+% and comparing against a 1-seed smoke would make the check trivially
+% pass.
+%
+% The tie-break is not cosmetic. It was originally a strict "more seeds
+% than the best so far", which meant that among two complete 50-seed
+% datasets the FIRST one alphabetically won - the superseded one. The
+% check then compared the clone's fresh run against a dataset predating
+% the exact-checksum fix and reported that the clone "does not
+% reproduce", naming exactly the three columns that fix had changed. The
+% clone was reproducing perfectly; the harness was pointing at the wrong
+% file.
 
 f = '';
 
@@ -389,36 +407,84 @@ if exist(expDir,'dir') ~= 7
     return;
 end
 
+% ---- 1. the run LATEST.txt names ----
+
+latest = fullfile(expDir, 'LATEST.txt');
+
+if exist(latest,'file') == 2
+
+    runId = strtrim(fileread(latest));
+
+    cand = fullfile(expDir, runId, 'tidy.csv');
+
+    if localHasSeed(cand, seedValue)
+        f = cand;
+        return;
+    end
+
+end
+
+% ---- 2. most seeds, newest directory wins a tie ----
+
 d = dir(expDir);
+
+names = {};
+
+for k = 1:numel(d)
+    if d(k).isdir && ~startsWith(d(k).name, '.')
+        names{end+1} = d(k).name;   %#ok<AGROW>
+    end
+end
+
+names = sort(names);   % run ids are timestamps, so this is chronological
 
 best = 0;
 
-for k = 1:numel(d)
+for k = 1:numel(names)
 
-    if ~d(k).isdir || startsWith(d(k).name, '.')
-        continue;
-    end
+    cand = fullfile(expDir, names{k}, 'tidy.csv');
 
-    cand = fullfile(expDir, d(k).name, 'tidy.csv');
+    n = localSeedCount(cand, seedValue);
 
-    if exist(cand,'file') ~= 2
-        continue;
-    end
-
-    T = readtable(cand, 'TextType','char');
-
-    if ~ismember('seed', T.Properties.VariableNames)
-        continue;
-    end
-
-    nSeed = numel(unique(T.seed));
-
-    if any(T.seed == seedValue) && nSeed > best
-        best = nSeed;
+    % >= rather than >, so that the newest of two equally complete
+    % datasets is the one selected.
+    if n > 0 && n >= best
+        best = n;
         f = cand;
     end
 
 end
+
+end
+
+
+function tf = localHasSeed(tidyPath, seedValue)
+
+tf = localSeedCount(tidyPath, seedValue) > 0;
+
+end
+
+
+function n = localSeedCount(tidyPath, seedValue)
+%LOCALSEEDCOUNT Distinct seeds in a tidy file, or 0 if it lacks the seed.
+
+n = 0;
+
+if exist(tidyPath,'file') ~= 2
+    return;
+end
+
+T = readtable(tidyPath, 'TextType','char');
+
+if ~ismember('seed', T.Properties.VariableNames)
+    return;
+end
+
+if ~any(T.seed == seedValue)
+    return;
+end
+
+n = numel(unique(T.seed));
 
 end
 
