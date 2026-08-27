@@ -1,14 +1,92 @@
 # EXP11 Report — Within-Run Network Switching / Fixed-Periodic Challenge
 
+**Verdict: LOCKED SUPPLEMENTAL / REVIEWER-RESPONSE RESULT.**
+Post-freeze supplementary evidence. No algorithm change, no EXP12, no rerun to
+search for dominance.
+
+**Tag:** `exp11-locked-supplemental` → `7b64af6`
 **Branch:** `exp11-dynamic-network`
 **Infrastructure commit:** `85ead26` (plan + code, committed before any run)
-**Base:** `simulation-v1.0 @ 32858b1` — the tag was **not** moved
+**Base:** `simulation-v1.0 @ 32858b1` — the tag was **not** moved and **not**
+re-tagged. EXP11 is **not** imported back into the release boundary.
 **Dataset:** `results/exp11_dynamic_network/2026-08-27_174026/tidy.csv`
 (400 rows, 50 seeds × 8 methods, 123 columns)
 **Debug pass:** `results/exp11_dynamic_network/2026-08-27_175335/` (24 rows)
 **Tests:** `run_all_tests` 10 of 10 PASS, `test_lock_regression` included
 **Gates:** **7 of 7 PASS**
 **Runtime:** 400 runs in 6.4 min (16 workers, N = 5)
+
+---
+
+## Formal verdicts, per pre-registration
+
+Each verdict is the outcome of the statistic **as written in
+`docs/EXP11_PLAN.md` before any run**. Nothing is reinterpreted after the fact:
+where the pre-registration defined a support criterion, the verdict is
+SUPPORTED or REJECTED against that criterion; where it explicitly declined to
+set a gate, the verdict is CHARACTERIZATION.
+
+| # | Pre-registered statement | Criterion | Verdict |
+|---|---|---|---|
+| **H1** | Causal-v3 adapts within a run in both directions: four adjacent segment DATA-rate differences with CIs excluding zero, signs `+ + − −` | all four CIs exclude zero on the required side | **SUPPORTED** |
+| **H2a** | `RMSE(Causal − P10) < 0` | upper CI bound < 0 | **SUPPORTED** |
+| **H2b** | `Total_w025(Causal − P20) < 0` | upper CI bound < 0 | **SUPPORTED** *(at w = 0.25 only — see scope limit)* |
+| **H3** | Classify Causal-v3 against the fixed-periodic frontier by the EXP07C 1 % rule. *"It is not pre-registered that Causal must win."* | no gate — classification only | **CHARACTERIZATION** |
+| **H4** | Gap to Oracle-periodic. *"No gate in either direction."* | no gate — reported only | **CHARACTERIZATION** |
+
+**H2b scope limit.** The pre-registered statistic is `Total_w025` and it is met
+(upper CI −60.40). It licenses **no general ACK-inclusive cost claim**: under the
+broadcast cost model the sign reverses and Causal-v3 becomes 59.7 % *more*
+expensive than P20. See §4.
+
+**H3 outcome.** NON-DOMINATED under the registered cost model (`Total_w025`),
+DOMINATED by P20 and P25 under broadcast. Both are reported; neither is a gate
+failure, because H3 was registered as a classification.
+
+**H4 outcome.** Causal-v3 is more accurate than the oracle and more expensive
+than it; neither dominates the other. Reported as it stands.
+
+---
+
+## Locked interpretation
+
+This is the reading EXP11 is licensed to support. It is fixed here so that later
+writing cannot drift into a stronger claim than the data carries.
+
+### SUPPORTED
+
+- **Causal-v3 changes its communication effort in both directions** when network
+  degradation and recovery occur inside one mission, **without receiving a regime
+  label**.
+- **Fixed periodic methods have no regime-adaptation mechanism at all.** Their
+  rate is invariant by construction, not merely badly tuned.
+- **State-event does not reproduce freshness-driven adaptation.** A state-error
+  trigger without a freshness term does not respond to a channel getting worse.
+
+### NOT SUPPORTED
+
+- Causal-v3 **universally dominates** a tuned fixed periodic rate.
+- Causal-v3 **guarantees** lower ACK-inclusive cost than P20.
+- Causal-v3 has a **broadcast-medium communication advantage**.
+
+### The sentence EXP11 licenses
+
+> A fixed periodic scheduler cannot adapt its transmission effort to
+> within-mission network changes because its rate is invariant by construction;
+> however, an appropriately chosen fixed rate can still offer a competitive
+> mission-level accuracy–cost trade-off.
+
+The result is **stronger about mechanism and weaker about Pareto superiority**
+than a naive reading of H1+H2 would suggest.
+
+**EXP11 must not be used to write "periodic cannot perform well under changing
+networks."** That sentence is false on this data: P20 and P25 achieve better
+mission RMSE than Causal-v3, and P12.5 is within 2.3 % of it at 10.4 % less cost.
+What periodic cannot do is *adapt* — which is a statement about mechanism, not
+about performance.
+
+**Oracle-periodic is a non-causal / regime-aware reference.** It is never called
+a deployable baseline, an upper bound, or an accuracy bound.
 
 ---
 
@@ -139,10 +217,37 @@ both RMSE ≤ 0.99 × 0.08147 and cost ≤ 0.99 × 139.54. All five fixed rates 
 themselves non-dominated, so the frontier is a clean monotone accuracy-for-cost
 trade with no wasted rate.
 
-Causal-v3 does not dominate anything either, and the margin is thin: **P12.5 buys
-97.7 % of Causal's accuracy for 89.6 % of its cost** (paired: Causal − P12.5 is
-−0.00195 RMSE, CI [−0.00213, −0.00177], and +14.53 cost, CI [+14.47, +14.59]).
-"Non-dominated" here means "on the frontier", not "ahead of it".
+Causal-v3 does not dominate anything either. "Non-dominated" here means "on the
+frontier", not "ahead of it".
+
+### 4.1 P12.5 — the counterexample, stated up front
+
+**A single appropriately chosen fixed rate gets within 2.3 % of Causal-v3's
+accuracy for 10.4 % less cost.** This is not an appendix detail; it is the
+strongest argument *against* reading EXP11 as a superiority result, and it
+belongs in the main text of anything EXP11 supports.
+
+| Causal-v3 − P12.5, paired, n = 50 | mean | 95 % CI | relative to P12.5 |
+|---|---|---|---|
+| RMSE | **−0.00195** | [−0.00213, −0.00177] | **−2.3 %** |
+| Total_w025 | **+14.532** | [+14.474, +14.589] | **+11.6 %** |
+| DATA Hz | −8.734 | [−8.795, −8.672] | −7.0 % |
+| broadcast Hz | **+116.649** | [+115.702, +117.596] | **+155.5 %** |
+
+Read as accuracy per unit cost: P12.5 delivers **97.7 %** of Causal-v3's accuracy
+for **89.6 %** of its `Total_w025` cost — and for **39.1 %** of its broadcast cost.
+Every one of those CIs is tight and excludes zero, so this is not a marginal
+sampling artefact.
+
+P12.5 survives the 1 % dominance rule only because it is 2.3 % *worse* on RMSE.
+The rule is doing real work here, and a reader is entitled to know that the
+"NON-DOMINATED" verdict rests on a 2.3 % accuracy margin bought with an 11.6 %
+cost premium — a trade a system designer might well decline.
+
+What P12.5 cannot do is adapt. Its rate is 125.0 Hz in Clean, in Moderate, in
+Stressed, in Moderate again and in Clean again (see §6). That is the distinction
+EXP11 actually establishes, and it is a statement about mechanism, not about
+mission-level performance.
 
 ### The cost model changes the answer — and one model reverses it
 
@@ -307,6 +412,109 @@ Oracle rate changes = 50 seeds × 4 boundaries, exactly. Every other method: zer
    pre-registered, not optimised; a better regime-aware schedule exists.
 4. Anything about N > 5, other topologies, other plants, or hardware. EXP11 is
    N = 5, ring2, 6-DOF, simulation only.
+5. **That periodic scheduling performs badly under a changing network.** It does
+   not. P20 and P25 achieve better mission RMSE than Causal-v3, and P12.5 comes
+   within 2.3 % of it for 10.4 % less cost. The claim EXP11 supports is about the
+   absence of an adaptation *mechanism*, not about poor performance.
+
+The one sentence that carries all of this without overreaching is the licensed
+statement at the top of this report: a fixed periodic scheduler cannot adapt its
+transmission effort to within-mission network changes because its rate is
+invariant by construction; however, an appropriately chosen fixed rate can still
+offer a competitive mission-level accuracy–cost trade-off.
+
+---
+
+## Appendix A — Exact 50-seed statistics
+
+All from `results/exp11_dynamic_network/2026-08-27_174026/tidy.csv`.
+Paired over the 50 holdout seeds `26000001:26000050`.
+`t(0.975, 49) = 2.0095752`. Every interval below has `nPairs = 50`,
+`nDropped = 0`, `complete = true` — no run diverged, so no pair was lost.
+
+### A.1 H1 — Causal-v3 adjacent segment DATA-rate differences [Hz]
+
+| difference | mean | std | SE | CI95 lo | CI95 hi | required | verdict |
+|---|---|---|---|---|---|---|---|
+| Moderate_1 − Clean_1 | **+39.9653** | 0.7835 | 0.1108 | +39.7427 | +40.1880 | > 0 | SUPPORTED |
+| Stressed − Moderate_1 | **+43.0947** | 0.7912 | 0.1119 | +42.8698 | +43.3195 | > 0 | SUPPORTED |
+| Moderate_2 − Stressed | **−41.4040** | 0.6314 | 0.0893 | −41.5834 | −41.2246 | < 0 | SUPPORTED |
+| Clean_2 − Moderate_2 | **−41.5939** | 0.6218 | 0.0879 | −41.7706 | −41.4171 | < 0 | SUPPORTED |
+
+Same four differences for the other arms (mean [Hz], for contrast):
+
+| method | Mod_1−Cln_1 | Str−Mod_1 | Mod_2−Str | Cln_2−Mod_2 |
+|---|---|---|---|---|
+| P10 | +0.000 | +0.000 | +0.000 | +0.011 |
+| P20 | +0.000 | +0.000 | +0.000 | −0.008 |
+| State-event | **−0.189** | **−0.284** | **+1.333** | **+0.177** |
+| Oracle-periodic | +49.856 | +99.885 | −99.885 | −49.923 |
+
+State-event's four CIs are [−0.213, −0.166], [−0.345, −0.223], [+1.244, +1.423],
+[+0.121, +0.232] — all exclude zero on the **wrong** side.
+
+### A.2 H2a and H2b
+
+| statistic | mean | std | SE | CI95 | verdict |
+|---|---|---|---|---|---|
+| **H2a** RMSE(Causal − P10) | **−0.010813** | 0.000851 | 0.000120 | [−0.011055, −0.010571] | SUPPORTED |
+| **H2b** Total_w025(Causal − P20) | **−60.459811** | 0.202172 | 0.028591 | [−60.517267, −60.402354] | SUPPORTED (w = 0.25 only) |
+
+### A.3 H3 — full fixed-periodic Pareto table, all cost models
+
+Seed means, n = 50.
+
+| method | RMSE | w=0.10 | w=0.25 | w=0.50 | airtime [B/s] | broadcast [Hz] | DATA [Hz] | ACK [Hz] |
+|---|---|---|---|---|---|---|---|---|
+| P5 | 0.13766 | 50.003 | 50.003 | 50.003 | 2400.17 | 30.001 | 50.003 | 0.000 |
+| P10 | 0.09228 | 100.002 | 100.002 | 100.002 | 4800.10 | 60.001 | 100.002 | 0.000 |
+| **P12.5** | **0.08342** | **125.007** | **125.007** | **125.007** | **6000.33** | **75.003** | **125.007** | **0.000** |
+| P20 | 0.07040 | 199.998 | 199.998 | 199.998 | 9599.92 | 119.999 | 199.998 | 0.000 |
+| P25 | 0.06573 | 249.995 | 249.995 | 249.995 | 11999.78 | 149.998 | 249.995 | 0.000 |
+| State-event | 0.16454 | 38.514 | 38.514 | 38.514 | 1848.66 | 23.114 | 38.514 | 0.000 |
+| **Causal-v3** | **0.08147** | **125.579** | **139.539** | **162.804** | **7814.59** | **191.652** | **116.273** | **93.061** |
+| Oracle-periodic *(non-causal / regime-aware reference)* | 0.08931 | 99.864 | 99.864 | 99.864 | 4793.47 | 59.919 | 99.864 | 0.000 |
+
+Causal-v3 classified by the EXP07C 1 % rule under each cost model:
+
+| cost model | Causal cost | classification | dominated by | Causal dominates |
+|---|---|---|---|---|
+| DATA only | 116.273 | NON-DOMINATED | — | P12.5 |
+| w = 0.10 | 125.579 | NON-DOMINATED | — | — |
+| **w = 0.25 (registered)** | **139.539** | **NON-DOMINATED** | — | — |
+| w = 0.50 | 162.804 | NON-DOMINATED | — | — |
+| airtime | 7814.59 | NON-DOMINATED | — | — |
+| **broadcast** | **191.652** | **DOMINATED** | **P20, P25** | — |
+
+Paired Causal-v3 − P20 under every cost model, n = 50:
+
+| cost model | mean | CI95 | relative to P20 | direction |
+|---|---|---|---|---|
+| DATA only | −83.725 | [−83.786, −83.665] | −41.9 % | lower |
+| w = 0.10 | −74.419 | [−74.477, −74.362] | −37.2 % | lower |
+| w = 0.25 | −60.460 | [−60.517, −60.402] | −30.2 % | lower |
+| w = 0.50 | −37.195 | [−37.262, −37.127] | −18.6 % | lower |
+| airtime | −1785.335 | [−1788.596, −1782.074] | −18.6 % | lower |
+| **broadcast** | **+71.653** | **[+70.707, +72.599]** | **+59.7 %** | **HIGHER** |
+
+The monotone decay and then sign reversal is the whole story: the advantage is a
+function of how cheaply the reverse channel is priced, and a broadcast medium
+prices it at full cost while making the forward channel nearly free.
+
+### A.4 H4 — Causal-v3 versus Oracle-periodic
+
+Oracle-periodic is a **non-causal / regime-aware reference**, not a deployable
+baseline. Its rate map (Clean→P5, Moderate→P10, Stressed→P20) was fixed before
+any run and was not optimised.
+
+| statistic | mean | std | SE | CI95 |
+|---|---|---|---|---|
+| RMSE(Causal − Oracle) | **−0.007841** | 0.000480 | 0.000068 | [−0.007978, −0.007705] |
+| Total_w025(Causal − Oracle) | **+39.674553** | 0.203319 | 0.028754 | [+39.616771, +39.732336] |
+
+Reference point, oracle against fixed P10 at essentially equal cost
+(99.864 vs 100.002): RMSE 0.08931 vs 0.09228, a **3.2 %** improvement. Perfect
+regime knowledge spent only on selecting a rate per regime buys very little.
 
 ---
 

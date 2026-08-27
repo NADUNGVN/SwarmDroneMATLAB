@@ -15,6 +15,7 @@ Status vocabulary:
 | NEGATIVE | the pre-registered claim was rejected |
 | DIAGNOSTIC | run to attribute a failure, not to support a claim |
 | SECONDARY | characterisation at a condition outside the primary matrix |
+| SUPPLEMENTAL | post-freeze evidence answering a specific reviewer objection; **outside** the `simulation-v1.0` release boundary and never imported back into it |
 
 A PARTIAL or NEGATIVE row is a result, not an unfinished task. None of them
 is re-tested away later in the campaign; `docs/FINAL_CLAIMS.md` and the
@@ -55,6 +56,17 @@ is re-tested away later in the campaign; `docs/FINAL_CLAIMS.md` and the
 | exp10a_final_validation | `simulation-v1.0` | f23c8c2 | `results/exp10a_final_validation/2026-08-27_091546` | POSITIVE | 50 holdout seeds, 3400 runs, 5/5 infrastructure gates; K1 SUPPORTED, K2 reported without direction |
 | exp10b_unified_matrix | `simulation-v1.0` | f23c8c2 | `results/exp10b_unified_matrix/2026-08-27_095330` | PARTIAL | Moderate criterion MET at w = 0.25 (87.5 %); Causal-v3 dominated in 75 % of Moderate cells under **broadcast** accounting, and Stressed non-dominance falls to 37.5 % at w = 0.50, airtime and broadcast |
 | simulation_v1_validation | `simulation-v1.0` | 9c96c4f | `results/simulation_v1_validation/2026-08-27_094912` | POSITIVE | EXP10C: 7/7 — test suite, tag and config hashes, hash re-verification in a fresh process, serial-versus-parallel bit-identity, environment manifest |
+| exp11_dynamic_network | `exp11-locked-supplemental` | 7b64af6 | `results/exp11_dynamic_network/2026-08-27_174026` | SUPPLEMENTAL / PARTIAL | 50 holdout seeds (`26000001:26000050`), 400 runs, **7/7 infrastructure gates**. H1 within-run adaptivity **SUPPORTED** both directions; H2a and H2b **SUPPORTED** at the registered statistics; H3 and H4 are **CHARACTERIZATION** (no gate was registered). PARTIAL because H3 gives no Pareto superiority: Causal-v3 dominates nothing, P12.5 reaches 97.7 % of its accuracy for 89.6 % of its cost, and under **broadcast** accounting Causal-v3 is **dominated by P20 and P25**. See `docs/EXP11_REPORT.md`. |
+
+### The `simulation-v1.0` release boundary
+
+EXP11 is the only row above that is **outside** the frozen release.
+`simulation-v1.0 @ 32858b1` is unchanged and was not re-tagged; EXP11 lives on
+branch `exp11-dynamic-network` under its own tag `exp11-locked-supplemental @
+7b64af6`. Its infrastructure is additive and default-off, and
+`test_lock_regression` reproduces every locked value bit-identically with it
+present — which is what makes EXP11 safe to keep in the same repository without
+it becoming part of the release. Nothing in EXP11 revises any row above it.
 
 Superseded or debug runs that the curated map deliberately does **not** point at:
 
@@ -63,6 +75,7 @@ Superseded or debug runs that the curated map deliberately does **not** point at
 | `results/exp10a_final_validation/2026-08-27_075759` | 3-seed infrastructure smoke, run before the holdout sweep. Its console log says so, and every row of its `tidy.csv` carries only 3 seeds. |
 | `results/exp10a_final_validation/2026-08-27_081056` | A complete, valid 50-seed sweep. Superseded only because its `PHASEHASH`, `FAULTHASH` and `BLACKHASH` columns predate the exact-checksum fix. Every other recorded value — RMSE, minSep, SafeFail, DIVERGED, DATA, ACK, broadcast, AoI, forward and reverse hashes, invariants, MAXDEV — is **identical row by row** to the final run. Two independent 3400-run executions agreeing exactly is the campaign's strongest reproducibility datapoint, and it is kept for that reason. |
 | `results/exp10b_unified_matrix/2026-08-27_0806*, _0841*, _0843*, _0844*, _0848*, _0854*` | Earlier aggregations. The numbers are the same as their source dataset; the reports are less complete — they predate the empty-denominator section, the no-fault safety table, or the warning-free table construction. |
+| `results/exp11_dynamic_network/2026-08-27_175335` | The 3-seed debug pass required by section 11 of `docs/EXP11_PLAN.md`. It was run **after** the 50-seed sweep, not before, because the debug hook read a base-workspace variable that the script's own `clear` had already deleted — disclosed in section 0 of `docs/EXP11_REPORT.md`. It is kept as evidence rather than discarded: its 24 rows were compared against the corresponding rows of the 50-seed dataset across all 123 columns with **0 mismatches**, which is what establishes that the 50-seed dataset is what the pre-registered order would have produced. |
 | `results/simulation_v1_validation/2026-08-27_084500`, `_084932`, `_090539` | Abandoned attempts, each superseded for a stated reason. `_084500` and `_084932` hit the shared-workspace defect in `run_all_tests` (a test's `t0` collided with the runner's `tic`, so the suite aborted after its seventh file without printing a failure). `_090539` was interrupted deliberately, mid-suite, once the checksum defect had been diagnosed and a fix was going in. None is a regression: the recorded run passes 7/7. |
 
 ## Auto-generated run log
