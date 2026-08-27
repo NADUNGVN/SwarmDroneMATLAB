@@ -1,0 +1,313 @@
+
+============================================================
+RUN  : exp10a_final_validation
+ID   : 2026-08-27_081056
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10a_final_validation\2026-08-27_081056
+WHEN : 2026-08-27 08:10:57
+============================================================
+
+
+============================================================
+EXP10A final validation - 50 holdout seeds
+============================================================
+
+Points   : 8
+Cells    : 17 (point x scenario)
+Methods  : P10, P20, State-event, Causal-v3
+Seeds    : 50 holdout (25000001..25000050)
+Runs     : 3400
+Phase    : ON (per sender, per payload class)
+
+Selected points:
+
+  NOMINAL    N=5   6dof  ring2    Nominal 6-DOF N=5
+  ACK        N=5   6dof  ring2    ACK impairment 10 % loss
+  MISMATCH   N=5   6dof  ring2    B7 plant mismatch
+  ESTIMATOR  N=5   6dof  ring2    C3 synthetic estimator
+  LINK       N=20  di    ring2    Permanent 20 % link removal
+  NODE       N=20  di    ring2    1-node 5 s blackout
+  N20REF     N=20  di    ring2    N=20 no-fault reference
+  SCALE      N=50  di    ring2    Scalability anchor N=50
+
+------------------------------------------------------------
+EXP10 holdout seed assertion
+------------------------------------------------------------
+  EXP10 block          : 25000001..25000050 (50 seeds)
+  EXP01-09 seed values : 93320 enumerated across 20 families
+  [PASS ] no EXP10 seed appears in any development family
+  [PASS ] the six master realizations are independent streams
+  [INFO ] 160 cross-experiment cross-type stream coincidence(s) -- harmless, see assertExp10Seeds header
+           ack: 40 stream seed(s) coincide with a locked stream
+           link: 40 stream seed(s) coincide with a locked stream
+           blackout: 40 stream seed(s) coincide with a locked stream
+           extForce: 40 stream seed(s) coincide with a locked stream
+ensureParallelPool: starting pool with 16 workers...
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+ensureParallelPool: pool ready (16 workers).
+
+------------------------------------------------------------
+EXP10 master realization registry
+------------------------------------------------------------
+  50 seeds x 3 swarm sizes, 7 realization types
+  N = 5    master hashes drawn for 50 seeds
+  N = 20   master hashes drawn for 50 seeds
+  N = 50   master hashes drawn for 50 seeds
+  [PASS ] every seed has a distinct continuous realization
+  [INFO ] discrete fault realizations draw from a finite set:
+           N=5 link: 20 distinct pattern(s) over 50 seeds
+           N=5 blackout: 4 distinct pattern(s) over 50 seeds
+           N=20 link: 45 distinct pattern(s) over 50 seeds
+           N=20 blackout: 19 distinct pattern(s) over 50 seeds
+           N=50 link: 50 distinct pattern(s) over 50 seeds
+           N=50 blackout: 34 distinct pattern(s) over 50 seeds
+
+--- [ 1/17] NOMINAL / Clean          N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 2/17] NOMINAL / Moderate       N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 3/17] NOMINAL / Stressed       N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 4/17] ACK / Moderate           N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 5/17] ACK / Stressed           N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 6/17] MISMATCH / Moderate      N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 7/17] MISMATCH / Stressed      N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 8/17] ESTIMATOR / Moderate     N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [ 9/17] ESTIMATOR / Stressed     N=5   6dof   (16 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [10/17] LINK / Moderate          N=20  di     (12 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [11/17] LINK / Stressed          N=20  di     (12 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [12/17] NODE / Moderate          N=20  di     (12 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [13/17] NODE / Stressed          N=20  di     (12 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [14/17] N20REF / Moderate        N=20  di     (12 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [15/17] N20REF / Stressed        N=20  di     (12 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [16/17] SCALE / Moderate         N=50  di     (8 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+--- [17/17] SCALE / Stressed         N=50  di     (8 workers)
+    P10          done
+    P20          done
+    State-event  done
+    Causal-v3    done
+
+Sweep completed in 29.3 min
+
+============================================================
+EXP10A infrastructure gate
+============================================================
+
+  Paired key claims, Nominal Stressed (N=5, 6-DOF, ring2)
+
+    Claim                                      mean d      CI lo      CI hi  nPair verdict
+    K1  RMSE(Causal - P10)      [m]           -0.0288    -0.0294    -0.0283  50/50  CI ENTIRELY BELOW 0
+    K2a DATA(Causal - P20)      [packets]   -501.8200  -503.2048  -500.4352  50/50  CI ENTIRELY BELOW 0
+    K2a DATA(Causal - P20)      [Hz]         -16.7273   -16.7735   -16.6812  50/50  CI ENTIRELY BELOW 0
+    K2b DATA+0.25ACK (C - P20)  [packets]    320.2300   317.6381   322.8219  50/50  CI ENTIRELY ABOVE 0
+    K2b DATA+0.25ACK (C - P20)  [Hz]          10.6743    10.5879    10.7607  50/50  CI ENTIRELY ABOVE 0
+
+    K1 directional hypothesis RMSE(Causal - P10) < 0 : SUPPORTED
+       the whole 95 % interval lies below zero
+
+    K2a and K2b carry NO directional gate by pre-registration.
+    A DATA saving that an ACK-inclusive total reverses is not a
+    communication saving; EXP07C established that and it stands.
+
+    NOTE: DATA falls but the ACK-inclusive total RISES. No
+    communication-saving claim may be made from this cell.
+
+  [PASS ] G1 realization hashes match where they must    0 mismatch(es) over 3400 runs
+  [PASS ] G2 no missing rows, every seed used once       0 missing, 0 cell(s) with a bad seed set
+  [PASS ] G3 no unlabelled NaN                           0 unlabelled, 0 labelled DIVERGED, 0 far-but-unlabelled
+  [PASS ] G4 protocol invariants zero                    0 causal, 0 baseline ACK, 0 ACK-point leak
+  [PASS ] G5 every key claim carries paired statistics   5 of 5 claims
+
+  EXP10A INFRASTRUCTURE GATE: PASS (5/5)
+  EXP10A SCIENTIFIC CLAIM K1: SUPPORTED
+  Per the pre-registration, a K1 verdict of any kind is not a
+  reason to re-run, retune or change the matrix.
+
+============================================================
+All cells, mean over non-diverged seeds
+============================================================
+
+Cell                       Method           RMSE   minSep   SafeF%  DATA Hz   ACK Hz   T.w025  nDiv
+NOMINAL / Clean            P10            0.0361   0.5522      0.0    99.67     0.00    99.67     0
+NOMINAL / Clean            P20            0.0254   0.5684      0.0   199.67     0.00   199.67     0
+NOMINAL / Clean            State-event    0.0823   0.4974      0.0    43.43     0.00    43.43     0
+NOMINAL / Clean            Causal-v3      0.0414   0.5456      0.0    84.47    84.47   105.58     0
+
+NOMINAL / Moderate         P10            0.0976   0.4770      0.0    99.67     0.00    99.67     0
+NOMINAL / Moderate         P20            0.0753   0.5045      0.0   199.67     0.00   199.67     0
+NOMINAL / Moderate         State-event    0.1694   0.3841      0.0    43.25     0.00    43.25     0
+NOMINAL / Moderate         Causal-v3      0.0892   0.4875      0.0   134.84   107.62   161.74     0
+
+NOMINAL / Stressed         P10            0.1477   0.4142      0.0    99.67     0.00    99.67     0
+NOMINAL / Stressed         P20            0.1121   0.4583      0.0   199.67     0.00   199.67     0
+NOMINAL / Stressed         State-event    0.2576   0.2711     24.0    42.55     0.00    42.55     0
+NOMINAL / Stressed         Causal-v3      0.1188   0.4496      0.0   182.94   109.61   210.34     0
+
+ACK / Moderate             P10            0.0976   0.4770      0.0    99.67     0.00    99.67     0
+ACK / Moderate             P20            0.0753   0.5045      0.0   199.67     0.00   199.67     0
+ACK / Moderate             State-event    0.1694   0.3841      0.0    43.25     0.00    43.25     0
+ACK / Moderate             Causal-v3      0.0878   0.4889      0.0   139.64   111.57   167.54     0
+
+ACK / Stressed             P10            0.1477   0.4142      0.0    99.67     0.00    99.67     0
+ACK / Stressed             P20            0.1121   0.4583      0.0   199.67     0.00   199.67     0
+ACK / Stressed             State-event    0.2576   0.2711     24.0    42.55     0.00    42.55     0
+ACK / Stressed             Causal-v3      0.1188   0.4496      0.0   182.94   109.61   210.34     0
+
+MISMATCH / Moderate        P10            0.7330   0.6543      0.0    99.67     0.00    99.67     0
+MISMATCH / Moderate        P20            0.7294   0.6579      0.0   199.67     0.00   199.67     0
+MISMATCH / Moderate        State-event    0.7494   0.6394      0.0    41.35     0.00    41.35     0
+MISMATCH / Moderate        Causal-v3      0.7317   0.6552      0.0   132.33   105.70   158.76     0
+
+MISMATCH / Stressed        P10            0.7434   0.6455      0.0    99.67     0.00    99.67     0
+MISMATCH / Stressed        P20            0.7357   0.6516      0.0   199.67     0.00   199.67     0
+MISMATCH / Stressed        State-event    0.7786   0.6213      0.0    40.62     0.00    40.62     0
+MISMATCH / Stressed        Causal-v3      0.7372   0.6498      0.0   178.31   106.83   205.01     0
+
+ESTIMATOR / Moderate       P10            0.0931   0.4634      0.0    99.67     0.00    99.67     0
+ESTIMATOR / Moderate       P20            0.0684   0.4976      0.0   199.67     0.00   199.67     0
+ESTIMATOR / Moderate       State-event    0.0881   0.4853      0.0   280.06     0.00   280.06     0
+ESTIMATOR / Moderate       Causal-v3      0.0692   0.5007      0.0   227.59   181.79   273.04     0
+
+ESTIMATOR / Stressed       P10            0.1412   0.4040      0.0    99.67     0.00    99.67     0
+ESTIMATOR / Stressed       P20            0.1050   0.4500      0.0   199.67     0.00   199.67     0
+ESTIMATOR / Stressed       State-event    0.1390   0.4205      0.0   280.16     0.00   280.16     0
+ESTIMATOR / Stressed       Causal-v3      0.1007   0.4583      0.0   249.16   149.40   286.51     0
+
+LINK / Moderate            P10            1.0655   0.2945     18.0   478.40     0.00   478.40     0
+LINK / Moderate            P20            1.0638   0.2963     18.0   958.40     0.00   958.40     0
+LINK / Moderate            State-event    1.0816   0.2801     20.0   536.42     0.00   536.42     0
+LINK / Moderate            Causal-v3      1.0656   0.2950     18.0   485.37   321.12   565.65     0
+
+LINK / Stressed            P10            1.0707   0.2899     18.0   478.40     0.00   478.40     0
+LINK / Stressed            P20            1.0668   0.2935     18.0   958.40     0.00   958.40     0
+LINK / Stressed            State-event    1.1070   0.2502     50.0   534.28     0.00   534.28     0
+LINK / Stressed            Causal-v3      1.0694   0.2924     18.0   585.92   301.19   661.22     0
+
+NODE / Moderate            P10            0.2156   0.2942     18.0   471.94     0.00   471.94     0
+NODE / Moderate            P20            0.1770   0.3093     18.0   945.48     0.00   945.48     0
+NODE / Moderate            State-event    0.3388   0.2274     52.0   189.96     0.00   189.96     0
+NODE / Moderate            Causal-v3      0.1997   0.3018     18.0   626.06   499.25   750.87     0
+
+NODE / Stressed            P10            0.2998   0.2526     22.0   471.94     0.00   471.94     0
+NODE / Stressed            P20            0.2403   0.2851     18.0   945.48     0.00   945.48     0
+NODE / Stressed            State-event    0.4850   0.0877    100.0   178.40     0.00   178.40     0
+NODE / Stressed            Causal-v3      0.2522   0.2782     18.0   829.61   495.82   953.57     0
+
+N20REF / Moderate          P10            0.1789   0.4033      0.0   478.40     0.00   478.40     0
+N20REF / Moderate          P20            0.1373   0.4487      0.0   958.40     0.00   958.40     0
+N20REF / Moderate          State-event    0.3111   0.2522     32.0   192.05     0.00   192.05     0
+N20REF / Moderate          Causal-v3      0.1625   0.4205      0.0   633.48   505.23   759.79     0
+
+N20REF / Stressed          P10            0.2678   0.3032      0.0   478.40     0.00   478.40     0
+N20REF / Stressed          P20            0.2054   0.3747      0.0   958.40     0.00   958.40     0
+N20REF / Stressed          State-event    0.4612   0.0938    100.0   180.84     0.00   180.84     0
+N20REF / Stressed          Causal-v3      0.2178   0.3607      0.0   839.68   502.04   965.19     0
+
+SCALE / Moderate           P10            0.1931   0.4025      0.0  1225.90     0.00  1225.90     0
+SCALE / Moderate           P20            0.1484   0.4489      0.0  2455.90     0.00  2455.90     0
+SCALE / Moderate           State-event    0.3349   0.2554     38.0   485.01     0.00   485.01     0
+SCALE / Moderate           Causal-v3      0.1753   0.4214      0.0  1619.40  1292.01  1942.40     0
+
+SCALE / Stressed           P10            0.2882   0.3026      0.0  1225.90     0.00  1225.90     0
+SCALE / Stressed           P20            0.2216   0.3746      0.0  2455.90     0.00  2455.90     0
+SCALE / Stressed           State-event    0.4952   0.0864    100.0   451.63     0.00   451.63     0
+SCALE / Stressed           Causal-v3      0.2347   0.3618      0.0  2139.49  1279.17  2459.28     0
+
+============================================================
+Adaptivity on the nominal point, Causal-v3
+============================================================
+
+  Scenario      DATA Hz     ACK Hz  Total.025       RMSE
+  Clean           84.47      84.47     105.58     0.0414
+  Moderate       134.84     107.62     161.74     0.0892
+  Stressed       182.94     109.61     210.34     0.1188
+
+  Clean < Moderate < Stressed on Causal DATA : yes
+
+tidy.csv : 3400 rows x 52 columns
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp10a_final_validation\2026-08-27_081056\figures
+
+============================================================
+DONE : exp10a_final_validation
+TIME : 30 m 30 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10a_final_validation\2026-08-27_081056
+============================================================

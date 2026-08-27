@@ -421,7 +421,7 @@ for iM = 1:nM
 
     o = simSwarm6DOF(cfgD, methodNames{iM});
 
-    serialScalar(iM,:) = localDetVector(o, cfgD);
+    serialScalar(iM,:) = exp10DetVector(o, cfgD);
     serialTraj{iM}     = o.P;
 
 end
@@ -437,7 +437,7 @@ parfor iM = 1:nM
 
     o = simSwarm6DOF(cfgD, methodNames{iM});
 
-    parScalar(iM,:) = localDetVector(o, cfgD);
+    parScalar(iM,:) = exp10DetVector(o, cfgD);
     parTraj{iM}     = o.P;
 
 end
@@ -721,38 +721,6 @@ if evalin('base', sprintf('exist(''%s'',''var'')', name))
     val = evalin('base', name);
     tf = ~isempty(val) && all(logical(val));
 end
-
-end
-
-
-function v = localDetVector(o, cfg)
-%LOCALDETVECTOR The scalars the determinism check compares.
-
-M = computeSwarmMetrics(o, cfg);
-
-if isfield(o,'ackTxCount')
-    ackCount = o.ackTxCount;
-else
-    ackCount = 0;
-end
-
-if isfield(o,'invariantViolations')
-    inv = o.invariantViolations;
-else
-    inv = 0;
-end
-
-v = [ ...
-    M.formationRMSE, ...
-    M.minSeparationEval, ...
-    o.txCount, ...
-    ackCount, ...
-    o.broadcastCount, ...
-    o.rxCount, ...
-    o.dropCount, ...
-    o.traceHash, ...
-    o.ackTraceHash, ...
-    inv];
 
 end
 
