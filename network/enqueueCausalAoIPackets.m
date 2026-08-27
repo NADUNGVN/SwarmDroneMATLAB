@@ -260,6 +260,23 @@ if nodeIsDark(cfg, j, tk) || nodeIsDark(cfg, i, tk)
 end
 
 
+%% ------------------------------------------------------------
+% Channel parameters in force at this instant
+%
+% Static cfg.net values unless a caller attached a regime schedule, so
+% the locked Causal-v3 path is unchanged. Resolved here, inside
+% transmit, because the regime that matters is the one in force when the
+% packet is actually put on the channel - not when the trigger was
+% evaluated, and not when the packet arrives.
+%
+% This is a channel lookup only. Nothing in the Causal-v3 trigger reads
+% it, and tests/test_exp11_regime_semantics.m asserts that the trigger
+% counters are untouched by a regime change under a fixed realisation.
+% ------------------------------------------------------------
+
+np = netParamsAt(cfg, tk);
+
+
 net.txCount = net.txCount + 1;
 
 
@@ -322,7 +339,7 @@ if linkIsDown(cfg, i, j, tk)
 end
 
 
-if drawLoss(netTrace,k,i,j,isLeaderLink) < cfg.net.packetLoss
+if drawLoss(netTrace,k,i,j,isLeaderLink) < np.packetLoss
 
     net.dropCount = net.dropCount + 1;
 
@@ -342,11 +359,11 @@ txState = pushOutstanding(txState, i, j, rec, isLeaderLink);
 % Delay and jitter
 % ------------------------------------------------------------
 
-packetDelay = cfg.net.delay;
+packetDelay = np.delay;
 
-if cfg.net.jitterStd > 0
+if np.jitterStd > 0
     packetDelay = packetDelay + ...
-        cfg.net.jitterStd * drawJitter(netTrace,k,i,j,isLeaderLink);
+        np.jitterStd * drawJitter(netTrace,k,i,j,isLeaderLink);
 end
 
 packetDelay = max(packetDelay, 0);

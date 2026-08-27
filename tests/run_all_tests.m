@@ -36,6 +36,7 @@ suite = {
     'test_mismatch_semantics'
     'test_estimator_semantics'
     'test_exp10_infrastructure'
+    'test_exp11_regime_semantics'
 };
 
 nTest = numel(suite);

@@ -152,10 +152,22 @@ if nodeIsDark(cfg, i, tk) || nodeIsDark(cfg, j, tk)
 end
 
 
+%% ------------------------------------------------------------
+% Reverse-channel parameters in force at this instant
+%
+% Static cfg.ack values unless a caller attached cfg.ack.regime, so every
+% pre-EXP11 path is unchanged. Resolved at the instant the ACK is
+% generated: an ACK created just before a switch travels under the
+% conditions that existed when it was sent.
+% ------------------------------------------------------------
+
+ap = ackParamsAt(cfg, tk);
+
+
 net.ackTxCount = net.ackTxCount + 1;
 
 
-if drawAckLoss(net, ackTrace, k, i, j, isLeaderLink) < cfg.ack.loss
+if drawAckLoss(net, ackTrace, k, i, j, isLeaderLink) < ap.loss
 
     net.ackDropCount = net.ackDropCount + 1;
 
@@ -164,11 +176,11 @@ if drawAckLoss(net, ackTrace, k, i, j, isLeaderLink) < cfg.ack.loss
 end
 
 
-ackDelay = cfg.ack.delay;
+ackDelay = ap.delay;
 
-if cfg.ack.jitterStd > 0
+if ap.jitterStd > 0
     ackDelay = ackDelay + ...
-        cfg.ack.jitterStd * drawAckJitter(net, ackTrace, k, i, j, isLeaderLink);
+        ap.jitterStd * drawAckJitter(net, ackTrace, k, i, j, isLeaderLink);
 end
 
 % Floored at one timestep: the receiver only decides at its own sampling
