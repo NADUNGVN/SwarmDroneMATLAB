@@ -12,7 +12,28 @@ re-tagged. EXP11 is **not** imported back into the release boundary.
 **Dataset:** `results/exp11_dynamic_network/2026-08-27_174026/tidy.csv`
 (400 rows, 50 seeds × 8 methods, 123 columns)
 **Debug pass:** `results/exp11_dynamic_network/2026-08-27_175335/` (24 rows)
-**Tests:** `run_all_tests` 10 of 10 PASS, `test_lock_regression` included
+**Tests:** `run_all_tests` **10 of 10 PASS** — confirmed twice: once on the
+dataset commit `7b64af6`, and again after the documentation-only housekeeping
+commit `e606cd3`.
+
+| test | dataset commit `7b64af6` | after housekeeping `e606cd3` |
+|---|---|---|
+| test_rotation | PASS 0.4 s | PASS 0.4 s |
+| test_formation_error | PASS 0.5 s | PASS 0.5 s |
+| test_setpoint_interface | PASS 24.6 s | PASS 36.5 s |
+| **test_lock_regression** | **PASS 405.0 s** | **PASS 413.2 s** |
+| test_causal_invariants | PASS 30.7 s | PASS 33.1 s |
+| test_blackout_semantics | PASS 27.0 s | PASS 28.7 s |
+| test_mismatch_semantics | PASS 44.3 s | PASS 47.5 s |
+| test_estimator_semantics | PASS 32.4 s | PASS 29.6 s |
+| test_exp10_infrastructure | PASS 15.9 s | PASS 13.5 s |
+| test_exp11_regime_semantics | PASS 78.4 s | PASS 29.2 s |
+| **total** | **10/10 in 11.0 min** | **10/10 in 10.5 min** |
+
+`test_lock_regression` passing with the EXP11 channel layer present is the check
+that matters here: it reproduces every locked EXP05C / EXP06A / EXP07A value
+bit-identically, which is what makes the EXP11 infrastructure additive rather
+than a modification of the frozen campaign.
 **Gates:** **7 of 7 PASS**
 **Runtime:** 400 runs in 6.4 min (16 workers, N = 5)
 
@@ -34,10 +55,19 @@ set a gate, the verdict is CHARACTERIZATION.
 | **H3** | Classify Causal-v3 against the fixed-periodic frontier by the EXP07C 1 % rule. *"It is not pre-registered that Causal must win."* | no gate — classification only | **CHARACTERIZATION** |
 | **H4** | Gap to Oracle-periodic. *"No gate in either direction."* | no gate — reported only | **CHARACTERIZATION** |
 
-**H2b scope limit.** The pre-registered statistic is `Total_w025` and it is met
-(upper CI −60.40). It licenses **no general ACK-inclusive cost claim**: under the
-broadcast cost model the sign reverses and Causal-v3 becomes 59.7 % *more*
-expensive than P20. See §4.
+**H2b — the distinction to preserve.** These two statements are not
+interchangeable, and only the first is supported:
+
+- **SUPPORTED:** at w = 0.25, Causal-v3 has a lower paired ACK-weighted total
+  cost than P20 **for this EXP11 mission**. (mean −60.460, CI
+  [−60.517, −60.402], n = 50.)
+- **NOT SUPPORTED:** general ACK-inclusive communication superiority over P20 —
+  because the conclusion is **cost-model dependent and reverses under
+  broadcast**, where Causal-v3 is 59.7 % *more* expensive (mean +71.653, CI
+  [+70.707, +72.599]).
+
+The pre-registered statistic is met exactly as written; what it does not do is
+generalise across cost models. See §4 and Appendix A.3.
 
 **H3 outcome.** NON-DOMINATED under the registered cost model (`Total_w025`),
 DOMINATED by P20 and P25 under broadcast. Both are reported; neither is a gate
