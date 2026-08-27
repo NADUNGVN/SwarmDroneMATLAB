@@ -1,0 +1,121 @@
+\section{Limitations}
+\label{sec:limitations}
+
+The campaign was pre-registered, so the boundaries below are recorded
+results rather than caveats added afterwards. Each is stated with what
+would be needed to remove it.
+
+\subsection{No hardware validation}
+
+This is a simulation study. No claim in this paper has been validated on
+hardware, and none of the timing, airtime or energy quantities has been
+measured on a radio or a processor. The airtime cost model
+\eqref{eq:costair} prices frames by assumed byte counts and the broadcast
+model \eqref{eq:costbcast} is an accounting proxy, not a medium-access
+simulation. A staged hardware programme --- protocol emulation, embedded
+timing, two-node radio, network-in-loop, then multi-vehicle --- is
+specified in \texttt{docs/HARDWARE\_ROADMAP.md}, with the simulation
+assumption each phase is designed to test.
+
+\subsection{The communication saving is DATA-only}
+
+Under the reference cost model the proposed policy is not the cheapest of
+the four methods in any cell of the final matrix
+(\MetricCausalCheapestCells{} of \MetricTotalCells{}), and against $20$~Hz
+periodic in the Stressed condition its ACK-inclusive cost is higher by
+\MetricKtwobMean{}~Hz with an interval excluding zero. Removing this
+limitation is a protocol question rather than a tuning question:
+acknowledgements would have to be aggregated across links, piggybacked on
+data the receiver is already sending, or made less frequent without losing
+the freshness signal that makes the policy work.
+
+\subsection{Broadcast accounting is unfavourable}
+
+Under a broadcast medium the Moderate non-dominated fraction falls from
+\MetricParetoModerateWtwentyfive{}\% to
+\MetricParetoModerateBroadcast{}\%. Synchronised periodic senders collapse
+into single broadcasts far more effectively than event-triggered ones, and
+unicast acknowledgements do not collapse at all. This is a structural
+disadvantage of the approach on a shared medium, not a measurement
+artefact.
+
+\subsection{Controller-owned limitations that no policy removes}
+
+Three of the rejected claims belong to the control layer, and we are
+explicit that our contribution neither causes nor cures them:
+
+\begin{itemize}
+\item \textbf{Degree-dependent safety.} The consensus gain is not
+      normalised by in-degree, so denser graphs are higher-gain systems.
+      A diagnostic confirmed the attribution by normalising the gain,
+      which removed both the trend and the safety failure.
+\item \textbf{Steady offset under mass mismatch.} The position loop has no
+      integral action, so a mass error leaves a constant error that no
+      transmission schedule can supply a correction for. Formation error
+      rises several-fold at the combined mismatch arm for \emph{every}
+      method.
+\item \textbf{Shared safety failure under link and node faults.} Under
+      $20\%$ permanent link removal and a $5$~s node blackout, the unsafe
+      fraction is the same for P10, P20 and the proposed policy. A failure
+      identical across a $20$~Hz periodic baseline and an event-triggered
+      policy is not a property of either.
+\end{itemize}
+
+Fixing any of these requires a controller change --- degree normalisation,
+integral action or explicit disturbance estimation --- which is outside the
+scope of a communication study and was deliberately not attempted, because
+retuning the controller per condition would have measured the quality of
+the retuning instead of the robustness of the policy.
+
+\subsection{Estimator and disturbance models are synthetic}
+
+The estimator noise standard deviations, the measurement latency and the
+external-force magnitudes are \emph{parameter assumptions}. They are not
+measurements from any sensor or airframe, and the estimator sigmas in
+particular must not be read as a sensor model. The external forcing is a
+world-frame nominal-mass-equivalent acceleration proxy: it does not depend
+on relative airspeed, carries no drag coefficient and does not scale with
+frontal area, so it is not an aerodynamic wind model.
+
+Within that scope the campaign found a real boundary: at the combined
+estimator arm, Clean-condition traffic rises by a factor of
+\MetricCleanNoiseRatio{} because measurement noise itself crosses the
+hard-innovation threshold. A noise-aware trigger --- filtering before the
+innovation test, or inflating the threshold by the estimator's own noise
+level --- is the obvious remedy and is \emph{not} evaluated here.
+
+\subsection{Rates are quoted at one timestep}
+
+Formation error is stable across outer timesteps but the transmission rate
+is not: \MetricDtFineData{}, \MetricDtBaseData{} and
+\MetricDtCoarseData{}~Hz at $\Delta t = 0.01$, $0.02$ and $0.04$~s. Every
+rate in this paper is therefore a rate \emph{at} $\Delta t = 0.02$~s. A
+$\Delta t$-invariant formulation would need to decouple trigger evaluation
+from the control step, which we have not done.
+
+\subsection{Scope of the final validation}
+
+The holdout validation ran one selected point per robustness axis, on
+ring topology only, at $\Delta t = 0.02$~s, and did not run the estimator
+point in the Clean condition. It therefore carries \emph{no evidence}
+about other topologies, other timesteps, or Clean-condition estimator
+noise, and the corresponding earlier rejections stand untouched rather
+than being narrowed. One point cannot retract a sweep.
+
+\subsection{Leader model and swarm scale}
+
+The leader is a kinematic reference in the 6-DOF study: it follows its
+trajectory exactly and is not itself a dynamic vehicle. It is also never
+selected for a communication blackout, since removing the formation's only
+absolute reference is a different experiment. The largest swarm studied is
+$N=50$ with double-integrator followers; the 6-DOF results are at $N=5$,
+with a secondary characterisation at $N=10$. No result here establishes
+6-DOF behaviour at large $N$.
+
+\subsection{Single formation geometry and mission}
+
+All results use one formation lattice, one leader trajectory and one
+mission duration. Formation geometry enters several of the safety results
+directly --- the minimum-separation threshold is a property of the lattice
+spacing --- so safety numbers should not be transferred to a different
+geometry.

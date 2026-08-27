@@ -1,0 +1,353 @@
+\section{Method: Causal ACK-Assisted AoI-Aware Triggering}
+\label{sec:method}
+
+This section specifies the policy completely enough to reimplement. All
+state is per directed channel $(i,j)$; we drop the subscript where it is
+unambiguous. Figure~\ref{fig:architecture} places the policy in the loop
+and Figure~\ref{fig:timeline} shows one round trip including a loss.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig01_architecture}
+\caption{Where the policy sits. The sender's only channel for learning
+what the receiver holds is the acknowledgement path (red). Nothing in the
+trigger reads receiver state.}
+\label{fig:architecture}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig02_protocol_timeline}
+\caption{Protocol timeline. A delivered packet is acknowledged
+cumulatively and retires every outstanding sequence number up to its own.
+A lost packet is never acknowledged, so it remains outstanding, refresh
+stays blocked, and the max-silence backstop provides recovery without any
+retransmission timer.}
+\label{fig:timeline}
+\end{figure}
+
+\subsection{Sender state: two memories, not one}
+\label{sec:dualmem}
+
+The sender maintains, for each channel:
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Memory & Governs \\
+\midrule
+$(\pos^{\mathrm{sent}}, \vel^{\mathrm{sent}})$, $g^{\mathrm{sent}}$, $k^{\mathrm{sent}}$
+  & \textbf{innovation} \\
+$g^{\mathrm{ack}}$, $k^{\mathrm{ack}}$
+  & \textbf{confirmed receiver knowledge} \\
+$\mathcal{O}$ (outstanding set)
+  & \textbf{in-flight suppression} \\
+$t^{\mathrm{tx}}$ (last transmission time)
+  & \textbf{all timing gates} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The separation is the load-bearing part of the design, so it is worth
+stating why each memory cannot do the other's job.
+
+$(\pos^{\mathrm{sent}}, \vel^{\mathrm{sent}})$ is the last state
+\emph{put on the wire}. Innovation must be measured against it, because
+the question a trigger answers is ``has the state moved since I last said
+anything about it?''. Measuring innovation against the last
+\emph{acknowledged} state instead would make the innovation fail to shrink
+for a full round trip after every transmission, so the sender would
+re-transmit state already in flight. That is not hypothetical: it is
+precisely the failure of our first design iteration
+(Section~\ref{sec:results}).
+
+$g^{\mathrm{ack}}$ is the generation timestamp of the newest packet an
+acknowledgement has \emph{confirmed}. Freshness must be measured against
+it, because the question freshness answers is ``how stale is what the
+receiver actually has?''. Estimating freshness from $g^{\mathrm{sent}}$
+instead --- an open loop --- makes the sender believe the receiver is as
+fresh as its own last attempt, which is wrong exactly when packets are
+being lost. Measured consequence: the open-loop variant's transmission
+rate moves the \emph{wrong way} with network quality, falling from
+\MetricSevenAthreecCleanRate{}~Hz to
+\MetricSevenAthreecStressedRate{}~Hz per channel as the network degrades.
+
+$\mathcal{O}$ holds the sequence numbers of transmitted-but-unacknowledged
+packets. It is a count of what the sender has not heard back about, and it
+must not depend on whether the channel dropped a packet --- a real sender
+cannot know that. The drop flag exists in our implementation only for
+verification counters and never enters a decision.
+
+\subsection{Estimated receiver freshness}
+
+At outer step $t$ with step size $\Delta t$,
+\begin{equation}
+\Aoihat(t) = t - g^{\mathrm{ack}} + \tfrac{1}{2}\Delta t .
+\label{eq:estaoi}
+\end{equation}
+The half-step term is a midpoint correction for the sampling interval and
+is kept identical to the convention used for the true-AoI metric
+\eqref{eq:trueaoi}, so the estimate and the ground truth remain
+comparable.
+
+Equation~\eqref{eq:estaoi} is monotone in wall-clock time between
+acknowledgements and jumps down only when an acknowledgement arrives.
+Loss and reverse-channel delay therefore inflate $\Aoihat$ relative to the
+true $A$, which is the intended behaviour: the sender should become more
+willing to transmit precisely when it has stopped hearing back.
+
+An ablation switch replaces $g^{\mathrm{ack}}$ with $g^{\mathrm{sent}}$ to
+obtain the open-loop variant discussed above. It is reported as an
+ablation, never as the method.
+
+\subsection{Freshness-adaptive threshold scale}
+
+Let $\bar{A}$ be the freshness threshold, $\rho$ the adaptation range,
+$s_0$ the base scale and $s_{\min}$ the floor. Define the normalised
+staleness excess
+\begin{equation}
+u(t) =
+\begin{cases}
+0, & \Aoihat(t) \le \bar{A}, \\[2pt]
+\min\!\left(
+\dfrac{1}{\rho}\left(\dfrac{\Aoihat(t)}{\bar{A}} - 1\right), \, 1
+\right), & \text{otherwise},
+\end{cases}
+\label{eq:excess}
+\end{equation}
+and the adaptive scale
+\begin{equation}
+\scale(t) = s_0 - (s_0 - s_{\min})\, u(t)
+\;\in\; [s_{\min},\, s_0] .
+\label{eq:scale}
+\end{equation}
+
+With the locked values $s_0 = 0.50$, $s_{\min} = 0.20$ and $\rho = 1$: at
+$\Aoihat = \bar{A}$ the scale is $0.50$, and at $\Aoihat = 2\bar{A}$ it has
+saturated at $0.20$. The saturation is not incidental --- it is what makes
+the policy's response to severe reverse-channel impairment flat, which we
+return to in Section~\ref{sec:discussion}.
+
+Innovation magnitudes are measured against the transmitted memory:
+\begin{equation}
+\Delta p(t) = \| \pos(t) - \pos^{\mathrm{sent}} \|, \qquad
+\Delta v(t) = \| \vel(t) - \vel^{\mathrm{sent}} \| .
+\label{eq:innov}
+\end{equation}
+
+\subsection{The four branches}
+
+The sender transmits when one of four conditions holds. The branches are
+ordered, mutually exclusive in effect, and differ in which timing gate
+applies to them --- that difference is the contribution.
+
+\paragraph{Global refractory.} No branch may fire within
+$\tau_{\min}$ of the previous transmission:
+\begin{equation}
+t - t^{\mathrm{tx}} < \tau_{\min} \;\Rightarrow\; \text{no transmission}.
+\label{eq:refractory}
+\end{equation}
+This bounds the instantaneous rate and excludes Zeno behaviour.
+
+\paragraph{Branch 1 --- hard new information.}
+\begin{equation}
+\Delta p \ge \epsP \;\;\vee\;\; \Delta v \ge \epsV .
+\label{eq:hard}
+\end{equation}
+The conventional state-event condition. Subject only to
+\eqref{eq:refractory}.
+
+\paragraph{Branch 2 --- freshness-adaptive new information.}
+\begin{equation}
+\Aoihat \ge \bar{A}
+\;\wedge\;
+\bigl( \Delta p \ge \scale\,\epsP \;\vee\; \Delta v \ge \scale\,\epsV \bigr).
+\label{eq:adaptive}
+\end{equation}
+The receiver is stale \emph{and} the state has moved past the lowered
+threshold. This is new information, so the refresh cooldown does
+\textbf{not} apply to it. Note that $\Aoihat \ge \bar{A}$ alone never
+transmits: age modulates the threshold, it does not trigger.
+
+\paragraph{Branch 3 --- refresh / retransmission.}
+\begin{equation}
+\Aoihat \ge \bar{A}
+\;\wedge\;
+t - t^{\mathrm{tx}} \ge \tau_{r}
+\;\wedge\;
+|\mathcal{O}| = 0 .
+\label{eq:refresh}
+\end{equation}
+Stale, but with nothing materially new to say. This is the only branch
+that repeats information the receiver may already be about to get, so it
+is the only branch the cooldown $\tau_r$ governs, and it is additionally
+forbidden while any packet is outstanding.
+
+\paragraph{Branch 4 --- max-silence backstop.}
+\begin{equation}
+t - t^{\mathrm{tx}} \ge \tau_{\max} .
+\label{eq:maxsilence}
+\end{equation}
+
+\subsection{Loss recovery without a retransmission timer}
+
+The policy introduces no RTO, no round-trip-time estimator and no window
+size. Recovery is a consequence of the branch semantics:
+
+\begin{enumerate}
+\item A lost packet is never acknowledged, so its sequence number stays in
+      $\mathcal{O}$.
+\item A non-empty $\mathcal{O}$ blocks Branch 3 by
+      \eqref{eq:refresh}.
+\item $g^{\mathrm{ack}}$ stays frozen, so $\Aoihat$ grows by
+      \eqref{eq:estaoi}, which drives $\scale \to s_{\min}$ by
+      \eqref{eq:scale} and makes Branch 2 progressively easier to satisfy.
+\item If the state is genuinely static, so that Branch 2 also stays quiet,
+      Branch 4 fires at $\tau_{\max}$.
+\end{enumerate}
+
+Whether this semantic arrangement alone suffices --- rather than an
+explicit retransmission mechanism --- was the question the third design
+iteration existed to answer, and it is answered empirically in
+Section~\ref{sec:results}.
+
+\subsection{Algorithms}
+
+\begin{algorithm}[t]
+\caption{Sender-side causal AoI policy, per channel $(i,j)$, per outer step}
+\label{alg:sender}
+\begin{algorithmic}[1]
+\Require $\pos,\vel$ (local estimate), sender memories
+$\pos^{\mathrm{sent}},\vel^{\mathrm{sent}},g^{\mathrm{ack}},
+ t^{\mathrm{tx}},\mathcal{O}, k^{\mathrm{sent}}$
+\Statex \textbf{Step 1: apply arrived acknowledgements} (Alg.~\ref{alg:receiver}, part B)
+\Statex \textbf{Step 2: evaluate the trigger}
+\State $\Aoihat \gets t - g^{\mathrm{ack}} + \Delta t/2$
+  \Comment{\eqref{eq:estaoi}}
+\If{$t - t^{\mathrm{tx}} < \tau_{\min}$}
+  \State \Return \textsc{no-send} \Comment{\eqref{eq:refractory}}
+\EndIf
+\State $\Delta p \gets \|\pos - \pos^{\mathrm{sent}}\|$;\;
+       $\Delta v \gets \|\vel - \vel^{\mathrm{sent}}\|$
+\State $u \gets \textsc{clamp}\!\left(\frac{1}{\rho}
+        \left(\frac{\Aoihat}{\bar A}-1\right),0,1\right)$ if
+        $\Aoihat > \bar A$, else $0$
+\State $\scale \gets s_0 - (s_0-s_{\min})\,u$
+  \Comment{\eqref{eq:scale}}
+\State $\textit{stale} \gets (\Aoihat \ge \bar A)$
+\If{$\Delta p \ge \epsP$ \textbf{or} $\Delta v \ge \epsV$}
+  \State \Return \textsc{send}, branch $\gets$ \textsc{hard}
+    \Comment{\eqref{eq:hard}}
+\EndIf
+\If{\textit{stale} \textbf{and}
+    ($\Delta p \ge \scale\,\epsP$ \textbf{or} $\Delta v \ge \scale\,\epsV$)}
+  \State \Return \textsc{send}, branch $\gets$ \textsc{adaptive-new}
+    \Comment{\eqref{eq:adaptive}}
+\EndIf
+\If{\textit{stale}}
+  \If{$t - t^{\mathrm{tx}} \ge \tau_r$ \textbf{and} $|\mathcal{O}| = 0$}
+    \State \Return \textsc{send}, branch $\gets$ \textsc{refresh}
+      \Comment{\eqref{eq:refresh}}
+  \EndIf
+\EndIf
+\If{$t - t^{\mathrm{tx}} \ge \tau_{\max}$}
+  \State \Return \textsc{send}, branch $\gets$ \textsc{max-silence}
+    \Comment{\eqref{eq:maxsilence}}
+\EndIf
+\State \Return \textsc{no-send}
+\Statex \textbf{Step 3: on \textsc{send}}
+\State $k^{\mathrm{sent}} \gets k^{\mathrm{sent}} + 1$
+\State $\pos^{\mathrm{sent}} \gets \pos$;\;
+       $\vel^{\mathrm{sent}} \gets \vel$;\;
+       $g^{\mathrm{sent}} \gets t$;\;
+       $t^{\mathrm{tx}} \gets t$
+\State $\mathcal{O} \gets \mathcal{O} \cup \{k^{\mathrm{sent}}\}$
+  \Comment{kept even if the channel drops it}
+\State emit packet $\langle k^{\mathrm{sent}}, t, \pos, \vel \rangle$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{Receiver DATA acceptance and cumulative ACK}
+\label{alg:receiver}
+\begin{algorithmic}[1]
+\Statex \textbf{Part A --- receiver, per channel, per tick}
+\Require arrived packets $\mathcal{P}$, stored $g_{ij}$, $k^{\mathrm{acc}}_{ij}$
+\State sort $\mathcal{P}$ by arrival time, then generation time
+\ForAll{$\langle k, g, \pos, \vel\rangle \in \mathcal{P}$}
+  \If{$g > g_{ij}$}
+    \State store $(\pos,\vel)$;\;
+           $g_{ij} \gets g$;\;
+           $k^{\mathrm{acc}}_{ij} \gets k$
+      \Comment{newest generation wins}
+  \Else
+    \State \textsc{stale-discard} \Comment{counted, not applied}
+  \EndIf
+\EndFor
+\If{$g_{ij}$ advanced during this tick}
+  \State emit \textbf{one} ACK $\langle k^{\mathrm{acc}}_{ij}, g_{ij}\rangle$
+    \Comment{cumulative; at most one per link per tick}
+\EndIf
+\Statex
+\Statex \textbf{Part B --- sender, applying an arrived ACK}
+\Require ACK $\langle k^{a}, g^{a} \rangle$, sender $g^{\mathrm{ack}}, k^{\mathrm{ack}}, \mathcal{O}$
+\If{$k^{a} \le k^{\mathrm{ack}}$}
+  \State \textsc{stale-ack-discard} \Comment{a late duplicate; not an error}
+  \State \Return
+\EndIf
+\If{$k^{a} \notin \mathcal{O}$}
+  \State \textsc{invariant violation: unknown sequence}
+\EndIf
+\State $g^{\mathrm{ack}} \gets g^{a}$;\;
+       $k^{\mathrm{ack}} \gets k^{a}$
+\State $\mathcal{O} \gets \{ k \in \mathcal{O} : k > k^{a} \}$
+  \Comment{cumulative retirement}
+\State \textbf{assert} $g^{\mathrm{ack}}$ non-decreasing
+  \Comment{no sender rollback}
+\end{algorithmic}
+\end{algorithm}
+
+Three properties of Algorithm~\ref{alg:receiver} matter for correctness.
+
+\textbf{Cumulative acknowledgement.} One ACK names the newest accepted
+packet and retires every outstanding sequence number up to it. This bounds
+reverse traffic at one frame per link per tick regardless of how many DATA
+packets arrived in that tick, and it makes recovery from a lost ACK
+automatic: the next ACK covers everything the lost one would have.
+
+\textbf{Stale-ACK rejection.} An acknowledgement naming a sequence number
+already retired is discarded, not applied. Without this, reordering on the
+reverse channel could move $g^{\mathrm{ack}}$ backwards, and the sender
+would conclude the receiver had become \emph{less} informed --- a
+non-physical belief that would inflate $\Aoihat$ and cause spurious
+transmission.
+
+\textbf{One-way advance.} $g^{\mathrm{ack}}$ is advanced by exactly one
+place in the implementation, the ACK handler. Nothing else may write it.
+This is what makes the causality requirement checkable rather than
+aspirational.
+
+\subsection{Protocol invariants}
+
+Nine conditions are asserted at runtime, and all nine were zero across all
+\MetricRuns{} runs of the final validation:
+an ACK never precedes its own accept; no ACK exists for data that never
+arrived; $g^{\mathrm{ack}}$ never rolls back; no generation timestamp lies
+in the future; no stale ACK is accepted; no ACK names an unknown sequence
+number; sequence and generation timestamps agree; the adaptive-new branch
+never fires without innovation; and refresh never fires while a useful
+packet is in flight.
+
+These are not unit tests of the simulator --- they are properties of the
+protocol that would be violated by the most natural implementation
+mistakes, in particular by any accidental same-timestep read of receiver
+state.
+
+\subsection{What is deliberately absent}
+
+For clarity about the scope of the contribution: the policy has no
+retransmission timeout, no round-trip-time estimator, no congestion
+window, no negotiated rate, no learned component, and no parameter that
+differs between network conditions. The complete parameter set is
+Table~\ref{tab:params}, and it is identical in every cell of every
+experiment in this paper.

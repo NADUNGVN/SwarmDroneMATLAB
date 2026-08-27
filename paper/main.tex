@@ -1,0 +1,116 @@
+% =====================================================================
+% Causal ACK-assisted AoI-aware event-triggered communication
+% for multi-UAV formation control
+%
+% Manuscript source for the frozen simulation campaign simulation-v1.0.
+%
+% BUILD
+%   pdflatex main && pdflatex main
+%
+% There is no bibliography yet, by design. paper/RELATED_WORK_NEEDS.md
+% records which literature groups are required and what each must
+% support; no citation is invented to fill a slot.
+%
+% EVERY HEADLINE NUMBER IS A MACRO from generated/metrics.tex, produced
+% by paper/scripts/make_paper_metrics.m from persisted result files.
+% Nothing numeric is typed into the prose. paper/scripts/paper_audit.m
+% enforces that.
+% =====================================================================
+
+\documentclass[10pt,twocolumn]{article}
+
+\usepackage[letterpaper,margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+
+\graphicspath{{figures/}}
+
+% ---------------------------------------------------------------------
+% Generated numbers. Never edit; regenerate.
+% ---------------------------------------------------------------------
+\input{generated/metrics}
+
+% ---------------------------------------------------------------------
+% Notation shorthands used across sections
+% ---------------------------------------------------------------------
+\newcommand{\pos}{\mathbf{p}}
+\newcommand{\vel}{\mathbf{v}}
+\newcommand{\Aoihat}{\hat{A}}
+\newcommand{\epsP}{\varepsilon_p}
+\newcommand{\epsV}{\varepsilon_v}
+\newcommand{\scale}{s}
+
+\title{\textbf{Causal ACK-Assisted, Age-of-Information-Aware
+Event-Triggered Communication for Multi-UAV Formation Control}}
+
+\author{(author list withheld for this draft)}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Fixed-rate inter-agent communication cannot adapt to a network whose
+quality is unknown or changing, while a conventional state-event trigger
+saves traffic by ignoring how stale the receiver's information has become.
+We present a \emph{causal ACK-assisted} age-of-information-aware
+event-triggered communication policy for multi-UAV formation control. The
+sender maintains two distinct memories --- the last state it transmitted,
+which defines innovation, and the last state a cumulative acknowledgement
+has \emph{confirmed} at the receiver, which defines estimated freshness ---
+and separates genuinely new information from refresh traffic so that a
+repetition cooldown governs only repetition. No agent reads receiver state
+directly; freshness is learned solely from acknowledgements that traverse a
+delayed and lossy reverse channel.
+
+On a pre-registered final validation over \MetricSeeds{} holdout seeds and
+\MetricRuns{} simulated runs, one fixed configuration adapts its
+transmission effort monotonically with network quality
+(\MetricDataCausalClean{}, \MetricDataCausalModerate{} and
+\MetricDataCausalStressed{}~Hz of DATA traffic in the Clean, Moderate and
+Stressed conditions) and attains lower formation error than a
+conventional state-event trigger in all \MetricTotalCells{} cells of the
+final matrix. Against a $10$~Hz periodic baseline in the Stressed
+condition, the paired improvement is \MetricKoneMean{}~m with a $95\%$
+confidence interval of $[\MetricKoneLo{}, \MetricKoneHi{}]$ over
+\MetricKonePairs{} matched pairs.
+
+We are equally explicit about what the campaign does \emph{not} show. The
+communication saving is a DATA-packet saving: against $20$~Hz periodic the
+paired DATA difference is \MetricKtwoaMean{}~Hz, while the same contrast
+under an ACK-inclusive cost model is \MetricKtwobMean{}~Hz --- a
+\emph{reversal}, not an ambiguity, with both intervals excluding zero. We
+therefore claim no universal superiority over well-tuned periodic
+communication and no Pareto superiority under ACK-inclusive cost in the
+Stressed condition. Six further pre-registered claims were tested and
+rejected, and are reported in full rather than omitted.
+\end{abstract}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_problem_formulation}
+\input{sections/04_method}
+\input{sections/05_experimental_setup}
+\input{sections/06_results}
+\input{sections/07_discussion}
+\input{sections/08_limitations}
+\input{sections/09_conclusion}
+
+\appendix
+
+\section{Reproducibility}
+The complete claim ledger, the frozen result directories behind every
+number, and the single-command validation entry point are documented in
+\texttt{paper/REPRODUCIBILITY.md} and \texttt{docs/FINAL\_CLAIMS.md} of
+the accompanying repository, at tag \texttt{simulation-v1.0}.
+
+\end{document}

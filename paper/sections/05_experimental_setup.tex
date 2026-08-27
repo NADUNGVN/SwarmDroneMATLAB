@@ -1,0 +1,159 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Pre-registration}
+
+Every experiment in this paper was pre-registered: the acceptance gates,
+the selected operating points, the statistical procedure and the seed
+policy were committed to writing \emph{before} the experiment ran, and
+each amendment carries a timestamp and a stated reason. Amendments made
+after a result was visible are not permitted, and none were made.
+
+This matters for how the paper should be read. A gate that failed is
+reported as failed rather than reinterpreted, and no parameter was
+adjusted in response to any result reported here. The design evolution in
+Section~\ref{sec:results} contains two variants that failed their gates;
+neither differs from the working variant by any parameter value.
+
+\subsection{Methods compared}
+
+\begin{itemize}
+\item \textbf{P10} --- periodic, $10$~Hz per channel.
+\item \textbf{P20} --- periodic, $20$~Hz per channel.
+\item \textbf{State-event} --- conventional state-error trigger,
+      \eqref{eq:hard} with the max-silence backstop, no freshness term.
+\item \textbf{Causal-v3} --- the proposed policy,
+      Algorithms~\ref{alg:sender}--\ref{alg:receiver}.
+\end{itemize}
+
+An acausal \textbf{oracle AoI} variant and three intermediate causal
+variants appear in the design-evolution ablation only.
+
+\subsection{Common random numbers}
+
+Sharing a random seed is not the same as sharing a realisation: each policy
+calls the random number generator a different number of times, so two
+methods at the same seed desynchronise on the first transmission and stop
+being comparable. Every stochastic input is therefore \emph{pre-drawn} as
+a realisation indexed by $(\text{link},\text{timestep})$ or by physical
+time, and consumed by lookup:
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Realisation & Indexed by \\
+\midrule
+forward channel loss and jitter & link, timestep \\
+reverse channel loss and jitter & link, timestep \\
+transmission phase & physical sender, payload class \\
+link-fault pattern & graph \\
+node-blackout selection & graph \\
+external-force trace & physical time \\
+estimator-noise trace & physical time \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A method that stays silent consumes nothing and disturbs nothing. The
+consequence is that two methods transmitting on the same link at the same
+instant meet exactly the same channel, which is what makes a
+\emph{paired} comparison valid. This is verified rather than asserted: all
+four methods report the same forward-realisation hash at a given seed
+despite transmitting substantially different numbers of packets, and every
+hash is checked against a registry computed before the sweep ran.
+
+\subsection{Holdout validation}
+
+The final validation used $50$ seeds drawn from a block never used during
+development, with an automated assertion that no seed appears in any
+seed family of the preceding experiments. The seed alone determines all
+realisations, so the three network conditions at one seed share one set of
+channel uniforms and differ only in the thresholds applied to them ---
+common random numbers across conditions, which is what makes a
+condition-to-condition difference attributable to network quality rather
+than to the draw.
+
+The final matrix contains \MetricTotalCells{} point-scenario cells over
+eight selected operating points spanning $N \in \{5,20,50\}$, both plants,
+ACK impairment, permanent link removal, node blackout, plant mismatch and
+estimator noise, for \MetricRuns{} runs in total. Each robustness point is
+a point that \emph{already exposed a limit} in its source experiment, not
+the most favourable cell of that experiment.
+
+\subsection{Statistical conventions}
+
+These are applied uniformly and are stated here so that no reader has to
+infer them from a table.
+
+\paragraph{Key claims (holdout).} Reported as a \emph{paired} mean
+difference with a $95\%$ confidence interval over $n=\MetricSeeds{}$
+matched pairs,
+\begin{equation}
+\bar{d} \pm t_{0.975,\,n-1}\, \frac{\sigma_d}{\sqrt{n}},
+\qquad d_s = m_A(s) - m_B(s) .
+\label{eq:pairedci}
+\end{equation}
+An interval containing zero downgrades the claim to \emph{not
+distinguishable at this sample size}. Adding seeds after inspecting an
+interval is forbidden, because that is choosing the sample size by the
+result. Where a pair is unusable --- an arm diverged, so there is no finite
+error to difference --- the usable pair count is reported and the claim is
+downgraded if it falls short of the pre-registered count. No pair was lost
+in the results below.
+
+\paragraph{Development experiments.} Reported as mean $\pm$ standard
+deviation over $n=20$ seeds.
+
+\paragraph{Binary safety.} Reported as \emph{unsafe / eligible} together
+with the percentage, never as a percentage alone. The denominator is not
+always the seed count, and hiding it would misrepresent the evidence.
+Two source-specific eligibility rules are preserved:
+
+\begin{itemize}
+\item under permanent link failure, the denominator is the seeds whose
+      active graph stayed connected --- a seed whose graph fell apart is a
+      connectivity fact, not evidence about a method;
+\item under node blackout, \emph{matched no-fault eligibility} applies: a
+      seed counts only if the same method, condition and seed was already
+      safe \emph{without} the fault. A configuration that was unsafe to
+      begin with carries no information about blackouts.
+\end{itemize}
+
+The second rule has a consequence we report explicitly rather than let
+appear as a zero: where a method was unsafe in every no-fault seed of a
+cell, its eligible denominator is empty and its blackout safety is
+\emph{unevaluable}, not perfect.
+
+\paragraph{No $p$-values.} The confidence intervals answer the questions
+the claims ask, and adding a significance test on top would invite reading
+a threshold crossing as a result. Where an interval contains zero we say
+so.
+
+\subsection{A note on two rate normalisations}
+
+The campaign contains two different rate conventions, and they must not be
+compared:
+
+\begin{itemize}
+\item \textbf{Per channel.} Table~\ref{tab:evolution} reports the DATA
+      rate on one directed channel. P10 reads exactly $10.00$~Hz.
+\item \textbf{Swarm total.} Tables~\ref{tab:nominal} and
+      \ref{tab:paired} report the summed rate over all directed channels.
+      P10 reads \MetricDataPtenClean{}~Hz at $N=5$.
+\end{itemize}
+
+The two eras additionally used different channel counts at the same swarm
+size, because the later graph convention removes in-links to the leader
+(the leader reads its reference directly). Absolute traffic is therefore
+comparable \emph{within} a table and not across the two conventions. Every
+caption states which convention it uses.
+
+\subsection{Reproducibility}
+
+The campaign is frozen at a tagged commit. A single command re-runs the
+test suite, re-verifies every realisation hash in a fresh process,
+re-checks bit-identity between serial and parallel execution, rebuilds
+every table and figure from persisted files, and writes an environment
+manifest. A separate check clones the repository and reproduces the test
+suite, the aggregate tables and one re-simulated seed bit-identically.
+Details are in \texttt{paper/REPRODUCIBILITY.md}.

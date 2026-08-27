@@ -1,0 +1,358 @@
+\section{Results}
+\label{sec:results}
+
+\begin{table}[t]
+\centering
+\caption{Locked parameters. Identical in every cell of every experiment in
+this paper. Generated from the configuration functions themselves.}
+\label{tab:params}
+\scriptsize
+\input{tables/tableI_parameters}
+\end{table}
+
+\subsection{Design evolution: what each element buys}
+\label{sec:evolution}
+
+Table~\ref{tab:evolution} and Figure~\ref{fig:evolution} give the causal
+design chain, measured on the same $20$ seeds and the same channel
+realisations. Rates are \textbf{per channel}.
+
+\begin{table*}[t]
+\centering
+\caption{Causal design evolution, Stressed condition. DATA rates are
+\textbf{per channel}: P10 reads exactly $10.00$~Hz. Every row is backed by
+a persisted result file. RMSE is mean $\pm$ standard deviation over $20$
+seeds.}
+\label{tab:evolution}
+\scriptsize
+\input{tables/tableII_design_evolution}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig03_design_evolution}
+\caption{The causal chain in the accuracy-versus-traffic plane, Stressed
+condition. The proposed policy reaches lower error than the acausal oracle
+by transmitting more; the oracle is an efficiency reference, not a
+performance ceiling.}
+\label{fig:evolution}
+\end{figure}
+
+Four observations, each of which the chain isolates.
+
+\textbf{A fixed threshold does not adapt.} The open-loop, non-adaptive
+variant transmits \MetricSevenAtwocCleanRate{},
+\MetricSevenAtwocModerateRate{} and \MetricSevenAtwocStressedRate{}~Hz
+across Clean, Moderate and Stressed --- essentially flat --- for a Stressed
+error of \MetricSevenAtwocStressedRmse{}~m, worse than P10.
+
+\textbf{Adaptation on an open loop adapts the wrong way.} Adding the
+freshness-adaptive threshold while still estimating freshness from what the
+sender transmitted gives \MetricSevenAthreecCleanRate{},
+\MetricSevenAthreecModerateRate{} and \MetricSevenAthreecStressedRate{}~Hz.
+The rate \emph{decreases} as the network degrades. The mechanism is direct:
+an open-loop sender believes the receiver is as fresh as its own last
+attempt, so it becomes \emph{less} willing to transmit exactly when
+packets are being lost.
+
+\textbf{Closing the loop is not sufficient on its own.} With freshness
+taken from acknowledgements but new information and refresh still
+conflated, the rate is \MetricSevenAfourcCleanRate{},
+\MetricSevenAfourcModerateRate{} and \MetricSevenAfourcStressedRate{}~Hz:
+the Moderate and Stressed values are pinned to the same figure. The
+refresh cooldown has become a ceiling on \emph{new information}, so the
+policy cannot respond to a worse network at all. This is the failure
+mode of our second design iteration.
+
+\textbf{Separating the two semantics resolves it, with no parameter
+change.} The proposed policy transmits \MetricSevenAfivecCleanRate{},
+\MetricSevenAfivecModerateRate{} and \MetricSevenAfivecStressedRate{}~Hz
+for a Stressed error of \MetricSevenAfivecStressedRmse{}~m. Every
+parameter is identical to the pinned variant above.
+
+A result we did not anticipate is worth stating plainly. The acausal
+oracle --- which reads receiver state directly in the same timestep ---
+runs at \MetricSevenIdealStressedRate{}~Hz for
+\MetricSevenIdealStressedRmse{}~m. The causal policy is \emph{more
+accurate} (\MetricSevenAfivecStressedRmse{}~m) while transmitting
+\emph{more} (\MetricSevenAfivecStressedRate{}~Hz). Free freshness
+information does not buy accuracy; it buys the ability to be quiet. Using
+an oracle as the upper reference for a communication policy therefore
+overstates achievable efficiency and understates achievable accuracy, and
+Section~\ref{sec:discussion} takes this up.
+
+\subsection{Holdout validation: adaptivity and accuracy}
+
+\begin{table}[t]
+\centering
+\caption{Nominal holdout results, $N=5$, 6-DOF followers,
+\MetricSeeds{} holdout seeds. Rates are \textbf{swarm totals} over $10$
+directed channels. $C_{0.25}$ is DATA $+\,0.25\,$ACK.}
+\label{tab:nominal}
+\scriptsize
+\input{tables/tableIII_nominal_holdout}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig04_adaptive_rate}
+\caption{Adaptive-rate response across network quality, nominal point.
+Left: DATA only. Right: the same comparison once acknowledgements are
+priced. The periodic baselines are flat by construction; the proposed
+policy is the only method whose effort tracks the condition, and it is
+also the only one whose cost grows when the reverse channel is counted.}
+\label{fig:adaptive}
+\end{figure}
+
+Table~\ref{tab:nominal} and Figure~\ref{fig:adaptive} give the nominal
+holdout cells. The adaptivity criterion is met: the proposed policy
+transmits \MetricDataCausalClean{}, \MetricDataCausalModerate{} and
+\MetricDataCausalStressed{}~Hz of DATA across the three conditions, a
+monotone ordering, with one fixed configuration. The periodic baselines
+transmit \MetricDataPtenClean{} and \MetricDataPtwentyClean{}~Hz
+regardless of the network.
+
+Across the whole final matrix the proposed policy attains lower mean
+formation error than the state-event baseline in
+\MetricBeatEventCells{} of \MetricTotalCells{} cells --- all of them ---
+and lower error than P10 in \MetricBeatPtenCells{} of
+\MetricTotalCells{}. It attains lower error than P20 in
+\MetricBeatPtwentyCells{} of \MetricTotalCells{} cells. We state that
+third number in the same sentence as the first two deliberately: the
+accuracy claim of this paper is against state-event and $10$~Hz periodic,
+not against a well-resourced $20$~Hz baseline.
+
+\subsection{Paired holdout claims}
+
+\begin{table}[t]
+\centering
+\caption{Pre-registered paired claims, nominal Stressed cell,
+\MetricSeeds{} matched pairs. Rates are swarm totals.}
+\label{tab:paired}
+\scriptsize
+\input{tables/tableIV_paired_ci}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig11_paired_holdout}
+\caption{Per-seed paired differences for the three pre-registered claims,
+with the mean and its $95\%$ interval. K1 lies entirely below zero. K2a
+and K2b lie on \emph{opposite} sides of zero: the DATA saving and the
+ACK-inclusive cost increase are both unambiguous.}
+\label{fig:paired}
+\end{figure}
+
+Table~\ref{tab:paired} and Figure~\ref{fig:paired} give the three
+pre-registered claims.
+
+\textbf{K1 (accuracy against P10) is supported.} The paired difference is
+\MetricKoneMean{}~m with interval
+$[\MetricKoneLo{}, \MetricKoneHi{}]$ over \MetricKonePairs{} pairs, lying
+entirely below zero.
+
+\textbf{K2a and K2b together reject any communication-saving claim from
+this cell.} Against P20 the paired DATA difference is
+\MetricKtwoaMean{}~Hz with interval
+$[\MetricKtwoaLo{}, \MetricKtwoaHi{}]$ --- fewer DATA packets. The same
+contrast under the reference ACK-inclusive cost model is
+\MetricKtwobMean{}~Hz with interval
+$[\MetricKtwobLo{}, \MetricKtwobHi{}]$ --- \emph{more} total traffic. Both
+intervals exclude zero, so this is a reversal and not an ambiguity.
+
+Neither K2a nor K2b carried a directional hypothesis. They were
+pre-registered as signed, undirected measurements precisely because an
+earlier experiment in this campaign had already shown that ACK-inclusive
+cost can reverse a DATA-only conclusion. Reporting the DATA saving alone
+would have reproduced that error with a confidence interval attached to it.
+
+\subsection{Accuracy against communication cost}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig05_cost_pareto}
+\caption{Accuracy against communication cost at the nominal point. Hollow
+markers price DATA only; filled markers price DATA $+\,0.25\,$ACK. The
+arrow is the distance pricing acknowledgements moves each method --- zero
+for the three baselines, which have no reverse channel. In the Stressed
+panel the proposed policy crosses P20 as a result.}
+\label{fig:pareto}
+\end{figure}
+
+Under the reference cost model the proposed policy is non-dominated in
+\MetricParetoModerateWtwentyfive{}\% of evaluable Moderate point families,
+meeting the pre-registered $75\%$ criterion. The single Moderate loss is
+the estimator-noise point, dominated by P20.
+
+That result is strongly cost-model dependent, and we report the dependence
+rather than the best case:
+
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Cost model & Moderate & Stressed \\
+\midrule
+$w=0.10$   & \MetricParetoModerateWten{}\%        & \MetricParetoStressedWten{}\% \\
+$w=0.25$   & \MetricParetoModerateWtwentyfive{}\% & \MetricParetoStressedWtwentyfive{}\% \\
+$w=0.50$   & \MetricParetoModerateWfifty{}\%      & \MetricParetoStressedWfifty{}\% \\
+airtime    & \MetricParetoModerateAirtime{}\%     & \MetricParetoStressedAirtime{}\% \\
+broadcast  & \MetricParetoModerateBroadcast{}\%   & \MetricParetoStressedBroadcast{}\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two features of this table are unfavourable to our method and are the
+reason it is printed in full. Under the \textbf{broadcast} model the
+Moderate figure falls to
+\MetricParetoModerateBroadcast{}\%; the $75\%$ result is a packet-count and
+airtime result, not a broadcast-medium result. And the Stressed row is
+reported without any acceptance gate: a pre-registered claim of Stressed
+Pareto superiority under ACK-inclusive cost was tested earlier in this
+campaign and \emph{rejected}, and these figures are consistent with that
+rejection. We do not re-open it.
+
+Finally, the proposed policy is the cheapest of the four methods under the
+reference cost model in \MetricCausalCheapestCells{} of
+\MetricTotalCells{} cells. The value is zero, and it belongs in the results
+rather than in a footnote.
+
+\subsection{Robustness}
+
+\begin{table*}[t]
+\centering
+\caption{Robustness summary. Every figure is drawn from a persisted result
+file of the named experiment.}
+\label{tab:robust}
+\scriptsize
+\input{tables/tableV_robustness}
+\end{table*}
+
+Table~\ref{tab:robust} summarises the robustness axes and
+Figures~\ref{fig:ackimp}--\ref{fig:mismatch} give the detail.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig06_ack_impairment}
+\caption{Reverse-channel impairment. Left, Moderate: increasing ACK loss
+and delay drives the adaptive scale down to its floor and the transmission
+rate up. Right, Stressed: the scale is \emph{already} at the floor, so the
+response is flat. The flatness is saturation of the adaptation mechanism,
+not robustness to impairment.}
+\label{fig:ackimp}
+\end{figure}
+
+\paragraph{ACK impairment.} In the Stressed condition, error and
+transmission rate are unchanged between a reliable reverse channel and one
+with $20\%$ loss and forward-equivalent delay
+(\MetricAckImpStressedReliableRmse{}~m against
+\MetricAckImpStressedImpairedRmse{}~m). This must not be read as
+robustness. The adaptive scale is pinned at its floor
+($s_{\min}$, observed mean \MetricAckImpStressedImpairedScale{}) in both
+cases, so the mechanism that would respond to reverse-channel degradation
+has no remaining range. The Moderate panel of Figure~\ref{fig:ackimp}
+shows the mechanism working before it saturates: there the same impairment
+moves the scale to its floor and raises the rate.
+
+\paragraph{Topology and swarm size.} Across four topologies and
+$N \in \{10,20,50\}$ the communication ranking is preserved
+(Figure~\ref{fig:topology}), but absolute safety generalisation was
+rejected: the safety gate fails systematically at one condition of the
+sweep, and a follow-up diagnostic attributed it to a consensus gain that is
+not normalised by in-degree --- a controller property, not a
+communication one.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig07_topology}
+\caption{Formation error against mean consensus in-degree across four
+topologies and three swarm sizes. The ordering between methods is stable;
+the absolute level is not, and the trend with in-degree is a controller
+effect.}
+\label{fig:topology}
+\end{figure}
+
+\paragraph{Link and node faults.} Under $20\%$ permanent directed-link
+removal and under a $5$~s single-node communication blackout, safety fails
+--- and fails at the \emph{same rate for every method}. In the holdout
+matrix the unsafe fraction under permanent link removal is identical for
+P10, P20 and the proposed policy. A failure shared identically by a
+$20$~Hz periodic baseline and an event-triggered policy is not a property
+of the communication policy. Figure~\ref{fig:fault} shows the traffic
+response and recovery.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig08_fault_response}
+\caption{Node-blackout response. Left: DATA rate before, during and after
+a $5$~s blackout. Right: time to return to the pre-fault error band.
+Recovery uses the max-silence backstop; there is no retransmission timer.}
+\label{fig:fault}
+\end{figure}
+
+\paragraph{6-DOF transition.} Replacing double-integrator followers with
+6-DOF quadrotors degrades every method's accuracy, and leaves the ordering
+between methods intact (Figure~\ref{fig:sixdof}). Adaptivity survives the
+plant change.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig09_di_vs_6dof}
+\caption{Double-integrator against 6-DOF quadrotor followers. Left: every
+method lies above the identity line --- all degrade --- while their
+ordering is preserved. Right: the adaptive rate response under 6-DOF.}
+\label{fig:sixdof}
+\end{figure}
+
+\paragraph{Plant mismatch and estimator noise.} Both were tested at a
+pre-registered combined arm and both rejected an absolute robustness
+claim (Figure~\ref{fig:mismatch}). Under combined mismatch --- external
+forcing, $+10\%$ true mass, $+20\%$ true drag --- formation error rises
+several-fold for \emph{every} method, and the attribution is that the
+controller has no integral action, so a mass offset leaves a steady error
+no communication policy can remove. Under combined estimator noise and
+latency, Clean-condition DATA traffic rises by a factor of
+\MetricCleanNoiseRatio{} against the noiseless arm, breaching a
+pre-registered bound of $2$: measurement noise itself crosses the
+hard-innovation threshold and manufactures triggers.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig10_mismatch_estimator}
+\caption{Left: plant-mismatch arms; the mass arm dominates and the effect
+is a steady offset. Right: estimator-noise arms; traffic rises past the
+pre-registered bound while accuracy does not improve correspondingly ---
+the extra transmissions are false triggers.}
+\label{fig:mismatch}
+\end{figure}
+
+\paragraph{Timestep sensitivity.} Formation error is stable across outer
+timesteps, but the DATA rate is not: \MetricDtFineData{},
+\MetricDtBaseData{} and \MetricDtCoarseData{}~Hz at
+$\Delta t = 0.01$, $0.02$ and $0.04$~s. A rate quoted from this campaign
+is a rate \emph{at} $\Delta t = 0.02$~s, not a property of the policy.
+
+\subsection{Negative and boundary results}
+
+\begin{table*}[t]
+\centering
+\caption{Negative and boundary results. Each row is a claim that was
+pre-registered, tested, and not supported. This table is part of the
+result, not an appendix to it.}
+\label{tab:negative}
+\scriptsize
+\input{tables/tableVI_negative_results}
+\end{table*}
+
+Table~\ref{tab:negative} collects every rejected or bounded claim with the
+number that rejected it. Seven claims are listed. Six concern robustness
+boundaries and one --- Stressed ACK-inclusive Pareto superiority --- is a
+direct rejection of a performance claim about the contribution itself.
+
+\subsection{Dataset integrity}
+
+For completeness: across all \MetricRuns{} runs of the final validation
+there were \MetricDiverged{} diverged runs and
+\MetricInvariants{} protocol-invariant violations. Every realisation hash
+matched a registry fixed before the sweep, all \MetricSeeds{} holdout seeds
+were used exactly once per method and point, and serial and parallel
+execution of the same seed agree bit-identically including trajectories.

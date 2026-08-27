@@ -1,0 +1,165 @@
+\section{Problem Formulation}
+\label{sec:problem}
+
+\subsection{Swarm, graph and formation objective}
+
+Consider $N$ agents indexed $i \in \{1,\dots,N\}$. Agent $1$ is a leader
+that tracks a known reference trajectory; agents $2,\dots,N$ are followers.
+Each follower holds position $\pos_i \in \mathbb{R}^3$ and velocity
+$\vel_i \in \mathbb{R}^3$.
+
+Communication is described by a fixed directed graph with adjacency
+$A \in \{0,1\}^{N \times N}$, where $A_{ij}=1$ means follower $i$ receives
+state from agent $j$, plus a pinning vector $\pi \in \{0,1\}^{N}$, where
+$\pi_i = 1$ means follower $i$ additionally receives the leader payload.
+The \emph{channel count} is
+\begin{equation}
+n_c = \|A\|_0 + \textstyle\sum_i \pi_i ,
+\label{eq:channels}
+\end{equation}
+and it is the denominator that makes communication cost comparable across
+methods: it is fixed by the graph and never altered by a fault, so a
+policy cannot appear cheap by losing links.
+
+Each follower has a desired offset $\delta_i$ relative to the leader. The
+formation objective is to drive
+$\pos_i \to \pos_1 + \delta_i$, and the reported accuracy metric is the
+root-mean-square formation error over the evaluation window
+$t \ge t_{\mathrm{eval}}$,
+\begin{equation}
+\mathrm{RMSE} =
+\sqrt{\frac{1}{|\mathcal{K}|(N-1)}
+\sum_{k \in \mathcal{K}} \sum_{i=2}^{N}
+\bigl\| \pos_i(t_k) - \pos_1(t_k) - \delta_i \bigr\|^2 } ,
+\label{eq:rmse}
+\end{equation}
+where $\mathcal{K}$ indexes outer steps with $t_k \ge t_{\mathrm{eval}}$.
+The window excludes the initial formation-acquisition transient.
+
+Safety is reported separately as the minimum pairwise separation over the
+same window,
+$
+d_{\min} = \min_{k \in \mathcal{K}} \min_{i \ne j} \| \pos_i(t_k) -
+\pos_j(t_k) \|,
+$
+and a run is \emph{unsafe} when $d_{\min}$ falls below a fixed threshold.
+Accuracy and safety are deliberately not combined into one score: the
+campaign's most important negative results are safety results that leave
+accuracy ordering intact.
+
+\subsection{Follower dynamics}
+
+Two plants are used, and both appear in the results so that the plant is
+never a hidden variable.
+
+The \textbf{double-integrator} plant treats the commanded acceleration as
+achieved, $\dot{\pos}_i = \vel_i$, $\dot{\vel}_i = \mathbf{a}_i$, with
+saturation on $\|\mathbf{a}_i\|$. It is the comparator used throughout the
+larger-swarm studies.
+
+The \textbf{6-DOF quadrotor} plant gives each follower full translational
+and rotational dynamics with thrust and torque limits, driven through a
+cascaded attitude controller at a $10{:}1$ inner-to-outer step ratio. The
+commanded acceleration becomes a reference the vehicle must actually
+achieve. A run is declared \emph{diverged} if any state becomes
+non-finite, if a follower leaves a $50$~m ball around the leader, or if
+roll or pitch exceeds $80^\circ$; a diverged run counts as both a
+stability failure and unsafe, and is excluded from continuous means while
+its denominator is reported.
+
+\subsection{Network model}
+
+The forward channel carries DATA from sender $j$ to receiver $i$. Each
+transmission is independently subject to
+\begin{itemize}
+\item \textbf{loss} with probability $p_{\mathrm{loss}}$,
+\item \textbf{delay} $d + \sigma_j z$, where $z$ is a standard normal draw
+      and the result is floored at zero,
+\item \textbf{out-of-order delivery}, resolved at the receiver by a
+      newest-generation-wins rule; a packet whose generation timestamp is
+      older than what the receiver already holds is counted as a stale
+      discard rather than applied.
+\end{itemize}
+
+The reverse channel carries acknowledgements and has its own,
+independently specified loss, delay and jitter. It is not free and it is
+not ideal. Its traffic is counted and priced.
+
+Three network conditions are used throughout, fixed since the earliest
+experiments: \textbf{Clean} ($p_{\mathrm{loss}}=0$, $d=0$),
+\textbf{Moderate} ($0.20$, $0.08$~s) and \textbf{Stressed}
+($0.40$, $0.12$~s).
+
+\subsection{Age of information, and the quantity a sender cannot have}
+
+For a directed channel $(i,j)$, let $g_{ij}(t)$ be the generation
+timestamp of the newest packet receiver $i$ has \emph{accepted} from
+sender $j$. The true age of information is
+\begin{equation}
+A_{ij}(t) = t - g_{ij}(t) .
+\label{eq:trueaoi}
+\end{equation}
+
+Equation~\eqref{eq:trueaoi} is an \emph{omniscient-observer} quantity. It
+is well defined, we log it, and we report it --- but sender $j$ cannot
+evaluate it, because $g_{ij}$ lives at the receiver. Any policy that reads
+$A_{ij}$ inside the sender's decision is acausal.
+
+This distinction is the crux of the paper, so we make it a definition.
+
+\begin{quote}
+\textbf{Causality requirement.} A communication policy is \emph{causal} if
+every quantity entering a sender's transmit decision at time $t$ is
+derivable from that sender's own state history and from packets that have
+\emph{arrived} at that sender strictly before $t$.
+\end{quote}
+
+An acausal AoI-aware policy is a legitimate object of study --- we use one
+as an upper reference --- but it is not implementable, and its efficiency
+must not be reported as achievable. What a real sender can maintain is an
+\emph{estimate} $\Aoihat_{ij}(t)$ built from acknowledgements, and the gap
+between $\Aoihat_{ij}$ and $A_{ij}$ is a modelling consequence of the
+reverse channel rather than an approximation error to be minimised away.
+
+\subsection{Communication cost}
+
+Counting DATA packets alone would exempt the reverse channel that makes
+the policy possible, so cost is reported under five models. With
+$n_{\mathrm{D}}$ DATA transmissions, $n_{\mathrm{A}}$ acknowledgements,
+$n_{\mathrm{B}}$ broadcast-accounted DATA transmissions and mission
+duration $T_m$:
+\begin{align}
+C_w &= (n_{\mathrm{D}} + w\, n_{\mathrm{A}})/T_m,
+   \quad w \in \{0.10,\,0.25,\,0.50\},
+   \label{eq:costw}\\
+C_{\mathrm{air}} &= (b_{\mathrm{D}} n_{\mathrm{D}} +
+   b_{\mathrm{A}} n_{\mathrm{A}})/T_m,
+   \label{eq:costair}\\
+C_{\mathrm{bcast}} &= (n_{\mathrm{B}} + n_{\mathrm{A}})/T_m .
+   \label{eq:costbcast}
+\end{align}
+Here $b_{\mathrm{D}}$ and $b_{\mathrm{A}}$ are DATA and ACK frame sizes,
+so \eqref{eq:costair} prices an acknowledgement as the short frame it is.
+Equation~\eqref{eq:costbcast} collapses the unicast links leaving one
+sender in one tick into a single radio transmission, which is what a
+broadcast medium actually does; acknowledgements remain unicast.
+
+$C_{0.25}$ is the pre-registered reference model. Reporting all five is
+not thoroughness for its own sake: the conclusion \emph{changes} between
+them, and Section~\ref{sec:results} reports where.
+
+\subsection{Dominance}
+
+Method $M$ is \emph{dominated} in a cell if some other method $M'$ attains
+both at least $1\%$ lower error and at least $1\%$ lower cost:
+\begin{equation}
+\mathrm{RMSE}(M') \le 0.99\,\mathrm{RMSE}(M)
+\;\wedge\;
+C(M') \le 0.99\,C(M) .
+\label{eq:dominance}
+\end{equation}
+The $1\%$ margin was fixed before any of the comparisons in this paper
+were run. A cell is \emph{evaluable} only when every method in it has a
+finite mean error and cost; non-evaluable cells are named and counted
+rather than dropped, because a shrinking denominator is the easiest way to
+flatter a fraction.

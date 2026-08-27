@@ -1,0 +1,44 @@
+% Table I -- locked parameters. GENERATED, do not edit.
+\begin{tabular}{llrl}
+\toprule
+Group & Parameter & Value & Unit \\
+\midrule
+Swarm & followers $N$ & 5 & -- \\
+ & outer timestep $\Delta t$ & 0.02 & s \\
+ & mission horizon $T$ & 30 & s \\
+ & evaluation window start & 8 & s \\
+ & formation gain $K_p$ & 1.8 & -- \\
+ & formation gain $K_v$ & 2.2 & -- \\
+ & leader pinning $K_p^{L}$ & 1.5 & -- \\
+ & leader pinning $K_v^{L}$ & 1.8 & -- \\
+ & max commanded acceleration & 2.0 & m/s$^2$ \\
+ & safety threshold (minimum separation) & 0.25 & m \\
+\addlinespace
+Graph & topology & ring, degree 2 + leader pinning & -- \\
+ & directed channels at $N=5$ & 10 & -- \\
+\addlinespace
+Trigger & hard position threshold $\epsilon_p$ & 0.05 & m \\
+ & hard velocity threshold $\epsilon_v$ & 0.10 & m/s \\
+ & freshness threshold $\bar{A}$ & 0.12 & s \\
+ & refractory $\tau_{\min}$ & 0.02 & s \\
+ & refresh cooldown $\tau_{r}$ & 0.10 & s \\
+ & max silence $\tau_{\max}$ & 0.50 & s \\
+ & scale base $s_0$ & 0.50 & -- \\
+ & scale floor $s_{\min}$ & 0.20 & -- \\
+ & adaptation range $\rho$ & 1.00 & -- \\
+\addlinespace
+Network & Clean loss / delay & 0 / 0 & -- / s \\
+ & Moderate loss / delay & 0.20 / 0.08 & -- / s \\
+ & Stressed loss / delay & 0.40 / 0.12 & -- / s \\
+ & periodic baselines & 10 Hz (P10), 20 Hz (P20) per channel & -- \\
+ & ACK channel & cumulative, one per link per tick & -- \\
+\addlinespace
+Quadrotor & mass (nominal) & 0.060 & kg \\
+ & linear drag (nominal) & 0.10 & N/(m/s) \\
+ & inner-loop ratio & 10:1 & -- \\
+\addlinespace
+Cost & ACK weights $w$ & 0.10, 0.25, 0.50 & -- \\
+ & airtime bytes DATA / ACK & 48 / 24 & B \\
+ & Pareto dominance margin & 1 & \% \\
+\bottomrule
+\end{tabular}

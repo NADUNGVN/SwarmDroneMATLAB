@@ -1,0 +1,23 @@
+% Table V -- robustness summary. GENERATED, do not edit.
+\begin{tabular}{p{2.4cm}lp{5.2cm}p{4.4cm}l}
+\toprule
+Axis & Source & Frozen evidence & Mechanism & Status \\
+\midrule
+ACK impairment & EXP07B & Stressed RMSE 0.1173 reliable vs 0.1173 at 20\% ACK loss & adaptive scale already at its floor $s_{\min}=0.20$ & Saturation, not robustness \\
+\addlinespace
+Topology & EXP08A & 4 topologies, $N\in\{10,20,50\}$; Stressed mean RMSE 0.2682 vs 0.5650 (State-event) & communication ranking holds; absolute safety does not generalise & Partial \\
+\addlinespace
+Permanent link failure & EXP08B & 20\% removal, ring2, Stressed: unsafe 4/20 (Causal) vs 4/20 (P20) & failure rate is shared across methods & Rejected (absolute), method-independent \\
+\addlinespace
+Node blackout (5 s) & EXP08C & 1 node dark, $N=20$, Stressed: unsafe 3/20, mean recovery 3.57 s & shared across methods; recovery via max-silence backstop & Rejected (absolute), method-independent \\
+\addlinespace
+6-DOF followers & EXP09A & Stressed Causal RMSE 0.1171 (DI) vs 0.1191 (6-DOF) & communication ranking survives the plant change & Supported \\
+\addlinespace
+Plant mismatch (B7) & EXP09B & Moderate RMSE 0.0892 $\rightarrow$ 0.7309 ($+719\%$) & controller has no integral action; steady offset, not a communication effect & Rejected (absolute) \\
+\addlinespace
+Estimator noise (C3) & EXP09C & Clean DATA 84.47 $\rightarrow$ 197.26 Hz ($\times2.34$) & noise crosses the hard-innovation threshold: false triggers & Rejected (bandwidth bound) \\
+\addlinespace
+Outer timestep & EXP09C-dt & Stressed DATA 202.9 / 182.9 / 133.0 Hz at $\Delta t=$ 0.01 / 0.02 / 0.04 s & RMSE stable, rate is not: the trigger is evaluated per step & Rejected (rate invariance) \\
+\addlinespace
+\bottomrule
+\end{tabular}

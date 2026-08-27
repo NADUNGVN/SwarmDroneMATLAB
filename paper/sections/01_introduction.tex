@@ -1,0 +1,125 @@
+\section{Introduction}
+\label{sec:intro}
+
+A formation of unmanned aerial vehicles holds its shape by exchanging
+state. How often that exchange should happen is not a detail: it sets the
+radio duty cycle, the energy budget, the number of vehicles a channel can
+carry, and --- through information staleness --- the accuracy of the
+formation itself.
+
+Two answers dominate practice, and each fails in a way the other does not.
+
+\textbf{Fixed-rate periodic communication} is simple, predictable and easy
+to schedule. Its weakness is that the rate must be chosen in advance, for a
+network whose quality is generally unknown and often changing. Choose a
+low rate and the formation degrades exactly when the channel degrades;
+choose a high rate and the radio is busy paying for margin it does not
+need. In our own frozen results this is visible directly: a $10$~Hz
+periodic baseline transmits \MetricDataPtenClean{}~Hz in a clean network
+and the same \MetricDataPtenStressed{}~Hz in a heavily impaired one, while
+its formation error grows from \MetricRmsePtenClean{}~m to
+\MetricRmsePtenStressed{}~m. The policy does not notice that anything has
+changed.
+
+\textbf{Conventional event-triggered communication} transmits when the
+local state has moved far enough to be worth reporting. This does save
+traffic, and substantially: our state-event baseline runs at
+\MetricDataEventStressed{}~Hz in the Stressed condition against
+\MetricDataPtwentyStressed{}~Hz for $20$~Hz periodic. But a pure state
+trigger is blind to what the receiver actually holds. If a packet is lost
+or badly delayed, the sender's own state may be perfectly steady --- no
+trigger --- while the receiver's copy grows arbitrarily stale. The
+resulting error is severe: \MetricRmseEventStressed{}~m, worse than either
+periodic baseline.
+
+The missing quantity is \emph{age of information}: not how much the
+sender's state has changed, but how old the receiver's copy of it is. Using
+it, however, raises a problem that is easy to state and easy to get wrong.
+\textbf{A sender cannot observe the age of information at a receiver.} It
+can only infer it, and only from something that comes back.
+
+\subsection*{What this paper contributes}
+
+We present a \emph{causal ACK-assisted, AoI-aware event-triggered
+communication policy} for multi-UAV formation control. The name is
+deliberately narrow. The policy is decentralised in that each sender
+decides alone, using only locally held quantities; it is \emph{not}
+feedback-free, and we do not describe it as such. Its estimate of receiver
+freshness comes entirely from cumulative acknowledgements that traverse a
+reverse channel with its own delay, jitter and loss. There is no
+same-timestep read of receiver state anywhere in the implementation, and
+nine protocol invariants are checked at runtime to keep it that way.
+
+Three design elements carry the result:
+
+\begin{enumerate}
+\item \textbf{Dual sender memory.} The sender keeps the last state it
+      \emph{transmitted}, which defines innovation, separately from the
+      last state an acknowledgement has \emph{confirmed}, which defines
+      estimated freshness. Conflating the two is not a shortcut; it makes
+      the policy re-send state that is already in flight.
+\item \textbf{Freshness-adaptive thresholds.} As the estimated age of the
+      receiver's copy grows past a threshold, the state-change threshold
+      required to transmit is reduced continuously toward a floor. Age
+      alone never triggers a transmission; it only makes the sender easier
+      to trigger.
+\item \textbf{Separation of new information from refresh.} A repetition
+      cooldown governs only repetition. Traffic that carries genuinely new
+      information is not subject to it, and refresh traffic is additionally
+      forbidden while any packet remains unacknowledged, so the policy does
+      not add a duplicate to something already on the wire.
+\end{enumerate}
+
+The third element is the one the design history turns on, and we present
+that history rather than hiding it. Two earlier versions of this policy
+failed for opposite reasons --- one over-transmitted until it breached its
+resource ceiling, the other over-suppressed until it lost adaptivity
+entirely --- and both failures are reported in
+Section~\ref{sec:results} as an ablation chain measured on frozen data.
+Neither was repaired by tuning a parameter. No parameter value differs
+between the failing and working variants.
+
+\subsection*{What we claim, and what we do not}
+
+The campaign behind this paper was pre-registered: acceptance gates,
+selected operating points, statistical procedure and seed policy were
+fixed in writing before each experiment ran, and the final validation used
+\MetricSeeds{} seeds never used during development. That discipline makes
+the negative results as reportable as the positive ones, and we report
+them.
+
+\textbf{We claim} that one fixed configuration adapts its communication
+effort across network conditions
+(\MetricDataCausalClean{} $<$ \MetricDataCausalModerate{} $<$
+\MetricDataCausalStressed{}~Hz), that it improves accuracy over
+conventional state-event communication in every cell of the final matrix
+(\MetricBeatEventCells{}/\MetricTotalCells{}), that it improves on $10$~Hz
+periodic in the Stressed condition with a paired confidence interval
+excluding zero, and that in the Moderate condition it occupies a
+favourable accuracy-versus-communication trade-off, non-dominated in
+\MetricParetoModerateWtwentyfive{}\% of the selected point families under
+the reference cost model.
+
+\textbf{We do not claim} universal superiority over optimally tuned
+periodic communication. A $20$~Hz periodic baseline attains lower formation
+error than our policy in \MetricTotalCells{}$-$\MetricBeatPtwentyCells{}
+of \MetricTotalCells{} cells, and our policy is never the cheapest of the
+four methods under the reference cost model. \textbf{We do not claim}
+Pareto superiority under ACK-inclusive cost in the Stressed condition: a
+pre-registered test of exactly that claim was rejected, and our holdout
+data reproduces the rejection with a signed confidence interval. And we do
+not claim any hardware result; this is a simulation study, and the
+estimator, disturbance and airtime models are stated parameter assumptions
+rather than measurements.
+
+The remainder of the paper is organised as follows.
+Section~\ref{sec:problem} formalises the setting.
+Section~\ref{sec:method} specifies the policy in enough detail to
+reimplement, including both algorithms and the receiver-side
+acknowledgement semantics. Section~\ref{sec:setup} describes the
+pre-registered experimental protocol and the statistical conventions.
+Section~\ref{sec:results} reports results, including the design-evolution
+ablation and every rejected claim. Section~\ref{sec:discussion} explains
+the negative results mechanistically rather than deferring them, and
+Section~\ref{sec:limitations} states the boundaries of what has been
+shown.
