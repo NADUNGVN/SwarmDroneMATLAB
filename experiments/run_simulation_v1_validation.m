@@ -32,6 +32,16 @@
 %       is NOT valid on a run that skipped the tests, and the manifest
 %       records that it did.
 %
+% ISOLATION OF THE NESTED SCRIPTS
+%
+% The test suite and the two experiments run through runScriptIsolated,
+% not evalin('base', ...). Each of them is a script, so sharing a
+% workspace with this one would let it overwrite expRun - and then this
+% script's manifest.json would be written into the last nested
+% experiment's directory and its INDEX.md row attributed to the wrong
+% run. See utils/runScriptIsolated.m for the two collisions that
+% actually occurred.
+%
 % WHY THE DETERMINISM CHECK IS BIT-IDENTITY AND NOT A TOLERANCE
 %
 % Every stochastic input is a pre-drawn realization indexed by (link,
@@ -101,7 +111,7 @@ else
     tTest = tic;
 
     try
-        evalin('base', 'run_all_tests');
+        runScriptIsolated('run_all_tests');
         testsPassed = true;
     catch err
         testsPassed = false;
@@ -225,7 +235,7 @@ if forceRun || ~haveDataset
     end
 
     evalin('base', 'clear exp10SmokeSeeds');
-    evalin('base', 'exp10a_final_validation');
+    runScriptIsolated('exp10a_final_validation');
 
     relog();
 
@@ -274,7 +284,7 @@ fprintf('STEP 4 / 7  rebuild EXP10B from the persisted dataset\n');
 fprintf('============================================================\n\n');
 
 try
-    evalin('base', 'exp10b_unified_matrix');
+    runScriptIsolated('exp10b_unified_matrix');
     rebuildOk = true;
 catch err
     rebuildOk = false;
@@ -345,11 +355,17 @@ for r = 1:height(D)
 
     hashChecked = hashChecked + 1;
 
-    if D.FWDHASH(r) ~= reg.fwd(iS,iN)
+    % EXACT hashes only. The locked generator hashes need sixteen digits
+    % to serialise and are not thread-stable, so comparing them against
+    % values recomputed in this session would report differences that are
+    % artefacts of float summation order and CSV precision rather than of
+    % the realization. They are compared separately below, with a stated
+    % tolerance.
+    if D.FWDHASHX(r) ~= reg.fwdX(iS,iN)
         hashMismatch = hashMismatch + 1;
     end
 
-    if strcmp(D.method{r}, 'Causal-v3') && D.ACKHASH(r) ~= reg.ack(iS,iN)
+    if strcmp(D.method{r}, 'Causal-v3') && D.ACKHASHX(r) ~= reg.ackX(iS,iN)
         hashMismatch = hashMismatch + 1;
     end
 
@@ -366,15 +382,66 @@ for r = 1:height(D)
         hashMismatch = hashMismatch + 1;
     end
 
-    if strcmp(D.kind{r},'mismatch') && D.EXTHASH(r) ~= reg.extForce(iS,iN)
+    if strcmp(D.kind{r},'mismatch') && D.EXTHASHX(r) ~= reg.extForceX(iS,iN)
         hashMismatch = hashMismatch + 1;
     end
 
-    if strcmp(D.kind{r},'estimator') && D.NOISEHASH(r) ~= reg.noise(iS,iN)
+    if strcmp(D.kind{r},'estimator') && D.NOISEHASHX(r) ~= reg.noiseX(iS,iN)
         hashMismatch = hashMismatch + 1;
     end
 
 end
+
+
+%% ------------------------------------------------------------
+% The locked generator hashes, compared with a STATED tolerance
+%
+% Plan section 14: if MATLAB floating-point scheduling makes bit
+% identity infeasible, prove exact deterministic inputs and
+% machine-precision equality - and never widen a tolerance silently.
+% This is that comparison, made explicitly and reported next to the
+% exact one so a reader can see which check carries the weight.
+%
+% The locked hashes are float sums over millions of elements whose
+% partial sums exceed 2^53, so their last one or two digits move with
+% the summation grouping, which depends on thread count. Relative
+% agreement to 1e-14 says the realization is the same and only the
+% checksum's low-order bits differ.
+% ------------------------------------------------------------
+
+LOCKED_HASH_RELTOL = 1e-14;
+
+lockedWorst = 0;
+lockedChecked = 0;
+
+for r = 1:height(D)
+
+    iS = find(reg.seeds == D.seed(r), 1);
+    iN = find(reg.N == D.pointN(r), 1);
+
+    if isempty(iS) || isempty(iN)
+        continue;
+    end
+
+    a = D.FWDHASH(r);
+    b = reg.fwd(iS,iN);
+
+    if isfinite(a) && isfinite(b) && b ~= 0
+        lockedChecked = lockedChecked + 1;
+        lockedWorst = max(lockedWorst, abs(a-b)/abs(b));
+    end
+
+end
+
+lockedOk = lockedWorst <= LOCKED_HASH_RELTOL;
+
+fprintf('\n  Locked forward hash, %d rows compared\n', lockedChecked);
+fprintf('    worst relative difference : %.3e\n', lockedWorst);
+fprintf('    stated tolerance          : %.3e\n', LOCKED_HASH_RELTOL);
+fprintf('    within tolerance          : %s\n', localYesNo(lockedOk));
+fprintf(['    (float summation order and CSV precision, not the ' ...
+         'realization; the exact-hash comparison above is what \n' ...
+         '     gates this step)\n']);
 
 hashesOk = hashMismatch == 0;
 
@@ -443,7 +510,7 @@ parfor iM = 1:nM
 end
 
 detNames = {'RMSE','minSep','DATA','ACK','broadcast','rx','drop', ...
-            'fwdHash','ackHash','invariants'};
+            'fwdHashX','ackHashX','invariants'};
 
 fprintf('  %-12s %-12s %24s %24s %s\n', ...
     'Method','Quantity','serial','parallel','identical');

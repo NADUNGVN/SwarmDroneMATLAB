@@ -1,0 +1,826 @@
+
+============================================================
+RUN  : simulation_v1_validation
+ID   : 2026-08-27_084932
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\simulation_v1_validation\2026-08-27_084932
+WHEN : 2026-08-27 08:49:33
+============================================================
+
+
+############################################################
+# SIMULATION v1.0 VALIDATION
+############################################################
+
+  force EXP10A re-run : no
+  skip test suite     : no
+
+============================================================
+STEP 1 / 7  test suite
+============================================================
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+############################################################
+# TEST SUITE  (9 files)
+############################################################
+
+------------------------------------------------------------
+[1/9] test_rotation
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_rotation: PASS
+
+------------------------------------------------------------
+[2/9] test_formation_error
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_formation_error: PASS (4 cases)
+
+------------------------------------------------------------
+[3/9] test_setpoint_interface
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_setpoint_interface
+============================================================
+
+    ok   at tau = 0 the reference is the outer sample position
+    ok   at tau = 0 the reference is the outer sample velocity
+    ok   the held acceleration passes through unchanged
+    ok   velocity reference is the exact integral of the command
+    ok   position reference is the exact double integral
+    ok   the position reference MOVES within the interval
+    ok   analytic reference differs from semi-implicit Euler by exactly 0.5*dt^2*a
+    ok   the two are NOT bit-identical, and the code does not claim they are
+    ok   tracking error starts at zero
+    ok   position error stays far below the drift a frozen reference would show
+    ok   velocity error stays bounded
+    ok   the inner loop produces finite state
+    ok   inner steps tile the outer step exactly
+    ok   the ratio is 10 : 1
+    ok   outer step is 50 Hz
+    ok   inner step is 500 Hz
+    ok   sixdof off reproduces the locked trajectory bit-identically
+    ok   sixdof off reproduces txCount
+    ok   sixdof off allocates no 6-DOF state
+    ok   P10 transmits exactly as often under 6-DOF
+    ok   P20 transmits exactly as often under 6-DOF
+    ok   P20 still transmits more often than P10
+    ok   forward CRN trace hash is identical for DI and 6-DOF
+    ok   reverse CRN trace hash is identical for DI and 6-DOF
+    ok   forward and reverse traces remain independent
+    ok   6-DOF metrics are produced
+    ok   the Clean-ish reference run does not diverge
+    ok   saturation is finite
+    ok   per-drone peak saturation covers every follower
+    ok   control effort is finite
+    ok   no NaN in the 6-DOF trajectory
+
+test_setpoint_interface: PASS (31 checks)
+
+------------------------------------------------------------
+[4/9] test_lock_regression
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+=== Locked-experiment regression ===
+
+[1] EXP05C ablation chain (20 seeds)
+[Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For
+more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In test_lock_regression (line 51)
+In run_all_tests (line 56)
+In run_simulation_v1_validation (line 104)] 
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+    ok   A1 -> A2 Clean     expected +43.93 %  got +43.93 %
+    ok   A1 -> A2 Moderate  expected +32.74 %  got +32.74 %
+    ok   A1 -> A2 Stressed  expected +32.89 %  got +32.89 %
+    ok   A2 -> A3 Clean     expected +15.04 %  got +15.04 %
+    ok   A2 -> A3 Moderate  expected  +8.43 %  got  +8.43 %
+    ok   A2 -> A3 Stressed  expected  +9.05 %  got  +9.05 %
+    ok   A3 -> A4 Clean     expected  +0.00 %  got  +0.00 %
+    ok   A3 -> A4 Moderate  expected  +5.71 %  got  +5.71 %
+    ok   A3 -> A4 Stressed  expected +16.07 %  got +16.07 %
+
+[2] EXP06A scaling exponent, Full-AoI (20 seeds)
+    ok   Moderate  expected alpha 0.996  got 0.996
+    ok   Stressed  expected alpha 0.978  got 0.978
+
+[3] Trace and phase-offset defaults
+    ok   useTrace defaults off
+    ok   phaseOffset defaults off
+
+[4] Trace mode is live and shared
+    ok   trace produces its own realisation (1468 vs 1421 drops)
+    ok   trace is reproducible (hash 7564230338975896)
+    ok   a different seed gives a different realisation
+
+[5] EXP07A Causal-AoI-v3 locked values (3 seeds, ack trace OFF)
+    ok   Clean     RMSE 0.0383 (exp 0.0383) | rate 8.44 (exp 8.44)
+    ok   Moderate  RMSE 0.0873 (exp 0.0873) | rate 13.34 (exp 13.34)
+    ok   Stressed  RMSE 0.1163 (exp 0.1163) | rate 18.24 (exp 18.24)
+
+[6] Reverse-channel ACK trace
+    ok   trace is invariant to ACK impairment settings
+    ok   trace is reproducible (hash 8251961724807448)
+    ok   a different seed gives a different realisation
+    ok   reverse trace is independent of the forward trace
+
+[7] ACK trace default and effect
+    ok   cfg.ack.useTrace defaults off
+    ok   ACK trace active when requested (hash 7352138064743608)
+    ok   trace produces its own realisation (764 vs 763 ACK drops)
+    ok   causality invariants hold under ACK trace mode
+
+test_lock_regression: PASS
+
+------------------------------------------------------------
+[5/9] test_causal_invariants
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+=== Causal-AoI invariant checks ===
+
+[1] Static check: forbidden receiver-side reads
+    ok   enqueueCausalAoIPackets.m
+    ok   initAckChannelState.m
+
+[2] Static check: locked simulators still use the oracle
+    ok   simSwarmAoIAware.m unchanged (still ideal-feedback)
+
+[3] Dynamic check: invariant counters with assertions enabled
+    ok   Clean     ackLoss  0%  violations 0  ackUpdates 3024  staleAckDiscarded 0
+    ok   Moderate  ackLoss 10%  violations 0  ackUpdates 2342  staleAckDiscarded 0
+    ok   Stressed  ackLoss 20%  violations 0  ackUpdates 1587  staleAckDiscarded 0
+
+[4] Dynamic check: reverse channel is genuinely stressed
+    ok   439 ACKs lost on the reverse channel
+    ok   37 superseded ACKs correctly discarded
+
+[5] Dynamic check: equivalence at zero delay, divergence with delay
+    Clean     ideal 0.037745 ( 8.41 Hz) | causal 0.037745 ( 8.41 Hz) | diff   0.00 %
+             ok   exact match, forward path unaltered
+    Moderate  ideal 0.097815 (11.21 Hz) | causal 0.099252 ( 9.07 Hz) | diff   1.47 %
+             ok   diverges from the oracle as required
+    Stressed  ideal 0.130470 (15.70 Hz) | causal 0.155745 ( 9.07 Hz) | diff  19.37 %
+             ok   diverges from the oracle as required
+
+test_causal_invariants: PASS
+
+------------------------------------------------------------
+[6/9] test_blackout_semantics
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_blackout_semantics
+============================================================
+
+[1] Fault disabled is inert
+    ok   nNodes = 0 leaves the trajectory bit-identical
+    ok   nNodes = 0 leaves txCount identical
+    ok   same seed gives the same nodes
+    ok   same seed gives the same timing
+    ok   a different seed gives different nodes
+    ok   the leader is never blacked out
+    ok   the requested number of nodes is selected
+    ok   cfg.swarm.A is unchanged by the run
+    ok   edge count is unchanged
+    ok   the dark node has neighbours to test against
+    ok   no DATA left the dark node during the outage
+    ok   no DATA reached the dark node during the outage
+    ok   DATA log is monotonic across the outage
+    ok   ACK log is monotonic across the outage
+    ok   the dark node keeps moving during the outage
+    ok   no NaN anywhere in the trajectory
+    ok   no ACK arrives before its own accept
+    ok   no ACK for data that never arrived
+    ok   no sender rollback
+    ok   no future genTime
+    ok   no stale ACK accepted
+    ok   no ACK for an unknown sequence number
+    ok   the nominal graph is connected
+    ok   isolated-follower count is reported
+    ok   disconnected duration is reported
+
+test_blackout_semantics: PASS (25 checks)
+
+------------------------------------------------------------
+[7/9] test_mismatch_semantics
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_mismatch_semantics
+============================================================
+
+    ok   the nominal arm leaves the trajectory bit-identical
+    ok   the nominal arm leaves txCount identical
+    ok   cfg.quad mass stays nominal
+    ok   cfg.quad drag stays nominal
+    ok   true mass is +10%
+    ok   true drag is +20%
+    ok   thrust limit is NOT scaled with mass
+    ok   torque limit is NOT scaled with mass
+    ok   inertia stays nominal, as pre-registered
+    ok   the controller issues the identical command under the perturbed arm
+    ok   the perturbed arm changes the trajectory
+    ok   the perturbed arm produces no NaN
+    ok   same seed gives the same force realization
+    ok   a different seed gives a different realization
+    ok   level 0 produces no force at all
+    ok   the force trace lives on a 0.01 s physical grid
+    ok   realized RMS is the right order for level 0.5
+    ok   peak exceeds RMS and is bounded
+    ok   the proxy is predominantly horizontal
+    ok   every method meets the identical force realization at the same seed
+    ok   the lag time constant is set
+    ok   command-to-actuator tracking error is logged
+    ok   the lag actually lags
+    ok   no lag error is logged when tau = 0
+    ok   the lag changes the trajectory
+    ok   saturation is still measured under lag
+    ok   metrics report the true mass ratio
+    ok   metrics report the true drag ratio
+    ok   the nominal arm reports ratio 1
+    ok   no ACK arrives before its own accept
+    ok   no ACK for data that never arrived
+    ok   no sender rollback
+    ok   no future genTime
+    ok   no stale ACK accepted
+    ok   no ACK for an unknown sequence number
+    ok   the forward CRN trace is unchanged by perturbation
+    ok   the reverse CRN trace is unchanged by perturbation
+
+test_mismatch_semantics: PASS (37 checks)
+
+============================================================
+STEP 2 / 7  locked tags and configuration hash
+============================================================
+
+  [ok   ] exp07a-locked                af8174f6e78da9643063edc9798027d02d3b876b
+  [ok   ] exp07b-locked                deb805dcdd8c40491c414c446e1ba2e37b21a11c
+  [ok   ] exp07c-locked-negative       03af557768dd8b8845dadb9b0579d194c045c66c
+  [ok   ] exp08a-locked-partial        dce01703121833d7d40fca147064bce0b463300b
+  [ok   ] exp08ad-locked-diagnostic    2953c7cac916c3c9165a8989492c38942f3bed25
+  [ok   ] exp08b-locked-partial        43fc1d561e202edd17ff0db5a6ed06a592d5a827
+  [ok   ] exp08c-locked-partial        e0f9e0bdd84f80413c7ec5df37eb5f9ef9fc7527
+  [ok   ] exp09a-locked                452af01d3c93a85f33ad5df45dbbc02f8cee733f
+  [ok   ] exp09b-locked-partial        d266db222aaccfa6992e2a24946a5ed33e4a060c
+  [ok   ] exp09c-locked-partial        cdc11855bff895ab0d06d60b5233774c40dbe0ee
+
+  configuration hashes
+    defaultConfig       112658898834990
+    NOMINAL             250864538582529
+    ACK                 250864638582529
+    MISMATCH           5340803321332020
+    ESTIMATOR          3435338329637218
+    LINK                302989693727566
+    NODE                339987574715954
+    N20REF              259576483603277
+    SCALE               382702688467022
+
+============================================================
+STEP 3 / 7  EXP10A holdout dataset
+============================================================
+
+  Reloading the existing dataset: 2026-08-27_081056
+  rows   : 3400
+  seeds  : 50
+  block  : 25000001..25000050
+  matches the pre-registered 50-seed holdout block : yes
+
+============================================================
+STEP 4 / 7  rebuild EXP10B from the persisted dataset
+============================================================
+
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+  EXP10B run : 2026-08-27_085455
+  figures    : 4
+
+============================================================
+STEP 5 / 7  realization hashes, re-derived in this session
+============================================================
+ensureParallelPool: pool ready (16 workers).
+
+------------------------------------------------------------
+EXP10 master realization registry
+------------------------------------------------------------
+  50 seeds x 3 swarm sizes, 7 realization types
+  N = 5    master hashes drawn for 50 seeds
+  N = 20   master hashes drawn for 50 seeds
+  N = 50   master hashes drawn for 50 seeds
+  [PASS ] every seed has a distinct continuous realization
+  [INFO ] discrete fault realizations draw from a finite set:
+           N=5 link: 20 distinct pattern(s) over 50 seeds
+           N=5 blackout: 4 distinct pattern(s) over 50 seeds
+           N=20 link: 45 distinct pattern(s) over 50 seeds
+           N=20 blackout: 19 distinct pattern(s) over 50 seeds
+           N=50 link: 50 distinct pattern(s) over 50 seeds
+           N=50 blackout: 34 distinct pattern(s) over 50 seeds
+
+  rows checked : 3400
+  mismatches   : 3815
+
+============================================================
+STEP 6 / 7  serial versus parallel determinism
+============================================================
+
+  point NOMINAL / Stressed, seed 25000001, all 4 methods
+
+  Method       Quantity                       serial                 parallel identical
+  P10          fwdHash          7.37428389003314e+15     7.37428389003311e+15 NO
+  P10          trajectory              22515 samples            22515 samples yes
+  P20          fwdHash          7.37428389003314e+15     7.37428389003311e+15 NO
+  P20          trajectory              22515 samples            22515 samples yes
+  State-event  fwdHash          7.37428389003314e+15     7.37428389003311e+15 NO
+  State-event  trajectory              22515 samples            22515 samples yes
+  Causal-v3    fwdHash          7.37428389003314e+15     7.37428389003311e+15 NO
+  Causal-v3    ackHash          8.18677251451718e+15     8.18677251451721e+15 NO
+  Causal-v3    trajectory              22515 samples            22515 samples yes
+
+  bit-identical across serial and parallel execution : no
+
+  This is a BLOCKER. No tolerance is applied: every stochastic input is a pre-drawn realization and both simulators pin the generator, so there is no legitimate source of difference.
+
+============================================================
+STEP 7 / 7  environment manifest
+============================================================
+
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 619)] 
+  manifest.json      : 111 toolboxes, git 3307fcce (DIRTY working tree)
+  trace_hashes.csv   : 150 rows
+
+############################################################
+# SIMULATION v1.0 VALIDATION SUMMARY
+############################################################
+
+  [FAIL   ] test suite                     5.3 min
+  [PASS   ] locked tags                    10 of 10 present
+  [PASS   ] EXP10A dataset                 2026-08-27_081056, 3400 rows, 50 seeds
+  [PASS   ] EXP10B rebuild                 2026-08-27_085455, 4 figures
+  [FAIL   ] realization hashes             3400 rows, 3815 mismatch(es)
+  [FAIL   ] serial/parallel determinism    4 methods, trajectories and counters compared
+  [PASS   ] environment manifest           manifest.json, trace_hashes.csv (150 rows)
+
+  FREEZE NOT READY.
+    - test suite failed: Argument to TOC must be a uint64 scalar.
+    - 3815 realization-hash mismatch(es)
+    - serial and parallel execution disagree
+
+  A scientific result being unfavourable is NOT a blocker and
+  is not a reason to re-run anything.
+
+============================================================
+DONE : exp10b_unified_matrix
+TIME : 1 m 04 s
+FIGS : 4
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_085455
+============================================================

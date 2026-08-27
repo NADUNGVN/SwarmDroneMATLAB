@@ -614,15 +614,19 @@ out.txRateTotal      = net.txCount / max(missionTime,eps);
 out.txRatePerChannel = out.txRateTotal / max(nChannels,1);
 
 if ~isempty(netTrace)
-    out.traceHash = netTrace.hash;
+    out.traceHash      = netTrace.hash;
+    out.traceHashExact = netTrace.hashExact;
 else
-    out.traceHash = NaN;
+    out.traceHash      = NaN;
+    out.traceHashExact = NaN;
 end
 
 if ~isempty(ackTrace)
-    out.ackTraceHash = ackTrace.hash;
+    out.ackTraceHash      = ackTrace.hash;
+    out.ackTraceHashExact = ackTrace.hashExact;
 else
-    out.ackTraceHash = NaN;
+    out.ackTraceHash      = NaN;
+    out.ackTraceHashExact = NaN;
 end
 
 % Causal-v3 is event driven and has no periodic clock, so the EXP10

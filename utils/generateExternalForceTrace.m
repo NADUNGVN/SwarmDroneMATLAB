@@ -46,9 +46,10 @@ if level <= 0
 
     trace.a = zeros(nSample, 3);
 
-    trace.rms  = 0;
-    trace.peak = 0;
-    trace.hash = 0;
+    trace.rms       = 0;
+    trace.peak      = 0;
+    trace.hash      = 0;
+    trace.hashExact = 0;
 
     return;
 
@@ -121,6 +122,11 @@ mag = sqrt(sum(a.^2, 2));
 trace.rms  = sqrt(mean(mag.^2));
 trace.peak = max(mag);
 
+% LOCKED hash, unchanged: its values appear in the EXP09B result table.
+% Not thread-stable, for the same reason as the trace generators.
 trace.hash = mod(sum(abs(a(:)) .* (1:numel(a))'), 2^52);
+
+% EXACT hash for EXP10; order-independent and CSV-safe.
+trace.hashExact = realizationHash(a(:));
 
 end

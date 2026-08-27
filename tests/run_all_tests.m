@@ -13,6 +13,16 @@
 % Each test script raises an error on failure. They are caught here so
 % that one failure does not hide the state of the others, and the run
 % still ends with a non-zero exit through the final error().
+%
+% ISOLATION
+%
+% Each test runs through runScriptIsolated, NOT evalin('base', ...). A
+% test script's variables would otherwise land in the same workspace as
+% this runner's own, and that is not hypothetical: test_mismatch_semantics
+% assigns t0 = generateExternalForceTrace(...), which collided with the
+% t0 = tic used to time each test. toc(t0) then raised, and the suite
+% aborted after the seventh test having printed no failure and no summary,
+% so two tests silently never ran. See utils/runScriptIsolated.m.
 
 startup;
 
@@ -53,7 +63,7 @@ for k = 1:nTest
     t0 = tic;
 
     try
-        evalin('base', name);
+        runScriptIsolated(name);
         passed(k)  = true;
         message{k} = '';
     catch err

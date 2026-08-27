@@ -72,11 +72,25 @@ trace.seed = cfg.net.seed;
 trace.N    = N;
 trace.K    = K;
 
-trace.hash = localHash([ ...
+% The realisation, flattened once and hashed twice.
+flat = [ ...
     trace.lossU(:); ...
     trace.jitterZ(:); ...
     trace.leaderLossU(:); ...
-    trace.leaderJitterZ(:)]);
+    trace.leaderJitterZ(:)];
+
+% LOCKED hash. Its values appear in EXP07-EXP09 result tables, so the
+% formula must not change. It is NOT thread-stable: it sums millions of
+% floats whose partial sums exceed 2^53, and MATLAB's sum() groups
+% differently depending on thread count, so the same realisation hashes
+% differently in the multithreaded client than on a single-threaded pool
+% worker. Kept for continuity, reported rather than gated.
+trace.hash = localHash(flat);
+
+% EXACT hash, added for EXP10. Integer arithmetic below 2^53 throughout,
+% so summation order cannot move it, and it round-trips through the CSV.
+% This is the one EXP10 gates on. See utils/realizationHash.m.
+trace.hashExact = realizationHash(flat);
 
 end
 
@@ -86,6 +100,9 @@ end
 %
 % Cheap order-sensitive checksum. Not cryptographic; it only has to
 % detect that two runs used different realisations.
+%
+% NOT thread-stable, and deliberately unchanged: see the note at the
+% call site.
 % ============================================================
 
 function h = localHash(v)

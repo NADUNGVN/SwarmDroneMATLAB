@@ -1,0 +1,109 @@
+
+============================================================
+RUN  : simulation_v1_validation
+ID   : 2026-08-27_090539
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\simulation_v1_validation\2026-08-27_090539
+WHEN : 2026-08-27 09:05:40
+============================================================
+
+
+############################################################
+# SIMULATION v1.0 VALIDATION
+############################################################
+
+  force EXP10A re-run : no
+  skip test suite     : no
+
+============================================================
+STEP 1 / 7  test suite
+============================================================
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+############################################################
+# TEST SUITE  (9 files)
+############################################################
+
+------------------------------------------------------------
+[1/9] test_rotation
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_rotation: PASS
+
+------------------------------------------------------------
+[2/9] test_formation_error
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_formation_error: PASS (4 cases)
+
+------------------------------------------------------------
+[3/9] test_setpoint_interface
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_setpoint_interface
+============================================================
+
+    ok   at tau = 0 the reference is the outer sample position
+    ok   at tau = 0 the reference is the outer sample velocity
+    ok   the held acceleration passes through unchanged
+    ok   velocity reference is the exact integral of the command
+    ok   position reference is the exact double integral
+    ok   the position reference MOVES within the interval
+    ok   analytic reference differs from semi-implicit Euler by exactly 0.5*dt^2*a
+    ok   the two are NOT bit-identical, and the code does not claim they are
+    ok   tracking error starts at zero
+    ok   position error stays far below the drift a frozen reference would show
+    ok   velocity error stays bounded
+    ok   the inner loop produces finite state
+    ok   inner steps tile the outer step exactly
+    ok   the ratio is 10 : 1
+    ok   outer step is 50 Hz
+    ok   inner step is 500 Hz
+    ok   sixdof off reproduces the locked trajectory bit-identically
+    ok   sixdof off reproduces txCount
+    ok   sixdof off allocates no 6-DOF state
+    ok   P10 transmits exactly as often under 6-DOF
+    ok   P20 transmits exactly as often under 6-DOF
+    ok   P20 still transmits more often than P10
+    ok   forward CRN trace hash is identical for DI and 6-DOF
+    ok   reverse CRN trace hash is identical for DI and 6-DOF
+    ok   forward and reverse traces remain independent
+    ok   6-DOF metrics are produced
+    ok   the Clean-ish reference run does not diverge
+    ok   saturation is finite
+    ok   per-drone peak saturation covers every follower
+    ok   control effort is finite
+    ok   no NaN in the 6-DOF trajectory
+
+test_setpoint_interface: PASS (31 checks)
+
+------------------------------------------------------------
+[4/9] test_lock_regression
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+=== Locked-experiment regression ===
+
+[1] EXP05C ablation chain (20 seeds)
+[Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For
+more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In test_lock_regression (line 51)
+In runScriptIsolated (line 37)
+In run_all_tests (line 66)
+In runScriptIsolated (line 37)
+In run_simulation_v1_validation (line 114)] 
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+    ok   A1 -> A2 Clean     expected +43.93 %  got +43.93 %
+    ok   A1 -> A2 Moderate  expected +32.74 %  got +32.74 %
+    ok   A1 -> A2 Stressed  expected +32.89 %  got +32.89 %
+    ok   A2 -> A3 Clean     expected +15.04 %  got +15.04 %
+    ok   A2 -> A3 Moderate  expected  +8.43 %  got  +8.43 %
+    ok   A2 -> A3 Stressed  expected  +9.05 %  got  +9.05 %
+    ok   A3 -> A4 Clean     expected  +0.00 %  got  +0.00 %
+    ok   A3 -> A4 Moderate  expected  +5.71 %  got  +5.71 %
+    ok   A3 -> A4 Stressed  expected +16.07 %  got +16.07 %
+
+[2] EXP06A scaling exponent, Full-AoI (20 seeds)
+    ok   Moderate  expected alpha 0.996  got 0.996

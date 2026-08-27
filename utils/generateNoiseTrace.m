@@ -42,8 +42,9 @@ trace.velSigma  = velSigma;
 
 if posSigma <= 0 && velSigma <= 0
 
-    trace.n    = zeros(nSample, N, 6);
-    trace.hash = 0;
+    trace.n         = zeros(nSample, N, 6);
+    trace.hash      = 0;
+    trace.hashExact = 0;
 
     return;
 
@@ -66,6 +67,11 @@ n(:,1,:) = 0;
 
 trace.n = n;
 
+% LOCKED hash, unchanged: its values appear in the EXP09C result table.
+% Not thread-stable, for the same reason as the trace generators.
 trace.hash = mod(sum(abs(n(:)) .* (1:numel(n))'), 2^52);
+
+% EXACT hash for EXP10; order-independent and CSV-safe.
+trace.hashExact = realizationHash(n(:));
 
 end

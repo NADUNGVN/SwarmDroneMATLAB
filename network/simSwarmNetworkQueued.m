@@ -285,13 +285,16 @@ out.est = estState;
 % ============================================================
 
 if ~isempty(netTrace)
-    out.traceHash = netTrace.hash;
+    out.traceHash      = netTrace.hash;
+    out.traceHashExact = netTrace.hashExact;
 else
-    out.traceHash = NaN;
+    out.traceHash      = NaN;
+    out.traceHashExact = NaN;
 end
 
 % The periodic path has no reverse channel at all.
-out.ackTraceHash = NaN;
+out.ackTraceHash      = NaN;
+out.ackTraceHashExact = NaN;
 
 if ~isempty(phaseTrace)
     out.phaseHash = phaseTrace.hash;

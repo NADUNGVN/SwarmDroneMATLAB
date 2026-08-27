@@ -50,7 +50,16 @@ nN    = numel(Nlist);
 reg.seeds = seedList;
 reg.N     = Nlist;
 
-types = {'fwd','ack','phase','link','blackout','extForce','noise','master'};
+types = {'fwd','ack','phase','link','blackout','extForce','noise', ...
+         'fwdX','ackX','extForceX','noiseX','master'};
+
+% The 'X' columns are the EXACT hashes. The plain fwd/ack/extForce/noise
+% columns are the LOCKED generator hashes, which are not thread-stable
+% because they sum millions of floats past 2^53 - the same realization
+% hashes differently in the multithreaded client than on a
+% single-threaded pool worker. EXP10 gates on the X columns and reports
+% the locked ones. phase, link and blackout have only one hash each,
+% already exact, because they were added with EXP10.
 
 for c = 1:numel(types)
     reg.(types{c}) = nan(nSeed, nN);
@@ -85,6 +94,10 @@ for iN = 1:nN
     blkH  = nan(nSeed,1);
     extH  = nan(nSeed,1);
     nseH  = nan(nSeed,1);
+    fwdXH = nan(nSeed,1);
+    ackXH = nan(nSeed,1);
+    extXH = nan(nSeed,1);
+    nseXH = nan(nSeed,1);
     mstH  = nan(nSeed,1);
 
     parfor s = 1:nSeed
@@ -110,9 +123,16 @@ for iN = 1:nN
         extH(s) = ext.hash;
         nseH(s) = nse.hash;
 
+        fwdXH(s) = fwd.hashExact;
+        ackXH(s) = rev.hashExact;
+        extXH(s) = ext.hashExact;
+        nseXH(s) = nse.hashExact;
+
+        % The master hash folds only EXACT hashes, so it is itself
+        % thread-stable and CSV-safe.
         mstH(s) = realizationHash([ ...
-            fwd.hash; rev.hash; ph.hash; ...
-            lnk.hash; blk.hash; ext.hash; nse.hash]);
+            fwd.hashExact; rev.hashExact; ph.hash; ...
+            lnk.hash; blk.hash; ext.hashExact; nse.hashExact]);
 
     end
 
@@ -123,6 +143,12 @@ for iN = 1:nN
     reg.blackout(:,iN) = blkH;
     reg.extForce(:,iN) = extH;
     reg.noise(:,iN)    = nseH;
+
+    reg.fwdX(:,iN)      = fwdXH;
+    reg.ackX(:,iN)      = ackXH;
+    reg.extForceX(:,iN) = extXH;
+    reg.noiseX(:,iN)    = nseXH;
+
     reg.master(:,iN)   = mstH;
 
     if verbose
@@ -151,7 +177,12 @@ end
 % number is visible rather than gated on the wrong side.
 % ============================================================
 
-continuousTypes = {'fwd','ack','phase','extForce','noise','master'};
+% 'master' is deliberately NOT gated. It folds only seven numbers, so its
+% range is far narrower than the per-type hashes it summarises and two
+% seeds could collide in it while every underlying realization differs -
+% a spurious failure. It exists as a one-line comparison for the
+% environment manifest; the per-type hashes below are the actual check.
+continuousTypes = {'fwdX','ackX','phase','extForceX','noiseX'};
 discreteTypes   = {'link','blackout'};
 
 reg.distinct = true;

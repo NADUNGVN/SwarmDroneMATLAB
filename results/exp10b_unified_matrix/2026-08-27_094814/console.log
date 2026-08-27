@@ -1,0 +1,423 @@
+
+============================================================
+RUN  : exp10b_unified_matrix
+ID   : 2026-08-27_094814
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_094814
+WHEN : 2026-08-27 09:48:14
+============================================================
+
+
+============================================================
+EXP10B unified final matrix
+============================================================
+
+Source dataset : exp10a_final_validation/2026-08-27_091546
+Rows           : 3400
+Source commit  : 3307fcc
+Source runtime : 31 m 20 s
+Seeds          : 50 (25000001..25000050)
+
+Re-verified realization hashes from the persisted file: 0 mismatch(es) -- OK
+
+============================================================
+UNIFIED FINAL MATRIX  (17 cells x 4 methods)
+============================================================
+
+--- NOMINAL / Clean            N=5   6dof  ring2      source EXP09A (exp09a-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0361  0.0000   0.5522    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.050     0    50
+    P20            0.0254  0.0000   0.5684    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.026     0    50
+    State-event    0.0823  0.0000   0.4974    0/50      43.43     0.00    43.43    43.43    43.43     2085   26.07  0.130     0    50
+    Causal-v3      0.0414  0.0000   0.5456    0/50      84.47    84.47    92.91   105.58   126.70     6082  135.17  0.060     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NOMINAL / Moderate         N=5   6dof  ring2      source EXP09A (exp09a-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0976  0.0008   0.4770    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0    50
+    P20            0.0753  0.0003   0.5045    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0    50
+    State-event    0.1694  0.0042   0.3841    0/50      43.25     0.00    43.25    43.25    43.25     2076   25.95  0.274     0    50
+    Causal-v3      0.0892  0.0005   0.4875    0/50     134.84   107.62   145.60   161.74   188.64     9055  226.31  0.142     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NOMINAL / Stressed         N=5   6dof  ring2      source EXP09A (exp09a-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1477  0.0020   0.4142    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.237     0    50
+    P20            0.1121  0.0007   0.4583    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0    50
+    State-event    0.2576  0.0085   0.2711   12/50      42.55     0.00    42.55    42.55    42.55     2042   25.50  0.427     0    50
+    Causal-v3      0.1188  0.0008   0.4496    0/50     182.94   109.61   193.90   210.34   237.74    11412  219.47  0.190     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ACK / Moderate             N=5   6dof  ring2      source EXP07B (exp07b-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0976  0.0008   0.4770    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0    50
+    P20            0.0753  0.0003   0.5045    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0    50
+    State-event    0.1694  0.0042   0.3841    0/50      43.25     0.00    43.25    43.25    43.25     2076   25.95  0.274     0    50
+    Causal-v3      0.0878  0.0005   0.4889    0/50     139.64   111.57   150.80   167.54   195.43     9381  234.09  0.139     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ACK / Stressed             N=5   6dof  ring2      source EXP07B (exp07b-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1477  0.0020   0.4142    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.237     0    50
+    P20            0.1121  0.0007   0.4583    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0    50
+    State-event    0.2576  0.0085   0.2711   12/50      42.55     0.00    42.55    42.55    42.55     2042   25.50  0.427     0    50
+    Causal-v3      0.1188  0.0008   0.4496    0/50     182.94   109.61   193.90   210.34   237.74    11412  219.47  0.190     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- MISMATCH / Moderate        N=5   6dof  ring2      source EXP09B (exp09b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.7330  0.0192   0.6543    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0    50
+    P20            0.7294  0.0177   0.6579    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0    50
+    State-event    0.7494  0.0239   0.6394    0/50      41.35     0.00    41.35    41.35    41.35     1985   24.76  0.279     0    50
+    Causal-v3      0.7317  0.0186   0.6552    0/50     132.33   105.70   142.90   158.76   185.18     8889  222.49  0.142     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- MISMATCH / Stressed        N=5   6dof  ring2      source EXP09B (exp09b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.7434  0.0223   0.6455    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.237     0    50
+    P20            0.7357  0.0200   0.6516    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0    50
+    State-event    0.7786  0.0313   0.6213    0/50      40.62     0.00    40.62    40.62    40.62     1950   24.30  0.441     0    50
+    Causal-v3      0.7372  0.0206   0.6498    0/50     178.31   106.83   188.99   205.01   231.72    11123  213.47  0.191     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ESTIMATOR / Moderate       N=5   6dof  ring2      source EXP09C (exp09c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0931  0.0053   0.4634    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0    50
+    P20            0.0684  0.0037   0.4976    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0    50
+    State-event    0.0881  0.0027   0.4853    0/50     280.06     0.00   280.06   280.06   280.06    13443  183.89  0.169     0    50
+    Causal-v3      0.0692  0.0028   0.5007    0/50     227.59   181.79   245.77   273.04   318.49    15287  343.33  0.123     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): P10
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ESTIMATOR / Stressed       N=5   6dof  ring2      source EXP09C (exp09c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1412  0.0065   0.4040    0/50      99.67     0.00    99.67    99.67    99.67     4784   59.80  0.237     0    50
+    P20            0.1050  0.0040   0.4500    0/50     199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0    50
+    State-event    0.1390  0.0068   0.4205    0/50     280.16     0.00   280.16   280.16   280.16    13448  183.95  0.260     0    50
+    Causal-v3      0.1007  0.0041   0.4583    0/50     249.16   149.40   264.10   286.51   323.86    15545  303.33  0.174     0    50
+    winner by RMSE: Causal-v3      winner by cost (w=0.25): P10
+
+--- LINK / Moderate            N=20  di    ring2      source EXP08B (exp08b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            1.0655  0.0733   0.2945    9/49     478.40     0.00   478.40   478.40   478.40    22963  209.30  3.455     0    50
+    P20            1.0638  0.0736   0.2963    9/49     958.40     0.00   958.40   958.40   958.40    46003  419.30  3.424     0    50
+    State-event    1.0816  0.0713   0.2801   10/49     536.42     0.00   536.42   536.42   536.42    25748  420.93  3.631     0    50
+    Causal-v3      1.0656  0.0734   0.2950    9/49     485.37   321.12   517.49   565.65   645.93    31005  678.02  3.467     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): P10
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- LINK / Stressed            N=20  di    ring2      source EXP08B (exp08b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            1.0707  0.0724   0.2899    9/49     478.40     0.00   478.40   478.40   478.40    22963  209.30  3.522     0    50
+    P20            1.0668  0.0731   0.2935    9/49     958.40     0.00   958.40   958.40   958.40    46003  419.30  3.474     0    50
+    State-event    1.1070  0.0689   0.2502   24/49     534.28     0.00   534.28   534.28   534.28    25645  419.83  3.802     0    50
+    Causal-v3      1.0694  0.0730   0.2924    9/49     585.92   301.19   616.04   661.22   736.52    35353  542.34  3.531     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): P10
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NODE / Moderate            N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2156  0.0069   0.2942    9/50     471.94     0.00   471.94   471.94   471.94    22653  207.46  0.210     0    50
+    P20            0.1770  0.0073   0.3093    9/50     945.48     0.00   945.48   945.48   945.48    45383  415.62  0.173     0    50
+    State-event    0.3388  0.0060   0.2274   16/34     189.96     0.00   189.96   189.96   189.96     9118   85.97  0.334     0    50
+    Causal-v3      0.1997  0.0071   0.3018    9/50     626.06   499.25   675.98   750.87   875.68    42033  998.36  0.196     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NODE / Stressed            N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2998  0.0065   0.2526   11/50     471.94     0.00   471.94   471.94   471.94    22653  207.46  0.293     0    50
+    P20            0.2403  0.0068   0.2851    9/50     945.48     0.00   945.48   945.48   945.48    45383  415.62  0.234     0    50
+    State-event    0.4850  0.0079   0.0877    0/0      178.40     0.00   178.40   178.40   178.40     8563   80.10  0.507     0    50
+    Causal-v3      0.2522  0.0069   0.2782    9/50     829.61   495.82   879.19   953.57  1077.52    51721  894.73  0.246     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- N20REF / Moderate          N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1789  0.0008   0.4033    0/50     478.40     0.00   478.40   478.40   478.40    22963  209.30  0.155     0    50
+    P20            0.1373  0.0003   0.4487    0/50     958.40     0.00   958.40   958.40   958.40    46003  419.30  0.118     0    50
+    State-event    0.3111  0.0036   0.2522   16/50     192.05     0.00   192.05   192.05   192.05     9219   83.16  0.278     0    50
+    Causal-v3      0.1625  0.0004   0.4205    0/50     633.48   505.23   684.01   759.79   886.10    42533  988.02  0.141     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- N20REF / Stressed          N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2678  0.0013   0.3032    0/50     478.40     0.00   478.40   478.40   478.40    22963  209.30  0.236     0    50
+    P20            0.2054  0.0006   0.3747    0/50     958.40     0.00   958.40   958.40   958.40    46003  419.30  0.179     0    50
+    State-event    0.4612  0.0065   0.0938   50/50     180.84     0.00   180.84   180.84   180.84     8680   77.41  0.447     0    50
+    Causal-v3      0.2178  0.0010   0.3607    0/50     839.68   502.04   889.88   965.19  1090.70    52353  868.32  0.190     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- SCALE / Moderate           N=50  di    ring2      source EXP06A (-)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1931  0.0005   0.4025    0/50    1225.90     0.00  1225.90  1225.90  1225.90    58843  508.30  0.155     0    50
+    P20            0.1484  0.0002   0.4489    0/50    2455.90     0.00  2455.90  2455.90  2455.90   117883 1018.30  0.118     0    50
+    State-event    0.3349  0.0018   0.2554   19/50     485.01     0.00   485.01   485.01   485.01    23280  197.63  0.279     0    50
+    Causal-v3      0.1753  0.0003   0.4214    0/50    1619.40  1292.01  1748.60  1942.40  2265.40   108739 2459.11  0.141     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- SCALE / Stressed           N=50  di    ring2      source EXP06A (-)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2882  0.0010   0.3026    0/50    1225.90     0.00  1225.90  1225.90  1225.90    58843  508.30  0.237     0    50
+    P20            0.2216  0.0004   0.3746    0/50    2455.90     0.00  2455.90  2455.90  2455.90   117883 1018.30  0.179     0    50
+    State-event    0.4952  0.0045   0.0864   50/50     451.63     0.00   451.63   451.63   451.63    21678  180.81  0.452     0    50
+    Causal-v3      0.2347  0.0005   0.3618    0/50    2139.49  1279.17  2267.41  2459.28  2779.08   133396 2163.25  0.190     0    50
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+============================================================
+Moderate: Causal-v3 non-dominated fraction
+============================================================
+
+  Cost model    evaluable    non-dom fraction
+  w=0.10                8          7     87.5 %
+  w=0.25                8          7     87.5 %
+  w=0.50                8          7     87.5 %
+  airtime               8          7     87.5 %
+  broadcast             8          2     25.0 %
+
+  Reference criterion: non-dominated in >= 75 % of evaluable
+  Moderate point-families at w = 0.25.
+  Result: 87.5 %  ->  MET
+
+  Per-cell Moderate dominance at w = 0.25:
+
+    Cell                       Causal         dominated by
+    NOMINAL / Moderate         non-dominated  -
+    ACK / Moderate             non-dominated  -
+    MISMATCH / Moderate        non-dominated  -
+    ESTIMATOR / Moderate       DOMINATED      P20
+    LINK / Moderate            non-dominated  -
+    NODE / Moderate            non-dominated  -
+    N20REF / Moderate          non-dominated  -
+    SCALE / Moderate           non-dominated  -
+
+============================================================
+Stressed: dominance characterisation (NO gate)
+============================================================
+
+  Cell                       cost model Causal         dominated by
+  NOMINAL / Stressed         w=0.10     non-dominated  -
+                             w=0.25     DOMINATED      P20
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  ACK / Stressed             w=0.10     non-dominated  -
+                             w=0.25     DOMINATED      P20
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  MISMATCH / Stressed        w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     non-dominated  -
+                             airtime    non-dominated  -
+                             broadcast  non-dominated  -
+
+  ESTIMATOR / Stressed       w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     non-dominated  -
+                             airtime    non-dominated  -
+                             broadcast  non-dominated  -
+
+  LINK / Stressed            w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     non-dominated  -
+                             airtime    non-dominated  -
+                             broadcast  non-dominated  -
+
+  NODE / Stressed            w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  N20REF / Stressed          w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  SCALE / Stressed           w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  Stressed non-dominated fraction, reported without a gate:
+    w=0.10        100.0 %
+    w=0.25         75.0 %
+    w=0.50         37.5 %
+    airtime        37.5 %
+    broadcast      37.5 %
+
+============================================================
+Adaptivity on the nominal N=5 6-DOF point
+============================================================
+
+  Scenario      DATA Hz     ACK Hz   Total.025       RMSE        AoI
+  Clean           84.47      84.47      105.58     0.0414      0.060
+  Moderate       134.84     107.62      161.74     0.0892      0.142
+  Stressed       182.94     109.61      210.34     0.1188      0.190
+
+  Criterion: Causal DATA  Clean < Moderate < Stressed
+  DATA Hz      : 84.47 < 134.84 < 182.94  ->  MET
+  Total w=0.25 : 105.58 -> 161.74 -> 210.34  (ordering increasing)
+
+  The two orderings are reported together because DATA alone
+  does not say what happened to total communication: EXP07C
+  showed ACK-inclusive cost can move the other way.
+
+============================================================
+Causal-v3 versus State-event across the whole final matrix
+============================================================
+
+  Causal-v3 mean RMSE is lower than State-event in ALL 17 cells.
+  The permitted statement is therefore:
+
+    "lower RMSE than State-event throughout the final matrix"
+
+============================================================
+LOCKED LIMITATIONS - NOT RE-TESTED AWAY
+============================================================
+
+  [EXP07C  exp07c-locked-negative]
+  Stressed ACK-inclusive Pareto superiority: REJECTED.
+  EXP10 does not re-open it. Stressed carries no superiority
+  gate above, and the Stressed non-dominated fraction at
+  w = 0.25 here is 75.0 % - reported, not tested.
+
+  [EXP08A  exp08a-locked-partial]
+  Safety generalization across topology: PARTIAL. EXP10 ran
+  ring2 only, so it carries NO evidence either way about the
+  other topologies and cannot narrow that limitation.
+
+  [EXP08B  exp08b-locked-partial]
+  Absolute safety under permanent link failure: FAILED, and
+  failed for every method alike. EXP10 at N=20 ring2, 20 %
+  permanent removal:
+    LINK / Moderate            P10          9/49 unsafe =  18.4 %
+    LINK / Moderate            P20          9/49 unsafe =  18.4 %
+    LINK / Moderate            State-event  10/49 unsafe =  20.4 %
+    LINK / Moderate            Causal-v3    9/49 unsafe =  18.4 %
+    LINK / Stressed            P10          9/49 unsafe =  18.4 %
+    LINK / Stressed            P20          9/49 unsafe =  18.4 %
+    LINK / Stressed            State-event  24/49 unsafe =  49.0 %
+    LINK / Stressed            Causal-v3    9/49 unsafe =  18.4 %
+
+  [EXP08C  exp08c-locked-partial]
+  Safety under a 5 s node blackout: FAILED, for every method
+  alike. EXP10 at N=20 ring2, one follower dark for 5 s, under
+  EXP08C matched no-fault eligibility:
+    NODE / Moderate            P10          9/50 unsafe =  18.0 %
+    NODE / Moderate            P20          9/50 unsafe =  18.0 %
+    NODE / Moderate            State-event  16/34 unsafe =  47.1 %
+    NODE / Moderate            Causal-v3    9/50 unsafe =  18.0 %
+    NODE / Stressed            P10          11/50 unsafe =  22.0 %
+    NODE / Stressed            P20          9/50 unsafe =  18.0 %
+    NODE / Stressed            State-event  0/0 unsafe =   NaN %
+    NODE / Stressed            Causal-v3    9/50 unsafe =  18.0 %
+
+  [EXP09B  exp09b-locked-partial]
+  Absolute RMSE robustness to plant mismatch: FAILED. The
+  attribution stands - the controller has no integral action,
+  so a mass offset leaves a steady error that no communication
+  policy can remove. EXP10 at B7:
+    MISMATCH / Moderate        Causal RMSE 0.7317   nominal 0.0892   (+720.3 %)
+    MISMATCH / Stressed        Causal RMSE 0.7372   nominal 0.1188   (+520.5 %)
+
+  [EXP09C  exp09c-locked-partial]
+  Two limitations, both standing:
+  (a) Clean-scenario estimator noise drove false triggers and
+      more than doubled DATA traffic. EXP10 did not run the
+      estimator point at Clean, so it carries NO evidence about
+      that failure and cannot retract it.
+  (b) The communication rate depends materially on the outer
+      dt. EXP10 ran dt = 0.02 s only, so the dt-invariance
+      rejection stands untouched.
+  EXP10 at C3, for the record:
+    ESTIMATOR / Moderate       Causal DATA 227.59 Hz   nominal 134.84 Hz   (x1.69)
+    ESTIMATOR / Stressed       Causal DATA 249.16 Hz   nominal 182.94 Hz   (x1.36)
+
+  [EXP06A graph convention]
+  The N=50 anchor here uses the EXP08 graph convention, which
+  removes in-links to the leader. Absolute traffic at N=50 is
+  therefore NOT comparable with EXP06A. Only within-EXP10
+  method ratios are.
+
+============================================================
+Safety across the whole matrix, per source eligibility rule
+============================================================
+
+  Cell                       Method           unsafe   eligible rule
+  NOMINAL / Stressed         State-event          12         50 all seeds
+  ACK / Stressed             State-event          12         50 all seeds
+  LINK / Moderate            P10                   9         49 EXP08B connected-seed denominator
+  LINK / Moderate            P20                   9         49 EXP08B connected-seed denominator
+  LINK / Moderate            State-event          10         49 EXP08B connected-seed denominator
+  LINK / Moderate            Causal-v3             9         49 EXP08B connected-seed denominator
+  LINK / Stressed            P10                   9         49 EXP08B connected-seed denominator
+  LINK / Stressed            P20                   9         49 EXP08B connected-seed denominator
+  LINK / Stressed            State-event          24         49 EXP08B connected-seed denominator
+  LINK / Stressed            Causal-v3             9         49 EXP08B connected-seed denominator
+  NODE / Moderate            P10                   9         50 EXP08C matched no-fault eligibility
+  NODE / Moderate            P20                   9         50 EXP08C matched no-fault eligibility
+  NODE / Moderate            State-event          16         34 EXP08C matched no-fault eligibility
+  NODE / Moderate            Causal-v3             9         50 EXP08C matched no-fault eligibility
+  NODE / Stressed            P10                  11         50 EXP08C matched no-fault eligibility
+  NODE / Stressed            P20                   9         50 EXP08C matched no-fault eligibility
+  NODE / Stressed            Causal-v3             9         50 EXP08C matched no-fault eligibility
+  N20REF / Moderate          State-event          16         50 all seeds
+  N20REF / Stressed          State-event          50         50 all seeds
+  SCALE / Moderate           State-event          19         50 all seeds
+  SCALE / Stressed           State-event          50         50 all seeds
+
+------------------------------------------------------------
+Cells with an EMPTY eligibility denominator - no evidence
+------------------------------------------------------------
+
+  NODE / Stressed            State-event  0 eligible seeds (EXP08C matched no-fault eligibility)
+                               this method was unsafe in ALL 50 no-fault seeds of the
+                               matched N20REF cell, so its blackout safety here is
+                               UNEVALUABLE, not zero.
+
+------------------------------------------------------------
+No-fault safety, all seeds - the baseline the rule subtracts
+------------------------------------------------------------
+
+  Cell                       Method           unsafe         of
+  NOMINAL / Stressed         State-event          12         50
+  N20REF / Moderate          State-event          16         50
+  N20REF / Stressed          State-event          50         50
+  SCALE / Moderate           State-event          19         50
+  SCALE / Stressed           State-event          50         50
+
+============================================================
+Divergence census - every run accounted for
+============================================================
+
+  rows                     : 3400
+  labelled DIVERGED        : 0
+  NaN RMSE without a label : 0
+  beyond a 50 m ball, unlabelled : 0
+
+unified matrix : 68 rows x 35 columns -> tidy.csv
+saveAllFigures: 4 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_094814\figures
+
+============================================================
+DONE : exp10b_unified_matrix
+TIME : 11.3 s
+FIGS : 4
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_094814
+============================================================

@@ -21,9 +21,19 @@ function v = exp10DetVector(out, cfg)
 %   5 broadcast-accounted DATA transmissions
 %   6 received packets
 %   7 dropped packets
-%   8 forward-trace hash
-%   9 reverse-trace hash (NaN where there is none)
+%   8 forward-trace EXACT hash
+%   9 reverse-trace EXACT hash (NaN where there is none)
 %  10 causal protocol invariant violations
+%
+% The EXACT hashes, not the locked generator ones. The locked hashes sum
+% millions of floats whose partial sums exceed 2^53, and MATLAB's
+% multithreaded pairwise sum() groups them differently depending on
+% thread count - a pool worker runs single-threaded, the client does not.
+% The identical forward trace therefore hashed to 7.37428389003314e+15 in
+% the client and 7.37428389003311e+15 on a worker while the trajectories
+% were bit-identical. Comparing those here would report a
+% reproducibility failure that does not exist. The exact hashes are
+% integer-summed below 2^53, so summation order cannot move them.
 
 M = computeSwarmMetrics(out, cfg);
 
@@ -47,8 +57,8 @@ v = [ ...
     out.broadcastCount, ...
     out.rxCount, ...
     out.dropCount, ...
-    out.traceHash, ...
-    out.ackTraceHash, ...
+    out.traceHashExact, ...
+    out.ackTraceHashExact, ...
     inv];
 
 end

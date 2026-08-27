@@ -75,11 +75,17 @@ trace.seed = cfg.net.seed;
 trace.N    = N;
 trace.K    = K;
 
-trace.hash = localHash([ ...
+flat = [ ...
     trace.lossU(:); ...
     trace.jitterZ(:); ...
     trace.leaderLossU(:); ...
-    trace.leaderJitterZ(:)]);
+    trace.leaderJitterZ(:)];
+
+% LOCKED hash, unchanged; not thread-stable. See generateNetworkTrace.
+trace.hash = localHash(flat);
+
+% EXACT hash for EXP10; order-independent and CSV-safe.
+trace.hashExact = realizationHash(flat);
 
 end
 
@@ -89,6 +95,8 @@ end
 %
 % Cheap order-sensitive checksum. Not cryptographic; it only has to
 % detect that two runs used different realisations.
+%
+% NOT thread-stable, and deliberately unchanged.
 % ============================================================
 
 function h = localHash(v)

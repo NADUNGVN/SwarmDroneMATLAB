@@ -352,13 +352,16 @@ out.est = estState;
 % ============================================================
 
 if ~isempty(netTrace)
-    out.traceHash = netTrace.hash;
+    out.traceHash      = netTrace.hash;
+    out.traceHashExact = netTrace.hashExact;
 else
-    out.traceHash = NaN;
+    out.traceHash      = NaN;
+    out.traceHashExact = NaN;
 end
 
-out.ackTraceHash = NaN;
-out.phaseHash    = NaN;
+out.ackTraceHash      = NaN;
+out.ackTraceHashExact = NaN;
+out.phaseHash         = NaN;
 
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.

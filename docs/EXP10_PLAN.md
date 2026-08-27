@@ -244,6 +244,37 @@ nhau ở cùng seed, và cả bốn phải report **cùng** forward hash. Nếu 
 transmission thay vì index theo `(link, timestep)`, method ồn hơn sẽ gặp channel khác và **mọi**
 paired statistic trong EXP10 mất cơ sở.
 
+### 4.1 AMENDMENT — hash nào được gate, và tại sao không phải hash cũ
+
+Locked hash trong `generateNetworkTrace` / `generateAckTrace` /
+`generateNoiseTrace` / `generateExternalForceTrace` **không dùng được làm gate**,
+vì hai lý do độc lập:
+
+1. **Không thread-stable.** Nó `sum()` hàng triệu float mà partial sum vượt
+   2^53. `sum()` của MATLAB là multithreaded và pairwise, nên grouping phụ thuộc
+   thread count — và một parallel-pool worker chạy single-threaded trong khi
+   client thì không. Cùng một forward trace hash ra
+   `7.37428389003314e+15` ở client và `7.37428389003311e+15` trên worker. Đo
+   thực tế: **trajectory bit-identical**, chỉ checksum lệch hai chữ số cuối.
+   Gate serial-vs-parallel dựng trên hash này sẽ báo một failure không tồn tại.
+2. **Không round-trip qua text.** Nó cần 16 chữ số; `writetable` mặc định
+   `%.15g` làm mất chữ số cuối. Một hash đọc lại từ `tidy.csv` vì thế khác
+   chính nó tính lại trong memory.
+
+Thêm `utils/realizationHash.m`: **số học nguyên exact dưới 2^53 từ đầu tới
+cuối**, nên thứ tự cộng không thể làm nó dịch, và kết quả ≤ ~3e13 (14 chữ số)
+nên round-trip qua CSV là exact. Mọi generator được thêm field `hashExact`;
+`hash` cũ **không đổi** vì giá trị của nó nằm trong locked result table
+EXP07–EXP09.
+
+**EXP10 gate trên `hashExact`.** Locked hash vẫn được ghi và report, và ở §14
+bước 6 nó được so với **tolerance tương đối 1e-14 nói rõ ra**, đúng như §14 của
+bản chốt yêu cầu: chứng minh input deterministic và metric equality ở
+machine precision, không nới tolerance một cách im lặng.
+
+Sau amendment này, serial-vs-parallel là **bit-identical thật**, kể cả hash:
+mọi scalar, mọi counter, cả trajectory, không tolerance nào được áp.
+
 **Discrete realization được report, không gate.** Link nào down và node nào dark là draw từ một tập
 hữu hạn nhỏ — ở N = 5 ring graph có 8 directed link và removal 20 % down đúng 2 cái, tức chỉ có 28
 realization khả dĩ. Hai seed trùng pattern là tính chất của intervention, không phải collision, và
@@ -510,6 +541,31 @@ trajectory**.
 hợp lệ nào giữa serial và parallel; một tolerance chỉ che nó. Nếu bit-identity fail, việc phải làm
 là tìm nguyên nhân.
 
+### 14.1 AMENDMENT — script lồng nhau phải chạy isolated
+
+Mọi experiment và test trong repo là **script**, và một script chạy trong
+workspace của người gọi nó. Gọi bằng `evalin('base', name)` vì thế đổ toàn bộ
+biến của nó vào base, chồng lên biến của caller. Hai collision đã **thực sự xảy
+ra**, và cả hai đều im lặng:
+
+1. `tests/run_all_tests` đo từng test bằng `t0 = tic`. Test thứ bảy,
+   `test_mismatch_semantics`, hợp lệ gán `t0 = generateExternalForceTrace(...)`.
+   `toc(t0)` kế tiếp nhận một struct, raise, và suite **abort sau test 7** —
+   không in failure nào (vì không có gì fail) và không in summary. **Hai test
+   lặng lẽ không bao giờ chạy.**
+2. `run_simulation_v1_validation` giữ run record của nó trong `expRun`. Mọi
+   experiment nó gọi mở record riêng vào cùng biến đó, nên `manifest.json` của
+   validation sẽ bị ghi vào directory của experiment lồng cuối cùng và row
+   `INDEX.md` bị gán cho sai run.
+
+Thêm `utils/runScriptIsolated.m`: `eval(scriptName)` bên trong một function body
+chạy script trong workspace của function đó, và toàn bộ biến bị bỏ đi khi
+return. `run_all_tests`, `run_simulation_v1_validation` và
+`run_clean_clone_check` đều dùng nó.
+
+Sửa bằng isolation chứ không bằng cách đặt tên biến lạ: đặt tên lạ chỉ dời
+collision sang chỗ khó thấy hơn.
+
 **Clean-clone test:**
 
 ```
@@ -596,3 +652,5 @@ Ghi lại mọi thay đổi so với draft trước, kèm lý do. Tất cả **t
 | A14 | `MAXDEV` column + report far-but-unlabelled | §7. Divergence labelling completeness nhìn thấy được, không dựng criterion mới sau khi thấy số. |
 | A15 | Worker cap theo N (16 / 12 / 8) | Memory ở N=50; chỉ ảnh hưởng scheduling, và §14 bước 7 verify kết quả độc lập với nó. |
 | A16 | Smoke hook `exp10SmokeSeeds` | Debug infrastructure. Không thể giả dạng final run: seed list vào console.log, vào mọi row tidy.csv, và G2 check lại. Tiền lệ: EXP08B 3-seed debug run. |
+| A17 | **Exact hash** thêm song song với locked hash; EXP10 gate trên exact, report locked | Xem §4.1. Locked hash không thread-stable và không round-trip qua CSV, nên gate trên nó báo một reproducibility failure không tồn tại. |
+| A18 | Test/experiment lồng nhau chạy qua `runScriptIsolated`, không qua `evalin('base', ...)` | Xem §14.1. Hai lần collision đã thực sự xảy ra và cả hai đều **im lặng**. |
