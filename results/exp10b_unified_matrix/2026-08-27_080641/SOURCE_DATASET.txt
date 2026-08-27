@@ -1,0 +1,3 @@
+exp10a_final_validation/2026-08-27_075759
+tidy.csv rows: 204
+seeds: 3 (25000001..25000003)

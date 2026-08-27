@@ -74,6 +74,8 @@ if strcmpi(faultType, 'none')
     fault.activeInDegreeMean = mean(inDeg);
     fault.activeInDegreeMin  = min(inDeg);
 
+    fault.hash = localFaultHash(fault);
+
     return;
 
 end
@@ -167,5 +169,37 @@ fault.isolatedFollowers = nnz(activeInDeg == 0);
 
 fault.activeInDegreeMean = mean(activeInDeg);
 fault.activeInDegreeMin  = min(activeInDeg);
+
+fault.hash = localFaultHash(fault);
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Provenance hash over the realization itself: which links are down and
+% for which interval. Additive - it is computed from fields that are
+% already final, draws no randomness and changes no realization.
+%
+% realizationHash rather than the localHash inside the trace generators,
+% because fault.down is LOGICAL and that formula collapses logicals to
+% zero; see utils/realizationHash.m.
+% ============================================================
+
+function h = localFaultHash(fault)
+
+if isfinite(fault.tEnd)
+    tEnd = fault.tEnd;
+else
+    % Sentinel for a permanent outage, so an inf never reaches the sum.
+    tEnd = -1;
+end
+
+h = realizationHash([ ...
+    double(fault.down(:)); ...
+    fault.tStart; ...
+    tEnd; ...
+    double(fault.nDown)]);
 
 end

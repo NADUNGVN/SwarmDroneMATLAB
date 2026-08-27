@@ -341,6 +341,25 @@ out.six = sixState;
 % Synthetic estimator bookkeeping. Empty when inert.
 out.est = estState;
 
+% ============================================================
+% Realization provenance
+%
+% The hash of the realization this run actually consumed. NaN means the
+% run used no trace of that kind: the state-event method has no reverse
+% channel, and it has no periodic clock for a transmission phase to
+% apply to, so cfg.net.phaseOffsetEnabled is inert here by construction
+% rather than by a switch.
+% ============================================================
+
+if ~isempty(netTrace)
+    out.traceHash = netTrace.hash;
+else
+    out.traceHash = NaN;
+end
+
+out.ackTraceHash = NaN;
+out.phaseHash    = NaN;
+
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.
 out.broadcastCount = net.broadcastCount;

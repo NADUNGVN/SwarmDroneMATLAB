@@ -1,11 +1,29 @@
 function net = enqueueNetworkPackets( ...
-    net, P, V, leader, tk, cfg, netTrace, k)
+    net, P, V, leader, tk, cfg, netTrace, k, fireMask)
 %ENQUEUENETWORKPACKETS Periodic packet generation.
 %
 % netTrace and k are optional. When a trace is supplied the channel
 % outcome is read from it at (k,i,j) instead of drawn inline, so every
 % method sees the same realisation. Omitting them reproduces the
 % original behaviour exactly.
+%
+% fireMask is optional and (N+1) x 1 logical:
+%
+%   fireMask(j)     physical sender j transmits its neighbour-state
+%                   payload on this step
+%   fireMask(N+1)   the leader payload class transmits on this step
+%
+% It exists for the EXP10 transmission-phase model: with independent
+% phase per sender the swarm no longer transmits in lockstep, so the
+% caller decides per sender rather than globally. Omitted, or all true,
+% is the locked behaviour in which every sender fires on one clock, and
+% tests/test_lock_regression proves bit-identity through that path.
+%
+% The mask is per SENDER, never per directed link: one radio
+% transmission from node j reaches all of its listeners at the same
+% instant, and splitting it per receiver would fabricate a difference
+% between the periodic baselines and the event-triggered methods out of
+% pure accounting.
 
 if nargin < 7
     netTrace = [];
@@ -16,6 +34,10 @@ if nargin < 8
 end
 
 N = cfg.swarm.N;
+
+if nargin < 9 || isempty(fireMask)
+    fireMask = true(N+1,1);
+end
 
 
 % ============================================================
@@ -47,6 +69,11 @@ for i = 1:N
             continue;
         end
 
+        % Transmission phase: this sender's clock has not fired.
+        if ~fireMask(j)
+            continue;
+        end
+
         % Blackout: the sender's radio is off, or the receiver's is.
         % Nothing leaves the antenna, so nothing is counted as sent.
         if nodeIsDark(cfg, j, tk) || nodeIsDark(cfg, i, tk)
@@ -54,6 +81,15 @@ for i = 1:N
         end
 
 
+        % Inert, and kept verbatim because it is part of the locked
+        % EXP08C code path. It re-tests node 1, which is never selected
+        % for a blackout (generateBlackoutRealization draws from 2:N
+        % only, because blacking out the leader removes the formation's
+        % only absolute reference and is a different experiment). The
+        % condition is therefore false in every realization ever run,
+        % and the receiver half duplicates the check two lines above.
+        % Recorded here so a reader does not conclude that a leader
+        % blackout is modelled.
         if nodeIsDark(cfg, 1, tk) || nodeIsDark(cfg, i, tk)
         continue;
     end
@@ -116,6 +152,8 @@ end
 % Leader packets
 % ============================================================
 
+if fireMask(N+1)
+
 for i = 2:N
 
     if ~cfg.swarm.pin(i)
@@ -167,6 +205,8 @@ for i = 2:N
     q{end+1} = pkt;
 
     net.leaderQueue{i} = q;
+
+end
 
 end
 

@@ -33,11 +33,31 @@ else
     netTrace = [];
 end
 
-% Per-link phase offset for periodic transmission (legacy default OFF).
-% Without it every channel fires on one global clock forever, which
-% flatters no method in particular but is not how real nodes behave.
+% ============================================================
+% Transmission phase
+%
+% cfg.net.phaseOffset is the LEGACY flag. It is retained, and its
+% default retained, because every locked experiment sets it explicitly
+% and tests/test_lock_regression checks that it defaults off. It never
+% did anything: the block below used to compute a per-link offset
+% matrix that was never read by the transmission decision, so every
+% locked result ran on ONE GLOBAL CLOCK regardless of the flag. That
+% is recorded rather than quietly repaired, because "phase OFF" is
+% what the locked results are, and it is what the flag delivered.
+%
+% cfg.net.phaseOffsetEnabled is the real thing, added for EXP10 and
+% default OFF so no locked path changes. When it is on, each
+% (physical sender, payload class) gets its own offset inside one
+% period, drawn by utils/generatePhaseTrace, and the senders stop
+% firing in lockstep.
+% ============================================================
+
 if ~isfield(cfg.net,'phaseOffset')
     cfg.net.phaseOffset = false;
+end
+
+if ~isfield(cfg.net,'phaseOffsetEnabled')
+    cfg.net.phaseOffsetEnabled = false;
 end
 
 
@@ -74,17 +94,25 @@ net = initQueuedNetworkState( ...
 
 % Initial state at t=0 is considered already transmitted.
 %
-% With phaseOffset enabled each link gets its own deterministic offset
-% inside one period, so the swarm does not transmit in lockstep.
-if cfg.net.phaseOffset
-    linkPhase = mod((0:N*N-1)' * cfg.net.commPeriod / max(N*N,1), ...
-        cfg.net.commPeriod);
-    linkPhase = reshape(linkPhase, N, N);
-    nextCommTime = cfg.net.commPeriod;
+% Per-sender transmission schedule. Entry j is the neighbour-state
+% payload class of physical sender j; entry N+1 is the leader payload
+% class. With phase disabled every offset is zero, so every entry of
+% nextTx is cfg.net.commPeriod and stays in step for the whole run,
+% which is exactly the single global clock the locked experiments ran
+% on.
+if cfg.net.phaseOffsetEnabled
+    phaseTrace = generatePhaseTrace(cfg);
+    phaseOffsetSec = phaseTrace.u * cfg.net.commPeriod;
 else
-    linkPhase = zeros(N,N);
-    nextCommTime = cfg.net.commPeriod;
+    phaseTrace = [];
+    phaseOffsetSec = zeros(N+1,1);
 end
+
+nextTx = phaseOffsetSec + cfg.net.commPeriod;
+
+% Passive: how many times each sender's clock fired. Written, never
+% read by the simulation.
+senderFireCount = zeros(N+1,1);
 
 
 for k = 1:K
@@ -117,14 +145,18 @@ for k = 1:K
     % Packet generation
     % ========================================================
 
-    if tk >= nextCommTime - 1e-12
+    fireMask = tk >= nextTx - 1e-12;
+
+    if any(fireMask)
 
         net = enqueueNetworkPackets( ...
-            net,PHat,VHat,leader,tk,cfg,netTrace,kTrace);
+            net,PHat,VHat,leader,tk,cfg,netTrace,kTrace,fireMask);
 
-        nextCommTime = ...
-            nextCommTime + ...
+        nextTx(fireMask) = ...
+            nextTx(fireMask) + ...
             cfg.net.commPeriod;
+
+        senderFireCount(fireMask) = senderFireCount(fireMask) + 1;
 
     end
 
@@ -242,6 +274,32 @@ out.six = sixState;
 
 % Synthetic estimator bookkeeping. Empty when inert.
 out.est = estState;
+
+% ============================================================
+% Realization provenance
+%
+% The hash of the realization this run actually consumed, reported so
+% that "every method met the same channel" is an audited fact rather
+% than an assertion re-derived by the experiment script. NaN means the
+% run used no trace of that kind.
+% ============================================================
+
+if ~isempty(netTrace)
+    out.traceHash = netTrace.hash;
+else
+    out.traceHash = NaN;
+end
+
+% The periodic path has no reverse channel at all.
+out.ackTraceHash = NaN;
+
+if ~isempty(phaseTrace)
+    out.phaseHash = phaseTrace.hash;
+else
+    out.phaseHash = NaN;
+end
+
+out.senderFireCount = senderFireCount;
 
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.

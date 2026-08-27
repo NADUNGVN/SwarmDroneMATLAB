@@ -625,6 +625,12 @@ else
     out.ackTraceHash = NaN;
 end
 
+% Causal-v3 is event driven and has no periodic clock, so the EXP10
+% transmission-phase realization does not apply to it. Reported as NaN
+% rather than omitted, so a hash table has one column per trace type
+% for every method.
+out.phaseHash = NaN;
+
 out.ackRateTotal      = net.ackTxCount / max(missionTime,eps);
 out.ackRatePerChannel = out.ackRateTotal / max(nChannels,1);
 

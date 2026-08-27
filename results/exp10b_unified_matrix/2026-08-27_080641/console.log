@@ -1,0 +1,656 @@
+
+============================================================
+RUN  : exp10b_unified_matrix
+ID   : 2026-08-27_080641
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_080641
+WHEN : 2026-08-27 08:06:41
+============================================================
+
+
+============================================================
+EXP10B unified final matrix
+============================================================
+
+Source dataset : exp10a_final_validation/2026-08-27_075759
+Rows           : 204
+Source commit  : cdc1185
+Source runtime : 6 m 42 s
+Seeds          : 3 (25000001..25000003)
+
+WARNING: the dataset carries 3 seeds, not the pre-registered 50. Every claim below inherits that and must be read as a 3-seed result.
+
+Re-verified realization hashes from the persisted file: 0 mismatch(es) -- OK
+
+============================================================
+UNIFIED FINAL MATRIX  (17 cells x 4 methods)
+============================================================
+
+--- NOMINAL / Clean            N=5   6dof  ring2      source EXP09A (exp09a-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0362  0.0000   0.5522    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.050     0     3
+    P20            0.0254  0.0000   0.5684    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.026     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.0823  0.0000   0.4974    0/3       43.43     0.00    43.43    43.43    43.43     2085   26.07  0.130     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.0414  0.0000   0.5456    0/3       84.47    84.47    92.91   105.58   126.70     6082  135.17  0.060     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NOMINAL / Moderate         N=5   6dof  ring2      source EXP09A (exp09a-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0976  0.0014   0.4777    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.0751  0.0005   0.5050    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.1708  0.0078   0.3869    0/3       43.23     0.00    43.23    43.23    43.23     2075   25.94  0.274     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.0890  0.0004   0.4881    0/3      135.30   107.81   146.08   162.25   189.21     9082  225.69  0.141     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NOMINAL / Stressed         N=5   6dof  ring2      source EXP09A (exp09a-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1468  0.0025   0.4159    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.236     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.1120  0.0009   0.4602    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.2583  0.0049   0.2939    0/3       42.58     0.00    42.58    42.58    42.58     2044   25.51  0.432     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.1185  0.0004   0.4520    0/3      182.88   109.14   193.79   210.16   237.45    11398  218.97  0.189     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ACK / Moderate             N=5   6dof  ring2      source EXP07B (exp07b-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0976  0.0014   0.4777    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.0751  0.0005   0.5050    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.1708  0.0078   0.3869    0/3       43.23     0.00    43.23    43.23    43.23     2075   25.94  0.274     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.0880  0.0002   0.4895    0/3      139.79   111.39   150.93   167.64   195.48     9383  234.10  0.140     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ACK / Stressed             N=5   6dof  ring2      source EXP07B (exp07b-locked)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1468  0.0025   0.4159    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.236     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.1120  0.0009   0.4602    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.2583  0.0049   0.2939    0/3       42.58     0.00    42.58    42.58    42.58     2044   25.51  0.432     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.1185  0.0004   0.4520    0/3      182.88   109.14   193.79   210.16   237.45    11398  218.97  0.189     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- MISMATCH / Moderate        N=5   6dof  ring2      source EXP09B (exp09b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.7155  0.0108   0.6409    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.7137  0.0116   0.6429    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.7258  0.0088   0.6315    0/3       40.84     0.00    40.84    40.84    40.84     1961   24.44  0.278     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.7148  0.0108   0.6418    0/3      131.52   104.88   142.01   157.74   183.96     8830  220.61  0.142     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- MISMATCH / Stressed        N=5   6dof  ring2      source EXP09B (exp09b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.7215  0.0101   0.6347    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.236     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.7169  0.0105   0.6405    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.7501  0.0100   0.6090    0/3       40.33     0.00    40.33    40.33    40.33     1936   24.11  0.441     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.7178  0.0100   0.6395    0/3      175.73   105.18   186.25   202.03   228.32    10959  210.17  0.191     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ESTIMATOR / Moderate       N=5   6dof  ring2      source EXP09C (exp09c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.0932  0.0027   0.4592    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.155     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.0693  0.0026   0.4869    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.118     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.0874  0.0028   0.4874    0/3      279.76     0.00   279.76   279.76   279.76    13428  183.81  0.168     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.0701  0.0050   0.4913    0/3      227.99   182.10   246.20   273.51   319.04    15314  343.41  0.123     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): P10
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- ESTIMATOR / Stressed       N=5   6dof  ring2      source EXP09C (exp09c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1386  0.0005   0.3989    0/3       99.67     0.00    99.67    99.67    99.67     4784   59.80  0.236     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.1065  0.0042   0.4393    0/3      199.67     0.00   199.67   199.67   199.67     9584  119.80  0.179     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.1388  0.0040   0.4291    0/3      280.02     0.00   280.02   280.02   280.02    13441  183.92  0.258     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.1036  0.0051   0.4570    0/3      249.11   149.82   264.09   286.57   324.02    15553  303.73  0.174     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: Causal-v3      winner by cost (w=0.25): P10
+
+--- LINK / Moderate            N=20  di    ring2      source EXP08B (exp08b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            1.1197  0.0713   0.3291    0/3      478.40     0.00   478.40   478.40   478.40    22963  209.30  3.559     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            1.1179  0.0720   0.3291    0/3      958.40     0.00   958.40   958.40   958.40    46003  419.30  3.529     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    1.1358  0.0691   0.3292    0/3      548.22     0.00   548.22   548.22   548.22    26315  416.51  3.735     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      1.1197  0.0716   0.3291    0/3      485.32   315.64   516.89   564.23   643.14    30871  670.99  3.577     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): P10
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- LINK / Stressed            N=20  di    ring2      source EXP08B (exp08b-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            1.1249  0.0695   0.3294    0/3      478.40     0.00   478.40   478.40   478.40    22963  209.30  3.626     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            1.1208  0.0709   0.3291    0/3      958.40     0.00   958.40   958.40   958.40    46003  419.30  3.579     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    1.1629  0.0663   0.3001    1/3      546.13     0.00   546.13   546.13   546.13    26214  415.36  3.914     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      1.1232  0.0707   0.3297    0/3      582.58   294.97   612.07   656.32   730.06    35043  533.29  3.646     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): P10
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NODE / Moderate            N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2152  0.0090   0.3348    0/3      472.29     0.00   472.29   472.29   472.29    22670  207.63  0.210     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.1752  0.0097   0.3559    0/3      946.16     0.00   946.16   946.16   946.16    45415  415.97  0.171     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.3343  0.0057   0.2705    0/3      190.06     0.00   190.06   190.06   190.06     9123   85.92  0.330     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.1981  0.0096   0.3494    0/3      626.39   500.50   676.44   751.51   876.64    42079 1000.17  0.194     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- NODE / Stressed            N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2997  0.0083   0.2871    0/3      472.29     0.00   472.29   472.29   472.29    22670  207.63  0.293     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.2385  0.0095   0.3374    0/3      946.16     0.00   946.16   946.16   946.16    45415  415.97  0.232     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.4805  0.0114   0.0668    0/0      178.69     0.00   178.69   178.69   178.69     8577   80.50  0.503     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.2494  0.0085   0.3323    0/3      829.67   497.69   879.44   954.09  1078.51    51769  895.06  0.244     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- N20REF / Moderate          N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1795  0.0007   0.4015    0/3      478.40     0.00   478.40   478.40   478.40    22963  209.30  0.155     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.1373  0.0004   0.4491    0/3      958.40     0.00   958.40   958.40   958.40    46003  419.30  0.118     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.3077  0.0050   0.2625    0/3      192.27     0.00   192.27   192.27   192.27     9229   83.26  0.276     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.1627  0.0003   0.4233    0/3      633.49   505.50   684.04   759.86   886.24    42539  987.30  0.141     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- N20REF / Stressed          N=20  di    ring2      source EXP08C (exp08c-locked-partial)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2688  0.0005   0.2910    0/3      478.40     0.00   478.40   478.40   478.40    22963  209.30  0.237     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.2053  0.0005   0.3748    0/3      958.40     0.00   958.40   958.40   958.40    46003  419.30  0.179     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.4590  0.0075   0.1058    3/3      180.84     0.00   180.84   180.84   180.84     8681   77.41  0.447     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.2177  0.0006   0.3606    0/3      839.63   503.89   890.02   965.61  1091.58    52396  868.79  0.190     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- SCALE / Moderate           N=50  di    ring2      source EXP06A (-)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.1930  0.0010   0.4016    0/3     1225.90     0.00  1225.90  1225.90  1225.90    58843  508.30  0.155     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.1485  0.0003   0.4488    0/3     2455.90     0.00  2455.90  2455.90  2455.90   117883 1018.30  0.118     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.3369  0.0031   0.2483    2/3      484.77     0.00   484.77   484.77   484.77    23269  197.51  0.281     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.1752  0.0002   0.4233    0/3     1619.81  1293.52  1749.16  1943.19  2266.57   108795 2460.02  0.140     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+--- SCALE / Stressed           N=50  di    ring2      source EXP06A (-)
+    Method           RMSE      sd   minSep  SafeFail     DATA      ACK    T.010    T.025    T.050  airtime   bcast    AoI  nDiv   nEv
+    P10            0.2876  0.0004   0.3002    0/3     1225.90     0.00  1225.90  1225.90  1225.90    58843  508.30  0.236     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    P20            0.2219  0.0005   0.3738    0/3     2455.90     0.00  2455.90  2455.90  2455.90   117883 1018.30  0.179     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    State-event    0.4970  0.0024   0.0621    3/3      451.56     0.00   451.56   451.56   451.56    21675  180.74  0.453     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    Causal-v3      0.2348  0.0002   0.3627    0/3     2139.27  1277.43  2267.01  2458.62  2777.98   133343 2160.89  0.190     0     3
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In exp10b_unified_matrix (line 494)] 
+    winner by RMSE: P20            winner by cost (w=0.25): State-event
+    NOTE: Causal-v3 does NOT win this cell on RMSE.
+
+============================================================
+Moderate: Causal-v3 non-dominated fraction
+============================================================
+
+  Cost model    evaluable    non-dom fraction
+  w=0.10                8          7     87.5 %
+  w=0.25                8          7     87.5 %
+  w=0.50                8          7     87.5 %
+  airtime               8          7     87.5 %
+  broadcast             8          2     25.0 %
+
+  Reference criterion: non-dominated in >= 75 % of evaluable
+  Moderate point-families at w = 0.25.
+  Result: 87.5 %  ->  MET
+
+  Per-cell Moderate dominance at w = 0.25:
+
+    Cell                       Causal         dominated by
+    NOMINAL / Moderate         non-dominated  -
+    ACK / Moderate             non-dominated  -
+    MISMATCH / Moderate        non-dominated  -
+    ESTIMATOR / Moderate       DOMINATED      P20
+    LINK / Moderate            non-dominated  -
+    NODE / Moderate            non-dominated  -
+    N20REF / Moderate          non-dominated  -
+    SCALE / Moderate           non-dominated  -
+
+============================================================
+Stressed: dominance characterisation (NO gate)
+============================================================
+
+  Cell                       cost model Causal         dominated by
+  NOMINAL / Stressed         w=0.10     non-dominated  -
+                             w=0.25     DOMINATED      P20
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  ACK / Stressed             w=0.10     non-dominated  -
+                             w=0.25     DOMINATED      P20
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  MISMATCH / Stressed        w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     non-dominated  -
+                             airtime    non-dominated  -
+                             broadcast  non-dominated  -
+
+  ESTIMATOR / Stressed       w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     non-dominated  -
+                             airtime    non-dominated  -
+                             broadcast  non-dominated  -
+
+  LINK / Stressed            w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     non-dominated  -
+                             airtime    non-dominated  -
+                             broadcast  non-dominated  -
+
+  NODE / Stressed            w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  N20REF / Stressed          w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  SCALE / Stressed           w=0.10     non-dominated  -
+                             w=0.25     non-dominated  -
+                             w=0.50     DOMINATED      P20
+                             airtime    DOMINATED      P20
+                             broadcast  DOMINATED      P20
+
+  Stressed non-dominated fraction, reported without a gate:
+    w=0.10        100.0 %
+    w=0.25         75.0 %
+    w=0.50         37.5 %
+    airtime        37.5 %
+    broadcast      37.5 %
+
+============================================================
+Adaptivity on the nominal N=5 6-DOF point
+============================================================
+
+  Scenario      DATA Hz     ACK Hz   Total.025       RMSE        AoI
+  Clean           84.47      84.47      105.58     0.0414      0.060
+  Moderate       135.30     107.81      162.25     0.0890      0.141
+  Stressed       182.88     109.14      210.16     0.1185      0.189
+
+  Criterion: Causal DATA  Clean < Moderate < Stressed
+  DATA Hz      : 84.47 < 135.30 < 182.88  ->  MET
+  Total w=0.25 : 105.58 -> 162.25 -> 210.16  (ordering increasing)
+
+  The two orderings are reported together because DATA alone
+  does not say what happened to total communication: EXP07C
+  showed ACK-inclusive cost can move the other way.
+
+============================================================
+Causal-v3 versus State-event across the whole final matrix
+============================================================
+
+  Causal-v3 mean RMSE is lower than State-event in ALL 17 cells.
+  The permitted statement is therefore:
+
+    "lower RMSE than State-event throughout the final matrix"
+
+============================================================
+LOCKED LIMITATIONS - NOT RE-TESTED AWAY
+============================================================
+
+  [EXP07C  exp07c-locked-negative]
+  Stressed ACK-inclusive Pareto superiority: REJECTED.
+  EXP10 does not re-open it. Stressed carries no superiority
+  gate above, and the Stressed non-dominated fraction at
+  w = 0.25 here is 75.0 % - reported, not tested.
+
+  [EXP08A  exp08a-locked-partial]
+  Safety generalization across topology: PARTIAL. EXP10 ran
+  ring2 only, so it carries NO evidence either way about the
+  other topologies and cannot narrow that limitation.
+
+  [EXP08B  exp08b-locked-partial]
+  Absolute safety under permanent link failure: FAILED, and
+  failed for every method alike. EXP10 at N=20 ring2, 20 %
+  permanent removal:
+    LINK / Moderate            P10          0/3 unsafe =   0.0 %
+    LINK / Moderate            P20          0/3 unsafe =   0.0 %
+    LINK / Moderate            State-event  0/3 unsafe =   0.0 %
+    LINK / Moderate            Causal-v3    0/3 unsafe =   0.0 %
+    LINK / Stressed            P10          0/3 unsafe =   0.0 %
+    LINK / Stressed            P20          0/3 unsafe =   0.0 %
+    LINK / Stressed            State-event  1/3 unsafe =  33.3 %
+    LINK / Stressed            Causal-v3    0/3 unsafe =   0.0 %
+
+  [EXP08C  exp08c-locked-partial]
+  Safety under a 5 s node blackout: FAILED, for every method
+  alike. EXP10 at N=20 ring2, one follower dark for 5 s, under
+  EXP08C matched no-fault eligibility:
+    NODE / Moderate            P10          0/3 unsafe =   0.0 %
+    NODE / Moderate            P20          0/3 unsafe =   0.0 %
+    NODE / Moderate            State-event  0/3 unsafe =   0.0 %
+    NODE / Moderate            Causal-v3    0/3 unsafe =   0.0 %
+    NODE / Stressed            P10          0/3 unsafe =   0.0 %
+    NODE / Stressed            P20          0/3 unsafe =   0.0 %
+    NODE / Stressed            State-event  0/0 unsafe =   NaN %
+    NODE / Stressed            Causal-v3    0/3 unsafe =   0.0 %
+
+  [EXP09B  exp09b-locked-partial]
+  Absolute RMSE robustness to plant mismatch: FAILED. The
+  attribution stands - the controller has no integral action,
+  so a mass offset leaves a steady error that no communication
+  policy can remove. EXP10 at B7:
+    MISMATCH / Moderate        Causal RMSE 0.7148   nominal 0.0890   (+703.1 %)
+    MISMATCH / Stressed        Causal RMSE 0.7178   nominal 0.1185   (+505.8 %)
+
+  [EXP09C  exp09c-locked-partial]
+  Two limitations, both standing:
+  (a) Clean-scenario estimator noise drove false triggers and
+      more than doubled DATA traffic. EXP10 did not run the
+      estimator point at Clean, so it carries NO evidence about
+      that failure and cannot retract it.
+  (b) The communication rate depends materially on the outer
+      dt. EXP10 ran dt = 0.02 s only, so the dt-invariance
+      rejection stands untouched.
+  EXP10 at C3, for the record:
+    ESTIMATOR / Moderate       Causal DATA 227.99 Hz   nominal 135.30 Hz   (x1.69)
+    ESTIMATOR / Stressed       Causal DATA 249.11 Hz   nominal 182.88 Hz   (x1.36)
+
+  [EXP06A graph convention]
+  The N=50 anchor here uses the EXP08 graph convention, which
+  removes in-links to the leader. Absolute traffic at N=50 is
+  therefore NOT comparable with EXP06A. Only within-EXP10
+  method ratios are.
+
+============================================================
+Safety across the whole matrix, per source eligibility rule
+============================================================
+
+  Cell                       Method           unsafe   eligible rule
+  LINK / Stressed            State-event           1          3 EXP08B connected-seed denominator
+  N20REF / Stressed          State-event           3          3 all seeds
+  SCALE / Moderate           State-event           2          3 all seeds
+  SCALE / Stressed           State-event           3          3 all seeds
+
+============================================================
+Divergence census - every run accounted for
+============================================================
+
+  rows                     : 204
+  labelled DIVERGED        : 0
+  NaN RMSE without a label : 0
+  beyond a 50 m ball, unlabelled : 0
+
+unified matrix : 68 rows x 35 columns -> tidy.csv
+saveAllFigures: 4 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_080641\figures
+
+============================================================
+DONE : exp10b_unified_matrix
+TIME : 14.5 s
+FIGS : 4
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp10b_unified_matrix\2026-08-27_080641
+============================================================

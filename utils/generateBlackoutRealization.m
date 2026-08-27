@@ -70,6 +70,8 @@ if nNodes <= 0
 
     blackout.disconnectedDuration = 0;
 
+    blackout.hash = localBlackoutHash(blackout);
+
     return;
 
 end
@@ -160,5 +162,31 @@ else
     blackout.activeInDegreeMin  = min(d);
 
 end
+
+blackout.hash = localBlackoutHash(blackout);
+
+end
+
+
+%% ============================================================
+% LOCAL FUNCTION
+%
+% Provenance hash over the realization itself: which nodes go dark and
+% for which interval. Additive - computed from fields that are already
+% final, draws no randomness and changes no realization.
+%
+% realizationHash rather than the localHash inside the trace generators,
+% because blackout.node is LOGICAL and that formula collapses logicals
+% to zero; see utils/realizationHash.m.
+% ============================================================
+
+function h = localBlackoutHash(blackout)
+
+h = realizationHash([ ...
+    double(blackout.node(:)); ...
+    blackout.tStart; ...
+    blackout.tEnd; ...
+    double(blackout.nNodes); ...
+    blackout.duration]);
 
 end
