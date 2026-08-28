@@ -140,13 +140,14 @@ rate response survive.}
 The transition to 6-DOF quadrotors degrades every method but retains method
 ordering and adaptivity. Broader sweeps identify boundaries rather than a
 universal robustness claim. In the Stressed reverse-channel sweep, reliable
-and impaired ACKs both give \MetricAckImpStressedReliableRate{} Hz at the
-$s_{\min}=\MetricAckImpStressedReliableScale{}$ floor; the flat response is
-saturation, not robustness. By contrast, the Moderate rate changes from
-\MetricAckImpModerateReliableRate{} to
-\MetricAckImpModerateImpairedRate{} Hz as the scale falls from
+and impaired ACKs both give \MetricAckImpStressedReliableRate{} Hz with a mean
+adaptive scale of \MetricAckImpStressedReliableScale{}, near the configured
+$s_{\min}=0.20$ floor; the flat response is saturation, not robustness. By
+contrast, in Moderate conditions the mean scale falls from
 \MetricAckImpModerateReliableScale{} to
-\MetricAckImpModerateImpairedScale{}. One topology condition fails because
+\MetricAckImpModerateImpairedScale{} as the DATA rate rises from
+\MetricAckImpModerateReliableRate{} to
+\MetricAckImpModerateImpairedRate{} Hz. One topology condition fails because
 the consensus gain is not degree-normalized; permanent link removal and node
 blackout create shared controller/geometry failures; mass mismatch leaves
 steady error without integral action; estimator noise creates false
