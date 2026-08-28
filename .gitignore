@@ -10,3 +10,6 @@ codegen/
 # kept in version control.
 results/**/*.mat
 results/**/*.fig
+
+# ---- Generated paper build outputs ----
+paper/output/

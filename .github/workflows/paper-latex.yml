@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - paper-v2-exp11
+      - paper-v3-tcns
     paths:
       - "paper/**"
       - ".github/workflows/paper-latex.yml"
@@ -42,22 +43,31 @@ jobs:
           texlive_version: 2025
           os: debian
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          post_compile: texcount -inc -sum main.tex > generated/texcount.txt
 
       - name: Enforce resolved citations, references, labels, and artifacts
         shell: bash
         run: bash paper/scripts/latex_ci_qa.sh paper/main.log paper/generated/ci_latex_report.txt
 
+      - name: Stage TCNS manuscript artifact
+        shell: bash
+        run: |
+          mkdir -p paper/output
+          cp paper/main.pdf paper/output/manuscript_tcns.pdf
+
       - name: Upload compiled paper and QA evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: paper-v2-exp11-${{ github.sha }}
+          name: paper-v3-tcns-${{ github.sha }}
           if-no-files-found: error
           retention-days: 30
           path: |
             paper/main.pdf
+            paper/output/manuscript_tcns.pdf
             paper/main.log
             paper/main.aux
             paper/main.bbl
             paper/main.blg
             paper/generated/ci_latex_report.txt
+            paper/generated/texcount.txt

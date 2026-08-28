@@ -1,103 +1,13 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We presented a causal ACK-assisted, AoI-aware event-triggered
-communication policy for multi-UAV formation control. The sender estimates
-receiver freshness only from cumulative acknowledgements crossing a
-delayed and lossy reverse channel, keeps that estimate in a memory
-separate from the last state it transmitted, and --- the element the design
-history turns on --- distinguishes traffic that carries new information
-from traffic that merely repeats it, so that a repetition cooldown governs
-only repetition.
-
-On a pre-registered holdout validation over \MetricSeeds{} unseen seeds
-and \MetricRuns{} runs, one fixed configuration adapts its DATA traffic
-monotonically with network quality
-(\MetricDataCausalClean{} $<$ \MetricDataCausalModerate{} $<$
-\MetricDataCausalStressed{}~Hz), attains lower formation error than a
-conventional state-event trigger in all \MetricTotalCells{} cells of the
-final matrix, and improves on a $10$~Hz periodic baseline in the Stressed
-condition by \MetricKoneMean{}~m with a $95\%$ interval of
-$[\MetricKoneLo{}, \MetricKoneHi{}]$. In the Moderate condition it is
-non-dominated in \MetricParetoModerateWtwentyfive{}\% of the selected
-point families under the reference cost model. The design-evolution
-ablation isolates why each element is needed: a fixed threshold does not
-adapt, adaptation on an open loop adapts in the wrong direction, and
-closing the loop without separating the two traffic semantics pins the
-rate so that the policy cannot perceive a worse network at all.
-
-The boundaries are as much of the result as the improvements, and three
-deserve repeating in a conclusion rather than being left in a limitations
-section. EXP11 adds direct within-mission evidence: all four adjacent
-Causal-v3 rate changes have the expected sign without a regime label;
-RMSE is lower than P10; and $C_{0.25}$ is lower than P20 at the
-pre-registered ACK weight. The central contribution is adaptivity under
-unknown and changing network conditions with one fixed causal policy, not
-universal dominance over tuned periodic communication. P12.5 retains
-\MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
-\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
-\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost.
-
-First, \textbf{fewer DATA packets do not imply less total traffic.} Against $20$~Hz
-periodic the paired DATA difference is \MetricKtwoaMean{}~Hz and the
-ACK-inclusive difference is \MetricKtwobMean{}~Hz, both with intervals
-excluding zero. The policy's contribution is adaptivity and accuracy, not
-a reduction in total radio traffic, and under the reference cost model it
-is the cheapest method in \MetricCausalCheapestCells{} of
-\MetricTotalCells{} cells.
-
-Second, \textbf{the non-causal ideal-feedback policy is an
-information-efficiency reference, not a bound on attainable accuracy.}
-That variant transmits less
-(\MetricSevenIdealStressedRate{}~Hz per channel) and is \emph{less}
-accurate (\MetricSevenIdealStressedRmse{}~m) than the causal policy
-(\MetricSevenAfivecStressedRate{}~Hz, \MetricSevenAfivecStressedRmse{}~m).
-Perfect freshness knowledge mainly buys the confidence to stay quiet.
-
-Third, \textbf{several failures the campaign found are not communication
-failures.} A steady offset under mass mismatch, a degree-dependent safety
-boundary, and safety failures under link and node faults that are
-identical across all four methods all belong to the control layer. We
-report them, attribute them, and do not claim to have addressed them.
-
-\subsection*{Future work}
-
-The results point to specific next steps rather than general ones.
-
-\emph{Reverse-channel cost} is the sharpest lever: aggregating
-acknowledgements across links, or piggybacking them on data a node is
-already sending, would attack the one cost model under which the method is
-clearly unfavourable.
-
-\emph{Broadcast alignment} follows from the same analysis. The policy
-already sends one payload per sender to all its listeners; aligning
-transmissions across senders would recover part of the broadcast-accounting
-gap.
-
-\emph{Noise-aware triggering} addresses the estimator boundary directly:
-the innovation test should respond to motion in excess of measurement
-uncertainty rather than to the raw norm, which is what caused the
-factor-of-\MetricCleanNoiseRatio{} Clean traffic increase.
-
-\emph{Timestep-invariant formulation} would decouple trigger evaluation
-from the control step so that a quoted rate is a property of the policy
-rather than of $\Delta t$.
-
-\emph{Hardware transition} is staged in
-\texttt{docs/HARDWARE\_ROADMAP.md}, beginning with protocol emulation and
-embedded timing rather than flight, because the assumptions most in need of
-measurement --- packet sizes, serialisation latency, ACK round-trip
-distribution, radio duty cycle --- can be tested on a bench before any
-vehicle is involved.
-
-\subsection*{Reproducibility}
-
-The complete campaign is frozen at a tagged commit. One command re-runs
-the test suite, re-verifies every random realisation against a registry
-computed in advance, checks bit-identity between serial and parallel
-execution, rebuilds every table and figure in this paper from persisted
-result files, and writes an environment manifest. A separate check clones
-the repository and reproduces the test suite, the aggregate tables and one
-re-simulated seed bit-identically. Every number in this paper is a
-generated macro traceable to a named result directory; none is typed into
-the prose.
+A fixed causal ACK-assisted AoI policy can adapt communication effort within a
+mission without a network-regime label. Dual confirmed/transmitted memory and
+the innovation/refresh split explain the v1--v3 improvement. The 50-seed
+holdout supports Stressed accuracy against P10 but shows that DATA savings
+reverse under ACK-inclusive accounting. EXP11 supports within-run adaptivity
+and its preregistered P20 cost contrast, while P12.5 and broadcast accounting
+rule out universal dominance. Together with the 6-DOF and boundary evidence,
+the results support a mechanism of causal adaptivity with explicit operating
+limits, not a general communication-saving, hardware-validation, robustness,
+or stability claim.

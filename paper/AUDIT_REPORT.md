@@ -11,7 +11,7 @@ Static audit status: **PASS**. MATLAB was not invoked.
 | Undefined refs | 0 |
 | Duplicate labels | 0 |
 | Missing figures/tables | 0 |
-| Figures / tables / references | 13 / 8 / 53 |
+| Figures / tables / references | 3 / 6 / 53 |
 | Headline rows, base / EXP11 | 279 / 41 |
 | Base generated metrics unchanged from paper-v1 | True / True |
 | EXP11 source | `results/exp11_dynamic_network/2026-08-27_174026/tidy.csv` |

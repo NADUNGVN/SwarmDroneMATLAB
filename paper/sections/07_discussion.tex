@@ -1,251 +1,37 @@
 \section{Discussion}
 \label{sec:discussion}
 
-This section explains the mechanisms behind the results, including and
-especially the negative ones. Every subsection below corresponds to
-something the data shows and the prose could otherwise have glossed over.
+\subsection{Mechanism versus mission-level superiority}
+The design chain supports a causal account. Ideal receiver knowledge exposes
+redundant in-flight retransmission; lastSent/lastAcked dual memory removes that
+ambiguity; v2 then reveals over-suppression because one cooldown governs both
+innovation and repetition. V3 resolves the semantic conflict by prioritizing
+new information and suppressing only refresh. The rate response in EXP10 and
+the four signed transitions in EXP11 support mechanistic adaptivity.
 
-\subsection{Why causal feedback helps}
-
-A state-only trigger fires on what the \emph{sender} sees. Its blind spot
-is a receiver whose copy has gone stale for a reason invisible locally: a
-dropped packet, a long delay, a reordered arrival. In those situations the
-sender's state may be perfectly steady, no trigger fires, and the
-receiver's error grows unobserved. The measured cost of that blind spot is
-large --- the state-event baseline reaches
-\MetricRmseEventStressed{}~m in the Stressed condition against
-\MetricRmseCausalStressed{}~m for the proposed policy, at
-\MetricDataEventStressed{}~Hz against \MetricDataCausalStressed{}~Hz.
-
-Acknowledgements close exactly that loop, and they do so with information
-the sender is entitled to have. An ACK is evidence that a specific packet
-arrived; the absence of one is evidence that something may not have. The
-adaptive threshold turns that evidence into willingness to transmit, and
-the direction is right by construction: the longer the silence from the
-receiver, the lower the bar for saying something again.
-
-\subsection{Why not tune P20, P12.5, or another fixed periodic rate?}
-
-This objection is partly correct. A periodic rate cannot adapt its
-communication effort within a mission: P12.5 remains P12.5 through Clean,
-Moderate and Stressed segments, while the fixed Causal-v3 policy changes
-effort at all four EXP11 transitions without receiving the regime label.
-That is direct evidence for mechanistic adaptivity.
-
-But adaptivity is not the same as mission-level Pareto superiority. A
-well-selected fixed rate can remain highly competitive when the entire
-mission is aggregated. In EXP11, P12.5 retains
+That result is not the same as Pareto superiority. A fixed periodic scheduler
+cannot adapt its communication effort to within-mission network changes because
+its rate is invariant by construction; however, a well-selected fixed rate can
+still provide a competitive mission-level accuracy--cost trade-off. P12.5 is
+the concrete counterexample: it retains
 \MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
-\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
-\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost. P20
-also has lower whole-mission RMSE, although Causal-v3 has lower
-$C_{0.25}$ at the pre-registered weight. The evidence therefore supports
-the adaptivity mechanism, not universal superiority over tuned periodic
-communication.
+\MetricElevenPonetwofiveCostPercent{}\% of its ACK-weighted cost and
+\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost. EXP11
+therefore supports the adaptation mechanism, not universal superiority.
 
-\subsection{What the ideal-feedback reference means}
+\subsection{Why accounting changes the conclusion}
+Periodic baselines require no modeled reverse ACK channel, while Causal-v3
+does. DATA-only accounting answers whether the policy sends fewer state
+packets; $C_w$ answers whether that remains true after pricing feedback; the
+broadcast model additionally credits one simultaneous medium transmission
+rather than charging each receiver link. K2 and EXP11 show that favorable
+DATA or ACK-weighted comparisons can reverse under another legitimate traffic
+convention. Claims must therefore name the unit and accounting model.
 
-A non-causal AoI policy reads the receiver's true age directly. It is the
-natural ideal-feedback reference, used to characterize the information
-gap rather than to bound attainable accuracy.
-
-The oracle transmits \MetricSevenIdealStressedRate{}~Hz per channel for
-\MetricSevenIdealStressedRmse{}~m; the causal policy transmits
-\MetricSevenAfivecStressedRate{}~Hz for
-\MetricSevenAfivecStressedRmse{}~m. The oracle is \emph{cheaper and less
-accurate}. The reason is that perfect freshness knowledge is mostly useful
-for deciding when \emph{not} to transmit: an oracle knows immediately when
-a packet has landed, so it can go quiet with confidence. A causal sender
-cannot distinguish ``delivered, ACK still in flight'' from ``lost'', so it
-errs toward transmitting --- and in a lossy network that pessimism is
-useful.
-
-The consequence for the literature is specific. An oracle-information
-reference characterizes the efficiency available with perfect freshness
-knowledge. Reporting its traffic figure as a target a causal implementation
-should necessarily approach understates how much traffic causality costs.
-
-\subsection{Why v1 over-transmits}
-
-The first iteration used a single memory: both innovation and freshness
-were measured against the last \emph{acknowledged} state. Under a round
-trip the innovation then cannot shrink for at least one round-trip time
-(RTT) after every transmission, because the reference point does not move until the ACK
-returns. The sender therefore re-transmits state that is already in
-flight, hard triggers dominate, and the design breached its
-pre-registered resource ceiling.
-
-The lesson generalises past our protocol: innovation must be measured
-against what was \emph{said}, not against what was \emph{confirmed}. They
-are the same quantity only on a zero-delay channel, which is the case the
-design must not be tuned for.
-
-\subsection{Why v2 over-suppresses}
-
-The second iteration fixed that with the dual memory, and introduced the
-opposite failure. With in-flight suppression removing most hard triggers,
-essentially all traffic flowed through the freshness branch --- and that
-branch carried a repetition cooldown. A cooldown intended to limit
-\emph{repetition} became a ceiling on \emph{new information}, and the rate
-pinned at \MetricSevenAfourcModerateRate{}~Hz in Moderate and
-\MetricSevenAfourcStressedRate{}~Hz in Stressed: the same number, meaning
-the policy could no longer perceive a difference between the two networks.
-
-This is worth stating as a design pathology rather than a bug. The
-parameter was correct, its value was correct, and it was applied to the
-wrong set of events.
-
-\subsection{Why v3 resolves the semantic conflict}
-
-The third iteration changes no parameter. It splits the freshness branch in
-two according to whether the transmission carries \emph{new information}
-or merely \emph{repeats} information:
-
-\begin{center}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}lll@{}}
-\toprule
-Traffic & Cooldown $\tau_r$ & In-flight block \\
-\midrule
-hard new information       & no  & no  \\
-adaptive new information   & no  & no  \\
-refresh / retransmission   & yes & yes \\
-max-silence backstop       & no  & no  \\
-\bottomrule
-\end{tabular}
-}
-\end{center}
-
-Only the third row can duplicate something the receiver may already be
-about to receive, so only the third row is governed by the cooldown and by
-in-flight suppression. Once that distinction exists, adaptivity is restored
-(\MetricSevenAfivecCleanRate{} $\to$ \MetricSevenAfivecModerateRate{}
-$\to$ \MetricSevenAfivecStressedRate{}~Hz) and the error falls below both
-the pinned variant and the oracle.
-
-The general point is that ``rate limiting'' is not one concept. Limiting
-how often a system may \emph{speak} and limiting how often it may
-\emph{repeat itself} are different constraints, and conflating them costs
-adaptivity.
-
-\subsection{Why ACK-inclusive cost reverses the Stressed conclusion}
-
-The proposed policy generates one DATA packet per trigger and, on the
-reverse path, up to one ACK per link per tick whenever the receiver's
-stored state advanced. In a lossy network the receiver's state advances
-often relative to the sender's trigger rate, so ACK traffic does not scale
-down with DATA traffic --- at the nominal Stressed cell the policy runs
-\MetricDataCausalStressed{}~Hz of DATA and
-\MetricAckCausalStressed{}~Hz of ACK.
-
-Consequently a DATA-only accounting credits the policy with a saving that
-the reverse channel spends. Against P20 the DATA difference is
-\MetricKtwoaMean{}~Hz and the ACK-inclusive difference is
-\MetricKtwobMean{}~Hz. The periodic baselines have no reverse channel at
-all, so pricing acknowledgements moves them not at all and moves our
-method to the right by the full weighted ACK rate
-(Figure~\ref{fig:pareto}).
-
-We draw the conservative conclusion: the contribution of this work is
-adaptivity and accuracy, not a reduction in total radio traffic. Any
-deployment argument based on traffic must price the reverse channel, and
-under the reference model our method is not the cheapest option in any
-cell of the final matrix.
-
-\subsection{Why broadcast accounting favours synchronised periodic traffic}
-
-Under a broadcast medium one transmission from a node reaches all of its
-listeners at once. Periodic senders fire on a clock, so their unicast
-links collapse almost perfectly into single broadcasts, and their cost
-under \eqref{eq:costbcast} falls close to the per-sender rate. An
-event-triggered sender fires when \emph{its own} state moves, which is not
-synchronised with anything, so its transmissions collapse far less. Add
-unicast acknowledgements, which do not collapse at all, and the ordering
-changes: Moderate non-dominance falls from
-\MetricParetoModerateWtwentyfive{}\% under the reference model to
-\MetricParetoModerateBroadcast{}\% under broadcast.
-
-This is a real disadvantage of event-triggered communication on a shared
-broadcast medium and we do not argue it away. It also identifies the most
-valuable direction for future protocol work: an event-triggered policy
-that aligns its transmissions across a sender's outgoing links, or that
-aggregates acknowledgements across links, would recover part of this gap.
-Our current policy already sends one payload per sender per instant to all
-listeners; what it does not do is align \emph{across} senders, and its
-acknowledgements remain per link.
-
-\subsection{Why degree-dependent consensus gain creates safety boundaries}
-
-The formation law sums relative terms over a follower's in-neighbours
-without normalising by in-degree. The effective loop gain therefore scales
-with the number of neighbours, so a denser graph is a
-higher-gain system. Beyond a point that produces overshoot and closer
-approaches between vehicles --- a safety failure that appears when the
-topology gets denser, not when the network gets worse.
-
-This is a controller property. A follow-up diagnostic in the campaign
-confirmed it by normalising the gain, which removed both the degree trend
-and the safety failure. We report it as a boundary on the campaign's
-generalisation and explicitly not as a communication result: none of the
-four methods avoids it, and the proposed policy neither causes nor cures
-it.
-
-\subsection{Why mass mismatch creates a steady offset}
-
-The position controller is proportional-derivative with a gravity
-feedforward computed from the \emph{nominal} mass. If the true mass is
-larger, the feedforward under-compensates weight by a constant, and with
-no integral action the loop settles at a constant error where the
-proportional term makes up the difference. The offset is predominantly
-vertical because the mismatch enters through the thrust axis.
-
-The measured effect is a several-fold rise in formation error at the
-combined mismatch arm, for every method alike. Calling this a
-communication failure would be wrong: no transmission schedule can supply
-a term the control law does not contain. The fix is a controller change ---
-integral action or explicit disturbance estimation --- and it is outside
-the scope of a communication study. We report the rejection and the
-attribution together so the reader is not left to guess which layer owns
-it.
-
-\subsection{Why measurement noise causes false event triggers}
-
-The hard-innovation branch compares $\|\pos - \pos^{\mathrm{sent}}\|$
-against a fixed threshold. With a noisy state estimate, that norm has a
-noise floor of order the position noise standard deviation times
-$\sqrt{3}$, independent of whether the vehicle moved. When that floor
-approaches the threshold, noise alone crosses it and the trigger fires on
-measurement error rather than on motion.
-
-The Clean condition is where this hurts most, because there is no channel
-impairment to justify the extra traffic: DATA rises by a factor of
-\MetricCleanNoiseRatio{} against the noiseless arm, breaching the
-pre-registered factor-of-two bound. Accuracy does not improve
-correspondingly, which is the signature of false triggering rather than
-useful transmission.
-
-The mechanism suggests its own remedy, and we state it as future work
-rather than claiming it: the innovation test should be applied to a
-filtered estimate, or the threshold should be inflated by a term
-proportional to the estimator's own noise level, so that the trigger
-responds to motion in excess of measurement uncertainty. We have not
-implemented or evaluated either, and the frozen result stands as a
-rejection.
-
-\subsection{Why the communication rate depends on the outer timestep}
-
-The trigger is evaluated once per outer control step. The number of
-opportunities to transmit in a fixed mission is therefore inversely
-proportional to $\Delta t$, and the refractory bound $\tau_{\min}$ is set
-to one step in our configuration --- so the maximum attainable rate scales
-with $1/\Delta t$ by construction. The measured rates,
-\MetricDtFineData{}, \MetricDtBaseData{} and \MetricDtCoarseData{}~Hz at
-$\Delta t = 0.01$, $0.02$ and $0.04$~s, follow that.
-
-Formation error, by contrast, is stable across the same range, so the
-policy's control behaviour is not $\Delta t$-sensitive in the way its
-traffic is. The honest consequence is a reporting rule rather than a fix:
-every rate in this paper is a rate at $\Delta t = 0.02$~s. A
-$\Delta t$-invariant formulation would need to decouple the trigger
-evaluation interval from the control step, or express $\tau_{\min}$ in
-physical time independent of the step size. We have not done either.
+\subsection{What the references and boundaries mean}
+The ideal-feedback and oracle-periodic policies are ideal-feedback,
+oracle-information, or efficiency references. They are not bounds on
+attainable accuracy or performance. Similarly, the robustness sweeps characterize where
+the fixed causal mechanism operates: saturation, controller degree scaling,
+unrecoverable blackouts, mass offset, estimator-triggered traffic, and sampled
+timestep dependence. They do not establish stability or universal robustness.

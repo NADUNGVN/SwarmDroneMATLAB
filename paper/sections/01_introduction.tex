@@ -1,145 +1,45 @@
 \section{Introduction}
 \label{sec:intro}
 
-A formation of unmanned aerial vehicles holds its shape by exchanging
-state. How often that exchange should happen is not a detail: it sets the
-radio duty cycle, the energy budget, the number of vehicles a channel can
-carry, and --- through information staleness --- the accuracy of the
-formation itself.
+Periodic communication is predictable, but its rate is fixed before a
+mission whose network quality may be unknown or changing. Event-triggered
+communication can react to state evolution, yet a sender does not directly
+observe what a receiver has received when DATA and feedback are delayed or
+lost. This distinction matters in multi-UAV formation control: repeated
+in-flight packets can consume communication without refreshing the receiver,
+whereas excessive suppression can hide genuinely new state information.
 
-Two answers dominate practice, and each fails in a way the other does not.
+We study one fixed causal policy that changes its communication effort as
+network quality changes without receiving a regime label. The policy uses
+cumulative acknowledgements (ACKs) to maintain an estimate of receiver
+freshness, separates the last state sent from the last state confirmed, and
+distinguishes new-information traffic from refresh traffic. Freshness affects
+the event threshold, while an in-flight cooldown suppresses only redundant
+refreshes. All decisions use locally available state, sampled time, and causal
+feedback.
 
-\textbf{Fixed-rate periodic communication} is simple, predictable and easy
-to schedule. Its weakness is that the rate must be chosen in advance, for a
-network whose quality is generally unknown and often changing. Choose a
-low rate and the formation degrades exactly when the channel degrades;
-choose a high rate and the radio is busy paying for margin it does not need ---
-and in a UAV swarm that margin is contested airtime rather than spare
-capacity~\cite{gupta2016survey,campion2019uavswarm}. In our own frozen results this is visible directly: a $10$~Hz
-periodic baseline transmits \MetricDataPtenClean{}~Hz in a clean network
-and the same \MetricDataPtenStressed{}~Hz in a heavily impaired one, while
-its formation error grows from \MetricRmsePtenClean{}~m to
-\MetricRmsePtenStressed{}~m. The policy does not notice that anything has
-changed.
-
-\textbf{Conventional event-triggered communication} transmits when the
-local state has moved far enough to be worth
-reporting~\cite{tabuada2007event,dimarogonas2012distributed}. This does save
-traffic, and substantially: our state-event baseline runs at
-\MetricDataEventStressed{}~Hz in the Stressed condition against
-\MetricDataPtwentyStressed{}~Hz for $20$~Hz periodic. But a pure state
-trigger is blind to what the receiver actually holds. If a packet is lost
-or badly delayed, the sender's own state may be perfectly steady --- no
-trigger --- while the receiver's copy grows arbitrarily stale. The
-resulting error is severe: \MetricRmseEventStressed{}~m, worse than either
-periodic baseline.
-
-The missing quantity is \emph{age of
-information}~\cite{kaul2012realtime,yates2021aoisurvey}: not how much the
-sender's state has changed, but how old the receiver's copy of it is. Using
-it, however, raises a problem that is easy to state and easy to get wrong.
-\textbf{A sender cannot observe the age of information at a receiver.} It
-can only infer it, and only from something that comes back.
-
-\subsection*{Contributions}
-
-\paragraph{C1 --- Method.} A \emph{causal acknowledgement-assisted
-(ACK-assisted), AoI-aware
-event-triggered communication policy} that separates new-information
-transmission from refresh/retransmission while using only causally
-available sender knowledge. The sender maintains two distinct memories ---
-the last state it \emph{transmitted}, which defines innovation, and the
-last state a cumulative acknowledgement has \emph{confirmed}, which
-defines estimated freshness --- and lets the freshness estimate scale the
-innovation threshold rather than trigger on its own. A repetition cooldown
-and in-flight suppression apply to refresh traffic alone. The policy is
-decentralised in that each sender decides locally; it is \emph{not}
-feedback-free, and we do not describe it as such. Nine protocol invariants
-are asserted at runtime to keep any same-timestep read of receiver state
-out of the implementation.
-
-\paragraph{C2 --- Mechanism and design evidence.} A controlled development
-and ablation study, measured on common random numbers, showing \emph{why}
-each element is required: why naive causal feedback over-transmits (an
-innovation measured against the last \emph{acknowledged} state cannot
-shrink for a full round trip, so the sender re-sends state already in
-flight), why adding in-flight suppression without a semantic split
-over-suppresses (a cooldown intended for repetition becomes a ceiling on
-new information, pinning the rate at \MetricSevenAfourcModerateRate{}~Hz
-in two different networks), and why innovation-priority resolves the
-conflict \emph{without retuning any threshold} --- no parameter value
-differs between the failing and working variants. The same study shows
-that a non-causal ideal-feedback reference transmits \emph{less} and is
-\emph{less} accurate than the causal policy. It is an efficiency
-reference, not a bound on attainable accuracy.
-
-\paragraph{C3 --- Evaluation.} A pre-registered simulation campaign
-spanning network impairment, ACK impairment, five cost-accounting models,
-topology and swarm size, permanent link failure and node blackout,
-six-degree-of-freedom (6-DOF) quadrotor dynamics, plant mismatch and synthetic estimator error, ending
-in a \MetricSeeds{}-seed holdout validation of \MetricRuns{} runs with
-paired confidence intervals --- while preserving, rather than re-testing
-away, the seven operating boundaries at which pre-registered claims were
-rejected. A separately frozen supplemental mission then changes network
-quality in flight. Without a regime label or retuning, the fixed Causal-v3
-policy changes its communication effort at all four adjacent transitions.
-This directly supports mechanistic adaptivity within one mission.
-
-\subsection*{What we claim, and what we do not}
-
-The campaign behind this paper was pre-registered: acceptance gates,
-selected operating points, statistical procedure and seed policy were
-fixed in writing before each experiment ran, and the final validation used
-\MetricSeeds{} seeds never used during development. That discipline makes
-the negative results as reportable as the positive ones, and we report
-them.
-
-\textbf{We claim} that one fixed configuration adapts its communication
-effort across network conditions
-(\MetricDataCausalClean{} $<$ \MetricDataCausalModerate{} $<$
-\MetricDataCausalStressed{}~Hz), that it improves accuracy over
-conventional state-event communication in every cell of the final matrix
-(\MetricBeatEventCells{}/\MetricTotalCells{}), that it improves on $10$~Hz
-periodic in the Stressed condition with a paired confidence interval
-excluding zero, and that in the Moderate condition it occupies a
-favourable accuracy-versus-communication trade-off, non-dominated in
-\MetricParetoModerateWtwentyfive{}\% of the selected point families under
-the reference cost model. In the supplemental changing-network mission,
-all four adjacent rate-difference confidence intervals have the expected
-sign; Causal-v3 also has lower RMSE than P10 and lower $C_{0.25}$ than P20.
-
-\textbf{We do not claim} universal superiority over a tuned fixed periodic
-rate. A $20$~Hz periodic baseline attains lower formation
-error than our policy in \MetricTotalCells{}$-$\MetricBeatPtwentyCells{}
-of \MetricTotalCells{} cells, and our policy is never the cheapest of the
-four methods under the reference cost model. \textbf{We do not claim}
-Pareto superiority under ACK-inclusive cost in the Stressed condition: a
-pre-registered test of exactly that claim was rejected, and our holdout
-data reproduces the rejection with a signed confidence interval. And we do
-not claim any hardware result; this is a simulation study, and the
-estimator, disturbance and airtime models are stated parameter assumptions
-rather than measurements. Nor do we claim general ACK-inclusive
-communication superiority or a broadcast-medium advantage. In the
-supplemental mission, P12.5 is a prominent counterexample: it retains
-\MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
-\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
+The primary contribution is causal within-mission communication adaptivity
+under unknown network conditions, rather than universal Pareto dominance over
+fixed periodic communication. The evidence is deliberately separated into a
+mechanistic claim and mission-level trade-offs. In a preregistered 50-seed
+holdout, the fixed Causal-v3 policy changes DATA effort across network regimes
+and improves Stressed accuracy relative to P10. ACK-inclusive accounting,
+however, reverses the apparent Stressed communication advantage. In the
+changing-network EXP11 mission, Causal-v3 adapts its rate within a run and has
+lower ACK-weighted cost than P20 at the preregistered $w=0.25$, while P12.5
+retains \MetricElevenPonetwofiveAccuracyPercent{}\% of its accuracy at
+\MetricElevenPonetwofiveCostPercent{}\% of its $\mathrm{Total}_{w025}$ cost and
 \MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost.
 
-The central contribution is therefore \emph{adaptivity under unknown and
-changing network conditions with one fixed causal policy}, not mission-level
-Pareto superiority over a well-selected periodic rate. These are different
-claims: the former concerns whether communication effort changes inside a
-mission without a regime label; the latter concerns which whole-mission
-operating point lies on a selected cost--accuracy frontier.
+The paper makes three contributions. First, it gives an implementable causal
+ACK-assisted AoI trigger with dual memory and an explicit innovation/refresh
+semantic split. Second, a frozen v1--v3 ablation isolates redundant in-flight
+retransmission and the over-suppression failure that motivated that split.
+Third, frozen simulation experiments report nominal, changing-network,
+communication-cost, robustness-boundary, and 6-DOF evidence with matched-seed
+confidence intervals and explicit negative results.
 
-The remainder of the paper is organised as follows.
-Section~\ref{sec:problem} formalises the setting.
-Section~\ref{sec:method} specifies the policy in enough detail to
-reimplement, including both algorithms and the receiver-side
-acknowledgement semantics. Section~\ref{sec:setup} describes the
-pre-registered experimental protocol and the statistical conventions.
-Section~\ref{sec:results} reports results, including the design-evolution
-ablation and every rejected claim. Section~\ref{sec:discussion} explains
-the negative results mechanistically rather than deferring them, and
-Section~\ref{sec:limitations} states the boundaries of what has been
-shown.
+The claims do not include universal superiority over a tuned periodic rate,
+general ACK-inclusive or broadcast-medium traffic reduction, hardware
+validation, or a closed-loop stability guarantee. These boundaries are part
+of the main results rather than deferred to supplementary material.

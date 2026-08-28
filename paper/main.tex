@@ -6,7 +6,7 @@
 % with EXP11 supplemental evidence frozen separately.
 %
 % BUILD
-%   pdflatex main && pdflatex main
+%   latexmk -pdf main.tex
 %
 % BIBLIOGRAPHY: paper/references.bib, 53 references, every one verified
 % against publisher-deposited metadata. Per-entry verification status and
@@ -22,9 +22,8 @@
 % enforces that.
 % =====================================================================
 
-\documentclass[10pt,twocolumn]{article}
+\documentclass[10pt,twocolumn,twoside]{IEEEtran}
 
-\usepackage[letterpaper,margin=0.75in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -32,8 +31,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{xcolor}
+\usepackage{flushend}
 \usepackage[hidelinks]{hyperref}
-\usepackage{caption}
 
 \graphicspath{{figures/}}
 
@@ -56,53 +55,40 @@
 % paper/TITLE_ABSTRACT_OPTIONS.md; this is the selected one. It avoids
 % "optimal", "robust", "universal" and "guaranteed", none of which the
 % evidence supports.
-\title{\textbf{Causal ACK-Assisted, AoI-Aware Event-Triggered
-Communication for UAV Swarm Coordination}}
+\title{Causal ACK-Assisted, AoI-Aware Event-Triggered
+Communication for UAV Swarm Coordination}
 
-\author{(author list withheld for this draft)}
-
-\date{}
+\author{[Author names and affiliations pending verified metadata]}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Fixed-rate inter-agent communication cannot adapt to a network whose
-quality is unknown or changing, while a conventional state-event trigger
-saves traffic but ignores how stale the receiver's copy has become. We
-present a causal ACK-assisted, age-of-information-aware event-triggered
-communication policy for multi-UAV formation control. Each sender
-estimates its receiver's freshness \emph{only} from cumulative
-acknowledgements crossing a delayed and lossy reverse channel, never by
-reading receiver state, and holds that estimate in a memory separate from
-the last state it transmitted, so that a repetition cooldown governs
-repetition alone rather than genuinely new information. A single fixed
-parameterization is used throughout.
-
-On a pre-registered validation over \MetricSeeds{} holdout seeds and
-\MetricRuns{} runs with 6-DOF quadrotor followers, the policy lowers
-formation error against a $10$~Hz periodic baseline in the most impaired
-condition by \MetricKoneMean{}~m (95\% CI
-$[\MetricKoneLo{},\MetricKoneHi{}]$), attains lower error than a
-conventional state-event trigger in all \MetricTotalCells{} cells of the
-final matrix, and adapts its DATA traffic monotonically with network
-quality (\MetricDataCausalClean{}, \MetricDataCausalModerate{} and
-\MetricDataCausalStressed{}~Hz). The reduction is \emph{DATA-only}:
-against $20$~Hz periodic, DATA falls by \MetricKtwoaMean{}~Hz while the
-ACK-inclusive total rises by \MetricKtwobMean{}~Hz, both intervals
-excluding zero, so no reduction in total radio traffic is claimed.
-Results are simulation only; no hardware validation is claimed.
-In a separate \MetricElevenSeeds{}-seed mission whose network regime changes
-in flight, the same fixed Causal-v3 policy changes its communication effort
-at every adjacent transition without receiving the regime label. It has
-lower RMSE than P10 and lower ACK-weighted total cost than P20 at the
-pre-registered weight $w=0.25$. These results support the adaptivity
-mechanism, not universal dominance: P12.5 retains
-\MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
-\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
-\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost.
+We present a fixed causal ACK-assisted, age-of-information-aware policy that
+adapts communication effort as network quality changes without receiving a
+regime label. Separate last-transmitted and ACK-confirmed memories prevent
+in-flight packets from masquerading as receiver knowledge, while distinct
+new-information and refresh branches suppress repetition without suppressing
+innovation. In a preregistered 50-seed holdout, Causal-v3 improves Stressed
+formation RMSE over P10 by \MetricKoneMean{} m (95\% CI
+$[\MetricKoneLo{},\MetricKoneHi{}]$). The communication conclusion depends on
+accounting: relative to P20, DATA falls by \MetricKtwoaMean{} Hz, but
+DATA$+0.25$ACK rises by \MetricKtwobMean{} Hz. In a separate changing-network
+mission, the same fixed policy changes rate at every adjacent regime transition
+and has lower ACK-weighted cost than P20 at preregistered $w=0.25$. Yet P12.5
+retains \MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
+\MetricElevenPonetwofiveCostPercent{}\% of its cost, and broadcast accounting
+reverses the P20 comparison. The evidence supports within-mission adaptivity,
+not universal dominance or general traffic reduction. Validation is
+simulation-only, including 6-DOF followers; no hardware or stability claim is
+made.
 \end{abstract}
+
+\begin{IEEEkeywords}
+Age of information, event-triggered communication, multi-agent systems,
+networked control systems, unmanned aerial vehicles.
+\end{IEEEkeywords}
 
 \input{sections/01_introduction}
 \input{sections/02_related_work}
@@ -114,20 +100,7 @@ mechanism, not universal dominance: P12.5 retains
 \input{sections/08_limitations}
 \input{sections/09_conclusion}
 
-% 'unsrt' is bundled with every BibTeX installation, so the document
-% builds with no added dependency. Substitute IEEEtran.bst when the
-% target venue is IEEE; see paper/VENUE_SHORTLIST.md.
-\bibliographystyle{unsrt}
+\bibliographystyle{IEEEtran}
 \bibliography{references}
-
-\appendix
-
-\section{Reproducibility}
-The complete claim ledger, the frozen result directories behind every
-number, and the validation entry points are documented in
-\texttt{paper/REPRODUCIBILITY.md} and \texttt{paper/FINAL\_CLAIMS.md}.
-The main campaign is frozen at \texttt{simulation-v1.0}; EXP11 is frozen
-separately at \texttt{exp11-locked-supplemental} and remains outside the
-\texttt{simulation-v1.0} release boundary.
 
 \end{document}
