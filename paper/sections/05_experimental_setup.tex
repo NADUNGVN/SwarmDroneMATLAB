@@ -4,30 +4,47 @@
 The scientific simulation and result files were frozen before manuscript
 editing. EXP07 defined the design ablations; EXP10 preregistered the final
 Causal-v3 configuration and evaluated 50 unseen seeds in Clean, Moderate, and
-Stressed regimes. Every method/regime/seed cell uses common random numbers, so
-reported differences and bootstrap confidence intervals are paired. The
-comparators are periodic P10/P12.5/P20, a conventional state-event trigger,
-an ideal-feedback reference, and causal design ablations. The ideal policy is
+Stressed regimes. Stochastic inputs are pre-drawn by link/timestep or physical
+time, so silence by one method does not shift another method's realization.
+Reported differences therefore use matched seeds and Student-$t$ 95\%
+intervals of the seed-level paired differences. P$k$ denotes a fixed
+$k$-Hz-per-channel scheduler; EXP11 uses P5, P10, P12.5, P20, and P25.
+State-event uses the hard-innovation branch with max silence but no freshness
+term. The design study adds causal ablations and an ideal-feedback reference;
+EXP11 adds a regime-aware oracle-periodic reference. The ideal policies are
 an ideal-feedback or oracle-information efficiency reference, not a bound on
 attainable accuracy or performance.
+
+At the nominal point, $N=5$, $\Delta t=0.02$ s, mission duration is 30 s,
+and evaluation begins at 8 s. The fixed trigger uses
+$\epsilon_p=0.05$ m, $\epsilon_v=0.10$ m/s, $\bar A=0.12$ s,
+$\tau_{\min}=0.02$ s, $\tau_r=0.10$ s, $\tau_{\max}=0.50$ s,
+$s_0=0.50$, $s_{\min}=0.20$, and $\rho=1$.
 
 Primary accuracy is formation RMSE. Communication is reported under two
 conventions that are never pooled: EXP07 reports DATA/ACK rates
 \textbf{per channel}; EXP08 and later report rates as \textbf{swarm totals}.
+The later graph convention also removes in-links to the leader, so absolute
+traffic is comparable within each table, not between EXP07 and EXP08+.
 DATA-only cost is distinct from
 $\mathrm{Total}_w=\mathrm{DATA}+w\,\mathrm{ACK}$, and broadcast accounting
-counts a simultaneous medium transmission once rather than once per receiver.
+is the idealized proxy in \eqref{eq:costbcast}, not an actual broadcast-medium
+simulation.
 The preregistered EXP11 comparison uses $w=0.25$.
 
 EXP11 is supplemental scientific evidence outside the
 \texttt{simulation-v1.0} release boundary. It places one fixed policy in a
-single mission whose network changes through four adjacent phases, again over
+single mission with five segments and four adjacent transitions, again over
 50 matched seeds. No regime label is supplied. All headline statistics,
 including adjacent rate-difference CIs, the P20 comparison, broadcast reversal,
 and ideal-periodic reference, are generated from the persisted frozen EXP11
 directory rather than transcribed into the manuscript.
 
-The complete parameter manifest, seed list, traffic definitions, preregistered
-hypotheses, and result-path provenance are retained in the reproducibility
-artifact. The policy configuration is identical across network cells; this
-paper runs no parameter search on the holdout data.
+The final validation spans \MetricTotalCells{} point-scenario cells covering
+both plants, larger swarms, ACK impairment, faults, mismatch, and estimator
+noise. Fault-safety ratios retain connected-graph or matched-no-fault
+eligibility denominators rather than counting ineligible seeds as successes.
+The complete parameter manifest, seed list, traffic definitions,
+preregistered hypotheses, and result-path provenance remain in the
+reproducibility artifact. The policy configuration is identical across
+network cells; this paper runs no parameter search on the holdout data.

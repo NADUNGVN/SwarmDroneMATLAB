@@ -56,3 +56,22 @@ operational conflict requiring a stop.
    while retaining all 15 protected scientific points in the main PDF.
 4. Stop rather than delete protected evidence if 12 pages cannot be reached.
 
+## Semantic-audit candidate compliance
+
+The current main manuscript is nine pages before verified author metadata is
+inserted. The submission target is to remain at or below the TCNS 10-page main
+paper limit after the real page-1 metadata is supplied. No numeric metadata
+headroom is estimated, and no appendix is added merely because the separate
+two-page appendix allowance exists.
+
+| Submission check | Candidate status |
+|---|---|
+| Abstract | 192 source words when each generated metric macro is counted as one token; below the official 300-word maximum. |
+| Document class | Exact `IEEEtran` 10-point, two-column, two-sided declaration. |
+| Paper size | Compiled media box is 612×792 points, i.e. US Letter 8.5×11 inches. |
+| Bibliography | `\bibliographystyle{IEEEtran}`; 53 publisher-verified references. |
+| Self-citations | **BLOCKED_BY_AUTHOR_METADATA.** With author identities still placeholders, the overlap between manuscript authors and cited authors cannot be determined. Recheck against the TCNS maximum of five after names are supplied. |
+| Page-1 identity/contact fields | **BLOCKED_BY_AUTHOR_METADATA.** The conspicuous author/affiliation placeholder must be replaced with verified identities, affiliations, mailing addresses, phone numbers, email addresses, and correspondence details. |
+| ORCID | **BLOCKED_BY_AUTHOR_METADATA.** ORCIDs are required in the submission system for every author; none is invented here. |
+| Funding/support | Unknown and intentionally not populated. Supply or explicitly confirm absence before submission. |
+| Appendix / supplement | None. All evidence supporting the main claims remains in the main PDF. |

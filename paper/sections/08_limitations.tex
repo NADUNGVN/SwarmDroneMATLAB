@@ -2,9 +2,12 @@
 \label{sec:limitations}
 
 This work is simulation-only and has no hardware validation. The 6-DOF plant
-is a validation model, not evidence of flight deployment; the estimator,
-disturbance, radio, and traffic models are synthetic rather than claims of
-sensor or aerodynamic realism.
+is a validation model, not evidence of flight deployment. Estimator noise and
+latency are synthetic parameter injections, not a physical sensor model. The
+external force is a world-frame, nominal-mass-equivalent acceleration proxy;
+it omits relative airspeed, drag, and frontal area and is not an aerodynamic
+wind model. The broadcast metric is likewise an accounting proxy, not a MAC,
+contention, or broadcast-delivery simulation.
 
 The evidence does not support universal superiority over tuned periodic
 communication, general ACK-inclusive savings, or a broadcast-medium advantage.
@@ -21,5 +24,10 @@ step. Table~\ref{tab:negative} keeps these operating boundaries visible.
 
 Finally, sampled evaluation excludes Zeno transmissions by construction, but
 neither this property nor the empirical safety gates constitute a closed-loop
-stability proof. Generalization to other graphs, missions, swarm sizes,
-hardware radios, and controllers remains to be tested.
+stability proof. The held-out nominal result covers one selected point on each
+network axis, a ring graph, and $\Delta t=0.02$ s; it does not convert the
+earlier sweeps into universal guarantees. The 6-DOF result uses $N=5$
+followers and a kinematic leader, while the larger-swarm evidence uses the
+double-integrator plant. Generalization beyond the tested formation geometry,
+trajectory, mission sequence, graphs, radios, and controllers remains to be
+tested.

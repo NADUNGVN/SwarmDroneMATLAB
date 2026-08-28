@@ -65,20 +65,24 @@ Communication for UAV Swarm Coordination}
 \maketitle
 
 \begin{abstract}
-We present a fixed causal ACK-assisted, age-of-information-aware policy that
+Fixed periodic schedules cannot adjust effort inside a changing mission, while
+a sender cannot directly observe receiver freshness across delayed or lossy
+DATA and ACK channels. We present a fixed causal ACK-assisted,
+age-of-information-aware policy that
 adapts communication effort as network quality changes without receiving a
 regime label. Separate last-transmitted and ACK-confirmed memories prevent
 in-flight packets from masquerading as receiver knowledge, while distinct
 new-information and refresh branches suppress repetition without suppressing
-innovation. In a preregistered 50-seed holdout, Causal-v3 improves Stressed
-formation RMSE over P10 by \MetricKoneMean{} m (95\% CI
+innovation. In a preregistered 50-seed holdout, the Stressed paired
+RMSE difference (Causal-v3$-$P10) is \MetricKoneMean{} m (95\% CI
 $[\MetricKoneLo{},\MetricKoneHi{}]$). The communication conclusion depends on
-accounting: relative to P20, DATA falls by \MetricKtwoaMean{} Hz, but
-DATA$+0.25$ACK rises by \MetricKtwobMean{} Hz. In a separate changing-network
+accounting: relative to P20, the signed Causal-v3$-$P20 differences are
+\MetricKtwoaMean{} Hz for DATA and \MetricKtwobMean{} Hz for
+DATA$+0.25$ACK. In a separate changing-network
 mission, the same fixed policy changes rate at every adjacent regime transition
 and has lower ACK-weighted cost than P20 at preregistered $w=0.25$. Yet P12.5
 retains \MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
-\MetricElevenPonetwofiveCostPercent{}\% of its cost, and broadcast accounting
+\MetricElevenPonetwofiveCostPercent{}\% of Causal-v3's cost, and broadcast accounting
 reverses the P20 comparison. The evidence supports within-mission adaptivity,
 not universal dominance or general traffic reduction. Validation is
 simulation-only, including 6-DOF followers; no hardware or stability claim is

@@ -7,7 +7,8 @@
 \centering
 \caption{Frozen v1--v3 design chain. DATA rates are \textbf{per channel};
 P10 is exactly 10 Hz. The ideal-feedback row is an efficiency reference,
-not an accuracy bound.}
+not an accuracy bound. RMSE entries are mean $\pm$ standard deviation over
+20 seeds.}
 \label{tab:evolution}
 \scriptsize
 \input{tables/tableII_design_evolution}
@@ -68,8 +69,9 @@ differences. Rates are \textbf{swarm totals}.}
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.78\textwidth]{fig12_exp11_adaptivity}
-\caption{EXP11 within-run DATA effort. The fixed causal policy receives no
-regime label; all adjacent paired intervals have the expected sign.}
+\caption{EXP11 within-run \textbf{swarm-total DATA rate}. The fixed causal
+policy receives no regime label; all adjacent paired intervals have the
+expected sign.}
 \label{fig:exp11adaptivity}
 \end{figure*}
 
@@ -84,7 +86,9 @@ ACK-inclusive superiority.
 \begin{table}[t]
 \centering
 \caption{EXP11 frontier characterization. P12.5 is the counterexample to
-universal mission-level dominance. Rates are swarm totals.}
+universal mission-level dominance. Rates are swarm totals;
+$C_{0.25}=$DATA$+0.25$ACK. Broadcast is the accounting proxy in
+\eqref{eq:costbcast}, not an actual broadcast-medium simulation.}
 \label{tab:exp11frontier}
 \scriptsize
 \resizebox{\columnwidth}{!}{\input{tables/tableVIII_exp11_frontier}}
@@ -106,9 +110,9 @@ reference, not a bound.
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.72\textwidth]{fig05_cost_pareto}
-\caption{Nominal accuracy--cost trade-offs. Hollow markers count DATA;
-filled markers add $0.25$ACK. ACK pricing moves Causal-v3 across P20 in the
-Stressed panel.}
+\caption{Nominal accuracy versus \textbf{swarm-total} communication cost.
+Hollow markers count DATA; filled markers add $0.25$ACK. ACK pricing moves
+Causal-v3 across P20 in the Stressed panel.}
 \label{fig:pareto}
 \end{figure*}
 
@@ -121,30 +125,39 @@ remain only \MetricParetoStressedWfifty{}\%,
 \MetricParetoStressedAirtime{}\%, and \MetricParetoStressedBroadcast{}\%.
 The policy is cheapest in \MetricCausalCheapestCells{} of
 \MetricTotalCells{} cells. These negative results rule out a general
-communication-saving claim.
+reduction in total radio traffic.
 
 \subsection{R5--R6: 6-DOF survival and operating boundaries}
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.68\textwidth]{fig09_di_vs_6dof}
-\caption{Double-integrator versus 6-DOF followers. Accuracy degrades for all
-methods, while ordering and the adaptive rate response survive.}
+\caption{Simulation-only comparison of double-integrator and 6-DOF followers
+at $N=5$. Accuracy degrades for all methods, while ordering and the adaptive
+rate response survive.}
 \label{fig:sixdof}
 \end{figure*}
 
 The transition to 6-DOF quadrotors degrades every method but retains method
 ordering and adaptivity. Broader sweeps identify boundaries rather than a
-universal robustness claim: reverse-channel response saturates at
-$s_{\min}$; one topology condition fails because the consensus gain is not
-degree-normalized; permanent link removal and node blackout create shared
-controller/geometry failures; mass mismatch leaves steady error without
-integral action; estimator noise creates false hard-innovation triggers; and
-traffic depends on the sampled outer step.
+universal robustness claim. In the Stressed reverse-channel sweep, reliable
+and impaired ACKs both give \MetricAckImpStressedReliableRate{} Hz at the
+$s_{\min}=\MetricAckImpStressedReliableScale{}$ floor; the flat response is
+saturation, not robustness. By contrast, the Moderate rate changes from
+\MetricAckImpModerateReliableRate{} to
+\MetricAckImpModerateImpairedRate{} Hz as the scale falls from
+\MetricAckImpModerateReliableScale{} to
+\MetricAckImpModerateImpairedScale{}. One topology condition fails because
+the consensus gain is not degree-normalized; permanent link removal and node
+blackout create shared controller/geometry failures; mass mismatch leaves
+steady error without integral action; estimator noise creates false
+hard-innovation triggers; and traffic depends on the sampled outer step.
 
 \begin{table*}[t]
 \centering
 \caption{Negative and boundary results retained in the main paper. Each row
-records a tested claim that was rejected or bounded.}
+records a tested claim that was rejected or bounded. Rate units follow the
+source experiment: EXP07 is per channel, whereas EXP08+ is swarm total; values
+must not be compared across those conventions.}
 \label{tab:negative}
 \scriptsize
 \input{tables/tableVI_negative_results}

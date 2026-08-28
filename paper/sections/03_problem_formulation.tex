@@ -75,8 +75,9 @@ The forward channel carries DATA from sender $j$ to receiver $i$. Each
 transmission is independently subject to
 \begin{itemize}
 \item \textbf{loss} with probability $p_{\mathrm{loss}}$,
-\item \textbf{delay} $d + \sigma_j z$, where $z$ is a standard normal draw
-      and the result is floored at zero,
+\item \textbf{delay} $d + \sigma_j z$, where $\sigma_j$ is the jitter
+      standard deviation, $z$ is a standard normal draw, and the result is
+      floored at zero,
 \item \textbf{out-of-order delivery}, resolved at the receiver by a
       newest-generation-wins rule; a packet whose generation timestamp is
       older than what the receiver already holds is counted as a stale
@@ -142,9 +143,10 @@ C_{\mathrm{bcast}} &= (n_{\mathrm{B}} + n_{\mathrm{A}})/T_m .
 \end{align}
 Here $b_{\mathrm{D}}$ and $b_{\mathrm{A}}$ are DATA and ACK frame sizes,
 so \eqref{eq:costair} prices an acknowledgement as the short frame it is.
-Equation~\eqref{eq:costbcast} collapses the unicast links leaving one
-sender in one tick into a single radio transmission, which is what a
-broadcast medium actually does; acknowledgements remain unicast.
+Equation~\eqref{eq:costbcast} is an accounting proxy that collapses the
+unicast links leaving one sender in one tick into one idealized broadcast
+transmission; acknowledgements remain unicast. It is not a simulation of
+medium access, contention, or broadcast-channel delivery.
 
 $C_{0.25}$ is the pre-registered reference model. Reporting all five is
 not thoroughness for its own sake: the conclusion \emph{changes} between

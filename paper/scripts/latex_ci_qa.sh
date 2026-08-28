@@ -75,8 +75,8 @@ if [[ "$reference_count" -ne 53 || "$figure_count" -ne 3 || "$table_count" -ne 6
   echo "Unexpected compiled/static counts: references=$reference_count figures=$figure_count tables=$table_count" >&2
   failures=1
 fi
-if [[ -n "$page_count" && "$page_count" -gt 12 ]]; then
-  echo "TCNS initial-submission limit exceeded: pages=$page_count limit=12" >&2
+if [[ -n "$page_count" && "$page_count" -gt 10 ]]; then
+  echo "TCNS main-paper limit exceeded: pages=$page_count limit=10" >&2
   failures=1
 fi
 if [[ "$failures" -ne 0 ]]; then

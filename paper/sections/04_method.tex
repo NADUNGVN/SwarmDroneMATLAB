@@ -3,8 +3,10 @@
 
 All policy state is per directed channel $(i,j)$. The sender retains the
 last transmitted state $(p^{\mathrm{sent}},v^{\mathrm{sent}})$, the newest
-ACK-confirmed generation time $g^{\mathrm{ack}}$, the last transmission
-time $t^{\mathrm{tx}}$, and the outstanding sequence set $\mathcal O$.
+ACK-confirmed generation time $g^{\mathrm{ack}}$ and sequence
+$k^{\mathrm{ack}}$, the last transmission time $t^{\mathrm{tx}}$, and the
+outstanding sequence set $\mathcal O$. An arrived cumulative ACK
+$\langle k^a,g^a\rangle$ reports its accepted sequence and generation time.
 This dual memory is essential: innovation must be measured from what was
 last put on the wire, whereas freshness must be measured from what causal
 feedback confirms the receiver holds. A packet remains in $\mathcal O$ even
@@ -30,8 +32,9 @@ Thus age lowers an innovation threshold; age alone does not trigger a
 transmission.
 
 After the global refractory condition
-$t-t^{\mathrm{tx}}\geq\tau_{\min}$, the sender evaluates four branches in
-order:
+$t-t^{\mathrm{tx}}\geq\tau_{\min}$, with hard position/velocity thresholds
+$\epsilon_p,\epsilon_v$, refresh cooldown $\tau_r$, and max-silence interval
+$\tau_{\max}$, the sender evaluates four branches in order:
 \begin{align}
  B_1 &: \Delta p\geq\epsilon_p\ \vee\ \Delta v\geq\epsilon_v,
  \label{eq:hard}\\
@@ -85,3 +88,7 @@ Decisions are evaluated only on an outer grid of spacing $h>0$, hence
 \end{equation}
 This excludes Zeno behavior by construction; it is not a closed-loop stability
 proof.
+
+The policy is distributed in the operational sense that each sender uses only
+its own state and ACKs received on its incident channels; it is not
+feedback-free and requires no global coordinator or regime label.
