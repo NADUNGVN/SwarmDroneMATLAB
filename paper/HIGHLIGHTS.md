@@ -22,8 +22,14 @@ support: no "first", no "optimal", no "robust", no unqualified "efficient".
 4. The reduction is DATA-only: against 20 Hz periodic, DATA falls by
    16.73 Hz while the ACK-inclusive total rises by 10.67 Hz (both 95 %
    intervals excluding zero), so no reduction in total radio traffic is
-   claimed — and an acausal oracle is shown to be an information-efficiency
-   reference rather than an accuracy bound.
+   claimed — and a non-causal ideal-feedback policy is used as an
+   information-efficiency reference rather than as a bound on accuracy.
+
+6. **EXP11 directly supports within-mission adaptivity, not universal
+   dominance.** With no regime label, fixed Causal-v3 changes effort at all
+   four network transitions. P12.5 remains the prominent counterexample:
+   97.7% of Causal-v3 accuracy at 89.6% of `Total_w025` and 39.1% of
+   broadcast cost.
 
 ---
 

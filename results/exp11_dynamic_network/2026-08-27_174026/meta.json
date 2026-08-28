@@ -1,0 +1,18 @@
+{
+  "experiment": "exp11_dynamic_network",
+  "runId": "2026-08-27_174026",
+  "startedAt": "2026-08-27 17:40:26",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "85ead26",
+  "notes": "Within-run network switching; fixed-periodic challenge.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp11_dynamic_network.m",
+  "finishedAt": "2026-08-27 17:48:41",
+  "elapsedSec": 494.7601811,
+  "elapsedText": "8 m 15 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

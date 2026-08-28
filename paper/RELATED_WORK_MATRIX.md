@@ -42,6 +42,8 @@ event-triggered communication has not been applied to UAV formations.
 | `ayan2019aoivoi` | **Age alone is a poor proxy for control cost**; value-of-information is an established alternative | Directly supports our design choice that age never triggers alone. Their solution is a centralised scheduler; ours is a distributed sender rule |
 | `rajaraman2021notjustage` | Combining age with a content/quality term is already done | Our innovation-times-age composition is *not* the first move beyond pure age; the difference is the setting and the causal ACK-derived age |
 | `mamduhi2020freshness` | AoI and event-based triggering have been co-designed | **Nearest neighbour.** Theirs is a network scheduler across independent control loops; there is no per-sender ACK-confirmed freshness memory and no new-information/refresh split |
+| `wang2021freshness` | AoI-aware event triggering appears in distributed Kalman consensus filtering | Their freshness constraint is not an ACK-derived estimate of what a particular receiver holds; there is no new-information/refresh split |
+| `lin2026cooperative` | Recent multi-agent consensus combines a state-error condition with an AoI-bound condition | Sender-held AoI resets on broadcast; the decision does not infer receiver freshness through delayed acknowledgements |
 
 **Prose consequence.** Section 2.2 may say that AoI-aware designs
 typically assume the age at the receiver is known to whoever makes the
@@ -53,6 +55,7 @@ say that nobody has combined AoI with event-based triggering.
 | Reference | Supports | Our difference |
 |---|---|---|
 | `ceran2019average` | **ACK/NACK feedback already drives AoI-optimal transmission without oracle knowledge**, with HARQ | The closest precedent for our E1. Single source-destination link, no state innovation, no multi-agent control loop. Also: their retransmission is explicit HARQ; we introduce no retransmission timer at all |
+| `tahir2024collaborative` | **Delayed ACKs support a belief over receiver AoI under partial observability in decentralized multi-agent scheduling** | Closest newly identified neighbour. It optimizes AoI/channel load and permits multiple in-flight messages; it has no physical state-innovation trigger, UAV formation loop, or new-information/refresh suppression split |
 | `tang2022whittle` | Index-based centralised AoI scheduling | Contrast class: centralised and periodic-evaluation, versus our distributed event trigger |
 | `park2018wireless`, `gatsis2014optimal` | Radio resources are a first-class design variable in wireless control | Motivates pricing the reverse channel, which we do under five cost models |
 | `walsh2002stability`, `hespanha2007survey` | Delay and dropout affect closed-loop stability | Our network model includes loss, delay, jitter and out-of-order delivery |
@@ -103,5 +106,7 @@ that estimates its own receiver's freshness **only from cumulative
 acknowledgements**, uses that estimate to modulate a **state-innovation**
 threshold, and separates **new information from refresh** so that a
 repetition cooldown governs only repetition — is what this paper
-addresses. The evidence for that gap, and the limits of the search behind
-it, are in `NOVELTY_GAP_REVIEW.md`.
+addresses. We did not identify prior work combining all of those elements.
+This is a bounded search result, not a priority claim. The evidence for that
+gap, and the limits of the search behind it, are in
+`NOVELTY_GAP_REVIEW.md`.

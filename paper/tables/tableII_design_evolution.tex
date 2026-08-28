@@ -6,7 +6,7 @@
 \cmidrule(lr){3-5}
  & & Clean & Mod. & Str. & RMSE [m] & \\
 \midrule
-Oracle AoI (acausal) & reads receiver state directly in the same step; ideal-feedback reference, not implementable and not an accuracy bound & 8.41 & 11.20 & 15.80 & 0.1306 $\pm$ 0.0005 &  \\
+Ideal-feedback reference (non-causal) & reads receiver state directly in the same step; information-efficiency reference, not implementable and not a bound on attainable accuracy & 8.41 & 11.20 & 15.80 & 0.1306 $\pm$ 0.0005 &  \\
 Causal, fixed threshold & open-loop freshness, no adaptation: rate barely moves with network quality & 7.42 & 7.47 & 7.47 & 0.1719 $\pm$ 0.0034 &  \\
 Causal, adaptive, open loop & adapts the threshold but estimates freshness from what it sent, so the rate moves the WRONG way & 8.41 & 8.29 & 8.16 & 0.1612 $\pm$ 0.0030 &  \\
 Causal, dual memory & freshness now from ACKs; refresh cooldown becomes a ceiling on new information and pins the rate & 8.41 & 9.07 & 9.07 & 0.1545 $\pm$ 0.0025 &  \\

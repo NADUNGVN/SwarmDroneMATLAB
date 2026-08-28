@@ -32,9 +32,9 @@ seeds.}
 \centering
 \includegraphics[width=\columnwidth]{fig03_design_evolution}
 \caption{The causal chain in the accuracy-versus-traffic plane, Stressed
-condition. The proposed policy reaches lower error than the acausal oracle
-by transmitting more; the oracle is an efficiency reference, not a
-an accuracy bound.}
+condition. The proposed policy reaches lower error than the non-causal
+ideal-feedback reference by transmitting more. The latter is an efficiency
+reference, not a bound on attainable accuracy.}
 \label{fig:evolution}
 \end{figure}
 
@@ -70,16 +70,17 @@ change.} The proposed policy transmits \MetricSevenAfivecCleanRate{},
 for a Stressed error of \MetricSevenAfivecStressedRmse{}~m. Every
 parameter is identical to the pinned variant above.
 
-A result we did not anticipate is worth stating plainly. The acausal
-oracle --- which reads receiver state directly in the same timestep ---
+A result we did not anticipate is worth stating plainly. The non-causal
+ideal-feedback reference --- which reads receiver state directly in the
+same timestep ---
 runs at \MetricSevenIdealStressedRate{}~Hz for
 \MetricSevenIdealStressedRmse{}~m. The causal policy is \emph{more
 accurate} (\MetricSevenAfivecStressedRmse{}~m) while transmitting
 \emph{more} (\MetricSevenAfivecStressedRate{}~Hz). Free freshness
-information does not buy accuracy; it buys the ability to be quiet. Using
-an oracle as an accuracy bound for a communication policy therefore
-overstates achievable efficiency and understates achievable accuracy, and
-Section~\ref{sec:discussion} takes this up.
+information does not buy accuracy; it buys the ability to be quiet. It
+therefore characterizes the cost of causal information, rather than
+bounding achievable accuracy, and Section~\ref{sec:discussion} takes this
+up.
 
 \subsection{Holdout validation: adaptivity and accuracy}
 
@@ -215,6 +216,97 @@ Finally, the proposed policy is the cheapest of the four methods under the
 reference cost model in \MetricCausalCheapestCells{} of
 \MetricTotalCells{} cells. The value is zero, and it belongs in the results
 rather than in a footnote.
+
+\subsection{EXP11: adaptation within a changing-network mission}
+\label{sec:exp11}
+
+EXP11 is supplemental evidence frozen separately from
+\texttt{simulation-v1.0}. Table~\ref{tab:exp11claims} reports every
+pre-registered hypothesis outcome from the persisted full run.
+
+\begin{table*}[t]
+\centering
+\caption{EXP11 hypotheses, \MetricElevenSeeds{} matched missions. H1
+differences are adjacent Causal-v3 segment DATA rates; H2a and H2b are
+whole-mission paired differences. Rates are \textbf{swarm totals}. H2b is
+supported only at its pre-registered ACK weight $w=0.25$.}
+\label{tab:exp11claims}
+\scriptsize
+\input{tables/tableVII_exp11_hypotheses}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig12_exp11_adaptivity}
+\caption{EXP11 within-mission Causal-v3 DATA effort. Network quality changes
+Clean$_1\to$Moderate$_1\to$Stressed$\to$Moderate$_2\to$Clean$_2$; the
+fixed causal policy receives no regime label. All four paired adjacent
+rate-difference intervals have the expected sign. Rates are swarm totals.}
+\label{fig:exp11adaptivity}
+\end{figure}
+
+\textbf{H1 is supported.} The four adjacent Causal-v3 rate differences are
+\MetricElevenHoneOneMean{}, \MetricElevenHoneTwoMean{},
+\MetricElevenHoneThreeMean{} and \MetricElevenHoneFourMean{}~Hz, with
+respective 95\% intervals
+$[\MetricElevenHoneOneLo{},\MetricElevenHoneOneHi{}]$,
+$[\MetricElevenHoneTwoLo{},\MetricElevenHoneTwoHi{}]$,
+$[\MetricElevenHoneThreeLo{},\MetricElevenHoneThreeHi{}]$ and
+$[\MetricElevenHoneFourLo{},\MetricElevenHoneFourHi{}]$. The fixed policy
+raises effort as the mission degrades and lowers it as the mission recovers,
+without observing the regime label.
+
+\textbf{H2a is supported.} Whole-mission RMSE(Causal$-$P10) is
+\MetricElevenHtwoaMean{}~m, 95\% CI
+$[\MetricElevenHtwoaLo{},\MetricElevenHtwoaHi{}]$.
+\textbf{H2b is supported only at the pre-registered $w=0.25$.}
+$C_{0.25}$(Causal$-$P20) is \MetricElevenHtwobMean{}~Hz, 95\% CI
+$[\MetricElevenHtwobLo{},\MetricElevenHtwobHi{}]$. This does not establish
+general ACK-inclusive communication superiority.
+
+\begin{table*}[t]
+\centering
+\caption{EXP11 whole-mission frontier characterization. All communication
+columns are \textbf{swarm-total} rates. P12.5 is emphasized because it is
+the direct counterexample to universal dominance by Causal-v3.}
+\label{tab:exp11frontier}
+\scriptsize
+\input{tables/tableVIII_exp11_frontier}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig13_exp11_frontier}
+\caption{EXP11 whole-mission accuracy--cost frontier. The mission-level
+frontier and oracle-information gap are characterizations, not promoted
+hypotheses. P12.5 remains highly competitive.}
+\label{fig:exp11frontier}
+\end{figure}
+
+\textbf{H3 is characterization, and P12.5 is the prominent counterexample.}
+It delivers \MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3
+accuracy at \MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost
+and only \MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast
+cost. Equivalently, RMSE(Causal$-$P12.5) is
+\MetricElevenPonetwofiveRmseMean{}~m while Causal-v3 costs
+\MetricElevenPonetwofiveCostMean{}~Hz more under $C_{0.25}$. Thus EXP11
+does not support universal superiority over a tuned fixed periodic rate.
+
+Broadcast accounting reverses the favorable P20 comparison:
+broadcast(Causal$-$P20) is \MetricElevenBroadcastPtwentyMean{}~Hz, 95\% CI
+$[\MetricElevenBroadcastPtwentyLo{},\MetricElevenBroadcastPtwentyHi{}]$,
+or \MetricElevenBroadcastWorsePercent{}\% higher. EXP11 therefore does not
+support a broadcast-medium communication advantage.
+
+\textbf{H4 is characterization.} Relative to the regime-aware
+oracle-periodic information reference, Causal-v3 has RMSE difference
+\MetricElevenOracleRmseMean{}~m, 95\% CI
+$[\MetricElevenOracleRmseLo{},\MetricElevenOracleRmseHi{}]$, while its
+$C_{0.25}$ difference is \MetricElevenOracleCostMean{}~Hz, 95\% CI
+$[\MetricElevenOracleCostLo{},\MetricElevenOracleCostHi{}]$. The reference
+itself improves RMSE over P10 by only
+\MetricElevenOraclePtenImprovePercent{}\% at nearly equal cost. This is an
+information-efficiency comparison, not a bound.
 
 \subsection{Robustness}
 

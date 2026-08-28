@@ -1,0 +1,30 @@
+{
+    "pass":  true,
+    "metricMacrosUsed":  101,
+    "metricMacrosDefined":  194,
+    "undefinedCitations":  0,
+    "undefinedRefs":  0,
+    "duplicateLabels":  0,
+    "missingFiguresOrTables":  0,
+    "figures":  13,
+    "tables":  8,
+    "references":  51,
+    "headlineRows":  320,
+    "baseHeadlineRows":  279,
+    "exp11HeadlineRows":  41,
+    "baseHeadlinesUnchangedFromPaperV1":  true,
+    "baseMacrosUnchangedFromPaperV1":  true,
+    "exp11Source":  "results/exp11_dynamic_network/2026-08-27_174026/tidy.csv",
+    "exp11Sha256":  "0d1272d35820643771c007099455056976399eb5f66ca234d1873b9eb77f0561",
+    "scientificSourceModifications":  0,
+    "numericContradictions":  0,
+    "unsupportedPromotedClaims":  0,
+    "guard":  [
+                  "PAPER_GUARD_OK TAG_OK simulation-v1.0=32858b1 remote=32858b1",
+                  "EXP11 supplemental anchor verified exp11-locked-supplemental=7b64af6 remote=7b64af6",
+                  "scientific-source modifications=0 boundary=outside-simulation-v1.0"
+              ],
+    "failures":  [
+
+                 ]
+}

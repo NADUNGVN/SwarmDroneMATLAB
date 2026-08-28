@@ -1,0 +1,24 @@
+{
+    "source":  "results/exp11_dynamic_network/2026-08-27_174026/tidy.csv",
+    "sha256":  "0d1272d35820643771c007099455056976399eb5f66ca234d1873b9eb77f0561",
+    "rows":  400,
+    "seeds":  50,
+    "methods":  [
+                    "P5",
+                    "P10",
+                    "P12.5",
+                    "P20",
+                    "P25",
+                    "StateEvent",
+                    "Causal",
+                    "OraclePeriodic"
+                ],
+    "verdicts":  {
+                     "H1":  "SUPPORTED",
+                     "H2a":  "SUPPORTED",
+                     "H2b":  "SUPPORTED at w=0.25 only",
+                     "H3":  "CHARACTERIZATION",
+                     "H4":  "CHARACTERIZATION"
+                 },
+    "generator":  "paper/scripts/rebuild_exp11_artifacts.ps1"
+}

@@ -123,3 +123,5 @@ superseded runs; the curated map above names the run that counts.
 | 2026-08-27_094814 | exp10b_unified_matrix | 11.3 s | 4 | yes | yes | (R2025a) | 3307fcc |
 | 2026-08-27_095330 | exp10b_unified_matrix | 16.0 s | 4 | yes | yes | (R2025a) | f23c8c2 |
 | 2026-08-27_094912 | simulation_v1_validation | 5 m 41 s | 0 | yes | - | (R2025a) | f23c8c2 |
+| 2026-08-27_174026 | exp11_dynamic_network | 8 m 15 s | 3 | yes | yes | (R2025a) | 85ead26 |
+| 2026-08-27_175335 | exp11_dynamic_network | 13.9 s | 3 | yes | yes | (R2025a) | 85ead26 |

@@ -1,0 +1,521 @@
+{
+    "referenceCount":  51,
+    "auditRowCount":  51,
+    "uniqueDoiCount":  51,
+    "verified":  true,
+    "failures":  [
+
+                 ],
+    "entries":  [
+                    {
+                        "citekey":  "kaul2012realtime",
+                        "doi":  "10.1109/INFCOM.2012.6195689",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "sun2017update",
+                        "doi":  "10.1109/TIT.2017.2735804",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "yates2021aoisurvey",
+                        "doi":  "10.1109/JSAC.2021.3065072",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "yang2025aoiperspective",
+                        "doi":  "10.1561/1300000064",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "kaswan2025gossip",
+                        "doi":  "10.1109/TCOMM.2024.3522043",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "rajaraman2021notjustage",
+                        "doi":  "10.1109/JSAC.2021.3065061",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "ayan2019aoivoi",
+                        "doi":  "10.1145/3302509.3311050",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "mamduhi2020freshness",
+                        "doi":  "10.3390/jsan9030043",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "wang2021freshness",
+                        "doi":  "10.1631/FITEE.2000206",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "astrom2002riemann",
+                        "doi":  "10.1109/CDC.2002.1184824",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "tabuada2007event",
+                        "doi":  "10.1109/TAC.2007.904277",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "heemels2012introduction",
+                        "doi":  "10.1109/CDC.2012.6425820",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "dimarogonas2012distributed",
+                        "doi":  "10.1109/TAC.2011.2174666",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "seyboth2013eventbased",
+                        "doi":  "10.1016/j.automatica.2012.08.042",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "girard2015dynamic",
+                        "doi":  "10.1109/TAC.2014.2366855",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "yi2017distributed",
+                        "doi":  "10.1109/CDC.2017.8264666",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "nowzari2019eventtriggered",
+                        "doi":  "10.1016/j.automatica.2019.03.009",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "chen2020howoften",
+                        "doi":  "10.1007/s11432-019-2637-9",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "ge2021dynamic",
+                        "doi":  "10.1007/s11633-021-1306-z",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "zhang2025overview",
+                        "doi":  "10.1007/s11432-024-4437-9",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "li2026impulsive",
+                        "doi":  "10.1109/JAS.2026.125930",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "walsh2002stability",
+                        "doi":  "10.1109/87.998034",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "hespanha2007survey",
+                        "doi":  "10.1109/JPROC.2006.887288",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "gatsis2014optimal",
+                        "doi":  "10.1109/TAC.2014.2305951",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "park2018wireless",
+                        "doi":  "10.1109/COMST.2017.2780114",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "ceran2019average",
+                        "doi":  "10.1109/TWC.2019.2899303",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "tang2022whittle",
+                        "doi":  "10.1109/LCOMM.2021.3125669",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "tahir2024collaborative",
+                        "doi":  "10.23919/IFIPNetworking62109.2024.10619823",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "lin2026cooperative",
+                        "doi":  "10.3390/pr14152502",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "gupta2016survey",
+                        "doi":  "10.1109/COMST.2015.2495297",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "zeng2016wireless",
+                        "doi":  "10.1109/MCOM.2016.7470933",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "mozaffari2019tutorial",
+                        "doi":  "10.1109/COMST.2019.2902862",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "zeng2019accessing",
+                        "doi":  "10.1109/JPROC.2019.2952892",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "campion2019uavswarm",
+                        "doi":  "10.1139/juvs-2018-0009",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "amodu2023aoiuav",
+                        "doi":  "10.1016/j.jnca.2023.103652",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "tripathi2023wiswarm",
+                        "doi":  "10.1109/INFOCOM53939.2023.10228860",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "tatikonda2004control",
+                        "doi":  "10.1109/TAC.2004.831187",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "nair2007feedback",
+                        "doi":  "10.1109/JPROC.2006.887294",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "molin2013optimality",
+                        "doi":  "10.1109/TAC.2012.2206719",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "ramesh2013design",
+                        "doi":  "10.1109/TAC.2013.2251791",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "demirel2017tradeoff",
+                        "doi":  "10.1109/TAC.2016.2606590",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "olfatisaber2006flocking",
+                        "doi":  "10.1109/TAC.2005.864190",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "lee2010geometric",
+                        "doi":  "10.1109/CDC.2010.5717652",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "mellinger2011minimum",
+                        "doi":  "10.1109/ICRA.2011.5980409",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "oh2015survey",
+                        "doi":  "10.1016/j.automatica.2014.10.022",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "vasarhelyi2018optimized",
+                        "doi":  "10.1126/scirobotics.aat3536",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "zhou2022swarm",
+                        "doi":  "10.1126/scirobotics.abm5954",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "yin2023eventbased",
+                        "doi":  "10.1016/j.isatra.2023.01.018",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "ji2023dynamic",
+                        "doi":  "10.1177/01423312221151193",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "chen2024distributed",
+                        "doi":  "10.1016/j.jfranklin.2024.106997",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "yang2025fencing",
+                        "doi":  "10.1016/j.dt.2025.04.004",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    }
+                ]
+}

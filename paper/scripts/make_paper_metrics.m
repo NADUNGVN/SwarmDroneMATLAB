@@ -12,6 +12,10 @@
 % number cannot be derived from a persisted file it is not emitted, and
 % the manuscript therefore cannot cite it.
 %
+% EXP11 is supplemental evidence outside simulation-v1.0. After this base
+% harvester, run paper/scripts/rebuild_exp11_artifacts.ps1 to append the
+% separately frozen EXP11 metrics, tables, figures and verification hash.
+%
 % WHY MACROS RATHER THAN TYPED NUMBERS
 %
 % A number typed into prose is a number nobody can check. Every headline

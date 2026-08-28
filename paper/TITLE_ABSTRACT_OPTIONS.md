@@ -55,7 +55,7 @@ terms.
 
 If a reviewer or editor finds the title generic, T4 is the fallback: the
 new-information/refresh separation is the single most distinctive mechanism
-in the paper, and `NOVELTY_GAP_REVIEW.md` records that we found no prior work
+in the paper, and `NOVELTY_GAP_REVIEW.md` records that we did not identify prior work
 applying a repetition cooldown only to repetition.
 
 ---
@@ -89,7 +89,7 @@ most.
 
 ### The wording rule the abstract must keep
 
-The phrase "communication saving" never appears unqualified. The abstract
+Any DATA-traffic reduction is explicitly qualified. The abstract
 says **"The reduction is DATA-only"** and then gives both signed
 differences. `paper_audit` rule A6 enforces this mechanically across the
 whole manuscript.

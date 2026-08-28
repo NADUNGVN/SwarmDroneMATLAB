@@ -54,11 +54,11 @@ An ablation on common random numbers shows each element is load-bearing
 | adaptive, open loop | 8.41 | 8.29 | 8.16 | 0.1612 | adapts the **wrong way** |
 | dual memory, no split | 8.41 | 9.07 | 9.07 | 0.1545 | rate **pinned**: cannot see a worse network |
 | **proposed** | **8.44** | **13.35** | **18.24** | **0.1170** | adaptivity restored |
-| acausal oracle | 8.41 | 11.20 | 15.80 | 0.1306 | cheaper **and less accurate** |
+| ideal-feedback reference | 8.41 | 11.20 | 15.80 | 0.1306 | cheaper **and less accurate** |
 
 No parameter value differs between the pinned variant and the proposed one.
-The oracle result is why we call ideal feedback an *information-efficiency*
-reference and never an accuracy bound.
+The reference result is why we use it for *information efficiency*, not as
+a bound on attainable accuracy.
 
 ## The holdout evidence
 
@@ -95,3 +95,21 @@ every development seed; common random numbers so methods meet the identical
 channel; nine runtime protocol invariants; bit-identical serial-versus-parallel
 execution; a clean-clone reproduction; and every manuscript number generated
 from a persisted result file rather than typed.
+
+## EXP11: the decisive scope refinement
+
+EXP11 changes the network inside one mission while keeping Causal-v3 fixed
+and withholding the regime label. All four adjacent DATA-rate differences
+have the expected sign. Whole-mission RMSE is lower than P10, and
+`Total_w025` is lower than P20 at the pre-registered `w=0.25`.
+
+This supports **mechanistic adaptivity**: one policy changes effort when the
+network changes. It does not establish **mission-level Pareto superiority**.
+P12.5 remains highly competitive, retaining **97.7% of Causal-v3 accuracy**
+at **89.6% of its `Total_w025` cost** and **39.1% of its broadcast cost**.
+
+The contribution after EXP11 is therefore adaptivity under unknown and
+changing network conditions with one fixed causal policy, not universal
+dominance over tuned periodic communication. EXP11 is supplemental evidence
+frozen at `exp11-locked-supplemental`, outside the `simulation-v1.0`
+boundary.

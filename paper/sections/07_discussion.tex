@@ -24,11 +24,30 @@ adaptive threshold turns that evidence into willingness to transmit, and
 the direction is right by construction: the longer the silence from the
 receiver, the lower the bar for saying something again.
 
-\subsection{Why oracle feedback overstates efficiency}
+\subsection{Why not tune P20, P12.5, or another fixed periodic rate?}
 
-An acausal AoI policy reads the receiver's true age directly. It is the
-natural ideal-feedback reference, and our results show that reading it
-as an accuracy bound is a mistake.
+This objection is partly correct. A periodic rate cannot adapt its
+communication effort within a mission: P12.5 remains P12.5 through Clean,
+Moderate and Stressed segments, while the fixed Causal-v3 policy changes
+effort at all four EXP11 transitions without receiving the regime label.
+That is direct evidence for mechanistic adaptivity.
+
+But adaptivity is not the same as mission-level Pareto superiority. A
+well-selected fixed rate can remain highly competitive when the entire
+mission is aggregated. In EXP11, P12.5 retains
+\MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
+\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
+\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost. P20
+also has lower whole-mission RMSE, although Causal-v3 has lower
+$C_{0.25}$ at the pre-registered weight. The evidence therefore supports
+the adaptivity mechanism, not universal superiority over tuned periodic
+communication.
+
+\subsection{What the ideal-feedback reference means}
+
+A non-causal AoI policy reads the receiver's true age directly. It is the
+natural ideal-feedback reference, used to characterize the information
+gap rather than to bound attainable accuracy.
 
 The oracle transmits \MetricSevenIdealStressedRate{}~Hz per channel for
 \MetricSevenIdealStressedRmse{}~m; the causal policy transmits
@@ -41,11 +60,10 @@ cannot distinguish ``delivered, ACK still in flight'' from ``lost'', so it
 errs toward transmitting --- and in a lossy network that pessimism is
 useful.
 
-The consequence for the literature is specific. An oracle-freshness
-baseline bounds the \emph{efficiency} attainable by a causal policy, not
-its accuracy, and reporting an oracle's traffic figure as the target a
-real implementation should approach understates how much traffic causality
-actually costs.
+The consequence for the literature is specific. An oracle-information
+reference characterizes the efficiency available with perfect freshness
+knowledge. Reporting its traffic figure as a target a causal implementation
+should necessarily approach understates how much traffic causality costs.
 
 \subsection{Why v1 over-transmits}
 

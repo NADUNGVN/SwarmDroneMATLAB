@@ -27,8 +27,11 @@ neither differs from the working variant by any parameter value.
       Algorithms~\ref{alg:sender}--\ref{alg:receiver}.
 \end{itemize}
 
-An acausal \textbf{oracle AoI} variant and three intermediate causal
-variants appear in the design-evolution ablation only.
+A non-causal \textbf{ideal-feedback reference} and three intermediate
+causal variants appear in the design-evolution ablation. EXP11 additionally
+compares P5, P12.5 and P25, and a regime-aware oracle-periodic
+\emph{information reference}; neither reference is treated as a bound on
+attainable performance.
 
 \subsection{Common random numbers}
 
@@ -141,6 +144,8 @@ compared:
 \item \textbf{Swarm total.} Tables~\ref{tab:nominal} and
       \ref{tab:paired} report the summed rate over all directed channels.
       P10 reads \MetricDataPtenClean{}~Hz at $N=5$.
+      EXP11 also reports swarm-total DATA, ACK-weighted total and broadcast
+      rates; Table~\ref{tab:exp11frontier} labels each explicitly.
 \end{itemize}
 
 The two eras additionally used different channel counts at the same swarm
@@ -148,6 +153,26 @@ size, because the later graph convention removes in-links to the leader
 (the leader reads its reference directly). Absolute traffic is therefore
 comparable \emph{within} a table and not across the two conventions. Every
 caption states which convention it uses.
+
+\subsection{Changing-network supplemental mission (EXP11)}
+
+EXP11 is a separately frozen supplemental experiment, outside the
+\texttt{simulation-v1.0} release boundary. One mission passes through five
+network segments---Clean$_1$, Moderate$_1$, Stressed, Moderate$_2$ and
+Clean$_2$---while the policy receives no regime label. The tested methods
+are P5, P10, P12.5, P20, P25, state-event, fixed Causal-v3 and a non-causal
+regime-aware oracle-periodic information reference. All use the same
+\MetricElevenSeeds{} matched seeds; no parameter is retuned between
+segments.
+
+H1 tests the sign of all four paired adjacent changes in Causal-v3 DATA
+rate. H2a tests whole-mission RMSE(Causal$-$P10). H2b tests whole-mission
+$C_{0.25}$(Causal$-$P20), where $C_{0.25}=\mathrm{DATA}+0.25\,\mathrm{ACK}$.
+H2b is specific to the pre-registered $w=0.25$ and is not generalized to
+other ACK prices. H3 (the periodic frontier) and H4 (the oracle-information
+gap) are characterization questions. The persisted full run contains
+\MetricElevenRuns{} rows; all EXP11 macros, tables and figures are rebuilt
+from its frozen \texttt{tidy.csv}, not transcribed into the manuscript.
 
 \subsection{Reproducibility}
 

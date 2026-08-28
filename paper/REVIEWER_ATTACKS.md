@@ -18,30 +18,28 @@ response.
 the strongest objection.
 
 **Evidence.** P20 has lower mean RMSE than our policy in **16 of 17** cells
-of the final matrix. At the nominal Stressed point P20 reaches 0.1121 m
-against our 0.1188 m, and our policy is the cheapest method under the
-reference cost model in **0 of 17** cells.
+of the final matrix. EXP11 supplies the more direct test: the network
+changes during one mission, Causal-v3 is fixed and receives no regime label,
+and all four adjacent DATA-rate differences have the expected sign. Yet
+P12.5 retains **97.7% of Causal-v3 accuracy** at **89.6% of its
+`Total_w025` cost** and **39.1% of its broadcast cost**.
 
 **Response.** The criticism is correct as far as it goes, and the paper says
-so in the introduction, the results and the conclusion: we do not claim
-superiority over well-tuned periodic communication. What tuning cannot buy
-is adaptation. A periodic rate must be chosen in advance for a network whose
-quality is unknown and changing; at 10 Hz it degrades when the channel does
-(0.0361 → 0.1477 m across Clean to Stressed) and at 20 Hz it pays the high
-rate permanently, including in the Clean condition where 10 Hz already
-delivers everything. Our policy moves between those operating points on its
-own with one parameterization. The honest framing is therefore *adaptivity
-without retuning*, not *better than periodic*.
+so in the introduction, results, discussion and conclusion. A periodic rate
+cannot adapt its communication effort within a mission: it remains fixed as
+the channel changes. Causal-v3 does adapt, with one parameterization and no
+regime label. However, a well-selected fixed rate can remain highly
+competitive on the aggregated mission, as P12.5 demonstrates. EXP11 thus
+supports the **adaptivity mechanism**, not universal superiority. This is
+the required distinction between mechanistic adaptivity and mission-level
+Pareto superiority.
 
-**Where addressed.** §1 "What we claim, and what we do not"; §6.2 final
-paragraph (which states the 16-of-17 figure in the same sentence as the
-positive result); §7.6; Limitations L4.
+**Where addressed.** §1 "What we claim, and what we do not"; §6 EXP11;
+§7 "Why not tune P20, P12.5, or another fixed periodic rate?"; Limitations.
 
-**Remaining weakness.** A reviewer could reasonably demand an experiment
-where the network quality *changes during a run*, which would show the
-adaptation actually being used rather than inferred from three static
-conditions. **We do not have that experiment.** It is the single most
-valuable addition to a future campaign.
+**Remaining weakness.** EXP11 contains one five-segment mission design.
+Different segment durations or regime mixtures could select a different
+best fixed rate; EXP11 does not establish universal mission-level dominance.
 
 ---
 
@@ -254,8 +252,8 @@ useful for deciding when **not** to transmit: an oracle knows immediately
 when a packet has landed and can go quiet with confidence. A causal sender
 cannot distinguish "delivered, ACK still in flight" from "lost", so it errs
 toward transmitting, and in a lossy network that pessimism buys accuracy.
-The oracle bounds attainable *efficiency*, not attainable accuracy, and the
-paper never calls it an accuracy bound.
+  The oracle-information result characterizes attainable efficiency; it is
+  not treated as a bound on attainable accuracy.
 
 **Where addressed.** §6.1 final paragraph; §7.2; §9; and the wording rule
 enforced across the manuscript.
@@ -432,16 +430,21 @@ to UAV formations, ACK-driven freshness estimation exists in AoI scheduling,
 and adaptive thresholds are established. The claim is the *combination* — a
 distributed sender in a formation estimating its own receiver's freshness
 only from cumulative acknowledgements, using it to scale a state-innovation
-threshold — plus the new-information/refresh separation, for which we found
-no prior art. Fifteen near neighbours are compared element by element, and
+  threshold — plus the new-information/refresh separation and in-flight
+  suppression. We did not identify prior work combining all of those
+  elements. The re-audit specifically accounts for Tahir et al. (2024),
+  which already uses delayed ACKs to infer receiver AoI in decentralized
+  multi-agent scheduling but does not add physical state innovation, UAV
+  formation control or the new-versus-refresh suppression split. Near
+  neighbours are compared element by element, and
 the search boundary and the conditions that would overturn the assessment
-are recorded. Nothing in the paper is called "first".
+are recorded. No priority claim is made.
 
 **Where addressed.** §2.5; `NOVELTY_GAP_REVIEW.md`;
 `RELATED_WORK_MATRIX.md`.
 
-**Remaining weakness.** "We found no prior work" is weak evidence of
-absence, and our search was Crossref-indexed and English-language. A
+**Remaining weakness.** A negative search result is weak evidence of
+absence, and our search was DOI-indexed and English-language. A
 reviewer who knows the field may produce the paper we missed — which is why
 the re-test trigger is written down.
 

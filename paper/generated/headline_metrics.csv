@@ -278,3 +278,44 @@ exp10.safety.nominal.stressed.State_event.unsafe,12,NaN,NaN,50,seeds,results/exp
 exp10.safety.nominal.stressed.State_event.eligible,50,NaN,NaN,50,seeds,results/exp10b_unified_matrix/2026-08-27_095330,"all seeds"
 exp10.safety.nominal.stressed.Causal_v3.unsafe,0,NaN,NaN,50,seeds,results/exp10b_unified_matrix/2026-08-27_095330,"all seeds"
 exp10.safety.nominal.stressed.Causal_v3.eligible,50,NaN,NaN,50,seeds,results/exp10b_unified_matrix/2026-08-27_095330,"all seeds"
+exp11.H1.adjacent_1,39.9653333333334,39.7426562400038,40.1880104266629,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,Causal adjacent-segment DATA-rate difference; paired over seeds
+exp11.H1.adjacent_2,43.0946666666667,42.8698010215395,43.319532311794,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,Causal adjacent-segment DATA-rate difference; paired over seeds
+exp11.H1.adjacent_3,-41.404,-41.5834322548795,-41.2245677451206,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,Causal adjacent-segment DATA-rate difference; paired over seeds
+exp11.H1.adjacent_4,-41.5938606302707,-41.7705799207397,-41.4171413398018,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,Causal adjacent-segment DATA-rate difference; paired over seeds
+exp11.H2a.rmse_causal_minus_p10,-0.0108131209016016,-0.0110550094718744,-0.0105712323313288,50,m,results/exp11_dynamic_network/2026-08-27_174026,preregistered H2a; paired over seeds
+exp11.H2b.total_w025_causal_minus_p20,-60.4598107171421,-60.5172673988001,-60.4023540354841,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,preregistered H2b at w=0.25 only; paired over seeds
+exp11.broadcast.causal_minus_p20,71.6528925619836,70.7065071851647,72.5992779388024,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,negative result: broadcast accounting reverses the comparison
+exp11.broadcast.causal_minus_p25,41.6544921354305,40.708018922367,42.6009653484939,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,negative result: Causal is also costlier than P25 under broadcast accounting
+exp11.oracle.rmse_causal_minus_oracle,-0.00784128138606835,-0.0079776103294861,-0.0077049524426506,50,m,results/exp11_dynamic_network/2026-08-27_174026,oracle-information reference; characterization only
+exp11.oracle.total_w025_causal_minus_oracle,39.6745534524127,39.6167708505415,39.7323360542839,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,oracle-information reference; characterization only
+exp11.oracle.rmse_oracle_minus_p10,-0.00297183951553327,-0.00322947437843376,-0.00271420465263277,50,m,results/exp11_dynamic_network/2026-08-27_174026,oracle-information reference versus P10 at near-equal cost
+exp11.oracle.total_w025_oracle_minus_p10,-0.138096507597941,-0.166792071037982,-0.109400944157899,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,oracle-information reference versus P10 at near-equal cost
+exp11.p125.rmse_causal_minus_p125,-0.00195049101616373,-0.00213179981998463,-0.00176918221234283,50,m,results/exp11_dynamic_network/2026-08-27_174026,prominent fixed-rate counterexample
+exp11.p125.total_w025_causal_minus_p125,14.5316582244734,14.4741511262687,14.5891653226781,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,prominent fixed-rate counterexample
+exp11.p125.accuracy_fraction,0.976617858329629,NaN,NaN,50,fraction,results/exp11_dynamic_network/2026-08-27_174026,Causal RMSE divided by P12.5 RMSE
+exp11.p125.total_w025_fraction,0.895859215327203,NaN,NaN,50,fraction,results/exp11_dynamic_network/2026-08-27_174026,P12.5 cost divided by Causal cost
+exp11.p125.broadcast_fraction,0.391350796439496,NaN,NaN,50,fraction,results/exp11_dynamic_network/2026-08-27_174026,P12.5 broadcast cost divided by Causal broadcast cost
+exp11.means.p5.rmse,0.137659276802443,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p5.total_w025,50.0034657424687,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p5.broadcast,30.0013329778726,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p10.rmse,0.0922806094555199,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p10.total_w025,100.002132764596,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p10.broadcast,60.0007997867235,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p125.rmse,0.0834179795700821,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p125.total_w025,125.006931484937,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p125.broadcast,75.0031991468941,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p20.rmse,0.0704037366700937,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p20.total_w025,199.998400426553,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p20.broadcast,119.999200213276,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p25.rmse,0.0657268234331837,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p25.total_w025,249.995467875233,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.p25.broadcast,149.997600639829,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.stateevent.rmse,0.164540486213368,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.stateevent.total_w025,38.5137296720874,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.stateevent.broadcast,23.1143695014663,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.causal.rmse,0.0814674885539183,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.causal.total_w025,139.538589709411,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.causal.broadcast,191.65209277526,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.oracle.rmse,0.0893087699399867,NaN,NaN,50,m,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.oracle.total_w025,99.8640362569981,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean
+exp11.means.oracle.broadcast,59.9192215409224,NaN,NaN,50,swarm-total Hz,results/exp11_dynamic_network/2026-08-27_174026,mission mean

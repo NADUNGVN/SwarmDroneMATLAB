@@ -1,0 +1,15 @@
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Method & RMSE [m] & $C_{0.25}$ [Hz] & broadcast [Hz] \\
+\midrule
+P5 & \MetricElevenPfiveRmse{} & \MetricElevenPfiveCost{} & \MetricElevenPfiveBroadcast{} \\
+P10 & \MetricElevenPtenRmse{} & \MetricElevenPtenCost{} & \MetricElevenPtenBroadcast{} \\
+\textbf{P12.5} & \textbf{\MetricElevenPonetwofiveRmse{}} & \textbf{\MetricElevenPonetwofiveCost{}} & \textbf{\MetricElevenPonetwofiveBroadcast{}} \\
+P20 & \MetricElevenPtwentyRmse{} & \MetricElevenPtwentyCost{} & \MetricElevenPtwentyBroadcast{} \\
+P25 & \MetricElevenPtwentyfiveRmse{} & \MetricElevenPtwentyfiveCost{} & \MetricElevenPtwentyfiveBroadcast{} \\
+State-event & \MetricElevenStateeventRmse{} & \MetricElevenStateeventCost{} & \MetricElevenStateeventBroadcast{} \\
+\textbf{Causal-v3} & \textbf{\MetricElevenCausalRmse{}} & \textbf{\MetricElevenCausalCost{}} & \textbf{\MetricElevenCausalBroadcast{}} \\
+Oracle-periodic\textsuperscript{*} & \MetricElevenOracleRmse{} & \MetricElevenOracleCost{} & \MetricElevenOracleBroadcast{} \\
+\bottomrule
+\multicolumn{4}{@{}l}{\footnotesize \textsuperscript{*}Non-causal, regime-aware oracle-information reference.}
+\end{tabular}

@@ -3,8 +3,9 @@ function report = paper_guard(verbose)
 %
 %   report = paper_guard()
 %
-% simulation-v1.0 is frozen. The paper package reads frozen results and
-% writes only into paper/. This checks that claim against git rather than
+% simulation-v1.0 is frozen. EXP11 is separately frozen supplemental
+% evidence outside that boundary and may be cited by the paper. The paper
+% package reads frozen results and writes only into paper/. This checks that claim against git rather than
 % trusting it, and it is a BLOCKER for the audit: a figure that required
 % editing a simulator is not a figure about the frozen campaign.
 %
@@ -63,8 +64,17 @@ end
 
 anchor = jsondecode(fileread(anchorPath));
 
+if ~isfield(anchor,'supplementalEvidence') || ...
+        ~contains(anchor.supplementalEvidence.relationshipToFrozen, ...
+        'outside simulation-v1.0 boundary')
+    error('paper_guard:noSupplementalBoundary', ...
+        'EXP11 must be recorded as supplemental evidence outside simulation-v1.0.');
+end
+
 expectedSha = anchor.frozenRelease.sha;
 frozenTag   = anchor.frozenRelease.tag;
+expectedExp11Sha = anchor.supplementalEvidence.sha;
+exp11Tag = anchor.supplementalEvidence.tag;
 
 readOnly = anchor.readOnlyPaths;
 
@@ -76,6 +86,20 @@ report.anchorFile  = 'paper/FROZEN_BASE.json';
 report.frozenTag   = frozenTag;
 report.expectedSha = expectedSha;
 report.readOnly    = readOnly;
+report.exp11Tag = exp11Tag;
+report.expectedExp11Sha = expectedExp11Sha;
+
+[stExp11, exp11Out] = system(sprintf('git -C "%s" rev-list -n1 %s', ...
+    root, exp11Tag));
+exp11Commit = strtrim(exp11Out);
+report.exp11LocalTagCommit = exp11Commit;
+report.exp11Supplemental = true;
+report.exp11OutsideSimulationBoundary = true;
+if stExp11 ~= 0 || ~localShaEq(exp11Commit, expectedExp11Sha)
+    error('paper_guard:exp11AnchorMismatch', ...
+        'EXP11 supplemental tag %s does not resolve to %s.', ...
+        exp11Tag, expectedExp11Sha);
+end
 
 
 %% ============================================================
@@ -182,6 +206,15 @@ end
 report.releaseBlocker = strcmp(report.remoteState,'REMOTE_TAG_MISSING');
 report.ownerAction    = '';
 
+[stExpRem, expRemOut] = system(sprintf( ...
+    'git -C "%s" ls-remote --tags origin %s', root, exp11Tag));
+report.exp11RemoteTagPresent = (stExpRem == 0) && ...
+    ~isempty(strtrim(expRemOut));
+if ~report.exp11RemoteTagPresent
+    error('paper_guard:exp11RemoteTagMissing', ...
+        'EXP11 supplemental tag is missing from origin.');
+end
+
 if report.releaseBlocker
     report.ownerAction = sprintf('git push origin %s', frozenTag);
 end
@@ -278,6 +311,9 @@ if verbose
     end
 
     fprintf('  remote tag      : %s\n', report.remoteState);
+    fprintf('  EXP11 supplement: %s -> %s (local + remote verified)\n', ...
+        exp11Tag, localShort(exp11Commit));
+    fprintf('                    outside simulation-v1.0 boundary\n');
     fprintf('  verified against: %s\n', verifyRef);
     fprintf('  paths touched   : %d\n', numel(allTouched));
 

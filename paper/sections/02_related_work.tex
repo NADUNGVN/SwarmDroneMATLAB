@@ -39,13 +39,16 @@ fencing with connectivity and collision
 constraints~\cite{yang2025fencing}. \textbf{The gap this paper addresses is
 therefore not the absence of event-triggered UAV formation control.}
 
-What these designs share is the quantity their trigger reads. It is a
-local error --- the difference between an agent's current state and the
-state it last sent --- and it is blind to what the receiver actually holds.
-When a packet is lost or badly delayed, a sender whose own state is steady
-generates no event while the receiver's copy ages without bound. Dynamic
-thresholds do not close this gap either: their modulating signal is
-internal to the sender.
+Most representative designs above trigger on a local error --- the
+difference between an agent's current state and the state it last sent ---
+and are blind to what the receiver actually holds. There are important
+exceptions to that generalisation. Wang et al. combine AoI with an
+event-triggered distributed Kalman consensus filter over a wireless sensor
+network~\cite{wang2021freshness}, and a recent consensus design triggers on
+either state error or a sender-held AoI bound~\cite{lin2026cooperative}.
+Neither design infers per-receiver freshness from delayed acknowledgements:
+the latter explicitly resets its age variable when the sender broadcasts.
+Thus ``AoI-aware event triggering'' is not itself the gap addressed here.
 
 \subsection{Age of information and freshness in networked control}
 \label{sec:rel_aoi}
@@ -58,15 +61,15 @@ possible~\cite{sun2017update}. The area is now
 surveyed at length~\cite{yates2021aoisurvey,yang2025aoiperspective}, with
 extensions to multi-node dissemination~\cite{kaswan2025gossip}.
 
-Two results from this literature shaped our design directly. First, age
+Two results from this literature shaped our design directly. One is that age
 alone is a poor proxy for control cost: \cite{ayan2019aoivoi} shows that
 scheduling on value-of-information rather than age changes the outcome for
 networked control loops. Our policy accordingly never lets age trigger a
 transmission by itself --- age only lowers the bar that a genuine state
 change must clear. Second, going beyond pure age is not new:
 \cite{rajaraman2021notjustage} already combines age with a
-content-quality term, so our composition of innovation with freshness is
-not the first attempt in that direction.
+content-quality term, so combining innovation-like content with freshness
+already has precedent.
 
 Closest to our combination is \cite{mamduhi2020freshness}, which co-designs
 control and networking policy for multi-loop systems using a mixture of
@@ -83,14 +86,26 @@ A sender cannot observe the age of information at a receiver; it can only
 infer it from what comes back. That inference is established in the
 AoI-scheduling literature: \cite{ceran2019average} drives AoI-optimal
 transmission from acknowledgement/negative-acknowledgement feedback with
-hybrid automatic repeat request (ARQ) under a resource constraint, with no oracle knowledge of future outcomes. We therefore do
-not claim ACK-based causal freshness estimation as novel in itself; we
-claim its use inside a distributed multi-agent trigger.
+hybrid automatic repeat request (ARQ) under a resource constraint, with no
+oracle knowledge of future outcomes. More directly, Tahir et al. give
+decentralised sensor agents delayed acknowledgements over a duplex channel
+and use a particle filter to maintain a belief over receiver AoI in a
+multi-agent transmission policy~\cite{tahir2024collaborative}. We therefore
+do not claim either ACK-based causal freshness inference or its multi-agent
+use as novel in itself.
+
+Tahir et al. is the closest feedback-side near-neighbour found in our
+independent re-check. Its objective and action depend on AoI and channel
+load; it has no physical state-innovation term, no UAV formation-control
+loop, and no semantic split between new information and refresh. It also
+explicitly permits more than one message from an agent to be in flight.
+Those differences, rather than the mere presence of ACKs, define our
+narrower mechanism claim.
 
 The contrast class is centralised and index-based: \cite{tang2022whittle}
 schedules to minimise an age cost with a Whittle-index policy. Such
 policies evaluate globally and periodically, where our policy decides
-locally and asynchronously. Radio resources being a first-class design
+locally and asynchronously. Radio resources being an explicit design
 variable in wireless control~\cite{gatsis2014optimal,park2018wireless} is
 why we price the reverse channel rather than treating acknowledgements as
 free, and delay and dropout affecting closed-loop
@@ -156,16 +171,18 @@ reporting cost under several models rather than one.
 Reading across the four subsections:
 
 \begin{itemize}
-\item event-triggered multi-agent designs, \emph{including recent UAV
-      formation work}, trigger on locally measurable error and do not model
-      receiver staleness (\S\ref{sec:rel_etc});
-\item AoI-aware control designs do model staleness, but generally place the
-      decision in a scheduler that is assumed to know the age, and address
-      multi-loop or single-link settings rather than a formation
+\item event-triggered multi-agent and UAV-formation designs establish local
+      state-error triggering, while AoI-aware consensus filters establish
+      freshness-aware triggering; neither line supplies the full mechanism
+      studied here (\S\ref{sec:rel_etc});
+\item AoI-aware control designs model staleness, but usually place the
+      decision in a scheduler or reset age at transmission rather than
+      infer per-receiver freshness from delayed feedback
       (\S\ref{sec:rel_aoi});
-\item ACK-driven causal freshness estimation exists, in single-link
-      AoI-optimal scheduling, without a state-innovation trigger
-      (\S\ref{sec:rel_ack});
+\item ACK-driven causal receiver-AoI inference already exists in both
+      single-link scheduling and a decentralised multi-agent sensor policy,
+      without a physical state-innovation trigger or the new-versus-refresh
+      semantic split (\S\ref{sec:rel_ack});
 \item UAV-swarm work supplies the constraints, and has reached hardware
       with a \emph{centralised} AoI scheduler (\S\ref{sec:rel_uav}).
 \end{itemize}
@@ -178,9 +195,9 @@ repetition cooldown governs only repetition. That combination is what this
 paper addresses.
 
 We are explicit about the strength of this statement. Each individual
-ingredient is precedented, and we found no prior work combining them in
-this way --- which is a claim about our search, not a proof of absence. The
-search boundary, the fifteen nearest neighbours with a per-element
+ingredient is precedented. \textbf{We did not identify prior work combining}
+these elements in this way --- a statement about our documented search, not
+a proof of absence. The search boundary, the nearest neighbours with a per-element
 comparison, and the conditions that would overturn the assessment are
-recorded in \texttt{paper/NOVELTY\_GAP\_REVIEW.md}. Nothing in this paper
-is described as first or first-ever.
+recorded in \texttt{paper/NOVELTY\_GAP\_REVIEW.md}. No priority claim is
+made.

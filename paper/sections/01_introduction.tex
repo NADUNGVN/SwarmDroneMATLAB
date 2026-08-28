@@ -69,9 +69,9 @@ new information, pinning the rate at \MetricSevenAfourcModerateRate{}~Hz
 in two different networks), and why innovation-priority resolves the
 conflict \emph{without retuning any threshold} --- no parameter value
 differs between the failing and working variants. The same study shows
-that an acausal oracle transmits \emph{less} and is \emph{less} accurate
-than the causal policy, which makes oracle feedback an information-%
-efficiency reference rather than an accuracy bound.
+that a non-causal ideal-feedback reference transmits \emph{less} and is
+\emph{less} accurate than the causal policy. It is an efficiency
+reference, not a bound on attainable accuracy.
 
 \paragraph{C3 --- Evaluation.} A pre-registered simulation campaign
 spanning network impairment, ACK impairment, five cost-accounting models,
@@ -80,7 +80,10 @@ six-degree-of-freedom (6-DOF) quadrotor dynamics, plant mismatch and synthetic e
 in a \MetricSeeds{}-seed holdout validation of \MetricRuns{} runs with
 paired confidence intervals --- while preserving, rather than re-testing
 away, the seven operating boundaries at which pre-registered claims were
-rejected.
+rejected. A separately frozen supplemental mission then changes network
+quality in flight. Without a regime label or retuning, the fixed Causal-v3
+policy changes its communication effort at all four adjacent transitions.
+This directly supports mechanistic adaptivity within one mission.
 
 \subsection*{What we claim, and what we do not}
 
@@ -101,10 +104,12 @@ periodic in the Stressed condition with a paired confidence interval
 excluding zero, and that in the Moderate condition it occupies a
 favourable accuracy-versus-communication trade-off, non-dominated in
 \MetricParetoModerateWtwentyfive{}\% of the selected point families under
-the reference cost model.
+the reference cost model. In the supplemental changing-network mission,
+all four adjacent rate-difference confidence intervals have the expected
+sign; Causal-v3 also has lower RMSE than P10 and lower $C_{0.25}$ than P20.
 
-\textbf{We do not claim} universal superiority over optimally tuned
-periodic communication. A $20$~Hz periodic baseline attains lower formation
+\textbf{We do not claim} universal superiority over a tuned fixed periodic
+rate. A $20$~Hz periodic baseline attains lower formation
 error than our policy in \MetricTotalCells{}$-$\MetricBeatPtwentyCells{}
 of \MetricTotalCells{} cells, and our policy is never the cheapest of the
 four methods under the reference cost model. \textbf{We do not claim}
@@ -113,7 +118,19 @@ pre-registered test of exactly that claim was rejected, and our holdout
 data reproduces the rejection with a signed confidence interval. And we do
 not claim any hardware result; this is a simulation study, and the
 estimator, disturbance and airtime models are stated parameter assumptions
-rather than measurements.
+rather than measurements. Nor do we claim general ACK-inclusive
+communication superiority or a broadcast-medium advantage. In the
+supplemental mission, P12.5 is a prominent counterexample: it retains
+\MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
+\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
+\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost.
+
+The central contribution is therefore \emph{adaptivity under unknown and
+changing network conditions with one fixed causal policy}, not mission-level
+Pareto superiority over a well-selected periodic rate. These are different
+claims: the former concerns whether communication effort changes inside a
+mission without a regime label; the latter concerns which whole-mission
+operating point lies on a selected cost--accuracy frontier.
 
 The remainder of the paper is organised as follows.
 Section~\ref{sec:problem} formalises the setting.

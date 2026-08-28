@@ -1,7 +1,8 @@
 # Reproducibility appendix
 
-Everything in the manuscript is derived from one frozen state of the
-simulation campaign. This file records what that state is, how to
+The main campaign is derived from one frozen state; EXP11 is separately
+frozen supplemental evidence outside that release boundary. This file
+records what those states are, how to
 reproduce it, and the four defects found during the freeze — including
 why none of them changed a scientific metric.
 
@@ -13,15 +14,35 @@ why none of them changed a scientific metric.
 |---|---|
 | Tag | `simulation-v1.0` |
 | Commit | `32858b1` |
-| Paper branch | `paper-v1`, branched from the tag |
+| Paper branch | `paper-v2-exp11`, branched from `paper-v1` at `68ca42f` |
 | Validation run recorded in the tag | `results/simulation_v1_validation/2026-08-27_094912` |
 | Holdout dataset | `results/exp10a_final_validation/2026-08-27_091546` (3400 rows) |
 | Unified matrix | `results/exp10b_unified_matrix/2026-08-27_095330` (68 rows) |
+| EXP11 supplemental tag | `exp11-locked-supplemental` -> `7b64af6` |
+| EXP11 full persisted run | `results/exp11_dynamic_network/2026-08-27_174026` (400 rows; 50 seeds × 8 methods) |
 
 A second, independent pass of the validation was run against the tagged
 tree itself and also reported 7/7; its log is committed after the tag,
 because committing a validation log necessarily moves `HEAD` past the
 commit the log describes.
+
+EXP11 does not move or extend `simulation-v1.0`. The paper may use it as
+supplemental evidence, and its generated artifacts record the source path
+and SHA-256 separately.
+
+### Paper-only rebuild and audit (runs no simulator)
+
+```powershell
+paper/scripts/rebuild_exp11_artifacts.ps1
+paper/scripts/reference_audit.ps1
+paper/scripts/paper_guard.ps1
+paper/scripts/paper_audit.ps1
+```
+
+The base paper-v1 generated values and Figures 1--11 remain those harvested
+from the frozen main campaign. The EXP11 companion rebuilds every added
+metric, macro, table and figure from the full persisted run; it rejects a
+shape or locked-verdict contradiction before writing.
 
 ## 2. Environment
 
@@ -285,3 +306,6 @@ manuscript labels both at every point of use:
   reference directly (10 channels at N = 5). Absolute traffic is therefore
   not comparable across the two eras, and the same caveat applies to
   N = 50 against EXP06A.
+- **EXP11 convention.** EXP11 uses swarm-total DATA, ACK-weighted total and
+  broadcast cost. It is never compared numerically to EXP07 per-channel
+  rates.

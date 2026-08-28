@@ -2,17 +2,16 @@
   "_comment": [
     "Machine-readable identity of the frozen simulation release that this",
     "paper package describes. paper_guard and paper_audit read this file",
-    "rather than hard-coding the values, so the anchor lives in exactly one",
-    "place.",
+    "rather than hard-coding the values. The main release and separately",
+    "frozen EXP11 supplemental anchor are both recorded here.",
     "",
     "The SHA is authoritative, not the tag. The tag is a convenience label",
     "that may be missing from a remote or, in a damaged repository, may point",
     "somewhere else; the commit it must point to is fixed here. Verification",
-    "is therefore anchored to the SHA even while the remote tag is absent.",
+    "is therefore anchored to the peeled commit SHA.",
     "",
     "DO NOT move, recreate or re-point the tag to satisfy a check. A missing",
-    "remote tag is a release-publication blocker requiring owner action, not",
-    "a scientific or audit failure, and the two must not be conflated."
+    "remote tag is a release-publication blocker requiring owner action."
   ],
 
   "frozenRelease": {
@@ -30,13 +29,25 @@
   },
 
   "paperPackage": {
-    "branch": "paper-v1",
-    "paperBaseCommit": "8c79ee0",
+    "branch": "paper-v2-exp11",
+    "paperBaseCommit": "68ca42f",
     "relationshipToFrozen": "descendant",
     "note": [
       "paperBaseCommit is the accepted paper-v1 package commit. It is a",
       "descendant of the frozen sha, so the frozen tree is reachable and",
       "every frozen path can be diffed against it."
+    ]
+  },
+
+  "supplementalEvidence": {
+    "tag": "exp11-locked-supplemental",
+    "sha": "7b64af6",
+    "branchHead": "00d1a13",
+    "resultDirectory": "results/exp11_dynamic_network/2026-08-27_174026",
+    "relationshipToFrozen": "supplemental evidence outside simulation-v1.0 boundary; paper may cite and use it",
+    "note": [
+      "EXP11 is not part of simulation-v1.0 and must never move that release boundary.",
+      "The paper-generated EXP11 numbers are rebuilt only from the full 50-seed persisted run."
     ]
   },
 
@@ -80,20 +91,16 @@
     "docs/"
   ],
 
-  "remoteTag": {
+  "remoteTags": {
     "expectedOnRemote": true,
-    "verifyCommand": "git ls-remote --tags origin simulation-v1.0",
-    "publishCommand": "git push origin simulation-v1.0",
-    "statusAtLastCheck": "ABSENT",
-    "classification": "RELEASE_BLOCKER / OWNER_ACTION",
+    "verifyCommand": "git ls-remote --tags origin",
+    "statusAtLastCheck": "VERIFIED",
+    "classification": "TAG_OK",
     "note": [
-      "A push of this tag was attempted and denied by the environment's",
-      "permission classifier. It was not retried and must not be worked",
-      "around. Until the tag is on the remote, a fresh clone of the paper",
-      "branch cannot resolve 'simulation-v1.0' and must fall back to",
-      "verifying against the sha directly, which paper_guard supports."
+      "Both annotated tags must be checked through their peeled ^{} refs:",
+      "simulation-v1.0 -> 32858b1 and exp11-locked-supplemental -> 7b64af6."
     ]
   },
 
-  "schemaVersion": 1
+  "schemaVersion": 2
 }

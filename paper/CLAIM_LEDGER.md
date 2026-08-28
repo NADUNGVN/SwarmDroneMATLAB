@@ -1,4 +1,24 @@
-# Publication claim ledger — simulation-v1.0
+# Publication claim ledger — simulation-v1.0 plus EXP11 supplement
+
+The canonical post-EXP11 summary is `paper/FINAL_CLAIMS.md`. The central
+claim is adaptivity under unknown and changing network conditions with one
+fixed causal policy, not universal dominance over a tuned fixed periodic
+rate. EXP11 is supplemental evidence outside the `simulation-v1.0` release
+boundary.
+
+## EXP11 locked claims
+
+| Claim | Verdict | Boundary |
+|---|---|---|
+| H1 within-mission rate adaptation without regime label | **SUPPORTED** | all four adjacent paired CIs have the expected sign |
+| H2a RMSE(Causal−P10) | **SUPPORTED** | complete EXP11 mission |
+| H2b `Total_w025`(Causal−P20) | **SUPPORTED only at `w=0.25`** | no generalization across ACK weights |
+| H3 periodic frontier | **CHARACTERIZATION** | P12.5 is prominent in main text |
+| H4 oracle-information gap | **CHARACTERIZATION** | efficiency reference, not a performance bound |
+
+P12.5 retains **97.7% of Causal-v3 accuracy**, at **89.6% of
+`Total_w025` cost** and **39.1% of broadcast cost**. This separates
+mechanistic adaptivity from mission-level Pareto superiority.
 
 Publication-ready form of `docs/FINAL_CLAIMS.md`. One row per claim, with
 the status, the supporting experiment, the metric that carries it, the
@@ -72,10 +92,10 @@ checks that they do not appear:
 - universal superiority over optimally tuned periodic communication
   (P20 has lower RMSE in **16 / 17** cells);
 - any reduction in **total** radio traffic once acknowledgements are priced;
-- "fully decentralized without feedback" — the policy is a **causal
-  ACK-assisted decentralized communication policy** and depends on the
+- any claim that local decisions require no reverse-channel information —
+  the policy is a **causal ACK-assisted decentralized communication policy** and depends on the
   reverse channel;
 - any hardware, airtime or energy measurement;
-- any aerodynamic wind model (the external forcing is a nominal-mass
+- any physical air-flow model (the external forcing is a nominal-mass
   equivalent acceleration proxy);
 - any measured sensor model (the estimator sigmas are assumptions).

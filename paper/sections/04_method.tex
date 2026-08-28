@@ -152,7 +152,14 @@ $\tau_{\min}$ of the previous transmission:
 t - t^{\mathrm{tx}} < \tau_{\min} \;\Rightarrow\; \text{no transmission}.
 \label{eq:refractory}
 \end{equation}
-This bounds the instantaneous rate and excludes Zeno behaviour.
+Because decisions are evaluated only on the sampled outer grid of spacing
+$h>0$, successive transmissions on a directed channel satisfy
+\begin{equation}
+t_{n+1}^{ij}-t_n^{ij}\ge h>0 .
+\label{eq:nozeno}
+\end{equation}
+This excludes Zeno behavior by construction; it is not a closed-loop
+stability proof.
 
 \paragraph{Branch 1 --- hard new information.}
 \begin{equation}

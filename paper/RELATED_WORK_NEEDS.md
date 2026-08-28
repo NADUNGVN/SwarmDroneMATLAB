@@ -69,7 +69,7 @@ acknowledgement* assumption are common in it. Removing those assumptions is
 only a contribution if they are actually prevalent.
 
 **How we differ.** We remove both and measure the cost. Our ablation
-includes an acausal oracle as an explicit reference, and the result is
+includes a non-causal ideal-feedback policy as an explicit reference, and the result is
 worth citing against: the causal policy reaches **lower** Stressed error
 than the oracle (0.1170 m vs 0.1306 m) while transmitting **more**
 (18.24 vs 15.80 Hz per channel). The oracle bounds efficiency, not

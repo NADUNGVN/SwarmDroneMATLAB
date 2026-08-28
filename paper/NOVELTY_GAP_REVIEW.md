@@ -1,6 +1,7 @@
 # Near-neighbour novelty stress test
 
-**Verdict: NO NOVELTY CONFLICT.** No verified prior work found combines
+**Verdict after independent 2026-08-28 re-audit: NO NOVELTY CONFLICT.** We
+did not identify verified prior work combining
 causal ACK-confirmed receiver freshness, state innovation, age-based
 threshold adaptation, and event-triggered multi-agent communication in
 essentially the same way. The reasoning, the evidence, and the limits of
@@ -41,6 +42,9 @@ different-in-kind, **—** not applicable.
 | Mamduhi et al. 2020 `10.3390/jsan9030043` | **Y** | **Y** | n | scheduler-side metric | oracle-ish (network-side) | ~ | n | Y | ~ multi-**loop** | n | ~ | Y (plants) | n | Closest AoI+event combination, but it co-designs a **network scheduler across independent control loops**; there is no sender that estimates its own receiver's freshness from ACKs, and no innovation-vs-refresh split |
 | Tripathi et al. 2023 (WiSwarm) `10.1109/INFOCOM53939.2023.10228860` | **Y** | n | ~ (scheduler feedback) | centralised scheduler | — | n | n | Y | **Y** | **Y** | ~ | Y | **Y** | Closest on application. A **centralised AoI-based scheduler** allocates the channel; there is no distributed state-innovation trigger and no per-sender freshness memory. Has the hardware we lack |
 | Ceran et al. 2019 `10.1109/TWC.2019.2899303` | **Y** | n | **Y** (ACK/NACK) | inferred from ACK | **causal** | n | ~ (HARQ) | Y | n | n | Y (resource constraint) | n | n | Has E1 in spirit: ACK-driven, causal, no oracle. But single source-destination **AoI-optimal scheduling**; no state innovation, no multi-agent, no control loop |
+| Tahir et al. 2024 `10.23919/IFIPNetworking62109.2024.10619823` | **Y** | n | **Y** (delayed ACK) | particle-filter belief | **causal** | n | n (multiple in flight allowed) | **Y** | **Y** sensor agents | n | **Y** | n | n | Closest feedback-side neighbour found in the re-audit: decentralized multi-agent receiver-AoI inference is already established, but there is no physical state innovation, UAV control loop, or new-versus-refresh suppression split |
+| Wang et al. 2021 `10.1631/FITEE.2000206` | **Y** | **Y** | n | freshness constraint | causal | **Y** | n | Y | **Y** | n | ~ | filter | n | AoI-aware event-triggered consensus filtering is established, but not ACK-derived per-receiver freshness or semantic in-flight suppression |
+| Lin et al. 2026 `10.3390/pr14152502` | **Y** | **Y** | n | sender-held bound | causal | ~ | n | ~ | **Y** | n | ~ | n | n | State-error/AoI-bound consensus trigger resets age on broadcast; it does not infer receiver freshness from ACKs |
 | Rajaraman et al. 2021 `10.1109/JSAC.2021.3065061` | **Y** | ~ | n | assumed | oracle | ~ | n | Y | n | n | Y | n | n | Goes beyond pure age by adding a **quality/content** term — conceptually adjacent to our innovation-times-age composition — but as a remote-estimation/scheduling formulation, not a multi-agent event trigger |
 | Ayan et al. 2019 `10.1145/3302509.3311050` | **Y** | ~ | n | scheduler-side | oracle | n | n | Y | ~ multi-loop | n | Y | Y | n | Establishes that age alone is a poor control proxy and proposes value-of-information instead; **centralised cellular scheduling**, not a distributed sender policy |
 | Tang et al. 2022 `10.1109/LCOMM.2021.3125669` | **Y** | n | n | assumed | oracle | n | n | Y | n | n | Y | n | n | Index-based centralised AoI scheduling; no trigger, no agents |
@@ -58,12 +62,12 @@ different-in-kind, **—** not applicable.
 
 ## 3. Column-by-column novelty accounting
 
-**E1 — causal ACK-confirmed receiver freshness.** *Precedented, but not in
-our setting.* The AoI-ARQ literature (Ceran et al. 2019) already drives
-transmission from ACK/NACK feedback without oracle knowledge. What we
-did not find is that mechanism inside a **multi-agent formation trigger**,
-where each sender maintains a per-directed-channel confirmed-freshness
-memory.
+**E1 — causal ACK-confirmed receiver freshness.** *Precedented, including
+in a multi-agent setting.* Ceran et al. (2019) drives transmission from
+ACK/NACK feedback, and Tahir et al. (2024) uses delayed ACKs and a particle
+filter to estimate receiver AoI for decentralized sensor agents. The
+remaining distinction is its combination with physical state innovation,
+a formation-control trigger and E5, not ACK-based inference itself.
 
 **E2 — innovation against the last transmitted state.** *Standard* in
 event-triggered control. Our specific point — that measuring innovation
@@ -82,7 +86,8 @@ modulated specifically by an **ACK-derived estimate of receiver age**.
 precedented*, including for UAV formations with flight experiments. We
 must not, and do not, claim novelty here.
 
-**E5 — new information separated from refresh.** *No prior art found.*
+**E5 — new information separated from refresh.** *We did not identify a
+matching implementation.*
 Repetition-suppression and duplicate-suppression exist in networking, and
 minimum inter-event times are standard in event-triggered control, but we
 found no work that applies a repetition cooldown **only** to
@@ -93,16 +98,14 @@ element our design-evolution ablation isolates.
 ## 4. What we therefore may and may not claim
 
 **May claim:** the combination E1+E2+E3+E4 as realised here, the E5
-semantic separation, the quantified demonstration that an acausal oracle
-is an information-efficiency reference rather than an accuracy bound, and
+semantic separation, the ideal-feedback efficiency characterization, and
 the pre-registered evaluation with a 50-seed holdout and preserved
 negative results.
 
 **May not claim:** novelty of event-triggered multi-agent control, of
 AoI as a metric, of ACK-driven scheduling, of adaptive thresholds, or of
-event-triggered UAV formation control. **Must not use "first" or
-"first-ever" for anything in this paper** — the search below is not
-exhaustive enough to support such a word, and the audit forbids it.
+event-triggered UAV formation control. No priority claim is warranted: the
+search below is not exhaustive enough to support one.
 
 ## 5. Limits of this search — stated so the verdict can be re-tested
 
@@ -119,10 +122,10 @@ exhaustive enough to support such a word, and the audit forbids it.
    are under-covered. Several 2026 preprints appeared in the discovery
    searches and were **not** used as evidence because they are not
    peer-reviewed.
-4. **Depth.** For most near neighbours the assessment rests on the
-   abstract and the verified metadata rather than a full reading. Two
-   entries (Mamduhi et al. 2020; Tripathi et al. 2023) were examined more
-   closely because they are the closest.
+4. **Depth.** The named core neighbours Mamduhi, Tripathi/WiSwarm, Ceran,
+   Tahir, Wang and Lin were re-checked from publisher full text or an
+   author-posted full manuscript plus publisher-deposited metadata. Less
+   direct candidates were screened at title/abstract level.
 5. **Asymmetry of evidence.** Absence of a matching paper in this search
    is weak evidence of absence. The verdict is "no conflict **found**",
    which is the strongest claim the method supports.

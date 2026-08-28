@@ -23,7 +23,7 @@ AoI-based wireless networking for collaborative UAV teams has been
 demonstrated on real hardware~\cite{tripathi2023wiswarm}. Our contribution
 is positioned against that work, not beside it.
 
-\subsection{The communication saving is DATA-only}
+\subsection{DATA reduction does not imply total-traffic reduction}
 
 Under the reference cost model the proposed policy is not the cheapest of
 the four methods in any cell of the final matrix
@@ -44,6 +44,23 @@ into single broadcasts far more effectively than event-triggered ones, and
 unicast acknowledgements do not collapse at all. This is a structural
 disadvantage of the approach on a shared medium, not a measurement
 artefact.
+
+EXP11 sharpens both limitations. Causal-v3 has lower ACK-weighted total
+cost than P20 at the pre-registered $w=0.25$, but that one weight does not
+establish general ACK-inclusive superiority. Under broadcast accounting it
+costs \MetricElevenBroadcastWorsePercent{}\% more than P20. P12.5 retains
+\MetricElevenPonetwofiveAccuracyPercent{}\% of its accuracy at only
+\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost.
+
+\subsection{One changing mission does not establish mission-level dominance}
+
+EXP11 directly tests in-flight adaptation, but only in one five-segment
+mission design. Its supported H1 is mechanistic: one fixed causal policy
+changes communication effort when the network changes without receiving
+the regime label. The result is not universal mission-level Pareto
+superiority. A tuned fixed rate such as P12.5 can remain highly competitive
+on the aggregated mission, and other segment durations or regime mixtures
+could change the best fixed rate.
 
 \subsection{Controller-owned limitations that no policy removes}
 
@@ -81,7 +98,7 @@ measurements from any sensor or airframe, and the estimator sigmas in
 particular must not be read as a sensor model. The external forcing is a
 world-frame nominal-mass-equivalent acceleration proxy: it does not depend
 on relative airspeed, carries no drag coefficient and does not scale with
-frontal area, so it is not an aerodynamic wind model.
+frontal area, so it is not a physical air-flow model.
 
 Within that scope the campaign found a real boundary: at the combined
 estimator arm, Clean-condition traffic rises by a factor of

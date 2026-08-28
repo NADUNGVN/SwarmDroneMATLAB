@@ -156,3 +156,29 @@ rate normalisations labelled wherever they are used.
 **Compilation QA: BLOCKED**, for the single stated reason that no TeX
 distribution exists in this environment. That blocker is environmental, not
 a defect in the manuscript, and it is recorded rather than worked around.
+
+## 9. Post-EXP11 QA (2026-08-28)
+
+The supplemental artifacts were rebuilt from
+`results/exp11_dynamic_network/2026-08-27_174026/tidy.csv` without running
+MATLAB or the simulator. Static audit results:
+
+| Check | Result |
+|---|---|
+| Figures / tables / references | **13 / 8 / 51** |
+| Undefined citations | **0** |
+| Undefined references | **0** |
+| Duplicate labels | **0** |
+| Missing figures/tables | **0** |
+| Scientific-source modifications | **0** |
+| Numeric contradictions | **0** |
+| Unsupported promoted claims | **0** |
+| EXP11 source hash | **PASS**, recorded in `generated/exp11_verification.json` |
+| Base generated metrics | **PASS** — 279 pre-EXP11 headline rows and the base macro block are unchanged from `paper-v1`; every recorded source directory contains its frozen `tidy.csv` |
+| Local and remote release anchors | **PASS** for both frozen tags |
+| EXP11 Figure 12/13 visual inspection | **PASS** — axes, units, method labels and P12.5 counterexample are legible |
+
+Compiler discovery was repeated exactly for `latexmk`, `pdflatex`,
+`xelatex`, `lualatex`, `bibtex` and `tectonic`; every command returned
+**MISSING**. No dependency was installed. Consequently page count,
+overfull/underfull boxes and final float placement remain **MANUAL** checks.

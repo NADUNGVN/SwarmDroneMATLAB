@@ -28,9 +28,17 @@ rate so that the policy cannot perceive a worse network at all.
 
 The boundaries are as much of the result as the improvements, and three
 deserve repeating in a conclusion rather than being left in a limitations
-section.
+section. EXP11 adds direct within-mission evidence: all four adjacent
+Causal-v3 rate changes have the expected sign without a regime label;
+RMSE is lower than P10; and $C_{0.25}$ is lower than P20 at the
+pre-registered ACK weight. The central contribution is adaptivity under
+unknown and changing network conditions with one fixed causal policy, not
+universal dominance over tuned periodic communication. P12.5 retains
+\MetricElevenPonetwofiveAccuracyPercent{}\% of Causal-v3 accuracy at
+\MetricElevenPonetwofiveCostPercent{}\% of its $C_{0.25}$ cost and
+\MetricElevenPonetwofiveBroadcastPercent{}\% of its broadcast cost.
 
-First, \textbf{the saving is a DATA-packet saving.} Against $20$~Hz
+First, \textbf{fewer DATA packets do not imply less total traffic.} Against $20$~Hz
 periodic the paired DATA difference is \MetricKtwoaMean{}~Hz and the
 ACK-inclusive difference is \MetricKtwobMean{}~Hz, both with intervals
 excluding zero. The policy's contribution is adaptivity and accuracy, not
@@ -38,8 +46,9 @@ a reduction in total radio traffic, and under the reference cost model it
 is the cheapest method in \MetricCausalCheapestCells{} of
 \MetricTotalCells{} cells.
 
-Second, \textbf{an acausal oracle is an information-efficiency
-reference, not an accuracy bound.} The oracle variant transmits less
+Second, \textbf{the non-causal ideal-feedback policy is an
+information-efficiency reference, not a bound on attainable accuracy.}
+That variant transmits less
 (\MetricSevenIdealStressedRate{}~Hz per channel) and is \emph{less}
 accurate (\MetricSevenIdealStressedRmse{}~m) than the causal policy
 (\MetricSevenAfivecStressedRate{}~Hz, \MetricSevenAfivecStressedRmse{}~m).

@@ -1,0 +1,25 @@
+{
+    "pass":  true,
+    "simulation":  {
+                       "tag":  "simulation-v1.0",
+                       "expected":  "32858b1",
+                       "local":  "32858b1",
+                       "remote":  "32858b1",
+                       "state":  "TAG_OK"
+                   },
+    "exp11":  {
+                  "tag":  "exp11-locked-supplemental",
+                  "expected":  "7b64af6",
+                  "local":  "7b64af6",
+                  "remote":  "7b64af6",
+                  "state":  "SUPPLEMENTAL_ANCHOR_VERIFIED",
+                  "relationship":  "supplemental evidence outside simulation-v1.0 boundary; paper may cite and use it"
+              },
+    "scientificSourceModifications":  0,
+    "touchedScientificPaths":  [
+
+                               ],
+    "failures":  [
+
+                 ]
+}
