@@ -55,6 +55,15 @@ jobs:
           mkdir -p paper/output
           cp paper/main.pdf paper/output/manuscript_tcns.pdf
 
+      - name: Render every page for visual QA in the ephemeral runner
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          mkdir -p paper/generated/rendered
+          pdfinfo paper/main.pdf > paper/generated/pdfinfo.txt
+          pdftoppm -png -r 144 paper/main.pdf paper/generated/rendered/page
+
       - name: Upload compiled paper and QA evidence
         if: always()
         uses: actions/upload-artifact@v7
@@ -71,3 +80,5 @@ jobs:
             paper/main.blg
             paper/generated/ci_latex_report.txt
             paper/generated/texcount.txt
+            paper/generated/pdfinfo.txt
+            paper/generated/rendered/*.png
