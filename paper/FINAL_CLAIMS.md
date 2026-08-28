@@ -82,4 +82,8 @@ Permitted wording:
 
 Do not claim priority. Tahir et al. (2024) already combine delayed ACKs,
 receiver-AoI belief estimation and decentralized multi-agent scheduling;
-the narrower combination above is the defensible distinction.
+Kesper et al. (2023) combine learned distributed multi-agent triggering with
+last-broadcast states and explicit age timers; Lin et al. (2023) provide a
+direct AoI-aware event-triggered controller; and Onozuka et al. (2024) apply
+AoI/event triggering in both forward and feedback control communication.
+The narrower combination above is the defensible distinction.

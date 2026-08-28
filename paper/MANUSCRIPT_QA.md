@@ -4,21 +4,20 @@ Publication-grade quality checks on `paper/main.tex` and its nine sections.
 
 ---
 
-## 1. Compilation — BLOCKED, with the exact blocker
+## 1. Compilation — PASS in isolated CI
 
 | | |
 |---|---|
-| **Compiled** | **NO** |
-| **Reason** | No TeX distribution is installed in this environment |
-| **Probed** | `pdflatex`, `xelatex`, `lualatex`, `latexmk`, `tectonic`, `bibtex`, `biber` — **all absent from `PATH`**; no TeX Live or MiKTeX installation directory present |
-| **Why not resolved here** | Installing a TeX distribution is a new environment dependency, which this work was scoped not to add. The manuscript source is complete and self-consistent; only the build step is unavailable |
-| **Owner action to unblock** | Install TeX Live (or MiKTeX), then from `paper/`: `pdflatex main && bibtex main && pdflatex main && pdflatex main` |
+| **Compiled** | **YES** — GitHub Actions run `33141338862` |
+| **Environment** | `pdflatex` via `latexmk`, isolated TeX Live 2025 Debian container |
+| **Local environment** | Unchanged; no TeX distribution or other dependency was installed locally |
+| **Artifact** | `paper/main.pdf`, uploaded with `main.log`, BibTeX outputs and `generated/ci_latex_report.txt` |
+| **Result** | **PASS** — 0 undefined citations, 0 undefined references, 0 duplicate labels, 0 missing figures/tables |
 
-Because the document cannot be compiled here, everything below is a
-**static** check performed directly on the source. Static checks catch
-undefined references, duplicate labels, unbalanced environments, missing
-artefacts and unresolved citekeys — they cannot catch overfull boxes, float
-placement, or the true page count.
+The repository now contains a paper-only workflow at
+`.github/workflows/paper-latex.yml`. It checks the frozen scientific boundary,
+compiles only `paper/main.tex`, rejects unresolved citations/references,
+duplicate labels and missing artifacts, and uploads the PDF plus QA evidence.
 
 ### Dependencies the build needs
 
@@ -38,9 +37,9 @@ dependency. Substitute `IEEEtran.bst` when targeting an IEEE venue — see
 | Undefined `\ref` / `\eqref` targets | **0** (39 distinct references, 52 labels) |
 | Duplicate labels | **0** |
 | Unbalanced environments (`figure`, `table`, `tabular`, `algorithm`, `algorithmic`, `itemize`, `enumerate`, `center`, `abstract`, `document`, and starred variants) | **0** |
-| Missing figure files | **0** — 11 referenced, 11 present as `.pdf` (and `.png`) |
-| Missing table files | **0** — 6 referenced, 6 present |
-| Unresolved citekeys | **0** — 48 keys used, 48 defined in `references.bib` |
+| Missing figure files | **0** — 13 referenced, 13 present as `.pdf` (and `.png`) |
+| Missing table files | **0** — 8 referenced, 8 present |
+| Unresolved citekeys | **0** — all 53 bibliography entries compile through BibTeX |
 | Placeholder markers (`TODO`, `FIXME`, `XXX`, `PLACEHOLDER`, `??`, empty `\cite{}`, `RELATED_WORK_NEEDS`) | **0** |
 | Hard-coded numeric results in prose | **0** — every headline number is a generated macro |
 | Undefined metric macros | **0** — 65 used, all defined in `generated/metrics.tex` |
@@ -57,15 +56,18 @@ the companion documents.
 |---|---|
 | Body words (excluding LaTeX markup, comments, tables, captions) | **≈ 9,440** |
 | Estimated text-only extent, two-column IEEE at ~900 words/page | **≈ 10.5 pages** |
-| Figures | 11 (2 schematic, 9 data) |
-| Tables | 6 (3 full-width `table*`) |
-| References | 48 |
+| Actual compiled extent | **23 pages** in the current letter-paper, two-column article layout |
+| Figures | 13 (2 schematic, 11 data) |
+| Tables | 8 |
+| References | 53 |
 | Algorithms | 2 |
 | Numbered equations | 12 |
 | Abstract | 205 words (target 180–230) |
 
-**Estimated total page count: 17–19 pages** once figures and tables are
-placed. This is a real constraint, not a formality:
+The actual 23-page count supersedes the earlier 17–19 page estimate. It is
+not yet a TCNS-template count, but it confirms that substantial compression
+would be needed for a 12-page target. Ranked, protected reduction options are
+recorded in `LENGTH_REDUCTION_PLAN.md`; no major cut has been made.
 
 | Venue | Limit | Verdict |
 |---|---|---|
@@ -94,7 +96,7 @@ reduction candidates.**
 | Mathematical variables defined | **PASS** | All of $N$, $A$, $\pi$, $n_c$, $\pos_i$, $\vel_i$, $\delta_i$, $d_{\min}$, $g_{ij}$, $A_{ij}$, $\hat{A}$, $\bar{A}$, $\rho$, $s_0$, $s_{\min}$, $s(t)$, $u(t)$, $\epsilon_p$, $\epsilon_v$, $\tau_{\min}$, $\tau_r$, $\tau_{\max}$, $\mathcal{O}$, $k^{\mathrm{sent}}$, $C_w$, $C_{\mathrm{air}}$, $C_{\mathrm{bcast}}$, $\bar d$, $\sigma_d$ are introduced where first used |
 | SI unit style | **PASS** | Plain units rather than `siunitx`, to avoid an added dependency; spacing and capitalisation are uniform |
 
-## 5. Figure inspection — manual, all 11 reviewed
+## 5. Figure inspection — manual, all 13 reviewed
 
 No mechanical check can confirm that a figure shows what its caption says,
 so each was viewed.
@@ -112,6 +114,8 @@ so each was viewed.
 | 9 DI vs 6-DOF | m on both axes, identity line | yes | yes — all methods above the line, ordering preserved |
 | 10 mismatch/estimator | m, Hz, with the ×2 bound drawn | yes | yes — bound breach visible |
 | 11 paired holdout | paired difference in m and Hz | yes | yes — K1 and K2a below zero, K2b above; the sign reversal is unmistakable |
+| 12 EXP11 adaptivity | swarm-total Hz and mission regimes | yes | yes — all transitions and the no-regime-label comparison are visible |
+| 13 EXP11 frontier | RMSE and normalized $C_{0.25}$ | yes | yes — P12.5 remains visibly competitive and is labelled |
 
 **Minor cosmetic notes (not defects):** in Figure 11 the inline statistics
 box slightly overlaps the confidence band in the first two panels; in
@@ -121,28 +125,29 @@ neither changes an interpretation. Fix if a venue requests it.
 
 ## 6. Overfull boxes and float placement
 
-**Cannot be assessed without compiling.** Two locations are flagged as
-likely to need attention on first build, both because of long unbroken
-content rather than prose:
+Final isolated compile and 23-page visual inspection:
 
-1. **Table V and Table VI** use fixed-width `p{}` columns holding long
-   sentences; column widths were chosen for a full-width `table*` at
-   letter paper and will need adjustment under a venue template.
-2. **Algorithm 1** has several long `\State` lines with inline mathematics
-   that may overrun a single column; the algorithm is likely to need
-   `\algorithmicindent` tuning or line splitting.
+| Check | Result |
+|---|---|
+| Overfull `\hbox` / `\vbox` | **0 / 0** |
+| Underfull `\hbox` / `\vbox` | **60 / 5** |
+| LaTeX float-placement warnings | **0** |
+| Visual overlap, clipping, or displaced floats | **0** after correcting the widths of Tables I–V and moving the paired-claim table to full width |
+| Font warnings | One benign Computer Modern bold-small-caps substitution; no missing glyphs |
 
-Neither is a content problem. Both must be re-checked on the first
-successful build, and the outcome recorded here.
+The underfull warnings are concentrated in narrow table cells, algorithms,
+two-column prose and bibliography entries. All pages were rendered and
+inspected; they produce visible loose spacing in a few cells/lines but no
+lost, obscured, or ambiguous content.
 
 ## 7. What remains open
 
 | Item | Status |
 |---|---|
-| Compile the document | **BLOCKED** — no TeX distribution (§1) |
-| True page count | Unknown until compiled; estimated 17–19 |
-| Overfull/underfull box log | Unavailable until compiled |
-| Float placement review | Unavailable until compiled |
+| Compile the document | **PASS** in isolated CI (§1) |
+| True page count | **23** in the current layout |
+| Overfull/underfull box log | **0 / 65** total warnings, detailed in §6 |
+| Float placement review | **PASS**, 23/23 pages visually inspected |
 | Venue template conversion | Deliberately not started — see `VENUE_SHORTLIST.md` |
 | Author list, affiliations, funding, ORCIDs | Withheld in this draft |
 
@@ -153,9 +158,10 @@ missing artefacts, zero unresolved citekeys, zero placeholders, zero
 hard-coded result numbers, all acronyms expanded before first use, and both
 rate normalisations labelled wherever they are used.
 
-**Compilation QA: BLOCKED**, for the single stated reason that no TeX
-distribution exists in this environment. That blocker is environmental, not
-a defect in the manuscript, and it is recorded rather than worked around.
+**Compilation QA: PASS.** The isolated CI build produced a 23-page PDF with
+no unresolved cross-reference/citation, duplicate label, missing artifact,
+overfull box, or float-placement defect. The remaining 65 underfull warnings
+are recorded rather than hidden.
 
 ## 9. Post-EXP11 QA (2026-08-28)
 
@@ -165,7 +171,7 @@ MATLAB or the simulator. Static audit results:
 
 | Check | Result |
 |---|---|
-| Figures / tables / references | **13 / 8 / 51** |
+| Figures / tables / references | **13 / 8 / 53** |
 | Undefined citations | **0** |
 | Undefined references | **0** |
 | Duplicate labels | **0** |
@@ -178,7 +184,7 @@ MATLAB or the simulator. Static audit results:
 | Local and remote release anchors | **PASS** for both frozen tags |
 | EXP11 Figure 12/13 visual inspection | **PASS** — axes, units, method labels and P12.5 counterexample are legible |
 
-Compiler discovery was repeated exactly for `latexmk`, `pdflatex`,
-`xelatex`, `lualatex`, `bibtex` and `tectonic`; every command returned
-**MISSING**. No dependency was installed. Consequently page count,
-overfull/underfull boxes and final float placement remain **MANUAL** checks.
+No local compiler was installed. The paper-only isolated CI path supplies
+the missing compiler without modifying the research environment, and its
+PDF/log were used to close the page-count, box-warning and float-placement
+checks above.

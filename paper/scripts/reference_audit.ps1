@@ -41,7 +41,8 @@ $failures = [System.Collections.Generic.List[string]]::new()
 if ($entries.Count -ne $auditRows.Count) { $failures.Add("bib/audit count mismatch: $($entries.Count)/$($auditRows.Count)") }
 
 $duplicateKeys = @($entries.Keys | Group-Object | Where-Object Count -gt 1)
-$duplicateDois = @($auditRows | Group-Object { $_.doi.ToLowerInvariant() } | Where-Object Count -gt 1)
+$doiRows = @($auditRows | Where-Object { -not [string]::IsNullOrWhiteSpace($_.doi) })
+$duplicateDois = @($doiRows | Group-Object { $_.doi.ToLowerInvariant() } | Where-Object Count -gt 1)
 if ($duplicateKeys.Count) { $failures.Add('duplicate citekey') }
 if ($duplicateDois.Count) { $failures.Add('duplicate DOI') }
 
@@ -56,10 +57,46 @@ foreach ($row in $auditRows) {
         continue
     }
     $entry = $entries[$row.citekey]
-    $bibDoi = $entry['doi'].ToLowerInvariant()
-    if ($bibDoi -ne $row.doi.ToLowerInvariant()) { $failures.Add("DOI mismatch: $($row.citekey)") }
+    $bibDoi = if ($entry.ContainsKey('doi')) { ([string]$entry['doi']).ToLowerInvariant() } else { '' }
+    $rowDoi = ([string]$row.doi).ToLowerInvariant()
+    if ($bibDoi -ne $rowDoi) { $failures.Add("DOI mismatch: $($row.citekey)") }
     if ([string]::IsNullOrWhiteSpace($row.claimSupported)) { $failures.Add("unsupported citation mapping: $($row.citekey)") }
     if ($row.verificationStatus -notlike 'VERIFIED*') { $failures.Add("unverified authority: $($row.citekey)") }
+
+    if ([string]::IsNullOrWhiteSpace($rowDoi)) {
+        try {
+            $publisherPage = Invoke-WebRequest -Uri $row.publisherURL -UseBasicParsing -TimeoutSec 30
+            $pageText = Normalize-Text $publisherPage.Content
+            $bibTitle = [string]$entry['title']
+            $bibYear = [string]$entry['year']
+            $bibVenue = if ($entry.ContainsKey('journal')) { [string]$entry['journal'] } else { [string]$entry['booktitle'] }
+            $titleOk = $pageText.Contains((Normalize-Text $bibTitle)) -and ((Normalize-Text $bibTitle) -eq (Normalize-Text $row.title))
+            $yearOk = $pageText.Contains((Normalize-Text $bibYear)) -and ($bibYear -eq [string]$row.year)
+            $venueOk = $pageText.Contains('proceedings of the 5th annual learning for dynamics and control conference') -and ((Normalize-Text $bibVenue) -eq (Normalize-Text $row.venue))
+            $bibFamilies = @(([string]$entry['author'] -split '\s+and\s+') | ForEach-Object { Normalize-Text (($_ -split ',')[0]) })
+            $authorsOk = @($bibFamilies | Where-Object { -not $pageText.Contains($_) }).Count -eq 0
+            if (-not $titleOk) { $failures.Add("title mismatch at primary URL: $($row.citekey)") }
+            if (-not $yearOk) { $failures.Add("year mismatch at primary URL: $($row.citekey)") }
+            if (-not $venueOk) { $failures.Add("venue mismatch at primary URL: $($row.citekey)") }
+            if (-not $authorsOk) { $failures.Add("author-list mismatch at primary URL: $($row.citekey)") }
+            $results.Add([ordered]@{
+                citekey = $row.citekey
+                doi = $null
+                doiResolved = $null
+                authoritativeUrlResolved = ([int]$publisherPage.StatusCode -eq 200)
+                metadataAuthority = 'PMLR primary publication page'
+                title = $titleOk
+                authors = $authorsOk
+                year = $yearOk
+                venue = $venueOk
+                claimMapping = -not [string]::IsNullOrWhiteSpace($row.claimSupported)
+            })
+        } catch {
+            $failures.Add("primary publication URL unresolved: $($row.citekey): $($_.Exception.Message)")
+            $results.Add([ordered]@{ citekey=$row.citekey; doi=$null; authoritativeUrlResolved=$false })
+        }
+        continue
+    }
 
     $doiResolved = $false
     try {
@@ -134,7 +171,8 @@ $doiHandler.Dispose()
 $report = [ordered]@{
     referenceCount = $entries.Count
     auditRowCount = $auditRows.Count
-    uniqueDoiCount = @($auditRows.doi | Sort-Object -Unique).Count
+    uniqueDoiCount = @($doiRows.doi | Sort-Object -Unique).Count
+    authoritativeUrlOnlyCount = @($auditRows | Where-Object { [string]::IsNullOrWhiteSpace($_.doi) }).Count
     verified = ($failures.Count -eq 0)
     failures = @($failures)
     entries = @($results)
@@ -146,4 +184,4 @@ if ($failures.Count) {
     $failures | ForEach-Object { Write-Error $_ }
     exit 1
 }
-Write-Output "REFERENCE_AUDIT_OK references=$($entries.Count) unique_dois=$(@($auditRows.doi | Sort-Object -Unique).Count) doi_resolve=$(@($results | Where-Object doiResolved).Count) metadata=Crossref"
+Write-Output "REFERENCE_AUDIT_OK references=$($entries.Count) unique_dois=$(@($doiRows.doi | Sort-Object -Unique).Count) doi_resolve=$(@($results | Where-Object doiResolved).Count) primary_url_only=$(@($results | Where-Object authoritativeUrlResolved).Count) metadata=Crossref+PMLR"

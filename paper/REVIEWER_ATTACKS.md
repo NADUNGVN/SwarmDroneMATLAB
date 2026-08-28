@@ -434,8 +434,12 @@ only from cumulative acknowledgements, using it to scale a state-innovation
   suppression. We did not identify prior work combining all of those
   elements. The re-audit specifically accounts for Tahir et al. (2024),
   which already uses delayed ACKs to infer receiver AoI in decentralized
-  multi-agent scheduling but does not add physical state innovation, UAV
-  formation control or the new-versus-refresh suppression split. Near
+  multi-agent scheduling; Kesper et al. (2023), which appends age timers to
+  last-broadcast states in learned distributed multi-agent control; Lin et
+  al. (2023), a direct AoI-aware event-triggered power-control precedent;
+  and Onozuka et al. (2024), which triggers both forward and feedback
+  communication. None adds the complete physical state-innovation,
+  cumulative-ACK confirmation and new-versus-refresh in-flight split. Near
   neighbours are compared element by element, and
 the search boundary and the conditions that would overturn the assessment
 are recorded. No priority claim is made.

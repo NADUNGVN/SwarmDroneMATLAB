@@ -1,18 +1,19 @@
 % Table II -- causal design evolution. GENERATED, do not edit.
 % Rates are PER CHANNEL (P10 reads exactly 10.000 Hz).
-\begin{tabular}{llrrrrl}
+\setlength{\tabcolsep}{3pt}%
+\begin{tabular}{p{3.0cm}p{7.0cm}rrrr}
 \toprule
-\multirow{2}{*}{Variant} & \multirow{2}{*}{Feedback / semantics} & \multicolumn{3}{c}{DATA rate per channel [Hz]} & Stressed & \multirow{2}{*}{Interpretation} \\
+\multirow{2}{*}{Variant} & \multirow{2}{*}{Feedback / semantics} & \multicolumn{3}{c}{DATA rate per channel [Hz]} & Stressed \\
 \cmidrule(lr){3-5}
- & & Clean & Mod. & Str. & RMSE [m] & \\
+ & & Clean & Mod. & Str. & RMSE [m] \\
 \midrule
-Ideal-feedback reference (non-causal) & reads receiver state directly in the same step; information-efficiency reference, not implementable and not a bound on attainable accuracy & 8.41 & 11.20 & 15.80 & 0.1306 $\pm$ 0.0005 &  \\
-Causal, fixed threshold & open-loop freshness, no adaptation: rate barely moves with network quality & 7.42 & 7.47 & 7.47 & 0.1719 $\pm$ 0.0034 &  \\
-Causal, adaptive, open loop & adapts the threshold but estimates freshness from what it sent, so the rate moves the WRONG way & 8.41 & 8.29 & 8.16 & 0.1612 $\pm$ 0.0030 &  \\
-Causal, dual memory & freshness now from ACKs; refresh cooldown becomes a ceiling on new information and pins the rate & 8.41 & 9.07 & 9.07 & 0.1545 $\pm$ 0.0025 &  \\
-\textbf{Causal-AoI-v3 (proposed)} & new information separated from refresh; only refresh is governed by the cooldown & 8.44 & 13.35 & 18.24 & 0.1170 $\pm$ 0.0011 &  \\
-P10 & baseline & 10.00 & 10.00 & 10.00 & 0.1462 $\pm$ 0.0023 &  \\
-P20 & baseline & 20.00 & 20.00 & 20.00 & 0.1101 $\pm$ 0.0009 &  \\
-A1 State-event & baseline & 4.33 & 4.29 & 4.21 & 0.2581 $\pm$ 0.0093 &  \\
+Ideal-feedback reference (non-causal) & reads receiver state directly in the same step; information-efficiency reference, not implementable and not a bound on attainable accuracy & 8.41 & 11.20 & 15.80 & 0.1306 $\pm$ 0.0005 \\
+Causal, fixed threshold & open-loop freshness, no adaptation: rate barely moves with network quality & 7.42 & 7.47 & 7.47 & 0.1719 $\pm$ 0.0034 \\
+Causal, adaptive, open loop & adapts the threshold but estimates freshness from what it sent, so the rate moves the WRONG way & 8.41 & 8.29 & 8.16 & 0.1612 $\pm$ 0.0030 \\
+Causal, dual memory & freshness now from ACKs; refresh cooldown becomes a ceiling on new information and pins the rate & 8.41 & 9.07 & 9.07 & 0.1545 $\pm$ 0.0025 \\
+\textbf{Causal-AoI-v3 (proposed)} & new information separated from refresh; only refresh is governed by the cooldown & 8.44 & 13.35 & 18.24 & 0.1170 $\pm$ 0.0011 \\
+P10 & baseline & 10.00 & 10.00 & 10.00 & 0.1462 $\pm$ 0.0023 \\
+P20 & baseline & 20.00 & 20.00 & 20.00 & 0.1101 $\pm$ 0.0009 \\
+A1 State-event & baseline & 4.33 & 4.29 & 4.21 & 0.2581 $\pm$ 0.0093 \\
 \bottomrule
 \end{tabular}

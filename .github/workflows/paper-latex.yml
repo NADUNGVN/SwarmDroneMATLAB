@@ -1,0 +1,63 @@
+name: Paper LaTeX
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - paper-v2-exp11
+    paths:
+      - "paper/**"
+      - ".github/workflows/paper-latex.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  compile-paper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository and frozen anchors
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Enforce paper-only scientific boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          forbidden=(simulation network controllers swarm models experiments metrics configs utils tests)
+          changed="$(git diff --name-only simulation-v1.0..HEAD -- "${forbidden[@]}")"
+          if [[ -n "$changed" ]]; then
+            printf 'Scientific-source modifications relative to simulation-v1.0:\n%s\n' "$changed" >&2
+            exit 1
+          fi
+          test "$(git rev-list -n1 simulation-v1.0)" = "32858b146790d684d8599d2822647030da8fa4e9"
+          test "$(git rev-list -n1 exp11-locked-supplemental)" = "7b64af683ad728606fac53d41e69703c71b9e9d3"
+
+      - name: Compile paper/main.tex in isolated TeX Live
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          working_directory: paper
+          texlive_version: 2025
+          os: debian
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Enforce resolved citations, references, labels, and artifacts
+        shell: bash
+        run: bash paper/scripts/latex_ci_qa.sh paper/main.log paper/generated/ci_latex_report.txt
+
+      - name: Upload compiled paper and QA evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: paper-v2-exp11-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            paper/main.pdf
+            paper/main.log
+            paper/main.aux
+            paper/main.bbl
+            paper/main.blg
+            paper/generated/ci_latex_report.txt

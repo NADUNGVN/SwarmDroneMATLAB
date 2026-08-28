@@ -108,7 +108,7 @@ $guardOutput = & (Join-Path $PSScriptRoot 'paper_guard.ps1') -RepositoryRoot $Re
 if ($LASTEXITCODE -ne 0) { $failures.Add('paper_guard failed') }
 
 $referenceReport = Get-Content -LiteralPath (Join-Path $paperDir 'generated\reference_verification.json') -Raw | ConvertFrom-Json
-if (-not $referenceReport.verified -or $referenceReport.referenceCount -ne 51) { $failures.Add('reference audit is not verified at 51 entries') }
+if (-not $referenceReport.verified -or $referenceReport.referenceCount -ne 53) { $failures.Add('reference audit is not verified at 53 entries') }
 
 $report = [ordered]@{
     pass = ($failures.Count -eq 0)

@@ -1,6 +1,6 @@
 # Literature search and verification log
 
-Record of how the 51 references in `paper/references.bib` were found and
+Record of how the 53 references in `paper/references.bib` were found and
 verified. Kept so that the bibliography can be re-audited, and so that the
 novelty verdict in `NOVELTY_GAP_REVIEW.md` can be re-tested against a
 known search boundary.
@@ -22,13 +22,15 @@ causal feedback + receiver freshness + multi-agent or UAV + state innovation
 | Tripathi et al. / WiSwarm (2023) | `10.1109/INFOCOM53939.2023.10228860` | AoI-aware collaborative UAV networking and real flight hardware | centralized leader/network middleware; not the distributed sender trigger studied here |
 | **Tahir et al. (2024)** | `10.23919/IFIPNetworking62109.2024.10619823` | **closest newly identified neighbour:** decentralized sensor agents use delayed ACKs and a belief over receiver AoI under partial observability | optimizes AoI/channel load; no UAV formation/control state, state-innovation threshold, or new-versus-refresh in-flight-suppression semantics |
 | Wang et al. (2021) | `10.1631/FITEE.2000206` | AoI-based event-triggered Kalman consensus filtering | no delayed-ACK estimate of receiver freshness or semantic traffic split |
-| Lin et al. (2026) | `10.3390/pr14152502` | multi-agent consensus using state-error or AoI-bound triggering | sender-side AoI resets on broadcast; no ACK-derived receiver-freshness estimate |
+| Lin et al. (2023) | `10.1109/TPWRS.2022.3186333` | AoI enters an event-triggered communication scheduler and LQR load-frequency controller | single power-system control application; no delayed cumulative-ACK confirmation, multi-agent/UAV semantics or in-flight split |
+| **Kesper et al. (2023)** | PMLR 211:1072--1085 | distributed multi-agent event-triggered communication/control; last-broadcast states carry explicit age timers | timers reset on broadcast rather than delayed cumulative ACK; no new-information/refresh split |
+| **Onozuka et al. (2024)** | `10.1109/ICIT58233.2024.10541007` | AoI-based event triggering in both forward and feedback railway-control communication | no distributed multi-agent/UAV formation, ACK-confirmed innovation or in-flight semantic split |
 
-Additional discovery candidates included Kesper et al. (2023), a
-distributed event-triggered multi-agent RL controller with receiver-side age
-timers, and Noroozi--Fidler (2024), a signal-aware/AoI hybrid update policy.
-They were not cited because the three added verified references already map
-the relevant claim boundary more directly.
+The earlier `lin2026cooperative` entry was removed. It is a real, verified
+Processes article, but the 2023 IEEE Transactions on Power Systems paper is
+the direct and substantially clearer support for the sentence that
+AoI-aware event-triggered control has precedent. Noroozi--Fidler (2024), a
+signal-aware/AoI hybrid update policy, remains an uncited screened candidate.
 
 **Verdict:** no substantial match to the complete core mechanism was found;
 there is no novelty-conflict stop. The result is deliberately phrased as
@@ -40,7 +42,7 @@ inference or for its use by decentralized multi-agent decision makers.
 
 ## 1. Verification method
 
-**Primary authority: Crossref.** Every entry was verified against the
+**Primary authority: Crossref.** Every DOI-bearing entry was verified against the
 Crossref REST API, which serves the metadata deposited by the publisher as
 the DOI registration agency. For each reference the following were read
 off that record and transcribed:
@@ -61,6 +63,12 @@ GET api.crossref.org/works?filter=doi:<d1>,doi:<d2>,...&rows=N
 
 The second form verifies several DOIs in one authoritative call and was
 used for the confirmation sweep once candidate DOIs were known.
+
+Kesper et al. has no publisher-assigned DOI. Its title, authors, year,
+venue, volume and pages were instead verified against the primary PMLR
+publication page and full paper. The automated audit treats this as one
+explicit primary-URL-only record; it does not invent or substitute the
+arXiv DOI for the peer-reviewed L4DC version.
 
 **What was not used as final evidence:** secondary citation aggregators,
 search-engine snippets, and any generated citation string. WebSearch was
@@ -134,7 +142,8 @@ Search-engine discovery (results used only to identify candidates):
 5. `event-triggered communication multi-UAV formation control 2023 2024 IEEE Transactions experimental quadrotor`
 6. `"receiver AoI" delayed ACK partial observability multi-agent`
 7. `AoI state innovation in-flight suppression event-triggered UAV`
-8. exact-title/DOI searches for Mamduhi, WiSwarm, Ceran, Tahir, Wang and Lin
+8. exact-title/DOI searches for Mamduhi, WiSwarm, Ceran, Tahir, Wang, Lin,
+   Kesper and Onozuka
 
 Queries 1–3 exist specifically to attack our own novelty claim: they are
 phrased to surface a paper that already does what we do. Query 5 exists to
@@ -148,20 +157,21 @@ batched multi-DOI confirmation sweeps.
 
 | Group | Required | Cited | Entries |
 |---|---|---|---|
-| G1 AoI / freshness in networked control | ≥ 6 | **9** | kaul2012, sun2017, yates2021, yang2025aoiperspective, kaswan2025, rajaraman2021, ayan2019, mamduhi2020, wang2021 |
-| G2 event-triggered multi-agent / consensus | ≥ 6 | **16** | astrom2002, tabuada2007, heemels2012, dimarogonas2012, seyboth2013, girard2015, yi2017, nowzari2019, chen2020, ge2021, zhang2025, yin2023, ji2023, chen2024, lin2026 (+ li2026 counted in G3) |
-| G3 wireless / networked control and scheduling | ≥ 6 | **8** | walsh2002, hespanha2007, gatsis2014, park2018, ceran2019, tang2022, tahir2024, li2026 |
+| G1 AoI / freshness in networked control | ≥ 6 | **10** | kaul2012, sun2017, yates2021, yang2025aoiperspective, kaswan2025, rajaraman2021, ayan2019, mamduhi2020, wang2021, lin2023 |
+| G2 event-triggered multi-agent / consensus | ≥ 6 | **17** | astrom2002, tabuada2007, heemels2012, dimarogonas2012, seyboth2013, girard2015, yi2017, nowzari2019, kesper2023, chen2020, ge2021, zhang2025, yin2023, ji2023, chen2024, lin2023 (+ li2026 counted in G3) |
+| G3 wireless / networked control and scheduling | ≥ 6 | **9** | walsh2002, hespanha2007, gatsis2014, park2018, ceran2019, tang2022, tahir2024, onozuka2024, li2026 |
 | G4 UAV / swarm communication constraints | ≥ 6 | **8** | gupta2016, zeng2016, mozaffari2019, zeng2019, campion2019, amodu2023, tripathi2023, yang2025fencing |
 | G5 communication-control co-design | ≥ 5 | **5** | tatikonda2004, nair2007, molin2013, ramesh2013, demirel2017 |
 | G6 UAV / swarm dynamics, formation, flight | ≥ 4 | **6** | olfatisaber2006, lee2010, mellinger2011, oh2015, vasarhelyi2018, zhou2022 |
-| **Total** | 35–55 | **51** | |
+| **Total** | 35–55 | **53** | |
 
-**2021–2026 window:** 18 references — yates2021, rajaraman2021, ge2021,
+**2021–2026 window:** 20 references — yates2021, rajaraman2021, ge2021,
 tang2022, zhou2022, tripathi2023, amodu2023, yin2023, ji2023, chen2024,
 yang2025aoiperspective, kaswan2025, zhang2025, yang2025fencing, li2026,
-wang2021freshness, tahir2024collaborative, lin2026cooperative.
+wang2021freshness, tahir2024collaborative, lin2023eventtriggered,
+kesper2023toward, onozuka2024aoi.
 
-Group totals sum above 51 because several entries are legitimately relevant to
+Group totals sum above 53 because several entries are legitimately relevant to
 two groups; each is assigned one **primary** group in
 `REFERENCE_AUDIT.csv`, and the minimums above are met on primary
 assignment alone.

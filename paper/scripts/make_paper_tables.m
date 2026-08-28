@@ -150,11 +150,12 @@ fid = localOpen(fullfile(tabDir,'tableII_design_evolution.tex'));
 
 fprintf(fid, '%% Table II -- causal design evolution. GENERATED, do not edit.\n');
 fprintf(fid, '%% Rates are PER CHANNEL (P10 reads exactly 10.000 Hz).\n');
-fprintf(fid, '\\begin{tabular}{llrrrrl}\n\\toprule\n');
+fprintf(fid, '\\setlength{\\tabcolsep}{3pt}%%\n');
+fprintf(fid, '\\begin{tabular}{p{3.0cm}p{7.0cm}rrrr}\n\\toprule\n');
 fprintf(fid, '\\multirow{2}{*}{Variant} & \\multirow{2}{*}{Feedback / semantics} & ');
-fprintf(fid, '\\multicolumn{3}{c}{DATA rate per channel [Hz]} & Stressed & \\multirow{2}{*}{Interpretation} \\\\\n');
+fprintf(fid, '\\multicolumn{3}{c}{DATA rate per channel [Hz]} & Stressed \\\\\n');
 fprintf(fid, '\\cmidrule(lr){3-5}\n');
-fprintf(fid, ' & & Clean & Mod. & Str. & RMSE [m] & \\\\\n\\midrule\n');
+fprintf(fid, ' & & Clean & Mod. & Str. & RMSE [m] \\\\\n\\midrule\n');
 
 for k = 1:size(chain,1)
 
@@ -176,8 +177,8 @@ for k = 1:size(chain,1)
         name = ['\textbf{' name '}'];
     end
 
-    fprintf(fid, '%s & %s & %.2f & %.2f & %.2f & %.4f $\\pm$ %.4f & %s \\\\\n', ...
-        name, chain{k,3}, r(1), r(2), r(3), rm, sd, '');
+    fprintf(fid, '%s & %s & %.2f & %.2f & %.2f & %.4f $\\pm$ %.4f \\\\\n', ...
+        name, chain{k,3}, r(1), r(2), r(3), rm, sd);
 
 end
 
@@ -192,9 +193,9 @@ for b = {'P10','P20','A1 State-event'}
 
     idxS = strcmp(E7.method,b{1}) & strcmp(E7.scenario,'Stressed');
 
-    fprintf(fid, '%s & %s & %.2f & %.2f & %.2f & %.4f $\\pm$ %.4f & %s \\\\\n', ...
+    fprintf(fid, '%s & %s & %.2f & %.2f & %.2f & %.4f $\\pm$ %.4f \\\\\n', ...
         b{1}, 'baseline', r(1), r(2), r(3), ...
-        mean(E7.RMSE(idxS),'omitnan'), std(E7.RMSE(idxS),'omitnan'), '');
+        mean(E7.RMSE(idxS),'omitnan'), std(E7.RMSE(idxS),'omitnan'));
 
 end
 
@@ -412,7 +413,8 @@ vRows(end+1,:) = {'Outer timestep', 'EXP09C-dt', ...
 fid = localOpen(fullfile(tabDir,'tableV_robustness.tex'));
 
 fprintf(fid, '%% Table V -- robustness summary. GENERATED, do not edit.\n');
-fprintf(fid, '\\begin{tabular}{p{2.4cm}lp{5.2cm}p{4.4cm}l}\n\\toprule\n');
+fprintf(fid, '\\setlength{\\tabcolsep}{2.5pt}%%\n');
+fprintf(fid, '\\begin{tabular}{p{2.0cm}p{1.2cm}p{4.7cm}p{4.0cm}p{4.0cm}}\n\\toprule\n');
 fprintf(fid, 'Axis & Source & Frozen evidence & Mechanism & Status \\\\\n\\midrule\n');
 
 for k = 1:size(vRows,1)

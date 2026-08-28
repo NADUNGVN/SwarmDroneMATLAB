@@ -29,6 +29,14 @@ time~\cite{girard2015dynamic,yi2017distributed}, and recent surveys
 document how far that idea has been
 carried~\cite{chen2020howoften,ge2021dynamic,zhang2025overview}.
 
+Distributed multi-agent event-triggered communication has also been learned
+jointly with control. Kesper et al. append explicit age timers to the last
+broadcast states available to each agent in a decentralized-execution
+multi-agent reinforcement-learning policy~\cite{kesper2023toward}. Their
+timer resets when an agent broadcasts; it is not a delayed cumulative-ACK
+confirmation of what a particular receiver holds, and the method has no
+new-information/refresh semantic split.
+
 This machinery has already been applied to multi-UAV formations, and we
 state that plainly because it bounds what we can claim. Event-based
 formation control has been developed for directed
@@ -44,11 +52,13 @@ difference between an agent's current state and the state it last sent ---
 and are blind to what the receiver actually holds. There are important
 exceptions to that generalisation. Wang et al. combine AoI with an
 event-triggered distributed Kalman consensus filter over a wireless sensor
-network~\cite{wang2021freshness}, and a recent consensus design triggers on
-either state error or a sender-held AoI bound~\cite{lin2026cooperative}.
-Neither design infers per-receiver freshness from delayed acknowledgements:
-the latter explicitly resets its age variable when the sender broadcasts.
-Thus ``AoI-aware event triggering'' is not itself the gap addressed here.
+network~\cite{wang2021freshness}. Lin et al. place AoI in both an
+event-triggered communication scheduler and an LQR load-frequency
+controller~\cite{lin2023eventtriggered}. These works establish direct
+AoI-aware event-triggered control precedent, but do not infer a particular
+receiver's confirmed state from delayed cumulative acknowledgements or
+separate new information from refresh traffic. Thus ``AoI-aware event
+triggering'' is not itself the gap addressed here.
 
 \subsection{Age of information and freshness in networked control}
 \label{sec:rel_aoi}
@@ -93,6 +103,14 @@ and use a particle filter to maintain a belief over receiver AoI in a
 multi-agent transmission policy~\cite{tahir2024collaborative}. We therefore
 do not claim either ACK-based causal freshness inference or its multi-agent
 use as novel in itself.
+
+Bidirectional AoI-based event triggering also predates this work. Onozuka
+et al. apply an AoI-based event trigger to both forward and feedback
+communication in networked railway vehicle control~\cite{onozuka2024aoi}.
+That is important precedent for using freshness in both directions of a
+control loop, but it is not a distributed multi-agent/UAV formation method
+and does not implement cumulative-ACK-confirmed innovation or our
+new-information/refresh in-flight mechanism.
 
 Tahir et al. is the closest feedback-side near-neighbour found in our
 independent re-check. Its objective and action depend on AoI and channel
@@ -173,16 +191,19 @@ Reading across the four subsections:
 \begin{itemize}
 \item event-triggered multi-agent and UAV-formation designs establish local
       state-error triggering, while AoI-aware consensus filters establish
-      freshness-aware triggering; neither line supplies the full mechanism
-      studied here (\S\ref{sec:rel_etc});
+      freshness-aware triggering, and Kesper et al. additionally combine
+      last-broadcast states with age timers in learned distributed
+      multi-agent control; none supplies the full mechanism studied here
+      (\S\ref{sec:rel_etc});
 \item AoI-aware control designs model staleness, but usually place the
       decision in a scheduler or reset age at transmission rather than
       infer per-receiver freshness from delayed feedback
       (\S\ref{sec:rel_aoi});
 \item ACK-driven causal receiver-AoI inference already exists in both
       single-link scheduling and a decentralised multi-agent sensor policy,
-      without a physical state-innovation trigger or the new-versus-refresh
-      semantic split (\S\ref{sec:rel_ack});
+      while bidirectional AoI/event triggering appears in railway control;
+      these lack the physical state-innovation and new-versus-refresh
+      in-flight semantic split (\S\ref{sec:rel_ack});
 \item UAV-swarm work supplies the constraints, and has reached hardware
       with a \emph{centralised} AoI scheduler (\S\ref{sec:rel_uav}).
 \end{itemize}

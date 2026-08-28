@@ -1,7 +1,8 @@
 {
-    "referenceCount":  51,
-    "auditRowCount":  51,
-    "uniqueDoiCount":  51,
+    "referenceCount":  53,
+    "auditRowCount":  53,
+    "uniqueDoiCount":  52,
+    "authoritativeUrlOnlyCount":  1,
     "verified":  true,
     "failures":  [
 
@@ -98,6 +99,16 @@
                         "claimMapping":  true
                     },
                     {
+                        "citekey":  "lin2023eventtriggered",
+                        "doi":  "10.1109/TPWRS.2022.3186333",
+                        "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
                         "citekey":  "astrom2002riemann",
                         "doi":  "10.1109/CDC.2002.1184824",
                         "doiResolved":  true,
@@ -171,6 +182,18 @@
                         "citekey":  "nowzari2019eventtriggered",
                         "doi":  "10.1016/j.automatica.2019.03.009",
                         "doiResolved":  true,
+                        "title":  true,
+                        "authors":  true,
+                        "year":  true,
+                        "venue":  true,
+                        "claimMapping":  true
+                    },
+                    {
+                        "citekey":  "kesper2023toward",
+                        "doi":  null,
+                        "doiResolved":  null,
+                        "authoritativeUrlResolved":  true,
+                        "metadataAuthority":  "PMLR primary publication page",
                         "title":  true,
                         "authors":  true,
                         "year":  true,
@@ -288,8 +311,8 @@
                         "claimMapping":  true
                     },
                     {
-                        "citekey":  "lin2026cooperative",
-                        "doi":  "10.3390/pr14152502",
+                        "citekey":  "onozuka2024aoi",
+                        "doi":  "10.1109/ICIT58233.2024.10541007",
                         "doiResolved":  true,
                         "title":  true,
                         "authors":  true,

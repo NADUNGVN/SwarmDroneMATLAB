@@ -24,6 +24,7 @@ generalisation is weakened in the prose.
 | `girard2015dynamic` | Dynamic, not static, trigger thresholds are established | Their auxiliary variable is internal; our modulating signal is ACK-derived and refers to another agent's state of knowledge |
 | `yi2017distributed` | Dynamic triggering works in the distributed multi-agent case | Same distinction as above |
 | `nowzari2019eventtriggered` | Survey of the field; documents that freshness is not a standard ingredient | We add the freshness ingredient causally |
+| `kesper2023toward` | **Distributed multi-agent event-triggered communication/control with last-broadcast states and explicit AoI timers** | Closest multi-agent mechanism-side neighbour added in the final correction pass. Its timers reset on broadcast and are available with the shared last-broadcast state; there is no delayed cumulative-ACK confirmation of a particular receiver and no new-information/refresh in-flight split |
 | `chen2020howoften`, `ge2021dynamic`, `zhang2025overview` | Current state and taxonomy of triggering techniques | Positions our branch structure inside an established design space |
 | `yin2023eventbased`, `ji2023dynamic`, `chen2024distributed`, `yang2025fencing` | **Event-triggered communication has already been applied to multi-UAV formation control**, including with delay, disturbances, connectivity and collision constraints | **This is the exception that forbids the easy claim.** We must not say event-triggered UAV formation control is unexplored. Our difference is the freshness term and the reverse channel, not the application |
 
@@ -43,7 +44,7 @@ event-triggered communication has not been applied to UAV formations.
 | `rajaraman2021notjustage` | Combining age with a content/quality term is already done | Our innovation-times-age composition is *not* the first move beyond pure age; the difference is the setting and the causal ACK-derived age |
 | `mamduhi2020freshness` | AoI and event-based triggering have been co-designed | **Nearest neighbour.** Theirs is a network scheduler across independent control loops; there is no per-sender ACK-confirmed freshness memory and no new-information/refresh split |
 | `wang2021freshness` | AoI-aware event triggering appears in distributed Kalman consensus filtering | Their freshness constraint is not an ACK-derived estimate of what a particular receiver holds; there is no new-information/refresh split |
-| `lin2026cooperative` | Recent multi-agent consensus combines a state-error condition with an AoI-bound condition | Sender-held AoI resets on broadcast; the decision does not infer receiver freshness through delayed acknowledgements |
+| `lin2023eventtriggered` | **Direct AoI-aware event-triggered control precedent:** AoI is used in an event-triggered communication scheduler and LQR load-frequency controller | Single power-system control application; no multi-agent/UAV formation, delayed cumulative-ACK confirmation, or new-information/refresh split. This replaces the less direct `lin2026cooperative` entry |
 
 **Prose consequence.** Section 2.2 may say that AoI-aware designs
 typically assume the age at the receiver is known to whoever makes the
@@ -56,6 +57,7 @@ say that nobody has combined AoI with event-based triggering.
 |---|---|---|
 | `ceran2019average` | **ACK/NACK feedback already drives AoI-optimal transmission without oracle knowledge**, with HARQ | The closest precedent for our E1. Single source-destination link, no state innovation, no multi-agent control loop. Also: their retransmission is explicit HARQ; we introduce no retransmission timer at all |
 | `tahir2024collaborative` | **Delayed ACKs support a belief over receiver AoI under partial observability in decentralized multi-agent scheduling** | Closest newly identified neighbour. It optimizes AoI/channel load and permits multiple in-flight messages; it has no physical state-innovation trigger, UAV formation loop, or new-information/refresh suppression split |
+| `onozuka2024aoi` | **AoI-based event triggering is applied in both forward and feedback communication for railway vehicle control** | Important bidirectional AoI/event-trigger precedent, but not a distributed multi-agent UAV formation method; no delayed cumulative-ACK confirmed-state memory, physical state-innovation modulation, or new-information/refresh in-flight split |
 | `tang2022whittle` | Index-based centralised AoI scheduling | Contrast class: centralised and periodic-evaluation, versus our distributed event trigger |
 | `park2018wireless`, `gatsis2014optimal` | Radio resources are a first-class design variable in wireless control | Motivates pricing the reverse channel, which we do under five cost models |
 | `walsh2002stability`, `hespanha2007survey` | Delay and dropout affect closed-loop stability | Our network model includes loss, delay, jitter and out-of-order delivery |
@@ -90,14 +92,17 @@ must state that our work has **not**.
 The gap must emerge from the rows above, not from assertion. Reading down
 the columns:
 
-1. Event-triggered multi-agent designs, including recent UAV-formation
-   ones, trigger on locally measurable state error and do not model
-   receiver staleness (2.1).
+1. Event-triggered multi-agent designs include both model-based UAV
+   formations and learned distributed policies; Kesper et al. explicitly
+   append AoI timers to last-broadcast states, but do not model delayed
+   cumulative-ACK-confirmed receiver state (2.1).
 2. AoI-aware control designs do model staleness, but typically place the
    decision in a scheduler that is assumed to know the age, and address
    multi-loop or single-loop settings rather than a formation (2.2).
-3. ACK-driven causal freshness estimation exists, in single-link
-   AoI-optimal scheduling, without a state-innovation trigger (2.3).
+3. ACK-driven causal freshness estimation exists in single-link and
+   decentralized multi-agent scheduling, and bidirectional AoI/event
+   triggering exists in railway control, without the full state-innovation
+   and in-flight semantic mechanism (2.3).
 4. UAV-swarm work supplies the constraints, and one line of it has reached
    hardware with a *centralised* AoI scheduler (2.4).
 
