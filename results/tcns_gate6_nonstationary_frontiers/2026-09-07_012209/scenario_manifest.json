@@ -1,0 +1,3237 @@
+[
+  {
+    "seed": 2.7020001E+7,
+    "scenario": {
+      "id": "S1",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [],
+      "performanceWindows_s": [],
+      "description": "Stationary IID Moderate channel and unchanged formation.",
+      "name": "Stationary-Moderate",
+      "seed": 2.7020001E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020001E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020002E+7,
+    "scenario": {
+      "id": "S1",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [],
+      "performanceWindows_s": [],
+      "description": "Stationary IID Moderate channel and unchanged formation.",
+      "name": "Stationary-Moderate",
+      "seed": 2.7020002E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020002E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020003E+7,
+    "scenario": {
+      "id": "S1",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [],
+      "performanceWindows_s": [],
+      "description": "Stationary IID Moderate channel and unchanged formation.",
+      "name": "Stationary-Moderate",
+      "seed": 2.7020003E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020003E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020004E+7,
+    "scenario": {
+      "id": "S1",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [],
+      "performanceWindows_s": [],
+      "description": "Stationary IID Moderate channel and unchanged formation.",
+      "name": "Stationary-Moderate",
+      "seed": 2.7020004E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020004E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020005E+7,
+    "scenario": {
+      "id": "S1",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [],
+      "performanceWindows_s": [],
+      "description": "Stationary IID Moderate channel and unchanged formation.",
+      "name": "Stationary-Moderate",
+      "seed": 2.7020005E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020005E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020001E+7,
+    "scenario": {
+      "id": "S2",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          14
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          10,
+          18
+        ],
+        [
+          20,
+          28
+        ]
+      ],
+      "description": "Continuous 90-degree formation rotation and return.",
+      "name": "Formation-switching",
+      "seed": 2.7020001E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020001E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "formationSchedule": {
+        "time_s": [
+          0,
+          10,
+          14,
+          20,
+          24,
+          30
+        ],
+        "offsets": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020002E+7,
+    "scenario": {
+      "id": "S2",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          14
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          10,
+          18
+        ],
+        [
+          20,
+          28
+        ]
+      ],
+      "description": "Continuous 90-degree formation rotation and return.",
+      "name": "Formation-switching",
+      "seed": 2.7020002E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020002E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "formationSchedule": {
+        "time_s": [
+          0,
+          10,
+          14,
+          20,
+          24,
+          30
+        ],
+        "offsets": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020003E+7,
+    "scenario": {
+      "id": "S2",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          14
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          10,
+          18
+        ],
+        [
+          20,
+          28
+        ]
+      ],
+      "description": "Continuous 90-degree formation rotation and return.",
+      "name": "Formation-switching",
+      "seed": 2.7020003E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020003E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "formationSchedule": {
+        "time_s": [
+          0,
+          10,
+          14,
+          20,
+          24,
+          30
+        ],
+        "offsets": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020004E+7,
+    "scenario": {
+      "id": "S2",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          14
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          10,
+          18
+        ],
+        [
+          20,
+          28
+        ]
+      ],
+      "description": "Continuous 90-degree formation rotation and return.",
+      "name": "Formation-switching",
+      "seed": 2.7020004E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020004E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "formationSchedule": {
+        "time_s": [
+          0,
+          10,
+          14,
+          20,
+          24,
+          30
+        ],
+        "offsets": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020005E+7,
+    "scenario": {
+      "id": "S2",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          14
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          10,
+          18
+        ],
+        [
+          20,
+          28
+        ]
+      ],
+      "description": "Continuous 90-degree formation rotation and return.",
+      "name": "Formation-switching",
+      "seed": 2.7020005E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020005E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "formationSchedule": {
+        "time_s": [
+          0,
+          10,
+          14,
+          20,
+          24,
+          30
+        ],
+        "offsets": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              0.6,
+              0
+            ],
+            [
+              -0.6,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.6,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020001E+7,
+    "scenario": {
+      "id": "S3",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        8,
+        30
+      ],
+      "performanceWindows_s": [
+        8,
+        30
+      ],
+      "description": "Forward burst loss with stationary mean loss about 0.41.",
+      "name": "Gilbert-Elliott-burst-loss",
+      "seed": 2.7020001E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.41,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020001E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "lossModel": {
+        "type": "gilbert-elliott",
+        "pGoodToBad": 0.04,
+        "pBadToGood": 0.06,
+        "lossGood": 0.05,
+        "lossBad": 0.95
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020002E+7,
+    "scenario": {
+      "id": "S3",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        8,
+        30
+      ],
+      "performanceWindows_s": [
+        8,
+        30
+      ],
+      "description": "Forward burst loss with stationary mean loss about 0.41.",
+      "name": "Gilbert-Elliott-burst-loss",
+      "seed": 2.7020002E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.41,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020002E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "lossModel": {
+        "type": "gilbert-elliott",
+        "pGoodToBad": 0.04,
+        "pBadToGood": 0.06,
+        "lossGood": 0.05,
+        "lossBad": 0.95
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020003E+7,
+    "scenario": {
+      "id": "S3",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        8,
+        30
+      ],
+      "performanceWindows_s": [
+        8,
+        30
+      ],
+      "description": "Forward burst loss with stationary mean loss about 0.41.",
+      "name": "Gilbert-Elliott-burst-loss",
+      "seed": 2.7020003E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.41,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020003E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "lossModel": {
+        "type": "gilbert-elliott",
+        "pGoodToBad": 0.04,
+        "pBadToGood": 0.06,
+        "lossGood": 0.05,
+        "lossBad": 0.95
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020004E+7,
+    "scenario": {
+      "id": "S3",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        8,
+        30
+      ],
+      "performanceWindows_s": [
+        8,
+        30
+      ],
+      "description": "Forward burst loss with stationary mean loss about 0.41.",
+      "name": "Gilbert-Elliott-burst-loss",
+      "seed": 2.7020004E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.41,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020004E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "lossModel": {
+        "type": "gilbert-elliott",
+        "pGoodToBad": 0.04,
+        "pBadToGood": 0.06,
+        "lossGood": 0.05,
+        "lossBad": 0.95
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020005E+7,
+    "scenario": {
+      "id": "S3",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        8,
+        30
+      ],
+      "performanceWindows_s": [
+        8,
+        30
+      ],
+      "description": "Forward burst loss with stationary mean loss about 0.41.",
+      "name": "Gilbert-Elliott-burst-loss",
+      "seed": 2.7020005E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.41,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020005E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "lossModel": {
+        "type": "gilbert-elliott",
+        "pGoodToBad": 0.04,
+        "pBadToGood": 0.06,
+        "lossGood": 0.05,
+        "lossBad": 0.95
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020001E+7,
+    "scenario": {
+      "id": "S4",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          16
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          22,
+          30
+        ]
+      ],
+      "performanceWindows_s": [
+        10,
+        30
+      ],
+      "description": "Moderate to congested to clean and back, including jitter.",
+      "name": "Time-varying-congestion",
+      "seed": 2.7020001E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020001E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0.2,
+          0.4,
+          0.1,
+          0.2
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020002E+7,
+    "scenario": {
+      "id": "S4",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          16
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          22,
+          30
+        ]
+      ],
+      "performanceWindows_s": [
+        10,
+        30
+      ],
+      "description": "Moderate to congested to clean and back, including jitter.",
+      "name": "Time-varying-congestion",
+      "seed": 2.7020002E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020002E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0.2,
+          0.4,
+          0.1,
+          0.2
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020003E+7,
+    "scenario": {
+      "id": "S4",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          16
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          22,
+          30
+        ]
+      ],
+      "performanceWindows_s": [
+        10,
+        30
+      ],
+      "description": "Moderate to congested to clean and back, including jitter.",
+      "name": "Time-varying-congestion",
+      "seed": 2.7020003E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020003E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0.2,
+          0.4,
+          0.1,
+          0.2
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020004E+7,
+    "scenario": {
+      "id": "S4",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          16
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          22,
+          30
+        ]
+      ],
+      "performanceWindows_s": [
+        10,
+        30
+      ],
+      "description": "Moderate to congested to clean and back, including jitter.",
+      "name": "Time-varying-congestion",
+      "seed": 2.7020004E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020004E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0.2,
+          0.4,
+          0.1,
+          0.2
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020005E+7,
+    "scenario": {
+      "id": "S4",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          10,
+          16
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          22,
+          30
+        ]
+      ],
+      "performanceWindows_s": [
+        10,
+        30
+      ],
+      "description": "Moderate to congested to clean and back, including jitter.",
+      "name": "Time-varying-congestion",
+      "seed": 2.7020005E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020005E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0.2,
+          0.4,
+          0.1,
+          0.2
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true,
+      "regime": {
+        "tStart": [
+          0,
+          10,
+          16,
+          22
+        ],
+        "loss": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "delay": [
+          0.08,
+          0.18,
+          0.02,
+          0.08
+        ],
+        "jitterStd": [
+          0,
+          0.04,
+          0.01,
+          0
+        ],
+        "label": [
+          "Moderate",
+          "Congested",
+          "Clean",
+          "Moderate"
+        ]
+      }
+    },
+    "tcns": {},
+    "fault": {}
+  },
+  {
+    "seed": 2.7020001E+7,
+    "scenario": {
+      "id": "S5",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        12,
+        18
+      ],
+      "performanceWindows_s": [
+        12,
+        22
+      ],
+      "description": "Thirty percent of configured directed links unavailable for 6 s.",
+      "name": "Topology-perturbation",
+      "seed": 2.7020001E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020001E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {
+      "type": "burst",
+      "level": 6,
+      "down": [
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      ],
+      "tStart": 12,
+      "tEnd": 18,
+      "nDown": 2,
+      "activeA": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "isolatedFollowers": 0,
+      "activeInDegreeMean": 1.5,
+      "activeInDegreeMin": 1,
+      "hash": 3956
+    }
+  },
+  {
+    "seed": 2.7020002E+7,
+    "scenario": {
+      "id": "S5",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        12,
+        18
+      ],
+      "performanceWindows_s": [
+        12,
+        22
+      ],
+      "description": "Thirty percent of configured directed links unavailable for 6 s.",
+      "name": "Topology-perturbation",
+      "seed": 2.7020002E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020002E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {
+      "type": "burst",
+      "level": 6,
+      "down": [
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      ],
+      "tStart": 12,
+      "tEnd": 18,
+      "nDown": 2,
+      "activeA": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "isolatedFollowers": 0,
+      "activeInDegreeMean": 1.5,
+      "activeInDegreeMin": 1,
+      "hash": 3956
+    }
+  },
+  {
+    "seed": 2.7020003E+7,
+    "scenario": {
+      "id": "S5",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        12,
+        18
+      ],
+      "performanceWindows_s": [
+        12,
+        22
+      ],
+      "description": "Thirty percent of configured directed links unavailable for 6 s.",
+      "name": "Topology-perturbation",
+      "seed": 2.7020003E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020003E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {
+      "type": "burst",
+      "level": 6,
+      "down": [
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          true
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          false
+        ]
+      ],
+      "tStart": 12,
+      "tEnd": 18,
+      "nDown": 2,
+      "activeA": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "isolatedFollowers": 0,
+      "activeInDegreeMean": 1.5,
+      "activeInDegreeMin": 1,
+      "hash": 3955
+    }
+  },
+  {
+    "seed": 2.7020004E+7,
+    "scenario": {
+      "id": "S5",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        12,
+        18
+      ],
+      "performanceWindows_s": [
+        12,
+        22
+      ],
+      "description": "Thirty percent of configured directed links unavailable for 6 s.",
+      "name": "Topology-perturbation",
+      "seed": 2.7020004E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020004E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {
+      "type": "burst",
+      "level": 6,
+      "down": [
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          true,
+          false
+        ]
+      ],
+      "tStart": 12,
+      "tEnd": 18,
+      "nDown": 2,
+      "activeA": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "isolatedFollowers": 0,
+      "activeInDegreeMean": 1.5,
+      "activeInDegreeMin": 1,
+      "hash": 3964
+    }
+  },
+  {
+    "seed": 2.7020005E+7,
+    "scenario": {
+      "id": "S5",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        12,
+        18
+      ],
+      "performanceWindows_s": [
+        12,
+        22
+      ],
+      "description": "Thirty percent of configured directed links unavailable for 6 s.",
+      "name": "Topology-perturbation",
+      "seed": 2.7020005E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020005E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {},
+    "fault": {
+      "type": "burst",
+      "level": 6,
+      "down": [
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          true,
+          false
+        ]
+      ],
+      "tStart": 12,
+      "tEnd": 18,
+      "nDown": 2,
+      "activeA": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "isolatedFollowers": 1,
+      "activeInDegreeMean": 1.5,
+      "activeInDegreeMin": 0,
+      "hash": 3951
+    }
+  },
+  {
+    "seed": 2.7020001E+7,
+    "scenario": {
+      "id": "S6",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          12,
+          16
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          12,
+          18
+        ],
+        [
+          20,
+          26
+        ]
+      ],
+      "description": "Two method-blind sine acceleration pulses on different followers.",
+      "name": "Dynamic-excitation",
+      "seed": 2.7020001E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020001E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "diDisturbance": {
+        "tStart_s": [
+          12,
+          20
+        ],
+        "duration_s": [
+          4,
+          4
+        ],
+        "amplitude_mps2": [
+          0.8,
+          0.8
+        ],
+        "axis": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "nodeMask": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020002E+7,
+    "scenario": {
+      "id": "S6",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          12,
+          16
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          12,
+          18
+        ],
+        [
+          20,
+          26
+        ]
+      ],
+      "description": "Two method-blind sine acceleration pulses on different followers.",
+      "name": "Dynamic-excitation",
+      "seed": 2.7020002E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020002E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "diDisturbance": {
+        "tStart_s": [
+          12,
+          20
+        ],
+        "duration_s": [
+          4,
+          4
+        ],
+        "amplitude_mps2": [
+          0.8,
+          0.8
+        ],
+        "axis": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "nodeMask": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020003E+7,
+    "scenario": {
+      "id": "S6",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          12,
+          16
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          12,
+          18
+        ],
+        [
+          20,
+          26
+        ]
+      ],
+      "description": "Two method-blind sine acceleration pulses on different followers.",
+      "name": "Dynamic-excitation",
+      "seed": 2.7020003E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020003E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "diDisturbance": {
+        "tStart_s": [
+          12,
+          20
+        ],
+        "duration_s": [
+          4,
+          4
+        ],
+        "amplitude_mps2": [
+          0.8,
+          0.8
+        ],
+        "axis": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "nodeMask": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020004E+7,
+    "scenario": {
+      "id": "S6",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          12,
+          16
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          12,
+          18
+        ],
+        [
+          20,
+          26
+        ]
+      ],
+      "description": "Two method-blind sine acceleration pulses on different followers.",
+      "name": "Dynamic-excitation",
+      "seed": 2.7020004E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020004E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "diDisturbance": {
+        "tStart_s": [
+          12,
+          20
+        ],
+        "duration_s": [
+          4,
+          4
+        ],
+        "amplitude_mps2": [
+          0.8,
+          0.8
+        ],
+        "axis": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "nodeMask": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  },
+  {
+    "seed": 2.7020005E+7,
+    "scenario": {
+      "id": "S6",
+      "evaluationStart_s": 8,
+      "eventWindows_s": [
+        [
+          12,
+          16
+        ],
+        [
+          20,
+          24
+        ]
+      ],
+      "performanceWindows_s": [
+        [
+          12,
+          18
+        ],
+        [
+          20,
+          26
+        ]
+      ],
+      "description": "Two method-blind sine acceleration pulses on different followers.",
+      "name": "Dynamic-excitation",
+      "seed": 2.7020005E+7,
+      "horizon_s": 30
+    },
+    "network": {
+      "rateHz": 10,
+      "packetLoss": 0.2,
+      "delaySec": 0.1,
+      "maxAoI": 5,
+      "commPeriod": 0.1,
+      "seed": 2.7020005E+7,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "phaseOffset": false,
+      "phaseOffsetEnabled": true
+    },
+    "ack": {
+      "loss": 0,
+      "delay": 0.08,
+      "jitterStd": 0,
+      "useTrace": true,
+      "assertInvariants": true
+    },
+    "tcns": {
+      "diDisturbance": {
+        "tStart_s": [
+          12,
+          20
+        ],
+        "duration_s": [
+          4,
+          4
+        ],
+        "amplitude_mps2": [
+          0.8,
+          0.8
+        ],
+        "axis": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "nodeMask": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "fault": {}
+  }
+]

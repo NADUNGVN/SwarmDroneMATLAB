@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gates 0--5 complete; Gate 6 nonstationary falsification next
+**Status:** Gates 0--6 complete; current mechanism stopped by Gate-6 evidence
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -20,7 +20,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 | Theory checkpoint | **complete** | Gate 4 authorized with explicit conditions |
 | Gate 4: control-aware trigger | **complete** | implementation contracts and one-seed sanity pass |
 | Gate 5: matched Pareto frontiers | **complete** | stationary periodic frontier dominates |
-| Gate 6: nonstationary regimes | next | decisive adaptivity hypothesis test |
+| Gate 6: nonstationary regimes | **complete** | `STOP_CURRENT_MECHANISM`, 0/5 support |
+| Gate 7+: robustness/scalability | **not authorized** | mechanism failed frozen Gate-6 rule |
 
 ## Frozen canonical evidence
 
@@ -289,3 +290,31 @@ predeclared decisive test of the separate time-varying-information-value
 hypothesis. If automatic frontier matching also finds consistent periodic
 dominance there, the current mechanism must stop or be reframed. Full details
 and limitations are in `paper/tcns/GATE5_RESULT.md`.
+
+## Gate-6 execution record and stop condition
+
+- Frozen protocol: `paper/tcns/GATE6_NONSTATIONARY_PROTOCOL.md`.
+- Accepted run:
+  `results/tcns_gate6_nonstationary_frontiers/2026-09-07_012209`.
+- Source commit: `9d5d8c0`; MATLAB R2025a; 690 complete runs, six scenarios,
+  23 arms and five paired development seeds.
+- Technical result: all rows finite, zero divergence, zero control-aware
+  causal violations, exact trace pairing, valid frontiers and complete
+  101-point bidirectional matching for every scenario.
+- Scientific result: every matched RMSE and matched-cost difference is
+  unfavorable over every shared-domain grid point in S1--S6. The frozen
+  support count is 0/5 nonstationary scenarios versus the required 2/5.
+- Mean budget-matched RMSE penalties in S2--S6 range from +0.0111 to
+  +0.0196 m. Mean performance-matched cost penalties range from +1.081 to
+  +1.456 Hz/channel.
+- Event-allocation diagnostics remain close to one rather than showing strong
+  concentration: 1.032 in S2, 1.002 in S4, 0.967 in S5 and 1.071 in S6 when
+  averaged over control-aware sweep arms.
+- Forty-nine saturated runs are retained and flagged, predominantly in the S5
+  topology outage; they are empirical results outside the linear theorem.
+
+The current Gate-4 mechanism is stopped exactly as preregistered. Gate 7,
+scalability and held-out evaluation must not run until an explicit scientific
+redirection is chosen. Gates 1--3 remain valid theory results; the trigger's
+performance hypothesis does not. Full evidence and permitted next directions
+are documented in `paper/tcns/GATE6_RESULT.md`.

@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate6_nonstationary_frontiers",
+  "runId": "2026-09-07_012209",
+  "startedAt": "2026-09-07 01:22:09",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "9d5d8c0",
+  "notes": "Decisive six-scenario development frontier campaign; scientific go/no-go rule committed before execution.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate6_nonstationary_frontiers.m",
+  "finishedAt": "2026-09-07 01:25:02",
+  "elapsedSec": 173.1193377,
+  "elapsedText": "2 m 53 s",
+  "figureCount": 2,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

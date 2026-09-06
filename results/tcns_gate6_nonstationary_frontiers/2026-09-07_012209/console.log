@@ -1,0 +1,29 @@
+
+============================================================
+RUN  : tcns_gate6_nonstationary_frontiers
+ID   : 2026-09-07_012209
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate6_nonstationary_frontiers\2026-09-07_012209
+WHEN : 2026-09-07 01:22:09
+============================================================
+
+Running 6 scenarios x 23 arms x 5 seeds = 690 DI simulations.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate6_nonstationary_frontiers\2026-09-07_012209\figures
+saveAllFigures: 2 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate6_nonstationary_frontiers\2026-09-07_012209\figures
+
+Gate 6 technical verdict: PASS
+  S1 Stationary-Moderate         dRMSE  +0.0220 (  0.0% favor), dCost   +1.479 (  0.0% favor), support 0
+  S2 Formation-switching         dRMSE  +0.0111 (  0.0% favor), dCost   +1.081 (  0.0% favor), support 0
+  S3 Gilbert-Elliott-burst-loss  dRMSE  +0.0187 (  0.0% favor), dCost   +1.177 (  0.0% favor), support 0
+  S4 Time-varying-congestion     dRMSE  +0.0196 (  0.0% favor), dCost   +1.249 (  0.0% favor), support 0
+  S5 Topology-perturbation       dRMSE  +0.0186 (  0.0% favor), dCost   +1.456 (  0.0% favor), support 0
+  S6 Dynamic-excitation          dRMSE  +0.0183 (  0.0% favor), dCost   +1.337 (  0.0% favor), support 0
+Gate 6 scientific decision: STOP_CURRENT_MECHANISM (0/5 nonstationary support)
+
+============================================================
+DONE : tcns_gate6_nonstationary_frontiers
+TIME : 2 m 53 s
+FIGS : 2
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate6_nonstationary_frontiers\2026-09-07_012209
+============================================================
