@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "gate": 5,
+  "status": "PASS",
+  "classification": "development-only stationary frontiers",
+  "scenario": "Stressed",
+  "seeds": [
+    2.7020001E+7,
+    2.7020002E+7,
+    2.7020003E+7,
+    2.7020004E+7,
+    2.7020005E+7
+  ],
+  "periodSamples": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    8,
+    10,
+    15,
+    20,
+    25,
+    40
+  ],
+  "periodSeconds": [
+    0.02,
+    0.04,
+    0.06,
+    0.08,
+    0.1,
+    0.16,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.8
+  ],
+  "epsilonSweep_m": [
+    0.05,
+    0.075,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    0.8,
+    1.2,
+    1.6
+  ],
+  "retryInterval_s": 0.1,
+  "matchingGridSize": 101,
+  "allFinitePass": true,
+  "causalPass": true,
+  "frontierSizePass": true,
+  "matchingPass": true,
+  "tracePairingPass": true,
+  "periodicFrontierPoints": 11,
+  "controlAwareFrontierPoints": 11,
+  "budgetOverlap_HzPerChannel": [
+    2.8623333333333334,
+    25.975
+  ],
+  "performanceOverlap_m": [
+    0.11189144805435632,
+    0.49239613855756748
+  ],
+  "meanBudgetMatchedErrorDifferenceControlMinusPeriodic_m": 0.030228405134102392,
+  "meanPerformanceMatchedCostDifferenceControlMinusPeriodic_Hz": 2.09217069850106,
+  "fractionBudgetGridFavoringControl": 0,
+  "fractionPerformanceGridFavoringControl": 0,
+  "saturatedRunCount": 2,
+  "divergedRunCount": 0,
+  "interpretation": "Differences cover the entire shared observed frontier domain and use control-aware minus periodic. Negative favors control-aware. This stationary development result does not select epsilon or period."
+}

@@ -1,0 +1,27 @@
+
+============================================================
+RUN  : tcns_gate5_stationary_frontiers
+ID   : 2026-09-07_010403
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate5_stationary_frontiers\2026-09-07_010403
+WHEN : 2026-09-07 01:04:03
+============================================================
+
+Running 23 arms x 5 paired seeds = 115 DI simulations.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate5_stationary_frontiers\2026-09-07_010403\figures
+
+Gate 5 stationary frontier verdict: PASS
+  periodic / control frontier points : 11 / 11
+  budget overlap [Hz/channel]        : 2.862 -- 25.975
+  performance overlap [m]            : 0.1119 -- 0.4924
+  mean matched RMSE difference [m]   : +0.03023
+  mean matched cost difference [Hz]  : +2.092
+  overlap fraction favoring control  : 0.0% / 0.0%
+
+============================================================
+DONE : tcns_gate5_stationary_frontiers
+TIME : 1 m 28 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate5_stationary_frontiers\2026-09-07_010403
+============================================================

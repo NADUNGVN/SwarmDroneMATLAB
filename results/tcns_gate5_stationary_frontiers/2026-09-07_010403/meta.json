@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate5_stationary_frontiers",
+  "runId": "2026-09-07_010403",
+  "startedAt": "2026-09-07 01:04:03",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "88b6705",
+  "notes": "Five paired development seeds; full periodic/control-aware stationary sweeps; automatic frontier and bidirectional matching.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate5_stationary_frontiers.m",
+  "finishedAt": "2026-09-07 01:05:31",
+  "elapsedSec": 88.3643974,
+  "elapsedText": "1 m 28 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

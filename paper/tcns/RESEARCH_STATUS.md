@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gates 0--4 complete; Gate 5 frontier design next
+**Status:** Gates 0--5 complete; Gate 6 nonstationary falsification next
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -19,7 +19,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 | Gate 3: uncertainty to formation | **complete** | structured ISS/UUB theorem and numerical validation |
 | Theory checkpoint | **complete** | Gate 4 authorized with explicit conditions |
 | Gate 4: control-aware trigger | **complete** | implementation contracts and one-seed sanity pass |
-| Gate 5: matched Pareto frontiers | next | preregister development frontier design |
+| Gate 5: matched Pareto frontiers | **complete** | stationary periodic frontier dominates |
+| Gate 6: nonstationary regimes | next | decisive adaptivity hypothesis test |
 
 ## Frozen canonical evidence
 
@@ -261,3 +262,30 @@ periodic schedule can be near-optimal in a stationary regime. Gate 5 must now
 replace the single P10 comparison with automated frontier and matched-cost /
 matched-performance analysis. No \(\epsilon_d\) value from this run is selected
 as the proposed operating point.
+
+## Gate-5 execution record
+
+- Frozen protocol: `paper/tcns/GATE5_FRONTIER_PROTOCOL.md`.
+- Accepted run:
+  `results/tcns_gate5_stationary_frontiers/2026-09-07_010403`.
+- Source commit: `88b6705`; MATLAB R2025a; five fixed paired development
+  seeds; stationary Stressed DI.
+- All 115 runs completed, all control-aware causal invariants are zero, seed
+  trace pairing passes, and no run diverges. Two Periodic-40-step runs briefly
+  touch saturation and remain explicitly flagged.
+- Both periodic and control-aware families contribute 11 Pareto points. Common
+  overlap is 2.862--25.975 Hz/channel and 0.1119--0.4924 m RMSE.
+- On all 101 automatically budget-matched points, periodic has lower RMSE;
+  mean control-aware-minus-periodic difference is `+0.03023 m`.
+- On all 101 automatically performance-matched points, periodic has lower
+  cost; mean control-aware-minus-periodic difference is
+  `+2.092 Hz/channel`.
+- No \(\epsilon_d\) or periodic period is selected. Complete raw grids and
+  dominated/saturation information are preserved.
+
+The current control-aware mechanism is therefore dominated in the stationary
+development regime. This is not a reason to tune it against P10. Gate 6 is the
+predeclared decisive test of the separate time-varying-information-value
+hypothesis. If automatic frontier matching also finds consistent periodic
+dominance there, the current mechanism must stop or be reframed. Full details
+and limitations are in `paper/tcns/GATE5_RESULT.md`.
