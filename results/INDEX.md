@@ -273,3 +273,6 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-06_081712 | exp23ap_routed_state_machine_common_phy | 52.2 s | 0 | yes | - | (R2025a) | 17cd865 |
 | 2026-09-06_081945 | exp23aq_routed_state_machine_confirmation | 51.8 s | 0 | yes | - | (R2025a) | 17cd865 |
 | 2026-09-06_140652 | tcns_gate0_baseline_audit | 21.9 s | 0 | yes | - | (R2025a) | 4dc76b0 |
+| 2026-09-06_141912 | exp10a_final_validation | 31 m 22 s | 3 | yes | yes | (R2025a) | ddfd669 |
+| 2026-09-06_145037 | exp10b_unified_matrix | 8.6 s | 4 | yes | yes | (R2025a) | ddfd669 |
+| 2026-09-06_140912 | simulation_v1_validation | 42 m 20 s | 0 | yes | - | (R2025a) | ddfd669 |

@@ -1,0 +1,2329 @@
+
+============================================================
+RUN  : simulation_v1_validation
+ID   : 2026-09-06_140912
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\simulation_v1_validation\2026-09-06_140912
+WHEN : 2026-09-06 14:09:12
+============================================================
+
+
+############################################################
+# SIMULATION v1.0 VALIDATION
+############################################################
+
+  force EXP10A re-run : yes
+  skip test suite     : no
+
+============================================================
+STEP 1 / 7  test suite
+============================================================
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+############################################################
+# TEST SUITE  (68 files)
+############################################################
+
+------------------------------------------------------------
+[1/68] test_rotation
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_rotation: PASS
+
+------------------------------------------------------------
+[2/68] test_formation_error
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_formation_error: PASS (4 cases)
+
+------------------------------------------------------------
+[3/68] test_formation_theory_certificate
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_formation_theory_certificate: PASS (default, ungrounded, directed)
+
+------------------------------------------------------------
+[4/68] test_probabilistic_safety_certificate
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_probabilistic_safety_certificate: PASS (service bound, p optimum, finite horizon)
+
+------------------------------------------------------------
+[5/68] test_standalone_ack_value_certificate
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_standalone_ack_value_certificate: PASS (identity, Pareto direction, lead-time bounds)
+
+------------------------------------------------------------
+[6/68] test_setpoint_interface
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_setpoint_interface
+============================================================
+
+    ok   at tau = 0 the reference is the outer sample position
+    ok   at tau = 0 the reference is the outer sample velocity
+    ok   the held acceleration passes through unchanged
+    ok   velocity reference is the exact integral of the command
+    ok   position reference is the exact double integral
+    ok   the position reference MOVES within the interval
+    ok   analytic reference differs from semi-implicit Euler by exactly 0.5*dt^2*a
+    ok   the two are NOT bit-identical, and the code does not claim they are
+    ok   tracking error starts at zero
+    ok   position error stays far below the drift a frozen reference would show
+    ok   velocity error stays bounded
+    ok   the inner loop produces finite state
+    ok   inner steps tile the outer step exactly
+    ok   the ratio is 10 : 1
+    ok   outer step is 50 Hz
+    ok   inner step is 500 Hz
+    ok   sixdof off reproduces the locked trajectory bit-identically
+    ok   sixdof off reproduces txCount
+    ok   sixdof off allocates no 6-DOF state
+    ok   P10 transmits exactly as often under 6-DOF
+    ok   P20 transmits exactly as often under 6-DOF
+    ok   P20 still transmits more often than P10
+    ok   forward CRN trace hash is identical for DI and 6-DOF
+    ok   reverse CRN trace hash is identical for DI and 6-DOF
+    ok   forward and reverse traces remain independent
+    ok   6-DOF metrics are produced
+    ok   the Clean-ish reference run does not diverge
+    ok   saturation is finite
+    ok   per-drone peak saturation covers every follower
+    ok   control effort is finite
+    ok   no NaN in the 6-DOF trajectory
+
+test_setpoint_interface: PASS (31 checks)
+
+------------------------------------------------------------
+[7/68] test_lock_regression
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+=== Locked-experiment regression ===
+
+[1] EXP05C ablation chain (20 seeds)
+[Warning: The temporary variable 'out' will be cleared at the beginning of each iteration of the parfor-loop. If 'out' is used before it is set, a runtime error will occur. For
+more information, see Parallel for Loops in MATLAB, "Uninitialized Temporaries".] 
+[> In test_lock_regression (line 51)
+In runScriptIsolated (line 37)
+In run_all_tests (line 125)
+In runScriptIsolated (line 37)
+In run_simulation_v1_validation (line 114)
+In run (line 112)] 
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+    ok   A1 -> A2 Clean     expected +43.93 %  got +43.93 %
+    ok   A1 -> A2 Moderate  expected +32.74 %  got +32.74 %
+    ok   A1 -> A2 Stressed  expected +32.89 %  got +32.89 %
+    ok   A2 -> A3 Clean     expected +15.04 %  got +15.04 %
+    ok   A2 -> A3 Moderate  expected  +8.43 %  got  +8.43 %
+    ok   A2 -> A3 Stressed  expected  +9.05 %  got  +9.05 %
+    ok   A3 -> A4 Clean     expected  +0.00 %  got  +0.00 %
+    ok   A3 -> A4 Moderate  expected  +5.71 %  got  +5.71 %
+    ok   A3 -> A4 Stressed  expected +16.07 %  got +16.07 %
+
+[2] EXP06A scaling exponent, Full-AoI (20 seeds)
+    ok   Moderate  expected alpha 0.996  got 0.996
+    ok   Stressed  expected alpha 0.978  got 0.978
+
+[3] Trace and phase-offset defaults
+    ok   useTrace defaults off
+    ok   phaseOffset defaults off
+
+[4] Trace mode is live and shared
+    ok   trace produces its own realisation (1468 vs 1421 drops)
+    ok   trace is reproducible (hash 7564230338975896)
+    ok   a different seed gives a different realisation
+
+[5] EXP07A Causal-AoI-v3 locked values (3 seeds, ack trace OFF)
+    ok   Clean     RMSE 0.0383 (exp 0.0383) | rate 8.44 (exp 8.44)
+    ok   Moderate  RMSE 0.0873 (exp 0.0873) | rate 13.34 (exp 13.34)
+    ok   Stressed  RMSE 0.1163 (exp 0.1163) | rate 18.24 (exp 18.24)
+
+[6] Reverse-channel ACK trace
+    ok   trace is invariant to ACK impairment settings
+    ok   trace is reproducible (hash 8251961724807448)
+    ok   a different seed gives a different realisation
+    ok   reverse trace is independent of the forward trace
+
+[7] ACK trace default and effect
+    ok   cfg.ack.useTrace defaults off
+    ok   ACK trace active when requested (hash 7352138064743608)
+    ok   trace produces its own realisation (764 vs 763 ACK drops)
+    ok   causality invariants hold under ACK trace mode
+
+test_lock_regression: PASS
+
+------------------------------------------------------------
+[8/68] test_causal_invariants
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+=== Causal-AoI invariant checks ===
+
+[1] Static check: forbidden receiver-side reads
+    ok   enqueueCausalAoIPackets.m
+    ok   initAckChannelState.m
+
+[2] Static check: locked simulators still use the oracle
+    ok   simSwarmAoIAware.m unchanged (still ideal-feedback)
+
+[3] Dynamic check: invariant counters with assertions enabled
+    ok   Clean     ackLoss  0%  violations 0  ackUpdates 3024  staleAckDiscarded 0
+    ok   Moderate  ackLoss 10%  violations 0  ackUpdates 2342  staleAckDiscarded 0
+    ok   Stressed  ackLoss 20%  violations 0  ackUpdates 1587  staleAckDiscarded 0
+
+[4] Dynamic check: reverse channel is genuinely stressed
+    ok   439 ACKs lost on the reverse channel
+    ok   37 superseded ACKs correctly discarded
+
+[5] Dynamic check: equivalence at zero delay, divergence with delay
+    Clean     ideal 0.037745 ( 8.41 Hz) | causal 0.037745 ( 8.41 Hz) | diff   0.00 %
+             ok   exact match, forward path unaltered
+    Moderate  ideal 0.097815 (11.21 Hz) | causal 0.099252 ( 9.07 Hz) | diff   1.47 %
+             ok   diverges from the oracle as required
+    Stressed  ideal 0.130470 (15.70 Hz) | causal 0.155745 ( 9.07 Hz) | diff  19.37 %
+             ok   diverges from the oracle as required
+
+test_causal_invariants: PASS
+
+------------------------------------------------------------
+[9/68] test_shared_medium_infrastructure
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_infrastructure
+============================================================
+
+    ok   one broadcast frame reaches all three intended receivers
+    ok   frame and recipient accounting remain distinct
+    ok   one broadcast can succeed at a strict subset of receivers
+    ok   simultaneous senders collide at their shared receiver
+    ok   serialized TDMA service delivers the same two frames without collision
+    ok   queued state DATA uses latest-generated-wins replacement
+    ok   finite queue preserves due feedback and rejects lower-priority DATA
+    ok   cumulative ACK merge retains only the newest sequence per sender
+    ok   a pending ACK summary piggybacks on the next DATA frame
+    ok   latest-generated-wins transfers piggyback ACKs to the newer DATA
+    ok   ACK priority transfers feedback from a displaced piggyback DATA frame
+    ok   ACK deadline materializes exactly one standalone cumulative summary
+    ok   a DATA loss neither advances receiver state nor creates an ACK
+    ok   delivered ACK summaries advance exactly the confirmed receiver beliefs
+    ok   sender history remains bounded during prolonged missing feedback
+    ok   identical actions on one pre-drawn trace are bit-identical
+    ok   busy-time union and offered frame airtime are separately accounted
+    ok   fully-conflicting interference corrupts disjoint intended receivers
+    ok   a declared sparse interference matrix permits spatial reuse
+    ok   collision retries are bounded and preserve logical frame identity
+    ok   inline mode applies DATA and causal ACK at their MAC event times
+    ok   an ACK outside bounded history is counted and rejected
+    ok   zero-load CSMA, ALOHA and TDMA preserve payload/sequence order
+    ok   a nonsensing interferer produces a genuine hidden-terminal collision
+    ok   terminal multi-slot work is exposed as in-flight rather than synthetic loss
+
+test_shared_medium_infrastructure: PASS (25 checks)
+
+------------------------------------------------------------
+[10/68] test_ack_value_instrumentation
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_ack_value_instrumentation: PASS (default off, passive identity, event schema, piggyback transport)
+
+------------------------------------------------------------
+[11/68] test_ack_branch_replay
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_ack_branch_replay: PASS (inert observe, identical prehistory, targeted suppression)
+
+------------------------------------------------------------
+[12/68] test_causal_broadcast_policy
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_causal_broadcast_policy
+============================================================
+
+    ok   one-receiver Causal-Broadcast is decision-equivalent to Causal-v3
+    ok   receiver permutation leaves the aggregate decision invariant
+    ok   worst confirmed receiver age drives adaptive new information
+    ok   hard new information is not blocked by unconfirmed receivers
+    ok   pure refresh is suppressed while useful broadcast information is pending
+    ok   max silence recovers from prolonged missing confirmation
+    ok   a sender with no out-neighbour never generates a frame
+
+test_causal_broadcast_policy: PASS (7 checks)
+
+------------------------------------------------------------
+[13/68] test_shared_medium_end_to_end
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_end_to_end
+============================================================
+
+    ok   one method/action sequence is bit-identical on one MAC trace
+    ok   periodic broadcast does not pay for unused causal feedback
+    ok   control, freshness and channel metrics share one finite output contract
+    ok   Causal-Broadcast receives real aggregated feedback with zero violations
+    ok   sender confirmed age remains conservative at every logged active link
+    ok   p=1 synchronized periodic load produces the declared collision collapse
+    ok   completed recipient outcomes and airtime accounting close exactly
+    ok   finite queue/history bounds hold and plant state remains finite
+
+test_shared_medium_end_to_end: PASS (8 checks)
+
+------------------------------------------------------------
+[14/68] test_exp13_policy_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp13_policy_contracts
+============================================================
+
+    ok   standalone feedback mode is explicit
+    ok   piggyback feedback mode is explicit
+    ok   unknown feedback modes fail at the boundary
+    ok   standalone-only never attaches pending ACKs to DATA
+    ok   piggyback-only never schedules a standalone deadline
+    ok   piggyback-only attaches the obligation to the next DATA
+    ok   unicast ablation materializes one physical frame per receiver
+    ok   unicast frames retain one logical generation sequence
+    ok   zero background load is inert
+    ok   full external occupancy blocks carrier-sensing service
+    ok   AoI-only baseline responds to confirmed age without state input
+    ok   AoCI-inspired baseline responds to age-times-change score
+    ok   delayed-ACK belief baseline responds to expected age
+    ok   causal-aoi-only runs end-to-end with finite causal state
+    ok   causal-aoci runs end-to-end with finite causal state
+    ok   delayed-ack-belief runs end-to-end with finite causal state
+    ok   causal-broadcast runs end-to-end with finite causal state
+    ok   causal-unicast runs end-to-end with finite causal state
+    ok   all EXP13 causal methods consume the paired absolute MAC trace
+    ok   causal-unicast rejects hybrid feedback instead of silently changing it
+    ok   deterministic LHS occupies every stratum once per parameter
+
+test_exp13_policy_contracts: PASS (21 checks)
+
+------------------------------------------------------------
+[15/68] test_shared_medium_channel_models
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_channel_models
+============================================================
+
+    ok   legacy iid mode preserves the original trace, ACK draw and hash
+    ok   reverse-only loss preserves DATA reception but blocks confirmation
+    ok   a reliable independent reverse trace confirms the accepted DATA
+    ok   piggyback feedback uses DATA loss, not standalone reverse-ACK loss
+    ok   Gilbert-Elliott bad-state runs are reproducible and temporally persistent
+    ok   declared absorbing bad state produces an all-bad DATA trace
+    ok   channel cells share underlying uniforms but expose distinct state hashes
+    ok   a supplied trace from another channel model is rejected
+    ok   unknown loss-model enums fail validation
+    ok   burst/asymmetric end-to-end run remains finite and causally conservative
+
+test_shared_medium_channel_models: PASS (10 checks)
+
+------------------------------------------------------------
+[16/68] test_exp14_infrastructure
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp14_infrastructure
+============================================================
+
+    ok   the frozen EXP14 registry has the preregistered exact hash
+    ok   100 holdout seeds are unique and disjoint from known development/final seeds
+    ok   all primary, mechanism and OOD run counts close exactly
+    ok   Clean primary configuration has its frozen exact hash
+    ok   Moderate primary configuration has its frozen exact hash
+    ok   Stressed primary configuration has its frozen exact hash
+    ok   primary plant, topology, multi-slot CSMA and burst channel are frozen
+    ok   channel cells have declared stationary mean-loss ordering
+    ok   frontier family identifiers form a closed fail-fast interface
+    ok   Periodic frontier is executable at all five frozen points
+    ok   State-event frontier is executable at all five frozen points
+    ok   Causal AoI-only frontier is executable at all five frozen points
+    ok   AoCI-inspired frontier is executable at all five frozen points
+    ok   Delayed-ACK belief frontier is executable at all five frozen points
+    ok   Causal-Broadcast frontier is executable at all five frozen points
+    ok   hidden-terminal OOD separates sensing from physical interference
+    ok   reverse-asymmetric OOD worsens only standalone-ACK channel marginals
+    ok   N20 OOD resizes plant, topology, interference and sensing consistently
+    ok   estimator OOD is the previously validated synthetic C3 point
+    ok   OOD point identifiers form a closed fail-fast interface
+    ok   development-seed primary smoke run satisfies the frozen row contract
+    ok   frozen paired-bootstrap and Wilson interval utilities expose denominators
+
+test_exp14_infrastructure: PASS (22 checks)
+
+------------------------------------------------------------
+[17/68] test_mac_aware_policy
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_mac_aware_policy
+============================================================
+
+    ok   MAC-aware defaults reproduce the frozen EXP14C contract
+    ok   adaptive is an explicit feedback enum
+    ok   invalid ordinary/forced busy ceilings fail at the boundary
+    ok   hard innovation and max-silence remain protected
+    ok   adaptive-new and refresh branches obey local busy/queue guards
+    ok   disabled load guard is behaviorally inert
+    ok   CSMA adaptive feedback waits for the piggyback-first delay
+    ok   low-busy CSMA ACK is admitted exactly after its minimum delay
+    ok   busy ACK defers and then uses the bounded max-deferral recovery rule
+    ok   hard busy ceiling prevents a recovery ACK from worsening overload
+    ok   ALOHA retains the short standalone-confirmation path
+    ok   piggyback clears pending entries, due time and obligation age atomically
+    ok   local busy EWMA responds to sensed occupancy without frame outcomes
+    ok   legacy and MAC-aware methods reject each other's feedback contract
+    ok   N10 v2 scales access to 1/N and runs with finite causal state
+
+test_mac_aware_policy: PASS (15 checks)
+
+------------------------------------------------------------
+[18/68] test_context_aware_policy
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_context_aware_policy
+============================================================
+
+    ok   context-aware extension is inert for every legacy configuration
+    ok   N5 access uses 1/N CSMA and the seven-slot ALOHA vulnerable period
+    ok   frame-aware ALOHA scaling includes both N and DATA-frame length
+    ok   capacity screen separates feasible N5/CSMA from N10 or loaded ALOHA
+    ok   fresh low-drift ACK passes both service and marginal-value gates
+    ok   nonpositive residual service slack blocks standalone ACK
+    ok   semantic drift removes credit for suppressing a potentially useful DATA
+    ok   zero calibrated reverse success cannot produce positive ACK value
+    ok   capacity-gated route maps feasible CSMA to piggyback and ALOHA to adaptive
+    ok   explicitly disabled context policy leaves legacy trajectories exact
+    ok   context-aware method runs causally and closes its decision accounting
+    ok   public context-aware method rejects a disabled policy contract
+
+test_context_aware_policy: PASS (12 checks)
+
+------------------------------------------------------------
+[19/68] test_exp14d_factorial_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp14d_factorial_contracts
+============================================================
+
+    ok   registry hash and 384-run matrix are frozen
+    ok   factor registry contains the complete binary cube exactly once
+    ok   EXP14D seeds are disjoint from EXP14C development
+    ok   factor A maps exactly to adaptive versus hybrid feedback
+    ok   method enum exposes guard-only cells without changing legacy methods
+    ok   load-guarded method rejects wrong feedback and disabled guard
+    ok   legacy causal-broadcast ignores additive guard/scaling flags
+    ok   N5 access-scaling negative controls are bit-identical
+    ok   scaled adaptive and guarded-hybrid paths run at p=1/N
+
+test_exp14d_factorial_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[20/68] test_exp14e_holdout_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp14e_holdout_contracts
+============================================================
+
+    ok   registry hash, leaves and run count are frozen
+    ok   100 holdout seeds are unique and disjoint from known blocks
+    ok   N5 CSMA seed-zero base configuration is frozen
+    ok   N10 ring2 seed-zero base configuration is frozen
+    ok   N20 ring2 seed-zero base configuration is frozen
+    ok   N5 ALOHA seed-zero base configuration is frozen
+    ok   six primary Holm tests and deterministic bootstrap are frozen
+    ok   Holm step-down adjustment is deterministic and shape preserving
+    ok   unknown holdout arms fail at the boundary
+    ok   all arms execute and only historical hybrid retains p=0.2 at N20
+    ok   all seven feedback contracts match the frozen registry
+    ok   selected and literature-baseline method semantics are exact
+    ok   candidate is exactly EXP14D a1-g0-s1
+
+test_exp14e_holdout_contracts: PASS (13 checks)
+
+------------------------------------------------------------
+[21/68] test_exp14f_shadow_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_exp14f_shadow_contracts: PASS (registry, arm semantics, matcher, censoring, paired smoke)
+
+------------------------------------------------------------
+[22/68] test_exp14g_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_exp14g_contracts: PASS (registry, deterministic sampling, causal branch pair)
+
+------------------------------------------------------------
+[23/68] test_exp14h_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_exp14h_contracts: PASS (registry, disjoint seeds, unchanged N20 estimand)
+
+------------------------------------------------------------
+[24/68] test_exp14i_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp14i_contracts
+============================================================
+
+    ok   registry hash, leaves, matrix and Holm family are frozen
+    ok   100 holdout seeds are unique and disjoint from known blocks
+    ok   N5 CSMA seed-zero base configuration is frozen
+    ok   N10 ring2 seed-zero base configuration is frozen
+    ok   N20 ring2 seed-zero base configuration is frozen
+    ok   N5 ALOHA seed-zero base configuration is frozen
+    ok   claim family and N20/universal ceilings are frozen
+    ok   N5 CSMA candidate is the exact routed reference
+    ok   N5 CSMA comparator feedback contracts execute
+    ok   N10 ring2 candidate is the exact routed reference
+    ok   N10 ring2 comparator feedback contracts execute
+    ok   N20 ring2 candidate is the exact routed reference
+    ok   N20 ring2 comparator feedback contracts execute
+    ok   N5 ALOHA candidate is the exact routed reference
+    ok   N5 ALOHA comparator feedback contracts execute
+    ok   unknown arms fail at the interface boundary
+    ok   selector refuses an unregistered MAC rather than extrapolating
+
+test_exp14i_contracts: PASS (17 checks)
+
+------------------------------------------------------------
+[25/68] test_exp16_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp16_contracts
+============================================================
+
+    ok   registry hash, leaves, matrix and six-test family are frozen
+    ok   100 holdout seeds are unique/disjoint and smoke seed is excluded
+    ok   registered arms contain one complete 2-by-2 plus two hybrid baselines
+    ok   seed-fixed matched base configuration is frozen
+    ok   all six arms consume one absolute random/channel realization
+    ok   CSMA adaptive executes its exact MAC/route/access contract
+    ok   CSMA piggyback-only executes its exact MAC/route/access contract
+    ok   CSMA fixed-deadline hybrid executes its exact MAC/route/access contract
+    ok   ALOHA adaptive executes its exact MAC/route/access contract
+    ok   ALOHA piggyback-only executes its exact MAC/route/access contract
+    ok   ALOHA fixed-deadline hybrid executes its exact MAC/route/access contract
+    ok   unknown feedback routes fail closed
+
+test_exp16_contracts: PASS (12 checks)
+
+------------------------------------------------------------
+[26/68] test_exp16_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp16_analysis_contracts
+============================================================
+
+    ok   six oriented primary tests reject after Holm
+    ok   both synthetic metric reversals are supported
+    ok   global claim verdict follows the frozen intersection rule
+    ok   two MACs by two routes by eight hybrid contrasts are retained
+    ok   registered observed safety guards are evaluated
+
+test_exp16_analysis_contracts: PASS (5 checks)
+
+------------------------------------------------------------
+[27/68] test_exp17_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp17_contracts
+============================================================
+
+    ok   registry hash, 4000-run matrix and 48-test family are frozen
+    ok   holdout seeds are unique/disjoint and smoke seed is excluded
+    ok   eight core, two boundary and frozen continuation rule are declared
+    ok   N5 Moderate bg0 development configuration is frozen
+    ok   N5 Moderate bg0.30 development configuration is frozen
+    ok   N5 Stressed bg0 development configuration is frozen
+    ok   N5 Stressed bg0.30 development configuration is frozen
+    ok   N10 Moderate bg0 development configuration is frozen
+    ok   N10 Moderate bg0.30 development configuration is frozen
+    ok   N10 Stressed bg0 development configuration is frozen
+    ok   N10 Stressed bg0.30 development configuration is frozen
+    ok   N5 Moderate reverse-asymmetric development configuration is frozen
+    ok   N5 Moderate hidden-terminal development configuration is frozen
+    ok   n5-moderate-bg0/csma-adaptive executes exact factor semantics
+    ok   n5-moderate-bg0/csma-piggyback executes exact factor semantics
+    ok   n5-moderate-bg0/aloha-adaptive executes exact factor semantics
+    ok   n5-moderate-bg0/aloha-piggyback executes exact factor semantics
+    ok   n5-moderate-bg0 shares one trace across both MAC levels
+    ok   n5-moderate-bg30/csma-adaptive executes exact factor semantics
+    ok   n5-moderate-bg30/csma-piggyback executes exact factor semantics
+    ok   n5-moderate-bg30/aloha-adaptive executes exact factor semantics
+    ok   n5-moderate-bg30/aloha-piggyback executes exact factor semantics
+    ok   n5-moderate-bg30 shares one trace across both MAC levels
+    ok   n5-stressed-bg0/csma-adaptive executes exact factor semantics
+    ok   n5-stressed-bg0/csma-piggyback executes exact factor semantics
+    ok   n5-stressed-bg0/aloha-adaptive executes exact factor semantics
+    ok   n5-stressed-bg0/aloha-piggyback executes exact factor semantics
+    ok   n5-stressed-bg0 shares one trace across both MAC levels
+    ok   n5-stressed-bg30/csma-adaptive executes exact factor semantics
+    ok   n5-stressed-bg30/csma-piggyback executes exact factor semantics
+    ok   n5-stressed-bg30/aloha-adaptive executes exact factor semantics
+    ok   n5-stressed-bg30/aloha-piggyback executes exact factor semantics
+    ok   n5-stressed-bg30 shares one trace across both MAC levels
+    ok   n10-moderate-bg0/csma-adaptive executes exact factor semantics
+    ok   n10-moderate-bg0/csma-piggyback executes exact factor semantics
+    ok   n10-moderate-bg0/aloha-adaptive executes exact factor semantics
+    ok   n10-moderate-bg0/aloha-piggyback executes exact factor semantics
+    ok   n10-moderate-bg0 shares one trace across both MAC levels
+    ok   n10-moderate-bg30/csma-adaptive executes exact factor semantics
+    ok   n10-moderate-bg30/csma-piggyback executes exact factor semantics
+    ok   n10-moderate-bg30/aloha-adaptive executes exact factor semantics
+    ok   n10-moderate-bg30/aloha-piggyback executes exact factor semantics
+    ok   n10-moderate-bg30 shares one trace across both MAC levels
+    ok   n10-stressed-bg0/csma-adaptive executes exact factor semantics
+    ok   n10-stressed-bg0/csma-piggyback executes exact factor semantics
+    ok   n10-stressed-bg0/aloha-adaptive executes exact factor semantics
+    ok   n10-stressed-bg0/aloha-piggyback executes exact factor semantics
+    ok   n10-stressed-bg0 shares one trace across both MAC levels
+    ok   n10-stressed-bg30/csma-adaptive executes exact factor semantics
+    ok   n10-stressed-bg30/csma-piggyback executes exact factor semantics
+    ok   n10-stressed-bg30/aloha-adaptive executes exact factor semantics
+    ok   n10-stressed-bg30/aloha-piggyback executes exact factor semantics
+    ok   n10-stressed-bg30 shares one trace across both MAC levels
+    ok   n5-moderate-reverse/csma-adaptive executes exact factor semantics
+    ok   n5-moderate-reverse/csma-piggyback executes exact factor semantics
+    ok   n5-moderate-reverse/aloha-adaptive executes exact factor semantics
+    ok   n5-moderate-reverse/aloha-piggyback executes exact factor semantics
+    ok   n5-moderate-reverse shares one trace across both MAC levels
+    ok   n5-moderate-hidden/csma-adaptive executes exact factor semantics
+    ok   n5-moderate-hidden/csma-piggyback executes exact factor semantics
+    ok   n5-moderate-hidden/aloha-adaptive executes exact factor semantics
+    ok   n5-moderate-hidden/aloha-piggyback executes exact factor semantics
+    ok   n5-moderate-hidden shares one trace across both MAC levels
+    ok   unknown contexts fail closed
+
+test_exp17_contracts: PASS (64 checks)
+
+------------------------------------------------------------
+[28/68] test_exp17_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp17_analysis_contracts
+============================================================
+
+    ok   all 48 synthetic core tests reject after global Holm control
+    ok   all eight synthetic core contexts satisfy the intersection rule
+    ok   two boundary contexts retain twelve descriptive effects without p-values
+    ok   frozen continuation rule executes on the synthetic full envelope
+    ok   global claim verdict follows the frozen cell/intersection rules
+
+test_exp17_analysis_contracts: PASS (5 checks)
+
+------------------------------------------------------------
+[29/68] test_exp18_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18_contracts
+============================================================
+
+    ok   registry separates 1,600 development runs from every future holdout
+    ok   csma/legacy-selector arm has exact method, route and access semantics
+    ok   csma/frame-piggyback arm has exact method, route and access semantics
+    ok   csma/frame-adaptive arm has exact method, route and access semantics
+    ok   csma/context-aware arm has exact method, route and access semantics
+    ok   aloha/legacy-selector arm has exact method, route and access semantics
+    ok   aloha/frame-piggyback arm has exact method, route and access semantics
+    ok   aloha/frame-adaptive arm has exact method, route and access semantics
+    ok   aloha/context-aware arm has exact method, route and access semantics
+    ok   reverse-asymmetric boundary carries an explicit optimistic mismatch
+    ok   both MAC types and all arms consume one absolute random realization
+    ok   context decision counters are inert outside the context-aware arm
+    ok   every disabled/enabled context arm returns the exact EXP18 row schema
+
+test_exp18_contracts: PASS (13 checks)
+
+------------------------------------------------------------
+[30/68] test_exp18_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18_analysis_contracts
+============================================================
+
+    ok   synthetic qualifying candidate is promotion-ready
+    ok   one candidate-only failure rejects the development candidate
+
+test_exp18_analysis_contracts: PASS (2 checks)
+
+------------------------------------------------------------
+[31/68] test_exp18a2_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18a2_contracts
+============================================================
+
+    ok   400-run amendment is development-only and points to canonical v1
+    ok   analytical screen retains preregistered minimum N/MAC coverage
+    ok   capacity boundary is fixed by service rate rather than observed failure
+    ok   certificate-infeasible N10 ALOHA abstains with exact row schema
+
+test_exp18a2_contracts: PASS (4 checks)
+
+------------------------------------------------------------
+[32/68] test_exp18a3_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18a3_contracts
+============================================================
+
+    ok   v3 keeps 400 development rows and registers stricter route gates
+    ok   v3 enables headroom only after capacity feasibility
+    ok   v3 trajectory closes decision accounting and exact row schema
+
+test_exp18a3_contracts: PASS (3 checks)
+
+------------------------------------------------------------
+[33/68] test_exp18a3_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18a3_analysis_contracts
+============================================================
+
+    ok   synthetic quantitative selector passes all v3 gates
+    ok   one CSMA physical mismatch rejects exact route aliasing
+
+test_exp18a3_analysis_contracts: PASS (2 checks)
+
+------------------------------------------------------------
+[34/68] test_exp18a4_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18a4_contracts
+============================================================
+
+    ok   v4 is a development-only exact-alias selector contract
+    ok   n5-moderate-bg0/csma aliases frame-piggyback exactly
+    ok   n5-moderate-bg0/aloha aliases frame-adaptive exactly
+    ok   n10-moderate-bg0/aloha aliases frame-piggyback exactly
+
+test_exp18a4_contracts: PASS (4 checks)
+
+------------------------------------------------------------
+[35/68] test_exp18a4_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18a4_analysis_contracts
+============================================================
+
+    ok   exact capacity-gated synthetic selector passes
+    ok   one registered outcome mismatch rejects selector
+
+test_exp18a4_analysis_contracts: PASS (2 checks)
+
+------------------------------------------------------------
+[36/68] test_exp18b_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18b_contracts
+============================================================
+
+    ok   registry hash, matrix and nine-test family are frozen
+    ok   100 holdout seeds are unique, exact and disjoint from known blocks
+    ok   primary cells, abstention boundary and claim ceilings are frozen
+    ok   n5-moderate-bg0/csma screen and exact routed alias execute
+    ok   n5-moderate-bg0/aloha screen and exact routed alias execute
+    ok   n5-stressed-bg0/aloha screen and exact routed alias execute
+    ok   n10-moderate-bg0/aloha screen and exact routed alias execute
+    ok   holdout row schema and candidate metadata close
+    ok   unknown post-hoc arm is rejected
+
+test_exp18b_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[37/68] test_exp18b_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18b_analysis_contracts
+============================================================
+
+    ok   all nine synthetic registered hypotheses support verdict
+    ok   one registered reversal rejects complete verdict without breaking alias
+
+test_exp18b_analysis_contracts: PASS (2 checks)
+
+------------------------------------------------------------
+[38/68] test_exp18b_scientific_audit_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18b_scientific_audit_contracts
+============================================================
+
+    ok   two negative intervals classify piggyback dominance
+    ok   two positive intervals classify adaptive dominance
+    ok   mixed interval signs do not manufacture dominance
+    ok   invalid interval order is rejected
+    ok   frozen audit covers every context/MAC and ALOHA access pair
+    ok   post-hoc audit cannot add a confirmatory or ACK-selector claim
+    ok   all feasible ALOHA cells expose the selected adaptive-route failure
+    ok   screen remains sufficient but not necessary at cell-mean level
+    ok   registered bundled contrast is separated from descriptive access isolation
+
+test_exp18b_scientific_audit_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[39/68] test_service_scheduler_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_service_scheduler_contracts
+============================================================
+
+    ok   default scheduler is inert
+    ok   deficit max-weight acts on virtual demand and differs from FIFO
+    ok   virtual deficit equals admissions minus successful service
+    ok   urgency max-weight uses present receiver state and no future draw
+    ok   round-robin cursor serves all N=10 nodes despite four-slot frames
+    ok   scheduled piggyback service is collision-free without standalone ACK
+
+test_service_scheduler_contracts: PASS (6 checks)
+
+------------------------------------------------------------
+[40/68] test_exp19a_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp19a_contracts
+============================================================
+
+    ok   registry fixes 30 seeds, six contexts and nine arms
+    ok   context access types match the mechanism-selected protocol
+    ok   periodic frontier and development-only claim boundary are frozen
+    ok   frame-piggyback retains the strongest original-access baseline
+    ok   capacity-gated selector is retained only as a negative control
+    ok   collision-free reference changes service while retaining piggyback
+    ok   deficit and urgency oracle information contracts are distinct
+    ok   all four periodic TDMA frontier rates execute their exact contracts
+    ok   EXP19A tidy-row schema is stable
+
+test_exp19a_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[41/68] test_exp19a_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp19a_analysis_contracts
+============================================================
+
+    ok   promotion requires all five frozen mechanism gates
+    ok   oracle and periodic diagnostics retain the complete comparison set
+    ok   periodic reproduction and inert priority force a negative verdict
+    ok   performance cannot override a failed integrity audit
+
+test_exp19a_analysis_contracts: PASS (4 checks)
+
+------------------------------------------------------------
+[42/68] test_exp19a_end_to_end
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp19a_end_to_end
+============================================================
+
+    ok   short control/network trajectories are finite and causal
+    ok   integrated virtual-service accounting closes exactly
+    ok   integrated service decision logs are complete and future-blind
+    ok   all scheduled arms remain standalone-free and collision-free
+    ok   all integrated arms replay one absolute channel realization
+
+test_exp19a_end_to_end: PASS (5 checks)
+
+------------------------------------------------------------
+[43/68] test_exp19a_posthoc_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp19a_posthoc_contracts
+============================================================
+
+    ok   audit retains every declared context/pair/metric row
+    ok   all descriptive continuous contrasts use 30 paired seeds
+    ok   post-hoc audit cannot rewrite the registered development decision
+    ok   audit distinguishes access headroom from semantic promotion
+
+test_exp19a_posthoc_contracts: PASS (4 checks)
+
+------------------------------------------------------------
+[44/68] test_exp20a_delta_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp20a_delta_contracts
+============================================================
+
+    ok   all arms use the same absolute stochastic draws
+    ok   all native AoII outcomes are finite and nonnegative
+    ok   attempt/success/collision accounting is ordered
+    ok   public and private feedback paths are active and private loss is realized
+    ok   private delayed queue is exercised without future feedback reads
+    ok   native rates remain within slot-level bounds
+    ok   private delayed execution is deterministic under a fixed seed
+    ok   public DELTA retains the upstream hot-start/CR heavy-tail boundary
+
+test_exp20a_delta_contracts: PASS (8 checks)
+
+------------------------------------------------------------
+[45/68] test_exp20a_formation_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp20a_formation_contracts
+============================================================
+
+    ok   frozen registry contains 2520 formation and 1800 native runs
+    ok   panel seed blocks are unique and disjoint
+    ok   all fourteen frozen formation identifiers resolve to an adapter
+    ok   all prior-art arms use one paired absolute channel trace
+    ok   DTSA common view is scheduled and private-view disagreement is logged
+    ok   age-gain thinning activates without receiver-truth reads
+    ok   Z-MAC-like owner and contention paths both activate
+    ok   DELTA public minislot and private piggyback feedback are both charged
+    ok   decision logs, future-read guards and causal invariants pass
+
+test_exp20a_formation_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[46/68] test_exp20a_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp20a_analysis_contracts
+============================================================
+
+    ok   all five gates alone permit EXP20B
+    ok   periodic dominance stops candidate creation
+    ok   zero supported native cells closes the information gap
+    ok   three of six native cells remains inconclusive
+    ok   an existing private baseline match stops candidate creation
+
+test_exp20a_analysis_contracts: PASS (5 checks)
+
+------------------------------------------------------------
+[47/68] test_exp21a_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21a_contracts
+============================================================
+
+    ok   frozen matrix contains 30 x 8 x 7 = 1680 trajectories
+    ok   EXP21A development seeds are fresh relative to EXP20A
+    ok   full and two-hop control-visibility contracts differ explicitly
+    ok   proposal, loss and clock tensors are absolute and deterministic
+    ok   all seven frozen arm identifiers resolve
+    ok   reservation epochs serialize positive charged control airtime
+    ok   request, response and commit recipient accounting closes
+    ok   nominal projection converges without future or receiver-truth reads
+    ok   local static TDMA consumes bounded pre-drawn clock impairment
+    ok   complete control erasure prevents assignment without hidden truth
+
+test_exp21a_contracts: PASS (10 checks)
+
+------------------------------------------------------------
+[48/68] test_exp21a_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21a_analysis_contracts
+============================================================
+
+    ok   all registered gates produce supported-path verdict
+    ok   failed nominal dominance produces ideal-artifact verdict
+    ok   post-nominal overhead failure produces fragile verdict
+
+test_exp21a_analysis_contracts: PASS (3 checks)
+
+------------------------------------------------------------
+[49/68] test_exp21b_continuous_timing_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21b_continuous_timing_contracts
+============================================================
+
+    ok   zero offset/drift reproduces exact nominal half-open intervals
+    ok   ownership slot uses DATA airtime rather than the 1-ms MAC quantum
+    ok   opposing residual offsets collide with zero guard
+    ok   half-open intervals are collision-free at the offset guard bound
+    ok   opposing drift collides late without guard and is safe at G_safe
+    ok   periodic synchronization reduces required guard and prevents overlap
+    ok   positive temporal overlap corrupts only declared interfering receivers
+    ok   identical explicit clock inputs are bit-identical
+    ok   clock equation and offered/busy interval accounting close
+
+test_exp21b_continuous_timing_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[50/68] test_exp21c_closed_loop_timing_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21c_closed_loop_timing_contracts
+============================================================
+
+    ok   integrated zero-clock starts equal standalone kernel starts
+    ok   integrated DATA uses exact non-rounded physical airtime
+    ok   clock equation closes without future or receiver-truth reads
+    ok   integrated adversarial offset witness obeys analytical guard boundary
+    ok   event engine retains receiver-specific interference under exact overlap
+    ok   event-time inline delivery and recipient accounting close
+    ok   busy-time union and continuous attempt accounting are finite
+    ok   identical absolute trace produces bit-identical integrated events
+
+test_exp21c_closed_loop_timing_contracts: PASS (8 checks)
+
+------------------------------------------------------------
+[51/68] test_exp21d_dstr_kernel_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21d_dstr_kernel_contracts
+============================================================
+
+    ok   native N5 reaches a valid resolved assignment
+    ok   recipient accounting and causal-information counters close
+    ok   colliding allocation activates TG/TGn and grows the superframe
+    ok   formation-wide management reach preserves native frame consensus
+    ok   TS/TSo/TSn and successful shrink paths all activate
+    ok   same-slot choices create DATA collision and energy-NACK witnesses
+    ok   missing implicit reports cause causal retry without oracle repair
+    ok   post-collision erasure is separately charged and accounted
+    ok   state loss rejoins through the normal protocol path
+    ok   identical absolute traces replay bit-identically
+    ok   registry contains exactly 800 declared seed/N/condition rows
+    ok   beacon-loss boundary changes DATA erasure only
+    ok   restricted reach and churn mappings match the frozen factors
+    ok   absolute trace generation is deterministic and dimensionally exact
+    ok   absolute draw prefixes are invariant to horizon extension
+    ok   source FST=30 removes a retained v2 internal-gap witness
+
+test_exp21d_dstr_kernel_contracts: PASS (16 checks)
+
+------------------------------------------------------------
+[52/68] test_exp21d_closed_loop_integration_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21d_closed_loop_integration_contracts
+============================================================
+
+    ok   every complete-horizon kernel DATA/control attempt maps once
+    ok   management group recipient accounting equals the kernel
+    ok   management and DATA transmission intervals never overlap
+    ok   translated schedule is monotone and information-causal
+    ok   identical configuration and absolute trace replay bit-identically
+    ok   oracle-warm coloring is independent of native terminal resolution
+    ok   a shorter mission exposes an exact prefix of the longer replay
+    ok   event engine consumes each due DATA opportunity exactly once
+    ok   management attempts, busy slots, airtime and cursor close
+    ok   event-engine DATA and management collision witnesses match kernel
+    ok   DATA and management recipient accounting closes
+    ok   scheduled DATA erasure masks reach the physical controller timeline
+    ok   split calls consume only due entries and equal one-shot replay
+    ok   closed-loop controller consumes D-STR deliveries with exact charge
+    ok   pin-augmented N10 graph has exact zero-collision warm witness
+
+test_exp21d_closed_loop_integration_contracts: PASS (15 checks)
+
+------------------------------------------------------------
+[53/68] test_exp21d_boundary_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21d_boundary_contracts
+============================================================
+
+    ok   registry freezes 360 falsification rows without promotion rights
+    ok   loss, visibility and rejoin arms change only declared kernel factors
+    ok   beacon erasure reaches controller and right-censor accounting closes
+    ok   loss-warm arm isolates physical erasure without acquisition traffic
+    ok   restricted reach retains paired draws and explicit composability flag
+    ok   state-loss arm activates and rejoins through the normal kernel path
+
+test_exp21d_boundary_contracts: PASS (6 checks)
+
+------------------------------------------------------------
+[54/68] test_exp21d_clock_composition_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp21d_clock_composition_contracts
+============================================================
+
+    ok   affine clock equation and sufficient-guard certificate close
+    ok   common nominal cutoff preserves identical logical opportunities
+    ok   lead time and cutoff keep every retained interval inside the horizon
+    ok   event engine consumes every retained clocked DATA/control attempt
+    ok   staggered co-slot attempts preserve scheduled physical outcomes
+    ok   closed event timeline exposes clock state without cross-plane overlap
+
+test_exp21d_clock_composition_contracts: PASS (6 checks)
+
+------------------------------------------------------------
+[55/68] test_local_union_graph_migration_kernel_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_local_union_graph_migration_kernel_contracts
+============================================================
+
+    ok   fresh union receipts activate the changed slot safely
+    ok   erased RESPONSE delays cumulative closure without unsafe reuse
+    ok   permanent RESPONSE blackout remains fail-silent
+    ok   REVOKE loss cannot change local silence or migration
+    ok   stale response version cannot complete migration
+    ok   concurrent migration is rejected as unsupported
+    ok   independent actual-graph oracle rejects incomplete union
+    ok   control bytes, recipients, airtime and bounds close
+
+test_local_union_graph_migration_kernel_contracts: PASS (8 checks)
+
+------------------------------------------------------------
+[56/68] test_local_union_migration_continuous_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_local_union_migration_continuous_contracts
+============================================================
+
+    ok   kernel attempts, bytes, airtime and collisions map exactly
+    ok   REVOKE, CLAIM, LOCK-PROOF and RESPONSE payloads are explicit
+    ok   fixed proof window remains independent after reactivation
+    ok   DATA switches old-slot to silence to certified new-slot
+    ok   affine-clock guard preserves every logical opportunity
+    ok   collision frames remain distinct from colliding attempts
+
+test_local_union_migration_continuous_contracts: PASS (6 checks)
+
+------------------------------------------------------------
+[57/68] test_local_migration_emergency_data_contracts
+------------------------------------------------------------
+test_local_migration_emergency_data_contracts: PASS
+
+------------------------------------------------------------
+[58/68] test_local_union_migration_retry_backoff_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+test_local_union_migration_retry_backoff_contracts: PASS
+
+------------------------------------------------------------
+[59/68] test_exp23ab_bounded_retry_contracts
+------------------------------------------------------------
+test_exp23ab_bounded_retry_contracts: PASS
+
+------------------------------------------------------------
+[60/68] test_elcs_kernel_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_elcs_kernel_contracts
+============================================================
+
+    ok   n5-6dof witnesses cover 10 edges (4 hidden); max load 3, 280 control bytes/epoch
+    ok   n10-ring2 witnesses cover 30 edges (17 hidden); max load 8, 640 control bytes/epoch
+    ok   witness builder exposes rather than hides an uncovered conflict edge
+    ok   n5-6dof ELCS-W certifies locally with exact attempt/byte bounds
+    ok   n10-ring2 ELCS-W certifies locally with exact attempt/byte bounds
+    ok   permanent transmitted-CERT loss causes fallback, never false validity
+    ok   ELCS-W DATA erasure changes delivery but not certificate state
+    ok   zero-loss priority coloring reaches a certified safe schedule
+    ok   control, fallback and scheduled attempt accounting closes
+    ok   event-driven renewal meets acquisition and analytical control bounds
+    ok   discovery-only STATUS never creates a GRANT frame
+    ok   lost final GRANT leaves the client in the disjoint fallback region
+    ok   owner lock is created by a GRANT attempt even when decoding fails
+    ok   an invalid node uses only its first eligible fallback slot per frame
+    ok   DATA erasure changes delivery only and never schedule evidence
+    ok   missing conflict-edge visibility yields fallback rather than false validity
+    ok   fixed frame remains common under restricted management reach
+    ok   physical conflict outside the declared envelope is rejected explicitly
+    ok   state-loss client reconstructs without violating outstanding owner locks
+    ok   owner tuple changes only after client-stop and owner-lock fencing
+    ok   reconfigured tuple forces an eligible request with exact accounting
+    ok   deterministic control closes all six v1 refresh-outage witnesses
+    ok   corrected stimulus activates and repairs cascade in both study graphs
+    ok   stale, future and tuple-mismatched GRANTs never create validity
+    ok   identical absolute trace replays bit-identically and causally
+
+test_elcs_kernel_contracts: PASS (25 checks)
+
+------------------------------------------------------------
+[61/68] test_elcs_continuous_integration_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_elcs_continuous_integration_contracts
+============================================================
+
+    ok   EXP22D registry freezes 120 integration-only fresh-seed rows
+    ok   EXP22E closed-loop rerun uses disjoint seeds after valid kernel repair
+    ok   EXP22J freezes a disjoint event-driven integration matrix
+    ok   EXP22L preserves frozen rates on fresh seeds after gate repair
+    ok   EXP22M targets the fresh exact one-percent cost boundary
+    ok   control and DATA use their declared common-PHY payload airtimes
+    ok   every full-horizon kernel attempt maps once with its plane/kind
+    ok   management attempt and recipient accounting equals the kernel
+    ok   DATA outcome projection closes without forbidden information reads
+    ok   native STATUS, GRANT, fallback and scheduled regions are disjoint
+    ok   zero/impaired clocks retain identical outcome-blind logical opportunities
+    ok   affine transformation preserves fallback/scheduled and STATUS/GRANT labels
+    ok   mission guard certifies the composed physical timeline
+    ok   ELCS-W maps variable CLAIM/RESPONSE bytes to exact common-PHY airtime
+    ok   affine clocks preserve ELCS-W logical events and variable airtime
+    ok   event engine replays ELCS-W attempts, recipients and airtime exactly
+    ok   event engine consumes all due attempts and charges control airtime
+    ok   physical DATA masks and fallback collisions replay exactly
+    ok   split calls equal one-shot replay bit-for-bit
+    ok   closed-loop formation consumes ELCS-F deliveries with exact accounting
+    ok   frontier row separates logical request and physical replay contracts
+    ok   EXP22F static frontier arm uses paired affine clock and full charge
+
+test_elcs_continuous_integration_contracts: PASS (22 checks)
+
+------------------------------------------------------------
+[62/68] test_exp18b_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18b_contracts
+============================================================
+
+    ok   registry hash, matrix and nine-test family are frozen
+    ok   100 holdout seeds are unique, exact and disjoint from known blocks
+    ok   primary cells, abstention boundary and claim ceilings are frozen
+    ok   n5-moderate-bg0/csma screen and exact routed alias execute
+    ok   n5-moderate-bg0/aloha screen and exact routed alias execute
+    ok   n5-stressed-bg0/aloha screen and exact routed alias execute
+    ok   n10-moderate-bg0/aloha screen and exact routed alias execute
+    ok   holdout row schema and candidate metadata close
+    ok   unknown post-hoc arm is rejected
+
+test_exp18b_contracts: PASS (9 checks)
+
+------------------------------------------------------------
+[63/68] test_exp18b_analysis_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp18b_analysis_contracts
+============================================================
+
+    ok   all nine synthetic registered hypotheses support verdict
+    ok   one registered reversal rejects complete verdict without breaking alias
+
+test_exp18b_analysis_contracts: PASS (2 checks)
+
+------------------------------------------------------------
+[64/68] test_exp15_trace_contracts
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp15_trace_contracts
+============================================================
+
+    ok   same measurement and replay seed are bit-identical
+    ok   measurement identity is separate from replay randomization
+    ok   absolute measured DATA probabilities drive attempted receptions
+    ok   standalone ACK uses the measured reverse probability tensor
+    ok   piggyback ignores standalone-ACK loss and follows its DATA frame
+    ok   measured external occupancy blocks CSMA independently of config load
+    ok   legacy generated-trace behavior remains additive and unchanged
+    ok   out-of-range probability fails with the stable validation identifier
+    ok   nonuniform absolute time grid fails at the boundary
+    ok   nonzero self-link measurements are rejected
+    ok   post-build semantic mutation is caught by the hash
+
+test_exp15_trace_contracts: PASS (11 checks)
+
+------------------------------------------------------------
+[65/68] test_blackout_semantics
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_blackout_semantics
+============================================================
+
+[1] Fault disabled is inert
+    ok   nNodes = 0 leaves the trajectory bit-identical
+    ok   nNodes = 0 leaves txCount identical
+    ok   same seed gives the same nodes
+    ok   same seed gives the same timing
+    ok   a different seed gives different nodes
+    ok   the leader is never blacked out
+    ok   the requested number of nodes is selected
+    ok   cfg.swarm.A is unchanged by the run
+    ok   edge count is unchanged
+    ok   the dark node has neighbours to test against
+    ok   no DATA left the dark node during the outage
+    ok   no DATA reached the dark node during the outage
+    ok   DATA log is monotonic across the outage
+    ok   ACK log is monotonic across the outage
+    ok   the dark node keeps moving during the outage
+    ok   no NaN anywhere in the trajectory
+    ok   no ACK arrives before its own accept
+    ok   no ACK for data that never arrived
+    ok   no sender rollback
+    ok   no future genTime
+    ok   no stale ACK accepted
+    ok   no ACK for an unknown sequence number
+    ok   the nominal graph is connected
+    ok   isolated-follower count is reported
+    ok   disconnected duration is reported
+
+test_blackout_semantics: PASS (25 checks)
+
+------------------------------------------------------------
+[66/68] test_mismatch_semantics
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_mismatch_semantics
+============================================================
+
+    ok   the nominal arm leaves the trajectory bit-identical
+    ok   the nominal arm leaves txCount identical
+    ok   cfg.quad mass stays nominal
+    ok   cfg.quad drag stays nominal
+    ok   true mass is +10%
+    ok   true drag is +20%
+    ok   thrust limit is NOT scaled with mass
+    ok   torque limit is NOT scaled with mass
+    ok   inertia stays nominal, as pre-registered
+    ok   the controller issues the identical command under the perturbed arm
+    ok   the perturbed arm changes the trajectory
+    ok   the perturbed arm produces no NaN
+    ok   same seed gives the same force realization
+    ok   a different seed gives a different realization
+    ok   level 0 produces no force at all
+    ok   the force trace lives on a 0.01 s physical grid
+    ok   realized RMS is the right order for level 0.5
+    ok   peak exceeds RMS and is bounded
+    ok   the proxy is predominantly horizontal
+    ok   every method meets the identical force realization at the same seed
+    ok   the lag time constant is set
+    ok   command-to-actuator tracking error is logged
+    ok   the lag actually lags
+    ok   no lag error is logged when tau = 0
+    ok   the lag changes the trajectory
+    ok   saturation is still measured under lag
+    ok   metrics report the true mass ratio
+    ok   metrics report the true drag ratio
+    ok   the nominal arm reports ratio 1
+    ok   no ACK arrives before its own accept
+    ok   no ACK for data that never arrived
+    ok   no sender rollback
+    ok   no future genTime
+    ok   no stale ACK accepted
+    ok   no ACK for an unknown sequence number
+    ok   the forward CRN trace is unchanged by perturbation
+    ok   the reverse CRN trace is unchanged by perturbation
+
+test_mismatch_semantics: PASS (37 checks)
+
+------------------------------------------------------------
+[67/68] test_estimator_semantics
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_estimator_semantics
+============================================================
+
+    ok   zero noise and zero latency leave the trajectory bit-identical
+    ok   zero noise and zero latency leave txCount identical
+    ok   same seed gives the same noise realization
+    ok   a different seed gives a different realization
+    ok   noise lives on the 0.01 s master grid
+    ok   the leader carries no noise
+    ok   realized position sigma matches the request
+    ok   realized velocity sigma matches the request
+    ok   the noise realization is identical at a different outer dt
+    ok   the delayed query lands at exactly t - 50 ms
+    ok   it is NOT the dt-rounded 40 ms value
+    ok   the test really is at a dt that would round
+    ok   the same 50 ms holds at a different outer dt
+    ok   followers receive a noisy estimate
+    ok   the leader estimate stays exact
+    ok   the leader velocity stays exact
+    ok   the estimate at a given instant is a function of time, not of call count
+    ok   noise changes the true trajectory
+    ok   reported minSep comes from the TRUE state
+    ok   no NaN under heavy noise
+    ok   no ACK arrives before its own accept
+    ok   no ACK for data that never arrived
+    ok   no sender rollback
+    ok   no future genTime
+    ok   no stale ACK accepted
+    ok   no ACK for an unknown sequence number
+    ok   the physical-time trace is identical across outer dt
+    ok   the master grid is longer than the per-step grid
+    ok   default mode leaves the slot as the step index
+    ok   physical-time mode maps by time
+    ok   the same instant maps to the same slot at another dt
+
+test_estimator_semantics: PASS (31 checks)
+
+------------------------------------------------------------
+[68/68] test_exp10_infrastructure
+------------------------------------------------------------
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp10_infrastructure
+============================================================
+
+    ok   realizationHash separates two logical patterns
+    ok   a logical realization does not hash to zero
+    ok   realizationHash is deterministic
+    ok   realizationHash is order sensitive
+    ok   a non-finite entry gives a finite hash, not NaN
+    ok   +inf and -inf are distinguished
+    ok   an all-zero realization does not hash to zero
+    ok   one phase per physical sender plus one for the leader payload class
+    ok   phaseU lies in [0,1)
+    ok   the same seed gives the same phase realization
+    ok   a different seed gives a different phase realization
+    ok   the phase hash is reproducible
+    ok   the phase hash separates seeds
+    ok   the legacy phaseOffset flag is inert, as every locked result assumed
+    ok   phaseOffsetEnabled absent equals phaseOffsetEnabled false
+    ok   no phase hash is reported when phase is off
+    ok   with phase off every sender fires on one clock
+    ok   a firing sender reaches every one of its receivers in the same step
+    ok   a sender whose clock has not fired sends to nobody
+    ok   the leader payload class is not dragged along by a neighbour sender
+    ok   the leader payload class does not emit neighbour-state packets
+    ok   the leader payload class reaches every pinned follower at once
+    ok   phase on is not inert for a periodic method
+    ok   the run consumed the registry phase realization
+    ok   P10 and P20 draw the identical phase realization
+    ok   the shared phaseU scales with each period rather than being redrawn
+    ok   phase leaves State-event bit-identical
+    ok   phase leaves the State-event transmission count identical
+    ok   phase leaves Causal-v3 bit-identical
+    ok   phase leaves the Causal-v3 transmission count identical
+    ok   the event-driven methods report no phase realization
+    ok   all four methods report the same forward realization hash
+    ok   that hash is the one the registry fixed in advance
+    ok   the four methods really did transmit different amounts
+    ok   a method with no reverse channel reports no ACK realization
+    ok   Causal-v3 consumed the registry reverse realization
+    ok   the link-fault hash is reproducible
+    ok   the link-fault hash separates seeds
+    ok   the link-fault realization is reproducible
+    ok   a different seed downs different links
+    ok   a permanent outage tEnd = inf still hashes finite
+    ok   the blackout hash is reproducible
+    ok   the blackout hash separates seeds
+    ok   the no-fault realizations are hashed too
+    ok   the no-fault link realization is distinguishable from a faulted one
+    ok   no EXP10 holdout seed was used by EXP01-EXP09
+    ok   the seven EXP10 realization streams are mutually disjoint
+    ok   the pre-registered block is 50 seeds
+    ok   the paired mean difference is correct
+    ok   a constant difference has zero spread
+    ok   a constant negative difference excludes zero
+    ok   a complete sample is reported complete
+    ok   a diverged arm removes exactly one pair
+    ok   an incomplete sample is flagged, not quietly quoted as 50 seeds
+    ok   a difference straddling zero is flagged as containing zero
+    ok   the t quantile matches tinv(0.975, nPairs-1)
+    ok   the final matrix has eight selected points
+    ok   the final matrix has seventeen point-scenario cells
+    ok   coverage spans N = 5, 20 and 50
+    ok   the nominal point carries Clean as well as Moderate and Stressed
+    ok   every robustness group named in the plan appears exactly once
+    ok   the holdout seed reaches cfg.net.seed unmodified
+    ok   EXP10 runs with transmission phase on
+    ok   both channel traces are on
+    ok   the nominal point installs no perturbation at all
+    ok   the ACK point is 10 % reverse loss at the forward DATA delay
+    ok   the ACK point carries no reverse jitter
+    ok   the mismatch point is EXP09B arm B7 exactly
+    ok   the estimator point is EXP09C arm C3 exactly
+    ok   the link point is a permanent 20 % directed-link removal
+    ok   the node point is one follower dark for 5 s from t = 12 s
+    ok   the scalability anchor is N = 50 double integrator
+    ok   N = 50 uses the EXP08 graph convention, not the EXP06A one
+    ok   the N = 5 points are 6-DOF at the locked inner ratio
+    ok   the original controller is used, not the EXP08A-D diagnostic
+    ok   four holdout seeds give four distinct CONTINUOUS realizations
+    ok   every master hash is finite
+    ok   the master hash separates seeds
+    ok   the two discrete fault realizations are reported, not gated
+
+test_exp10_infrastructure: PASS (79 checks)
+
+############################################################
+# TEST SUITE SUMMARY
+############################################################
+
+  [PASS ] test_rotation                   0.9 s
+  [PASS ] test_formation_error            0.9 s
+  [PASS ] test_formation_theory_certificate    1.0 s
+  [PASS ] test_probabilistic_safety_certificate    0.9 s
+  [PASS ] test_standalone_ack_value_certificate    0.9 s
+  [PASS ] test_setpoint_interface        13.7 s
+  [PASS ] test_lock_regression          226.6 s
+  [PASS ] test_causal_invariants         14.1 s
+  [PASS ] test_shared_medium_infrastructure    3.2 s
+  [PASS ] test_ack_value_instrumentation    4.9 s
+  [PASS ] test_ack_branch_replay          5.8 s
+  [PASS ] test_causal_broadcast_policy    2.0 s
+  [PASS ] test_shared_medium_end_to_end    3.2 s
+  [PASS ] test_exp13_policy_contracts     3.2 s
+  [PASS ] test_shared_medium_channel_models    2.4 s
+  [PASS ] test_exp14_infrastructure       6.3 s
+  [PASS ] test_mac_aware_policy           2.3 s
+  [PASS ] test_context_aware_policy       3.0 s
+  [PASS ] test_exp14d_factorial_contracts    4.0 s
+  [PASS ] test_exp14e_holdout_contracts    2.6 s
+  [PASS ] test_exp14f_shadow_contracts    3.8 s
+  [PASS ] test_exp14g_contracts           6.6 s
+  [PASS ] test_exp14h_contracts           2.0 s
+  [PASS ] test_exp14i_contracts           4.4 s
+  [PASS ] test_exp16_contracts            2.8 s
+  [PASS ] test_exp16_analysis_contracts    9.2 s
+  [PASS ] test_exp17_contracts            5.1 s
+  [PASS ] test_exp17_analysis_contracts    5.6 s
+  [PASS ] test_exp18_contracts            2.8 s
+  [PASS ] test_exp18_analysis_contracts    9.9 s
+  [PASS ] test_exp18a2_contracts          2.6 s
+  [PASS ] test_exp18a3_contracts          2.6 s
+  [PASS ] test_exp18a3_analysis_contracts    3.9 s
+  [PASS ] test_exp18a4_contracts          3.5 s
+  [PASS ] test_exp18a4_analysis_contracts    3.7 s
+  [PASS ] test_exp18b_contracts           3.7 s
+  [PASS ] test_exp18b_analysis_contracts   25.5 s
+  [PASS ] test_exp18b_scientific_audit_contracts    2.9 s
+  [PASS ] test_service_scheduler_contracts    2.4 s
+  [PASS ] test_exp19a_contracts           3.9 s
+  [PASS ] test_exp19a_analysis_contracts    3.0 s
+  [PASS ] test_exp19a_end_to_end          4.0 s
+  [PASS ] test_exp19a_posthoc_contracts    2.7 s
+  [PASS ] test_exp20a_delta_contracts     8.6 s
+  [PASS ] test_exp20a_formation_contracts    3.5 s
+  [PASS ] test_exp20a_analysis_contracts    5.2 s
+  [PASS ] test_exp21a_contracts           3.3 s
+  [PASS ] test_exp21a_analysis_contracts    4.6 s
+  [PASS ] test_exp21b_continuous_timing_contracts    2.1 s
+  [PASS ] test_exp21c_closed_loop_timing_contracts    2.7 s
+  [PASS ] test_exp21d_dstr_kernel_contracts   10.8 s
+  [PASS ] test_exp21d_closed_loop_integration_contracts    8.7 s
+  [PASS ] test_exp21d_boundary_contracts   36.2 s
+  [PASS ] test_exp21d_clock_composition_contracts    2.8 s
+  [PASS ] test_local_union_graph_migration_kernel_contracts    2.4 s
+  [PASS ] test_local_union_migration_continuous_contracts    2.9 s
+  [PASS ] test_local_migration_emergency_data_contracts    0.2 s
+  [PASS ] test_local_union_migration_retry_backoff_contracts    2.4 s
+  [PASS ] test_exp23ab_bounded_retry_contracts    6.2 s
+  [PASS ] test_elcs_kernel_contracts      6.4 s
+  [PASS ] test_elcs_continuous_integration_contracts    3.1 s
+  [PASS ] test_exp18b_contracts           2.8 s
+  [PASS ] test_exp18b_analysis_contracts   19.1 s
+  [PASS ] test_exp15_trace_contracts      2.1 s
+  [PASS ] test_blackout_semantics         9.7 s
+  [PASS ] test_mismatch_semantics        13.1 s
+  [PASS ] test_estimator_semantics       10.9 s
+  [PASS ] test_exp10_infrastructure       6.4 s
+
+  68 of 68 passed in 9.9 min
+
+  TEST SUITE: ALL PASS
+
+============================================================
+STEP 2 / 7  locked tags and configuration hash
+============================================================
+
+  [ok   ] exp07a-locked                af8174f6e78da9643063edc9798027d02d3b876b
+  [ok   ] exp07b-locked                deb805dcdd8c40491c414c446e1ba2e37b21a11c
+  [ok   ] exp07c-locked-negative       03af557768dd8b8845dadb9b0579d194c045c66c
+  [ok   ] exp08a-locked-partial        dce01703121833d7d40fca147064bce0b463300b
+  [ok   ] exp08ad-locked-diagnostic    2953c7cac916c3c9165a8989492c38942f3bed25
+  [ok   ] exp08b-locked-partial        43fc1d561e202edd17ff0db5a6ed06a592d5a827
+  [ok   ] exp08c-locked-partial        e0f9e0bdd84f80413c7ec5df37eb5f9ef9fc7527
+  [ok   ] exp09a-locked                452af01d3c93a85f33ad5df45dbbc02f8cee733f
+  [ok   ] exp09b-locked-partial        d266db222aaccfa6992e2a24946a5ed33e4a060c
+  [ok   ] exp09c-locked-partial        cdc11855bff895ab0d06d60b5233774c40dbe0ee
+
+  configuration hashes
+    defaultConfig              44647374
+    NOMINAL                    74931807
+    ACK                        75702937
+    MISMATCH                 4813414255
+    ESTIMATOR               38283010554
+    LINK                      116974829
+    NODE                      120619505
+    N20REF                    107968153
+    SCALE                     207936462
+
+============================================================
+STEP 3 / 7  EXP10A holdout dataset
+============================================================
+
+  Re-running EXP10A by request.
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+  rows   : 3400
+  seeds  : 50
+  block  : 25000001..25000050
+  matches the pre-registered 50-seed holdout block : yes
+
+============================================================
+STEP 4 / 7  rebuild EXP10B from the persisted dataset
+============================================================
+
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+  EXP10B run : 2026-09-06_145037
+  figures    : 4
+
+============================================================
+STEP 5 / 7  realization hashes, re-derived in this session
+============================================================
+ensureParallelPool: pool ready (16 workers).
+
+------------------------------------------------------------
+EXP10 master realization registry
+------------------------------------------------------------
+  50 seeds x 3 swarm sizes, 7 realization types
+  N = 5    master hashes drawn for 50 seeds
+  N = 20   master hashes drawn for 50 seeds
+  N = 50   master hashes drawn for 50 seeds
+  [PASS ] every seed has a distinct continuous realization
+  [INFO ] discrete fault realizations draw from a finite set:
+           N=5 link: 20 distinct pattern(s) over 50 seeds
+           N=5 blackout: 4 distinct pattern(s) over 50 seeds
+           N=20 link: 45 distinct pattern(s) over 50 seeds
+           N=20 blackout: 19 distinct pattern(s) over 50 seeds
+           N=50 link: 50 distinct pattern(s) over 50 seeds
+           N=50 blackout: 34 distinct pattern(s) over 50 seeds
+
+  Locked forward hash, 3400 rows compared
+    worst relative difference : 4.579e-15
+    stated tolerance          : 1.000e-14
+    within tolerance          : yes
+    (float summation order and CSV precision, not the realization; the exact-hash comparison above is what 
+     gates this step)
+
+  rows checked : 3400
+  mismatches   : 0
+
+============================================================
+STEP 6 / 7  serial versus parallel determinism
+============================================================
+
+  point NOMINAL / Stressed, seed 25000001, all 4 methods
+
+  Method       Quantity                       serial                 parallel identical
+  P10          trajectory              22515 samples            22515 samples yes
+  P20          trajectory              22515 samples            22515 samples yes
+  State-event  trajectory              22515 samples            22515 samples yes
+  Causal-v3    trajectory              22515 samples            22515 samples yes
+
+  bit-identical across serial and parallel execution : yes
+
+============================================================
+STEP 7 / 7  environment manifest
+============================================================
+
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default values.] 
+[> In . (line 486)
+In run_simulation_v1_validation (line 686)
+In run (line 112)] 
+  manifest.json      : 111 toolboxes, git ddfd6694 (DIRTY working tree)
+  trace_hashes.csv   : 150 rows
+
+############################################################
+# SIMULATION v1.0 VALIDATION SUMMARY
+############################################################
+
+  [PASS   ] test suite                     9.9 min
+  [PASS   ] locked tags                    10 of 10 present
+  [PASS   ] EXP10A dataset                 2026-09-06_141912, 3400 rows, 50 seeds
+  [PASS   ] EXP10B rebuild                 2026-09-06_145037, 4 figures
+  [PASS   ] realization hashes             3400 rows, 0 mismatch(es)
+  [PASS   ] serial/parallel determinism    4 methods, trajectories and counters compared
+  [PASS   ] environment manifest           manifest.json, trace_hashes.csv (150 rows)
+
+  FREEZE READY: every blocking check passed.
+  simulation-v1.0 may be tagged on this commit.
+
+  A scientific result being unfavourable is NOT a blocker and
+  is not a reason to re-run anything.
+
+============================================================
+DONE : simulation_v1_validation
+TIME : 42 m 20 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\simulation_v1_validation\2026-09-06_140912
+============================================================
