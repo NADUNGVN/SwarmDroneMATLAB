@@ -505,41 +505,178 @@ seeds. All envelopes have unit empirical coverage to numerical tolerance. This
 is numerical validation of the proved deterministic inequalities, not an
 additional theorem or a held-out policy comparison.
 
-**PROOF GAP G2.2 — sender-side distributed budget.** Lemma 1 makes confirmed
-age conservative, but the sender does not automatically know the velocity in
-the receiver's latest accepted payload. A sender-implementable bound must use
-confirmed payload history or a pre-frozen global envelope. This decomposition
-belongs to Gate 3--4 and must not read receiver truth.
+### Proven Lemma 4 — causal sender information-set containment
 
-## 11. Gate-3 candidate result and exact gap
-
-If \(A_h\) is Schur, then for any \(Q\succ0\) there is a unique
-\(P\succ0\) satisfying
+For link $(i,j)$, let the sender's information set after ACK processing be
 
 \[
-A_h^\top P A_h-P=-Q.
+\mathcal S_{ij}(k)=\{x_j^{ack}(k)\}\cup
+\{x_j^n:n>n_{ij}^{ack}(k),\;n\text{ remains outstanding}\}.
 \]
 
-Expanding \(V_k=y_k^\top Py_k\) under the exact input in Section 5 can yield an
-ISS/UUB inequality with respect to communication and leader-step inputs. This
-is a theorem target, not yet a completed TCNS theorem.
+Under the causal protocol invariants, the state currently held by receiver
+$i$ belongs to $\mathcal S_{ij}(k)$. Therefore the sender-computable quantities
 
-**PROOF GAP G3.1.** The existing generic \(Q=I\)/Young bound has transient gain
-about 93.44 and input gain about \(5.18\times10^6\) for the default cell. It is
-logically valid but numerically useless. A tighter metric or finite-horizon
-reachable/induced bound is required.
+\[
+\zeta^p_{ij}(k)=\max_{x\in\mathcal S_{ij}(k)}\|p_j(k)-p(x)\|,
+\qquad
+\zeta^v_{ij}(k)=\max_{x\in\mathcal S_{ij}(k)}\|v_j(k)-v(x)\|
+\]
 
-**PROOF GAP G3.2.** A global disturbance budget must be decomposed into
-sender/link quantities available without receiver truth or future channel
-outcomes. Otherwise it cannot define a distributed causal trigger.
+upper-bound the true receiver errors. The same construction includes
+acceleration for the pinned analytical-leader payload.
 
-**PROOF GAP G3.3.** The first LTI result does not cover acceleration
-saturation, the 6-DOF cascade, directed/switching graphs, Gaussian estimation
-noise, or topology disconnection.
+**Proof.** A cumulative ACK names a payload already accepted by the receiver
+and retires all earlier sequence numbers. If the receiver has accepted
+nothing newer, it holds the confirmed payload. If it holds a newer payload,
+that payload was sent with a larger sequence number and has not yet been
+cumulatively acknowledged at the sender, so its sent record remains
+outstanding. Including records known internally by the simulator to have been
+dropped enlarges the set but never invalidates containment; the drop flag is
+not read. Taking a maximum over the containing set proves each bound.
+\(\square\)
 
-**PROOF GAP G3.4.** Formation RMSE is a time/follower average of position error;
-a pointwise stacked-state UUB must be translated carefully rather than called
-an RMSE bound without proof.
+This closes the sender-side part of former `PROOF GAP G2.2` without assuming
+that state-error norm is monotone in AoI. Freshness still matters because ACK
+arrival contracts the possible set and unacknowledged transmissions expand or
+refine it, but AoI is no longer treated as sufficient control information.
+
+## 11. Gate-3 formation robustness result
+
+### Control-disturbance budget
+
+Applying the triangle inequality to the exact command perturbation in Section
+4 and the information-set bounds in Lemma 4 gives
+
+\[
+\|d_i^c(k)\|\le\beta_i(k),
+\]
+
+\[
+\begin{split}
+\beta_i={}&K_ps_i\sum_jA_{ij}\zeta^p_{ij}
++K_vs_i\sum_jA_{ij}\zeta^v_{ij}\\
+&+\pi_iK_{pL}\zeta^{p,L}_{i1}
++\pi_iK_{vL}\zeta^{v,L}_{i1}
++\pi_i\zeta^{a,L}_{i1}.
+\end{split}
+\]
+
+Every term is associated with a real controller coefficient. This is the
+first explicit control-relevance mapping; it is not a fitted weighted sum.
+
+### Proven Theorem 1 — exact communication-degradation dynamics
+
+Let a stale-information trajectory and a perfect-current-information
+trajectory share the same analytical leader and the same state at sample
+$k_0$. Suppose both commands remain unsaturated and A1--A6 hold on the
+interval. With
+
+\[
+\delta y_k=\begin{bmatrix}\delta e_k\\h\delta w_k\end{bmatrix},
+\qquad
+B_c=h^2\begin{bmatrix}I\\I\end{bmatrix},
+\]
+
+their exact difference obeys
+
+\[
+\delta y_{k+1}=A_h\delta y_k+B_cd^c_k,
+\qquad \delta y_{k_0}=0.
+\]
+
+**Proof.** Write the exact sampled update in Section 5 for each trajectory.
+The leader position-step and velocity-step residuals are identical and cancel.
+The perfect-information command has $d^c=0$; subtracting the two updates leaves
+the displayed recurrence. \(\square\)
+
+### Proven Theorem 2 — structured finite-horizon ISS/UUB bound
+
+Treat each scalar row of $A_h^rB_c$ as a coefficient multiplying a 3-D vector
+block. If $\|d_i^c(k)\|\le\beta_i(k)$, then for state block $\ell$ and
+$n>k_0$,
+
+\[
+\|\delta y_\ell(n)\|
+\le
+\sum_{r=k_0}^{n-1}\sum_{i=1}^{m}
+\left|[A_h^{n-1-r}B_c]_{\ell i}\right|\beta_i(r).
+\]
+
+**Proof.** Unroll Theorem 1 from zero initial degradation, group each follower
+input as a 3-D vector, and apply the triangle inequality after the signed
+matrix power has been evaluated. Thus cancellations inside $A_h^rB_c$ are
+preserved. \(\square\)
+
+Because $A_h$ is Schur, the impulse series is summable and the system is ISS.
+For a uniform vector bound $\beta(k)\preceq b$, select any integer $q$ with
+$\alpha=\|A_h^q\|_2<1$, and define
+
+\[
+G_q=\sum_{r=0}^{q-1}|A_h^rB_c|,
+\]
+
+\[
+\tau_\ell=
+\frac{\|B_c\|_2\alpha}{1-\alpha}
+\sum_{s=0}^{q-1}\|e_\ell^\top A_h^s\|_2.
+\]
+
+Then the explicit ultimate block bound is
+
+\[
+\limsup_{k\to\infty}\|\delta y_\ell(k)\|
+\le [G_qb]_\ell+\tau_\ell\|b\|_2.
+\]
+
+This follows by writing every tail index as $lq+s$ and summing the geometric
+series in $\alpha^l$. `utils/tcnsFormationRobustnessCertificate.m` evaluates
+this rigorous tail rather than truncating the series without an error term.
+
+### Corollary 1 — formation and RMSE translation
+
+For follower $i$ at every validated sample,
+
+\[
+\|e_i^{stale}(k)\|
+\le\|e_i^{perfect}(k)\|+z_i(k),
+\]
+
+where $z_i$ is the position block from Theorem 2. Consequently, over any
+finite sample/follower evaluation set $\mathcal E$,
+
+\[
+\operatorname{RMSE}_{stale}
+\le
+\sqrt{\frac{1}{|\mathcal E|}
+\sum_{(k,i)\in\mathcal E}
+(\|e_i^{perfect}(k)\|+z_i(k))^2}.
+\]
+
+For a desired uniform communication-degradation target $\epsilon$, the
+inequality
+
+\[
+[G_qb]_{1:m}+\tau_{1:m}\|b\|_2\preceq\epsilon
+\]
+
+is a sufficient performance condition. It is not claimed necessary or
+optimal.
+
+**Resolved gap G3.R1 — useful constants.** The structured certificate replaces
+the numerically useless generic $Q=I$/Young gain. A committed development run
+must still record its tightness before Gate 3 is closed.
+
+**PROOF GAP G3.2 — distributed budget allocation.** The vector $\beta_i$ is a
+sum of causal link-local terms, but no single sender owns all terms entering
+receiver $i$. Gate 4 must preallocate or coordinate link budgets without
+reading receiver truth; otherwise the sufficient condition is not a
+distributed trigger.
+
+**PROOF GAP G3.3 — scope extension.** The proved result is conditional on an
+unsaturated interval and does not cover the 6-DOF cascade, directed/switching
+graphs, Gaussian estimation noise, or topology disconnection. These remain
+validation domains, not hidden theorem claims.
 
 ## 12. Gate-1 executable evidence
 
@@ -584,5 +721,6 @@ The local follower bound is sufficiently tight to carry into Gate 3. The
 age-only mission bound is valid but unusably conservative: because no speed
 limiter is implemented, its defensible 30 s velocity envelope is 60 m/s. This
 negative result rules out using that global AoI-only envelope as the primary
-control-aware trigger signal. The sender-side construction remains
-`PROOF GAP G2.2`.
+control-aware trigger signal. It directly motivated the causal possible-state
+construction in Lemma 4; that later construction does not retroactively alter
+the accepted Gate-2 data.

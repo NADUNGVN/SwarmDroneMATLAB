@@ -192,6 +192,8 @@ EstAoILog = nan(K,N,N);
 % sampled staleness bound rather than reconstructing receiver state later.
 logReceiverState = isfield(cfg,'tcns') && ...
     isfield(cfg.tcns,'logReceiverState') && cfg.tcns.logReceiverState;
+logCausalSetBound = isfield(cfg,'tcns') && ...
+    isfield(cfg.tcns,'logCausalSetBound') && cfg.tcns.logCausalSetBound;
 
 if logReceiverState
     ReceiverNeighborPositionLog = nan(K,N,N,3);
@@ -201,6 +203,16 @@ if logReceiverState
     ReceiverLeaderVelocityLog = nan(K,N,3);
     ReceiverLeaderAccelerationLog = nan(K,N,3);
     ReceiverLeaderGenTimeLog = nan(K,N);
+end
+
+if logCausalSetBound
+    SenderSetPositionBoundLog = nan(K,N,N);
+    SenderSetVelocityBoundLog = nan(K,N,N);
+    SenderSetCandidateCountLog = nan(K,N,N);
+    SenderLeaderSetPositionBoundLog = nan(K,N);
+    SenderLeaderSetVelocityBoundLog = nan(K,N);
+    SenderLeaderSetAccelerationBoundLog = nan(K,N);
+    SenderLeaderSetCandidateCountLog = nan(K,N);
 end
 
 
@@ -394,6 +406,46 @@ for k = 1:K
     end
 
 
+    % Causal transmitter information-set envelope. It uses only local
+    % current state, cumulatively ACK-confirmed payload memory, and sent
+    % outstanding payload records. In particular, it never reads receiver
+    % registers or the outstanding record's simulation-only drop flag.
+    if logCausalSetBound
+        for i = 1:N
+            for j = 1:N
+                if cfg.swarm.A(i,j)==0
+                    continue;
+                end
+                setBound = causalReceiverStateSetBound( ...
+                    PHat(j,:),VHat(j,:), ...
+                    reshape(txState.ackPos(i,j,:),1,3), ...
+                    reshape(txState.ackVel(i,j,:),1,3), ...
+                    txState.outstanding{i,j});
+                SenderSetPositionBoundLog(k,i,j) = setBound.position;
+                SenderSetVelocityBoundLog(k,i,j) = setBound.velocity;
+                SenderSetCandidateCountLog(k,i,j) = ...
+                    setBound.candidateCount;
+            end
+        end
+
+        for i = 2:N
+            if ~cfg.swarm.pin(i)
+                continue;
+            end
+            setBound = causalReceiverStateSetBound( ...
+                leader.pos',leader.vel',txState.leaderAckPos(i,:), ...
+                txState.leaderAckVel(i,:),txState.leaderOutstanding{i}, ...
+                leader.acc',txState.leaderAckAcc(i,:));
+            SenderLeaderSetPositionBoundLog(k,i) = setBound.position;
+            SenderLeaderSetVelocityBoundLog(k,i) = setBound.velocity;
+            SenderLeaderSetAccelerationBoundLog(k,i) = ...
+                setBound.acceleration;
+            SenderLeaderSetCandidateCountLog(k,i) = ...
+                setBound.candidateCount;
+        end
+    end
+
+
     %% --------------------------------------------------------
     % AoI logging
     %
@@ -495,6 +547,18 @@ if logReceiverState
     out.receiverLeaderVelocity = ReceiverLeaderVelocityLog;
     out.receiverLeaderAcceleration = ReceiverLeaderAccelerationLog;
     out.receiverLeaderGenTime = ReceiverLeaderGenTimeLog;
+end
+
+
+if logCausalSetBound
+    out.senderSetPositionBound = SenderSetPositionBoundLog;
+    out.senderSetVelocityBound = SenderSetVelocityBoundLog;
+    out.senderSetCandidateCount = SenderSetCandidateCountLog;
+    out.senderLeaderSetPositionBound = SenderLeaderSetPositionBoundLog;
+    out.senderLeaderSetVelocityBound = SenderLeaderSetVelocityBoundLog;
+    out.senderLeaderSetAccelerationBound = ...
+        SenderLeaderSetAccelerationBoundLog;
+    out.senderLeaderSetCandidateCount = SenderLeaderSetCandidateCountLog;
 end
 
 

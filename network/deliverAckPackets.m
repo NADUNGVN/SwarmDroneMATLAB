@@ -288,6 +288,7 @@ if isLeaderLink
 
     txState.leaderAckPos(i,:)   = outst(idx).pos;
     txState.leaderAckVel(i,:)   = outst(idx).vel;
+    txState.leaderAckAcc(i,:)   = outst(idx).acc;
     txState.leaderAckGenTime(i) = ack.ackedGenTime;
     txState.leaderAckSeq(i)     = ack.ackedSeq;
 

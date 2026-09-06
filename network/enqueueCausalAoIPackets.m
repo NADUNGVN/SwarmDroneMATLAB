@@ -297,6 +297,7 @@ if isLeaderLink
     txState.leaderSentSeq(i)     = seq;
     txState.leaderSentPos(i,:)   = currentPos;
     txState.leaderSentVel(i,:)   = currentVel;
+    txState.leaderSentAcc(i,:)   = leaderAcc;
     txState.leaderSentGenTime(i) = tk;
     txState.leaderLastTxTime(i)  = tk;
 else
@@ -313,6 +314,11 @@ rec.genTime = tk;
 rec.seq     = seq;
 rec.pos     = currentPos;
 rec.vel     = currentVel;
+if isLeaderLink
+    rec.acc = leaderAcc;
+else
+    rec.acc = nan(1,3);
+end
 rec.dropped = false;
 
 

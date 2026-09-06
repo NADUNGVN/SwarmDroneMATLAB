@@ -160,6 +160,7 @@ end
 
 txState.leaderSentPos     = nan(N,3);
 txState.leaderSentVel     = nan(N,3);
+txState.leaderSentAcc     = nan(N,3);
 txState.leaderSentGenTime = nan(N,1);
 txState.leaderSentSeq     = zeros(N,1);
 
@@ -168,6 +169,7 @@ txState.leaderNextSeq    = ones(N,1);
 
 txState.leaderAckPos     = nan(N,3);
 txState.leaderAckVel     = nan(N,3);
+txState.leaderAckAcc     = nan(N,3);
 txState.leaderAckGenTime = nan(N,1);
 txState.leaderAckSeq     = zeros(N,1);
 
@@ -182,10 +184,12 @@ for i = 1:N
 
         txState.leaderSentPos(i,:) = leader.pos';
         txState.leaderSentVel(i,:) = leader.vel';
+        txState.leaderSentAcc(i,:) = leader.acc';
         txState.leaderSentGenTime(i) = 0;
 
         txState.leaderAckPos(i,:) = leader.pos';
         txState.leaderAckVel(i,:) = leader.vel';
+        txState.leaderAckAcc(i,:) = leader.acc';
         txState.leaderAckGenTime(i) = 0;
 
     end
@@ -206,6 +210,7 @@ q = struct( ...
     'seq',     {}, ...
     'pos',     {}, ...
     'vel',     {}, ...
+    'acc',     {}, ...
     'dropped', {});
 
 end
