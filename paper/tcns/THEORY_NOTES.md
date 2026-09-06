@@ -1,7 +1,8 @@
 # Control-aware freshness: exact model and proof ledger
 
-**Gate:** 1  
-**Status:** implementation-faithful model; Gate-2/3 results not yet claimed  
+**Gate:** 2
+**Status:** implementation-faithful model and proved ZOH staleness envelope;
+Gate-3 result not yet claimed
 **Primary analytical scope:** fixed undirected grounded graph, exact-state,
 constant-formation, unsaturated double-integrator subsystem
 
@@ -382,7 +383,7 @@ No deterministic infinite-horizon AoI bound is assumed.
 distributed budget decomposition, and trigger parameters are fixed using
 development scenarios/seeds before final held-out data are opened.
 
-## 10. Gate-2 candidate result and exact gap
+## 10. Gate-2 staleness-to-uncertainty result
 
 For a payload generated \(q\) outer steps ago, semi-implicit integration gives
 the exact telescoping relations
@@ -396,27 +397,78 @@ p_j(k)-p_j(k-q)=qh\,v_j(k-q)
 +h^2\sum_{r=0}^{q-1}(q-r)u_j(k-q+r).
 \]
 
-Under A7--A8, the candidate ZOH envelopes are therefore
+### Proven Lemma 2 — exact-state ZOH staleness envelope
+
+Under A1, A5--A7, suppose follower $j$'s accepted payload was generated
+at $k-q$. Then
 
 \[
-E_v(q)=qh\bar a_j,
-\qquad
-E_p(q)=qh\bar v_j+\frac{h^2\bar a_j}{2}q(q+1).
+\|v_j(k)-\hat v_{ij}(k)\|\le qh\bar a_j,
 \]
 
-For bounded payload errors, ZOH adds \(\bar\eta_v\) to the velocity envelope
-and \(\bar\eta_p\) to the position envelope. A constant-velocity predictor
-would additionally couple velocity payload error into position, but that
-predictor is not implemented today.
+\[
+\|p_j(k)-\hat p_{ij}(k)\|
+\le qh\|\hat v_{ij}(k)\|
++\frac{h^2\bar a_j}{2}q(q+1).
+\]
 
-**PROOF GAP G2.1.** The algebraic envelope is not yet validated against logged
-receiver trajectories, and its conservatism with a defensible pre-frozen
-\(\bar v_j\) is unknown.
+**Proof.** Apply the triangle inequality to the two exact telescoping
+relations above. The receiver's ZOH value is exactly the state at $k-q$
+under A5--A6, and every acceleration norm is bounded by A7. The weighted sum
+of acceleration coefficients is
+\(\sum_{r=0}^{q-1}(q-r)=q(q+1)/2\). \(\square\)
 
-**PROOF GAP G2.2.** Causal sender age is conservative for generation time, but
-the exact mapping from logged half-step age to integer \(q\), including all
-leader-pin channels and zero-delay delivery ordering, still needs a tested
-utility.
+This local envelope is not an oracle quantity: the receiver already holds the
+accepted payload velocity whose norm appears in it. It therefore maps physical
+information age to a state-error budget using only accepted information and a
+hard plant input bound.
+
+If payload position and velocity errors at generation are bounded by
+\(\bar\eta_p,\bar\eta_v\), respectively, the same proof gives
+
+\[
+E_v(q)=\bar\eta_v+qh\bar a_j,
+\]
+
+\[
+E_p(q)=\bar\eta_p+qh(\|\hat v_{ij}\|+\bar\eta_v)
++\frac{h^2\bar a_j}{2}q(q+1).
+\]
+
+If only AoI and the finite-horizon A8 envelope are retained, replacing
+\(\|\hat v_{ij}\|\) by \(\bar v_j\) gives a valid age-only bound. For the
+current implementation this is expected to be much looser because
+`cfg.swarm.maxSpeed` is not enforced. A constant-velocity predictor could
+change the error recursion, but that predictor is not implemented and is not
+part of Lemma 2.
+
+`utils/tcnsZohStalenessBound.m` implements these formulas and refuses a
+physical age that is not an integer multiple of $h$. The simulator's logged
+age is converted by
+
+\[
+q=\operatorname{round}\left(
+\frac{\Delta_{ij}^{log}-h/2}{h}\right),
+\]
+
+only after the grid-alignment residual has been checked.
+
+**PROOF GAP G2.1 — numerical coverage/tightness.** The algebra is complete,
+but a committed run must still measure coverage and conservatism over actual
+receiver trajectories and fixed development seeds. This gap closes only when
+the executable result is recorded, not merely because the formula has been
+implemented.
+
+**PROOF GAP G2.2 — sender-side distributed budget.** Lemma 1 makes confirmed
+age conservative, but the sender does not automatically know the velocity in
+the receiver's latest accepted payload. A sender-implementable bound must use
+confirmed payload history or a pre-frozen global envelope. This decomposition
+belongs to Gate 3--4 and must not read receiver truth.
+
+**PROOF GAP G2.3 — analytical leader streams.** Lemma 2 applies to follower
+states advanced by the semi-implicit plant. Ordinary links whose sender is the
+analytical leader and separate pin streams need bounds derived from
+`leaderReference`, not a false application of follower acceleration dynamics.
 
 ## 11. Gate-3 candidate result and exact gap
 
@@ -461,5 +513,5 @@ and two real one-step comparisons. Gate 1 passes only if:
   from the older Euler shorthand;
 - the directed-graph fixture does not inherit the symmetric theorem.
 
-This gate establishes a trustworthy model. It does not establish the Gate-2
-uncertainty bound or the Gate-3 robustness theorem.
+This gate establishes a trustworthy model. Gate 2 builds on it; neither gate
+establishes the Gate-3 robustness theorem.

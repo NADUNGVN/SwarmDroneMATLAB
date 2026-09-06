@@ -184,6 +184,25 @@ LeaderAoILog   = nan(K,N);
 % into the control or trigger path.
 EstAoILog = nan(K,N,N);
 
+% Gate-2 diagnostic instrumentation. This is deliberately default-off and
+% passive: none of these arrays is ever read by the simulator. When enabled,
+% they expose the receiver's actual zero-order-hold state after all DATA due
+% at tk has been delivered and immediately before formation control is
+% evaluated. That timestamp convention is essential for checking an exact
+% sampled staleness bound rather than reconstructing receiver state later.
+logReceiverState = isfield(cfg,'tcns') && ...
+    isfield(cfg.tcns,'logReceiverState') && cfg.tcns.logReceiverState;
+
+if logReceiverState
+    ReceiverNeighborPositionLog = nan(K,N,N,3);
+    ReceiverNeighborVelocityLog = nan(K,N,N,3);
+    ReceiverNeighborGenTimeLog = nan(K,N,N);
+    ReceiverLeaderPositionLog = nan(K,N,3);
+    ReceiverLeaderVelocityLog = nan(K,N,3);
+    ReceiverLeaderAccelerationLog = nan(K,N,3);
+    ReceiverLeaderGenTimeLog = nan(K,N);
+end
+
 
 %% ============================================================
 % Common random numbers (legacy default OFF)
@@ -357,6 +376,23 @@ for k = 1:K
     LeaderPos(k,:) = leader.pos';
     LeaderVel(k,:) = leader.vel';
 
+    if logReceiverState
+        ReceiverNeighborPositionLog(k,:,:,:) = ...
+            reshape(net.Pij,[1 N N 3]);
+        ReceiverNeighborVelocityLog(k,:,:,:) = ...
+            reshape(net.Vij,[1 N N 3]);
+        ReceiverNeighborGenTimeLog(k,:,:) = ...
+            reshape(net.genTime,[1 N N]);
+        ReceiverLeaderPositionLog(k,:,:) = ...
+            reshape(net.leaderPos,[1 N 3]);
+        ReceiverLeaderVelocityLog(k,:,:) = ...
+            reshape(net.leaderVel,[1 N 3]);
+        ReceiverLeaderAccelerationLog(k,:,:) = ...
+            reshape(net.leaderAcc,[1 N 3]);
+        ReceiverLeaderGenTimeLog(k,:) = ...
+            reshape(net.leaderGenTime,[1 N]);
+    end
+
 
     %% --------------------------------------------------------
     % AoI logging
@@ -450,6 +486,16 @@ out.neighborAoI = NeighborAoILog;
 out.leaderAoI   = LeaderAoILog;
 
 out.estimatedAoI = EstAoILog;
+
+if logReceiverState
+    out.receiverNeighborPosition = ReceiverNeighborPositionLog;
+    out.receiverNeighborVelocity = ReceiverNeighborVelocityLog;
+    out.receiverNeighborGenTime = ReceiverNeighborGenTimeLog;
+    out.receiverLeaderPosition = ReceiverLeaderPositionLog;
+    out.receiverLeaderVelocity = ReceiverLeaderVelocityLog;
+    out.receiverLeaderAcceleration = ReceiverLeaderAccelerationLog;
+    out.receiverLeaderGenTime = ReceiverLeaderGenTimeLog;
+end
 
 
 %% ============================================================
