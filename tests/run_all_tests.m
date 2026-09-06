@@ -34,6 +34,7 @@ suite = {
     'test_tcns_gate2_staleness_bound'
     'test_tcns_gate3_robustness_bound'
     'test_tcns_gate4_control_aware_policy'
+    'test_tcns_gate5_frontier_matching'
     'test_probabilistic_safety_certificate'
     'test_standalone_ack_value_certificate'
     'test_setpoint_interface'
