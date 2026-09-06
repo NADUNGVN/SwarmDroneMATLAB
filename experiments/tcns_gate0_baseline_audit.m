@@ -16,6 +16,7 @@ R = startExperiment('tcns_gate0_baseline_audit', ...
     'Explicit canonical audit plus selected deterministic 6-DOF replay.');
 
 root = projectRoot();
+startingCommit = 'dbbb4197849694154cfec769d18fc4b38b05f0ad';
 expectedTree = '954fbf22ee37039619b3dd4b04d4dc4b22f85f86';
 exp10Rel = fullfile('results','exp10a_final_validation','2026-08-27_091546');
 exp11Rel = fullfile('results','exp11_dynamic_network','2026-08-27_174026');
@@ -34,15 +35,21 @@ mustExist(exp11DebugFile);
 assert(gitStatus == 0,'Gate0: cannot resolve Git commit.');
 gitCommit = strtrim(gitCommit);
 
-[treeStatus,gitTree] = system(sprintf( ...
-    'git -C "%s" show -s --format=%%T HEAD',root));
-assert(treeStatus == 0,'Gate0: cannot resolve Git tree.');
-gitTree = strtrim(gitTree);
-assert(strcmp(gitTree,expectedTree), ...
-    'Gate0: requested tree mismatch. Expected %s, got %s.', ...
-    expectedTree,gitTree);
+[treeStatus,startingTree] = system(sprintf( ...
+    'git -C "%s" show -s --format=%%T %s',root,startingCommit));
+assert(treeStatus == 0,'Gate0: cannot resolve the starting tree.');
+startingTree = strtrim(startingTree);
+assert(strcmp(startingTree,expectedTree), ...
+    'Gate0: requested starting tree mismatch. Expected %s, got %s.', ...
+    expectedTree,startingTree);
+
+[ancestorStatus,~] = system(sprintf( ...
+    'git -C "%s" merge-base --is-ancestor %s HEAD',root,startingCommit));
+assert(ancestorStatus == 0, ...
+    'Gate0: starting commit is not an ancestor of the audit commit.');
 
 fprintf('Requested tree : %s\n',expectedTree);
+fprintf('Starting commit: %s\n',startingCommit);
 fprintf('Audited commit : %s\n',gitCommit);
 fprintf('Tree identity  : PASS\n\n');
 
@@ -203,9 +210,10 @@ audit = struct();
 audit.schemaVersion = 1;
 audit.gate = 0;
 audit.status = 'PASS_SELECTED_REPLAY';
+audit.startingCommit = startingCommit;
 audit.requestedTree = expectedTree;
 audit.gitCommit = gitCommit;
-audit.gitTree = gitTree;
+audit.startingTree = startingTree;
 audit.matlab = version;
 audit.release = version('-release');
 audit.seed = seed;
