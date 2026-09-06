@@ -272,3 +272,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-06_075633 | exp23ao_multi_origin_routing | 37.8 s | 0 | yes | - | (R2025a) | 17cd865 |
 | 2026-09-06_081712 | exp23ap_routed_state_machine_common_phy | 52.2 s | 0 | yes | - | (R2025a) | 17cd865 |
 | 2026-09-06_081945 | exp23aq_routed_state_machine_confirmation | 51.8 s | 0 | yes | - | (R2025a) | 17cd865 |
+| 2026-09-06_140652 | tcns_gate0_baseline_audit | 21.9 s | 0 | yes | - | (R2025a) | 4dc76b0 |

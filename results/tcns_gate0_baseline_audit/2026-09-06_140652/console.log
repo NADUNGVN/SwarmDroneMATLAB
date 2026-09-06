@@ -1,0 +1,109 @@
+
+============================================================
+RUN  : tcns_gate0_baseline_audit
+ID   : 2026-09-06_140652
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate0_baseline_audit\2026-09-06_140652
+WHEN : 2026-09-06 14:06:52
+============================================================
+
+Requested tree : 954fbf22ee37039619b3dd4b04d4dc4b22f85f86
+Starting commit: dbbb4197849694154cfec769d18fc4b38b05f0ad
+Audited commit : 4dc76b043f5881a5320d6cef6b9278cef7b27cc0
+Tree identity  : PASS
+
+EXP10 canonical : 3400 rows, 50 seeds
+EXP11 canonical : 400 rows, 50 seeds
+EXP11 debug     : 24 rows, 3 seeds
+EXP11 LATEST    : 2026-08-27_175335 (debug; never used as canonical)
+
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 95)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 95)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 95)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 95)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 95)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 115)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 115)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 115)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 115)
+In run (line 112)] 
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 115)
+In run (line 112)] 
+Clean     P10        RMSE 0.0361126629657577, DATA 2990, ACK 0: PASS
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 162)
+In run (line 112)] 
+Clean     Causal-v3  RMSE 0.0413792333665601, DATA 2534, ACK 2534: PASS
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 162)
+In run (line 112)] 
+Moderate  P10        RMSE 0.0992469005904237, DATA 2990, ACK 0: PASS
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 162)
+In run (line 112)] 
+Moderate  Causal-v3  RMSE 0.0890492326106277, DATA 4046, ACK 3244: PASS
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 162)
+In run (line 112)] 
+Stressed  P10        RMSE 0.149627059619872, DATA 2990, ACK 0: PASS
+[Warning: The assignment added rows to the table, but did not assign values to all of the table's existing variables. Those variables are extended with rows containing default
+values.] 
+[> In . (line 486)
+In tcns_gate0_baseline_audit (line 162)
+In run (line 112)] 
+Stressed  Causal-v3  RMSE 0.118000578585488, DATA 5489, ACK 3296: PASS
+
+Gate-0 selected replay: PASS (6/6 rows).
+The full EXP10 forced reproduction remains a separate mandatory Gate-0 step.
+
+============================================================
+DONE : tcns_gate0_baseline_audit
+TIME : 21.9 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate0_baseline_audit\2026-09-06_140652
+============================================================
