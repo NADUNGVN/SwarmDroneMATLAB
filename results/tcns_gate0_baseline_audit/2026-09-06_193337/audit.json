@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "gate": 0,
+  "status": "PASS_SELECTED_REPLAY",
+  "startingCommit": "dbbb4197849694154cfec769d18fc4b38b05f0ad",
+  "requestedTree": "954fbf22ee37039619b3dd4b04d4dc4b22f85f86",
+  "gitCommit": "82b966ea53b2b60d3acab5c0c5972811afd63018",
+  "startingTree": "954fbf22ee37039619b3dd4b04d4dc4b22f85f86",
+  "matlab": "25.1.0.2943329 (R2025a)",
+  "release": "2025a",
+  "seed": 2.5000001E+7,
+  "selectedReplayRows": 6,
+  "selectedReplayPassed": true,
+  "exp10Canonical": "results/exp10a_final_validation/2026-08-27_091546",
+  "exp10Rows": 3400,
+  "exp10Seeds": 50,
+  "exp11Canonical": "results/exp11_dynamic_network/2026-08-27_174026",
+  "exp11Rows": 400,
+  "exp11Seeds": 50,
+  "exp11Latest": "2026-09-06_192155",
+  "exp11LatestIsDebug": false,
+  "exp11LatestIsFull": true
+}

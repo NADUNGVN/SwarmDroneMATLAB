@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate0_baseline_audit",
+  "runId": "2026-09-06_193337",
+  "startedAt": "2026-09-06 19:33:37",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "82b966e",
+  "notes": "Explicit canonical audit plus selected deterministic 6-DOF replay.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate0_baseline_audit.m",
+  "finishedAt": "2026-09-06 19:33:55",
+  "elapsedSec": 17.4655208,
+  "elapsedText": "17.5 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

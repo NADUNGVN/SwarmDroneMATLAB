@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "gate": 0,
+  "status": "PASS",
+  "startingSnapshot": {
+    "requestedObject": "954fbf22ee37039619b3dd4b04d4dc4b22f85f86",
+    "objectType": "tree",
+    "owningCommit": "dbbb4197849694154cfec769d18fc4b38b05f0ad",
+    "branch": "paper-v3-tcns"
+  },
+  "environment": {
+    "matlabVersion": "25.1",
+    "matlabRelease": "R2025a",
+    "computer": "PCWIN64",
+    "workers": 16
+  },
+  "exp10": {
+    "canonical": "results/exp10a_final_validation/2026-08-27_091546",
+    "reproduced": "results/exp10a_final_validation/2026-09-06_141912",
+    "validation": "results/simulation_v1_validation/2026-09-06_140912",
+    "derived": "results/exp10b_unified_matrix/2026-09-06_145037",
+    "sourceCommit": "ddfd669475ee66656c280d07a08224eda1281293",
+    "rows": 3400,
+    "seeds": 50,
+    "testsPassed": 68,
+    "testsTotal": 68,
+    "requiredTagsPassed": 10,
+    "requiredTagsTotal": 10,
+    "hashMismatches": 0,
+    "serialParallelBitIdentical": true,
+    "canonicalSha256": "94076C0FE5996632041E42716D6361980F70A30D82C4514DAEBB7E5C5EADD727",
+    "reproducedSha256": "94076C0FE5996632041E42716D6361980F70A30D82C4514DAEBB7E5C5EADD727",
+    "byteIdentical": true
+  },
+  "exp11": {
+    "canonical": "results/exp11_dynamic_network/2026-08-27_174026",
+    "initialFailure": "results/exp11_dynamic_network/2026-09-06_191734",
+    "initialFailureReason": "Executable EXP11 dependencies and regime hooks were absent from the starting paper branch.",
+    "historicalSourceCommit": "85ead26",
+    "restorationCommit": "8e40d46",
+    "reproduced": "results/exp11_dynamic_network/2026-09-06_192155",
+    "rows": 400,
+    "seeds": 50,
+    "gatesPassed": 7,
+    "gatesTotal": 7,
+    "semanticsChecksPassed": 24,
+    "semanticsChecksTotal": 24,
+    "divergenceCount": 0,
+    "causalInvariantViolations": 0,
+    "canonicalNormalizedSha256": "0D1272D35820643771C007099455056976399EB5F66CA234D1873B9EB77F0561",
+    "reproducedNormalizedSha256": "0D1272D35820643771C007099455056976399EB5F66CA234D1873B9EB77F0561",
+    "normalizedCharacterIdentical": true,
+    "rawDifference": "CRLF versus LF only"
+  },
+  "postRestorationRegression": {
+    "lockedRegressionPassed": true,
+    "causalInvariantsPassed": true,
+    "exp11SemanticsPassed": true,
+    "selectedReplay": "results/tcns_gate0_baseline_audit/2026-09-06_193337",
+    "selectedReplayRowsPassed": 6,
+    "selectedReplayRowsTotal": 6
+  },
+  "gate1Authorized": true
+}

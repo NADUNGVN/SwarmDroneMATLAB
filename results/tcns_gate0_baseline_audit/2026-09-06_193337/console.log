@@ -1,0 +1,34 @@
+
+============================================================
+RUN  : tcns_gate0_baseline_audit
+ID   : 2026-09-06_193337
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate0_baseline_audit\2026-09-06_193337
+WHEN : 2026-09-06 19:33:37
+============================================================
+
+Requested tree : 954fbf22ee37039619b3dd4b04d4dc4b22f85f86
+Starting commit: dbbb4197849694154cfec769d18fc4b38b05f0ad
+Audited commit : 82b966ea53b2b60d3acab5c0c5972811afd63018
+Tree identity  : PASS
+
+EXP10 canonical : 3400 rows, 50 seeds
+EXP11 canonical : 400 rows, 50 seeds
+EXP11 debug     : 24 rows, 3 seeds
+EXP11 LATEST    : 2026-09-06_192155 (complete reproduction, canonical source still explicit)
+
+Clean     P10        RMSE 0.0361126629657577, DATA 2990, ACK 0: PASS
+Clean     Causal-v3  RMSE 0.0413792333665601, DATA 2534, ACK 2534: PASS
+Moderate  P10        RMSE 0.0992469005904237, DATA 2990, ACK 0: PASS
+Moderate  Causal-v3  RMSE 0.0890492326106277, DATA 4046, ACK 3244: PASS
+Stressed  P10        RMSE 0.149627059619872, DATA 2990, ACK 0: PASS
+Stressed  Causal-v3  RMSE 0.118000578585488, DATA 5489, ACK 3296: PASS
+
+Gate-0 selected replay: PASS (6/6 rows).
+The full EXP10 forced reproduction remains a separate mandatory Gate-0 step.
+
+============================================================
+DONE : tcns_gate0_baseline_audit
+TIME : 17.5 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate0_baseline_audit\2026-09-06_193337
+============================================================
