@@ -498,11 +498,12 @@ closed-form branches. \(\square\)
 is necessary: applying the follower double-integrator envelope across the
 leader switch would be mathematically false.
 
-**PROOF GAP G2.1 — numerical coverage/tightness.** The algebra is complete,
-but a committed run must still measure coverage and conservatism over actual
-receiver trajectories and fixed development seeds. This gap closes only when
-the executable result is recorded, not merely because the formula has been
-implemented.
+**Resolved validation item G2.R1 — numerical coverage/tightness.** The
+committed-source run identified in Section 13 checks 45,030 follower-link
+samples plus every ordinary-leader and pin sample over five fixed development
+seeds. All envelopes have unit empirical coverage to numerical tolerance. This
+is numerical validation of the proved deterministic inequalities, not an
+additional theorem or a held-out policy comparison.
 
 **PROOF GAP G2.2 — sender-side distributed budget.** Lemma 1 makes confirmed
 age conservative, but the sender does not automatically know the velocity in
@@ -555,3 +556,33 @@ and two real one-step comparisons. Gate 1 passes only if:
 
 This gate establishes a trustworthy model. Gate 2 builds on it; neither gate
 establishes the Gate-3 robustness theorem.
+
+## 13. Gate-2 executable evidence
+
+`experiments/tcns_gate2_staleness_bound_diagnostic.m` runs the frozen
+Causal-v3 mechanism without any trigger search in the frozen Stressed channel,
+but replaces the 6-DOF plant by the exact Gate-1 double-integrator subsystem.
+The five development seeds are 27020001--27020005. The accepted run is
+`results/tcns_gate2_staleness_bound_diagnostic/2026-09-06_195924`, generated
+from commit `36bfb69` under MATLAB R2025a.
+
+The recorded outcomes are:
+
+- 45,030 follower-to-follower directed-link samples;
+- position and velocity coverage exactly 1 for every seed and link;
+- largest follower position-bound excess $5.551\times10^{-17}$ m and
+  velocity-bound excess $2.776\times10^{-17}$ m/s;
+- mean across seeds of p95 actual/local-position-bound ratio 0.7467;
+- mean p95 velocity ratio 0.1818;
+- mean p95 actual/age-only-position-bound ratio 0.00746;
+- ordinary-leader position/velocity and pinned-leader
+  position/velocity/acceleration coverage all exactly 1;
+- maximum leader-envelope excess $1.665\times10^{-16}$ in acceleration;
+- zero timestamp-convention and generation-payload residual.
+
+The local follower bound is sufficiently tight to carry into Gate 3. The
+age-only mission bound is valid but unusably conservative: because no speed
+limiter is implemented, its defensible 30 s velocity envelope is 60 m/s. This
+negative result rules out using that global AoI-only envelope as the primary
+control-aware trigger signal. The sender-side construction remains
+`PROOF GAP G2.2`.

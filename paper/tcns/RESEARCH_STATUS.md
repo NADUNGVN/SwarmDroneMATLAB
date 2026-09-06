@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gates 0--1 complete; Gate 2 authorized
+**Status:** Gates 0--2 complete; Gate 3 authorized
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -15,8 +15,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 | Initial audit | complete | commit `a4a49f3`; requested tree identified exactly |
 | Gate 0: baseline reproduction | **complete** | full EXP10 and EXP11 reproductions plus post-repair regression |
 | Gate 1: exact mathematical model | **complete** | exact real-step audit and corrected analytical-leader residual |
-| Gate 2: staleness to uncertainty | next | Gate 1 no longer blocks work |
-| Gate 3: uncertainty to formation | not started | blocked by Gate 2 |
+| Gate 2: staleness to uncertainty | **complete** | follower and analytical-leader bounds proved and validated |
+| Gate 3: uncertainty to formation | next | Gate 2 no longer blocks work |
 | Theory checkpoint | not started | blocked by Gate 3 |
 | Gate 4: control-aware trigger | not started | blocked by checkpoint |
 
@@ -154,3 +154,34 @@ this process, and every failed attempt remains preserved.
 
 Gate 1 establishes the exact analytical subsystem and its limitations. It does
 not claim the Gate-2 staleness envelope or Gate-3 ISS/UUB result.
+
+## Gate-2 execution record
+
+- Accepted run:
+  `results/tcns_gate2_staleness_bound_diagnostic/2026-09-06_195924`.
+- Source commit: `36bfb69`; MATLAB R2025a.
+- Classification: development-only bound validation, not a policy comparison.
+- Fixed seeds: 27020001--27020005; N=5; Stressed channel with 0.4 DATA loss
+  and 0.12 s delay; exact-state semi-implicit double integrator.
+- No policy/trigger parameter was searched. Frozen Causal-v3 supplied varied
+  receiver ages only.
+- Follower evidence: 45,030 directed-link samples, position and velocity
+  coverage 1.0 for every link/seed, maximum excess $5.551\times10^{-17}$ m
+  and $2.776\times10^{-17}$ m/s.
+- Local accepted-payload-speed position bound: mean p95 tightness 0.7467.
+- Global AoI-only position bound: mean p95 tightness 0.00746. It is valid but
+  scientifically too loose because the only defensible 30 s velocity envelope
+  is 60 m/s and the configured `maxSpeed` is not enforced.
+- Ordinary leader and pin-stream P/V/A envelopes have coverage 1.0. Their
+  dedicated proof includes the velocity and acceleration jumps at the
+  analytical trajectory switch $t=3$ s.
+- Timestamp convention and accepted-payload reconstruction have zero residual.
+- Earlier runs `194936`, `195059`, and `195402` are retained as development
+  history. `195924` is the first full run from committed source including the
+  analytical-leader bound.
+
+Gate 2 establishes a useful local age/state envelope and simultaneously
+falsifies the usefulness of the current global AoI-only envelope. Gate 3 must
+now map the local uncertainty budgets through the exact formation dynamics;
+it must not substitute the loose global envelope merely because it is easier
+to decentralize.

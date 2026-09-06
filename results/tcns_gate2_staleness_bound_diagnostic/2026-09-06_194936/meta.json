@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate2_staleness_bound_diagnostic",
+  "runId": "2026-09-06_194936",
+  "startedAt": "2026-09-06 19:49:36",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "0632c21",
+  "notes": "Development-seed validation of the exact ZOH age-to-state-error envelope; no parameter sweep or policy comparison.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate2_staleness_bound_diagnostic.m",
+  "finishedAt": "2026-09-06 19:49:49",
+  "elapsedSec": 12.6597178,
+  "elapsedText": "12.7 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

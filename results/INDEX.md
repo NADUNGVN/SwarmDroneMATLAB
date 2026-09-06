@@ -279,3 +279,7 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-06_192155 | exp11_dynamic_network | 5 m 44 s | 3 | yes | yes | (R2025a) | 8e40d46 |
 | 2026-09-06_193337 | tcns_gate0_baseline_audit | 17.5 s | 0 | yes | - | (R2025a) | 82b966e |
 | 2026-09-06_194134 | tcns_gate1_model_audit | 0.7 s | 0 | yes | - | (R2025a) | 31ff907 |
+| 2026-09-06_194936 | tcns_gate2_staleness_bound_diagnostic | 12.7 s | 1 | yes | yes | (R2025a) | 0632c21 |
+| 2026-09-06_195059 | tcns_gate2_staleness_bound_diagnostic | 12.2 s | 1 | yes | yes | (R2025a) | 0632c21 |
+| 2026-09-06_195402 | tcns_gate2_staleness_bound_diagnostic | 11.9 s | 1 | yes | yes | (R2025a) | 1d05c78 |
+| 2026-09-06_195924 | tcns_gate2_staleness_bound_diagnostic | 12.2 s | 1 | yes | yes | (R2025a) | 36bfb69 |

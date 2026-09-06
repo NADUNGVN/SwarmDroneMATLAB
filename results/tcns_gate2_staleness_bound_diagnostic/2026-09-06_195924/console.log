@@ -1,0 +1,30 @@
+
+============================================================
+RUN  : tcns_gate2_staleness_bound_diagnostic
+ID   : 2026-09-06_195924
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate2_staleness_bound_diagnostic\2026-09-06_195924
+WHEN : 2026-09-06 19:59:24
+============================================================
+
+seed 27020001: pos cov 1.000000, vel cov 1.000000, p95 tight 0.749
+seed 27020002: pos cov 1.000000, vel cov 1.000000, p95 tight 0.745
+seed 27020003: pos cov 1.000000, vel cov 1.000000, p95 tight 0.745
+seed 27020004: pos cov 1.000000, vel cov 1.000000, p95 tight 0.747
+seed 27020005: pos cov 1.000000, vel cov 1.000000, p95 tight 0.748
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate2_staleness_bound_diagnostic\2026-09-06_195924\figures
+
+Gate 2 ZOH staleness bound: PASS
+  samples across seeds/links : 45030
+  minimum position coverage : 1.000000
+  minimum velocity coverage : 1.000000
+  mean p95 local tightness   : 0.7467
+  mean p95 age-only tightness: 0.0075
+  max position violation [m]: 5.551e-17
+  minimum leader P/V/A coverage: 1.000000 / 1.000000 / 1.000000
+
+============================================================
+DONE : tcns_gate2_staleness_bound_diagnostic
+TIME : 12.2 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate2_staleness_bound_diagnostic\2026-09-06_195924
+============================================================
