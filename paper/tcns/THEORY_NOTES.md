@@ -1,8 +1,8 @@
 # Control-aware freshness: exact model and proof ledger
 
-**Gate:** 2
-**Status:** implementation-faithful model and proved ZOH staleness envelope;
-Gate-3 result not yet claimed
+**Gate:** 3
+**Status:** implementation-faithful model, causal uncertainty set, and
+structured sampled formation ISS/UUB result; Gate-4 trigger not yet claimed
 **Primary analytical scope:** fixed undirected grounded graph, exact-state,
 constant-formation, unsaturated double-integrator subsystem
 
@@ -664,8 +664,8 @@ is a sufficient performance condition. It is not claimed necessary or
 optimal.
 
 **Resolved gap G3.R1 — useful constants.** The structured certificate replaces
-the numerically useless generic $Q=I$/Young gain. A committed development run
-must still record its tightness before Gate 3 is closed.
+the numerically useless generic $Q=I$/Young gain. The committed development
+run in Section 14 records both the improvement and remaining conservatism.
 
 **PROOF GAP G3.2 — distributed budget allocation.** The vector $\beta_i$ is a
 sum of causal link-local terms, but no single sender owns all terms entering
@@ -691,8 +691,8 @@ and two real one-step comparisons. Gate 1 passes only if:
   from the older Euler shorthand;
 - the directed-graph fixture does not inherit the symmetric theorem.
 
-This gate establishes a trustworthy model. Gate 2 builds on it; neither gate
-establishes the Gate-3 robustness theorem.
+This gate establishes a trustworthy model. Gates 2--3 build on it; Gate 1 by
+itself does not establish the robustness theorem.
 
 ## 13. Gate-2 executable evidence
 
@@ -724,3 +724,42 @@ negative result rules out using that global AoI-only envelope as the primary
 control-aware trigger signal. It directly motivated the causal possible-state
 construction in Lemma 4; that later construction does not retroactively alter
 the accepted Gate-2 data.
+
+## 14. Gate-3 executable evidence
+
+The accepted run is
+`results/tcns_gate3_formation_robustness_diagnostic/2026-09-07_003518`,
+generated from commit `6b92074` under MATLAB R2025a. It uses the same five
+development seeds and frozen Stressed channel as Gate 2. At 8 s, after the
+acquisition/saturation transient, a perfect-current-information continuation
+is initialized from exactly the same plant state. No trigger parameter is
+searched.
+
+The evidence is:
+
+- the stale-versus-perfect recurrence matches the implemented controller and
+  integrator with maximum residual $4.441\times10^{-16}$;
+- the causal ACK-confirmed-plus-outstanding information set contains every
+  logged receiver payload; its construction is invariant to the hidden drop
+  flag;
+- finite position, scaled-velocity, and absolute formation bounds have
+  coverage 1 for every development seed;
+- the exact signed propagation driven by actual disturbance norms has mean
+  p95 tightness 0.9981;
+- the full sender-causal information-set bound has mean p95 tightness 0.4827,
+  versus 0.0859 for the hard-acceleration staleness envelope;
+- mean actual communication degradation RMS is 0.1093 m and its structured
+  upper bound is 0.2421 m;
+- mean stale formation RMSE is 0.1169 m and the Corollary-1 upper bound is
+  0.2602 m;
+- the structured uniform UUB averages 0.518 m, versus $2.246\times10^3$ m
+  when the older generic Lyapunov gain is applied to the same causal-set input
+  budget;
+- all evaluation continuations remain strictly below acceleration saturation.
+
+The accepted result is meaningful but not tight enough to call optimal. It
+supports proceeding to Gate 4 because the remaining factor is mainly the
+triangle inequality across plausible payloads/links, not unstable or
+pathologically conservative formation propagation. Runs `201053`, `002803`,
+and `003415` are retained as development history; `003518` is the accepted
+committed-source run with the final evaluation-window figure.

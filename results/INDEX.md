@@ -283,3 +283,7 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-06_195059 | tcns_gate2_staleness_bound_diagnostic | 12.2 s | 1 | yes | yes | (R2025a) | 0632c21 |
 | 2026-09-06_195402 | tcns_gate2_staleness_bound_diagnostic | 11.9 s | 1 | yes | yes | (R2025a) | 1d05c78 |
 | 2026-09-06_195924 | tcns_gate2_staleness_bound_diagnostic | 12.2 s | 1 | yes | yes | (R2025a) | 36bfb69 |
+| 2026-09-06_201053 | tcns_gate3_formation_robustness_diagnostic | 15.6 s | 1 | yes | yes | (R2025a) | ef4be37 |
+| 2026-09-07_002803 | tcns_gate3_formation_robustness_diagnostic | 20.2 s | 1 | yes | yes | (R2025a) | ef4be37 |
+| 2026-09-07_003415 | tcns_gate3_formation_robustness_diagnostic | 20.4 s | 1 | yes | yes | (R2025a) | f019d99 |
+| 2026-09-07_003518 | tcns_gate3_formation_robustness_diagnostic | 20.7 s | 1 | yes | yes | (R2025a) | 6b92074 |

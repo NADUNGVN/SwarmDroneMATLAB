@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "gate": 3,
+  "status": "PASS",
+  "classification": "development-only theory validation",
+  "seeds": [
+    2.7020001E+7,
+    2.7020002E+7,
+    2.7020003E+7,
+    2.7020004E+7,
+    2.7020005E+7
+  ],
+  "scenario": "Stressed",
+  "evaluationStart_s": 8,
+  "scope": "fixed symmetric grounded, exact-state, unsaturated DI subsystem",
+  "blockLength": 741,
+  "blockContraction": 9.5614218321853065E-5,
+  "legacyLyapunovInputGain": 5.177928967083E+6,
+  "maxUnitInputPositionUUB": 1.0005426417339143,
+  "minPositionCoverage": 1,
+  "minFormationCoverage": 1,
+  "maxRecurrenceResidual": 4.4408920985006262E-16,
+  "meanP95FullPositionTightness": 0.48268510663912839,
+  "meanP95HardAccelerationTightness": 0.0858701824196406,
+  "meanP95PropagationOnlyTightness": 0.99807500154976014,
+  "meanActualDegradationRMS_m": 0.1092863253326692,
+  "meanDegradationRMSUpper_m": 0.24206516423379876,
+  "meanFormationRMSE_m": 0.11690420600200205,
+  "meanFormationRMSEUpper_m": 0.26022597806935271,
+  "meanMaxStructuredPositionUUB_m": 0.51840324784925029,
+  "meanLegacyCommunicationUUB_m": 2245.734208333969,
+  "interpretation": "The theorem uses the causal ACK-confirmed-plus-outstanding payload information set to bound communication-induced degradation relative to a perfect-current-information continuation sharing the state at 8 s. Coverage does not establish policy superiority."
+}

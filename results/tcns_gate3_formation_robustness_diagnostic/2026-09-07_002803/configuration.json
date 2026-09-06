@@ -1,0 +1,294 @@
+{
+  "seed": 1,
+  "quad": {
+    "m": 0.06,
+    "g": 9.81,
+    "J": [
+      [
+        2.5E-5,
+        0,
+        0
+      ],
+      [
+        0,
+        2.5E-5,
+        0
+      ],
+      [
+        0,
+        0,
+        4.5E-5
+      ]
+    ],
+    "linearDrag": 0.1,
+    "angularDrag": 0.0001,
+    "maxThrust": 1.4715,
+    "maxTorque": [
+      0.018,
+      0.018,
+      0.01
+    ]
+  },
+  "ctrl": {
+    "KpPos": [
+      3,
+      3,
+      6
+    ],
+    "KdPos": [
+      2.8,
+      2.8,
+      4
+    ],
+    "Kr": [
+      0.01,
+      0.01,
+      0.0065
+    ],
+    "Kw": [
+      0.0009,
+      0.0009,
+      0.0008
+    ]
+  },
+  "single": {
+    "dt": 0.002,
+    "T": 8,
+    "hoverPosition": [
+      0,
+      0,
+      1
+    ],
+    "yaw": 0
+  },
+  "swarm": {
+    "N": 5,
+    "dt": 0.02,
+    "T": 30,
+    "kp": 1.6,
+    "kv": 1.2,
+    "leaderKp": 1.8,
+    "leaderKv": 1.5,
+    "maxAccel": 2,
+    "maxSpeed": 2,
+    "safetyRadius": 0.2,
+    "connectivityRange": 5,
+    "offsets": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.6,
+        0,
+        0
+      ],
+      [
+        0,
+        0.6,
+        0
+      ],
+      [
+        -0.6,
+        0,
+        0
+      ],
+      [
+        0,
+        -0.6,
+        0
+      ]
+    ],
+    "adjacency": [
+      [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "Kp": 1.8,
+    "Kv": 2.2,
+    "KpLeader": 1.5,
+    "KvLeader": 1.8,
+    "A": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "pin": [
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "initialPositions": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        -0.2,
+        -0.4,
+        0.1
+      ],
+      [
+        0.4,
+        0.1,
+        0
+      ],
+      [
+        -0.5,
+        0.4,
+        -0.1
+      ],
+      [
+        0.3,
+        -0.5,
+        0.15
+      ]
+    ],
+    "initialVelocities": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "topology": "ring2",
+    "normalizeConsensusDegree": false
+  },
+  "net": {
+    "rateHz": 10,
+    "packetLoss": 0.4,
+    "delaySec": 0.1,
+    "maxAoI": 5,
+    "commPeriod": 0.1,
+    "seed": 2.7020001E+7,
+    "delay": 0.12,
+    "jitterStd": 0,
+    "useTrace": true,
+    "phaseOffset": false,
+    "phaseOffsetEnabled": true
+  },
+  "aoiEvent": {
+    "posThreshold": 0.05,
+    "velThreshold": 0.1,
+    "aoiThreshold": 0.12,
+    "maxSilence": 0.5,
+    "minInterTx": 0.02,
+    "aoiMinInterTx": 0.1,
+    "aoiStateScaleBase": 0.5,
+    "aoiStateScaleMin": 0.2,
+    "aoiAdaptRange": 1
+  },
+  "event": {
+    "posThreshold": 0.05,
+    "velThreshold": 0.1,
+    "maxSilence": 0.5
+  },
+  "ack": {
+    "loss": 0,
+    "delay": 0.12,
+    "jitterStd": 0,
+    "useTrace": true,
+    "assertInvariants": true
+  },
+  "causal": {
+    "useAdaptiveScale": true,
+    "useAckFeedback": true,
+    "innovationPriority": true
+  },
+  "sixdof": {
+    "enable": false,
+    "ratio": 10
+  },
+  "tcns": {
+    "logReceiverState": true,
+    "logCausalSetBound": true
+  }
+}

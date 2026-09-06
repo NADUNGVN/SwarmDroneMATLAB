@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gates 0--2 complete; Gate 3 authorized
+**Status:** Gates 0--3 complete; theory-review checkpoint next
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -16,8 +16,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 | Gate 0: baseline reproduction | **complete** | full EXP10 and EXP11 reproductions plus post-repair regression |
 | Gate 1: exact mathematical model | **complete** | exact real-step audit and corrected analytical-leader residual |
 | Gate 2: staleness to uncertainty | **complete** | follower and analytical-leader bounds proved and validated |
-| Gate 3: uncertainty to formation | next | Gate 2 no longer blocks work |
-| Theory checkpoint | not started | blocked by Gate 3 |
+| Gate 3: uncertainty to formation | **complete** | structured ISS/UUB theorem and numerical validation |
+| Theory checkpoint | next | audit Gates 1--3 before trigger design |
 | Gate 4: control-aware trigger | not started | blocked by checkpoint |
 
 ## Frozen canonical evidence
@@ -185,3 +185,35 @@ falsifies the usefulness of the current global AoI-only envelope. Gate 3 must
 now map the local uncertainty budgets through the exact formation dynamics;
 it must not substitute the loose global envelope merely because it is easier
 to decentralize.
+
+## Gate-3 execution record
+
+- Accepted run:
+  `results/tcns_gate3_formation_robustness_diagnostic/2026-09-07_003518`.
+- Source commit: `6b92074`; MATLAB R2025a.
+- Fixed development seeds 27020001--27020005, Stressed channel, exact-state
+  N=5 DI subsystem, evaluation continuation from 8 s.
+- No policy or threshold was tuned; the comparison is stale information
+  versus a perfect-current-information counterfactual initialized at the same
+  state, not Causal-v3 versus Periodic10.
+- New causal mechanism: the sender's possible receiver-state set consists of
+  the cumulatively ACK-confirmed payload plus every later outstanding payload.
+  It provably contains receiver memory without reading delivery/drop outcomes.
+- Exact degradation recurrence residual: at most
+  $4.441\times10^{-16}$.
+- Position/scaled-velocity/formation coverage: 1.0 for every seed.
+- Propagation-only p95 tightness: 0.9981.
+- Full causal bound p95 tightness: 0.4827, compared with 0.0859 for the
+  Gate-2 hard-acceleration envelope.
+- Mean degradation RMS: 0.1093 m actual versus 0.2421 m upper bound.
+- Mean formation RMSE: 0.1169 m actual versus 0.2602 m upper bound.
+- Mean structured UUB: 0.518 m. Applying the old generic Lyapunov gain to the
+  same causal input budget gives 2246 m and is rejected as numerically useless.
+- The theorem is conditional on the declared post-acquisition interval where
+  both stale and perfect DI commands remain unsaturated. It does not prove the
+  6-DOF, switching/directed graph, or estimator cases.
+
+Gate 3 supplies the requested staleness/state uncertainty to closed-loop
+formation connection. Gate 4 is not yet authorized until the theory checkpoint
+confirms that its distributed link-budget construction does not reintroduce an
+oracle or collapse to the existing state-event trigger.

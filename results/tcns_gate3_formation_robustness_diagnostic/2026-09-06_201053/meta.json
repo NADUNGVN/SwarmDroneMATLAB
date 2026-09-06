@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate3_formation_robustness_diagnostic",
+  "runId": "2026-09-06_201053",
+  "startedAt": "2026-09-06 20:10:53",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "ef4be37",
+  "notes": "Development validation of structured sampled formation-degradation bounds; frozen policy/channel and no parameter search.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate3_formation_robustness_diagnostic.m",
+  "finishedAt": "2026-09-06 20:11:09",
+  "elapsedSec": 15.5672071,
+  "elapsedText": "15.6 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

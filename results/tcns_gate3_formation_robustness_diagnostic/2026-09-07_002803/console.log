@@ -1,0 +1,29 @@
+
+============================================================
+RUN  : tcns_gate3_formation_robustness_diagnostic
+ID   : 2026-09-07_002803
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate3_formation_robustness_diagnostic\2026-09-07_002803
+WHEN : 2026-09-07 00:28:03
+============================================================
+
+seed 27020001: degradation max 0.1496 <= 0.3248 m, p95 tight 0.483, UUB 0.522 m
+seed 27020002: degradation max 0.1560 <= 0.3284 m, p95 tight 0.494, UUB 0.524 m
+seed 27020003: degradation max 0.1466 <= 0.3245 m, p95 tight 0.480, UUB 0.523 m
+seed 27020004: degradation max 0.1481 <= 0.3245 m, p95 tight 0.477, UUB 0.503 m
+seed 27020005: degradation max 0.1488 <= 0.3284 m, p95 tight 0.479, UUB 0.520 m
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate3_formation_robustness_diagnostic\2026-09-07_002803\figures
+
+Gate 3 formation robustness: PASS
+  minimum position/formation coverage : 1.000000 / 1.000000
+  max recurrence residual             : 4.441e-16
+  mean p95 full-bound tightness        : 0.4827
+  mean p95 hard-accel tightness        : 0.0859
+  mean degradation RMS / upper [m]    : 0.1093 / 0.2421
+  structured / legacy mean UUB [m]    : 0.518 / 2.246e+03
+
+============================================================
+DONE : tcns_gate3_formation_robustness_diagnostic
+TIME : 20.2 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate3_formation_robustness_diagnostic\2026-09-07_002803
+============================================================
