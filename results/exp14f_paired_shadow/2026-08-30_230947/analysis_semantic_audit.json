@@ -1,0 +1,11 @@
+{
+  "auditStatus": "POST_RUN_SEMANTIC_CLARIFICATION",
+  "createdAt": "2026-08-30 23:14:30",
+  "performanceValuesChanged": false,
+  "eventMatchesChanged": false,
+  "generationMatchedPolicyLeadAvailable": true,
+  "perDecisionCausalLeadIdentified": false,
+  "reason": "The actual and shadow policies run independently from t=0, so prior ACK decisions may separate their histories before a focal matched event.",
+  "claimBoundary": "Event rows are clustered policy-history comparisons, not independent marginal treatment effects and not additive benefit observations.",
+  "predictiveCertificateReady": false
+}

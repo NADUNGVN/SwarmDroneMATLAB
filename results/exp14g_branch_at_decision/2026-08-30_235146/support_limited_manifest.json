@@ -1,0 +1,22 @@
+{
+  "analysisStatus": "SUPPORT_LIMITED_DEVELOPMENT_AUDIT",
+  "originalIntegrityVerdict": "FAIL_SELECTION_SUPPORT",
+  "verdictChanged": false,
+  "confirmatoryClaimPermitted": false,
+  "thresholdTuningPermitted": false,
+  "predictorFittingPermitted": false,
+  "supportedCells": [
+    "n5-csma",
+    "n10-ring2",
+    "n5-aloha"
+  ],
+  "unsupportedCells": [
+    "n20-ring2"
+  ],
+  "n20InferencePermitted": false,
+  "performanceUsedToChangeSupportRule": false,
+  "nextRequiredStep": "new fixed N20-only pilot seed block; retain the same selection minimum, covariates, intervention and local horizon",
+  "registryHash": 5.2831592E+7,
+  "registryLeaves": 31,
+  "createdAt": "2026-08-31 00:09:55"
+}

@@ -1,0 +1,101 @@
+
+============================================================
+RUN  : exp23ae_receiver_lifted_closure_common_phy
+ID   : 2026-09-05_092152
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ae_receiver_lifted_closure_common_phy\2026-09-05_092152
+WHEN : 2026-09-05 09:21:52
+============================================================
+
+  N= 5 seed 10 / 50; rows  140 / 2100
+  N= 5 seed 20 / 50; rows  280 / 2100
+  N= 5 seed 30 / 50; rows  420 / 2100
+  N= 5 seed 40 / 50; rows  560 / 2100
+  N= 5 seed 50 / 50; rows  700 / 2100
+  N=10 seed 10 / 50; rows  840 / 2100
+  N=10 seed 20 / 50; rows  980 / 2100
+  N=10 seed 30 / 50; rows 1120 / 2100
+  N=10 seed 40 / 50; rows 1260 / 2100
+  N=10 seed 50 / 50; rows 1400 / 2100
+  N=20 seed 10 / 50; rows 1540 / 2100
+  N=20 seed 20 / 50; rows 1680 / 2100
+  N=20 seed 30 / 50; rows 1820 / 2100
+  N=20 seed 40 / 50; rows 1960 / 2100
+  N=20 seed 50 / 50; rows 2100 / 2100
+
+EXP23AE receiver-lifted closure common-PHY gates
+  [PASS] registry_frozen                            hash 71120201 over 59 leaves
+  [PASS] kernel_parent_locked                       canonical EXP23AD 24/24 kernel result retained
+  [PASS] matrix_complete_unique                     2100/2100 unique rows
+  [PASS] exact_matrix_coverage                      50 seeds, three sizes, seven faults and two clocks exact
+  [PASS] clock_arm_pairing                          trace, kernel, native schedule and logical hashes pair exactly
+  [PASS] receiver_lift_stimulus                     all cells contain nonincident sender edges induced at a receiver
+  [PASS] joint_union_coloring                       every candidate is proper on old/new union and changes a slot
+  [PASS] piggyback_revocation_mapping               PREPARE/QUIESCENT carry revoke semantics; no standalone packet
+  [PASS] control_kind_mapping                       six transmitted management kinds and MTU map exactly
+  [PASS] control_attempt_byte_airtime_accounting    kernel and common-PHY attempt, byte and airtime totals match
+  [PASS] control_recipient_accounting               management recipient attempts, successes and erasures replay
+  [PASS] data_state_slot_mapping                    every active kernel node has one exact DATA slot; silence is exact
+  [PASS] data_receiver_outcome_partition            receiver-level DATA successes/collisions form an exact partition
+  [PASS] supported_collision_safety                 all supported fault and clock cells are receiver-collision free
+  [PASS] incomplete_union_oracle_visible            omitted physical interferer is visible at kernel and receiver PHY
+  [PASS] affine_clock_safety                        analytical guard prevents inter-group overlap within reset horizon
+  [PASS] logical_opportunities_preserved            affine mapping trims no registered management or DATA event
+  [PASS] quiescence_blackouts_block_motion          missing PREPARE or positive QUIESCENT receipt prevents motion
+  [PASS] response_blackout_fail_silent              post-barrier graph activation retains full closure silence
+  [PASS] commit_blackout_partial_safe               initiator-only commit remains collision free under both clocks
+  [PASS] iid20_completion_reliability               completion 1.0000, Wilson lower 0.9750
+  [PASS] bounds_causality_and_scope                 bounds and forbidden-read checks pass; no downstream claim promoted
+    N           condition               clockArm        nRuns    completionRate    motionAuthorizationRate    meanAffectedCount    meanControlAttempts    meanControlBytes    meanControlAirtime    collisionFrames
+    __    ______________________    ________________    _____    ______________    _______________________    _________________    ___________________    ________________    __________________    _______________
+
+     5    {'commit-blackout'   }    {'affine-clock'}     50            0                      1                      3.5                   15.5                   591              0.018912                 0      
+     5    {'commit-blackout'   }    {'zero-clock'  }     50            0                      1                      3.5                   15.5                   591              0.018912                 0      
+     5    {'iid20'             }    {'affine-clock'}     50            1                      1                      3.5                  18.84                870.36              0.027852                 0      
+     5    {'iid20'             }    {'zero-clock'  }     50            1                      1                      3.5                  18.84                870.36              0.027852                 0      
+     5    {'incomplete-union'  }    {'affine-clock'}     50            1                      1                      3.5                   10.5                   451              0.014432              2650      
+     5    {'incomplete-union'  }    {'zero-clock'  }     50            1                      1                      3.5                   10.5                   451              0.014432              2650      
+     5    {'nominal-zero'      }    {'affine-clock'}     50            1                      1                      3.5                   10.5                   451              0.014432                 0      
+     5    {'nominal-zero'      }    {'zero-clock'  }     50            1                      1                      3.5                   10.5                   451              0.014432                 0      
+     5    {'prepare-blackout'  }    {'affine-clock'}     50            0                      0                      3.5                     20                   656              0.020992                 0      
+     5    {'prepare-blackout'  }    {'zero-clock'  }     50            0                      0                      3.5                     20                   656              0.020992                 0      
+     5    {'quiescent-blackout'}    {'affine-clock'}     50            0                      0                      3.5                     28                   848              0.027136                 0      
+     5    {'quiescent-blackout'}    {'zero-clock'  }     50            0                      0                      3.5                     28                   848              0.027136                 0      
+     5    {'response-blackout' }    {'affine-clock'}     50            0                      1                      3.5                   63.5                  3276               0.10483                 0      
+     5    {'response-blackout' }    {'zero-clock'  }     50            0                      1                      3.5                   63.5                  3276               0.10483                 0      
+    10    {'commit-blackout'   }    {'affine-clock'}     50            0                      1                      4.5                   18.5                   717              0.022944                 0      
+    10    {'commit-blackout'   }    {'zero-clock'  }     50            0                      1                      4.5                   18.5                   717              0.022944                 0      
+    10    {'iid20'             }    {'affine-clock'}     50            1                      1                      4.5                  26.34                1254.3              0.040137                 0      
+    10    {'iid20'             }    {'zero-clock'  }     50            1                      1                      4.5                  26.34                1254.3              0.040137                 0      
+    10    {'incomplete-union'  }    {'affine-clock'}     50            1                      1                      4.5                   13.5                   577              0.018464              2650      
+    10    {'incomplete-union'  }    {'zero-clock'  }     50            1                      1                      4.5                   13.5                   577              0.018464              2650      
+    10    {'nominal-zero'      }    {'affine-clock'}     50            1                      1                      4.5                   13.5                   577              0.018464                 0      
+    10    {'nominal-zero'      }    {'zero-clock'  }     50            1                      1                      4.5                   13.5                   577              0.018464                 0      
+    10    {'prepare-blackout'  }    {'affine-clock'}     50            0                      0                      4.5                     28                   880               0.02816                 0      
+    10    {'prepare-blackout'  }    {'zero-clock'  }     50            0                      0                      4.5                     28                   880               0.02816                 0      
+    10    {'quiescent-blackout'}    {'affine-clock'}     50            0                      0                      4.5                     36                  1072              0.034304                 0      
+    10    {'quiescent-blackout'}    {'zero-clock'  }     50            0                      0                      4.5                     36                  1072              0.034304                 0      
+    10    {'response-blackout' }    {'affine-clock'}     50            0                      1                      4.5                   84.5                  4284               0.13709                 0      
+    10    {'response-blackout' }    {'zero-clock'  }     50            0                      1                      4.5                   84.5                  4284               0.13709                 0      
+    20    {'commit-blackout'   }    {'affine-clock'}     50            0                      1                      4.5                   18.5                   717              0.022944                 0      
+    20    {'commit-blackout'   }    {'zero-clock'  }     50            0                      1                      4.5                   18.5                   717              0.022944                 0      
+    20    {'iid20'             }    {'affine-clock'}     50            1                      1                      4.5                  27.54                1319.8              0.042232                 0      
+    20    {'iid20'             }    {'zero-clock'  }     50            1                      1                      4.5                  27.54                1319.8              0.042232                 0      
+    20    {'incomplete-union'  }    {'affine-clock'}     50            1                      1                      4.5                   13.5                   577              0.018464              2650      
+    20    {'incomplete-union'  }    {'zero-clock'  }     50            1                      1                      4.5                   13.5                   577              0.018464              2650      
+    20    {'nominal-zero'      }    {'affine-clock'}     50            1                      1                      4.5                   13.5                   577              0.018464                 0      
+    20    {'nominal-zero'      }    {'zero-clock'  }     50            1                      1                      4.5                   13.5                   577              0.018464                 0      
+    20    {'prepare-blackout'  }    {'affine-clock'}     50            0                      0                      4.5                     28                   880               0.02816                 0      
+    20    {'prepare-blackout'  }    {'zero-clock'  }     50            0                      0                      4.5                     28                   880               0.02816                 0      
+    20    {'quiescent-blackout'}    {'affine-clock'}     50            0                      0                      4.5                     36                  1072              0.034304                 0      
+    20    {'quiescent-blackout'}    {'zero-clock'  }     50            0                      0                      4.5                     36                  1072              0.034304                 0      
+    20    {'response-blackout' }    {'affine-clock'}     50            0                      1                      4.5                   84.5                  4284               0.13709                 0      
+    20    {'response-blackout' }    {'zero-clock'  }     50            0                      1                      4.5                   84.5                  4284               0.13709                 0      
+
+EXP23AE DECISION: RECEIVER_LIFTED_CLOSURE_COMMON_PHY_VALID
+
+============================================================
+DONE : exp23ae_receiver_lifted_closure_common_phy
+TIME : 52.2 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ae_receiver_lifted_closure_common_phy\2026-09-05_092152
+============================================================

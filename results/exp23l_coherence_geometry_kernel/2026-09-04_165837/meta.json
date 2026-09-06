@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23l_coherence_geometry_kernel",
+  "runId": "2026-09-04_165837",
+  "startedAt": "2026-09-04 16:58:37",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh randomized falsification of reachable conflict supergraphs, coherence horizon selection and fail-silent self-revocation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23l_coherence_geometry_kernel.m",
+  "finishedAt": "2026-09-04 16:58:41",
+  "elapsedSec": 3.1484758,
+  "elapsedText": "3.1 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

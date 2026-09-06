@@ -1,0 +1,7 @@
+N,condition,positionError,velocityError,speedScale,accelerationScale,managementRadius,nRuns,meanDataNeighborEdges,meanSelectedHorizonSec,targetHorizonRate,noLeaseRate,meanSelectedSenderEdges,meanSelectedPhysicalEdges,meanHiddenSenderEdgeCount
+5,mobile-limited-high,0.3,0.1,1,1,1.5,100,1.16,2.49,0.25,0.08,1.19,3.79,11.47
+5,mobile-limited-low,0.02,0.02,1,1,1.5,100,1.16,2.92,0.25,0,1.35,3.83,9.17
+5,static-wide-low,0.02,0.02,0,0,Inf,100,1.16,6.8,1,0,1.33,0.95,0.86
+10,mobile-limited-high,0.3,0.1,1,1,1.5,100,4.03,0.2675,0,0.47,2.89,2.7,81.13
+10,mobile-limited-low,0.02,0.02,1,1,1.5,100,4.03,0.945,0,0,4.97,3.54,63.5
+10,static-wide-low,0.02,0.02,0,0,Inf,100,4.03,6.8,1,0,4.97,3.22,4.27

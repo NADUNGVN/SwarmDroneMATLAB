@@ -1,0 +1,97 @@
+{
+  "version": "EXP21C-CLOSED-LOOP-TIMING-INTEGRATION-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "development-model-integration",
+  "policyOptimizationAllowed": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6032001E+7,
+    1.6032002E+7,
+    1.6032003E+7,
+    1.6032004E+7,
+    1.6032005E+7,
+    1.6032006E+7,
+    1.6032007E+7,
+    1.6032008E+7,
+    1.6032009E+7,
+    1.603201E+7,
+    1.6032011E+7,
+    1.6032012E+7,
+    1.6032013E+7,
+    1.6032014E+7,
+    1.6032015E+7,
+    1.6032016E+7,
+    1.6032017E+7,
+    1.6032018E+7,
+    1.6032019E+7,
+    1.603202E+7,
+    1.6032021E+7,
+    1.6032022E+7,
+    1.6032023E+7,
+    1.6032024E+7,
+    1.6032025E+7,
+    1.6032026E+7,
+    1.6032027E+7,
+    1.6032028E+7,
+    1.6032029E+7,
+    1.603203E+7
+  ],
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "syncPeriodSec": 0.5,
+  "safeGuardSec": 0.00054002160086403454,
+  "periodicRateHz": 8.3333333333333339,
+  "cells": [
+    {
+      "id": "n5-stressed",
+      "label": "N5 Stressed",
+      "exp21aCell": "n5-stressed-nominal"
+    },
+    {
+      "id": "n10-moderate",
+      "label": "N10 Moderate",
+      "exp21aCell": "n10-moderate-nominal"
+    }
+  ],
+  "arms": [
+    {
+      "id": "ideal-tdma-p8p333",
+      "label": "Ideal TDMA 8.333 Hz",
+      "kind": "ideal-reference",
+      "schedulerMode": "round-robin",
+      "clockEnabled": false,
+      "guardFactor": null
+    },
+    {
+      "id": "continuous-zero-clock",
+      "label": "Continuous local TDMA zero clock",
+      "kind": "integration-zero",
+      "schedulerMode": "continuous-local-static-tdma",
+      "clockEnabled": false,
+      "guardFactor": 0
+    },
+    {
+      "id": "continuous-clock-unguarded",
+      "label": "Continuous local TDMA unguarded clock",
+      "kind": "integration-witness",
+      "schedulerMode": "continuous-local-static-tdma",
+      "clockEnabled": true,
+      "guardFactor": 0
+    },
+    {
+      "id": "continuous-clock-safe-guard",
+      "label": "Continuous local TDMA safe guard",
+      "kind": "integration-safe",
+      "schedulerMode": "continuous-local-static-tdma",
+      "clockEnabled": true,
+      "guardFactor": 1
+    }
+  ],
+  "idealArm": "ideal-tdma-p8p333",
+  "zeroArm": "continuous-zero-clock",
+  "witnessArm": "continuous-clock-unguarded",
+  "safeArm": "continuous-clock-safe-guard",
+  "maxZeroRelativeRmseGap": 0.1,
+  "maxZeroAbsoluteUtilGap": 0.05,
+  "expectedRuns": 240
+}

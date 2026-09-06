@@ -1,0 +1,48 @@
+
+============================================================
+RUN  : exp23q_broadcast_graph_repair
+ID   : 2026-09-04_173841
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23q_broadcast_graph_repair\2026-09-04_173841
+WHEN : 2026-09-04 17:38:41
+============================================================
+
+  seeds  10 / 100; rows  60 / 600
+  seeds  20 / 100; rows 120 / 600
+  seeds  30 / 100; rows 180 / 600
+  seeds  40 / 100; rows 240 / 600
+  seeds  50 / 100; rows 300 / 600
+  seeds  60 / 100; rows 360 / 600
+  seeds  70 / 100; rows 420 / 600
+  seeds  80 / 100; rows 480 / 600
+  seeds  90 / 100; rows 540 / 600
+  seeds 100 / 100; rows 600 / 600
+
+EXP23Q broadcast graph-repair gates
+  [PASS] registry_frozen                               hash 126875752 over 53 leaves
+  [PASS] matrix_complete_unique                        600/600 unique rows
+  [PASS] exact_matrix_coverage                         100 fresh seeds, N5/N10 and three geometry cells exact
+  [PASS] paired_base_and_receiver_graph                geometry cells share base realization and intended receiver graph
+  [PASS] deterministic_reproduction                    repeated seed/cell is bit-identical
+  [PASS] independent_actual_graph_subset               independently enumerated actual sender graph is a subset
+  [PASS] independent_proper_color_safety               independent conflicting sender pairs never share a color
+  [PASS] direct_receiver_delivery_safety               direct receiver oracle observes zero same-color DATA collisions
+  [PASS] reach_beyond_interference_stimulus            aggregate intended-reach-only conflict instances 44034
+  [PASS] sender_graph_horizon_monotonicity             receiver-lifted sender edges never disappear with horizon
+  [PASS] static_target_activation                      200/200 static/wide rows select 6.8 s
+  [PASS] uncertainty_horizon_contraction               mobile high uncertainty never lengthens paired horizon
+  [PASS] issued_witness_payload_slot_feasibility       issued sender graph has witness, MTU and color feasibility
+  [PASS] uncovered_fail_silent                         no feasible repaired horizon yields no lease
+  [PASS] self_revocation_contract                      bounded motion stays active; injected bound violation self-revokes
+  [PASS] causal_information_contract                   zero future-random and receiver-truth decision reads
+  [PASS] hidden_sender_conflict_stimulus               aggregate receiver-lifted hidden-edge instances 17247
+  [PASS] selector_boundary_stimulus                    target/contracted/no-lease rows 268/284/48
+  [PASS] kernel_scope_only                             graph repair only; no packet, closed-loop or submission decision
+
+EXP23Q DECISION: BROADCAST_DETECTABILITY_GRAPH_REPAIR_VALID
+
+============================================================
+DONE : exp23q_broadcast_graph_repair
+TIME : 18.1 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23q_broadcast_graph_repair\2026-09-04_173841
+============================================================

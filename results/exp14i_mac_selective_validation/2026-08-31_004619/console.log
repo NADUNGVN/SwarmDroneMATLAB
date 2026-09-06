@@ -1,0 +1,74 @@
+
+============================================================
+RUN  : exp14i_mac_selective_validation
+ID   : 2026-08-31_004619
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14i_mac_selective_validation\2026-08-31_004619
+WHEN : 2026-08-31 00:46:19
+============================================================
+
+EXP14I HOLDOUT IS NOW OPEN. Registry hash: 84940762
+Frozen matrix: 1600 runs (100 seeds).
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 12 / 400; rows   48 / 1600
+  groups  13-- 24 / 400; rows   96 / 1600
+  groups  25-- 36 / 400; rows  144 / 1600
+  groups  37-- 48 / 400; rows  192 / 1600
+  groups  49-- 60 / 400; rows  240 / 1600
+  groups  61-- 72 / 400; rows  288 / 1600
+  groups  73-- 84 / 400; rows  336 / 1600
+  groups  85-- 96 / 400; rows  384 / 1600
+  groups  97--108 / 400; rows  432 / 1600
+  groups 109--120 / 400; rows  480 / 1600
+  groups 121--132 / 400; rows  528 / 1600
+  groups 133--144 / 400; rows  576 / 1600
+  groups 145--156 / 400; rows  624 / 1600
+  groups 157--168 / 400; rows  672 / 1600
+  groups 169--180 / 400; rows  720 / 1600
+  groups 181--192 / 400; rows  768 / 1600
+  groups 193--204 / 400; rows  816 / 1600
+  groups 205--216 / 400; rows  864 / 1600
+  groups 217--228 / 400; rows  912 / 1600
+  groups 229--240 / 400; rows  960 / 1600
+  groups 241--252 / 400; rows 1008 / 1600
+  groups 253--264 / 400; rows 1056 / 1600
+  groups 265--276 / 400; rows 1104 / 1600
+  groups 277--288 / 400; rows 1152 / 1600
+  groups 289--300 / 400; rows 1200 / 1600
+  groups 301--312 / 400; rows 1248 / 1600
+  groups 313--324 / 400; rows 1296 / 1600
+  groups 325--336 / 400; rows 1344 / 1600
+  groups 337--348 / 400; rows 1392 / 1600
+  groups 349--360 / 400; rows 1440 / 1600
+  groups 361--372 / 400; rows 1488 / 1600
+  groups 373--384 / 400; rows 1536 / 1600
+  groups 385--396 / 400; rows 1584 / 1600
+  groups 397--400 / 400; rows 1600 / 1600
+
+EXP14I integrity gates
+  [PASS] registry_contract                  hash 84940762 over 52 leaves
+  [PASS] matrix_completeness                1600 frozen runs
+  [PASS] unique_cells                       one row per seed/cell/arm
+  [PASS] complete_paired_groups             all four arms occur once per seed/cell
+  [PASS] finite_eligible_outputs            all nondivergent continuous outcomes are finite
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=2 max history=32
+  [PASS] physical_accounting                terminal accounting and channel busy union close
+  [PASS] paired_absolute_trace              one trace and channel-state realization per seed/cell
+  [PASS] access_semantics                   all four arms use analytical access scaling
+  [PASS] selector_semantics                 candidate route depends only on configured MAC type
+  [PASS] comparator_semantics               fixed feedback and access-only contracts match
+  [PASS] exact_route_alias                  max registered outcome difference 0
+  [PASS] local_busy_contract                causal local busy estimates remain in [0,1]
+  [PASS] divergence_accounting              0 divergences retained
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp14i_mac_selective_validation\2026-08-31_004619\figures
+
+EXP14I CLAIM VERDICT: SUPPORTED_REGISTERED_MAC_SELECTOR
+  Holm tests: 6/6 | primary cells: 3/3
+
+============================================================
+DONE : exp14i_mac_selective_validation
+TIME : 15 m 49 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14i_mac_selective_validation\2026-08-31_004619
+============================================================

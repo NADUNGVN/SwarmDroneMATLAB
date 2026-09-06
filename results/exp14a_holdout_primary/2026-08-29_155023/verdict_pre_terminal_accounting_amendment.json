@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "gatesPassed": 10,
+  "gatesTotal": 11,
+  "totalRuns": 10500,
+  "performanceClaimGate": "NONE",
+  "negativeResultsRetained": true,
+  "configurationChangePermitted": false
+}

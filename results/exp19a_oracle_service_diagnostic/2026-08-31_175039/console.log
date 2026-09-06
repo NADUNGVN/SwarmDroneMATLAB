@@ -1,0 +1,54 @@
+
+============================================================
+RUN  : exp19a_oracle_service_diagnostic
+ID   : 2026-08-31_175039
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp19a_oracle_service_diagnostic\2026-08-31_175039
+WHEN : 2026-08-31 17:50:39
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 12 / 180; rows  108 / 1620
+  groups  13-- 24 / 180; rows  216 / 1620
+  groups  25-- 36 / 180; rows  324 / 1620
+  groups  37-- 48 / 180; rows  432 / 1620
+  groups  49-- 60 / 180; rows  540 / 1620
+  groups  61-- 72 / 180; rows  648 / 1620
+  groups  73-- 84 / 180; rows  756 / 1620
+  groups  85-- 96 / 180; rows  864 / 1620
+  groups  97--108 / 180; rows  972 / 1620
+  groups 109--120 / 180; rows 1080 / 1620
+  groups 121--132 / 180; rows 1188 / 1620
+  groups 133--144 / 180; rows 1296 / 1620
+  groups 145--156 / 180; rows 1404 / 1620
+  groups 157--168 / 180; rows 1512 / 1620
+  groups 169--180 / 180; rows 1620 / 1620
+
+EXP19A integrity gates
+  [PASS] registry_recorded                        development hash 76356276 over 93 leaves
+  [PASS] matrix_completeness                      1620/1620 rows
+  [PASS] unique_rows                              one row per seed/context/arm
+  [PASS] exact_development_seeds                  all and only 30 declared development seeds are present
+  [PASS] complete_paired_groups                   all nine arms occur once in each seed/context group
+  [PASS] paired_absolute_trace                    channel, state and estimator traces match within each group
+  [PASS] finite_eligible_outputs                  all nondivergent control/service outcomes are finite
+  [PASS] causal_conservatism                      0 protocol violations
+  [PASS] bounded_memory                           max queue=2 max history=32
+  [PASS] physical_accounting                      recipient outcomes, in-flight work and busy union close
+  [PASS] virtual_service_accounting               Z terminal equals admitted semantic demand minus successful service
+  [PASS] no_scheduled_standalone_ack              all scheduling/frontier arms emit zero standalone ACK
+  [PASS] decision_log_contract                    every scheduled transmission records eligible set and selection
+  [PASS] present_past_oracle_only                 urgency reads receiver truth; neither oracle reads future uniforms
+  [PASS] collision_free_scheduled_access          scheduled arms have no endogenous collision; background remains counted
+  [PASS] arm_semantics                            baseline, oracle, collision-free and periodic contracts match registry
+  [PASS] context_access_contract                  all contexts retain their declared original ALOHA/CSMA label
+  [PASS] unsafe_runs_retained                     124 observed safety failures retained
+
+EXP19A DEVELOPMENT VERDICT: NO_SERVICE_SCHEDULING_HEADROOM (3/5 gates)
+
+============================================================
+DONE : exp19a_oracle_service_diagnostic
+TIME : 7 m 12 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp19a_oracle_service_diagnostic\2026-08-31_175039
+============================================================

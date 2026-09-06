@@ -1,0 +1,99 @@
+
+============================================================
+RUN  : exp23g_background_gate_repair
+ID   : 2026-09-04_154603
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23g_background_gate_repair\2026-09-04_154603
+WHEN : 2026-09-04 15:46:03
+============================================================
+
+  groups   1--  4 / 240; rows   8 / 480
+  groups   5--  8 / 240; rows  16 / 480
+  groups   9-- 12 / 240; rows  24 / 480
+  groups  13-- 16 / 240; rows  32 / 480
+  groups  17-- 20 / 240; rows  40 / 480
+  groups  21-- 24 / 240; rows  48 / 480
+  groups  25-- 28 / 240; rows  56 / 480
+  groups  29-- 32 / 240; rows  64 / 480
+  groups  33-- 36 / 240; rows  72 / 480
+  groups  37-- 40 / 240; rows  80 / 480
+  groups  41-- 44 / 240; rows  88 / 480
+  groups  45-- 48 / 240; rows  96 / 480
+  groups  49-- 52 / 240; rows 104 / 480
+  groups  53-- 56 / 240; rows 112 / 480
+  groups  57-- 60 / 240; rows 120 / 480
+  groups  61-- 64 / 240; rows 128 / 480
+  groups  65-- 68 / 240; rows 136 / 480
+  groups  69-- 72 / 240; rows 144 / 480
+  groups  73-- 76 / 240; rows 152 / 480
+  groups  77-- 80 / 240; rows 160 / 480
+  groups  81-- 84 / 240; rows 168 / 480
+  groups  85-- 88 / 240; rows 176 / 480
+  groups  89-- 92 / 240; rows 184 / 480
+  groups  93-- 96 / 240; rows 192 / 480
+  groups  97--100 / 240; rows 200 / 480
+  groups 101--104 / 240; rows 208 / 480
+  groups 105--108 / 240; rows 216 / 480
+  groups 109--112 / 240; rows 224 / 480
+  groups 113--116 / 240; rows 232 / 480
+  groups 117--120 / 240; rows 240 / 480
+  groups 121--124 / 240; rows 248 / 480
+  groups 125--128 / 240; rows 256 / 480
+  groups 129--132 / 240; rows 264 / 480
+  groups 133--136 / 240; rows 272 / 480
+  groups 137--140 / 240; rows 280 / 480
+  groups 141--144 / 240; rows 288 / 480
+  groups 145--148 / 240; rows 296 / 480
+  groups 149--152 / 240; rows 304 / 480
+  groups 153--156 / 240; rows 312 / 480
+  groups 157--160 / 240; rows 320 / 480
+  groups 161--164 / 240; rows 328 / 480
+  groups 165--168 / 240; rows 336 / 480
+  groups 169--172 / 240; rows 344 / 480
+  groups 173--176 / 240; rows 352 / 480
+  groups 177--180 / 240; rows 360 / 480
+  groups 181--184 / 240; rows 368 / 480
+  groups 185--188 / 240; rows 376 / 480
+  groups 189--192 / 240; rows 384 / 480
+  groups 193--196 / 240; rows 392 / 480
+  groups 197--200 / 240; rows 400 / 480
+  groups 201--204 / 240; rows 408 / 480
+  groups 205--208 / 240; rows 416 / 480
+  groups 209--212 / 240; rows 424 / 480
+  groups 213--216 / 240; rows 432 / 480
+  groups 217--220 / 240; rows 440 / 480
+  groups 221--224 / 240; rows 448 / 480
+  groups 225--228 / 240; rows 456 / 480
+  groups 229--232 / 240; rows 464 / 480
+  groups 233--236 / 240; rows 472 / 480
+  groups 237--240 / 240; rows 480 / 480
+
+EXP23G background-load robustness integrity gates
+  [PASS] registry_frozen                             hash 78936880 over 72 leaves
+  [PASS] matrix_complete_unique                      480/480 unique rows
+  [PASS] exact_matrix_coverage                       30 seeds, two cells, four load conditions and two arms exact
+  [PASS] paired_shared_realizations                  each cell/condition pairs channel, estimator, clock and occupancy
+  [PASS] nested_background_random_field              IID and Markov conditions derive from one absolute uniform field
+  [PASS] periodic_boundary_and_timing                EXP23D rates remain guarded without endogenous collision
+  [PASS] exact_background_busy_time_pairing          both engines charge the same absolute occupied time
+  [PASS] candidate_background_certificate            ELCS-W control/DATA overlay matches shared trace and declared load
+  [PASS] background_stimulus_activation              nonzero load hits ELCS-W attempts; clean remains exactly empty
+  [PASS] markov_burst_correlation_stimulus           mean on-run IID/Markov 0.001177/0.0487 s
+  [PASS] one_hop_witness_cover                       all hidden conflicts retain bounded local witnesses
+  [PASS] absolute_control_bounds                     max attempt/byte ratios 0.240500/0.230643
+  [PASS] exact_elcs_w_replay                         queue, outcome, clock and control/DATA plane contracts close
+  [PASS] variable_payload_management_accounting      attempt, recipient, byte and airtime accounting close exactly
+  [PASS] load_induced_retry_stimulus                 every loaded cell activates retry; clean does not
+  [PASS] periodic_cost_eligibility                   periodic is at least 1% cheaper in every load contrast
+  [PASS] recipient_airtime_and_busy_union            focal offered airtime, recipients and exogenous busy union close
+  [PASS] causal_and_protocol_invariants              zero future/random truth reads and protocol invariant violations
+  [PASS] all_robustness_failures_retained            unsafe, divergent and terminal-uncertified outcomes remain observable
+  [PASS] background_screen_scope_only                no tuning, broad robustness, promotion or submission decision
+
+EXP23G DECISION: ELCS_W_BACKGROUND_EPSILON_DOMINATED_RETURN_TO_DESIGN
+
+============================================================
+DONE : exp23g_background_gate_repair
+TIME : 17 m 15 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23g_background_gate_repair\2026-09-04_154603
+============================================================

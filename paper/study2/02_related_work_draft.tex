@@ -1,0 +1,149 @@
+\section{Related Work}
+\label{sec:s2-related}
+
+The communication decision in networked coordination contains three distinct
+questions: whether the state is informative enough to transmit, what the
+sender causally knows about receiver freshness, and how a feedback action
+changes contention on the shared medium. Existing work usually resolves one
+or two of these questions. We therefore organize the literature by decision
+information and network mechanism rather than list papers by application.
+
+\subsection{State relevance: event-triggered coordination}
+
+Classical event-triggered control replaces periodic updates with transmissions
+driven by a local state or estimation error
+\cite{astrom2002riemann,tabuada2007event,heemels2012introduction}. Distributed
+extensions establish consensus and coordination guarantees, avoid Zeno
+behavior, and introduce dynamic thresholds
+\cite{dimarogonas2012distributed,seyboth2013eventbased,girard2015dynamic,yi2017distributed,nowzari2019eventtriggered}.
+This line extends to multi-UAV formation under directed topologies, delays,
+disturbances, and dynamic triggers
+\cite{yin2023eventbased,ji2023dynamic,chen2024distributed,yang2025fencing},
+including finite-time event-triggered experiments with Bebop2 quadrotors
+\cite{wang2022finiteuav}. Event-triggered formation is therefore not the gap.
+
+Loss-aware event triggering is also established. Wang and Lemmon study
+distributed event triggering with delay and packet loss
+\cite{wang2011eventtriggering}; Dolk and Heemels explicitly distinguish ETC
+with and without acknowledgements \cite{dolk2017packetlosses}; Garcia
+\emph{et al.} address non-consistent broadcast loss and delay while documenting
+earlier receiver-specific ACK/retransmission protocols
+\cite{garcia2016unreliable}; and Viel \emph{et al.} trigger formation updates
+using estimates of an agent's own state as evaluated by its neighbors under
+packet loss \cite{viel2022packetlossformation}. ACK-aware ETC and
+receiver-dependent versions of a broadcast state are consequently foundations,
+not contributions of this paper.
+
+One remaining abstraction is receiver observability. A sender often resets its
+broadcast error when it transmits, effectively treating the transmitted sample
+as the receivers' new reference despite queueing or forward loss. Kesper
+\emph{et al.} attach age timers to last-broadcast states in learned distributed
+event-triggered control \cite{kesper2023toward}, but the timer is not a delayed
+receiver-specific acknowledgement of an accepted generation. State relevance
+answers whether the plant changed, but not whether a particular neighbor
+received the change.
+
+\subsection{Time and semantic relevance}
+
+AoI measures elapsed time since generation of the newest update at a receiver
+\cite{kaul2012realtime,sun2017update,yates2021aoisurvey}. AoI-aware networked
+control schedules scarce transmissions or constrains estimation quality.
+Mamduhi \emph{et al.} combine age- and event-based scheduling across multiple
+feedback loops \cite{mamduhi2020freshness}; Wang \emph{et al.} impose
+freshness constraints in event-triggered Kalman consensus
+\cite{wang2021freshness}; and Lin \emph{et al.} integrate AoI into
+event-triggered load-frequency control \cite{lin2023eventtriggered}. These
+works establish that freshness is control relevant and that pure state
+innovation can leave a receiver stale.
+
+Age is not identical to task value. AoI can underperform state- or
+value-aware policies in networked control \cite{ayan2019aoivoi,mamduhi2020freshness}.
+Semantic metrics make the same distinction: Age of Incorrect Information
+penalizes information that is both stale and wrong \cite{maatouk2020aoii},
+whereas Age of Changed Information combines elapsed time with content change
+\cite{wang2022aoci}. Decentralized AoII has also been examined under
+slotted-ALOHA collisions \cite{nayak2023decentralizedaoii}. Hence neither
+content-aware freshness nor collision-aware age scheduling alone is the
+present contribution. The unresolved issue is how such relevance is inferred
+causally for every formation neighbor and translated into actual shared-medium
+traffic.
+
+\subsection{ACKs and delayed two-way feedback}
+
+With unreliable delivery, sender transmission history does not reveal
+receiver AoI. Ceran \emph{et al.} optimize ACK-driven sampling and
+retransmission under resource constraints \cite{ceran2019average}. Pan
+\emph{et al.} derive threshold sampling with random two-way delay and ACK
+feedback \cite{pan2023twoway}. Tahir \emph{et al.} consider decentralized
+sensors sharing capacity-limited non-FIFO duplex channels; each sensor uses a
+particle filter to maintain a belief over receiver AoI under delayed ACKs
+\cite{tahir2024collaborative}. Onozuka \emph{et al.} event-trigger forward and
+feedback traffic in railway control \cite{onozuka2024aoi}.
+
+This strand resolves the causal observability problem omitted by classical
+event triggers, and the delayed-ACK belief method is consequently implemented
+as an experimental baseline rather than cited only for positioning. Its main
+objective is receiver age or remote estimation. It does not directly answer
+whether a continuous formation state is newly informative to a particular
+neighbor, or whether a standalone ACK changes future broadcast demand enough
+to repay its own airtime and collisions.
+
+That resource question also has direct prior art. Munari and Badia
+analytically identify reliability/feedback-cost regions in which requesting
+feedback is or is not beneficial for finite-horizon AoI optimization
+\cite{munari2025feedback}. Their single-sensor opportunity-budget model does
+not include formation semantics, broadcast neighbor beliefs, piggyback versus
+standalone contention, or closed-loop DATA suppression. It does mean that the
+generic claim ``feedback is sometimes worth its cost'' is not novel. Our gap
+is the mediated path from an ACK, through sender belief and future DATA
+actions, to receiver freshness and control.
+
+\subsection{Random access and MAC-dependent freshness}
+
+The access mechanism is already known to change AoI. Kadota and Modiano analyze
+stochastic-arrival AoI under slotted ALOHA and CSMA
+\cite{kadota2021randomaccess}; Mena and N\'u\~nez derive AoI expressions and a
+MAC-selection method for CSMA/CA and TDMA in IoT networked control
+\cite{mena2023macperspective}; and Peng \emph{et al.} use piggybacked collision
+information in an AoI-optimized V2X sidelink MAC
+\cite{peng2021piggyback}. Thus neither MAC-dependent AoI nor piggyback signaling
+is the contribution. The open issue is whether the \emph{feedback route}
+changes the transmitter's semantic update process enough to reverse its
+receiver/control value on a shared broadcast medium.
+
+\subsection{Shared-medium UAV networking}
+
+UAV-network research emphasizes mobility, interference, bandwidth limits, and
+topology changes \cite{gupta2016survey,zeng2016wireless,mozaffari2019tutorial}.
+WiSwarm is particularly relevant: it implements an AoI-based application layer
+over Wi-Fi for collaborative UAV teams, including stale-packet handling,
+traffic priorities, collision prevention, and flight experiments
+\cite{tripathi2023wiswarm}. It demonstrates why logical directed-link counts
+are insufficient: broadcast aggregation, queueing and medium access change
+delivered freshness and resource cost.
+
+The complementary limitation is that network-oriented systems do not isolate
+the present receiver-specific innovation/confirmation mechanism, while many
+formation-control papers abstract the MAC. We bridge these layers with an
+explicit but radio-agnostic shared-medium kernel. This is stronger than a
+broadcast accounting proxy but weaker than a named IEEE PHY/MAC or hardware
+experiment; trace and radio validation remain a separate stage.
+
+\subsection{Gap and positioning}
+
+The literature has solved neighboring pieces: semantic state triggers for
+coordination, receiver-age scheduling, delayed-ACK receiver beliefs, and
+shared-medium UAV networking. The joint gap is not the union of familiar
+ingredients. It is the decision mechanism created when receiver-confirmed
+semantic triggering, broadcast aggregation, cumulative feedback, finite
+contention, and formation control interact.
+
+Our central question is correspondingly conditional: when does faster causal
+confirmation improve the receiver-side control process after paying direct and
+collision-mediated cost? The answer cannot be inferred from ACK delay alone.
+This paper combines pathwise accounting, focal-decision counterfactual replay,
+disjoint directional validation, and a preregistered within-seed factorial
+interaction to show that the relative route effect reverses with the configured
+access mechanism in the declared cell. The contribution is an auditable
+causal/accounting framework and a bounded MAC-conditioned route effect, not a priority claim
+for event triggering, AoI, ACK inference, broadcast, or CSMA/ALOHA separately.

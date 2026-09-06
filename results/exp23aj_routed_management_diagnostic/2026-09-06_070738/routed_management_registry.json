@@ -1,0 +1,55 @@
+{
+  "version": "EXP23AJ-ROUTED-MANAGEMENT-DIAGNOSTIC-v1",
+  "frozenDate": "2026-09-06",
+  "stage": "routed-management-development-diagnostic",
+  "parentRun": "2026-09-06_003132",
+  "parentStatus": "INTEGER_ACCOUNTED_RADIAL_CLOSURE_FRESH_VALID",
+  "parentGatesPassed": 28,
+  "parentGatesTotal": 28,
+  "parentRegistryVersion": "EXP23AI-INTEGER-PHY-ACCOUNTING-v1",
+  "diagnosticWitnessSeed": 1.6094113E+7,
+  "swarmSizes": [
+    5,
+    10,
+    20
+  ],
+  "topology": "ring2-with-symmetric-leader-pins",
+  "interferenceModes": [
+    "spatial-reuse-lower-bound",
+    "complete-interference-upper-bound"
+  ],
+  "linkErasureProbability": [
+    0.05,
+    0.2,
+    0.3
+  ],
+  "maximumLogicalPacketFailure": 0.001,
+  "maxRepetitionsPerHop": 20,
+  "maxHopsFactor": 1,
+  "phyRateBps": 250000,
+  "safeGuardSec": 0.0029001160046401857,
+  "maximumPacketBytes": 96,
+  "monteCarloLoss": 0.2,
+  "monteCarloRepetitionsPerHop": 2,
+  "monteCarloTrials": 10000,
+  "monteCarloSeeds": [
+    1.6094501E+7,
+    1.6094502E+7,
+    1.6094503E+7,
+    1.6094504E+7,
+    1.6094505E+7,
+    1.6094506E+7
+  ],
+  "monteCarloStandardErrorMultiplier": 5,
+  "requiredValidationContracts": 17,
+  "expectedStructuralRows": 210,
+  "expectedMonteCarloRows": 6,
+  "expectedSemanticRows": 25,
+  "developmentOnly": true,
+  "confirmatoryEvidence": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false
+}

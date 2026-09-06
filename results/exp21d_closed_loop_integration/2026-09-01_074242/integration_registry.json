@@ -1,0 +1,95 @@
+{
+  "version": "EXP21D-CLOSED-LOOP-INTEGRATION-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "prior-art-integration-falsification",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "boundaryContinuationPermitted": false,
+  "seeds": [
+    1.6036001E+7,
+    1.6036002E+7,
+    1.6036003E+7,
+    1.6036004E+7,
+    1.6036005E+7,
+    1.6036006E+7,
+    1.6036007E+7,
+    1.6036008E+7,
+    1.6036009E+7,
+    1.603601E+7,
+    1.6036011E+7,
+    1.6036012E+7,
+    1.6036013E+7,
+    1.6036014E+7,
+    1.6036015E+7,
+    1.6036016E+7,
+    1.6036017E+7,
+    1.6036018E+7,
+    1.6036019E+7,
+    1.603602E+7,
+    1.6036021E+7,
+    1.6036022E+7,
+    1.6036023E+7,
+    1.6036024E+7,
+    1.6036025E+7,
+    1.6036026E+7,
+    1.6036027E+7,
+    1.6036028E+7,
+    1.6036029E+7,
+    1.603603E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "arms": [
+    {
+      "id": "periodic-static-tdma-p8p333",
+      "label": "Periodic static TDMA 8.333 Hz",
+      "kind": "ideal-service-reference",
+      "schedulerMode": "continuous-local-static-tdma",
+      "periodicRateHz": 8.3333333333333339,
+      "idealFlag": 1
+    },
+    {
+      "id": "dstr-native",
+      "label": "D-STR native acquisition",
+      "kind": "prior-art-native",
+      "schedulerMode": "continuous-dstr-replay",
+      "periodicRateHz": 50,
+      "idealFlag": 0
+    },
+    {
+      "id": "dstr-oracle-warm",
+      "label": "D-STR oracle-warm",
+      "kind": "oracle-cost-decomposition",
+      "schedulerMode": "continuous-dstr-replay",
+      "periodicRateHz": 50,
+      "idealFlag": 1
+    }
+  ],
+  "periodicArm": "periodic-static-tdma-p8p333",
+  "nativeArm": "dstr-native",
+  "warmArm": "dstr-oracle-warm",
+  "maxFrames": 1200,
+  "initialDataSlots": 10,
+  "maxDataSlots": 64,
+  "collisionThreshold": 3,
+  "growthMargin": 3,
+  "shrinkThreshold": 5,
+  "failedShrinkTimeout": 30,
+  "shrinkBackoffExponentCap": 6,
+  "retentionProbability": 0.75,
+  "traceSeedOffset": 2.1092026E+7,
+  "safeGuardSec": 0.00054002160086403454,
+  "requiredIntegrationContracts": 12,
+  "expectedRuns": 180
+}

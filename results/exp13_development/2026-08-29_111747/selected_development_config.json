@@ -1,0 +1,13 @@
+{
+  "designIndex": 0,
+  "isDefault": 1,
+  "posThreshold": 0.05,
+  "velThreshold": 0.1,
+  "aoiThreshold": 0.12,
+  "maxSilence": 0.5,
+  "minInterTx": 0.02,
+  "aoiMinInterTx": 0.1,
+  "scaleBase": 0.5,
+  "scaleMin": 0.2,
+  "adaptRange": 1
+}

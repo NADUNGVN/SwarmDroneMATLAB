@@ -1,0 +1,17 @@
+{
+  "experiment": "exp23u_dynamic_closed_loop_envelope",
+  "runId": "2026-09-04_203719",
+  "startedAt": "2026-09-04 20:37:19",
+  "matlabVersion": "25.1.0.2943329 (R2025a)",
+  "matlabRelease": "2025a",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "",
+  "notes": "resumed frozen EXP23U checkpoint",
+  "finishedAt": "2026-09-04 20:49:10",
+  "elapsedSec": 2.4536862,
+  "elapsedText": "2.5 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

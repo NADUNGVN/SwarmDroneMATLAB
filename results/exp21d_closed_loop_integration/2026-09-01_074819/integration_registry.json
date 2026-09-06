@@ -1,0 +1,96 @@
+{
+  "version": "EXP21D-CLOSED-LOOP-INTEGRATION-v2",
+  "frozenDate": "2026-09-01",
+  "stage": "prior-art-integration-falsification",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "boundaryContinuationPermitted": false,
+  "seeds": [
+    1.6036101E+7,
+    1.6036102E+7,
+    1.6036103E+7,
+    1.6036104E+7,
+    1.6036105E+7,
+    1.6036106E+7,
+    1.6036107E+7,
+    1.6036108E+7,
+    1.6036109E+7,
+    1.603611E+7,
+    1.6036111E+7,
+    1.6036112E+7,
+    1.6036113E+7,
+    1.6036114E+7,
+    1.6036115E+7,
+    1.6036116E+7,
+    1.6036117E+7,
+    1.6036118E+7,
+    1.6036119E+7,
+    1.603612E+7,
+    1.6036121E+7,
+    1.6036122E+7,
+    1.6036123E+7,
+    1.6036124E+7,
+    1.6036125E+7,
+    1.6036126E+7,
+    1.6036127E+7,
+    1.6036128E+7,
+    1.6036129E+7,
+    1.603613E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "arms": [
+    {
+      "id": "periodic-static-tdma-p8p333",
+      "label": "Periodic static TDMA 8.333 Hz",
+      "kind": "ideal-service-reference",
+      "schedulerMode": "continuous-local-static-tdma",
+      "periodicRateHz": 8.3333333333333339,
+      "idealFlag": 1
+    },
+    {
+      "id": "dstr-native",
+      "label": "D-STR native acquisition",
+      "kind": "prior-art-native",
+      "schedulerMode": "continuous-dstr-replay",
+      "periodicRateHz": 50,
+      "idealFlag": 0
+    },
+    {
+      "id": "dstr-oracle-warm",
+      "label": "D-STR oracle-warm",
+      "kind": "oracle-cost-decomposition",
+      "schedulerMode": "continuous-dstr-replay",
+      "periodicRateHz": 50,
+      "idealFlag": 1
+    }
+  ],
+  "periodicArm": "periodic-static-tdma-p8p333",
+  "nativeArm": "dstr-native",
+  "warmArm": "dstr-oracle-warm",
+  "warmAssignment": "deterministic-centralized-greedy-conflict-coloring",
+  "maxFrames": 1200,
+  "initialDataSlots": 10,
+  "maxDataSlots": 64,
+  "collisionThreshold": 3,
+  "growthMargin": 3,
+  "shrinkThreshold": 5,
+  "failedShrinkTimeout": 30,
+  "shrinkBackoffExponentCap": 6,
+  "retentionProbability": 0.75,
+  "traceSeedOffset": 2.1092026E+7,
+  "safeGuardSec": 0.00054002160086403454,
+  "requiredIntegrationContracts": 13,
+  "expectedRuns": 180
+}

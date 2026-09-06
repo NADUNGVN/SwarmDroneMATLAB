@@ -1,0 +1,27 @@
+{
+  "algorithm": "configHash over sorted path/content records",
+  "sourceHash": 3.5903784847E+10,
+  "sourceLeaves": 38,
+  "fileCount": 19,
+  "files": [
+    "docs__EXP23V_FAST_REACTIVATION_DEVELOPMENT_RESULTS_2026-09-04.md",
+    "docs__EXP23V_WITNESS_CONFIRMED_REACTIVATION_DESIGN.md",
+    "docs__EXP23W_FAST_REACTIVATION_HOLDOUT_PLAN.md",
+    "experiments__exp23w_fast_reactivation_holdout.m",
+    "network__applySharedBackgroundToElcsWitnessTrace.m",
+    "network__buildElcsWitnessContinuousSchedule.m",
+    "network__simulateElcsWitnessScheduling.m",
+    "tests__test_elcs_dynamic_continuous_integration_contracts.m",
+    "tests__test_elcs_dynamic_revocation_contracts.m",
+    "tests__test_exp23w_fast_reactivation_analysis_contracts.m",
+    "tests__test_exp23w_fast_reactivation_holdout_contracts.m",
+    "utils__analyzeExp23wFastReactivation.m",
+    "utils__exp23uDynamicClosedLoopEnvelopeEmptyRow.m",
+    "utils__exp23wFastReactivationHoldoutRegistry.m",
+    "utils__holmAdjustP.m",
+    "utils__pairedBootstrapCI.m",
+    "utils__runExp23cWitnessClosedLoopCell.m",
+    "utils__runExp23uDynamicClosedLoopSeed.m",
+    "utils__writeTableAtomic.m"
+  ]
+}

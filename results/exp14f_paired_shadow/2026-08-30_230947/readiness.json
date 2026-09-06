@@ -1,0 +1,17 @@
+{
+  "analysisStatus": "DEVELOPMENT_MECHANISM_STUDY",
+  "confirmatoryClaimPermitted": false,
+  "thresholdTuningPermitted": false,
+  "generationMatchedPolicyLeadAvailable": true,
+  "perDecisionCausalLeadIdentified": false,
+  "fullPoliciesMayDivergeBeforeEvent": true,
+  "leadEstimand": "max(min(t_shadow,H)-t_actual,0)",
+  "censoringRetained": true,
+  "eventLevelIIDInferencePermitted": false,
+  "eventWindowEffectsAreAdditive": false,
+  "predictiveCertificateReady": false,
+  "nextRequiredStep": "pre-register a causal-at-decision predictor and validate it on a disjoint seed block",
+  "registryHash": 2.0176987E+7,
+  "registryLeaves": 25,
+  "createdAt": "2026-08-30 23:14:31"
+}

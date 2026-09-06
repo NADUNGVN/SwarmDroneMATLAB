@@ -1,0 +1,101 @@
+\section{Discussion}
+\label{sec:s2-discussion}
+
+\subsection{The useful unit is a mediated action, not an ACK}
+
+The focal replay changes the interpretation of ACK assistance. A standalone
+ACK is not a receiver update; it is an action on sender information state. Its
+receiver-side effect is mediated through subsequent DATA and contention. This
+is why positive confirmation lead coexists with adverse true AoI at N5 and
+adverse formation loss at N10. A decision rule based only on expected ACK
+delay, ACK success probability, or age reduction is structurally incomplete.
+It must also account for how the changed belief alters future update demand.
+
+The exact airtime identity makes the same point at policy level. Standalone
+feedback reduces offered load only when DATA airtime saved exceeds additional
+ACK airtime. Under N5 CSMA, the earlier EXP14E audit recovers only 49.1\% of
+direct ACK cost through DATA savings; at N10 it induces rather than saves DATA.
+Under ALOHA, DATA savings cover 247.4\% of direct ACK airtime. These signs are
+reproduced on new EXP14I traces and survive the formal within-seed interaction
+test in EXP16.
+
+\subsection{Why the MAC reverses feedback value}
+
+Carrier-sensing service and collision-only ALOHA turn the same confirmation
+into different future opportunity costs. Under CSMA, piggyback can transport
+cumulative feedback on already useful DATA while standalone frames consume
+service opportunities and add collision exposure. At N5/N10, that direct cost
+is not repaid. Under the tested ALOHA load, delayed confirmation sustains more
+redundant DATA and collisions; a fast standalone path reduces both enough to
+repay its own traffic.
+
+Equation~\eqref{eq:s2-mac-selector} is intentionally categorical. The data do
+not support a finely fitted state predictor: the focal study contains only 20
+independent decisions in each supported cell and heterogeneous signs. The
+selector instead encodes a mechanism visible before runtime and then receives
+an entirely disjoint directional validation followed by a matched factorial
+interaction test. Its exact alias gate also prevents a semantic
+sleight of hand: within a cell, the candidate is just the chosen fixed route.
+
+The EXP16 interaction is the strongest evidence for the MAC-conditioned
+mechanism, but its interpretation remains deliberately narrow. The configured
+CSMA/ALOHA factor changes abstract access semantics while holding the random
+loss realization fixed; it does not identify which detailed 802.11 feature
+would reproduce the effect. Moreover, adaptive and fixed-deadline hybrid are
+statistically unresolved under ALOHA. The evidence therefore favors retaining
+a standalone feedback path in that cell, not the universal optimality of the
+specific adaptive scheduler.
+
+\subsection{Why configured MAC type is not a sufficient selector}
+
+EXP17 distinguishes a mechanism from an operating policy. The base-cell
+interaction is reproducible, but background occupancy, burst severity, swarm
+size, and reverse-path asymmetry change both the opportunity cost of ACKs and
+the DATA actions that confirmation suppresses. In loaded cells the route
+effect can vanish because both routes approach the same unsafe service limit.
+At N10 the CSMA resource benefit may persist while the ALOHA control benefit
+does not. Reverse asymmetry can improve RMSE while increasing offered airtime.
+
+Consequently, the categorical rule in \eqref{eq:s2-mac-selector} is a compact
+description of the supported base regime, not a deployable selector. A future
+policy would require observable load/channel/size state and an independently
+preregistered validation. Reusing EXP17 to tune and then claim confirmation on
+the same contexts would erase the evidence boundary, so no post-hoc repair is
+performed here.
+
+\subsection{Support failure is a result}
+
+At N20 the selected adaptive policy already behaves almost piggyback-only.
+Only 11 of 300 development trajectories contain an eligible post-transient
+standalone decision. Repeatedly adding seeds or moving the analysis window
+would change the design after observing the support problem. Reporting the
+failure preserves the estimand: EXP14G identifies event-conditional effects
+only where the natural candidate process supplies decisions. Full-policy
+comparisons remain possible, but they do not manufacture a conditional ACK
+effect in unsupported states.
+
+\subsection{Communication and control claims remain distinct}
+
+Access scaling repairs catastrophic N20 contention, while the fixed load guard
+shows that a lower channel demand can still worsen control and safety. The
+formation result cannot therefore be inferred from a MAC metric alone.
+Conversely, lower RMSE does not prove communication efficiency: the initial
+Stressed default improves error while using more offered airtime than P10.
+The paper reports both axes and retains raw safety counts rather than collapse
+them into an unregistered scalar objective.
+
+\subsection{Relation to the theoretical results}
+
+Causal conservatism is an invariant: delayed or lost honest ACKs can make the
+sender pessimistic but not optimistically fresher than receiver truth. The age
+tail and formation ISS results are conditional on service minorization,
+bounded motion, and an unsaturated linear region. They explain how a credible
+service bound could propagate to safety, but the current generic Lyapunov bound
+is too conservative for a useful numerical probability. Simulation verifies
+protocol and mechanism contracts; it is not substituted for those theorem
+assumptions.
+
+The ACK-value proposition is similarly a decision envelope, not an empirical
+guarantee that ACK transmission is beneficial. EXP14G supplies pathwise focal
+contrasts on supported events and falsifies lead-as-value. It does not fit the
+benefit-rate envelope required for a universal state-conditional certificate.

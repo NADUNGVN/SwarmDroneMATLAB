@@ -1,0 +1,14 @@
+{
+  "version": "EXP18B-CAPACITY-SCREEN-HOLDOUT-v1",
+  "rows": 8000,
+  "primaryTests": 9,
+  "holmFamilySize": 9,
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.8218218E+7,
+  "familywiseAlpha": 0.05,
+  "screenIsNecessityClaim": false,
+  "populationSafetyClaimPermitted": false,
+  "universalOptimalityClaimPermitted": false,
+  "hardwareClaimPermitted": false,
+  "createdAt": "2026-08-31 17:01:34"
+}

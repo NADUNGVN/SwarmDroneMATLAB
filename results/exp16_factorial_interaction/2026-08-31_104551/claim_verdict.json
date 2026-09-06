@@ -1,0 +1,14 @@
+{
+  "status": "SUPPORTED_REGISTERED_FACTORIAL_INTERACTION",
+  "holmTestsRejected": 6,
+  "holmTestsTotal": 6,
+  "metricsSupported": 2,
+  "metricsTotal": 2,
+  "observedSafetyGuardsPassed": 2,
+  "observedSafetyGuardsTotal": 2,
+  "observedSafetyGuardOnly": true,
+  "populationSafetyClaimPermitted": false,
+  "generalMacSelectorClaimPermitted": false,
+  "namedMacClaimPermitted": false,
+  "hardwareClaimPermitted": false
+}

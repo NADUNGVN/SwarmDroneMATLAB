@@ -1,0 +1,77 @@
+{
+  "version": "EXP23C-ELCS-W-CLOSED-LOOP-INTEGRATION-v1",
+  "frozenDate": "2026-09-03",
+  "stage": "local-witness-closed-loop-integration-falsification",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "frontierComparisonPermitted": false,
+  "seeds": [
+    1.6059001E+7,
+    1.6059002E+7,
+    1.6059003E+7,
+    1.6059004E+7,
+    1.6059005E+7,
+    1.6059006E+7,
+    1.6059007E+7,
+    1.6059008E+7,
+    1.6059009E+7,
+    1.605901E+7,
+    1.6059011E+7,
+    1.6059012E+7,
+    1.6059013E+7,
+    1.6059014E+7,
+    1.6059015E+7,
+    1.6059016E+7,
+    1.6059017E+7,
+    1.6059018E+7,
+    1.6059019E+7,
+    1.605902E+7,
+    1.6059021E+7,
+    1.6059022E+7,
+    1.6059023E+7,
+    1.6059024E+7,
+    1.6059025E+7,
+    1.6059026E+7,
+    1.6059027E+7,
+    1.6059028E+7,
+    1.6059029E+7,
+    1.605903E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "maxFrames": 400,
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockResetHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "arms": [
+    {
+      "id": "elcs-w-zero-clock",
+      "label": "ELCS-W local witness / zero clock",
+      "kind": "clock-paired-reference",
+      "clockEnabled": false
+    },
+    {
+      "id": "elcs-w-affine-clock",
+      "label": "ELCS-W local witness / affine clock",
+      "kind": "candidate-clock-composition",
+      "clockEnabled": true
+    }
+  ],
+  "zeroArm": "elcs-w-zero-clock",
+  "clockArm": "elcs-w-affine-clock",
+  "expectedRuns": 120,
+  "requiredIntegrationContracts": 18
+}

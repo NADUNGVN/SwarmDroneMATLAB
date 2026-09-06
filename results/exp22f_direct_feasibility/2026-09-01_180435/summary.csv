@@ -1,0 +1,21 @@
+scenario,scenarioLabel,arm,methodLabel,ENGINE_FAMILY,PERIODIC_RATE_HZ,n,meanRMSE,meanTrueAoI,meanTotalOfferedUtil,meanChannelUtil,meanGoodputHz,meanManagementUtil
+n10-ring2-zero-loss,N10 ring2 zero-loss,dstr-native-mission-affine,D-STR native / mission affine clock,prior-art-dstr,50,30,0.0360798834991086,0.0426077305778799,0.757606400000019,0.493620331870817,164.511111111111,0.251980799999999
+n10-ring2-zero-loss,N10 ring2 zero-loss,elcs-f-mission-affine,ELCS-F / mission affine clock,candidate-elcs,50,30,0.0508632272032115,0.0653871667304502,0.376951466666665,0.27219043007178,92.7916666666667,0.0918186666666675
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p10,Periodic static TDMA 10 Hz,periodic-static,10,30,0.0564734163039416,0.0764714887102945,0.307199999999997,0.307199999999961,100,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p12p5,Periodic static TDMA 12.5 Hz,periodic-static,12.5,30,0.0501368467565799,0.0662661053705829,0.384000000000003,0.383999999999951,125,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p15,Periodic static TDMA 15 Hz,periodic-static,15,30,0.0468284069329386,0.0602752902155887,0.460800000000013,0.460799999999941,150,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p17p5,Periodic static TDMA 17.5 Hz,periodic-static,17.5,30,0.0435578025691421,0.0551870136497001,0.528426666666689,0.528426666666599,172.013888888889,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p20,Periodic static TDMA 20 Hz,periodic-static,20,30,0.0418996325080291,0.0522146957520092,0.578210133333362,0.578210133333259,188.219444444444,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p25,Periodic static TDMA 25 Hz,periodic-static,25,30,0.0380726287909854,0.0461829314963642,0.677691733333372,0.677691733333245,220.602777777778,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p5,Periodic static TDMA 5 Hz,periodic-static,5,30,0.0926460266183416,0.126565888506187,0.153599999999999,0.153599999999981,50,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-static-p8p33333,Periodic static TDMA 8.33333 Hz,periodic-static,8.33333333333333,30,0.0631249524403173,0.0864385763490242,0.255999999999998,0.255999999999968,83.3333333333333,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,dstr-native-mission-affine,D-STR native / mission affine clock,prior-art-dstr,50,30,0.0280939636352969,0.0362302377003869,0.384529066666663,0.371154708886556,107.280555555556,0.0547328
+n5-6dof-zero-loss,N5 6-DOF zero-loss,elcs-f-mission-affine,ELCS-F / mission affine clock,candidate-elcs,50,30,0.0301119656782675,0.0409657269209509,0.350788266666666,0.35065006158574,87.7805555555556,0.0810666666666681
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p10,Periodic static TDMA 10 Hz,periodic-static,10,30,0.041129350290581,0.0653772802653398,0.153599999999999,0.153599999999981,50,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p12p5,Periodic static TDMA 12.5 Hz,periodic-static,12.5,30,0.0364739718738646,0.0552194582642342,0.191999999999998,0.191999999999976,62.5,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p15,Periodic static TDMA 15 Hz,periodic-static,15,30,0.0337100054632107,0.049240464344942,0.230399999999998,0.230399999999971,75,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p17p5,Periodic static TDMA 17.5 Hz,periodic-static,17.5,30,0.0312768681817252,0.0439184632393588,0.268799999999997,0.268799999999966,87.5,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p20,Periodic static TDMA 20 Hz,periodic-static,20,30,0.030156620094988,0.0410182421227196,0.307199999999997,0.307199999999961,100,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p25,Periodic static TDMA 25 Hz,periodic-static,25,30,0.0276194647976299,0.035107241569928,0.384000000000003,0.383999999999951,125,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p5,Periodic static TDMA 5 Hz,periodic-static,5,30,0.0647069429140297,0.115649530127142,0.0767999999999997,0.0767999999999906,25,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-static-p8p33333,Periodic static TDMA 8.33333 Hz,periodic-static,8.33333333333333,30,0.0458327726860719,0.0754825870646764,0.127999999999999,0.127999999999984,41.6666666666667,0

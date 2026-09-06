@@ -1,0 +1,54 @@
+
+============================================================
+RUN  : exp23s_dynamic_revocation_kernel
+ID   : 2026-09-04_180028
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23s_dynamic_revocation_kernel\2026-09-04_180028
+WHEN : 2026-09-04 18:00:28
+============================================================
+
+  seeds  10 / 100; rows  80 / 800
+  seeds  20 / 100; rows 160 / 800
+  seeds  30 / 100; rows 240 / 800
+  seeds  40 / 100; rows 320 / 800
+  seeds  50 / 100; rows 400 / 800
+  seeds  60 / 100; rows 480 / 800
+  seeds  70 / 100; rows 560 / 800
+  seeds  80 / 100; rows 640 / 800
+  seeds  90 / 100; rows 720 / 800
+  seeds 100 / 100; rows 800 / 800
+
+EXP23S dynamic revocation-kernel gates
+  [PASS] registry_frozen                               hash 88210915 over 43 leaves
+  [PASS] matrix_complete_unique                        800/800 unique rows
+  [PASS] exact_matrix_coverage                         100 fresh seeds, N5/N10 and four channel conditions exact
+  [PASS] paired_absolute_realizations                  packet draws, dynamic graph, event and eligible frame are paired
+  [PASS] deterministic_reproduction                    repeated seed/cell is bit-identical
+  [PASS] dynamic_mode_exact                            every row executes one local version increment
+  [PASS] packet_format_and_mtu_exact                   maximum RESPONSE 46 bytes under 28/16+10e/24 format
+  [PASS] third_party_witness_stimulus                  revoker has third-party witness and nontrivial witness load
+  [PASS] positive_pre_event_state                      800/800 revokers scheduled immediately before event
+  [PASS] one_charged_revoke                            one 24-byte REVOKE attempt per lifecycle
+  [PASS] event_frame_local_suppression                 local suppression is effective in the REVOKE frame
+  [PASS] unsafe_window_suppression                     revoker never uses scheduled DATA during outside-supergraph edge
+  [PASS] dynamic_edge_transition_stimulus              within-edge add/remove plus unsafe same-color outside edge exercised
+  [PASS] scheduled_delivery_safety                     zero scheduled collision frames across dynamic graph sequences
+  [PASS] certificate_safety                            zero false-valid certified edge frames
+  [PASS] nonblackout_reacquisition_liveness            600/600 nonblackout rows reacquire
+  [PASS] old_fence_respected                           no scheduled reuse before captured old tuple fence
+  [PASS] response_blackout_stimulus                    permanent incident-witness RESPONSE blackout activates retry
+  [PASS] response_blackout_fail_silent                 missing reacquisition receipt never restores scheduled validity
+  [PASS] revoke_loss_safety_independence               delivered/lost REVOKE has identical local silence and reuse times
+  [PASS] loss_retry_stimulus                           joint-loss rows exercise cumulative retry and REVOKE erasure
+  [PASS] attempt_byte_recipient_accounting             CLAIM/RESPONSE/REVOKE attempts, bytes and recipients close
+  [PASS] absolute_control_bounds                       max attempt/byte ratios 0.146429/0.166351
+  [PASS] version_bound_revoke_rejection                stale, future, malformed and unauthenticated metadata is inert
+  [PASS] causal_nonpromotion_scope                     causal fixed-supergraph kernel only; no promotion or submission claim
+
+EXP23S DECISION: DYNAMIC_COHERENCE_REVOCATION_KERNEL_VALID
+
+============================================================
+DONE : exp23s_dynamic_revocation_kernel
+TIME : 14.7 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23s_dynamic_revocation_kernel\2026-09-04_180028
+============================================================

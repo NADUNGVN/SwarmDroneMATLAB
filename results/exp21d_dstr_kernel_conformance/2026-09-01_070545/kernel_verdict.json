@@ -1,0 +1,10 @@
+{
+  "status": "DSTR_KERNEL_CONFORMANCE_VALID",
+  "gatesPassed": 17,
+  "gatesTotal": 17,
+  "rows": 800,
+  "closedLoopPriorArtComparisonPermitted": true,
+  "newPolicyPromotionPermitted": false,
+  "submissionClaimPermitted": false,
+  "boundaryFailuresAreSourceClaims": false
+}

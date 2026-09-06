@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ag_fresh_radial_receiver_closure",
+  "runId": "2026-09-05_142942",
+  "startedAt": "2026-09-05 14:29:42",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh-seed one-sided radial receiver-closure confirmation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ag_fresh_radial_receiver_closure.m",
+  "finishedAt": "2026-09-05 14:34:20",
+  "elapsedSec": 278.1520451,
+  "elapsedText": "4 m 38 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

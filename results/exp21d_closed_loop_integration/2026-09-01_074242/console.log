@@ -1,0 +1,29 @@
+
+============================================================
+RUN  : exp21d_closed_loop_integration
+ID   : 2026-09-01_074242
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_closed_loop_integration\2026-09-01_074242
+WHEN : 2026-09-01 07:42:42
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+
+[Warning: Failed to automatically create a parallel pool with the default parallel environment. Running serially on the client instead. Fallback to serial execution will be removed in a future release. Error details:
+
+Error using parallel.internal.parpool.getOrCreateCurrentPool (line 16)
+Parallel pool failed to start with the following error. For more detailed information, validate the profile 'Processes' in the Cluster Profile Manager.
+
+Error in pctTryCreatePoolIfNecessary (line 20)
+    pool = parallel.internal.parpool.getOrCreateCurrentPool();
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in parallel_function (line 389)
+    [isPoolRunning, pool] = pctTryCreatePoolIfNecessary();
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in exp21d_closed_loop_integration (line 36)
+    parfor (q=1:numel(index),12)
+    ^
+Caused by:
+    Error using parallel.internal.pool.JobStateChecker>iThrowIfBadParallelJobStatus (line 95)
+    The parallel pool job errored with the following message: MATLAB worker shut down unexpectedly with status 1 during task execution.] 
+  groups  1-- 6 / 60; rows  18 / 180
+Starting parallel pool (parpool) using the 'Processes' profile ...

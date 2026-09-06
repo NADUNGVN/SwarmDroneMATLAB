@@ -1,0 +1,17 @@
+{
+  "experiment": "exp23k_horizon_scaled_development",
+  "runId": "2026-09-04_164602",
+  "startedAt": "2026-09-04 16:46:02",
+  "matlabVersion": "25.1.0.2943329 (R2025a)",
+  "matlabRelease": "2025a",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "",
+  "notes": "resumed frozen EXP23K checkpoint",
+  "finishedAt": "2026-09-04 16:48:09",
+  "elapsedSec": 0.828998,
+  "elapsedText": "0.8 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

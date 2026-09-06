@@ -1,0 +1,30 @@
+
+============================================================
+RUN  : exp23i_cumulative_closed_loop_target
+ID   : 2026-09-04_162852
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23i_cumulative_closed_loop_target\2026-09-04_162852
+WHEN : 2026-09-04 16:28:52
+============================================================
+
+  seeds  1-- 4 / 60; rows  12 / 180
+  seeds  5-- 8 / 60; rows  24 / 180
+  seeds  9--12 / 60; rows  36 / 180
+  seeds 13--16 / 60; rows  48 / 180
+  seeds 17--20 / 60; rows  60 / 180
+  seeds 21--24 / 60; rows  72 / 180
+  seeds 25--28 / 60; rows  84 / 180
+  seeds 29--32 / 60; rows  96 / 180
+  seeds 33--36 / 60; rows 108 / 180
+  seeds 37--40 / 60; rows 120 / 180
+  seeds 41--44 / 60; rows 132 / 180
+  seeds 45--48 / 60; rows 144 / 180
+  seeds 49--52 / 60; rows 156 / 180
+  seeds 53--56 / 60; rows 168 / 180
+  seeds 57--60 / 60; rows 180 / 180
+{Error using exp23i_cumulative_closed_loop_target>validationGates (line 300)
+exp23i: registry contract count differs from implemented gates.
+
+Error in exp23i_cumulative_closed_loop_target (line 51)
+gates=validationGates(T,R,registryHash,registryLeaves);
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 

@@ -1,0 +1,14 @@
+{
+  "status": "SUPPORTED_REGISTERED_MAC_SELECTOR",
+  "candidate": "mac-selective-scaled",
+  "holmTestsRejected": 6,
+  "holmTestsTotal": 6,
+  "primaryCellsSupported": 3,
+  "primaryCellsTotal": 3,
+  "exactAliasGatePassed": true,
+  "observedSafetyGuardOnly": true,
+  "populationSafetyClaimPermitted": false,
+  "n20CausalClaimPermitted": false,
+  "equivalenceClaimPermitted": false,
+  "universalMacClaimPermitted": false
+}

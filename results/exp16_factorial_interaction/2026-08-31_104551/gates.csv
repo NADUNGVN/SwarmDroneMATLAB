@@ -1,0 +1,15 @@
+gate,passed,detail
+registry_contract,1,hash 89775929 over 56 leaves
+matrix_completeness,1,600 frozen runs
+unique_seed_arms,1,one row per seed/arm
+complete_matched_groups,1,all six arms occur once per seed
+finite_eligible_outputs,1,all nondivergent outcomes are finite
+causal_conservatism,1,0 protocol violations
+bounded_memory,1,max queue=2 max history=32
+physical_accounting,1,terminal accounting and busy union close
+cross_mac_absolute_trace,1,one trace/channel/estimator realization per seed across all arms
+factor_route_semantics,1,MAC and feedback-route factors match their method contracts
+ack_route_actions,1,standalone/adaptive actions occur only in registered routes
+matched_access_scaling,1,configured and actual pAccess equal 1/N under both MACs
+primary_factorial_flags,1,only the four registered 2-by-2 cells enter primary estimands
+divergence_accounting,1,0 divergences retained

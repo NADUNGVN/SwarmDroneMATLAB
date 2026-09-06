@@ -1,0 +1,8 @@
+gate,passed,detail
+registry_and_invalid_parent_retained,1,registry 27894330/28 leaves; EXP23AL retained at 9/10
+other_parent_gates_retained,1,all nine non-sentinel EXP23AL gates remain passed
+local_only_nan_sentinel,1,one initiator-local RESPONSE has NaN route hash and zero radio cost
+semantic_recipient_identity,1,25/25 semantic recipient hashes reproduce exactly
+nonlocal_plan_and_reliability_identity,1,24 nonlocal routed plans/certificates exact; local route undefined
+semantic_delivery_and_accounting_exact,1,attempt range 0--30; integer byte/airtime exact
+primitive_scope_only,1,routing primitive closes; closed-loop and renewal claims stay false

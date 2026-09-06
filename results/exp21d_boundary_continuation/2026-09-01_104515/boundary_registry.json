@@ -1,0 +1,120 @@
+{
+  "version": "EXP21D-BOUNDARY-CONTINUATION-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "prior-art-boundary-falsification",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "clockContinuationPermitted": false,
+  "seeds": [
+    1.6037001E+7,
+    1.6037002E+7,
+    1.6037003E+7,
+    1.6037004E+7,
+    1.6037005E+7,
+    1.6037006E+7,
+    1.6037007E+7,
+    1.6037008E+7,
+    1.6037009E+7,
+    1.603701E+7,
+    1.6037011E+7,
+    1.6037012E+7,
+    1.6037013E+7,
+    1.6037014E+7,
+    1.6037015E+7,
+    1.6037016E+7,
+    1.6037017E+7,
+    1.6037018E+7,
+    1.6037019E+7,
+    1.603702E+7,
+    1.6037021E+7,
+    1.6037022E+7,
+    1.6037023E+7,
+    1.6037024E+7,
+    1.6037025E+7,
+    1.6037026E+7,
+    1.6037027E+7,
+    1.6037028E+7,
+    1.6037029E+7,
+    1.603703E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof",
+      "label": "N5 6-DOF",
+      "closedLoopCell": "n5-6dof-zero-loss"
+    },
+    {
+      "id": "n10-ring2",
+      "label": "N10 ring2",
+      "closedLoopCell": "n10-ring2-zero-loss"
+    }
+  ],
+  "arms": [
+    {
+      "id": "zero-native",
+      "label": "D-STR native zero loss",
+      "condition": "zero",
+      "kind": "prior-art-native",
+      "warm": false
+    },
+    {
+      "id": "zero-warm",
+      "label": "Oracle-warm zero loss",
+      "condition": "zero",
+      "kind": "oracle-cost-decomposition",
+      "warm": true
+    },
+    {
+      "id": "beacon-loss-native",
+      "label": "D-STR native DATA erasure 0.05",
+      "condition": "beacon-loss",
+      "kind": "prior-art-boundary",
+      "warm": false
+    },
+    {
+      "id": "beacon-loss-warm",
+      "label": "Oracle-warm DATA erasure 0.05",
+      "condition": "beacon-loss",
+      "kind": "oracle-loss-decomposition",
+      "warm": true
+    },
+    {
+      "id": "restricted-management-native",
+      "label": "D-STR restricted management reach",
+      "condition": "restricted-management",
+      "kind": "logical-alignment-boundary",
+      "warm": false
+    },
+    {
+      "id": "churn-rejoin-native",
+      "label": "D-STR local state loss/rejoin",
+      "condition": "churn-rejoin",
+      "kind": "prior-art-boundary",
+      "warm": false
+    }
+  ],
+  "zeroNativeArm": "zero-native",
+  "zeroWarmArm": "zero-warm",
+  "lossNativeArm": "beacon-loss-native",
+  "lossWarmArm": "beacon-loss-warm",
+  "restrictedArm": "restricted-management-native",
+  "churnArm": "churn-rejoin-native",
+  "maxFrames": 1200,
+  "initialDataSlots": 10,
+  "maxDataSlots": 64,
+  "collisionThreshold": 3,
+  "growthMargin": 3,
+  "shrinkThreshold": 5,
+  "failedShrinkTimeout": 30,
+  "shrinkBackoffExponentCap": 6,
+  "retentionProbability": 0.75,
+  "beaconErasureProbability": 0.05,
+  "churnFrame": 60,
+  "churnNode": 2,
+  "traceSeedOffset": 2.1092026E+7,
+  "safeGuardSec": 0.00054002160086403454,
+  "periodicRateHz": 50,
+  "expectedRuns": 360,
+  "requiredIntegrationContracts": 15
+}

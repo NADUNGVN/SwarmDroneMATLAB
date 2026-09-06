@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23y_migration_common_phy",
+  "runId": "2026-09-04_233623",
+  "startedAt": "2026-09-04 23:36:23",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Randomized local migration common-PHY and affine-clock validation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23y_migration_common_phy.m",
+  "finishedAt": "2026-09-04 23:36:43",
+  "elapsedSec": 19.5935429,
+  "elapsedText": "19.6 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

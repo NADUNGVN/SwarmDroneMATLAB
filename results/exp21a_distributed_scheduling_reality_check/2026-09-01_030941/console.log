@@ -1,0 +1,66 @@
+
+============================================================
+RUN  : exp21a_distributed_scheduling_reality_check
+ID   : 2026-09-01_030941
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21a_distributed_scheduling_reality_check\2026-09-01_030941
+WHEN : 2026-09-01 03:09:41
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1--  8 / 240; rows   56 / 1680
+  groups   9-- 16 / 240; rows  112 / 1680
+  groups  17-- 24 / 240; rows  168 / 1680
+  groups  25-- 32 / 240; rows  224 / 1680
+  groups  33-- 40 / 240; rows  280 / 1680
+  groups  41-- 48 / 240; rows  336 / 1680
+  groups  49-- 56 / 240; rows  392 / 1680
+  groups  57-- 64 / 240; rows  448 / 1680
+  groups  65-- 72 / 240; rows  504 / 1680
+  groups  73-- 80 / 240; rows  560 / 1680
+  groups  81-- 88 / 240; rows  616 / 1680
+  groups  89-- 96 / 240; rows  672 / 1680
+  groups  97--104 / 240; rows  728 / 1680
+  groups 105--112 / 240; rows  784 / 1680
+  groups 113--120 / 240; rows  840 / 1680
+  groups 121--128 / 240; rows  896 / 1680
+  groups 129--136 / 240; rows  952 / 1680
+  groups 137--144 / 240; rows 1008 / 1680
+  groups 145--152 / 240; rows 1064 / 1680
+  groups 153--160 / 240; rows 1120 / 1680
+  groups 161--168 / 240; rows 1176 / 1680
+  groups 169--176 / 240; rows 1232 / 1680
+  groups 177--184 / 240; rows 1288 / 1680
+  groups 185--192 / 240; rows 1344 / 1680
+  groups 193--200 / 240; rows 1400 / 1680
+  groups 201--208 / 240; rows 1456 / 1680
+  groups 209--216 / 240; rows 1512 / 1680
+  groups 217--224 / 240; rows 1568 / 1680
+  groups 225--232 / 240; rows 1624 / 1680
+  groups 233--240 / 240; rows 1680 / 1680
+
+EXP21A integrity gates
+  [PASS] registry_recorded                          hash 126003573 over 141 leaves
+  [PASS] matrix_complete_unique                     1680/1680 unique rows
+  [PASS] exact_seeds                                all and only 30 declared seeds
+  [PASS] exact_cell_arm_coverage                    8 cells and 7 arms only
+  [PASS] paired_absolute_traces                     channel, estimator, proposal, control-loss and clock hashes pair
+  [PASS] causality_and_no_future_reads              0 protocol violations; 0 future reads
+  [PASS] bounded_data_memory                        max queue/history 1/32
+  [PASS] data_ack_terminal_accounting               DATA and ACK recipient attempts close including terminal frames
+  [PASS] control_recipient_accounting               control success plus loss equals attempts
+  [PASS] named_mechanisms_activated                 reservation, local TDMA, ideal TDMA, and Z-MAC paths exercised
+  [PASS] control_airtime_positive_and_charged       distributed control blocks DATA and increases charged utilization
+  [PASS] local_schedule_information_only            local/static and reservation arms do not read receiver truth
+  [PASS] clock_impairment_contract                  zero in nominal and bounded nonzero in clock cells
+  [PASS] failures_retained_finite_cost              345 unsafe and 0 diverged runs retained
+  [PASS] frozen_source_snapshot_recorded            plan, registry, mechanism, runner, analyzer and tests copied
+
+EXP21A DEVELOPMENT VERDICT: SCHEDULING_GAIN_FRAGILE
+
+============================================================
+DONE : exp21a_distributed_scheduling_reality_check
+TIME : 15 m 03 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21a_distributed_scheduling_reality_check\2026-09-01_030941
+============================================================

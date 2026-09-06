@@ -1,0 +1,4 @@
+cell,continuousPass,candidateFailures,accessFailures,observedSafetyGuard,cellClaimSupported
+n5-csma,1,0,0,1,1
+n10-ring2,1,0,0,1,1
+n20-ring2,1,1,5,1,1

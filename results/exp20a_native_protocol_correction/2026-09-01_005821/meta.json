@@ -1,0 +1,18 @@
+{
+  "experiment": "exp20a_native_protocol_correction",
+  "runId": "2026-09-01_005821",
+  "startedAt": "2026-09-01 00:58:22",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "",
+  "notes": "resumed EXP20A native protocol correction",
+  "sourceFile": "",
+  "finishedAt": "2026-09-01 02:13:56",
+  "elapsedSec": 4013.3686912,
+  "elapsedText": "1 h 07 m",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,59 @@
+
+============================================================
+RUN  : exp22i_elcs_event_driven_order_repair
+ID   : 2026-09-01_192508
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22i_elcs_event_driven_order_repair\2026-09-01_192508
+WHEN : 2026-09-01 19:25:09
+============================================================
+
+  groups   1-- 10 / 200; rows   70 / 1400
+  groups  11-- 20 / 200; rows  140 / 1400
+  groups  21-- 30 / 200; rows  210 / 1400
+  groups  31-- 40 / 200; rows  280 / 1400
+  groups  41-- 50 / 200; rows  350 / 1400
+  groups  51-- 60 / 200; rows  420 / 1400
+  groups  61-- 70 / 200; rows  490 / 1400
+  groups  71-- 80 / 200; rows  560 / 1400
+  groups  81-- 90 / 200; rows  630 / 1400
+  groups  91--100 / 200; rows  700 / 1400
+  groups 101--110 / 200; rows  770 / 1400
+  groups 111--120 / 200; rows  840 / 1400
+  groups 121--130 / 200; rows  910 / 1400
+  groups 131--140 / 200; rows  980 / 1400
+  groups 141--150 / 200; rows 1050 / 1400
+  groups 151--160 / 200; rows 1120 / 1400
+  groups 161--170 / 200; rows 1190 / 1400
+  groups 171--180 / 200; rows 1260 / 1400
+  groups 181--190 / 200; rows 1330 / 1400
+  groups 191--200 / 200; rows 1400 / 1400
+
+EXP22-K ELCS-F kernel gates
+  [PASS] registry_frozen                             hash 109430786 over 68 leaves
+  [PASS] matrix_complete_unique                      1400/1400 unique rows
+  [PASS] exact_seed_cell_condition_coverage          100 fresh seeds, two cells and seven conditions exact
+  [PASS] paired_absolute_base_traces                 all conditions share one absolute trace per seed/cell
+  [PASS] data_erasure_schedule_separation            zero and DATA-erasure rows have identical schedule-state hashes
+  [PASS] zero_loss_certification                     200/200 zero-loss rows fully certified
+  [PASS] scheduled_region_collision_free             0 scheduled collision frames
+  [PASS] fallback_attempt_cap                        maximum observed per node/frame 1 (cap 1)
+  [PASS] edge_lease_safety_invariant                 0 false-valid, 0 lock violations
+  [PASS] directed_grant_loss_is_conservative         200/200 selected clients remain uncertified
+  [PASS] state_loss_recovery                         200/200 state-loss rows recovered
+  [PASS] owner_reconfiguration_fenced                200/200 reconfigurations applied after fence
+  [PASS] owner_reconfiguration_recovers              200/200 terminally certified; 600 automatic recolors
+  [PASS] recipient_and_airtime_accounting            management, scheduled and fallback partitions and utilization close
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] event_driven_request_discipline             0 GRANTs without request; STATUS partition residual 0
+  [PASS] analytical_zero_loss_control_bound          maximum observed/bound ratio 0.982967
+  [PASS] zero_loss_acquisition_deadline              maximum first-certification excess 0 frames
+  [PASS] all_boundary_outcomes_retained              400 noncertified terminals, 23684 fallback collision frames retained
+  [PASS] kernel_scope_only                           no tuning, closed-loop claim, promotion or submission decision
+
+EXP22-K VERDICT: ELCS_F_KERNEL_VALID
+
+============================================================
+DONE : exp22i_elcs_event_driven_order_repair
+TIME : 9 m 37 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22i_elcs_event_driven_order_repair\2026-09-01_192508
+============================================================

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ad_receiver_lifted_closure_kernel",
+  "runId": "2026-09-05_081510",
+  "startedAt": "2026-09-05 08:15:11",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Receiver-lifted dependency closure kernel falsification.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ad_receiver_lifted_closure_kernel.m",
+  "finishedAt": "2026-09-05 08:15:35",
+  "elapsedSec": 24.5131282,
+  "elapsedText": "24.5 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

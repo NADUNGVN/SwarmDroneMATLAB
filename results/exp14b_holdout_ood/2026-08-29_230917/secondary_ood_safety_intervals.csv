@@ -1,0 +1,41 @@
+oodPoint,contrast,armA,armB,failuresA,totalA,rateA,loA,hiA,failuresB,totalB,rateB,loB,hiB
+N10 ring2,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N10 ring2,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N10 ring2,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,1,100,0.01,0.00176743206414065,0.0544861961787053
+N10 ring2,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N10 ring2,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N20 ring2,hybrid-vs-p10,proposed-hybrid,periodic-p10,100,100,1,0.963006501793014,1,100,100,1,0.963006501793014,1
+N20 ring2,hybrid-vs-p20,proposed-hybrid,periodic-p20,100,100,1,0.963006501793014,1,100,100,1,0.963006501793014,1
+N20 ring2,hybrid-vs-state,proposed-hybrid,state-default,100,100,1,0.963006501793014,1,5,100,0.05,0.021543679154368,0.111750469231919
+N20 ring2,hybrid-vs-belief,proposed-hybrid,belief-default,100,100,1,0.963006501793014,1,100,100,1,0.963006501793014,1
+N20 ring2,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,100,100,1,0.963006501793014,1,100,100,1,0.963006501793014,1
+N10 sparse4,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N10 sparse4,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N10 sparse4,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,2,100,0.02,0.00550196755016234,0.0700117907285439
+N10 sparse4,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+N10 sparse4,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+30% background busy,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,13,100,0.13,0.0775716742724051,0.209803514400764
+30% background busy,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+30% background busy,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,94,100,0.94,0.875231845541041,0.972213876036812
+30% background busy,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+30% background busy,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+hidden terminals,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,16,100,0.16,0.100952884888048,0.244202693892702
+hidden terminals,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+hidden terminals,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+hidden terminals,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+hidden terminals,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+reverse-asymmetric ACK,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+reverse-asymmetric ACK,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+reverse-asymmetric ACK,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+reverse-asymmetric ACK,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+reverse-asymmetric ACK,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+C3 estimator,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+C3 estimator,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+C3 estimator,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+C3 estimator,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+C3 estimator,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+ALOHA p=0.2,hybrid-vs-p10,proposed-hybrid,periodic-p10,0,100,0,0,0.0369934982069857,100,100,1,0.963006501793014,1
+ALOHA p=0.2,hybrid-vs-p20,proposed-hybrid,periodic-p20,0,100,0,0,0.0369934982069857,95,100,0.95,0.888249530768081,0.978456320845632
+ALOHA p=0.2,hybrid-vs-state,proposed-hybrid,state-default,0,100,0,0,0.0369934982069857,6,100,0.06,0.0277861239631882,0.124768154458959
+ALOHA p=0.2,hybrid-vs-belief,proposed-hybrid,belief-default,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+ALOHA p=0.2,piggyback-vs-hybrid,proposed-piggyback,proposed-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857

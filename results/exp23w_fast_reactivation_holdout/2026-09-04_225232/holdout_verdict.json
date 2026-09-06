@@ -1,0 +1,14 @@
+{
+  "status": "FAST_REACTIVATION_FIXED_GRAPH_CONFIRMED",
+  "gatesPassed": 21,
+  "gatesTotal": 21,
+  "rows": 800,
+  "primaryTestsRejected": 6,
+  "primaryTestsTotal": 6,
+  "frontierGuardPassed": true,
+  "freshSeedEvidence": true,
+  "fixedGraphOnly": true,
+  "graphMigrationValidated": false,
+  "submissionClaimPermitted": false,
+  "next": "online_union_graph_migration_validation"
+}

@@ -1,0 +1,80 @@
+{
+  "version": "EXP23AK-ROUTED-INTEGER-ACCOUNTING-v1",
+  "frozenDate": "2026-09-06",
+  "stage": "routed-management-integer-accounting-confirmation",
+  "parentRun": "2026-09-06_070738",
+  "parentStatus": "ROUTED_MANAGEMENT_PRIMITIVE_DIAGNOSTIC_INVALID",
+  "parentGatesPassed": 15,
+  "parentGatesTotal": 17,
+  "parentFailedGates": [
+    "integer_bytes_and_derived_airtime",
+    "semantic_routes_reliable_and_accounted"
+  ],
+  "parentRegistryVersion": "EXP23AJ-ROUTED-MANAGEMENT-DIAGNOSTIC-v1",
+  "repairedSimulatorVersion": "REPEATED-HOP-MANAGEMENT-FLOOD-REPLAY-v2",
+  "swarmSizes": [
+    5,
+    10,
+    20
+  ],
+  "interferenceModes": [
+    "spatial-reuse-lower-bound",
+    "complete-interference-upper-bound"
+  ],
+  "linkErasureProbability": [
+    0.05,
+    0.2,
+    0.3
+  ],
+  "maximumLogicalPacketFailure": 0.001,
+  "maxRepetitionsPerHop": 20,
+  "phyRateBps": 250000,
+  "safeGuardSec": 0.0029001160046401857,
+  "maximumPacketBytes": 96,
+  "packetBytes": [
+    24,
+    28,
+    32,
+    40,
+    48,
+    56,
+    72,
+    96
+  ],
+  "diagnosticWitnessSeed": 1.6094113E+7,
+  "semanticLinkErasureProbability": 0.2,
+  "randomReplayRepetitionsPerHop": 1,
+  "randomReplayTrialsPerCell": 2000,
+  "randomReplaySeeds": [
+    1.6094601E+7,
+    1.6094602E+7,
+    1.6094603E+7,
+    1.6094604E+7,
+    1.6094605E+7,
+    1.6094606E+7,
+    1.6094607E+7,
+    1.6094608E+7,
+    1.6094609E+7,
+    1.609461E+7,
+    1.6094611E+7,
+    1.6094612E+7,
+    1.6094613E+7,
+    1.6094614E+7,
+    1.6094615E+7,
+    1.6094616E+7,
+    1.6094617E+7,
+    1.6094618E+7
+  ],
+  "expectedStructuralRows": 210,
+  "expectedSemanticRows": 25,
+  "expectedRandomCells": 18,
+  "expectedRandomRows": 36000,
+  "requiredValidationContracts": 10,
+  "developmentOnly": true,
+  "confirmatoryEvidence": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false
+}

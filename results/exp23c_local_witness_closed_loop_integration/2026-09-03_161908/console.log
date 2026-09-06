@@ -1,0 +1,52 @@
+
+============================================================
+RUN  : exp23c_local_witness_closed_loop_integration
+ID   : 2026-09-03_161908
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23c_local_witness_closed_loop_integration\2026-09-03_161908
+WHEN : 2026-09-03 16:19:08
+============================================================
+
+  groups  1-- 4 / 60; rows   8 / 120
+  groups  5-- 8 / 60; rows  16 / 120
+  groups  9--12 / 60; rows  24 / 120
+  groups 13--16 / 60; rows  32 / 120
+  groups 17--20 / 60; rows  40 / 120
+  groups 21--24 / 60; rows  48 / 120
+  groups 25--28 / 60; rows  56 / 120
+  groups 29--32 / 60; rows  64 / 120
+  groups 33--36 / 60; rows  72 / 120
+  groups 37--40 / 60; rows  80 / 120
+  groups 41--44 / 60; rows  88 / 120
+  groups 45--48 / 60; rows  96 / 120
+  groups 49--52 / 60; rows 104 / 120
+  groups 53--56 / 60; rows 112 / 120
+  groups 57--60 / 60; rows 120 / 120
+
+EXP23C ELCS-W closed-loop integration gates
+  [PASS] registry_frozen                             hash 36192552 over 32 leaves
+  [PASS] matrix_complete_unique                      120/120 unique rows
+  [PASS] exact_seed_cell_arm_coverage                30 fresh seeds, two cells and two arms exact
+  [PASS] paired_absolute_realizations                channel, estimator, witness kernel and logical opportunities paired
+  [PASS] one_hop_witness_cover                       1260 hidden conflict-edge instances; max witness load 8
+  [PASS] clock_impairment_declared                   only affine arm consumes the paired bounded clock realization
+  [PASS] affine_clock_and_guard_certificate          max residual 4.44e-16 s; min gap 0.000352 s
+  [PASS] witness_kernel_safety                       0 false-valid, 0 scheduled-collision, 0 unsupported cert
+  [PASS] zero_loss_renewal_contract                  max retry 0; max attempt/byte ratios 0.077500/0.077500
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] all_elcs_w_opportunities_served             0 skipped opportunities
+  [PASS] exact_data_outcome_replay                   success, erasure and collision masks match the witness schedule
+  [PASS] variable_payload_management_accounting      max byte-to-airtime residual 5.55e-17 s
+  [PASS] cross_plane_nonoverlap                      0 overlap witnesses
+  [PASS] recipient_and_airtime_accounting            recipient partition and DATA/ACK/control utilization close
+  [PASS] protocol_invariants                         0 invariant violations
+  [PASS] all_failures_retained                       0 unsafe, 0 divergent and 0 uncertified retained
+  [PASS] integration_scope_only                      no tuning, promotion, frontier claim or submission decision
+
+EXP23C VERDICT: ELCS_W_CLOSED_LOOP_VALID
+
+============================================================
+DONE : exp23c_local_witness_closed_loop_integration
+TIME : 2 m 29 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23c_local_witness_closed_loop_integration\2026-09-03_161908
+============================================================

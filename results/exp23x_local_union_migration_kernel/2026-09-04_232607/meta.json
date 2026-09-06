@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23x_local_union_migration_kernel",
+  "runId": "2026-09-04_232607",
+  "startedAt": "2026-09-04 23:26:07",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Randomized local union-graph migration kernel falsification.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23x_local_union_migration_kernel.m",
+  "finishedAt": "2026-09-04 23:26:21",
+  "elapsedSec": 14.0367708,
+  "elapsedText": "14.0 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

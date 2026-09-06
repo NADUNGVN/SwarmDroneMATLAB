@@ -1,0 +1,128 @@
+{
+  "version": "EXP23Y-MIGRATION-COMMON-PHY-v1",
+  "frozenDate": "2026-09-04",
+  "stage": "local-union-migration-common-phy-validation",
+  "parentKernelRun": "2026-09-04_232823",
+  "parentKernelStatus": "LOCAL_UNION_MIGRATION_KERNEL_VALID",
+  "seeds": [
+    1.6085001E+7,
+    1.6085002E+7,
+    1.6085003E+7,
+    1.6085004E+7,
+    1.6085005E+7,
+    1.6085006E+7,
+    1.6085007E+7,
+    1.6085008E+7,
+    1.6085009E+7,
+    1.608501E+7,
+    1.6085011E+7,
+    1.6085012E+7,
+    1.6085013E+7,
+    1.6085014E+7,
+    1.6085015E+7,
+    1.6085016E+7,
+    1.6085017E+7,
+    1.6085018E+7,
+    1.6085019E+7,
+    1.608502E+7,
+    1.6085021E+7,
+    1.6085022E+7,
+    1.6085023E+7,
+    1.6085024E+7,
+    1.6085025E+7,
+    1.6085026E+7,
+    1.6085027E+7,
+    1.6085028E+7,
+    1.6085029E+7,
+    1.608503E+7,
+    1.6085031E+7,
+    1.6085032E+7,
+    1.6085033E+7,
+    1.6085034E+7,
+    1.6085035E+7,
+    1.6085036E+7,
+    1.6085037E+7,
+    1.6085038E+7,
+    1.6085039E+7,
+    1.608504E+7,
+    1.6085041E+7,
+    1.6085042E+7,
+    1.6085043E+7,
+    1.6085044E+7,
+    1.6085045E+7,
+    1.6085046E+7,
+    1.6085047E+7,
+    1.6085048E+7,
+    1.6085049E+7,
+    1.608505E+7
+  ],
+  "swarmSizes": [
+    5,
+    10,
+    20
+  ],
+  "cases": [
+    {
+      "id": "zero-loss-valid",
+      "kind": "valid",
+      "erasureProbability": 0
+    },
+    {
+      "id": "iid20-valid",
+      "kind": "valid",
+      "erasureProbability": 0.2
+    },
+    {
+      "id": "iid40-valid",
+      "kind": "valid",
+      "erasureProbability": 0.4
+    },
+    {
+      "id": "revoke-blackout",
+      "kind": "revoke-blackout",
+      "erasureProbability": 0.2
+    },
+    {
+      "id": "response-blackout",
+      "kind": "response-blackout",
+      "erasureProbability": 0.2
+    },
+    {
+      "id": "incomplete-union",
+      "kind": "incomplete-union",
+      "erasureProbability": 0.2
+    }
+  ],
+  "clockArms": [
+    {
+      "id": "zero-clock",
+      "impaired": false
+    },
+    {
+      "id": "affine-clock",
+      "impaired": true
+    }
+  ],
+  "maxFrames": 60,
+  "transitionFrame": 8,
+  "newGraphActivationFrame": 9,
+  "eligibleFrame": 12,
+  "lockProofRepeatFrames": 20,
+  "phyRateBps": 250000,
+  "dataBytes": 64,
+  "claimBytes": 28,
+  "certificateHeaderBytes": 16,
+  "certificateEntryBytes": 10,
+  "revokeBytes": 24,
+  "maxControlPacketBytes": 96,
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockLeadTimeSec": 0.01,
+  "clockResetHorizonSec": 30,
+  "safeGuardSec": 0.0029001160046401857,
+  "requiredValidationContracts": 18,
+  "freshSeedEvidence": false,
+  "closedLoopClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "expectedRuns": 1800
+}

@@ -1,0 +1,12 @@
+{
+  "status": "RADIAL_CONTRACT_REPAIR_SUPPORTED",
+  "rows": 100,
+  "parentExp23afStatus": "ONLINE_SWEPT_RECEIVER_CLOSURE_INVALID",
+  "posthocDiagnosis": true,
+  "registeredConfirmation": false,
+  "maximumProtectedVectorRatio": 1.1667017086992373,
+  "maximumProtectedRadialRatio": 0.78990275240672214,
+  "minimumProtectedOmittedMargin": 0.13496694291225553,
+  "submissionClaimPermitted": false,
+  "next": "preregister_fresh_seed_radial_contract_validation"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "gatesPassed": 11,
+  "gatesTotal": 11,
+  "totalRuns": 10500,
+  "performanceClaimGate": "NONE",
+  "negativeResultsRetained": true,
+  "configurationChangePermitted": false,
+  "accountingAmendment": "terminal right-censoring; no simulation rerun"
+}

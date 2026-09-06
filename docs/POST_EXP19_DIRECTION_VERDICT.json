@@ -1,0 +1,64 @@
+{
+  "audit_date": "2026-08-31",
+  "decision": "DO_NOT_OPEN_EXP20_AS_CURRENTLY_FRAMED",
+  "current_framing": "causal implementable contention-to-scheduled access using local load/service observations",
+  "generic_hybrid_mac_novelty": false,
+  "generic_dynamic_uav_tdma_novelty": false,
+  "generic_semantic_distributed_mac_novelty": false,
+  "ack_belief_semantic_mac_novelty": false,
+  "semantic_scheduling_headroom_supported_by_exp19a": false,
+  "conditional_residual_gap": {
+    "status": "SCOPED_NOT_PROVEN",
+    "statement": "Distributed broadcast medium access for continuous-state multi-agent control under delayed lossy non-FIFO private per-receiver feedback, without a common gateway or public ACK/NACK, with charged coordination overhead and closed-loop safety outcomes.",
+    "closest_conflicts": [
+      "10.1109/TON.2025.3629535",
+      "arXiv:2508.19141",
+      "10.23919/IFIPNetworking62109.2024.10619823",
+      "arXiv:2202.00919",
+      "10.1109/ACCESS.2024.3381859"
+    ]
+  },
+  "next_study": {
+    "id": "EXP20A_PRIOR_ART_BASELINE_CLOSURE",
+    "type": "development_falsification",
+    "new_candidate_optimization_allowed": false,
+    "mandatory_baselines": [
+      "current_causal_v3_frame_piggyback",
+      "periodic_tdma_frontier",
+      "collision_free_round_robin",
+      "dtsa_kinematic_priority",
+      "delta_native_public_feedback",
+      "delta_private_delayed_feedback_projection",
+      "chen_age_gain_thinning",
+      "zmac_like_hybrid_access",
+      "exp19a_oracles"
+    ],
+    "second_stage_baseline_if_positive": "aydin_full_distributed_stdma",
+    "primary_contrast": "public_common_feedback_vs_private_delayed_multi_receiver_feedback",
+    "stop_conditions": [
+      "periodic_tdma_or_dtsa_explains_closed_loop_frontier",
+      "delta_or_age_gain_matches_current_mechanism_under_equal_information_and_charged_airtime"
+    ],
+    "go_conditions": [
+      "private_feedback_materially_degrades_public_feedback_semantic_mac",
+      "current_ack_confirmed_memory_retains_reproducible_closed_loop_advantage",
+      "periodic_tdma_and_dtsa_do_not_reproduce_advantage_at_matched_airtime",
+      "effect_survives_charged_control_plane_overhead"
+    ]
+  },
+  "hardware": {
+    "execute_now": false,
+    "likely_required_if_branch_survives": true,
+    "reason": "closest UAV TDMA prior art already includes Crazyflie, COTS, or semi-physical validation"
+  },
+  "bibliographic_findings": [
+    {
+      "key": "munari2025feedback",
+      "stored_doi": "10.1109/TCOMM.2025.3548035",
+      "correct_doi": "10.1109/TCOMM.2025.3583639",
+      "status": "RECORDED_NOT_EDITED_RESEARCH_FIRST_RULE"
+    }
+  ],
+  "manuscript_modified": false
+}
+

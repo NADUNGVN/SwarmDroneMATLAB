@@ -1,0 +1,18 @@
+{
+  "experiment": "exp14e_preregistered_holdout",
+  "runId": "2026-08-30_213957",
+  "startedAt": "2026-08-30 21:39:58",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed selected adaptive-ACK/scaled-access holdout; Holm primary family; ALOHA mandatory boundary.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp14e_preregistered_holdout.m",
+  "finishedAt": "2026-08-30 22:03:39",
+  "elapsedSec": 1421.1480015,
+  "elapsedText": "23 m 41 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

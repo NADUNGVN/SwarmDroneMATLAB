@@ -1,0 +1,11 @@
+{
+  "status": "BOUNDED_RETRY_DEVELOPMENT_FEASIBLE",
+  "gatesPassed": 24,
+  "gatesTotal": 24,
+  "rows": 120,
+  "developmentOnly": true,
+  "geometryCoupledToPlant": false,
+  "freshSeedEvidence": false,
+  "submissionClaimPermitted": false,
+  "next": "online_state_tube_coupling"
+}

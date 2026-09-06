@@ -1,0 +1,14 @@
+{
+  "classification": "reporting-only literal correction",
+  "recordedDate": "2026-09-01",
+  "simulationRerun": false,
+  "scientificRegistryChanged": false,
+  "seedsChanged": false,
+  "cellsChanged": false,
+  "armsChanged": false,
+  "metricsChanged": false,
+  "thresholdsChanged": false,
+  "decisionLogicChanged": false,
+  "verdictChanged": false,
+  "correction": "Replace stale detail text '13 integrity gates pass' by 'all integrity gates passed'; the actual integrity result is 15/15 PASS."
+}

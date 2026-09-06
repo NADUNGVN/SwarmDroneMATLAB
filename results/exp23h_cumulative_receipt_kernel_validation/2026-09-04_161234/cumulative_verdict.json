@@ -1,0 +1,9 @@
+{
+  "status": "ELCS_W_CUMULATIVE_KERNEL_VALID",
+  "gatesPassed": 17,
+  "gatesTotal": 17,
+  "rows": 2400,
+  "closedLoopBackgroundRerunPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

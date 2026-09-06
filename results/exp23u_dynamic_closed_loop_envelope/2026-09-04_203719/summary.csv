@@ -1,0 +1,7 @@
+arm,methodLabel,nRuns,meanRMSE,meanOfferedUtil,meanManagementAirtime,safeFailures
+coherence-static-target,Coherence ELCS-W / no revocation,60,0.0557444612707005,0.275257333333331,0.0565472,0
+dynamic-early-delivered,Coherence ELCS-W / revoke at 3 s,60,0.0570379324126579,0.264333599999998,0.0647264,0
+dynamic-early-response-blackout,Coherence ELCS-W / revoke at 3 s / RESPONSE blackout,60,0.0640945598551024,0.294706577777776,0.603026133333337,0
+dynamic-early-revoke-blackout,Coherence ELCS-W / revoke at 3 s / REVOKE blackout,60,0.0570379324126579,0.264333599999998,0.0647264,0
+dynamic-late-delivered,Coherence ELCS-W / revoke at 8 s,60,0.060346474777474,0.264306044444442,0.0651125333333333,0
+periodic-exp23d-lower,Periodic static TDMA / EXP23D lower-cost boundary,60,0.054502330065721,0.286719999999997,0,0

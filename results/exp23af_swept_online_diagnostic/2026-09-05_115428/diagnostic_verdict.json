@@ -1,0 +1,7 @@
+{
+  "status": "SWEPT_ONLINE_FIXTURE_DIAGNOSTIC_COMPLETE",
+  "rows": 175,
+  "fullyValidParameterCells": 0,
+  "confirmationEvidence": false,
+  "next": "freeze_online_coupled_matrix"
+}

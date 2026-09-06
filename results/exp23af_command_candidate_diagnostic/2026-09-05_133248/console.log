@@ -1,0 +1,19 @@
+
+============================================================
+RUN  : exp23af_command_candidate_diagnostic
+ID   : 2026-09-05_133248
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_command_candidate_diagnostic\2026-09-05_133248
+WHEN : 2026-09-05 13:32:48
+============================================================
+
+    node    targetX    targetY    displacement    minimumSweepSeparation    nearestNode    changedSenderEdges    nonincidentSenderEdges    affectedCount    changedSlotCount    oldColors    newColors    maxResponseBytes    geometryHash
+    ____    _______    _______    ____________    ______________________    ___________    __________________    ______________________    _____________    ________________    _________    _________    ________________    ____________
+
+
+
+============================================================
+DONE : exp23af_command_candidate_diagnostic
+TIME : 3.7 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_command_candidate_diagnostic\2026-09-05_133248
+============================================================

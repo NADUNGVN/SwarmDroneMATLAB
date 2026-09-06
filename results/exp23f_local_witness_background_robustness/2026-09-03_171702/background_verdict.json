@@ -1,0 +1,13 @@
+{
+  "status": "ELCS_W_BACKGROUND_ROBUSTNESS_STUDY_INVALID",
+  "integrityGatesPassed": 19,
+  "integrityGatesTotal": 20,
+  "rows": 480,
+  "terminalOrSafetyFailureFound": true,
+  "epsilonDominanceFound": true,
+  "confidenceSupportedEpsilonDominanceFound": false,
+  "next": "repair_background_composition",
+  "nextRobustnessContinuationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "gatesPassed": 21,
+  "gatesTotal": 21,
+  "totalRuns": 8000,
+  "performanceIsIntegrityGate": false,
+  "negativeResultsRetained": true,
+  "policyChangePermitted": false,
+  "hardwareClaimPermitted": false
+}

@@ -1,0 +1,11 @@
+{
+  "status": "FAST_REACTIVATION_DEVELOPMENT_FEASIBLE",
+  "gatesPassed": 18,
+  "gatesTotal": 18,
+  "rows": 180,
+  "mechanismReliefPassed": true,
+  "freshSeedEvidence": false,
+  "next": "fresh_seed_fast_reactivation_confirmation",
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

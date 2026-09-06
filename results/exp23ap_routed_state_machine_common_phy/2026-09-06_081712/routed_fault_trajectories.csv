@@ -1,0 +1,4 @@
+fault,seed,barrierClosed,motionAuthorized,commitReady,allAffectedReactivated,prepareBudgetExhausted,commitBudgetExhausted,logicalClaimPackets,logicalResponsePackets,logicalCommitPackets,routeCollisionRecipients,crossPacketStateWrites,forbiddenReads,physicalControlAttempts,physicalControlBytes,continuousDurationSec,kernelContinuousReplayExact,dynamicBundleEnvelopeExact
+prepare-blackout,16095701,0,0,0,0,1,0,0,0,0,0,0,0,12,576,1.19833270898836,1,1
+response-blackout,16095701,1,1,0,0,0,0,16,37,0,0,0,0,596,30176,3.97062352766111,1,1
+commit-blackout,16095701,1,1,1,0,0,1,4,10,2,0,0,0,332,13064,2.35633087019481,1,1

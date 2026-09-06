@@ -1,0 +1,13 @@
+{
+  "registryHash": 8.7778193E+7,
+  "registryLeaves": 58,
+  "rows": 2800,
+  "primaryTests": 6,
+  "holmFamilySize": 6,
+  "secondaryContrasts": 168,
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.4151515E+7,
+  "familywiseAlpha": 0.05,
+  "universalMacClaimPermitted": false,
+  "createdAt": "2026-08-30 22:03:28"
+}

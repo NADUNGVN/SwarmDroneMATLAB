@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23b_local_witness_retry_validation",
+  "runId": "2026-09-03_142535",
+  "startedAt": "2026-09-03 14:25:36",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh local-witness validation after causal exact-sequence receipt and next-frame retry repair.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23b_local_witness_retry_validation.m",
+  "finishedAt": "2026-09-03 14:28:03",
+  "elapsedSec": 146.7929788,
+  "elapsedText": "2 m 27 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

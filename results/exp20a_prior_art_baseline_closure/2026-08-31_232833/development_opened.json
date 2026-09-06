@@ -1,0 +1,12 @@
+{
+  "openedAt": "2026-08-31 23:28:34",
+  "registryHash": 2.02523373E+8,
+  "registryLeaves": 165,
+  "developmentFalsificationOnly": true,
+  "candidateOptimizationAllowed": false,
+  "confirmatoryClaimPermitted": false,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false,
+  "upstreamDeltaUrl": "https://github.com/signetlabdei/delta_medium_access",
+  "upstreamDeltaCommit": "813dd2d952e172fff302356cd936e0d20a30a328"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "NO_NONVACUOUS_SAFE_COMMAND_CANDIDATE",
+  "candidates": 0,
+  "radius": 0.97,
+  "pairwiseTrackingRadius": true,
+  "managementReachHops": null,
+  "developmentDiagnostic": true,
+  "confirmationEvidence": false
+}

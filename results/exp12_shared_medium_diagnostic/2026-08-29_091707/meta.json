@@ -1,0 +1,18 @@
+{
+  "experiment": "exp12_shared_medium_diagnostic",
+  "runId": "2026-08-29_091707",
+  "startedAt": "2026-08-29 09:17:08",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development-only shared-medium integration diagnostic; no method claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp12_shared_medium_diagnostic.m",
+  "finishedAt": "2026-08-29 09:18:03",
+  "elapsedSec": 55.4186566,
+  "elapsedText": "55.4 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

@@ -1,0 +1,13 @@
+cell,comparator,candidateFailures,comparatorFailures,seedsImproved,seedsWorsened,seedsEqual,nPairs
+n5-csma,fixed-adaptive-scaled,0,0,0,0,100,100
+n5-csma,fixed-piggyback-scaled,0,0,0,0,100,100
+n5-csma,access-only-scaled,0,0,0,0,100,100
+n10-ring2,fixed-adaptive-scaled,0,0,0,0,100,100
+n10-ring2,fixed-piggyback-scaled,0,0,0,0,100,100
+n10-ring2,access-only-scaled,0,0,0,0,100,100
+n20-ring2,fixed-adaptive-scaled,0,0,0,0,100,100
+n20-ring2,fixed-piggyback-scaled,0,0,0,0,100,100
+n20-ring2,access-only-scaled,0,6,6,0,94,100
+n5-aloha,fixed-adaptive-scaled,0,0,0,0,100,100
+n5-aloha,fixed-piggyback-scaled,0,1,1,0,99,100
+n5-aloha,access-only-scaled,0,0,0,0,100,100

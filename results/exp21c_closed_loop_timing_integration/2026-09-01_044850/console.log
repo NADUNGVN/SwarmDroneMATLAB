@@ -1,0 +1,42 @@
+
+============================================================
+RUN  : exp21c_closed_loop_timing_integration
+ID   : 2026-09-01_044850
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21c_closed_loop_timing_integration\2026-09-01_044850
+WHEN : 2026-09-01 04:48:51
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups  1--10 / 60; rows  40 / 240
+  groups 11--20 / 60; rows  80 / 240
+  groups 21--30 / 60; rows 120 / 240
+  groups 31--40 / 60; rows 160 / 240
+  groups 41--50 / 60; rows 200 / 240
+  groups 51--60 / 60; rows 240 / 240
+
+EXP21C integration gates
+  [PASS] registry_frozen                             hash 44227844 over 48 leaves
+  [PASS] matrix_complete_unique                      240/240 unique rows
+  [PASS] exact_seed_cell_arm_coverage                30 seeds, two cells and four arms exact
+  [PASS] paired_absolute_traces                      channel, estimator and continuous-clock hashes match per group
+  [PASS] causal_local_information_only               zero future reads, zero receiver-truth reads
+  [PASS] clock_equation_closes                       maximum residual 9.44e-16 s
+  [PASS] exact_physical_airtime                      DATA airtime equals attempts times 3.072 ms
+  [PASS] zero_clock_collision_free                   0 zero-clock collision frames
+  [PASS] safe_guard_collision_free                   0 safe-guard collision frames
+  [PASS] unguarded_clock_mechanism_activated         99752 witness collision frames
+  [PASS] ideal_reference_collision_free              centralized reference has zero endogenous collisions
+  [PASS] zero_clock_consistent_with_ideal            n5-stressed RMSE 0.082546/0.082328 util 0.128/0.16667 fail 0/0; n10-moderate RMSE 0.10096/0.10151 util 0.256/0.33333 fail 0/0
+  [PASS] recipient_and_interval_accounting           terminal recipient counts close and busy union does not exceed offered
+  [PASS] all_failures_retained                       60 unsafe retained
+  [PASS] integration_scope_only                      no policy promotion or submission decision in this study
+
+EXP21C INTEGRATION VERDICT: CLOSED_LOOP_TIMING_INTEGRATION_VALID
+
+============================================================
+DONE : exp21c_closed_loop_timing_integration
+TIME : 2 m 35 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21c_closed_loop_timing_integration\2026-09-01_044850
+============================================================

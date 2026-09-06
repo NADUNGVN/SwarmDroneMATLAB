@@ -1,0 +1,9 @@
+cell,N,channel,background,bothMetricsSupported,bothSafetyGuardsPassed,cellSupported
+n5-moderate-bg0,5,moderate,0,1,1,1
+n5-moderate-bg30,5,moderate,0.3,0,1,0
+n5-stressed-bg0,5,stressed,0,0,1,0
+n5-stressed-bg30,5,stressed,0.3,0,1,0
+n10-moderate-bg0,10,moderate,0,0,1,0
+n10-moderate-bg30,10,moderate,0.3,0,1,0
+n10-stressed-bg0,10,stressed,0,0,1,0
+n10-stressed-bg30,10,stressed,0.3,0,0,0

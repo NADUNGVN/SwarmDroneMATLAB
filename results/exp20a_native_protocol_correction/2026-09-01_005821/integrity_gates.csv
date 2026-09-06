@@ -1,0 +1,8 @@
+gate,passed,detail
+parent_formation_integrity,1,13/13 parent gates pass
+corrected_native_matrix_complete_unique,1,1800/1800 unique corrected rows
+exact_corrected_native_seeds,1,all and only 30 frozen native seeds
+corrected_native_absolute_draw_pairing,1,five arms share one absolute draw tensor in every group
+corrected_private_feedback_causality,1,future reads 0; max queue 5
+corrected_native_accounting_finite,1,attempt/success/collision ordering and finite AoII hold
+corrected_feedback_paths_activated,1,public and delayed/lossy private feedback paths exercised

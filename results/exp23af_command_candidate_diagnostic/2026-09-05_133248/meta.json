@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23af_command_candidate_diagnostic",
+  "runId": "2026-09-05_133248",
+  "startedAt": "2026-09-05 13:32:48",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Search safe receiver-lifted command sweeps that force recoloring.",
+  "sourceFile": "",
+  "finishedAt": "2026-09-05 13:32:52",
+  "elapsedSec": 3.6653511,
+  "elapsedText": "3.7 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

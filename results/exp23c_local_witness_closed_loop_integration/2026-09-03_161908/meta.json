@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23c_local_witness_closed_loop_integration",
+  "runId": "2026-09-03_161908",
+  "startedAt": "2026-09-03 16:19:08",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-W local-witness common-PHY closed-loop composition with paired zero and bounded affine clocks.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23c_local_witness_closed_loop_integration.m",
+  "finishedAt": "2026-09-03 16:21:37",
+  "elapsedSec": 149.2845346,
+  "elapsedText": "2 m 29 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,12 @@
+{
+  "recordedAt": "2026-09-01 00:22:06",
+  "classification": "execution-only dispatch correction",
+  "scientificRegistryChanged": false,
+  "seedsChanged": false,
+  "armsChanged": false,
+  "parametersChanged": false,
+  "metricsChanged": false,
+  "nativeRowsAlreadyComplete": 1800,
+  "formationRowsProducedBeforeFailure": 0,
+  "correction": "map the two frozen EXP20A oracle identifiers to their semantically identical EXP19A adapter identifiers"
+}

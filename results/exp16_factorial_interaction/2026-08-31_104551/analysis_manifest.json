@@ -1,0 +1,15 @@
+{
+  "registryHash": 8.9775929E+7,
+  "registryLeaves": 56,
+  "rows": 600,
+  "primaryTests": 6,
+  "holmFamilySize": 6,
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.6216216E+7,
+  "familywiseAlpha": 0.05,
+  "interactionComputedWithinSeed": true,
+  "generalMacSelectorClaimPermitted": false,
+  "namedMacClaimPermitted": false,
+  "hardwareClaimPermitted": false,
+  "createdAt": "2026-08-31 10:49:10"
+}

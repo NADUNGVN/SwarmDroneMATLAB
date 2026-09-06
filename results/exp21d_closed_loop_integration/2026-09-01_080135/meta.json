@@ -1,0 +1,18 @@
+{
+  "experiment": "exp21d_closed_loop_integration",
+  "runId": "2026-09-01_080135",
+  "startedAt": "2026-09-01 08:01:35",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "D-STR native acquisition on the continuous closed-loop event timeline; prior-art integration only.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp21d_closed_loop_integration.m",
+  "finishedAt": "2026-09-01 08:09:22",
+  "elapsedSec": 466.3794851,
+  "elapsedText": "7 m 46 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

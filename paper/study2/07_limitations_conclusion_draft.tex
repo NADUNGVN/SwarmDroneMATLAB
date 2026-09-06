@@ -1,0 +1,60 @@
+\section{Limitations and Validation Boundary}
+\label{sec:s2-limitations}
+
+The MAC is an abstract discrete-event model, not an implementation of IEEE
+802.11, IEEE 802.15.4, 5G NR, or another named stack. Frame sizes, PHY rate,
+transmit power, carrier-sense graph, and Gilbert--Elliott parameters are
+declared simulation inputs rather than radio measurements. Independent link
+chains omit spatially correlated fading, capture effects, rate adaptation,
+clock drift, hardware queues, and firmware latency. Offered airtime and the
+energy proxy are not measured energy.
+
+The validated selector covers one fully sensed p-persistent CSMA family and
+one slotted-ALOHA cell. EXP16 confirms a formal route-by-configured-MAC
+interaction only in the matched N5 Moderate cell. EXP17 supports only 1/8
+core operating contexts and rejects configured MAC type as a general selector.
+It is not evidence that every carrier-sensing protocol
+should suppress standalone feedback or that every collision-based protocol
+should enable it. Background load, hidden terminals, reverse asymmetry, and
+estimator noise are reported boundaries, not a complete operational design
+space. The $N=20$ causal ACK effect and adaptive--piggyback equivalence are not
+identified.
+
+The primary $N=5$ experiment uses 6-DOF follower dynamics, but larger swarms
+and all stated formation theorems use the double-integrator subsystem. The ISS
+result assumes inactive saturation and an undirected grounded graph; the
+finite-horizon safety certificate is conditional and presently conservative.
+Raw zero failure counts are observed guards, not population guarantees.
+
+ACK integrity assumes honest cumulative feedback. Sequence checks, rollback
+rejection, and future-generation rejection detect protocol violations under
+loss and delay, but no spoofing, replay attacker, jamming adversary, or key
+management is modeled. Security claims require an authenticated feedback
+design and separate threat-driven experiments.
+
+Finally, the study has no trace, radio, HIL, or flight validation. The frozen
+EXP17 continuation gate fails, so hardware procurement for the current general
+selector is deferred rather than presented as the automatic next step. The
+measured absolute-time trace and two-node airtime/energy interfaces remain
+available for a future redesigned policy or a deliberately narrow base-cell
+mechanism study.
+
+\section{Conclusion}
+\label{sec:s2-conclusion}
+
+Receiver-confirmed semantic triggering remains causal on a finite shared
+medium, but causality does not make every acknowledgement useful. Broadcast
+aggregation, scaled access, cumulative piggybacking, and standalone feedback
+interact through future DATA demand and contention. The initial negative
+holdout, factorial repair, focal-decision replay, disjoint validation, and a
+matched factorial interaction expose one bounded mechanism: piggyback is
+favored in the tested base CSMA cell while a standalone path is favored in its
+matched ALOHA cell.
+
+The broader operating-envelope holdout supports only 1/8 contexts and rejects
+configured MAC type as a general selector. Together with the $N=20$ support
+failure and adverse focal effects, this prevents a universal ACK-value or
+deployment claim. The contribution is instead a causal account of feedback
+mediation and an experimentally identified boundary showing why confirmation
+lead, MAC category, and communication cost cannot individually determine
+closed-loop value.

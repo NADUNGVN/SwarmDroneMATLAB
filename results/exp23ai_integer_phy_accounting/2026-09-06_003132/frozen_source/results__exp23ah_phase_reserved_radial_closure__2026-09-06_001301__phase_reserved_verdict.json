@@ -1,0 +1,16 @@
+{
+  "status": "PHASE_RESERVED_RADIAL_CLOSURE_FRESH_INVALID",
+  "gatesPassed": 26,
+  "gatesTotal": 27,
+  "rows": 300,
+  "onlinePlantCouplingValidated": false,
+  "radialContractionContractValidated": false,
+  "finiteRetryReliabilityValidated": false,
+  "freshPhaseReservedEvidence": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "repair_phase_reliability_or_radial_contract_without_gate_relaxation"
+}

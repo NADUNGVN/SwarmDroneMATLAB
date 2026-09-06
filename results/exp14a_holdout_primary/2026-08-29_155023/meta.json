@@ -1,0 +1,19 @@
+{
+  "experiment": "exp14a_holdout_primary",
+  "runId": "2026-08-29_155023",
+  "startedAt": "2026-08-29 15:50:23",
+  "resumedAt": "2026-08-29 22:20:30",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "",
+  "notes": "Resumed after external interruption; frozen registry, configuration and completed rows unchanged.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp14a_holdout_primary.m",
+  "finishedAt": "2026-08-29 22:52:52",
+  "elapsedSec": 1941.9644507,
+  "elapsedText": "32 m 22 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

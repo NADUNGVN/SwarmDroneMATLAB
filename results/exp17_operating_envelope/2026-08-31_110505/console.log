@@ -1,0 +1,102 @@
+
+============================================================
+RUN  : exp17_operating_envelope
+ID   : 2026-08-31_110505
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp17_operating_envelope\2026-08-31_110505
+WHEN : 2026-08-31 11:05:05
+============================================================
+
+EXP17 HOLDOUT IS NOW OPEN. Registry hash: 123727884
+Frozen matrix: 4000 runs (1000 seed/context groups).
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups    1--  16 / 1000; rows   64 / 4000
+  groups   17--  32 / 1000; rows  128 / 4000
+  groups   33--  48 / 1000; rows  192 / 4000
+  groups   49--  64 / 1000; rows  256 / 4000
+  groups   65--  80 / 1000; rows  320 / 4000
+  groups   81--  96 / 1000; rows  384 / 4000
+  groups   97-- 112 / 1000; rows  448 / 4000
+  groups  113-- 128 / 1000; rows  512 / 4000
+  groups  129-- 144 / 1000; rows  576 / 4000
+  groups  145-- 160 / 1000; rows  640 / 4000
+  groups  161-- 176 / 1000; rows  704 / 4000
+  groups  177-- 192 / 1000; rows  768 / 4000
+  groups  193-- 208 / 1000; rows  832 / 4000
+  groups  209-- 224 / 1000; rows  896 / 4000
+  groups  225-- 240 / 1000; rows  960 / 4000
+  groups  241-- 256 / 1000; rows 1024 / 4000
+  groups  257-- 272 / 1000; rows 1088 / 4000
+  groups  273-- 288 / 1000; rows 1152 / 4000
+  groups  289-- 304 / 1000; rows 1216 / 4000
+  groups  305-- 320 / 1000; rows 1280 / 4000
+  groups  321-- 336 / 1000; rows 1344 / 4000
+  groups  337-- 352 / 1000; rows 1408 / 4000
+  groups  353-- 368 / 1000; rows 1472 / 4000
+  groups  369-- 384 / 1000; rows 1536 / 4000
+  groups  385-- 400 / 1000; rows 1600 / 4000
+  groups  401-- 416 / 1000; rows 1664 / 4000
+  groups  417-- 432 / 1000; rows 1728 / 4000
+  groups  433-- 448 / 1000; rows 1792 / 4000
+  groups  449-- 464 / 1000; rows 1856 / 4000
+  groups  465-- 480 / 1000; rows 1920 / 4000
+  groups  481-- 496 / 1000; rows 1984 / 4000
+  groups  497-- 512 / 1000; rows 2048 / 4000
+  groups  513-- 528 / 1000; rows 2112 / 4000
+  groups  529-- 544 / 1000; rows 2176 / 4000
+  groups  545-- 560 / 1000; rows 2240 / 4000
+  groups  561-- 576 / 1000; rows 2304 / 4000
+  groups  577-- 592 / 1000; rows 2368 / 4000
+  groups  593-- 608 / 1000; rows 2432 / 4000
+  groups  609-- 624 / 1000; rows 2496 / 4000
+  groups  625-- 640 / 1000; rows 2560 / 4000
+  groups  641-- 656 / 1000; rows 2624 / 4000
+  groups  657-- 672 / 1000; rows 2688 / 4000
+  groups  673-- 688 / 1000; rows 2752 / 4000
+  groups  689-- 704 / 1000; rows 2816 / 4000
+  groups  705-- 720 / 1000; rows 2880 / 4000
+  groups  721-- 736 / 1000; rows 2944 / 4000
+  groups  737-- 752 / 1000; rows 3008 / 4000
+  groups  753-- 768 / 1000; rows 3072 / 4000
+  groups  769-- 784 / 1000; rows 3136 / 4000
+  groups  785-- 800 / 1000; rows 3200 / 4000
+  groups  801-- 816 / 1000; rows 3264 / 4000
+  groups  817-- 832 / 1000; rows 3328 / 4000
+  groups  833-- 848 / 1000; rows 3392 / 4000
+  groups  849-- 864 / 1000; rows 3456 / 4000
+  groups  865-- 880 / 1000; rows 3520 / 4000
+  groups  881-- 896 / 1000; rows 3584 / 4000
+  groups  897-- 912 / 1000; rows 3648 / 4000
+  groups  913-- 928 / 1000; rows 3712 / 4000
+  groups  929-- 944 / 1000; rows 3776 / 4000
+  groups  945-- 960 / 1000; rows 3840 / 4000
+  groups  961-- 976 / 1000; rows 3904 / 4000
+  groups  977-- 992 / 1000; rows 3968 / 4000
+  groups  993--1000 / 1000; rows 4000 / 4000
+
+EXP17 integrity gates
+  [PASS] registry_contract                    hash 123727884 over 122 leaves
+  [PASS] matrix_completeness                  4000 frozen runs
+  [PASS] unique_seed_context_arms             one row per seed/context/arm
+  [PASS] complete_matched_groups              all four arms occur once per seed/context
+  [PASS] finite_eligible_outputs              all nondivergent outcomes are finite
+  [PASS] causal_conservatism                  0 protocol violations
+  [PASS] bounded_memory                       max queue=2 max history=32
+  [PASS] physical_accounting                  terminal accounting and busy union close
+  [PASS] cross_mac_absolute_trace             one trace/channel/estimator realization per seed/context
+  [PASS] factor_route_semantics               MAC and route factors match their method contracts
+  [PASS] ack_route_actions                    standalone/adaptive actions occur only in adaptive arms
+  [PASS] analytical_access_scaling            configured and actual pAccess equal min(0.20,1/N)
+  [PASS] context_semantics                    N/channel/background/modifier/core flags match registry
+  [PASS] divergence_accounting                0 divergences retained
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp17_operating_envelope\2026-08-31_110505\figures
+
+EXP17 ENVELOPE VERDICT: PARTIALLY_SUPPORTED_NO_CONTINUATION_GATE
+  Core supported: 1/8 | continuation gate: DO_NOT_PROCEED_WITH_GENERAL_SELECTOR
+
+============================================================
+DONE : exp17_operating_envelope
+TIME : 23 m 04 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp17_operating_envelope\2026-08-31_110505
+============================================================

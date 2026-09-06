@@ -1,0 +1,503 @@
+\section{Mathematical Foundation}
+\label{sec:s2-foundation}
+
+This section separates what follows from causal ACK semantics from what
+requires a stochastic service assumption.  The plant result is first stated
+for the unsaturated double-integrator subsystem; neither the shared-medium
+simulation nor a hardware trace is used as a substitute for proof.
+
+\subsection{Receiver truth and causal sender belief}
+
+Broadcast $k$ of sender $j$ has generation time $s_j^k$.  Let $r_{ij}^k$
+denote its acceptance time at receiver $i$, and let $a_{ji}^k$ denote the
+arrival time at $j$ of an ACK entry confirming that acceptance.  Define
+\begin{align}
+G_{ij}(t)&=\max\{s_j^k:r_{ij}^k\le t\}, &
+\Delta_{ij}(t)&=t-G_{ij}(t),\label{eq:s2-true-age}\\
+C_{ij}(t)&=\max\{s_j^k:a_{ji}^k\le t\}, &
+\widehat\Delta_{ij}(t)&=t-C_{ij}(t).
+\label{eq:s2-confirmed-age}
+\end{align}
+The sampled implementation may add a nonnegative half-step correction to
+$\widehat\Delta_{ij}$.
+
+\begin{assumption}[Protocol integrity]
+Sequences and generation times increase together.  A receiver accepts only a
+newer generation and never rolls its state back.  An ACK entry is created only
+after the named DATA has been accepted; the sender rejects future, unknown, or
+rollback ACK entries.  Loss, collision, queue drop, and silence do not update
+$C_{ij}$.  Initial receiver and confirmed generation times agree.
+\label{ass:s2-integrity}
+\end{assumption}
+
+\begin{theorem}[Causal conservatism]
+Under Assumption~\ref{ass:s2-integrity}, for every configured link and all
+$t\ge0$,
+\begin{equation}
+C_{ij}(t)\le G_{ij}(t),\qquad
+\widehat\Delta_{ij}(t)\ge\Delta_{ij}(t),
+\label{eq:s2-conservatism}
+\end{equation}
+and the conservatism gap is exactly
+$\widehat\Delta_{ij}-\Delta_{ij}=G_{ij}-C_{ij}\ge0$.
+\label{thm:s2-conservatism}
+\end{theorem}
+
+\begin{proof}
+The order holds at initialization.  The only event that advances $C_{ij}$ is
+an arrived ACK.  The ACK's generation was already accepted by receiver $i$,
+so it cannot exceed the current $G_{ij}$.  Monotone updates preserve the
+order.  DATA without returned ACK may advance only $G_{ij}$, while loss,
+collision, and silence advance neither generation time.  Subtracting from the
+same time $t$ proves the age inequality and gap identity.
+\end{proof}
+
+Consequently,
+\begin{equation}
+\max_i\widehat\Delta_{ij}\ge\max_i\Delta_{ij}.
+\label{eq:s2-worst-age}
+\end{equation}
+For any nonnegative nondecreasing $f$ and common sender innovation $I_j$,
+$\max_i I_jf(\widehat\Delta_{ij})\ge\max_i I_jf(\Delta_{ij})$.  The receiver
+that maximizes confirmed age need not maximize true age; worst-neighbor
+aggregation is conservative but does not identify the true worst receiver.
+
+\subsection{Semantic error envelopes}
+
+\begin{assumption}[Bounded motion]
+On the analysis interval,
+$\|v_j(t)\|\le\bar v_j$ and $\|a_j(t)\|\le\bar a_j$.
+\label{ass:s2-motion}
+\end{assumption}
+
+\begin{theorem}[Age-to-state-error map]
+Suppose the receiver uses the last accepted state as a zero-order hold.  Under
+Assumptions~\ref{ass:s2-integrity}--\ref{ass:s2-motion},
+\begin{align}
+\|v_j(t)-\widetilde v_j(t)\|
+&\le \bar a_j\widehat\Delta_{ij}(t),
+\label{eq:s2-vel-envelope}\\
+\|p_j(t)-\widetilde p_j(t)\|
+&\le \bar v_j\widehat\Delta_{ij}(t)
++\tfrac12\bar a_j\widehat\Delta_{ij}^2(t).
+\label{eq:s2-pos-envelope}
+\end{align}
+For constant-velocity prediction, the position right-hand side improves to
+$\tfrac12\bar a_j\widehat\Delta_{ij}^2$.
+\label{thm:s2-semantic-envelope}
+\end{theorem}
+
+\begin{proof}
+Let $g=G_{ij}(t)$ and $\Delta=t-g$.  Integrating acceleration bounds
+$v_j(t)-v_j(g)$.  Taylor's integral form gives
+\[
+p_j(t)=p_j(g)+v_j(g)\Delta
++\int_g^t(t-\tau)a_j(\tau)d\tau.
+\]
+The triangle inequality yields the true-age envelopes.  They are
+nondecreasing for nonnegative age, so
+Theorem~\ref{thm:s2-conservatism} permits replacement of $\Delta$ by
+$\widehat\Delta_{ij}$.
+\end{proof}
+
+The trigger innovation and the bounds above are intentionally distinct.  The
+former compares current state with the last state put on the medium; the
+latter bounds reconstruction error from the last causally confirmed
+generation.
+
+\subsection{Stochastic age rather than a false deterministic bound}
+
+\begin{proposition}
+If every recovery attempt has a nonzero independent probability of failure,
+a max-silence generation timer does not imply a finite deterministic uniform
+AoI bound.  Over an infinite horizon, arbitrarily long failure runs occur
+almost surely.
+\label{prop:s2-no-deterministic-age}
+\end{proposition}
+
+\begin{assumption}[Block-service minorization]
+There are $T_b>0$ and $q\in(0,1]$ such that, conditional on the entire past, a
+fresh DATA generated in each recovery block is accepted and causally confirmed
+by the block end with probability at least $q$.
+\label{ass:s2-block-service}
+\end{assumption}
+
+Assumption~\ref{ass:s2-block-service} includes queue admission, MAC service,
+DATA reception, ACK generation, and ACK service.  It is not implied by the
+max-silence branch; congestion can make $q=0$.
+
+\begin{theorem}[Confirmed-age tail]
+Under Assumption~\ref{ass:s2-block-service}, at any time $t$ in the current
+block and for every integer $m\ge1$,
+\begin{equation}
+\Pr\{\widehat\Delta_{ij}(t)>(m+1)T_b\}\le(1-q)^m.
+\label{eq:s2-age-tail}
+\end{equation}
+Independence between blocks is not required.
+\label{thm:s2-age-tail}
+\end{theorem}
+
+\begin{proof}
+A fresh confirmation in any of the preceding $m$ complete blocks puts the
+confirmed generation time no more than $(m+1)T_b$ behind $t$.  Thus the age
+event implies failure in all $m$ blocks.  If $F_\ell$ is block failure and
+$\mathcal F_\ell$ its history, then
+$\Pr(F_\ell\mid\mathcal F_\ell)\le1-q$.  Repeated conditioning bounds the
+intersection probability by $(1-q)^m$.
+\end{proof}
+
+A DATA-only value $q_D$ bounds true receiver age.  End-to-end confirmation
+uses $q_C\le q_D$ and exposes the price of feedback congestion.
+
+\begin{proposition}[Analytical p-persistent default]
+If a tagged node and at most $c$ other conflicting nodes attempt in an idle
+opportunity with probability $p$, its collision-free access term
+$\theta_c(p)=p(1-p)^c$ is maximized by
+$p^\star=1/(c+1)$ for $c\ge1$.
+\label{prop:s2-p-optimum}
+\end{proposition}
+
+\begin{proof}
+$\theta_c'(p)=(1-p)^{c-1}[1-(c+1)p]$, whose only interior zero changes the
+derivative from positive to negative.
+\end{proof}
+
+For DATA/ACK admission lower bounds $q_D^{adm},q_A^{adm}$, residual-loss upper
+bounds $\ell_D,\ell_A$, contender bounds $c_D,c_A$, and guaranteed opportunity
+counts $R_D,R_A$, define
+\begin{align}
+q_{D,1}&=q_D^{adm}p_D(1-p_D)^{c_D}(1-\ell_D),\\
+q_{A,1}&=q_A^{adm}p_A(1-p_A)^{c_A}(1-\ell_A).
+\end{align}
+Repeated conditioning gives a valid end-to-end block minorization
+\begin{equation}
+q_C^{blk}\ge
+[1-(1-q_{D,1})^{R_D}]
+[1-(1-q_{A,1})^{R_A}].
+\label{eq:s2-service-minorization}
+\end{equation}
+Equation~\eqref{eq:s2-service-minorization} uses sequential conditional lower
+bounds, not an independence assumption.  If an admission or opportunity lower
+bound is zero, the theorem must report $q_C^{blk}=0$.
+
+\begin{theorem}[Finite-horizon uniform confirmed age]
+Let $K=\lceil T/T_b\rceil$, let $L$ be the number of control-relevant directed
+channels, and let $W_m=\max\{0,K-m+1\}$.  Under
+Assumption~\ref{ass:s2-block-service},
+\begin{equation}
+\Pr\!\left\{
+\max_{(i,j)}\sup_{0\le t\le T}\widehat\Delta_{ij}(t)
+>(m+1)T_b\right\}
+\le\min\{1,LW_m(1-q)^m\}.
+\label{eq:s2-uniform-age}
+\end{equation}
+\label{thm:s2-uniform-age}
+\end{theorem}
+
+\begin{proof}
+Every violation contains, for some link, one window of $m$ consecutive failed
+blocks.  Theorem~\ref{thm:s2-age-tail} bounds each window by $(1-q)^m$.
+A union bound over $W_m$ possible starts and $L$ links proves the result.
+\end{proof}
+
+For target probability $\alpha$, a sufficient requirement is
+$q\ge1-[\alpha/(LW_m)]^{1/m}$, clipped to $[0,1]$.
+
+\subsection{When is a standalone ACK worth its cost?}
+
+Let $S$ denote an ACK-assisted policy and $P$ a piggyback-only policy.  The
+two policies use the same DATA trigger, access rule, packet format, and
+exogenous cell.  A standalone ACK advances sender belief $C_{ij}$ but carries
+no new plant state.  It therefore cannot directly advance receiver truth
+$G_{ij}$ or reduce true receiver age; every positive control effect must be
+mediated by changed future DATA generation, service, or collision.
+
+Over a horizon of duration $H$, let $D_H^\pi$ and $A_H^\pi$ be total DATA and
+standalone-ACK airtime under $\pi\in\{S,P\}$.  DATA airtime includes bytes of
+feedback entries piggybacked on DATA.  Define
+\begin{equation}
+S_D=D_H^P-D_H^S,\qquad
+C_A=A_H^S-A_H^P,\qquad
+M_{air}=S_D-C_A.
+\label{eq:s2-ack-accounting-defs}
+\end{equation}
+
+\begin{proposition}[Exact ACK airtime accounting]
+The offered-utilization difference satisfies
+\begin{equation}
+U_H^P-U_H^S=\frac{M_{air}}{H}.
+\label{eq:s2-ack-accounting}
+\end{equation}
+Hence standalone ACK reduces offered airtime if and only if the DATA airtime
+saved exceeds the additional standalone-ACK airtime.  Piggyback overhead must
+not be added separately because it is already contained in $D_H^\pi$.
+\label{prop:s2-ack-accounting}
+\end{proposition}
+
+\begin{proof}
+Substitute $U_H^\pi=(D_H^\pi+A_H^\pi)/H$ and collect terms.  The identity is
+pathwise and requires neither independence nor stationarity.
+\end{proof}
+
+For any lower-is-better control loss $L_H^\pi$ and collision count
+$N_C^\pi$, nonnegative dimensionally compatible weights define
+\begin{equation}
+V_H=w_L(L_H^P-L_H^S)+w_UM_{air}+w_C(N_C^P-N_C^S).
+\label{eq:s2-ack-weighted-value}
+\end{equation}
+Standalone ACK has positive value for this declared objective exactly when
+$\mathbb E[V_H\mid\mathcal F_t]>0$.  A mixed control/resource result has no
+objective-free scalar ordering.
+
+Let $\tau_A$ be the time at which standalone feedback first advances sender
+belief and $\tau_P$ the time at which the same information would arrive in a
+coupled piggyback counterfactual.  Define the horizon-capped unique lead
+\begin{equation}
+\ell=[\min\{\tau_P,H\}-\min\{\tau_A,H\}]^+,
+\label{eq:s2-ack-unique-lead}
+\end{equation}
+with $\ell=0$ when standalone feedback is not earlier.
+
+\begin{assumption}[Lead-value envelope]
+For the declared operating set and objective, the early-information benefit
+$B_H$ and non-airtime ACK externality $X_A$ obey
+\begin{align}
+\underline b\,\mathbb E[\ell\mid\mathcal F_t]
+&\le\mathbb E[B_H\mid\mathcal F_t]
+\le\overline b\,\mathbb E[\ell\mid\mathcal F_t],\label{eq:s2-lead-benefit}\\
+0\le\underline x&\le\mathbb E[X_A\mid\mathcal F_t]\le\overline x.
+\label{eq:s2-ack-externality}
+\end{align}
+These are analytical or shadow-counterfactual bounds, not values fitted to a
+favorable holdout mean.
+\label{ass:s2-lead-value}
+\end{assumption}
+
+\begin{assumption}[Target-event support]
+Let $E_t=1$ denote that the natural policy produces a permitted standalone-ACK
+candidate satisfying the declared analysis window, and let $X_t$ contain the
+pre-decision covariates.  If $\mu_c$ is the target covariate distribution in
+cell $c$ and $\nu_c$ is the distribution induced by eligible events, then
+\begin{equation}
+\mu_c\ll\nu_c.
+\label{eq:s2-event-support}
+\end{equation}
+Thus every target set of positive probability must have positive
+eligible-event support.  State-cloned replay constructs both actions after an
+eligible event, but it does not supply an intervention in states where the
+natural candidate process produces no event.
+\label{ass:s2-event-support}
+\end{assumption}
+
+\begin{proposition}[Unique-lead ACK certificate]
+Let $c_A$ be direct standalone-ACK airtime and let $w_U$ convert it to the
+declared objective.  Under Assumption~\ref{ass:s2-lead-value},
+\begin{equation}
+\begin{split}
+\underline V={}&\underline b\,\mathbb E[\ell\mid\mathcal F_t]
+ -(w_Uc_A+\overline x)\\
+\le{}&\mathbb E[V_H\mid\mathcal F_t]\\
+\le{}&\overline b\,\mathbb E[\ell\mid\mathcal F_t]
+ -(w_Uc_A+\underline x)=\overline V.
+\end{split}
+\label{eq:s2-ack-value-bounds}
+\end{equation}
+Thus $\overline V\le0$ certifies discard/defer,
+$\underline V>0$ certifies standalone transmission, and overlapping bounds
+are inconclusive.
+\label{prop:s2-ack-value}
+\end{proposition}
+
+\begin{proof}
+Apply the benefit bounds, subtract the opposite externality bound and the
+common direct airtime cost, and inspect the signs of the resulting interval.
+\end{proof}
+
+The result formalizes piggyback-first scheduling.  Mean ACK rate, AoI, or
+channel busy fraction alone does not identify the unique lead or its decision
+value; predictive use requires obligation-level timestamps and a shadow
+no-standalone scheduler.
+
+\begin{proposition}[Identification domain of branch replay]
+Let $Y_H(1)$ and $Y_H(0)$ denote a local outcome under focal ACK admit and
+suppress.  A replay that clones the complete pre-decision state and future
+exogenous inputs and changes only focal admission identifies
+\begin{equation}
+\delta_H=Y_H(0)-Y_H(1)
+\end{equation}
+for every sampled eligible decision.  Independent parent trajectories
+therefore estimate
+\begin{equation}
+\tau_c=\mathbb E[\delta_H\mid E_t=1,c]
+\end{equation}
+over the supported eligible-event distribution, but not an effect for
+$E_t=0$ or outside Assumption~\ref{ass:s2-event-support}.
+\label{prop:s2-branch-identification}
+\end{proposition}
+
+\begin{proof}
+State and future-input identity remove pre-treatment and exogenous branch
+differences, while the focal intervention supplies both potential paths at an
+eligible decision.  No contrast is constructed where $E_t=0$.
+\end{proof}
+
+A full-policy shadow run can measure a generation-matched policy lead, but it
+does not identify a focal effect after earlier feedback decisions have
+separated the histories.  The state-cloned replay closes that branch-identity
+gap only on supported decisions.  In the registered N20 design, EXP14G and
+EXP14H found an eligible post-transient event in only 11 of 300 independent
+parent seeds (3.67\%; two-sided 95\% Wilson interval 2.06--6.45\%).
+EXP14H supplied seven events, below its frozen minimum of 12, and stopped
+before replay.  This is a practical support failure, not an ACK-effect
+estimate and not proof that the population event probability is zero.
+
+\subsection{Formation ISS}
+
+For followers $i=2,\ldots,N$, let
+$e_i=p_i-p_L-\delta_i$ and $r_i=v_i-v_L$.  Let $L_f$ be the
+follower--follower Laplacian, $G=\operatorname{diag}(A_{i1})$ the ordinary
+leader-neighbor grounding, and $\Pi=\operatorname{diag}(\pi_i)$ the separate
+leader pinning.  Define
+\begin{equation}
+H_p=K_p(L_f+G)+K_{pL}\Pi,\qquad
+H_v=K_v(L_f+G)+K_{vL}\Pi.
+\label{eq:s2-grounded-matrices}
+\end{equation}
+For one coordinate in the unsaturated double-integrator region,
+\begin{equation}
+\dot z=A_cz+B_c(d_{net}+d_L),\quad
+A_c=\begin{bmatrix}0&I\\-H_p&-H_v\end{bmatrix},\quad
+B_c=\begin{bmatrix}0\\I\end{bmatrix}.
+\label{eq:s2-error-system}
+\end{equation}
+The three-dimensional dynamics follow by a Kronecker product with $I_3$.
+Theorem~\ref{thm:s2-semantic-envelope} bounds each stale-neighbor term in
+$d_{net}$.  In the current implementation only pinned followers receive
+leader-acceleration feed-forward, so even with perfect communication
+\begin{equation}
+d_{L,i}=(\pi_i-1)a_L.
+\label{eq:s2-leader-mismatch}
+\end{equation}
+
+\begin{theorem}[Unsaturated formation ISS]
+Suppose the follower graph is undirected, every connected component is
+grounded by $G$ or $\Pi$, all controller gains are positive, and acceleration
+saturation is inactive.  Then $A_c$ is Hurwitz and there exist $M\ge1$ and
+$\lambda>0$ such that
+\begin{equation}
+\|z(t)\|\le Me^{-\lambda t}\|z(0)\|
++\frac{M}{\lambda}
+\sup_{0\le\tau\le t}\|d_{net}(\tau)+d_L(\tau)\|.
+\label{eq:s2-iss-bound}
+\end{equation}
+\label{thm:s2-formation-iss}
+\end{theorem}
+
+\begin{proof}
+The grounding condition makes $H_p$ and $H_v$ symmetric positive definite.
+If $s$ is an eigenvalue of $A_c$, a nonzero complex $x$ obeys
+$(s^2I+sH_v+H_p)x=0$.  Premultiplication by $x^*$ yields
+$s^2+\alpha s+\beta=0$ with real $\alpha,\beta>0$, so
+$\operatorname{Re}s<0$.  The variation-of-constants formula and
+$\|e^{A_ct}\|\le Me^{-\lambda t}$ prove the bound.
+\end{proof}
+
+For an explicit certificate, let $P\succ0$ solve
+$A_c^\top P+PA_c=-I$ and define
+$\kappa_P=\lambda_{\max}(P)/\lambda_{\min}(P)$.  Completing the square in
+$\dot V$, $V=z^\top Pz$, gives
+\begin{equation}
+\begin{split}
+\|z(t)\|\le{}&\sqrt{\kappa_P}
+e^{-t/(4\lambda_{\max}(P))}\|z(0)\|\\
+&+2\|PB_c\|_2\sqrt{\kappa_P}
+\|d_{net}+d_L\|_{\infty,[0,t]}.
+\end{split}
+\label{eq:s2-explicit-iss}
+\end{equation}
+Unlike a raw spectral abscissa, every constant in
+\eqref{eq:s2-explicit-iss} belongs to the same induced-norm bound.
+
+The simulator uses semi-implicit Euler rather than the continuous flow.  Define
+$y_k=[e_k^\top,(h r_k)^\top]^\top$, so all state components have position
+units, and define
+\begin{equation}
+\chi_k=h v_L(t_{k+1})-[p_L(t_{k+1})-p_L(t_k)].
+\end{equation}
+Bounded leader acceleration gives
+$\|\chi_k\|\le\tfrac12\bar a_Lh^2$ per follower.  With acceleration
+disturbance $\omega_k$ and
+$u_k=[\chi_k^\top,(h^2\omega_k)^\top]^\top$, the exact sampled update is
+\begin{equation}
+y_{k+1}=A_hy_k+D_hu_k,
+\label{eq:s2-sampled-system}
+\end{equation}
+where
+\begin{equation}
+A_h=\begin{bmatrix}
+I-h^2H_p&I-hH_v\\
+-h^2H_p&I-hH_v
+\end{bmatrix},\qquad
+D_h=\begin{bmatrix}I&I\\0&I\end{bmatrix}.
+\end{equation}
+
+\begin{theorem}[Implementation-faithful sampled ISS]
+If $\rho(A_h)<1$, let $P_h\succ0$ solve
+$A_h^\top P_hA_h-P_h=-I$ and define
+\begin{align}
+\alpha_h&=[2\lambda_{\max}(P_h)]^{-1},\\
+\beta_h&=2\|A_h^\top P_hD_h\|_2^2+
+\|D_h^\top P_hD_h\|_2,\\
+\sigma_h&=\sqrt{1-\alpha_h},\qquad
+\Gamma_h=\sqrt{\frac{\beta_h}
+{\alpha_h\lambda_{\min}(P_h)}}.
+\end{align}
+Then
+\begin{equation}
+\|y_k\|\le\sqrt{\kappa(P_h)}\sigma_h^k\|y_0\|
++\Gamma_h\|u\|_{\infty,[0,k-1]}.
+\label{eq:s2-sampled-iss}
+\end{equation}
+\label{thm:s2-sampled-iss}
+\end{theorem}
+
+\begin{proof}
+For $V_k=y_k^\top P_hy_k$, expansion of
+$V_{k+1}-V_k$ and Young's inequality give
+$V_{k+1}-V_k\le-\tfrac12\|y_k\|^2+\beta_h\|u_k\|^2
+\le-\alpha_hV_k+\beta_h\|u_k\|^2$.  Iteration and the eigenvalue bounds on
+$V_k$ prove \eqref{eq:s2-sampled-iss}.
+\end{proof}
+
+Let $d_\star=\min_{i\ne j}\|\delta_i-\delta_j\|$ and
+$r_{safe}=(d_\star-d_{safe})/\sqrt2$.  Whenever the right-hand side of
+\eqref{eq:s2-iss-bound} is below $r_{safe}$, all pairwise separations exceed
+$d_{safe}$.
+
+\begin{corollary}[Finite-horizon probabilistic separation]
+Let $a_m=(m+1)T_b$, use
+Theorem~\ref{thm:s2-semantic-envelope} to construct a stacked disturbance
+bound $\bar\omega_m$, and define
+\begin{equation}
+\bar u_m=\sqrt{(N-1)(\tfrac12\bar a_Lh^2)^2+h^4\bar\omega_m^2}.
+\end{equation}
+For $k_e=\lfloor t_e/h\rfloor$, define
+\begin{equation}
+R_m^h(k_e)=\sqrt{\kappa(P_h)}\sigma_h^{k_e}\|y_0\|
++\Gamma_h\bar u_m.
+\end{equation}
+If $R_m^h(k_e)<r_{safe}$, then
+\begin{equation}
+\Pr\!\left\{\min_{t\in[t_e,T]}d_{min}(t)\le d_{safe}\right\}
+\le\min\{1,LW_m(1-q)^m\}.
+\label{eq:s2-safety-probability}
+\end{equation}
+\label{cor:s2-probabilistic-separation}
+\end{corollary}
+
+If the deterministic inequality fails, increasing $q$ cannot produce a safety
+certificate; the result is ``not certified.''
+
+The result does not cover saturation, a directed nonsymmetric controller, or
+the 6-DOF cascade.  Those are separate extensions and cannot be inferred from
+the theorem above.

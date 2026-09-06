@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23p_coherence_packet_kernel",
+  "runId": "2026-09-04_172817",
+  "startedAt": "2026-09-04 17:28:18",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh coherence-aware ELCS-W packet-kernel validation under control loss, occupancy, no-lease and blackout.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23p_coherence_packet_kernel.m",
+  "finishedAt": "2026-09-04 17:32:05",
+  "elapsedSec": 227.5466728,
+  "elapsedText": "3 m 48 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

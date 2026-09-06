@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23aj_routed_management_diagnostic",
+  "runId": "2026-09-06_070738",
+  "startedAt": "2026-09-06 07:07:38",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen routed-management primitive, reliability, accounting, and semantic-multicast diagnostic.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23aj_routed_management_diagnostic.m",
+  "finishedAt": "2026-09-06 07:07:58",
+  "elapsedSec": 20.4779387,
+  "elapsedText": "20.5 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "gatesPassed": 14,
+  "gatesTotal": 14,
+  "totalRuns": 4000,
+  "performanceIsIntegrityGate": false,
+  "negativeResultsRetained": true,
+  "designChangePermitted": false
+}

@@ -1,0 +1,13 @@
+{
+  "status": "ELCS_W_BACKGROUND_EPSILON_DOMINATED_RETURN_TO_DESIGN",
+  "integrityGatesPassed": 20,
+  "integrityGatesTotal": 20,
+  "rows": 480,
+  "terminalOrSafetyFailureFound": false,
+  "epsilonDominanceFound": true,
+  "confidenceSupportedEpsilonDominanceFound": false,
+  "next": "redesign_load_response_or_overhead",
+  "nextRobustnessContinuationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

@@ -1,0 +1,19 @@
+{
+  "status": "MULTI_ORIGIN_ROUTED_CONTROL_DIAGNOSTIC_VALID",
+  "gatesPassed": 16,
+  "gatesTotal": 16,
+  "bundleRows": 5,
+  "frontierRows": 7,
+  "monteCarloRows": 5,
+  "selectedUniformRepetitions": 4,
+  "selectedTransactionFailureUpperBound": 0.00090955439743163613,
+  "selectedConservativeTransactionTimeSec": 5.0346184407376295,
+  "multiOriginRoutingDiagnosticValidated": true,
+  "managementRelayingValidated": false,
+  "closedLoopManagementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "routed_common_phy_closed_loop_integration"
+}

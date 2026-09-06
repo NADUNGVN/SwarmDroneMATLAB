@@ -1,0 +1,18 @@
+{
+  "experiment": "exp18b_preregistered_holdout",
+  "runId": "2026-08-31_152137",
+  "startedAt": "2026-08-31 15:21:37",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed capacity-screen and abstention holdout; nine-test Holm family; no hardware claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp18b_preregistered_holdout.m",
+  "finishedAt": "2026-08-31 17:01:45",
+  "elapsedSec": 6011.0553343,
+  "elapsedText": "1 h 40 m",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

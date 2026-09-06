@@ -1,0 +1,62 @@
+
+============================================================
+RUN  : exp14a_holdout_primary
+ID   : 2026-08-29_155023
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14a_holdout_primary\2026-08-29_155023
+WHEN : 2026-08-29 15:50:23
+============================================================
+
+EXP14A HOLDOUT IS NOW OPEN. Registry hash: 201658753
+Primary matrix: 10500 frozen runs (100 seeds).
+  completed groups   1-- 16 / 300; rows   560 / 10500
+  completed groups  17-- 32 / 300; rows  1120 / 10500
+  completed groups  33-- 48 / 300; rows  1680 / 10500
+  completed groups  49-- 64 / 300; rows  2240 / 10500
+  completed groups  65-- 80 / 300; rows  2800 / 10500
+  completed groups  81-- 96 / 300; rows  3360 / 10500
+  completed groups  97--112 / 300; rows  3920 / 10500
+  completed groups 113--128 / 300; rows  4480 / 10500
+  completed groups 129--144 / 300; rows  5040 / 10500
+  completed groups 145--160 / 300; rows  5600 / 10500
+
+============================================================
+RESUME: exp14a_holdout_primary
+ID    : 2026-08-29_155023
+WHEN  : 2026-08-29 22:20:30
+CAUSE : external interactive-run interruption
+CHANGE: recovery mechanism only; frozen scientific design unchanged
+============================================================
+
+EXP14A RESUME: 160 complete groups and 5600 rows recovered; no performance columns inspected.
+  completed pending groups 161--176 / 300; rows  6160 / 10500
+  completed pending groups 177--192 / 300; rows  6720 / 10500
+  completed pending groups 193--208 / 300; rows  7280 / 10500
+  completed pending groups 209--224 / 300; rows  7840 / 10500
+  completed pending groups 225--240 / 300; rows  8400 / 10500
+  completed pending groups 241--256 / 300; rows  8960 / 10500
+  completed pending groups 257--272 / 300; rows  9520 / 10500
+  completed pending groups 273--288 / 300; rows 10080 / 10500
+  completed pending groups 289--300 / 300; rows 10500 / 10500
+
+EXP14A machine gates
+  [PASS] matrix_completeness                total=10500 frontier=9000 mechanism=1500
+  [PASS] unique_cells                       every declared seed/cell appears once
+  [PASS] finite_outputs                     all required control, freshness, PHY and 6-DOF outputs are finite
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=3 max history=32
+  [FAIL] physical_accounting                DATA/ACK recipient outcomes and busy-time identities close
+  [PASS] paired_absolute_trace              one underlying trace per seed and one state realization per seed/scenario
+  [PASS] feedback_information_constraint    periodic/state arms emit no ACK traffic
+  [PASS] mechanism_semantics                standalone, piggyback and hybrid obligations remain distinct
+  [PASS] plant_stability                    0 diverged 6-DOF runs
+  [PASS] channel_cell_identity              logged stationary channel marginals match the frozen registry
+
+EXP14A VERDICT: FAIL (10/11 integrity gates)
+Performance superiority was not a machine gate.
+
+============================================================
+DONE : exp14a_holdout_primary
+TIME : 32 m 22 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14a_holdout_primary\2026-08-29_155023
+============================================================

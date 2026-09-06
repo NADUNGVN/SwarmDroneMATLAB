@@ -1,0 +1,17 @@
+{
+  "status": "INTEGER_ACCOUNTED_ROUTING_PRIMITIVE_DIAGNOSTIC_VALID",
+  "gatesPassed": 7,
+  "gatesTotal": 7,
+  "exp23ajInvalidRetained": true,
+  "exp23alInvalidRetained": true,
+  "routingPrimitiveValidated": true,
+  "integerRoutedAccountingValidated": true,
+  "semanticRecipientRoutingValidated": true,
+  "closedLoopManagementRelayingValidated": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "multi_origin_common_phy_routing_integration"
+}

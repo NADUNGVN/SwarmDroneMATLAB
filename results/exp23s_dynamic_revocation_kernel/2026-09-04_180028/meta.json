@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23s_dynamic_revocation_kernel",
+  "runId": "2026-09-04_180028",
+  "startedAt": "2026-09-04 18:00:28",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh fixed-supergraph self-revocation and reacquisition validation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23s_dynamic_revocation_kernel.m",
+  "finishedAt": "2026-09-04 18:00:43",
+  "elapsedSec": 14.6536894,
+  "elapsedText": "14.7 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

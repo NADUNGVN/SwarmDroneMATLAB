@@ -1,0 +1,18 @@
+{
+  "experiment": "exp17_operating_envelope",
+  "runId": "2026-08-31_110505",
+  "startedAt": "2026-08-31 11:05:05",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed operating-envelope holdout; 48-test core Holm family plus reverse-asymmetric/hidden-terminal boundaries.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp17_operating_envelope.m",
+  "finishedAt": "2026-08-31 11:28:10",
+  "elapsedSec": 1384.4929423,
+  "elapsedText": "23 m 04 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

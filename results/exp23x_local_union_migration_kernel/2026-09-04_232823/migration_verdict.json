@@ -1,0 +1,10 @@
+{
+  "status": "LOCAL_UNION_MIGRATION_KERNEL_VALID",
+  "gatesPassed": 21,
+  "gatesTotal": 21,
+  "rows": 3000,
+  "freshSeedEvidence": false,
+  "closedLoopClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "common_phy_local_migration_integration"
+}

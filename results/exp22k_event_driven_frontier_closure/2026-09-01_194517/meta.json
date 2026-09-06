@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22k_event_driven_frontier_closure",
+  "runId": "2026-09-01_194517",
+  "startedAt": "2026-09-01 19:45:18",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh cost-targeted periodic falsification of event-driven ELCS-F with protocol and analytical-bound gates.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22k_event_driven_frontier_closure.m",
+  "finishedAt": "2026-09-01 19:51:01",
+  "elapsedSec": 343.6059331,
+  "elapsedText": "5 m 44 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

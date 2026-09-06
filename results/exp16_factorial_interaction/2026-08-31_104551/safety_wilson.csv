@@ -1,0 +1,7 @@
+arm,macType,route,failures,n,rate,wilsonLo,wilsonHi,divergences
+csma-adaptive,csma,adaptive,0,100,0,0,0.0369934982069857,0
+csma-piggyback,csma,piggyback,0,100,0,0,0.0369934982069857,0
+csma-fixed-hybrid,csma,fixed-hybrid,0,100,0,0,0.0369934982069857,0
+aloha-adaptive,aloha,adaptive,0,100,0,0,0.0369934982069857,0
+aloha-piggyback,aloha,piggyback,0,100,0,0,0.0369934982069857,0
+aloha-fixed-hybrid,aloha,fixed-hybrid,0,100,0,0,0.0369934982069857,0

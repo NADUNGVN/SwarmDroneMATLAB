@@ -1,0 +1,13 @@
+{
+  "status": "ONLINE_SWEPT_RECEIVER_CLOSURE_INVALID",
+  "gatesPassed": 23,
+  "gatesTotal": 24,
+  "rows": 120,
+  "developmentOnly": true,
+  "onlinePlantCouplingValidated": false,
+  "managementRelayingValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "repair_online_tube_or_transaction_without_relaxing_gates"
+}

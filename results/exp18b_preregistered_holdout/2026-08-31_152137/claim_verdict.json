@@ -1,0 +1,20 @@
+{
+  "status": "SUPPORTED_WITHIN_REGISTERED_SCOPE",
+  "candidate": "capacity-gated-selector",
+  "holmTestsRejected": 9,
+  "holmTestsTotal": 9,
+  "positiveScreenTestsRejected": 5,
+  "positiveScreenTestsTotal": 5,
+  "abstentionTestsRejected": 2,
+  "abstentionTestsTotal": 2,
+  "accessRepairTestsRejected": 2,
+  "accessRepairTestsTotal": 2,
+  "exactAliasGatePassed": true,
+  "infeasibleAbstentionGatePassed": true,
+  "boundarySafetyGuardPassed": true,
+  "screenNecessityClaimPermitted": false,
+  "populationSafetyClaimPermitted": false,
+  "universalOptimalityClaimPermitted": false,
+  "hardwareClaimPermitted": false,
+  "measuredTraceBenchPermitted": true
+}

@@ -1,0 +1,13 @@
+gate,passed,detail
+matrix_completeness,1,"288 development runs"
+unique_cells,1,"one row per declared seed/cell/arm"
+finite_outputs,1,"control, AoI and medium outputs are finite"
+causal_conservatism,1,"0 protocol violations"
+bounded_memory,1,"max queue=2 max history=32"
+physical_accounting,1,"DATA/ACK terminal accounting and busy union close"
+paired_absolute_trace,1,"one trace and channel-state realization per seed/cell"
+adaptive_ack_semantics,1,"adaptive decisions occur only in declared adaptive arms"
+load_guard_semantics,1,"guard blocks only declared guarded arms and is exercised"
+access_scaling_semantics,1,"only access/full arms apply min(p,1/N)"
+local_busy_contract,1,"causal local busy estimates remain in [0,1]"
+divergence_accounting,1,"0 divergences retained"

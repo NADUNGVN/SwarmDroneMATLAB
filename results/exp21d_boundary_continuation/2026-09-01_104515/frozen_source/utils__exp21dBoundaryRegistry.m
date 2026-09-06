@@ -1,0 +1,56 @@
+function R=exp21dBoundaryRegistry()
+%EXP21DBOUNDARYREGISTRY Frozen D-STR closed-loop boundary matrix.
+
+R.version='EXP21D-BOUNDARY-CONTINUATION-v1';
+R.frozenDate='2026-09-01';
+R.stage='prior-art-boundary-falsification';
+R.policyOptimizationAllowed=false;
+R.newMethodPromotionAllowed=false;
+R.submissionClaimPermitted=false;
+R.clockContinuationPermitted=false;
+R.seeds=(16037001:16037030)';
+R.cells=struct( ...
+    'id',{'n5-6dof','n10-ring2'}, ...
+    'label',{'N5 6-DOF','N10 ring2'}, ...
+    'closedLoopCell',{'n5-6dof-zero-loss','n10-ring2-zero-loss'});
+R.arms=struct( ...
+    'id',{'zero-native','zero-warm','beacon-loss-native', ...
+        'beacon-loss-warm','restricted-management-native', ...
+        'churn-rejoin-native'}, ...
+    'label',{'D-STR native zero loss','Oracle-warm zero loss', ...
+        'D-STR native DATA erasure 0.05', ...
+        'Oracle-warm DATA erasure 0.05', ...
+        'D-STR restricted management reach', ...
+        'D-STR local state loss/rejoin'}, ...
+    'condition',{'zero','zero','beacon-loss','beacon-loss', ...
+        'restricted-management','churn-rejoin'}, ...
+    'kind',{'prior-art-native','oracle-cost-decomposition', ...
+        'prior-art-boundary','oracle-loss-decomposition', ...
+        'logical-alignment-boundary','prior-art-boundary'}, ...
+    'warm',{false,true,false,true,false,false});
+R.zeroNativeArm='zero-native';
+R.zeroWarmArm='zero-warm';
+R.lossNativeArm='beacon-loss-native';
+R.lossWarmArm='beacon-loss-warm';
+R.restrictedArm='restricted-management-native';
+R.churnArm='churn-rejoin-native';
+R.maxFrames=1200;
+R.initialDataSlots=10;
+R.maxDataSlots=64;
+R.collisionThreshold=3;
+R.growthMargin=3;
+R.shrinkThreshold=5;
+R.failedShrinkTimeout=30;
+R.shrinkBackoffExponentCap=6;
+R.retentionProbability=0.75;
+R.beaconErasureProbability=0.05;
+R.churnFrame=60;
+R.churnNode=2;
+R.traceSeedOffset=21092026;
+B=continuousTdmaGuardBound(0.25e-3,40,0.5);
+R.safeGuardSec=B.safeGuardSec;
+R.periodicRateHz=50;
+R.expectedRuns=numel(R.seeds)*numel(R.cells)*numel(R.arms);
+R.requiredIntegrationContracts=15;
+
+end

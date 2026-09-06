@@ -1,0 +1,25 @@
+{
+  "referenceUrl": "https://github.com/signetlabdei/delta_medium_access",
+  "referenceCommit": "813dd2d952e172fff302356cd936e0d20a30a328",
+  "referenceDirectory": "C:\\Users\\Dawin\\AppData\\Local\\Temp\\swarm_exp20_delta_validate_3716b317ee164c01a977bf23470dd70e\\delta_medium_access",
+  "cleanRoomImplementation": "network/simulateDeltaInformationStructure.m",
+  "seeds": [
+    1.6027801E+7,
+    1.6027802E+7,
+    1.6027803E+7,
+    1.6027804E+7,
+    1.6027805E+7
+  ],
+  "cells": [
+    "n5-rho50-eps05",
+    "n5-rho50-eps20",
+    "n10-rho50-eps05",
+    "n10-rho50-eps20",
+    "n20-rho50-eps05",
+    "n20-rho50-eps20"
+  ],
+  "descriptiveOnly": true,
+  "decisionGate": false,
+  "upstreamSourceCopiedIntoRepository": false,
+  "upstreamLicense": "GPLv3"
+}

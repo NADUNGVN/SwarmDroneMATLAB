@@ -1,0 +1,11 @@
+{
+  "status": "RECEIVER_LIFTED_CLOSURE_COMMON_PHY_VALID",
+  "gatesPassed": 22,
+  "gatesTotal": 22,
+  "rows": 2100,
+  "freshSeedEvidence": false,
+  "closedLoopClaimPermitted": false,
+  "onlinePlantCouplingPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "online_plant_coupled_tube_integration"
+}

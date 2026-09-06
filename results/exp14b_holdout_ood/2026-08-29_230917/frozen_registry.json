@@ -1,0 +1,348 @@
+{
+  "version": "EXP14-FROZEN-v1",
+  "frozenDate": "2026-08-29",
+  "seedStatus": "unopened when this registry was written",
+  "seeds": [
+    1.4014001E+7,
+    1.4014002E+7,
+    1.4014003E+7,
+    1.4014004E+7,
+    1.4014005E+7,
+    1.4014006E+7,
+    1.4014007E+7,
+    1.4014008E+7,
+    1.4014009E+7,
+    1.401401E+7,
+    1.4014011E+7,
+    1.4014012E+7,
+    1.4014013E+7,
+    1.4014014E+7,
+    1.4014015E+7,
+    1.4014016E+7,
+    1.4014017E+7,
+    1.4014018E+7,
+    1.4014019E+7,
+    1.401402E+7,
+    1.4014021E+7,
+    1.4014022E+7,
+    1.4014023E+7,
+    1.4014024E+7,
+    1.4014025E+7,
+    1.4014026E+7,
+    1.4014027E+7,
+    1.4014028E+7,
+    1.4014029E+7,
+    1.401403E+7,
+    1.4014031E+7,
+    1.4014032E+7,
+    1.4014033E+7,
+    1.4014034E+7,
+    1.4014035E+7,
+    1.4014036E+7,
+    1.4014037E+7,
+    1.4014038E+7,
+    1.4014039E+7,
+    1.401404E+7,
+    1.4014041E+7,
+    1.4014042E+7,
+    1.4014043E+7,
+    1.4014044E+7,
+    1.4014045E+7,
+    1.4014046E+7,
+    1.4014047E+7,
+    1.4014048E+7,
+    1.4014049E+7,
+    1.401405E+7,
+    1.4014051E+7,
+    1.4014052E+7,
+    1.4014053E+7,
+    1.4014054E+7,
+    1.4014055E+7,
+    1.4014056E+7,
+    1.4014057E+7,
+    1.4014058E+7,
+    1.4014059E+7,
+    1.401406E+7,
+    1.4014061E+7,
+    1.4014062E+7,
+    1.4014063E+7,
+    1.4014064E+7,
+    1.4014065E+7,
+    1.4014066E+7,
+    1.4014067E+7,
+    1.4014068E+7,
+    1.4014069E+7,
+    1.401407E+7,
+    1.4014071E+7,
+    1.4014072E+7,
+    1.4014073E+7,
+    1.4014074E+7,
+    1.4014075E+7,
+    1.4014076E+7,
+    1.4014077E+7,
+    1.4014078E+7,
+    1.4014079E+7,
+    1.401408E+7,
+    1.4014081E+7,
+    1.4014082E+7,
+    1.4014083E+7,
+    1.4014084E+7,
+    1.4014085E+7,
+    1.4014086E+7,
+    1.4014087E+7,
+    1.4014088E+7,
+    1.4014089E+7,
+    1.401409E+7,
+    1.4014091E+7,
+    1.4014092E+7,
+    1.4014093E+7,
+    1.4014094E+7,
+    1.4014095E+7,
+    1.4014096E+7,
+    1.4014097E+7,
+    1.4014098E+7,
+    1.4014099E+7,
+    1.40141E+7
+  ],
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.4141414E+7,
+  "scenarios": [
+    {
+      "id": "clean",
+      "label": "Clean",
+      "dataGoodLoss": 0,
+      "dataBadLoss": 0.2,
+      "dataGoodToBad": 0.001,
+      "dataBadToGood": 0.039,
+      "ackGoodLoss": 0,
+      "ackBadLoss": 0.2,
+      "ackGoodToBad": 0.001,
+      "ackBadToGood": 0.039,
+      "stationaryBadProbability": 0.025,
+      "meanBadDurationSec": 0.02564102564102564,
+      "stationaryMeanLoss": 0.005000000000000001
+    },
+    {
+      "id": "moderate",
+      "label": "Moderate",
+      "dataGoodLoss": 0.03,
+      "dataBadLoss": 0.7,
+      "dataGoodToBad": 0.004,
+      "dataBadToGood": 0.036,
+      "ackGoodLoss": 0.03,
+      "ackBadLoss": 0.7,
+      "ackGoodToBad": 0.004,
+      "ackBadToGood": 0.036,
+      "stationaryBadProbability": 0.10000000000000002,
+      "meanBadDurationSec": 0.02777777777777778,
+      "stationaryMeanLoss": 0.097
+    },
+    {
+      "id": "stressed",
+      "label": "Stressed",
+      "dataGoodLoss": 0.05,
+      "dataBadLoss": 0.85,
+      "dataGoodToBad": 0.009,
+      "dataBadToGood": 0.021,
+      "ackGoodLoss": 0.05,
+      "ackBadLoss": 0.85,
+      "ackGoodToBad": 0.009,
+      "ackBadToGood": 0.021,
+      "stationaryBadProbability": 0.3,
+      "meanBadDurationSec": 0.047619047619047616,
+      "stationaryMeanLoss": 0.29
+    }
+  ],
+  "frontiers": [
+    {
+      "id": "periodic",
+      "label": "Periodic",
+      "values": [
+        5,
+        10,
+        12.5,
+        20,
+        25
+      ]
+    },
+    {
+      "id": "state",
+      "label": "State-event",
+      "values": [
+        0.5,
+        0.75,
+        1,
+        1.5,
+        2
+      ]
+    },
+    {
+      "id": "aoi",
+      "label": "Causal AoI-only",
+      "values": [
+        0.06,
+        0.09,
+        0.12,
+        0.18,
+        0.24
+      ]
+    },
+    {
+      "id": "aoci",
+      "label": "AoCI-inspired",
+      "values": [
+        0.5,
+        0.75,
+        1,
+        1.5,
+        2
+      ]
+    },
+    {
+      "id": "belief",
+      "label": "Delayed-ACK belief",
+      "values": [
+        0.06,
+        0.09,
+        0.12,
+        0.18,
+        0.24
+      ]
+    },
+    {
+      "id": "proposed",
+      "label": "Causal-Broadcast",
+      "values": [
+        0.5,
+        0.75,
+        1,
+        1.5,
+        2
+      ]
+    }
+  ],
+  "mechanisms": [
+    {
+      "id": "causal-unicast",
+      "label": "Causal unicast + standalone ACK",
+      "method": "causal-unicast",
+      "feedbackMode": "standalone"
+    },
+    {
+      "id": "broadcast-data-only",
+      "label": "Broadcast DATA only",
+      "method": "state-event",
+      "feedbackMode": "none"
+    },
+    {
+      "id": "broadcast-standalone",
+      "label": "Broadcast + standalone ACK",
+      "method": "causal-broadcast",
+      "feedbackMode": "standalone"
+    },
+    {
+      "id": "broadcast-piggyback",
+      "label": "Broadcast + piggyback ACK",
+      "method": "causal-broadcast",
+      "feedbackMode": "piggyback"
+    },
+    {
+      "id": "broadcast-hybrid",
+      "label": "Full Causal-Broadcast",
+      "method": "causal-broadcast",
+      "feedbackMode": "hybrid"
+    }
+  ],
+  "oodPoints": [
+    {
+      "id": "n10-ring2",
+      "label": "N10 ring2"
+    },
+    {
+      "id": "n20-ring2",
+      "label": "N20 ring2"
+    },
+    {
+      "id": "n10-sparse4",
+      "label": "N10 sparse4"
+    },
+    {
+      "id": "background030",
+      "label": "30% background busy"
+    },
+    {
+      "id": "hidden-terminal",
+      "label": "hidden terminals"
+    },
+    {
+      "id": "reverse-asymmetric",
+      "label": "reverse-asymmetric ACK"
+    },
+    {
+      "id": "estimator-c3",
+      "label": "C3 estimator"
+    },
+    {
+      "id": "aloha-p020",
+      "label": "ALOHA p=0.2"
+    }
+  ],
+  "oodMethods": [
+    {
+      "id": "periodic-p10",
+      "label": "Periodic-P10",
+      "method": "periodic",
+      "periodHz": 10,
+      "feedbackMode": "none"
+    },
+    {
+      "id": "periodic-p20",
+      "label": "Periodic-P20",
+      "method": "periodic",
+      "periodHz": 20,
+      "feedbackMode": "none"
+    },
+    {
+      "id": "state-default",
+      "label": "State-event default",
+      "method": "state-event",
+      "periodHz": null,
+      "feedbackMode": "none"
+    },
+    {
+      "id": "belief-default",
+      "label": "Delayed-ACK belief default",
+      "method": "delayed-ack-belief",
+      "periodHz": null,
+      "feedbackMode": "hybrid"
+    },
+    {
+      "id": "proposed-hybrid",
+      "label": "Causal-Broadcast hybrid",
+      "method": "causal-broadcast",
+      "periodHz": null,
+      "feedbackMode": "hybrid"
+    },
+    {
+      "id": "proposed-piggyback",
+      "label": "Causal-Broadcast piggyback",
+      "method": "causal-broadcast",
+      "periodHz": null,
+      "feedbackMode": "piggyback"
+    }
+  ],
+  "primaryContrasts": [
+    "Clean: proposed default minus Periodic-P10",
+    "Stressed: proposed default minus Periodic-P10",
+    "Stressed: proposed default minus delayed-belief default",
+    "Moderate: hybrid broadcast minus causal unicast",
+    "Moderate: piggyback-only minus hybrid broadcast"
+  ],
+  "expected": {
+    "primaryFrontierRuns": 9000,
+    "primaryMechanismRuns": 1500,
+    "primaryRuns": 10500,
+    "oodRuns": 4800,
+    "totalRuns": 15300
+  }
+}

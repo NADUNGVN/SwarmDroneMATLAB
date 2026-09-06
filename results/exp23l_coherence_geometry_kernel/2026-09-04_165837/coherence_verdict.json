@@ -1,0 +1,9 @@
+{
+  "status": "COHERENCE_GEOMETRY_KERNEL_INVALID",
+  "gatesPassed": 14,
+  "gatesTotal": 15,
+  "rows": 400,
+  "distributedKernelIntegrationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

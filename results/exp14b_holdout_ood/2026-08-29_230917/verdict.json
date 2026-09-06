@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "gatesPassed": 9,
+  "gatesTotal": 9,
+  "totalRuns": 4800,
+  "performanceClaimGate": "NONE",
+  "negativeResultsRetained": true,
+  "configurationChangePermitted": false
+}

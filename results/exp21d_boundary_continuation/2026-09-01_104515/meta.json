@@ -1,0 +1,17 @@
+{
+  "experiment": "exp21d_boundary_continuation",
+  "runId": "2026-09-01_104515",
+  "startedAt": "2026-09-01 10:45:15",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "",
+  "notes": "resumed from complete checkpoint for final housekeeping",
+  "finishedAt": "2026-09-01 11:33:57",
+  "elapsedSec": 2.1546681,
+  "elapsedText": "2.2 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "gatesPassed": 14,
+  "gatesTotal": 14,
+  "totalDevelopmentRuns": 531,
+  "selectedDesignIndex": 0,
+  "policyClaimPermitted": false,
+  "holdoutOpened": false,
+  "note": "EXP13 may freeze an EXP14 candidate only. Frontier and ablation contrasts are development observations."
+}

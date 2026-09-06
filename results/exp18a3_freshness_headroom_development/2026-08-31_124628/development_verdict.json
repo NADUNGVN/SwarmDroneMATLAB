@@ -1,0 +1,10 @@
+{
+  "status": "REJECT_OR_REVISE_FRESHNESS_HEADROOM",
+  "developmentOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "gatesPassed": 7,
+  "gatesTotal": 8,
+  "feasibleCoreMacCells": 5,
+  "futureHoldoutOpened": false,
+  "hardwareClaimPermitted": false
+}

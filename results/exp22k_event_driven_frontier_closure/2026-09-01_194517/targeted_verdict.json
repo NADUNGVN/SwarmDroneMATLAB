@@ -1,0 +1,13 @@
+{
+  "status": "ELCS_TARGETED_FRONTIER_STUDY_INVALID",
+  "integrityGatesPassed": 12,
+  "integrityGatesTotal": 13,
+  "rows": 180,
+  "strictDominanceFound": false,
+  "epsilonDominanceFound": false,
+  "confidenceSupportedEpsilonDominanceFound": false,
+  "next": "repair_experiment_integrity",
+  "robustnessContinuationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

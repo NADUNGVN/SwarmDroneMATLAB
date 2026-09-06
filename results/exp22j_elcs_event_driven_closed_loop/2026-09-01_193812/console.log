@@ -1,0 +1,54 @@
+
+============================================================
+RUN  : exp22j_elcs_event_driven_closed_loop
+ID   : 2026-09-01_193812
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22j_elcs_event_driven_closed_loop\2026-09-01_193812
+WHEN : 2026-09-01 19:38:12
+============================================================
+
+  groups  1-- 4 / 60; rows   8 / 120
+  groups  5-- 8 / 60; rows  16 / 120
+  groups  9--12 / 60; rows  24 / 120
+  groups 13--16 / 60; rows  32 / 120
+  groups 17--20 / 60; rows  40 / 120
+  groups 21--24 / 60; rows  48 / 120
+  groups 25--28 / 60; rows  56 / 120
+  groups 29--32 / 60; rows  64 / 120
+  groups 33--36 / 60; rows  72 / 120
+  groups 37--40 / 60; rows  80 / 120
+  groups 41--44 / 60; rows  88 / 120
+  groups 45--48 / 60; rows  96 / 120
+  groups 49--52 / 60; rows 104 / 120
+  groups 53--56 / 60; rows 112 / 120
+  groups 57--60 / 60; rows 120 / 120
+
+EXP22D ELCS-F closed-loop integration gates
+  [PASS] registry_frozen                             hash 44430535 over 39 leaves
+  [PASS] matrix_complete_unique                      120/120 unique rows
+  [PASS] exact_seed_cell_arm_coverage                30 fresh seeds, two cells and two arms exact
+  [PASS] paired_absolute_realizations                channel, estimator, ELCS kernel and logical opportunities paired
+  [PASS] clock_impairment_declared                   only affine arm consumes the paired bounded clock realization
+  [PASS] affine_clock_and_guard_certificate          max residual 2.22e-16 s; min gap 0.000306 s
+  [PASS] elcs_kernel_safety                          0 false-valid, 0 lock and 0 scheduled-collision witnesses
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] all_elcs_opportunities_served               0 skipped opportunities
+  [PASS] exact_data_outcome_replay                   scheduled/fallback success, erasure and collision masks match
+  [PASS] data_collision_witness_match                event collision frames equal completed ELCS witnesses
+  [PASS] management_accounting_closes                STATUS/GRANT recipient partitions and 32-byte attempt-airtime close
+  [PASS] cross_plane_nonoverlap                      0 overlap witnesses
+  [PASS] recipient_and_airtime_accounting            recipient partition and fully charged offered/busy utilization close
+  [PASS] protocol_invariants                         0 invariant violations
+  [PASS] event_driven_request_discipline             0 grant-without-request; STATUS residual 0
+  [PASS] event_driven_control_bound                  maximum observed/bound ratio 0.982967
+  [PASS] event_driven_acquisition_deadline           maximum first-certification excess 0 frames
+  [PASS] all_failures_retained                       0 unsafe, 0 divergent and 0 uncertified retained
+  [PASS] integration_scope_only                      no tuning, promotion, robustness claim or submission decision
+
+EXP22D VERDICT: ELCS_EVENT_DRIVEN_CLOSED_LOOP_VALID
+
+============================================================
+DONE : exp22j_elcs_event_driven_closed_loop
+TIME : 3 m 07 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22j_elcs_event_driven_closed_loop\2026-09-01_193812
+============================================================

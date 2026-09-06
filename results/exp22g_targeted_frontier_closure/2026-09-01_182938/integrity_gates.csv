@@ -1,0 +1,11 @@
+gate,passed,detail
+registry_frozen,1,"hash 46263215 over 43 leaves"
+matrix_complete_unique,1,"180/180 unique rows"
+exact_matrix_coverage,1,"30 fresh seeds, two cells and three arms exact"
+paired_shared_realizations,1,"channel, initial state, estimator and clock draws paired"
+static_guarded_collision_free,1,"targeted static arms remain physically collision-free"
+exact_elcs_replay,1,"ELCS queue opportunities, receiver outcomes and control accounting close"
+elcs_safety,1,"lease safety remains valid on every fresh seed"
+recipient_and_airtime_accounting,1,"all actual DATA and management airtime and recipients close"
+causal_and_closed_loop_invariants,1,"zero causal, protocol, safety and divergence failures"
+targeted_scope_only,1,"no tuning, robustness, promotion or submission decision"

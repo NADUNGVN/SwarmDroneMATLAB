@@ -1,0 +1,11 @@
+{
+  "exp13Dir": "results/exp13_development/2026-08-29_111747",
+  "exp13bDir": "results/exp13b_multislot_mac_diagnostic/2026-08-29_131048",
+  "proposedParetoClean": 0,
+  "proposedParetoModerate": 0,
+  "proposedParetoStressed": 2,
+  "mostInfluentialParameter": "aoiThreshold",
+  "oneSlotMacDegenerate": true,
+  "multiSlotMacDistinct": true,
+  "policyClaimPermitted": false
+}

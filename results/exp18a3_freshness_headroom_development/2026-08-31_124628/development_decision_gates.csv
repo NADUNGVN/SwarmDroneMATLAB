@@ -1,0 +1,9 @@
+gate,passed,detail
+feasible_coverage,1,5 feasible core cells with both N and access types
+feasible_failure_nonincrease,1,feasible candidate failures do not exceed either fixed route
+feasible_not_jointly_worse,1,1 jointly-worse feasible cells (maximum 1)
+infeasible_exact_abstention,1,11 infeasible context--MAC cells emit zero standalone ACKs
+feasible_csma_exact_piggyback_alias,0,4 feasible CSMA cells emit zero ACK and alias piggyback exactly
+feasible_aloha_active_quality,1,1 feasible ALOHA cells retain ACK activity without joint loss
+n10_aloha_collision_frame_repair,1,N10 ALOHA absolute collisions reduce by >= 10%
+reverse_mismatch_reported,1,reverse boundary retains nominal ACK calibration mismatch

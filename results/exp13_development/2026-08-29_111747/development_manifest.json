@@ -1,0 +1,29 @@
+{
+  "status": "development-only",
+  "preregistration": "docs/EXP13_DEVELOPMENT_PLAN.md",
+  "developmentSeeds": [
+    1.3013001E+7,
+    1.3013002E+7,
+    1.3013003E+7,
+    1.3013004E+7
+  ],
+  "sensitivitySeeds": [
+    1.3013001E+7,
+    1.3013002E+7,
+    1.3013003E+7
+  ],
+  "scenarioNames": [
+    "Clean",
+    "Moderate",
+    "Stressed"
+  ],
+  "scenarioLoss": [
+    0,
+    0.1,
+    0.3
+  ],
+  "primaryPAccess": 0.2,
+  "frontierPointsPerFamily": 5,
+  "totalRuns": 531,
+  "holdoutSeedRange": "not assigned and not accessed"
+}

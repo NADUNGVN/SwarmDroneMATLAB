@@ -1,0 +1,12 @@
+{
+  "status": "RENEWAL_ARCHITECTURE_HAS_THEORETICAL_HEADROOM",
+  "sourceRun": "2026-09-04_162852",
+  "rows": 60,
+  "reconstructionCloses": true,
+  "bootstrapOnlyCheaperThanPeriodic": true,
+  "sharedHeaderCheaperThanPeriodic": false,
+  "renewalHasRequiredHeadroom": true,
+  "kernelRedesignPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

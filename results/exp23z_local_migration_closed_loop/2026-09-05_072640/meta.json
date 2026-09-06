@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23z_local_migration_closed_loop",
+  "runId": "2026-09-05_072640",
+  "startedAt": "2026-09-05 07:26:40",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "N10 graph-input local migration closed-loop development.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23z_local_migration_closed_loop.m",
+  "finishedAt": "2026-09-05 07:29:21",
+  "elapsedSec": 161.4705897,
+  "elapsedText": "2 m 41 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

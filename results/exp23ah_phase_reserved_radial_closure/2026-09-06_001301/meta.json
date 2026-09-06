@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ah_phase_reserved_radial_closure",
+  "runId": "2026-09-06_001301",
+  "startedAt": "2026-09-06 00:13:01",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh phase-reserved reliable online radial closure validation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ah_phase_reserved_radial_closure.m",
+  "finishedAt": "2026-09-06 00:17:52",
+  "elapsedSec": 290.8488276,
+  "elapsedText": "4 m 51 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

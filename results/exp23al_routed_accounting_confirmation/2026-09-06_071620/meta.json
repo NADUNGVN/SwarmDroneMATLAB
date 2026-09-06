@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23al_routed_accounting_confirmation",
+  "runId": "2026-09-06_071620",
+  "startedAt": "2026-09-06 07:16:20",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh-trace exact integer byte and derived-airtime confirmation for the retained routed-management diagnostic.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23al_routed_accounting_confirmation.m",
+  "finishedAt": "2026-09-06 07:16:38",
+  "elapsedSec": 18.3380448,
+  "elapsedText": "18.3 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

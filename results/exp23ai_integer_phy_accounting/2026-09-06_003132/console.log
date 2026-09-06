@@ -1,0 +1,71 @@
+
+============================================================
+RUN  : exp23ai_integer_phy_accounting
+ID   : 2026-09-06_003132
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ai_integer_phy_accounting\2026-09-06_003132
+WHEN : 2026-09-06 00:31:32
+============================================================
+
+  seed  5 / 50; rows  30 / 300
+  seed 10 / 50; rows  60 / 300
+  seed 15 / 50; rows  90 / 300
+  seed 20 / 50; rows 120 / 300
+  seed 25 / 50; rows 150 / 300
+  seed 30 / 50; rows 180 / 300
+  seed 35 / 50; rows 210 / 300
+  seed 40 / 50; rows 240 / 300
+  seed 45 / 50; rows 270 / 300
+  seed 50 / 50; rows 300 / 300
+
+EXP23AI integer-PHY accounting gates
+  [PASS] registry_frozen_fresh                         hash 194842944 over 122 leaves; 50 seeds disjoint
+  [PASS] invalid_parent_retained                       EXP23AH remains invalid at 26/27; accounting is not relabeled
+  [PASS] calibration_nonfresh                          phase and leader radius remain calibration-only
+  [PASS] matrix_complete_unique                        300/300 unique rows
+  [PASS] exact_matrix_coverage                         50 untouched seeds and six frozen arms exact
+  [PASS] seed_trace_pairing                            one exogenous PHY trace is paired across arms per seed
+  [PASS] online_prefix_exact                           decision state and pre-PREPARE schedule are prefix-identical
+  [PASS] causal_geometry_pairing                       geometry, selector, and reliability certificate pair per seed
+  [PASS] receiver_lifted_stimulus                      minimum nonincident edges 1; affected range 3--4
+  [PASS] union_packet_and_protected_slots              union coloring, MTU, and protected slots remain admissible
+  [PASS] persistent_quiet_kernel_bounds                v2 persistent QUIET and analytical kernel bounds hold
+  [PASS] motion_gate_exact                             command begins at graph activation only
+  [PASS] prepare_blackout_blocks_motion                PREPARE blackout safely exhausts without motion
+  [PASS] analytical_transaction_reliability            maximum union failure bound 0.000760320524
+  [PASS] normal_completion_or_safe_abort               completion 50/50 = 1.0000; any failure remains suppressed
+  [PASS] response_blackout_conditional_silence         pre-barrier abort or full post-barrier suppression only
+  [PASS] commit_blackout_conditional_safety            abort, evidence failure, or initiator-only COMMIT are safe
+  [PASS] parallel_emergency_mapping                    each suppressed sender gets a distinct protected slot per frame
+  [PASS] radial_construction_premise                   every omitted pair is nominally beyond R_I+b_ij
+  [PASS] protected_radial_theorem                      maximum inward-contraction ratio 0.980655
+  [PASS] protected_actual_graph_subset                 minimum omitted-edge margin 0.131280 m
+  [PASS] no_emergency_negative_visible                 minimum radial violation 5.930; mean paired RMSE penalty 0.227599 m
+  [PASS] supported_collision_safety                    all protected fresh rows are collision-free
+  [PASS] receiver_outcome_replay_exact                 receiver success/erasure outcomes replay exactly
+  [PASS] integer_management_accounting                 maximum observed bytes 13034; integer attempts/bytes exact
+  [PASS] derived_airtime_exact                         runtime and schedule airtime equal 8*integer bytes/rate exactly
+  [PASS] affine_timing_and_causal_reads                maximum equation residual 8.88e-16 s; forbidden reads zero
+  [PASS] protected_safety_and_scope                    minimum protected separation 0.996960 m; downstream claims false
+                       arm                           kind                fault            emergencyEnabled    nRuns    motionAuthorizationRate    reactivationRate    meanMissionRmse    minimumSeparation    safeFailures    radialContractPassRate    maximumRadialRatio    maximumTransactionFailureBound    maximumObservedControlBytes    meanManagementAirtime    meanTotalCost
+    __________________________________________    ___________    _____________________    ________________    _____    _______________________    ________________    _______________    _________________    ____________    ______________________    __________________    ______________________________    ___________________________    _____________________    _____________
+
+    {'closure-commit-blackout-emergency'     }    {'closure'}    {'commit-blackout'  }           1             50                 1                      0                0.14818             0.99696              0                    1                     0.9806                    0.00076032                          5692                      0.14693              0.15443   
+    {'closure-iid20-emergency'               }    {'closure'}    {'none'             }           1             50                 1                      1                0.14919              1.0087              0                    1                    0.97923                    0.00076032                          5552                      0.14309              0.15406   
+    {'closure-prepare-blackout-emergency'    }    {'closure'}    {'prepare-blackout' }           1             50                 0                      0                 0.1572              1.0177              0                    1                    0.98061                    0.00076032                           432                     0.012559              0.14163   
+    {'closure-response-blackout-emergency'   }    {'closure'}    {'response-blackout'}           1             50                 1                      0                0.14835                   1              0                    1                    0.98066                    0.00076032                         13034                      0.40651              0.17915   
+    {'closure-response-blackout-no-emergency'}    {'closure'}    {'response-blackout'}           0             50                 1                      0                0.37595              0.7213              0                    0                     7.6676                    0.00076032                         13034                      0.40651              0.14575   
+
+                   contrast                    nPairs    meanDeltaMissionRmse    minimumDeltaMissionRmse    maximumDeltaMissionRmse    meanDeltaTotalCost
+    _______________________________________    ______    ____________________    _______________________    _______________________    __________________
+
+    "response_no_emergency_minus_protected"      50              0.2276                  0.18473                    0.25771                  -0.0334     
+    "normal_closure_minus_periodic"              50            0.038142                 0.029229                   0.047347                 -0.10323     
+
+EXP23AI DECISION: INTEGER_ACCOUNTED_RADIAL_CLOSURE_FRESH_VALID
+
+============================================================
+DONE : exp23ai_integer_phy_accounting
+TIME : 4 m 52 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ai_integer_phy_accounting\2026-09-06_003132
+============================================================

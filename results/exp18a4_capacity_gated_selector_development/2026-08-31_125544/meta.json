@@ -1,0 +1,18 @@
+{
+  "experiment": "exp18a4_capacity_gated_selector_development",
+  "runId": "2026-08-31_125544",
+  "startedAt": "2026-08-31 12:55:44",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development-only capacity abstention with exact fixed-route alias; no confirmatory claim or new threshold.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp18a4_capacity_gated_selector_development.m",
+  "finishedAt": "2026-08-31 12:59:04",
+  "elapsedSec": 199.5163615,
+  "elapsedText": "3 m 20 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

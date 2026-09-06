@@ -1,0 +1,2 @@
+scenario,nDecisions,minimumRequired,totalEntries,positiveLeadEntryFraction,meanLeadSeconds,meanNetAirtimeBenefit,meanTrueAoIIntegralBenefit,meanControlLossIntegralBenefit,inferencePermitted
+n20-ring2,4,12,9,0.333333333333333,0.000500000000000168,-0.00599999999999933,0.000343478260869557,6.32149144952022e-06,0

@@ -1,0 +1,9 @@
+{
+  "status": "DSTR_BOUNDARY_STUDY_VALID",
+  "gatesPassed": 16,
+  "gatesTotal": 16,
+  "rows": 360,
+  "clockContinuationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

@@ -1,0 +1,96 @@
+\section{System and Protocol Model}
+\label{sec:s2-system}
+
+\subsection{Formation information graph}
+
+Consider $N$ agents with directed information graph
+$\mathcal G=(\mathcal V,\mathcal E)$. Agent $j$ broadcasts state
+$x_j=[p_j^\top,v_j^\top]^\top$ to its out-neighbors. The controller uses the
+newest accepted neighbor sample propagated with a constant-velocity model.
+The primary plant has 6-DOF followers at $N=5$; larger-swarm studies and the
+theory track use double-integrator followers. The communication protocol is
+identical across these plant models.
+
+For receiver $i$ and sender $j$, let $G_{ij}(t)$ be the generation time of the
+newest DATA accepted by $i$, and let $C_{ij}(t)$ be the newest generation that
+$j$ has causally confirmed through an arrived ACK entry. Their associated
+ages are
+\begin{equation}
+\Delta_{ij}(t)=t-G_{ij}(t),\qquad
+\widehat\Delta_{ij}(t)=t-C_{ij}(t).
+\end{equation}
+The sender never reads $G_{ij}$ in its decision logic.
+
+\subsection{Semantic broadcast trigger}
+
+Each sender stores its last transmitted state $x_j^{\rm tx}$ separately from
+$C_{ij}$. Let the position and velocity innovations be
+\begin{equation}
+e_{p,j}=\|p_j-p_j^{\rm tx}\|,\qquad
+e_{v,j}=\|v_j-v_j^{\rm tx}\|.
+\end{equation}
+Receiver-confirmed age modulates the semantic threshold but does not replace
+innovation. With worst-neighbor confirmed age
+$\widehat\Delta_j^{\max}=\max_{i\in\mathcal N_j^{out}}
+\widehat\Delta_{ij}$, the adaptive scale is bounded below:
+\begin{equation}
+s_j=\max\!\left\{s_{\min},
+s_0-\rho\,[\widehat\Delta_j^{\max}-\bar A]^+\right\}.
+\end{equation}
+New information is admitted when a fixed or scaled innovation boundary is
+crossed. Pure refresh is separately rate limited and may be suppressed while
+an informative frame is pending. A max-silence branch provides a bounded
+generation opportunity; it does not guarantee bounded delivery under an
+overloaded or starved medium.
+
+\subsection{Broadcast DATA and cumulative feedback}
+
+One DATA frame can be accepted by any subset of intended receivers. Each
+successful receiver creates a cumulative obligation naming the newest accepted
+sequence and generation. Obligations for the same source are merged by newest
+generation and never roll back. They can be attached to the receiver's next
+DATA frame or placed in a standalone aggregate ACK after a declared delay.
+ACK delivery advances only $C_{ij}$; it never advances receiver truth or
+controller state directly.
+
+The adaptive standalone scheduler is piggyback first. It uses causal local
+busy and queue state, with separate minimum delays for CSMA and ALOHA and a
+bounded forced-recovery branch. The fixed load guard examined during
+development is not retained because its state coupling worsened the $N=20$
+control outcome despite reducing offered load.
+
+\subsection{Shared-medium service}
+
+DATA and standalone ACK frames share one discrete-event medium. A frame spans
+as many 1-ms slots as required by its byte length and declared PHY rate.
+Finite per-node queues use latest-generated-wins replacement for state DATA,
+while feedback obligations are transferred rather than silently discarded.
+Carrier sensing and physical interference are separate binary graphs, which
+allows fully sensed CSMA, ALOHA, sparse reuse, and hidden-terminal cells.
+Retries are bounded and terminal in-flight work is accounted explicitly.
+
+The offered-airtime utilization is
+\begin{equation}
+U_{\rm off}=\frac{D_H+A_H}{H},
+\end{equation}
+where $D_H$ includes DATA frame airtime and all feedback bytes piggybacked on
+DATA, and $A_H$ is standalone-ACK airtime. $U_{\rm off}$ can exceed one under
+overload because it is demand, whereas physical channel-busy union is bounded
+by one.
+
+\subsection{Frozen MAC-selective feedback route}
+
+The final selector uses only the configured access mechanism:
+\begin{equation}
+\pi_{\rm fb}(m)=
+\begin{cases}
+\text{piggyback-only}, & m=\text{CSMA},\\
+\text{adaptive standalone+piggyback}, & m=\text{ALOHA}.
+\end{cases}
+\label{eq:s2-mac-selector}
+\end{equation}
+Both branches use $p_{\rm access}=\min\{p_{\rm configured},1/N\}$ and disable
+the failed fixed load guard. Equation~\eqref{eq:s2-mac-selector} inspects no
+realized outcome, AoI, control error, or queue threshold. Inside a cell it is
+exactly the routed component; the tested object is the cross-MAC selection,
+not a new implementation of either component.

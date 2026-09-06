@@ -1,0 +1,3 @@
+arm,boundaryRmseDifference,boundaryOfferedDifference,boundaryFailureDifference,failureCellFailureDifference,failureCellOfferedDifference,boundaryParetoGate,failureReductionGate,priorityDiffersFifoFraction,priorityActionGate
+oracle-deficit-maxweight-piggyback,-0.0336654770836565,-0.0537111111111103,0,-17,0.00996666666666574,1,0,0.628533912157998,1
+oracle-urgency-maxweight-piggyback,-0.0328923276613408,-0.0572444444444437,0,-17,0.00164444444444439,1,0,0.543721384072656,1

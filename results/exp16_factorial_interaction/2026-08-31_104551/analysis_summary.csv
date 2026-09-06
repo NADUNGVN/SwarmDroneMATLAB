@@ -1,0 +1,7 @@
+arm,methodLabel,macType,route,primaryFactorialFlag,n,nContinuousEligible,meanRMSE,safeFailures,divergences,meanTrueAoI,meanOfferedUtil,meanChannelUtil,meanCollisions,meanDataAttempts,meanAckAttempts,meanStandaloneAcks
+aloha-adaptive,ALOHA adaptive,aloha,adaptive,1,100,100,0.0793052870386171,0,0,0.114842012161415,0.768434999999956,0.49393250000002,1875.52,2208.13,309.09,309.18
+aloha-fixed-hybrid,ALOHA fixed-deadline hybrid,aloha,fixed-hybrid,0,100,100,0.0790883581445126,0,0,0.113837700386954,0.772433333333289,0.495656666666687,1894.06,2218.76,314.25,314.4
+aloha-piggyback,ALOHA piggyback-only,aloha,piggyback,1,100,100,0.0880420707136419,0,0,0.132038363736871,0.813993333333281,0.50360416666669,1996.01,2441.98,0,0
+csma-adaptive,CSMA adaptive,csma,adaptive,1,100,100,0.0543123308112106,0,0,0.0726748479823106,0.283395833333334,0.262429166666645,126.86,819.98,62.53,62.57
+csma-fixed-hybrid,CSMA fixed-deadline hybrid,csma,fixed-hybrid,0,100,100,0.0578016871909751,0,0,0.0791422885572138,0.2873025,0.269489166666644,159.58,694.97,522.34,522.6
+csma-piggyback,CSMA piggyback-only,csma,piggyback,1,100,100,0.0537806892721741,0,0,0.0715834162520729,0.275993333333334,0.255068333333313,122.12,827.98,0,0

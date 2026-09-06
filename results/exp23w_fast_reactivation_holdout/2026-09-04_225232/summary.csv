@@ -1,0 +1,9 @@
+arm,methodLabel,nRuns,meanRMSE,meanOfferedUtil,meanManagementAirtime,safeFailures
+coherence-static-target,Coherence ELCS-W / no revocation,100,0.0553198613595166,0.275263359999997,0.05734656,0
+conservative-early-delivered,Conservative old-fence / event 3 s,100,0.0568179243675234,0.264214186666664,0.0656384,0
+conservative-late-delivered,Conservative old-fence / event 8 s,100,0.0597563754187304,0.264281066666664,0.06555008,0
+fast-early-delivered,Witness-confirmed reactivation / event 3 s,100,0.055317915748049,0.274280106666664,0.0656384,0
+fast-early-response-blackout,Witness-confirmed / event 3 s / RESPONSE blackout,100,0.0630495844105636,0.294596693333331,0.603182080000004,0
+fast-early-revoke-blackout,Witness-confirmed / event 3 s / REVOKE blackout,100,0.055317915748049,0.274280106666664,0.0656384,0
+fast-late-delivered,Witness-confirmed reactivation / event 8 s,100,0.0561854264411659,0.274272746666664,0.06555008,0
+periodic-exp23d-lower,Periodic static TDMA / EXP23D lower-cost boundary,100,0.0542381260458344,0.286719999999997,0,0

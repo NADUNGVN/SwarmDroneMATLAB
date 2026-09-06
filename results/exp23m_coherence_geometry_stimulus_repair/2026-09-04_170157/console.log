@@ -1,0 +1,45 @@
+
+============================================================
+RUN  : exp23m_coherence_geometry_stimulus_repair
+ID   : 2026-09-04_170157
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23m_coherence_geometry_stimulus_repair\2026-09-04_170157
+WHEN : 2026-09-04 17:01:57
+============================================================
+
+  seeds  10 / 100; rows  60 / 600
+  seeds  20 / 100; rows 120 / 600
+  seeds  30 / 100; rows 180 / 600
+  seeds  40 / 100; rows 240 / 600
+  seeds  50 / 100; rows 300 / 600
+  seeds  60 / 100; rows 360 / 600
+  seeds  70 / 100; rows 420 / 600
+  seeds  80 / 100; rows 480 / 600
+  seeds  90 / 100; rows 540 / 600
+  seeds 100 / 100; rows 600 / 600
+
+EXP23M coherence stimulus-repair gates
+  [PASS] registry_frozen                             hash 106670224 over 48 leaves
+  [PASS] matrix_complete_unique                      600/600 unique rows
+  [PASS] exact_matrix_coverage                       100 seeds, N5/N10 and three repaired conditions exact
+  [PASS] paired_base_realizations                    all condition arms share base positions and random directions
+  [PASS] deterministic_reproduction                  repeated seed/cell is bit-identical
+  [PASS] actual_graph_subset                         every sampled actual conflict belongs to its supergraph
+  [PASS] proper_color_safety                         no sampled actual conflict shares a supergraph color
+  [PASS] horizon_graph_monotonicity                  potential edges never disappear as horizon grows
+  [PASS] static_target_activation                    200/200 static/wide rows select 6.8 s
+  [PASS] uncertainty_horizon_contraction             mobile high uncertainty never lengthens paired horizon
+  [PASS] issued_horizon_feasible                     every issued lease has cover, payload and slot feasibility
+  [PASS] uncovered_fail_silent                       no feasible horizon yields no positive lease
+  [PASS] self_revocation_contract                    bounded motion stays active; injected bound violation self-revokes
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] selector_boundary_stimulus                  target/contracted/no-lease rows 200/331/69
+  [PASS] kernel_scope_only                           no closed-loop, promotion or submission decision
+
+EXP23M DECISION: COHERENCE_GEOMETRY_KERNEL_VALID
+
+============================================================
+DONE : exp23m_coherence_geometry_stimulus_repair
+TIME : 3.3 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23m_coherence_geometry_stimulus_repair\2026-09-04_170157
+============================================================

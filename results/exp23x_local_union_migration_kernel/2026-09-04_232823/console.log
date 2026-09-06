@@ -1,0 +1,39 @@
+
+============================================================
+RUN  : exp23x_local_union_migration_kernel
+ID   : 2026-09-04_232823
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23x_local_union_migration_kernel\2026-09-04_232823
+WHEN : 2026-09-04 23:28:24
+============================================================
+
+
+EXP23X local-union migration gates
+  [PASS] registry_frozen                            hash 92059553 over 54 leaves
+  [PASS] matrix_complete_unique                     3000/3000 unique rows
+  [PASS] exact_matrix_coverage                      100 seeds, N={5,10,20}, and ten cases exact
+  [PASS] paired_random_draws                        all ten cases share one raw draw tensor per seed and size
+  [PASS] selector_stimulus                          every topology forces one add, one removal and a changed slot
+  [PASS] zero_loss_activation                       300/300 zero-loss rows activate the new slot at eligibility
+  [PASS] iid20_cumulative_recovery                  300/300 IID-20 rows recover
+  [PASS] iid40_cumulative_recovery                  300/300 IID-40 rows recover
+  [PASS] loss_delay_stimulus                        loss produces delayed closure and additional charged attempts
+  [PASS] response_blackout_fail_silent              permanent missing RESPONSE never activates
+  [PASS] stale_response_fail_silent                 wrong version cannot create a positive receipt
+  [PASS] revoke_blackout_equivalence                lost REVOKE cannot alter local state or reacquisition
+  [PASS] concurrent_boundary                        two-sender migration is explicitly unsupported and silent
+  [PASS] independent_union_oracle                   omitted actual edge is rejected and its collision remains visible
+  [PASS] inadmissible_selector_fail_silent          missing witness and over-MTU selector outputs remain silent
+  [PASS] supported_safety                           zero scheduled collision or unsafe reuse in every supported row
+  [PASS] control_component_accounting               attempt and byte components close exactly
+  [PASS] recipient_airtime_accounting               recipient outcomes and control airtime close
+  [PASS] absolute_bounds                            finite-horizon attempt and byte bounds hold
+  [PASS] causal_integrity                           zero forbidden reads and exact hashes finite
+  [PASS] kernel_scope_only                          randomized falsification cannot promote performance claims
+EXP23X DECISION: LOCAL_UNION_MIGRATION_KERNEL_VALID
+
+============================================================
+DONE : exp23x_local_union_migration_kernel
+TIME : 15.2 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23x_local_union_migration_kernel\2026-09-04_232823
+============================================================

@@ -1,0 +1,7 @@
+gate,passed,detail
+failure_nonincrease,0,candidate failure count does not exceed either frame-aware fixed route
+n10_aloha_access_repair,0,all four N10 ALOHA core cells reduce offered/collision by >= 10%
+not_jointly_worse,1,1 jointly-worse core context--MAC cells (maximum 2)
+decision_accounting,1,evaluated decisions close into permit/feasibility/value outcomes
+value_blocks_active,1,6251 value-blocked development evaluations
+reverse_mismatch_reported,1,reverse-asymmetric boundary uses nominal calibration intentionally

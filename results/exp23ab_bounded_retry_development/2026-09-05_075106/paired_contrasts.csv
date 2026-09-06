@@ -1,0 +1,5 @@
+candidate,reference,nPairs,relativeRmse,rmseDelta,rmseCiLo,rmseCiHi,relativeCost,costDelta,costCiLo,costCiHi,managementAirtimeDelta,managementAirtimeCiLo,managementAirtimeCiHi,controlAttemptDelta,claimAttemptDelta,responseAttemptDelta
+migration-backoff-iid20-emergency,migration-dense-iid20-emergency,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+migration-backoff-iid20-emergency-response-blackout,migration-dense-iid20-emergency-response-blackout,20,0,0,0,0,-0.0496139508994462,-0.0125501333333333,-0.0126866733333333,-0.0124133266666666,-0.150601599999999,-0.152268799999999,-0.148950399999999,-150.8,-30,-120.8
+migration-backoff-iid20-emergency-revoke-blackout,migration-backoff-iid20-emergency,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+migration-backoff-iid20-emergency-response-blackout,periodic-iid20,20,0.0196842149142784,0.0016335321209082,0.000608577699102947,0.00278010398358118,-0.0609156249999989,-0.0155943999999996,-0.0157157399999996,-0.0154749333333329,0.2122272,0.210736,0.2136672,231.85,NaN,NaN

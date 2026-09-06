@@ -1,0 +1,4 @@
+scenario,scenarioLabel,nDecisions,nParentSeeds,totalEntries,positiveLeadEntryFraction,actualConfirmationFraction,shadowConfirmationFraction,meanLocalBusy,meanPendingAge,meanEntries,forcedFraction,paretoBeneficialDecisions,paretoHarmfulDecisions,mixedOrNullDecisions
+n5-csma,N5 CSMA,20,20,39,0.897435897435897,1,1,0.231519773485608,0.1,1.95,0,1,11,8
+n10-ring2,N10 ring2,20,20,41,0.804878048780488,1,1,0.516761312540362,0.1,2.05,0,3,9,8
+n5-aloha,N5 ALOHA,20,20,31,0.709677419354839,0.967741935483871,0.935483870967742,0.397398541469348,0.0200000000000002,1.55,0,8,5,7

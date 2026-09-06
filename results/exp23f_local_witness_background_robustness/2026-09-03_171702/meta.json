@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23f_local_witness_background_robustness",
+  "runId": "2026-09-03_171702",
+  "startedAt": "2026-09-03 17:17:02",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-W versus periodic under shared IID and Markov-bursty exogenous channel occupancy.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23f_local_witness_background_robustness.m",
+  "finishedAt": "2026-09-03 17:40:56",
+  "elapsedSec": 1433.2277373,
+  "elapsedText": "23 m 53 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

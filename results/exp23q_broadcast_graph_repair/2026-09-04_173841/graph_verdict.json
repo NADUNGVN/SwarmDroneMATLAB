@@ -1,0 +1,9 @@
+{
+  "status": "BROADCAST_DETECTABILITY_GRAPH_REPAIR_VALID",
+  "gatesPassed": 19,
+  "gatesTotal": 19,
+  "rows": 600,
+  "freshPacketKernelRepairPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

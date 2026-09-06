@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23e_local_witness_iid_robustness",
+  "runId": "2026-09-03_164740",
+  "startedAt": "2026-09-03 16:47:40",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh paired ELCS-W versus periodic robustness under separated and joint 5% IID CLAIM, RESPONSE and DATA loss.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23e_local_witness_iid_robustness.m",
+  "finishedAt": "2026-09-03 17:04:25",
+  "elapsedSec": 1004.2727391,
+  "elapsedText": "16 m 44 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

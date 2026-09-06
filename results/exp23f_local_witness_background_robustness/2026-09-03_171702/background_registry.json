@@ -1,0 +1,123 @@
+{
+  "version": "EXP23F-ELCS-W-BACKGROUND-OCCUPANCY-ROBUSTNESS-v1",
+  "frozenDate": "2026-09-03",
+  "stage": "local-witness-background-load-robustness-falsification",
+  "policyOptimizationAllowed": false,
+  "broadRobustnessClaimPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6067001E+7,
+    1.6067002E+7,
+    1.6067003E+7,
+    1.6067004E+7,
+    1.6067005E+7,
+    1.6067006E+7,
+    1.6067007E+7,
+    1.6067008E+7,
+    1.6067009E+7,
+    1.606701E+7,
+    1.6067011E+7,
+    1.6067012E+7,
+    1.6067013E+7,
+    1.6067014E+7,
+    1.6067015E+7,
+    1.6067016E+7,
+    1.6067017E+7,
+    1.6067018E+7,
+    1.6067019E+7,
+    1.606702E+7,
+    1.6067021E+7,
+    1.6067022E+7,
+    1.6067023E+7,
+    1.6067024E+7,
+    1.6067025E+7,
+    1.6067026E+7,
+    1.6067027E+7,
+    1.6067028E+7,
+    1.6067029E+7,
+    1.606703E+7
+  ],
+  "pilotSeed": 1.6065901E+7,
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed",
+      "parentElcsWCost": 0.290453333333331,
+      "costMatchRateHz": 18.909722222222072,
+      "boundaryFactor": 0.9875,
+      "lowerCostRateHz": 18.6733506944443
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate",
+      "parentElcsWCost": 0.309759999999997,
+      "costMatchRateHz": 10.083333333333234,
+      "boundaryFactor": 0.9866,
+      "lowerCostRateHz": 9.94821666666657
+    }
+  ],
+  "parentIidRun": "2026-09-03_164740",
+  "parentIidDecision": "ELCS_W_IID5_ROBUSTNESS_SCREEN_SURVIVES",
+  "conditions": [
+    {
+      "id": "clean",
+      "label": "Clean occupancy",
+      "model": "iid",
+      "targetLoad": 0,
+      "offToOn": 0,
+      "onToOff": 0
+    },
+    {
+      "id": "iid-load15",
+      "label": "IID occupancy 15%",
+      "model": "iid",
+      "targetLoad": 0.15,
+      "offToOn": 0,
+      "onToOff": 0
+    },
+    {
+      "id": "markov-load15",
+      "label": "Markov occupancy 15% / 50 ms mean burst",
+      "model": "markov",
+      "targetLoad": 0.15,
+      "offToOn": 0.0035294117647058825,
+      "onToOff": 0.02
+    },
+    {
+      "id": "markov-load30",
+      "label": "Markov occupancy 30% / 50 ms mean burst",
+      "model": "markov",
+      "targetLoad": 0.3,
+      "offToOn": 0.0085714285714285719,
+      "onToOff": 0.02
+    }
+  ],
+  "arms": [
+    {
+      "id": "periodic-exp23d-lower",
+      "label": "Periodic static TDMA / EXP23D lower-cost boundary",
+      "family": "periodic-static"
+    },
+    {
+      "id": "elcs-w-affine",
+      "label": "ELCS-W local witness / affine clock",
+      "family": "candidate-elcs-w"
+    }
+  ],
+  "periodicArm": "periodic-exp23d-lower",
+  "elcsWArm": "elcs-w-affine",
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "elcsMaxFrames": 400,
+  "epsilonRmse": 0.01,
+  "requiredCostImprovement": 0.01,
+  "bootstrapSeedBase": 1.60679E+7,
+  "requiredIntegrityContracts": 20,
+  "expectedRuns": 480
+}

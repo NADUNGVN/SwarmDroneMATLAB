@@ -1,0 +1,9 @@
+N,condition,nRuns,preEventActiveRate,reacquisitionRate,meanFirstReacquiredFrame,meanControlAttempts,meanControlBytes,revokeErasureCount,scheduledCollisionFrames
+5,joint-control-revoke-iid5,100,1,1,36.19,62.45,1907.68,3,0
+5,reacquire-response-blackout,100,1,0,NaN,123,3866,0,0
+5,revoke-blackout,100,1,1,36,55,1690,100,0
+5,zero-delivered,100,1,1,36,55,1690,0,0
+10,joint-control-revoke-iid5,100,1,1,36.17,92.42,2746.74,5,0
+10,reacquire-response-blackout,100,1,0,NaN,153,4706,0,0
+10,revoke-blackout,100,1,1,36,85,2530,100,0
+10,zero-delivered,100,1,1,36,85,2530,0,0

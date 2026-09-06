@@ -1,0 +1,10 @@
+{
+  "status": "SCHEDULING_GAIN_FRAGILE",
+  "developmentFalsificationOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "candidateOptimizationWasAllowed": false,
+  "schedulingConfirmatoryStudyPermitted": false,
+  "manuscriptClaimPermitted": false,
+  "hardwareClaimPermitted": false,
+  "negativeResultsRetained": true
+}

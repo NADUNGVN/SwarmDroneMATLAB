@@ -1,0 +1,18 @@
+{
+  "experiment": "exp14h_n20_support_closure",
+  "runId": "2026-08-31_001447",
+  "startedAt": "2026-08-31 00:14:47",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "N20-only branch-at-decision support closure; unchanged estimand, outcome-blind selection, no predictor fitting.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp14h_n20_support_closure.m",
+  "finishedAt": "2026-08-31 00:22:10",
+  "elapsedSec": 442.9499344,
+  "elapsedText": "7 m 23 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

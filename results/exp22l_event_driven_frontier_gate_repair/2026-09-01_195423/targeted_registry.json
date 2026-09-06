@@ -1,0 +1,100 @@
+{
+  "version": "EXP22L-EVENT-DRIVEN-FRONTIER-GATE-REPAIR-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "event-driven-candidate-frontier-gate-repair-rerun",
+  "policyOptimizationAllowed": false,
+  "robustnessContinuationPermitted": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6053001E+7,
+    1.6053002E+7,
+    1.6053003E+7,
+    1.6053004E+7,
+    1.6053005E+7,
+    1.6053006E+7,
+    1.6053007E+7,
+    1.6053008E+7,
+    1.6053009E+7,
+    1.605301E+7,
+    1.6053011E+7,
+    1.6053012E+7,
+    1.6053013E+7,
+    1.6053014E+7,
+    1.6053015E+7,
+    1.6053016E+7,
+    1.6053017E+7,
+    1.6053018E+7,
+    1.6053019E+7,
+    1.605302E+7,
+    1.6053021E+7,
+    1.6053022E+7,
+    1.6053023E+7,
+    1.6053024E+7,
+    1.6053025E+7,
+    1.6053026E+7,
+    1.6053027E+7,
+    1.6053028E+7,
+    1.6053029E+7,
+    1.605303E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed",
+      "parentElcsCost": 0.293563733333331,
+      "costMatchRateHz": 19.112222222222073,
+      "lowerCostRateHz": 18.729977777777631
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate",
+      "parentElcsCost": 0.318873599999998,
+      "costMatchRateHz": 10.379999999999933,
+      "lowerCostRateHz": 10.172399999999934
+    }
+  ],
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "elcsMaxFrames": 400,
+  "strictMargin": 0.01,
+  "epsilonRmse": 0.01,
+  "requiredCostImprovement": 0.01,
+  "arms": [
+    {
+      "id": "periodic-cost-match",
+      "label": "Periodic static TDMA / ELCS cost match",
+      "family": "periodic-static",
+      "rateRule": "cost-match"
+    },
+    {
+      "id": "periodic-cost-minus2pct",
+      "label": "Periodic static TDMA / 2% below ELCS cost",
+      "family": "periodic-static",
+      "rateRule": "cost-minus2pct"
+    },
+    {
+      "id": "elcs-f-mission-affine",
+      "label": "ELCS-F / mission affine clock",
+      "family": "candidate-elcs",
+      "rateRule": "candidate"
+    }
+  ],
+  "elcsArm": "elcs-f-mission-affine",
+  "lowerCostArm": "periodic-cost-minus2pct",
+  "expectedRuns": 180,
+  "parentClosedLoopRun": "2026-09-01_193812",
+  "parentClosedLoopGates": "20/20",
+  "eventDrivenContractRequired": true,
+  "grantRequiresDecodedRequest": true,
+  "analyticalControlBoundRequired": true,
+  "acquisitionDeadlineFrames": "N",
+  "bootstrapSeedBase": 1.60539E+7,
+  "parentInvalidRun": "2026-09-01_194517",
+  "parentInvalidGate": "event_driven_request_discipline",
+  "repair": "separate full-kernel logical request discipline from mission-horizon physical management replay accounting"
+}

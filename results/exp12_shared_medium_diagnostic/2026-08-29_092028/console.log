@@ -1,0 +1,111 @@
+
+============================================================
+RUN  : exp12_shared_medium_diagnostic
+ID   : 2026-08-29_092028
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp12_shared_medium_diagnostic\2026-08-29_092028
+WHEN : 2026-08-29 09:20:28
+============================================================
+
+EXP12 status: infrastructure diagnostic, not a policy benchmark.
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_infrastructure
+============================================================
+
+    ok   one broadcast frame reaches all three intended receivers
+    ok   frame and recipient accounting remain distinct
+    ok   one broadcast can succeed at a strict subset of receivers
+    ok   simultaneous senders collide at their shared receiver
+    ok   serialized TDMA service delivers the same two frames without collision
+    ok   queued state DATA uses latest-generated-wins replacement
+    ok   finite queue preserves due feedback and rejects lower-priority DATA
+    ok   cumulative ACK merge retains only the newest sequence per sender
+    ok   a pending ACK summary piggybacks on the next DATA frame
+    ok   ACK deadline materializes exactly one standalone cumulative summary
+    ok   a DATA loss neither advances receiver state nor creates an ACK
+    ok   delivered ACK summaries advance exactly the confirmed receiver beliefs
+    ok   sender history remains bounded during prolonged missing feedback
+    ok   identical actions on one pre-drawn trace are bit-identical
+    ok   busy-time union and offered frame airtime are separately accounted
+    ok   fully-conflicting interference corrupts disjoint intended receivers
+    ok   a declared sparse interference matrix permits spatial reuse
+    ok   collision retries are bounded and preserve logical frame identity
+    ok   inline mode applies DATA and causal ACK at their MAC event times
+    ok   an ACK outside bounded history is counted and rejected
+    ok   zero-load CSMA, ALOHA and TDMA preserve payload/sequence order
+
+test_shared_medium_infrastructure: PASS (21 checks)
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_causal_broadcast_policy
+============================================================
+
+    ok   one-receiver Causal-Broadcast is decision-equivalent to Causal-v3
+    ok   receiver permutation leaves the aggregate decision invariant
+    ok   worst confirmed receiver age drives adaptive new information
+    ok   hard new information is not blocked by unconfirmed receivers
+    ok   pure refresh is suppressed while useful broadcast information is pending
+    ok   max silence recovers from prolonged missing confirmation
+    ok   a sender with no out-neighbour never generates a frame
+
+test_causal_broadcast_policy: PASS (7 checks)
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_end_to_end
+============================================================
+
+    ok   one method/action sequence is bit-identical on one MAC trace
+    ok   periodic broadcast does not pay for unused causal feedback
+    ok   control, freshness and channel metrics share one finite output contract
+    ok   Causal-Broadcast receives real aggregated feedback with zero violations
+    ok   sender confirmed age remains conservative at every logged active link
+    ok   p=1 synchronized periodic load produces the declared collision collapse
+    ok   completed recipient outcomes and airtime accounting close exactly
+    ok   finite queue/history bounds hold and plant state remains finite
+
+test_shared_medium_end_to_end: PASS (8 checks)
+
+Diagnostic matrix: 108 runs
+  development seeds : 12012001..12012003
+  p values          : [0.1 0.2 0.4 1]
+  residual loss     : [0 0.1 0.3]
+  completed  12 / 108 runs
+  completed  24 / 108 runs
+  completed  36 / 108 runs
+  completed  48 / 108 runs
+  completed  60 / 108 runs
+  completed  72 / 108 runs
+  completed  84 / 108 runs
+  completed  96 / 108 runs
+  completed 108 / 108 runs
+
+EXP12 diagnostic gates
+  [PASS] micro_contracts            21 kernel + 7 policy + 8 end-to-end checks executed before matrix
+  [PASS] causal_invariants          0 total violations
+  [PASS] confirmed_age_conservative confirmed age dominates true AoI only where feedback belief exists
+  [PASS] finite_outputs             RMSE, separation and true-AoI finite in every development cell
+  [PASS] bounded_queue              max observed 2 / capacity 4
+  [PASS] bounded_history            max observed 32 / bound 32
+  [PASS] recipient_accounting       every attempted DATA recipient has exactly one success/loss outcome
+  [PASS] airtime_union              busy-time union does not exceed offered airtime or mission horizon
+  [PASS] p1_collision_collapse      synchronized periodic senders have collisions and zero DATA reception
+  [PASS] analytical_p_star          theta=[0.06561 0.08192 0.05184 0]; unique grid maximum at p=0.20
+  [PASS] nondeadlock_subunit_p      every p<1 development run delivers at least one DATA frame
+  [PASS] paired_crn_trace           one absolute MAC trace hash per development seed across all cells
+  [PASS] feedback_semantics         only Causal-Broadcast generates ACK traffic; p<1 cells confirm entries
+  [PASS] frame_count_order          unique delivered logical DATA frames never exceed generated frames
+
+EXP12 VERDICT: PASS (14/14 gates)
+Policy superiority claim permitted: NO
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp12_shared_medium_diagnostic\2026-08-29_092028\figures
+
+============================================================
+DONE : exp12_shared_medium_diagnostic
+TIME : 55.1 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp12_shared_medium_diagnostic\2026-08-29_092028
+============================================================

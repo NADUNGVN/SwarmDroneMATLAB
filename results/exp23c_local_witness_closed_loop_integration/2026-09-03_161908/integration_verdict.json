@@ -1,0 +1,9 @@
+{
+  "status": "ELCS_W_CLOSED_LOOP_VALID",
+  "gatesPassed": 18,
+  "gatesTotal": 18,
+  "rows": 120,
+  "frontierComparisonPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

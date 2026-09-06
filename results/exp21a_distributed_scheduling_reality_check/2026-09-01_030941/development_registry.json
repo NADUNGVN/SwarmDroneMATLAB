@@ -1,0 +1,214 @@
+{
+  "version": "EXP21A-DISTRIBUTED-SCHEDULING-REALITY-CHECK-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "development-falsification",
+  "candidateOptimizationAllowed": false,
+  "confirmatory": false,
+  "manuscriptClaimPermitted": false,
+  "hardwareClaimPermitted": false,
+  "seeds": [
+    1.6030001E+7,
+    1.6030002E+7,
+    1.6030003E+7,
+    1.6030004E+7,
+    1.6030005E+7,
+    1.6030006E+7,
+    1.6030007E+7,
+    1.6030008E+7,
+    1.6030009E+7,
+    1.603001E+7,
+    1.6030011E+7,
+    1.6030012E+7,
+    1.6030013E+7,
+    1.6030014E+7,
+    1.6030015E+7,
+    1.6030016E+7,
+    1.6030017E+7,
+    1.6030018E+7,
+    1.6030019E+7,
+    1.603002E+7,
+    1.6030021E+7,
+    1.6030022E+7,
+    1.6030023E+7,
+    1.6030024E+7,
+    1.6030025E+7,
+    1.6030026E+7,
+    1.6030027E+7,
+    1.6030028E+7,
+    1.6030029E+7,
+    1.603003E+7
+  ],
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.6030991E+7,
+  "dominanceMargin": 0.01,
+  "reservation": {
+    "frameSlots": null,
+    "periodSec": 0.5,
+    "leaseSec": 1.5,
+    "requestBytes": 24,
+    "responseBaseBytes": 12,
+    "responseEntryBytes": 4,
+    "commitBytes": 16,
+    "clockOffsetMaxSec": 0.00025,
+    "clockDriftMaxPpm": 40,
+    "nominalControlLoss": 0.05,
+    "stressControlLoss": 0.25,
+    "churnTimeSec": 6,
+    "churnNode": 2
+  },
+  "cells": [
+    {
+      "id": "n5-stressed-nominal",
+      "label": "N5 Stressed nominal",
+      "baseCell": "n5-stressed-bg0",
+      "clockEnabled": false,
+      "controlLoss": 0.05,
+      "controlReach": "full",
+      "churnEnabled": false,
+      "role": "nominal"
+    },
+    {
+      "id": "n5-stressed-clock",
+      "label": "N5 Stressed clock",
+      "baseCell": "n5-stressed-bg0",
+      "clockEnabled": true,
+      "controlLoss": 0.05,
+      "controlReach": "full",
+      "churnEnabled": false,
+      "role": "single-fault"
+    },
+    {
+      "id": "n5-stressed-control-loss",
+      "label": "N5 Stressed control loss",
+      "baseCell": "n5-stressed-bg0",
+      "clockEnabled": false,
+      "controlLoss": 0.25,
+      "controlReach": "full",
+      "churnEnabled": false,
+      "role": "single-fault"
+    },
+    {
+      "id": "n5-stressed-churn",
+      "label": "N5 Stressed churn",
+      "baseCell": "n5-stressed-bg0",
+      "clockEnabled": false,
+      "controlLoss": 0.05,
+      "controlReach": "full",
+      "churnEnabled": true,
+      "role": "single-fault"
+    },
+    {
+      "id": "n10-moderate-nominal",
+      "label": "N10 Moderate nominal",
+      "baseCell": "n10-moderate-bg0",
+      "clockEnabled": false,
+      "controlLoss": 0.05,
+      "controlReach": "full",
+      "churnEnabled": false,
+      "role": "nominal"
+    },
+    {
+      "id": "n10-moderate-clock",
+      "label": "N10 Moderate clock",
+      "baseCell": "n10-moderate-bg0",
+      "clockEnabled": true,
+      "controlLoss": 0.05,
+      "controlReach": "full",
+      "churnEnabled": false,
+      "role": "single-fault"
+    },
+    {
+      "id": "n10-moderate-hidden",
+      "label": "N10 Moderate hidden control",
+      "baseCell": "n10-moderate-bg0",
+      "clockEnabled": false,
+      "controlLoss": 0.05,
+      "controlReach": "two-hop-ring",
+      "churnEnabled": false,
+      "role": "single-fault"
+    },
+    {
+      "id": "n10-moderate-compound",
+      "label": "N10 Moderate compound",
+      "baseCell": "n10-moderate-bg0",
+      "clockEnabled": true,
+      "controlLoss": 0.25,
+      "controlReach": "two-hop-ring",
+      "churnEnabled": true,
+      "role": "compound"
+    }
+  ],
+  "arms": [
+    {
+      "id": "frame-piggyback",
+      "label": "Frame-aware piggyback",
+      "kind": "current",
+      "schedulerMode": "native",
+      "periodicRateHz": null
+    },
+    {
+      "id": "ideal-tdma-p8p333",
+      "label": "Ideal TDMA 8.333 Hz",
+      "kind": "ideal-reference",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 8.3333333333333339
+    },
+    {
+      "id": "ideal-tdma-p10",
+      "label": "Ideal TDMA 10 Hz",
+      "kind": "ideal-reference",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 10
+    },
+    {
+      "id": "local-static-p8p333",
+      "label": "Local static TDMA 8.333 Hz",
+      "kind": "clock-isolation",
+      "schedulerMode": "local-static-tdma",
+      "periodicRateHz": 8.3333333333333339
+    },
+    {
+      "id": "distributed-reservation-p8p333",
+      "label": "Distributed reservation 8.333 Hz",
+      "kind": "distributed-projection",
+      "schedulerMode": "distributed-reservation",
+      "periodicRateHz": 8.3333333333333339
+    },
+    {
+      "id": "distributed-reservation-p10",
+      "label": "Distributed reservation 10 Hz",
+      "kind": "distributed-sensitivity",
+      "schedulerMode": "distributed-reservation",
+      "periodicRateHz": 10
+    },
+    {
+      "id": "zmac-like-hybrid",
+      "label": "Z-MAC-like hybrid",
+      "kind": "prior-art-projection",
+      "schedulerMode": "zmac-like",
+      "periodicRateHz": null
+    }
+  ],
+  "currentArm": "frame-piggyback",
+  "primaryArm": "distributed-reservation-p8p333",
+  "idealArm": "ideal-tdma-p8p333",
+  "nominalCells": [
+    "n5-stressed-nominal",
+    "n10-moderate-nominal"
+  ],
+  "singleFaultCells": [
+    "n5-stressed-clock",
+    "n5-stressed-control-loss",
+    "n5-stressed-churn",
+    "n10-moderate-clock",
+    "n10-moderate-hidden"
+  ],
+  "compoundCell": "n10-moderate-compound",
+  "maxControlOverheadFraction": 0.15,
+  "maxConvergenceSec": 2,
+  "minConvergenceFraction": 0.9,
+  "maxRelativeIdealRmseGap": 0.25,
+  "maxAbsoluteIdealUtilGap": 0.1,
+  "minFaultCellsRetained": 4,
+  "expectedRuns": 1680
+}

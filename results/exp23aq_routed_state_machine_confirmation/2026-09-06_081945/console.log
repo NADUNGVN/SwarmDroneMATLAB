@@ -1,0 +1,56 @@
+
+============================================================
+RUN  : exp23aq_routed_state_machine_confirmation
+ID   : 2026-09-06_081945
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23aq_routed_state_machine_confirmation\2026-09-06_081945
+WHEN : 2026-09-06 08:19:45
+============================================================
+
+  routed normal 50/500 complete; failures=0
+  routed normal 100/500 complete; failures=0
+  routed normal 150/500 complete; failures=0
+  routed normal 200/500 complete; failures=0
+  routed normal 250/500 complete; failures=0
+  routed normal 300/500 complete; failures=0
+  routed normal 350/500 complete; failures=0
+  routed normal 400/500 complete; failures=0
+  routed normal 450/500 complete; failures=0
+  routed normal 500/500 complete; failures=0
+
+EXP23AQ-ROUTED-STATE-MACHINE-CONFIRMATION-v1 validation gates
+  [PASS] exact_parent_registry_and_source            parent 16/16; registry/source 57/42 leaves
+  [PASS] superseded_version_gate_exposed             EXP23AP 2026-09-06_081712 is retained but not promoted
+  [PASS] registered_tests_and_seed_partition         500 unique normal seeds and 3 isolated fault rows
+  [PASS] selected_retry_and_certificate_identity     r=4, allocation [3 4 2 2], failure 0.000909554397
+  [PASS] normal_completion_bound_sanity              0/500 failures = 0; bound+tolerance 0.0096502
+  [PASS] barrier_activation_and_coloring_safety      zero premature activation/collision; every active coloring is proper
+  [PASS] route_causality_collision_and_isolation     zero route collision, cross-packet write, or forbidden read
+  [PASS] conditional_integer_phy_accounting          attempt range 328--436; maximum bytes 19144
+  [PASS] kernel_continuous_replay_identity           state hash, attempts, bytes, and airtime replay exactly
+  [PASS] continuous_nonoverlap_and_horizon           maximum schedule duration 3.970624/6.500 s
+  [PASS] conservative_duration_envelope              maximum 3.970624 <= frozen 5.034618 s
+  [PASS] affine_clock_accounting_preserved           500/500 clock-impaired schedules preserve accounting
+  [PASS] dynamic_bundle_slot_envelopes               maximum headroom 0 slots; minimum 0
+  [PASS] prepare_blackout_fails_safe                 no barrier, motion, evidence, response, commit, or reactivation
+  [PASS] response_blackout_fails_safe                barrier closes but certification and commit remain blocked
+  [PASS] commit_blackout_fails_safe                  certification succeeds but remote reactivation remains blocked
+  [PASS] implementation_version_identity             routed trace, state kernel, and continuous builder versions fixed
+  [PASS] analytical_reliability_scope                failure 0.000909554397 and time 5.034618 s remain jointly feasible
+  [PASS] development_scope_preserved                 only a passing verdict may promote management-relaying validation
+      bundle       registeredSlotEnvelope    maximumObservedSlots    slotHeadroom    envelopeSatisfied
+    ___________    ______________________    ____________________    ____________    _________________
+
+    "prepare"                16                       16                  0                  1        
+    "quiescent"              24                       24                  0                  1        
+    "evidence"              112                      112                  0                  1        
+    "response"               64                       64                  0                  1        
+    "commit"                 16                       16                  0                  1        
+
+EXP23AQ-ROUTED-STATE-MACHINE-CONFIRMATION-v1 DECISION: ROUTED_MANAGEMENT_STATE_MACHINE_CONFIRMATION_VALID
+
+============================================================
+DONE : exp23aq_routed_state_machine_confirmation
+TIME : 51.8 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23aq_routed_state_machine_confirmation\2026-09-06_081945
+============================================================

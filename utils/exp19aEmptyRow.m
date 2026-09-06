@@ -1,0 +1,33 @@
+function row=exp19aEmptyRow()
+%EXP19AEMPTYROW Stable schema for the oracle action-space diagnostic.
+
+row=exp14EmptyRow();
+row.originalMacType='';
+row.armKind='';
+row.route='';
+row.accessDesign='';
+row.ackDesign='';
+row.schedulerMode='';
+row.oracleFlag=NaN;
+row.PERIODIC_RATE_HZ=NaN;
+row.TARGET_RATE_HZ=NaN;
+row.MEAN_NODE_GOODPUT_HZ=NaN;
+row.MIN_NODE_GOODPUT_HZ=NaN;
+row.MEAN_GOODPUT_MARGIN_HZ=NaN;
+row.MIN_GOODPUT_MARGIN_HZ=NaN;
+row.SERVICE_ADMISSIONS=NaN;
+row.SERVICE_COMPLETIONS=NaN;
+row.SERVICE_REPLACEMENTS=NaN;
+row.VIRTUAL_DEFICIT_MAX=NaN;
+row.VIRTUAL_DEFICIT_TERMINAL=NaN;
+row.MAX_STARVATION_SEC=NaN;
+row.SERVICE_DECISIONS=NaN;
+row.FIFO_COMPARABLE_DECISIONS=NaN;
+row.PRIORITY_DIFFERS_FIFO=NaN;
+row.PRIORITY_DIFFERS_FIFO_FRACTION=NaN;
+row.RECEIVER_TRUTH_READS=NaN;
+row.FUTURE_RANDOM_READS=NaN;
+row.SERVICE_DECISION_LOG_VALID=NaN;
+row.ENDOGENOUS_COLLISION_FRAMES=NaN;
+
+end

@@ -1,0 +1,6 @@
+gate,Var2,detail
+all_integrity_gates,1,7/7 integrity gates pass
+native_private_feedback_gap_4_of_6,1,6/6 rho=0.50 cells meet the 10% positive-CI rule
+not_explained_by_periodic_or_dtsa,0,priorArtExplains=1
+not_matched_by_private_delta_or_age_gain,1,existingPrivateBaselineMatches=0
+formation_public_private_loss_after_charging,1,charged N5 Stressed public-private loss=1

@@ -1,0 +1,58 @@
+
+============================================================
+RUN  : exp18a_context_aware_development
+ID   : 2026-08-31_121134
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp18a_context_aware_development\2026-08-31_121134
+WHEN : 2026-08-31 12:11:34
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups    1--  16 /  400; rows   64 / 1600
+  groups   17--  32 /  400; rows  128 / 1600
+  groups   33--  48 /  400; rows  192 / 1600
+  groups   49--  64 /  400; rows  256 / 1600
+  groups   65--  80 /  400; rows  320 / 1600
+  groups   81--  96 /  400; rows  384 / 1600
+  groups   97-- 112 /  400; rows  448 / 1600
+  groups  113-- 128 /  400; rows  512 / 1600
+  groups  129-- 144 /  400; rows  576 / 1600
+  groups  145-- 160 /  400; rows  640 / 1600
+  groups  161-- 176 /  400; rows  704 / 1600
+  groups  177-- 192 /  400; rows  768 / 1600
+  groups  193-- 208 /  400; rows  832 / 1600
+  groups  209-- 224 /  400; rows  896 / 1600
+  groups  225-- 240 /  400; rows  960 / 1600
+  groups  241-- 256 /  400; rows 1024 / 1600
+  groups  257-- 272 /  400; rows 1088 / 1600
+  groups  273-- 288 /  400; rows 1152 / 1600
+  groups  289-- 304 /  400; rows 1216 / 1600
+  groups  305-- 320 /  400; rows 1280 / 1600
+  groups  321-- 336 /  400; rows 1344 / 1600
+  groups  337-- 352 /  400; rows 1408 / 1600
+  groups  353-- 368 /  400; rows 1472 / 1600
+  groups  369-- 384 /  400; rows 1536 / 1600
+  groups  385-- 400 /  400; rows 1600 / 1600
+
+EXP18A integrity gates
+  [PASS] registry_recorded                    development hash 67884206 over 112 leaves
+  [PASS] matrix_completeness                  1600 development runs
+  [PASS] unique_rows                          one row per seed/context/MAC/arm
+  [PASS] complete_groups                      all four arms occur once per seed/context/MAC
+  [PASS] absolute_trace_crn                   both MAC types and four arms share one absolute realization
+  [PASS] finite_outputs                       all development outcomes are finite
+  [PASS] causal_conservatism                  0 protocol violations
+  [PASS] bounded_memory                       max queue=2 max history=32
+  [PASS] physical_accounting                  terminal recipient and busy-union accounting close
+  [PASS] arm_semantics                        legacy, fixed-route and context-aware contracts are exact
+  [PASS] access_geometry                      CSMA/legacy use 1/N; frame-aware ALOHA uses 1/[N(2L-1)]
+  [PASS] decision_accounting                  context decisions close and fixed arms remain inert
+
+EXP18A DEVELOPMENT VERDICT: REJECT_OR_REVISE_CANDIDATE (4/6 gates)
+
+============================================================
+DONE : exp18a_context_aware_development
+TIME : 15 m 05 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp18a_context_aware_development\2026-08-31_121134
+============================================================

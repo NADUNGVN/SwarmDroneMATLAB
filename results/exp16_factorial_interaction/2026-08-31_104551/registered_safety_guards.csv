@@ -1,0 +1,3 @@
+macType,registeredWinner,registeredLoser,winnerFailures,loserFailures,seedsImproved,seedsWorsened,seedsEqual,nPairs,observedGuardPassed
+csma,csma-piggyback,csma-adaptive,0,0,0,0,100,100,1
+aloha,aloha-adaptive,aloha-piggyback,0,0,0,0,100,100,1

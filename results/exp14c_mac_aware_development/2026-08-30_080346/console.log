@@ -1,0 +1,56 @@
+
+============================================================
+RUN  : exp14c_mac_aware_development
+ID   : 2026-08-30_080346
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14c_mac_aware_development\2026-08-30_080346
+WHEN : 2026-08-30 08:03:46
+============================================================
+
+EXP14C development matrix: 288 runs, 48 seed/cell groups.
+  groups  1-- 8 / 48; rows  48 / 288
+  groups  9--16 / 48; rows  96 / 288
+  groups 17--24 / 48; rows 144 / 288
+  groups 25--32 / 48; rows 192 / 288
+  groups 33--40 / 48; rows 240 / 288
+  groups 41--48 / 48; rows 288 / 288
+{Error using ==
+Invalid data type. Argument must be numeric, char, or logical.
+
+Error in exp14c_mac_aware_development>makeFigure (line 299)
+        Q=S(S.scenarioLabel==cells(k) & S.arm==arms(j),:);
+                           ^
+Error in exp14c_mac_aware_development (line 50)
+makeFigure(summary);
+^^^^^^^^^^^^^^^^^^^
+} 
+
+Finalizing existing EXP14C run from D:\Research\Drone\SwarmDroneMATLAB\results\exp14c_mac_aware_development\2026-08-30_080346\tidy.csv; no simulations rerun.
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp14c_mac_aware_development\2026-08-30_080346\figures
+
+EXP14C integrity gates
+  [PASS] matrix_completeness              288 development runs
+  [PASS] unique_cells                     one row per declared seed/cell/arm
+  [PASS] finite_outputs                   control, AoI and medium outputs are finite
+  [PASS] causal_conservatism              0 protocol violations
+  [PASS] bounded_memory                   max queue=2 max history=32
+  [PASS] physical_accounting              DATA/ACK terminal accounting and busy union close
+  [PASS] paired_absolute_trace            one trace and channel-state realization per seed/cell
+  [PASS] adaptive_ack_semantics           adaptive decisions occur only in declared adaptive arms
+  [PASS] load_guard_semantics             guard blocks only declared guarded arms and is exercised
+  [PASS] access_scaling_semantics         only access/full arms apply min(p,1/N)
+  [PASS] local_busy_contract              causal local busy estimates remain in [0,1]
+  [PASS] divergence_accounting            0 divergences retained
+
+EXP14C DEVELOPMENT DECISION: PROCEED_TO_NEW_PREREGISTRATION
+  [PASS] integrity                    all integrity gates pass
+  [PASS] no_n5_n10_safety_regression  full-v2 has no additional N5/N10 failures
+  [PASS] n20_collapse_removed         full-v2 util=1.107 failures=5 versus hybrid=8
+  [PASS] aloha_no_two_axis_loss       full-v2 RMSE/util 0.0763/0.738; hybrid 0.0740/0.758
+
+============================================================
+DONE : exp14c_mac_aware_development
+TIME : 8.0 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14c_mac_aware_development\2026-08-30_080346
+============================================================

@@ -1,0 +1,8 @@
+{
+  "lockedAt": "2026-08-30 23:59:09",
+  "selectionHash": 7.88188353E+8,
+  "selectionLeaves": 1280,
+  "selectedEvents": 64,
+  "outcomesInspected": false,
+  "selectionRule": "new-stratum/new-seed priority pass, then new-seed priority fill"
+}

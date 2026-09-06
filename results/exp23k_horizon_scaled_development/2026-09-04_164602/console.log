@@ -1,0 +1,32 @@
+
+============================================================
+RUN  : exp23k_horizon_scaled_development
+ID   : 2026-09-04_164602
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23k_horizon_scaled_development\2026-09-04_164602
+WHEN : 2026-09-04 16:46:02
+============================================================
+
+  seeds  1-- 4 / 60; rows  4 / 60
+  seeds  5-- 8 / 60; rows  8 / 60
+  seeds  9--12 / 60; rows 12 / 60
+  seeds 13--16 / 60; rows 16 / 60
+  seeds 17--20 / 60; rows 20 / 60
+  seeds 21--24 / 60; rows 24 / 60
+  seeds 25--28 / 60; rows 28 / 60
+  seeds 29--32 / 60; rows 32 / 60
+  seeds 33--36 / 60; rows 36 / 60
+  seeds 37--40 / 60; rows 40 / 60
+  seeds 41--44 / 60; rows 44 / 60
+  seeds 45--48 / 60; rows 48 / 60
+  seeds 49--52 / 60; rows 52 / 60
+  seeds 53--56 / 60; rows 56 / 60
+  seeds 57--60 / 60; rows 60 / 60
+{Unrecognized field name "cumulativeArm".
+
+Error in exp23k_horizon_scaled_development>developmentContrast (line 155)
+S=selectSource(source,R.cumulativeArm);
+                      ^^^^^^^^^^^^^^^
+Error in exp23k_horizon_scaled_development (line 48)
+D=developmentContrast(T,source,R);
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 

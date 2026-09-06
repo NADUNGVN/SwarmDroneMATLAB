@@ -1,0 +1,12 @@
+{
+  "status": "DO_NOT_PROCEED_WITH_GENERAL_SELECTOR",
+  "passed": false,
+  "baseCellSupported": true,
+  "coreCellsSupported": 1,
+  "coreCellsTotal": 8,
+  "n5Supported": 1,
+  "n10Supported": 0,
+  "bothChannelLevelsRepresented": false,
+  "bothBackgroundLevelsRepresented": false,
+  "allCoreSafetyGuardsPassed": false
+}

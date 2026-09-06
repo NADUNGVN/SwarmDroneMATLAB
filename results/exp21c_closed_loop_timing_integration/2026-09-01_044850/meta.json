@@ -1,0 +1,18 @@
+{
+  "experiment": "exp21c_closed_loop_timing_integration",
+  "runId": "2026-09-01_044850",
+  "startedAt": "2026-09-01 04:48:51",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Continuous local-clock event-engine integration; no policy optimization or submission claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp21c_closed_loop_timing_integration.m",
+  "finishedAt": "2026-09-01 04:51:26",
+  "elapsedSec": 155.4303499,
+  "elapsedText": "2 m 35 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

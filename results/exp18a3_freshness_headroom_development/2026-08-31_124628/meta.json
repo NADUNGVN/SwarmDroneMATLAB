@@ -1,0 +1,18 @@
+{
+  "experiment": "exp18a3_freshness_headroom_development",
+  "runId": "2026-08-31_124628",
+  "startedAt": "2026-08-31 12:46:28",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development amendment: service abstention plus parameter-free freshness-headroom marginal ACK value.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp18a3_freshness_headroom_development.m",
+  "finishedAt": "2026-08-31 12:49:39",
+  "elapsedSec": 190.9316101,
+  "elapsedText": "3 m 11 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

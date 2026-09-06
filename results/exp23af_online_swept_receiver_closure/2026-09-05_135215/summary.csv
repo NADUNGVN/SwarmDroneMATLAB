@@ -1,0 +1,6 @@
+arm,kind,fault,emergencyEnabled,nRuns,motionAuthorizationRate,reactivationRate,meanFinalSuppressed,meanMissionRmse,meanFormationRmse,minimumSeparation,safeFailures,maximumCapsuleRatio,physicalSubsetRate,senderSubsetRate,meanControlBytes,meanDataAirtime,meanManagementAirtime,meanTotalCost
+closure-commit-blackout-emergency,closure,commit-blackout,1,20,1,0,2.8,0.141597200794584,0.143007632827701,1.01290136285949,0,1.16670170869924,1,1,3895.3,1.47455999999999,0.1246496,0.152305676190475
+closure-iid20-emergency,closure,none,1,20,1,1,0,0.142109876841196,0.143462024876004,1.0081947830791,0,1.15244894262028,1,1,3781.9,1.47455999999999,0.1210208,0.151960076190475
+closure-prepare-blackout-emergency,closure,prepare-blackout,1,20,0,0,2.8,0.14863704800206,0.139737500929399,1.03677546203407,0,1.15306503096785,1,1,656,1.47455999999999,0.020992,0.142433523809523
+closure-response-blackout-emergency,closure,response-blackout,1,20,1,0,3.8,0.14159680499382,0.143006278152413,1.01636753929652,0,1.15697417039536,1,1,7430.1,1.47455999999999,0.2377632,0.163078399999999
+closure-response-blackout-no-emergency,closure,response-blackout,0,20,1,0,3.8,0.257347018994488,0.248862450914971,0.659833624831842,0,4.79354723995826,1,1,7430.1,1.24308479999999,0.2377632,0.141033142857142

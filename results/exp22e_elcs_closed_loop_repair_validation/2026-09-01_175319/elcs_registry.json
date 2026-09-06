@@ -1,0 +1,82 @@
+{
+  "version": "EXP22E-ELCS-F-CLOSED-LOOP-REPAIR-VALIDATION-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "candidate-fallback-repair-closed-loop-validation",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "robustnessContinuationPermitted": false,
+  "seeds": [
+    1.6046001E+7,
+    1.6046002E+7,
+    1.6046003E+7,
+    1.6046004E+7,
+    1.6046005E+7,
+    1.6046006E+7,
+    1.6046007E+7,
+    1.6046008E+7,
+    1.6046009E+7,
+    1.604601E+7,
+    1.6046011E+7,
+    1.6046012E+7,
+    1.6046013E+7,
+    1.6046014E+7,
+    1.6046015E+7,
+    1.6046016E+7,
+    1.6046017E+7,
+    1.6046018E+7,
+    1.6046019E+7,
+    1.604602E+7,
+    1.6046021E+7,
+    1.6046022E+7,
+    1.6046023E+7,
+    1.6046024E+7,
+    1.6046025E+7,
+    1.6046026E+7,
+    1.6046027E+7,
+    1.6046028E+7,
+    1.6046029E+7,
+    1.604603E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "maxFrames": 400,
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockResetHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "arms": [
+    {
+      "id": "elcs-mission-zero-clock",
+      "label": "ELCS-F mission guard / zero clock",
+      "kind": "clock-paired-reference",
+      "clockEnabled": false
+    },
+    {
+      "id": "elcs-mission-affine-clock",
+      "label": "ELCS-F mission guard / affine clock",
+      "kind": "candidate-clock-composition",
+      "clockEnabled": true
+    }
+  ],
+  "zeroArm": "elcs-mission-zero-clock",
+  "clockArm": "elcs-mission-affine-clock",
+  "expectedRuns": 120,
+  "requiredIntegrationContracts": 12,
+  "parentInvalidRun": "2026-09-01_173320",
+  "parentInvalidGates": "14/17",
+  "parentKernelRun": "2026-09-01_174154",
+  "parentKernelGates": "17/17",
+  "fallbackAttemptCapPerNodeFrame": 1
+}

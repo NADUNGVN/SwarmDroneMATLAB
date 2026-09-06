@@ -1,0 +1,23 @@
+{
+  "status": "CURRENT_CANDIDATE_NOT_SUBMISSION_READY",
+  "analysisType": "post-hoc descriptive research audit",
+  "confirmatoryClaimAdded": false,
+  "feasibleAlohaCells": 3,
+  "feasibleAlohaPiggybackDominates": 3,
+  "feasibleAlohaAdaptiveDominates": 0,
+  "candidateMisroutesResolvedFeasibleAloha": 3,
+  "safeResolvedPiggybackDominates": 8,
+  "safeResolvedAdaptiveDominates": 0,
+  "screenFalsePositiveCellMeans": 0,
+  "screenConservativeFalseNegativeCellMeans": 1,
+  "registeredH8H9CleanAccessIsolation": false,
+  "descriptiveMatchedAccessRepairN10Collision": true,
+  "descriptiveMatchedAccessRepairN10Load": true,
+  "standaloneAckAsPrimaryNoveltyPermitted": false,
+  "capacityScreenAsSufficientGateRetained": true,
+  "frameAwareAccessMechanismRetained": true,
+  "hardwarePolicyValidationPermitted": false,
+  "measurementInfrastructureWorkPermitted": true,
+  "nextResearchQuestion": "Can service-aware semantic admission/scheduling improve control over frame-aware piggyback when service demand exceeds capacity?",
+  "nextStage": "EXP19A_ORACLE_SERVICE_ACTION_SPACE_DIAGNOSTIC"
+}

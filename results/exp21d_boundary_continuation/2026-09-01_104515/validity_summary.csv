@@ -1,0 +1,13 @@
+scenario,arm,BOUNDARY_CONDITION,n,physicallyComposable,terminalResolved,terminalCollisionFree,terminalFrameAgreement,meanMaxFrameDisagreement,meanFalseResolvedNodeFrames
+n10-ring2,beacon-loss-native,beacon-loss,30,30,13,28,30,0,21.4333333333333
+n10-ring2,beacon-loss-warm,beacon-loss,30,30,30,30,30,0,21.4333333333333
+n10-ring2,churn-rejoin-native,churn-rejoin,30,30,30,30,30,0,0.4
+n10-ring2,restricted-management-native,restricted-management,30,0,20,16,0,17.0666666666667,1332.13333333333
+n10-ring2,zero-native,zero,30,30,30,30,30,0,0.4
+n10-ring2,zero-warm,zero,30,30,30,30,30,0,0.4
+n5-6dof,beacon-loss-native,beacon-loss,30,30,17,27,30,0,15.2666666666667
+n5-6dof,beacon-loss-warm,beacon-loss,30,30,30,30,30,0,15.2666666666667
+n5-6dof,churn-rejoin-native,churn-rejoin,30,30,30,30,30,0,0.533333333333333
+n5-6dof,restricted-management-native,restricted-management,30,0,30,21,0,7.16666666666667,1332.5
+n5-6dof,zero-native,zero,30,30,30,30,30,0,0.533333333333333
+n5-6dof,zero-warm,zero,30,30,30,30,30,0,0.533333333333333

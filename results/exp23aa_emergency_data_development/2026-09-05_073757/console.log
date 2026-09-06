@@ -1,0 +1,76 @@
+
+============================================================
+RUN  : exp23aa_emergency_data_development
+ID   : 2026-09-05_073757
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23aa_emergency_data_development\2026-09-05_073757
+WHEN : 2026-09-05 07:37:57
+============================================================
+
+  seed  1 / 20; rows   6 / 120
+  seed  2 / 20; rows  12 / 120
+  seed  3 / 20; rows  18 / 120
+  seed  4 / 20; rows  24 / 120
+  seed  5 / 20; rows  30 / 120
+  seed  6 / 20; rows  36 / 120
+  seed  7 / 20; rows  42 / 120
+  seed  8 / 20; rows  48 / 120
+  seed  9 / 20; rows  54 / 120
+  seed 10 / 20; rows  60 / 120
+  seed 11 / 20; rows  66 / 120
+  seed 12 / 20; rows  72 / 120
+  seed 13 / 20; rows  78 / 120
+  seed 14 / 20; rows  84 / 120
+  seed 15 / 20; rows  90 / 120
+  seed 16 / 20; rows  96 / 120
+  seed 17 / 20; rows 102 / 120
+  seed 18 / 20; rows 108 / 120
+  seed 19 / 20; rows 114 / 120
+  seed 20 / 20; rows 120 / 120
+
+EXP23AA protected emergency DATA gates
+  [PASS] registry_frozen                            hash 76584149 over 86 leaves
+  [PASS] negative_parent_retained                   EXP23Z remains negative at 15/16 gates
+  [PASS] matrix_complete_unique                     120/120 unique rows
+  [PASS] exact_matrix_coverage                      20 new seeds and six paired arms exact
+  [PASS] paired_realizations                        DATA random field, clock, geometry and event pair by seed
+  [PASS] geometry_selector_stimulus                 one local edge forces UAV 10 from shared slot 7 to slot 9
+  [PASS] protected_slot_mapping                     protected arms map suppressed DATA only to collision-free slot 10
+  [PASS] unprotected_control_arms                   silent comparator contains no emergency DATA opportunity
+  [PASS] causal_instrumentation                     zero forbidden reads; plant-tube coupling remains explicitly absent
+  [PASS] clock_timing_valid                         all migration arms retain affine-clock safety
+  [PASS] exact_closed_loop_replay                   receiver success, erasure and collision outcomes replay exactly
+  [PASS] control_airtime_accounting                 management attempts, bytes and airtime close
+  [PASS] collision_safety                           all arms remain collision-free
+  [PASS] normal_reacquisition                       60/60 ordinary rows reacquire
+  [PASS] response_blackout_lease_silence            both RESPONSE-blackout arms refuse uncertified shared-slot reuse
+  [PASS] silent_negative_replicated                 the EXP23Z unsafe silent boundary remains visible
+  [PASS] protected_blackout_safety_recovered        protected DATA restores closed-loop safety under permanent RESPONSE loss
+  [PASS] supported_closed_loop_safety               all intended protected and ordinary operating arms remain safe
+  [PASS] revoke_loss_independence                   protected local state, performance and cost ignore REVOKE delivery
+                          arm                           meanRMSE    meanCost    safeFailureRate    meanEmergencyOpportunities
+    ________________________________________________    ________    ________    _______________    __________________________
+
+    "periodic-iid20"                                    0.083203      0.256            0                       NaN           
+    "migration-iid20-no-emergency"                      0.087371    0.23578            0                       NaN           
+    "migration-iid20-emergency"                         0.085667    0.23712            0                      5.25           
+    "migration-iid20-emergency-revoke-blackout"         0.085667    0.23712            0                      5.25           
+    "migration-iid20-emergency-response-blackout"       0.085647    0.25275            0                        43           
+    "migration-iid20-no-emergency-response-blackout"     0.18278    0.24174            1                       NaN           
+
+                      candidate                                         reference                        nPairs    relativeRmse    rmseDelta      rmseCiLo      rmseCiHi     relativeCost    costDelta      costCiLo      costCiHi 
+    _____________________________________________    ________________________________________________    ______    ____________    __________    __________    __________    ____________    __________    __________    __________
+
+    "migration-iid20-no-emergency"                   "periodic-iid20"                                      20        0.050098       0.0041683      0.002985     0.0053765     -0.079002       -0.020225     -0.020315     -0.020147
+    "migration-iid20-emergency"                      "migration-iid20-no-emergency"                        20       -0.019509      -0.0017045    -0.0023872    -0.0011314     0.0057003        0.001344     0.0011648     0.0015488
+    "migration-iid20-emergency-response-blackout"    "migration-iid20-no-emergency-response-blackout"      20        -0.53142       -0.097132     -0.098798     -0.095745      0.045536        0.011008      0.011008      0.011008
+    "migration-iid20-emergency-response-blackout"    "periodic-iid20"                                      20        0.029382       0.0024447     0.0011881     0.0036917     -0.012686      -0.0032477    -0.0034875    -0.0030213
+    "migration-iid20-emergency-revoke-blackout"      "migration-iid20-emergency"                           20               0               0             0             0             0               0             0             0
+
+EXP23AA DECISION: PROTECTED_EMERGENCY_DATA_DEVELOPMENT_FEASIBLE
+
+============================================================
+DONE : exp23aa_emergency_data_development
+TIME : 2 m 24 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23aa_emergency_data_development\2026-09-05_073757
+============================================================

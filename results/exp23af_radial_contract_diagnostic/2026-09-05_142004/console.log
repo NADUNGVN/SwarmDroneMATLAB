@@ -1,0 +1,29 @@
+
+============================================================
+RUN  : exp23af_radial_contract_diagnostic
+ID   : 2026-09-05_142004
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_radial_contract_diagnostic\2026-09-05_142004
+WHEN : 2026-09-05 14:20:04
+============================================================
+
+  seed  5 / 20; rows  25
+  seed 10 / 20; rows  50
+  seed 15 / 20; rows  75
+  seed 20 / 20; rows 100
+                       arm                        nRuns    vectorTubePassRate    radialContractPassRate    maximumVectorRatio    maximumRadialRatio    minimumOmittedMargin    actualPhysicalSubsetRate
+    __________________________________________    _____    __________________    ______________________    __________________    __________________    ____________________    ________________________
+
+    {'closure-commit-blackout-emergency'     }     20              0.4                     1                     1.1667               0.78437                 0.15408                     1            
+    {'closure-iid20-emergency'               }     20             0.45                     1                     1.1524                0.7899                 0.15408                     1            
+    {'closure-prepare-blackout-emergency'    }     20              0.4                     1                     1.1531               0.78447                 0.13497                     1            
+    {'closure-response-blackout-emergency'   }     20              0.4                     1                      1.157               0.78439                 0.15408                     1            
+    {'closure-response-blackout-no-emergency'}     20                0                     0                     4.7935                3.5817                0.053292                     1            
+
+EXP23AF RADIAL DIAGNOSIS: RADIAL_CONTRACT_REPAIR_SUPPORTED
+
+============================================================
+DONE : exp23af_radial_contract_diagnostic
+TIME : 1 m 44 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_radial_contract_diagnostic\2026-09-05_142004
+============================================================

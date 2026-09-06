@@ -1,0 +1,12 @@
+gate,passed,detail
+registry_frozen,1,"hash 65243571 over 18 leaves"
+matrix_complete_unique,1,"1600/1600 unique rows"
+exact_declared_seeds,1,"all and only 100 registered seeds"
+exact_factor_coverage,1,"N, sync and guard factors exact"
+paired_absolute_clock_draws,1,"all eight arms in each seed/N group share one master clock draw"
+sufficient_guard_collision_free,1,"800 safe-bound rows, 0 collision frames"
+clock_equation_closes,1,"maximum residual 1.78e-15 s"
+collision_witnesses_valid,1,"every marked collision has positive overlap and declared interference"
+interval_accounting_closes,1,"offered sum and busy-time union are consistent"
+synchronization_reduces_guard,1,"0.5-s 0.000540022 s versus 12-s 0.00146006 s"
+model_validity_scope_only,1,"no policy or formation outcome enters a validity gate"

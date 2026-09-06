@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23af_radial_contract_diagnostic",
+  "runId": "2026-09-05_142004",
+  "startedAt": "2026-09-05 14:20:04",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Posthoc one-sided radial diagnosis of the frozen EXP23AF tube failure.",
+  "sourceFile": "",
+  "finishedAt": "2026-09-05 14:21:49",
+  "elapsedSec": 104.3835625,
+  "elapsedText": "1 m 44 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,7 @@
+gate,passed,detail
+matrix_completeness,1,96 declared runs
+one_slot_degeneracy_reproduced,1,one-slot CSMA and ALOHA are exactly identical on physical outcomes
+multi_slot_duration,1,multi-slot bare DATA duration=4 slots
+multi_slot_mac_distinguishable,1,multi-slot CSMA and ALOHA differ in at least one paired outcome
+protocol_and_accounting,1,0 invariant violations; max queue=2; max history=32
+paired_absolute_trace,1,one absolute random trace per development seed

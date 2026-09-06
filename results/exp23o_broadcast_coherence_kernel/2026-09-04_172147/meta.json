@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23o_broadcast_coherence_kernel",
+  "runId": "2026-09-04_172147",
+  "startedAt": "2026-09-04 17:21:47",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh validation of receiver-lifted reachable broadcast sender conflict supergraphs under mobility and causal uncertainty.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23o_broadcast_coherence_kernel.m",
+  "finishedAt": "2026-09-04 17:22:04",
+  "elapsedSec": 16.6773261,
+  "elapsedText": "16.7 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,73 @@
+
+============================================================
+RUN  : exp14e_preregistered_holdout
+ID   : 2026-08-30_213957
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14e_preregistered_holdout\2026-08-30_213957
+WHEN : 2026-08-30 21:39:58
+============================================================
+
+EXP14E HOLDOUT IS NOW OPEN. Registry hash: 87778193
+Frozen matrix: 2800 runs (100 seeds).
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 12 / 400; rows   84 / 2800
+  groups  13-- 24 / 400; rows  168 / 2800
+  groups  25-- 36 / 400; rows  252 / 2800
+  groups  37-- 48 / 400; rows  336 / 2800
+  groups  49-- 60 / 400; rows  420 / 2800
+  groups  61-- 72 / 400; rows  504 / 2800
+  groups  73-- 84 / 400; rows  588 / 2800
+  groups  85-- 96 / 400; rows  672 / 2800
+  groups  97--108 / 400; rows  756 / 2800
+  groups 109--120 / 400; rows  840 / 2800
+  groups 121--132 / 400; rows  924 / 2800
+  groups 133--144 / 400; rows 1008 / 2800
+  groups 145--156 / 400; rows 1092 / 2800
+  groups 157--168 / 400; rows 1176 / 2800
+  groups 169--180 / 400; rows 1260 / 2800
+  groups 181--192 / 400; rows 1344 / 2800
+  groups 193--204 / 400; rows 1428 / 2800
+  groups 205--216 / 400; rows 1512 / 2800
+  groups 217--228 / 400; rows 1596 / 2800
+  groups 229--240 / 400; rows 1680 / 2800
+  groups 241--252 / 400; rows 1764 / 2800
+  groups 253--264 / 400; rows 1848 / 2800
+  groups 265--276 / 400; rows 1932 / 2800
+  groups 277--288 / 400; rows 2016 / 2800
+  groups 289--300 / 400; rows 2100 / 2800
+  groups 301--312 / 400; rows 2184 / 2800
+  groups 313--324 / 400; rows 2268 / 2800
+  groups 325--336 / 400; rows 2352 / 2800
+  groups 337--348 / 400; rows 2436 / 2800
+  groups 349--360 / 400; rows 2520 / 2800
+  groups 361--372 / 400; rows 2604 / 2800
+  groups 373--384 / 400; rows 2688 / 2800
+  groups 385--396 / 400; rows 2772 / 2800
+  groups 397--400 / 400; rows 2800 / 2800
+
+EXP14E integrity gates
+  [PASS] registry_contract                  hash 87778193 over 58 leaves
+  [PASS] matrix_completeness                2800 frozen runs
+  [PASS] unique_cells                       one row per seed/cell/arm
+  [PASS] complete_paired_groups             all seven arms occur once per seed/cell
+  [PASS] finite_eligible_outputs            all nondivergent continuous outcomes are finite
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=2 max history=32
+  [PASS] physical_accounting                terminal accounting and channel busy union close
+  [PASS] paired_absolute_trace              one trace and channel-state realization per seed/cell
+  [PASS] access_semantics                   all nonhistorical arms scale access; historical arm is frozen
+  [PASS] candidate_semantics                selected arm is adaptive, scaled and guard-free
+  [PASS] comparator_semantics               historical, piggyback, state, belief and P10 contracts match
+  [PASS] local_busy_contract                causal local busy estimates remain in [0,1]
+  [PASS] divergence_accounting              0 divergences retained
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp14e_preregistered_holdout\2026-08-30_213957\figures
+
+EXP14E CLAIM VERDICT: SUPPORTED_ALL_PREREGISTERED_CSMA_CELLS
+  Holm tests: 6/6 | CSMA cells: 3/3
+
+============================================================
+DONE : exp14e_preregistered_holdout
+TIME : 23 m 41 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14e_preregistered_holdout\2026-08-30_213957
+============================================================

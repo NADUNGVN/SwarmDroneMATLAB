@@ -1,0 +1,141 @@
+% Narrative rewrite candidate. Not included by main.tex until explicitly swapped.
+\section{Related Work}
+\label{sec:related-v2}
+
+The communication decision in networked coordination has two distinct
+questions: \emph{is the current state informative enough to transmit?}, and
+\emph{what does the sender causally know about the state currently held by the
+receiver?} Event-triggered control mainly addresses the first question,
+whereas age-based scheduling and feedback-aware status updating mainly address
+the second. Our problem lies at their intersection. We therefore organize the
+literature by the information used to make a transmission decision rather
+than by application domain alone.
+
+\subsection{State relevance: event-triggered coordination}
+
+Classical event-triggered control replaces periodic updates with transmissions
+driven by a local state or estimation error
+\cite{astrom2002riemann,tabuada2007event,heemels2012introduction}. Distributed
+extensions establish consensus and coordination guarantees, exclude Zeno
+behavior, and introduce dynamic thresholds
+\cite{dimarogonas2012distributed,seyboth2013eventbased,girard2015dynamic,yi2017distributed,nowzari2019eventtriggered}.
+This line has been extended to multi-UAV formation under directed topologies,
+delays, disturbances, and dynamic triggers
+\cite{yin2023eventbased,ji2023dynamic,chen2024distributed,yang2025fencing}.
+Importantly, Wang \emph{et al.} also demonstrate finite-time distributed
+event-triggered formation using three Bebop2 quadrotors
+\cite{wang2022finiteuav}. Thus, neither event-triggered multi-agent control nor
+its application to UAV formation is new.
+
+What this strand generally abstracts is receiver observability. A sender
+usually resets its local broadcast error when it transmits, implicitly treating
+the transmitted sample as the neighbors' new reference despite queueing,
+forward loss, or delayed feedback. Kesper \emph{et al.} explicitly attach age
+timers to last-broadcast states in learned distributed event-triggered control
+\cite{kesper2023toward}, but the timers reset on broadcast rather than on
+delayed acknowledgement of a particular receiver. State relevance therefore
+answers when the plant has changed, but not necessarily whether a specific
+neighbor has received that change.
+
+\subsection{Time relevance: AoI-aware networked control}
+
+Age of information (AoI) quantifies the time elapsed since generation of the
+newest update available at a receiver
+\cite{kaul2012realtime,sun2017update,yates2021aoisurvey}. AoI-aware networked
+control uses this receiver-side freshness to schedule scarce transmissions or
+constrain estimation quality. Mamduhi \emph{et al.} combine age-based and
+event-based scheduling across multiple independent feedback loops
+\cite{mamduhi2020freshness}; Wang \emph{et al.} impose freshness constraints in
+an event-triggered Kalman consensus filter \cite{wang2021freshness}; and Lin
+\emph{et al.} integrate AoI into event-triggered load-frequency control
+\cite{lin2023eventtriggered}. These studies establish that freshness can be a
+control-relevant scheduling variable. They also show why a pure state trigger
+can leave a receiver stale even when the sender's instantaneous innovation is
+small.
+
+Age alone, however, is not equivalent to task relevance. In networked control,
+AoI can underperform policies that account for plant state or value of
+information \cite{ayan2019aoivoi,mamduhi2020freshness}. The communication
+literature reaches the same conclusion through semantic freshness metrics.
+Age of Incorrect Information (AoII) penalizes information that is both stale
+and wrong \cite{maatouk2020aoii}, while Age of Changed Information (AoCI)
+combines elapsed time with whether the monitored content has changed
+\cite{wang2022aoci}. Decentralized AoII policies have also been studied under
+slotted-ALOHA collisions \cite{nayak2023decentralizedaoii}. These works are
+important conceptual precedents for combining age and innovation; consequently,
+our novelty cannot be the generic idea of making freshness content-aware.
+Their typical setting is a discrete status source or remote estimator with a
+common destination, rather than continuous-state distributed formation with a
+separate belief for every directed neighbor link.
+
+\subsection{Receiver observability: ACKs and delayed two-way feedback}
+
+When delivery is unreliable, the sender does not know the receiver's AoI from
+its own transmission history alone. ACK/NACK-aware scheduling addresses this
+causal information constraint. Ceran \emph{et al.} optimize AoI through
+ACK-driven sampling and retransmission decisions under resource constraints
+\cite{ceran2019average}. Pan \emph{et al.} derive threshold sampling for an
+unreliable forward channel with random two-way delay and acknowledgement
+feedback \cite{pan2023twoway}. Tahir \emph{et al.} go further to decentralized
+sensor agents sharing capacity-limited, non-FIFO duplex channels: each agent
+uses a particle filter to maintain a belief over receiver AoI under delayed
+ACKs \cite{tahir2024collaborative}. Onozuka \emph{et al.} provide a related
+bidirectional precedent by event-triggering both forward and feedback traffic
+in railway control \cite{onozuka2024aoi}.
+
+This strand solves part of the observability problem that classical
+event-triggered control omits, and Tahir \emph{et al.} is therefore a necessary
+nearest-neighbor baseline rather than merely a citation. Nevertheless, these
+policies optimize age or estimation objectives for sources communicating with
+a receiver; they do not decide whether a continuous physical state is newly
+informative for a particular formation neighbor. Conversely, AoI-aware control
+studies that assume the receiver age is directly available do not expose the
+distinction between a state that was transmitted and a state whose reception
+has been causally confirmed.
+
+\subsection{UAV shared-medium implementations}
+
+UAV-network studies emphasize mobility, interference, bandwidth constraints,
+and topology changes \cite{gupta2016survey,zeng2016wireless,mozaffari2019tutorial}.
+WiSwarm is especially relevant because it implements an AoI-based application
+layer over Wi-Fi for collaborative UAV teams, including collision prevention,
+stale-packet handling, traffic prioritization, and hardware flight experiments
+\cite{tripathi2023wiswarm}. It demonstrates that a useful freshness policy
+cannot be evaluated only by counting logical sender--receiver updates: shared
+medium access and queueing can change both delivered freshness and the relative
+cost of broadcast and unicast traffic.
+
+The UAV literature therefore exposes a complementary split. Formation-control
+papers provide stronger stability and plant results but often idealize the
+network, whereas network-oriented systems such as WiSwarm model or measure the
+wireless stack but do not implement the present per-neighbor, state-innovation
+formation trigger. Our current simulation addresses the protocol logic between
+these layers, but its broadcast metric remains an accounting proxy; without a
+contention/MAC or trace-based experiment, it cannot support a shared-medium
+performance claim.
+
+\subsection{Unresolved intersection and positioning}
+
+The literature has therefore solved four neighboring subproblems: state-error
+triggers for distributed coordination; receiver-age scheduling for networked
+control; semantic freshness that combines time and content; and causal
+receiver-age inference from delayed ACKs. We did not identify prior work that
+jointly combines (i) a per-directed-neighbor estimate updated only by causal
+cumulative ACKs, (ii) state innovation measured against the last transmitted
+state, (iii) an innovation threshold modulated by the ACK-derived receiver-age
+estimate, and (iv) protocol logic that separates genuinely new information
+from refresh traffic so that in-flight suppression applies only to the latter,
+within a distributed formation-control loop. This is a scoped intersection
+claim, not a claim that any individual ingredient is new.
+
+That gap motivates three contributions. First, we formulate a dual-memory
+sender policy that distinguishes last-transmitted from ACK-confirmed state and
+therefore remains causal under forward and reverse delay/loss. Second, we
+separate new-information and refresh branches; a frozen design ablation tests
+the failure caused by applying one cooldown to both. Third, we evaluate the
+result under matched network realizations and multiple communication-accounting
+models, retaining the regimes in which periodic baselines dominate. These
+contributions do not constitute a stability theorem, a MAC-layer solution, or
+a hardware validation; those boundaries delimit the present study and define
+the next validation stage.
+

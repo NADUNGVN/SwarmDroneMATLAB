@@ -1,0 +1,44 @@
+
+============================================================
+RUN  : exp23l_coherence_geometry_kernel
+ID   : 2026-09-04_165837
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23l_coherence_geometry_kernel\2026-09-04_165837
+WHEN : 2026-09-04 16:58:37
+============================================================
+
+  seeds  10 / 100; rows  40 / 400
+  seeds  20 / 100; rows  80 / 400
+  seeds  30 / 100; rows 120 / 400
+  seeds  40 / 100; rows 160 / 400
+  seeds  50 / 100; rows 200 / 400
+  seeds  60 / 100; rows 240 / 400
+  seeds  70 / 100; rows 280 / 400
+  seeds  80 / 100; rows 320 / 400
+  seeds  90 / 100; rows 360 / 400
+  seeds 100 / 100; rows 400 / 400
+
+EXP23L coherence geometry-kernel gates
+  [PASS] registry_frozen                             hash 83642131 over 31 leaves
+  [PASS] matrix_complete_unique                      400/400 unique rows
+  [PASS] exact_matrix_coverage                       100 seeds, N5/N10 and two uncertainty levels exact
+  [PASS] paired_base_realizations                    uncertainty arms share motion, errors and management graph
+  [PASS] deterministic_reproduction                  repeated seed/cell is bit-identical
+  [PASS] actual_graph_subset                         every sampled actual conflict belongs to its supergraph
+  [PASS] proper_color_safety                         no sampled actual conflict shares a selected graph color
+  [PASS] horizon_graph_monotonicity                  potential edges never disappear as horizon grows
+  [PASS] uncertainty_horizon_contraction             higher causal uncertainty never lengthens selected horizon
+  [PASS] issued_horizon_feasible                     every issued lease has cover, payload and slot feasibility
+  [PASS] uncovered_fail_silent                       no feasible horizon yields no positive lease
+  [PASS] self_revocation_contract                    bounded motion remains active; injected bound violation self-revokes
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [FAIL] selector_boundary_stimulus                  target/contracted/no-lease rows 0/313/87
+  [PASS] kernel_scope_only                           no closed-loop, promotion or submission decision
+
+EXP23L DECISION: COHERENCE_GEOMETRY_KERNEL_INVALID
+
+============================================================
+DONE : exp23l_coherence_geometry_kernel
+TIME : 3.1 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23l_coherence_geometry_kernel\2026-09-04_165837
+============================================================

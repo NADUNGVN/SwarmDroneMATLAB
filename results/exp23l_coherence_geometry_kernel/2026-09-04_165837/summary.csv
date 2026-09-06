@@ -1,0 +1,5 @@
+N,condition,positionError,velocityError,nRuns,meanSelectedHorizonSec,targetHorizonRate,noLeaseRate,meanSelectedEdges,meanInfeasibleHorizons
+5,high-uncertainty,0.3,0.1,100,0.6275,0,0.25,0.78,4.15
+5,low-uncertainty,0.02,0.02,100,1.29,0,0,0.86,2.79
+10,high-uncertainty,0.3,0.1,100,0.1625,0,0.62,1.74,5.39
+10,low-uncertainty,0.02,0.02,100,0.8025,0,0,3.11,3.42

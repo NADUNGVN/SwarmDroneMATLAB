@@ -1,0 +1,64 @@
+{
+  "version": "EXP14F-PAIRED-SHADOW-DEVELOPMENT-v1",
+  "designDate": "2026-08-30",
+  "designStatus": "development; no confirmatory claim",
+  "seeds": [
+    1.6018001E+7,
+    1.6018002E+7,
+    1.6018003E+7,
+    1.6018004E+7,
+    1.6018005E+7,
+    1.6018006E+7,
+    1.6018007E+7,
+    1.6018008E+7,
+    1.6018009E+7,
+    1.601801E+7,
+    1.6018011E+7,
+    1.6018012E+7,
+    1.6018013E+7,
+    1.6018014E+7,
+    1.6018015E+7,
+    1.6018016E+7,
+    1.6018017E+7,
+    1.6018018E+7,
+    1.6018019E+7,
+    1.601802E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-csma",
+      "label": "N5 CSMA"
+    },
+    {
+      "id": "n10-ring2",
+      "label": "N10 ring2"
+    },
+    {
+      "id": "n20-ring2",
+      "label": "N20 ring2"
+    },
+    {
+      "id": "n5-aloha",
+      "label": "N5 ALOHA"
+    }
+  ],
+  "arms": [
+    {
+      "id": "selected-adaptive-scaled",
+      "label": "Selected adaptive + scaled"
+    },
+    {
+      "id": "piggyback-scaled",
+      "label": "Piggyback-only + scaled"
+    }
+  ],
+  "actualArm": "selected-adaptive-scaled",
+  "shadowArm": "piggyback-scaled",
+  "eventSchema": "ACK-VALUE-EVENT-v1",
+  "matchRule": "same-link-first-shadow-genTime-ge-actual-genTime",
+  "censorRule": "right-censor-at-simulation-horizon",
+  "expectedGroups": 80,
+  "expectedRuns": 160,
+  "confirmatoryClaimPermitted": false,
+  "newDesignPermitted": false
+}

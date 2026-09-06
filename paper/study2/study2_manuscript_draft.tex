@@ -1,0 +1,76 @@
+% Study 2 manuscript draft. Study 1 paper/main.tex remains untouched.
+% Build from paper/study2 with:
+%   latexmk -pdf study2_manuscript_draft.tex
+
+\documentclass[10pt,twocolumn,twoside]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\title{Causal Feedback Mediation on a Shared Medium for
+UAV Swarm Coordination}
+
+\author{[Author names and affiliations pending verified metadata]}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A sender in a networked UAV formation cannot infer a receiver's information
+age from its own transmissions when DATA and acknowledgements are delayed,
+lost, queued, and contended on a shared medium. We study receiver-confirmed
+semantic triggering with broadcast DATA, cumulative feedback, finite queues,
+multi-slot contention, and burst losses. The protocol maintains distinct
+transmitted and causally confirmed memories; the analysis proves conservative
+sender-side age, connects age to semantic state error and formation input-to-
+state stability, and derives an exact marginal-airtime identity for standalone
+ACKs. The experiments deliberately retain negative results. A fixed initial
+design is dominated by a delayed-belief baseline in all primary regimes and
+collapses at 20 agents under unscaled access. Access scaling repairs that
+failure, but state-cloned focal-decision replay shows that earlier confirmation
+can worsen receiver age or formation loss by suppressing later DATA. This
+motivates a preregistered MAC-conditioned route: piggyback-only under CSMA and
+adaptive standalone feedback under ALOHA. Directional validation supports all
+six registered RMSE/load hypotheses. A second frozen matched $2\times2$
+holdout then tests the route-by-access interaction within each of 100 new
+seeds. All six Holm-adjusted simple-effect/interaction tests pass; the RMSE
+interaction is $-0.00927$~m and the offered-airtime interaction is $-0.05296$,
+with both 95\% intervals entirely negative. A third frozen holdout expands to
+eight load/loss/size contexts; only 11/48 globally adjusted tests and 1/8 full
+context rules pass. This rejects configured MAC type as a general selector and
+triggers a preregistered stop before hardware. At 20 agents, eligible
+standalone decisions occur in only 11 of 300
+development trajectories, so no per-decision ACK-value or equivalence claim
+is made. The results expose a bounded causal feedback-mediation effect within
+the declared abstract model, not universal ACK utility, named-MAC behavior, or
+hardware readiness.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Age of information, acknowledgement feedback, event-triggered control,
+shared-medium networks, UAV swarms, networked control systems.
+\end{IEEEkeywords}
+
+\input{01_introduction_draft}
+\input{02_related_work_draft}
+\input{03_system_protocol_draft}
+\input{03_mathematical_foundation_draft}
+\input{04_experimental_methodology_draft}
+\input{05_results_draft}
+\input{06_discussion_draft}
+\input{07_limitations_conclusion_draft}
+
+\bibliographystyle{IEEEtran}
+\bibliography{../references}
+
+\end{document}

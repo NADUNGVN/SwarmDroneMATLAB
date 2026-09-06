@@ -1,0 +1,96 @@
+
+============================================================
+RUN  : exp14b_holdout_ood
+ID   : 2026-08-29_230917
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14b_holdout_ood\2026-08-29_230917
+WHEN : 2026-08-29 23:09:17
+============================================================
+
+EXP14B OOD matrix: 4800 frozen runs.
+  completed pending groups   1-- 12 / 800; rows   72 / 4800
+  completed pending groups  13-- 24 / 800; rows  144 / 4800
+  completed pending groups  25-- 36 / 800; rows  216 / 4800
+  completed pending groups  37-- 48 / 800; rows  288 / 4800
+  completed pending groups  49-- 60 / 800; rows  360 / 4800
+  completed pending groups  61-- 72 / 800; rows  432 / 4800
+  completed pending groups  73-- 84 / 800; rows  504 / 4800
+  completed pending groups  85-- 96 / 800; rows  576 / 4800
+  completed pending groups  97--108 / 800; rows  648 / 4800
+  completed pending groups 109--120 / 800; rows  720 / 4800
+  completed pending groups 121--132 / 800; rows  792 / 4800
+  completed pending groups 133--144 / 800; rows  864 / 4800
+  completed pending groups 145--156 / 800; rows  936 / 4800
+  completed pending groups 157--168 / 800; rows 1008 / 4800
+  completed pending groups 169--180 / 800; rows 1080 / 4800
+  completed pending groups 181--192 / 800; rows 1152 / 4800
+  completed pending groups 193--204 / 800; rows 1224 / 4800
+  completed pending groups 205--216 / 800; rows 1296 / 4800
+  completed pending groups 217--228 / 800; rows 1368 / 4800
+  completed pending groups 229--240 / 800; rows 1440 / 4800
+  completed pending groups 241--252 / 800; rows 1512 / 4800
+  completed pending groups 253--264 / 800; rows 1584 / 4800
+  completed pending groups 265--276 / 800; rows 1656 / 4800
+  completed pending groups 277--288 / 800; rows 1728 / 4800
+  completed pending groups 289--300 / 800; rows 1800 / 4800
+  completed pending groups 301--312 / 800; rows 1872 / 4800
+  completed pending groups 313--324 / 800; rows 1944 / 4800
+  completed pending groups 325--336 / 800; rows 2016 / 4800
+  completed pending groups 337--348 / 800; rows 2088 / 4800
+  completed pending groups 349--360 / 800; rows 2160 / 4800
+  completed pending groups 361--372 / 800; rows 2232 / 4800
+  completed pending groups 373--384 / 800; rows 2304 / 4800
+  completed pending groups 385--396 / 800; rows 2376 / 4800
+  completed pending groups 397--408 / 800; rows 2448 / 4800
+  completed pending groups 409--420 / 800; rows 2520 / 4800
+  completed pending groups 421--432 / 800; rows 2592 / 4800
+  completed pending groups 433--444 / 800; rows 2664 / 4800
+  completed pending groups 445--456 / 800; rows 2736 / 4800
+  completed pending groups 457--468 / 800; rows 2808 / 4800
+  completed pending groups 469--480 / 800; rows 2880 / 4800
+  completed pending groups 481--492 / 800; rows 2952 / 4800
+  completed pending groups 493--504 / 800; rows 3024 / 4800
+  completed pending groups 505--516 / 800; rows 3096 / 4800
+  completed pending groups 517--528 / 800; rows 3168 / 4800
+  completed pending groups 529--540 / 800; rows 3240 / 4800
+  completed pending groups 541--552 / 800; rows 3312 / 4800
+  completed pending groups 553--564 / 800; rows 3384 / 4800
+  completed pending groups 565--576 / 800; rows 3456 / 4800
+  completed pending groups 577--588 / 800; rows 3528 / 4800
+  completed pending groups 589--600 / 800; rows 3600 / 4800
+  completed pending groups 601--612 / 800; rows 3672 / 4800
+  completed pending groups 613--624 / 800; rows 3744 / 4800
+  completed pending groups 625--636 / 800; rows 3816 / 4800
+  completed pending groups 637--648 / 800; rows 3888 / 4800
+  completed pending groups 649--660 / 800; rows 3960 / 4800
+  completed pending groups 661--672 / 800; rows 4032 / 4800
+  completed pending groups 673--684 / 800; rows 4104 / 4800
+  completed pending groups 685--696 / 800; rows 4176 / 4800
+  completed pending groups 697--708 / 800; rows 4248 / 4800
+  completed pending groups 709--720 / 800; rows 4320 / 4800
+  completed pending groups 721--732 / 800; rows 4392 / 4800
+  completed pending groups 733--744 / 800; rows 4464 / 4800
+  completed pending groups 745--756 / 800; rows 4536 / 4800
+  completed pending groups 757--768 / 800; rows 4608 / 4800
+  completed pending groups 769--780 / 800; rows 4680 / 4800
+  completed pending groups 781--792 / 800; rows 4752 / 4800
+  completed pending groups 793--800 / 800; rows 4800 / 4800
+
+EXP14B machine gates
+  [PASS] matrix_completeness                4800 frozen OOD runs
+  [PASS] unique_cells                       every seed/point/method occurs once
+  [PASS] finite_outputs                     required control, freshness and PHY outputs are finite
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=2 max history=32
+  [PASS] physical_accounting                DATA/ACK success, loss and terminal in-flight outcomes plus channel union close
+  [PASS] paired_absolute_trace              one channel trace and state realization per seed/OOD point
+  [PASS] divergence_accounting              0 diverged runs retained as safety failures
+  [PASS] ood_perturbations_exercised        background, hidden collision, ACK asymmetry and C3 noise are active
+
+EXP14B VERDICT: PASS (9/9 integrity gates)
+
+============================================================
+DONE : exp14b_holdout_ood
+TIME : 43 m 44 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14b_holdout_ood\2026-08-29_230917
+============================================================

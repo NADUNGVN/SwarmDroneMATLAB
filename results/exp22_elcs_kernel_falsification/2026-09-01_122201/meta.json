@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22_elcs_kernel_falsification",
+  "runId": "2026-09-01_122201",
+  "startedAt": "2026-09-01 12:22:02",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F edge-lease safety invariant; no tuning or performance claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22_elcs_kernel_falsification.m",
+  "finishedAt": "2026-09-01 12:31:07",
+  "elapsedSec": 544.8183664,
+  "elapsedText": "9 m 05 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

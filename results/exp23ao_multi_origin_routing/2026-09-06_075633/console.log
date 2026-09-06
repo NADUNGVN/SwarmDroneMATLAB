@@ -1,0 +1,61 @@
+
+============================================================
+RUN  : exp23ao_multi_origin_routing
+ID   : 2026-09-06_075633
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ao_multi_origin_routing\2026-09-06_075633
+WHEN : 2026-09-06 07:56:33
+============================================================
+
+  Monte Carlo prepare   : 43/5000 failures (exact 0.00956168)
+  Monte Carlo quiescent : 53/5000 failures (exact 0.0111464)
+  Monte Carlo evidence  : 392/5000 failures (exact 0.0798942)
+  Monte Carlo response  : 124/5000 failures (exact 0.0299662)
+  Monte Carlo commit    : 37/5000 failures (exact 0.00956168)
+
+EXP23AO-MULTI-ORIGIN-ROUTED-CONTROL-v1 validation gates
+  [PASS] frozen_registry_source_and_parent           registry 60747109/67; source 25634156691/36; parent 19/19
+  [PASS] exact_bundle_membership                     5 bundles; logical [1 3 10 10 1]; routed [1 3 10 9 1]
+  [PASS] admissible_conflict_free_precedence         independent replay observes zero receiver collisions
+  [PASS] independent_no_loss_delivery                5/5 bundles deliver every routed packet
+  [PASS] serial_incumbent_and_visible_compaction     saves up to 20 slots; concurrency up to 2
+  [PASS] integer_bytes_and_derived_airtime           maximum exact no-loss physical bytes 6800
+  [PASS] packet_identity_blackout_isolation          target blackout never suppresses another packet identity
+  [PASS] multi_origin_probability_ordering           maximum exact all-packet attempt failure 0.0798942
+  [PASS] monte_carlo_probability_and_oracle          25,000 trials; max error 0.005166 vs tolerance 0.019372
+  [PASS] routed_endpoint_cache_exact                 7/7 retry levels reproduce the uncached certificate
+  [PASS] uniform_retry_grid_complete                 complete r=1--7 frontier
+  [PASS] registered_low_retry_boundaries             r=1 infeasible; r=2 time 6.953507 > 6.500 s
+  [PASS] registered_uniform_retry_selected           r=4 is minimum at 5.034618 s with [3 4 2 2]
+  [PASS] transaction_reliability_and_time_feasible   failure <= 0.000909554397; time 5.034618/6.500 s
+  [PASS] implementation_version_identity             schedule, replay, bundle, and transaction certificates match registry
+  [PASS] development_scope_preserved                 no downstream validation or submission flag is promoted
+
+Bundle schedules at r=4
+      bundle       routedPacketCount    taskCount    serialSlotCount    compactSlotCount    compactDurationSec    jointAttemptFailureExact
+    ___________    _________________    _________    _______________    ________________    __________________    ________________________
+
+    "prepare"              1                4               16                 16                0.070978                0.0095617        
+    "quiescent"            3                7               28                 24                0.088035                 0.011146        
+    "evidence"            10               34              132                112                 0.58286                 0.079894        
+    "response"             9               19               76                 64                 0.27982                 0.029966        
+    "commit"               1                4               16                 16                0.060738                0.0095617        
+
+    repetitionsPerHop    feasible    bestTimeSec    prepareAttempts    claimAttempts    evidencePrefixAttempts    commitAttempts    transactionFailureUpperBound
+    _________________    ________    ___________    _______________    _____________    ______________________    ______________    ____________________________
+
+            1               0             Inf             NaN               NaN                  NaN                   NaN                          NaN         
+            2               1          6.9535               5                10                    5                     6                   0.00099878         
+            3               1          5.6306               3                 6                    3                     3                   0.00061553         
+            4               1          5.0346               3                 4                    2                     2                   0.00090955         
+            5               1          5.7586               2                 4                    2                     2                   4.2262e-05         
+            6               1          6.7311               2                 4                    2                     2                   1.6914e-06         
+            7               1          6.1044               2                 3                    2                     2                   0.00047365         
+
+EXP23AO-MULTI-ORIGIN-ROUTED-CONTROL-v1 DECISION: MULTI_ORIGIN_ROUTED_CONTROL_DIAGNOSTIC_VALID
+
+============================================================
+DONE : exp23ao_multi_origin_routing
+TIME : 37.8 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ao_multi_origin_routing\2026-09-06_075633
+============================================================

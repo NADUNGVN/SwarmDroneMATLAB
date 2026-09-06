@@ -1,0 +1,18 @@
+{
+  "experiment": "exp16_factorial_interaction",
+  "runId": "2026-08-31_104551",
+  "startedAt": "2026-08-31 10:45:52",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed route-by-MAC interaction holdout; matched 2-by-2 factorial plus fixed-deadline hybrid references.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp16_factorial_interaction.m",
+  "finishedAt": "2026-08-31 10:49:17",
+  "elapsedSec": 205.2584367,
+  "elapsedText": "3 m 25 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

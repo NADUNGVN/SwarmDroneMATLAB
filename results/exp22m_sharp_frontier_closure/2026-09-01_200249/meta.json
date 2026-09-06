@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22m_sharp_frontier_closure",
+  "runId": "2026-09-01_200249",
+  "startedAt": "2026-09-01 20:02:49",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Exact one-percent-cost periodic boundary falsification of event-driven ELCS-F.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22m_sharp_frontier_closure.m",
+  "finishedAt": "2026-09-01 20:08:12",
+  "elapsedSec": 322.7588049,
+  "elapsedText": "5 m 23 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

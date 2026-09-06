@@ -1,0 +1,12 @@
+{
+  "status": "READY_TO_PREREGISTER_FRESH_SEED_HOLDOUT",
+  "developmentOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "gatesPassed": 6,
+  "gatesTotal": 6,
+  "exactAliasRows": 400,
+  "exactAliasTotal": 400,
+  "feasibleCoreMacCells": 5,
+  "futureHoldoutOpened": false,
+  "hardwareClaimPermitted": false
+}

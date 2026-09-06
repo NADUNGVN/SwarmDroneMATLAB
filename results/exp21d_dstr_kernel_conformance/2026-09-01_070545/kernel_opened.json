@@ -1,0 +1,25 @@
+{
+  "openedAt": "2026-09-01 07:05:46",
+  "registryHash": 8.5258916E+7,
+  "registryLeaves": 48,
+  "sourceHash": 8.171592E+6,
+  "contractChecksPassed": 16,
+  "preflight": {
+    "sourceTransitionsValid": true,
+    "namedManagementPathsValid": true,
+    "replayValid": true,
+    "accountingValid": true,
+    "causalCountersValid": true,
+    "managementCounts": {
+      "TG": 8,
+      "TGn": 12,
+      "TS": 211,
+      "TSo": 163,
+      "TSn": 2803,
+      "shrinkEvents": 3
+    }
+  },
+  "policyOptimizationAllowed": false,
+  "closedLoopClaimPermitted": false,
+  "submissionClaimPermitted": false
+}

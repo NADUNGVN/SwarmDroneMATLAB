@@ -1,0 +1,9 @@
+scenario,scenarioLabel,arm,methodLabel,armKind,schedulerMode,n,meanRMSE,safeFailures,meanChargedUtil,meanTrueAoI,meanEndogenousCollisions,meanStartAttempts
+n10-moderate,N10 Moderate,continuous-clock-safe-guard,Continuous local TDMA safe guard,integration-safe,continuous-local-static-tdma,30,0.102837833948377,0,0.255999999999998,0.0938280028429284,0,1000
+n10-moderate,N10 Moderate,continuous-clock-unguarded,Continuous local TDMA unguarded clock,integration-witness,continuous-local-static-tdma,30,0.546974892401982,30,0.650001066666705,0.689521914238332,2268.56666666667,2539.06666666667
+n10-moderate,N10 Moderate,continuous-zero-clock,Continuous local TDMA zero clock,integration-zero,continuous-local-static-tdma,30,0.100957243832834,0,0.255999999999998,0.0923619995261788,0,1000
+n10-moderate,N10 Moderate,ideal-tdma-p8p333,Ideal TDMA 8.333 Hz,ideal-reference,round-robin,30,0.101507341208921,0,0.333333333333334,0.0917754086709312,0,0
+n5-stressed,N5 Stressed,continuous-clock-safe-guard,Continuous local TDMA safe guard,integration-safe,continuous-local-static-tdma,30,0.0829052916893333,0,0.127999999999999,0.120137092316197,0,500
+n5-stressed,N5 Stressed,continuous-clock-unguarded,Continuous local TDMA unguarded clock,integration-witness,continuous-local-static-tdma,30,0.348757744368174,30,0.311628799999997,0.609490326147043,1056.5,1217.3
+n5-stressed,N5 Stressed,continuous-zero-clock,Continuous local TDMA zero clock,integration-zero,continuous-local-static-tdma,30,0.0825456554726342,0,0.127999999999999,0.119157545605307,0,500
+n5-stressed,N5 Stressed,ideal-tdma-p8p333,Ideal TDMA 8.333 Hz,ideal-reference,round-robin,30,0.0823282494731915,0,0.166666666666667,0.120358208955224,0,0

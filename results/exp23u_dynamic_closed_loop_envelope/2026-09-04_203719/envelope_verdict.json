@@ -1,0 +1,11 @@
+{
+  "status": "DYNAMIC_CLOSED_LOOP_OPERATING_ENVELOPE_VALID",
+  "gatesPassed": 21,
+  "gatesTotal": 21,
+  "rows": 360,
+  "performanceIsOperatingEnvelopeNotPassGate": true,
+  "onlineGraphMigrationValidated": false,
+  "next": "implement_online_graph_reselection_and_color_migration",
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp13_development",
+  "runId": "2026-08-29_111747",
+  "startedAt": "2026-08-29 11:17:48",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development-only shared-medium frontiers, mechanism ablations, sensitivity and contention boundaries; no superiority claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp13_development.m",
+  "finishedAt": "2026-08-29 11:25:28",
+  "elapsedSec": 460.1460709,
+  "elapsedText": "7 m 40 s",
+  "figureCount": 4,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

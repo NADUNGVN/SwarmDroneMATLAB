@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ao_multi_origin_routing",
+  "runId": "2026-09-06_075633",
+  "startedAt": "2026-09-06 07:56:33",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen multi-origin common-PHY routing, packet isolation, and cross-layer retry diagnostic.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ao_multi_origin_routing.m",
+  "finishedAt": "2026-09-06 07:57:11",
+  "elapsedSec": 37.8358297,
+  "elapsedText": "37.8 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

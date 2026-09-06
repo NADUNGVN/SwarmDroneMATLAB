@@ -1,0 +1,19 @@
+{
+  "status": "ROUTED_MANAGEMENT_STATE_MACHINE_DIAGNOSTIC_VALID",
+  "gatesPassed": 18,
+  "gatesTotal": 18,
+  "normalRuns": 500,
+  "normalCompletions": 500,
+  "normalFailures": 0,
+  "faultRows": 3,
+  "maximumContinuousDurationSec": 3.9706235276611075,
+  "transactionFailureUpperBound": 0.00090955439743163613,
+  "multiOriginRoutingDiagnosticValidated": true,
+  "managementRelayingValidated": true,
+  "closedLoopManagementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "routed_common_phy_plant_closed_loop"
+}

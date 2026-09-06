@@ -1,0 +1,18 @@
+{
+  "experiment": "exp13b_multislot_mac_diagnostic",
+  "runId": "2026-08-29_131048",
+  "startedAt": "2026-08-29 13:10:49",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Post-EXP13 corrective one-slot versus multi-slot MAC diagnostic; no policy claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp13b_multislot_mac_diagnostic.m",
+  "finishedAt": "2026-08-29 13:11:52",
+  "elapsedSec": 63.5710418,
+  "elapsedText": "1 m 04 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

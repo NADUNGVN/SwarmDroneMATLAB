@@ -1,0 +1,9 @@
+oracleArm,periodicArm,rmseDifference,offeredDifference,failureDifference,reproducesOracle
+oracle-deficit-maxweight-piggyback,periodic-tdma-p6p25,0.0422719884718532,-0.158433333333334,0,0
+oracle-deficit-maxweight-piggyback,periodic-tdma-p8p333,0.0207410213354352,-0.116766666666667,0,0
+oracle-deficit-maxweight-piggyback,periodic-tdma-p10,0.0113678529970582,-0.0834333333333337,0,0
+oracle-deficit-maxweight-piggyback,periodic-tdma-p12p5,0.000598980808746236,-0.0334333333333338,0,0
+oracle-urgency-maxweight-piggyback,periodic-tdma-p6p25,0.0414988390495374,-0.1549,0,0
+oracle-urgency-maxweight-piggyback,periodic-tdma-p8p333,0.0199678719131194,-0.113233333333333,0,0
+oracle-urgency-maxweight-piggyback,periodic-tdma-p10,0.0105947035747424,-0.0799000000000003,0,0
+oracle-urgency-maxweight-piggyback,periodic-tdma-p12p5,-0.00017416861356951,-0.0299000000000004,0,1

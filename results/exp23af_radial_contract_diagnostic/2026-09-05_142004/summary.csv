@@ -1,0 +1,6 @@
+arm,nRuns,vectorTubePassRate,radialContractPassRate,maximumVectorRatio,maximumRadialRatio,minimumOmittedMargin,actualPhysicalSubsetRate
+closure-commit-blackout-emergency,20,0.4,1,1.16670170869924,0.784369189927335,0.154084511749297,1
+closure-iid20-emergency,20,0.45,1,1.15244894262028,0.789902752406722,0.154084511749297,1
+closure-prepare-blackout-emergency,20,0.4,1,1.15306503096785,0.784471158203306,0.134966942912256,1
+closure-response-blackout-emergency,20,0.4,1,1.15697417039536,0.784391422336901,0.154084511749297,1
+closure-response-blackout-no-emergency,20,0,0,4.79354723995826,3.58173555845788,0.0532915173438295,1

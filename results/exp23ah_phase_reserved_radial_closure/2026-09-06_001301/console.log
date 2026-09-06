@@ -1,0 +1,70 @@
+
+============================================================
+RUN  : exp23ah_phase_reserved_radial_closure
+ID   : 2026-09-06_001301
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ah_phase_reserved_radial_closure\2026-09-06_001301
+WHEN : 2026-09-06 00:13:01
+============================================================
+
+  seed  5 / 50; rows  30 / 300
+  seed 10 / 50; rows  60 / 300
+  seed 15 / 50; rows  90 / 300
+  seed 20 / 50; rows 120 / 300
+  seed 25 / 50; rows 150 / 300
+  seed 30 / 50; rows 180 / 300
+  seed 35 / 50; rows 210 / 300
+  seed 40 / 50; rows 240 / 300
+  seed 45 / 50; rows 270 / 300
+  seed 50 / 50; rows 300 / 300
+
+EXP23AH phase-reserved radial closure gates
+  [PASS] registry_frozen_fresh                         hash 160447421 over 114 leaves; 50 seeds disjoint
+  [PASS] invalid_parent_retained                       EXP23AG remains invalid at 22/25; radial component retained
+  [PASS] calibration_nonfresh                          phase and 0.23-m leader radius remain calibration-only
+  [PASS] matrix_complete_unique                        300/300 unique rows
+  [PASS] exact_matrix_coverage                         50 untouched seeds and six frozen arms exact
+  [PASS] seed_trace_pairing                            one exogenous PHY trace is shared across six arms per seed
+  [PASS] online_prefix_exact                           decision state and pre-PREPARE schedule are arm-independent
+  [PASS] causal_geometry_pairing                       geometry, selector, and reliability certificate pair per seed
+  [PASS] receiver_lifted_stimulus                      minimum nonincident edges 1; affected range 3--4
+  [PASS] union_packet_and_protected_slots              union coloring, MTU, and protected-slot separation hold
+  [PASS] persistent_quiet_kernel_bounds                v2 persistent QUIET, union, coloring, attempt and byte bounds hold
+  [PASS] motion_gate_exact                             command begins at authorized graph activation only
+  [PASS] prepare_blackout_blocks_motion                PREPARE blackout safely exhausts without motion
+  [PASS] analytical_transaction_reliability            maximum union failure bound 0.000760320524
+  [PASS] normal_completion_or_safe_abort               completion 50/50 = 1.0000; failures, if any, remain suppressed
+  [PASS] response_blackout_conditional_silence         pre-barrier aborts hold; post-barrier full closure stays silent
+  [PASS] commit_blackout_conditional_safety            abort, evidence failure, and initiator-only COMMIT cases are safe
+  [PASS] parallel_emergency_mapping                    each suppressed sender gets one distinct protected slot per frame
+  [PASS] radial_construction_premise                   each omitted pair has nominal distance strictly above R_I+b_ij
+  [PASS] protected_radial_theorem                      maximum inward-contraction ratio 0.941594
+  [PASS] protected_actual_graph_subset                 minimum omitted-edge margin 0.133894 m
+  [PASS] no_emergency_negative_visible                 minimum radial violation 5.513; paired RMSE penalty 0.223480 m
+  [PASS] supported_collision_safety                    all protected fresh rows are collision-free
+  [PASS] receiver_outcome_replay_exact                 receiver success/erasure outcomes replay exactly
+  [FAIL] management_accounting_and_bounds              attempts/airtime match schedule and byte bounds close
+  [PASS] affine_timing_and_causal_reads                maximum equation residual 8.88e-16 s; forbidden reads zero
+  [PASS] protected_safety_and_scope                    minimum protected separation 1.006477 m; downstream claims false
+                       arm                           kind                fault            emergencyEnabled    nRuns    motionAuthorizationRate    reactivationRate    meanMissionRmse    minimumSeparation    safeFailures    radialContractPassRate    maximumRadialRatio    minimumOmittedMargin    maximumTransactionFailureBound    physicalSubsetRate    senderSubsetRate    meanControlAttempts    meanControlBytes    meanDataAirtime    meanManagementAirtime    meanTotalCost
+    __________________________________________    ___________    _____________________    ________________    _____    _______________________    ________________    _______________    _________________    ____________    ______________________    __________________    ____________________    ______________________________    __________________    ________________    ___________________    ________________    _______________    _____________________    _____________
+
+    {'closure-commit-blackout-emergency'     }    {'closure'}    {'commit-blackout'  }           1             50                 1                      0                0.14865             1.0091               0                    1                     0.9396                0.15885                     0.00076032                      1                    1                   136.6                4632.9             1.4746                0.14825              0.15455   
+    {'closure-iid20-emergency'               }    {'closure'}    {'none'             }           1             50                 1                      1                0.14975             1.0065               0                    1                    0.94159                0.15885                     0.00076032                      1                    1                  132.14                  4508             1.4746                0.14426              0.15417   
+    {'closure-prepare-blackout-emergency'    }    {'closure'}    {'prepare-blackout' }           1             50                 0                      0                0.15758             1.0255               0                    1                    0.93955                0.13389                     0.00076032                      1                    1                    9.44                392.88             1.4746               0.012572              0.14163   
+    {'closure-response-blackout-emergency'   }    {'closure'}    {'response-blackout'}           1             50                 1                      0                0.14861             1.0119               0                    1                     0.9396                0.15885                     0.00076032                      1                    1                   304.2                 12692             1.4746                0.40614              0.17911   
+    {'closure-response-blackout-no-emergency'}    {'closure'}    {'response-blackout'}           0             50                 1                      0                0.37209             0.7235               0                    0                     7.5628                -0.2465                     0.00076032                      0                    0                   304.2                 12692             1.1265                0.40614              0.14597   
+
+                   contrast                    nPairs    meanDeltaMissionRmse    minimumDeltaMissionRmse    maximumDeltaMissionRmse    meanDeltaMinimumSeparation    meanDeltaTotalCost    meanDeltaDataAirtime
+    _______________________________________    ______    ____________________    _______________________    _______________________    __________________________    __________________    ____________________
+
+    "normal_closure_minus_periodic"              50            0.038802                 0.028383                   0.047733                    -0.030914                  -0.10309                -1.2267      
+    "response_no_emergency_minus_protected"      50             0.22348                  0.17249                    0.25104                     -0.26013                 -0.033148               -0.34806      
+
+EXP23AH DECISION: PHASE_RESERVED_RADIAL_CLOSURE_FRESH_INVALID
+
+============================================================
+DONE : exp23ah_phase_reserved_radial_closure
+TIME : 4 m 51 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ah_phase_reserved_radial_closure\2026-09-06_001301
+============================================================

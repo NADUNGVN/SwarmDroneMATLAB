@@ -1,0 +1,17 @@
+{
+  "status": "COHERENCE_PACKET_FORMAT_RETAINS_COST_MARGIN",
+  "sourceRun": "2026-09-04_162852",
+  "rows": 60,
+  "format": {
+    "claimBytes": 28,
+    "responseHeaderBytes": 16,
+    "responseEntryBytes": 10,
+    "maxPacketBytes": 96,
+    "revokeBytes": 24
+  },
+  "mtuViolations": 0,
+  "relativeChargedCostVsPeriodic": -0.017103484623015253,
+  "distributedKernelFormatPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

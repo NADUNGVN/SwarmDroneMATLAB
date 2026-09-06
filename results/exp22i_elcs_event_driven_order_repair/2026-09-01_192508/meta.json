@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22i_elcs_event_driven_order_repair",
+  "runId": "2026-09-01_192508",
+  "startedAt": "2026-09-01 19:25:09",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F edge-lease safety invariant; no tuning or performance claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22i_elcs_event_driven_order_repair.m",
+  "finishedAt": "2026-09-01 19:34:45",
+  "elapsedSec": 576.5189179,
+  "elapsedText": "9 m 37 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

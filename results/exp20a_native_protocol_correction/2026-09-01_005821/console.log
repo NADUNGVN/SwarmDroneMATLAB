@@ -1,0 +1,76 @@
+
+============================================================
+RUN  : exp20a_native_protocol_correction
+ID   : 2026-09-01_005821
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp20a_native_protocol_correction\2026-09-01_005821
+WHEN : 2026-09-01 00:58:22
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+
+[Warning: Failed to automatically create a parallel pool with the default parallel environment. Running serially on the client instead. Fallback to serial execution will be removed in a future release. Error details:
+
+Error using parallel.internal.parpool.getOrCreateCurrentPool (line 16)
+Parallel pool failed to start with the following error. For more detailed information, validate the profile 'Processes' in the Cluster Profile Manager.
+
+Error in pctTryCreatePoolIfNecessary (line 20)
+    pool = parallel.internal.parpool.getOrCreateCurrentPool();
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in parallel_function (line 389)
+    [isPoolRunning, pool] = pctTryCreatePoolIfNecessary();
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in exp20a_native_protocol_correction (line 46)
+    parfor (q=1:numel(indices),16)
+    ^
+Caused by:
+    Error using parallel.internal.pool.JobStateChecker>iThrowIfBadParallelJobStatus (line 95)
+    The parallel pool job errored with the following message: MATLAB worker shut down unexpectedly with status 1 during task execution.] 
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  corrected native tasks    1--  64 / 1800; rows   64
+  corrected native tasks   65-- 128 / 1800; rows  128
+  corrected native tasks  129-- 192 / 1800; rows  192
+  corrected native tasks  193-- 256 / 1800; rows  256
+  corrected native tasks  257-- 320 / 1800; rows  320
+  corrected native tasks  321-- 384 / 1800; rows  384
+  corrected native tasks  385-- 448 / 1800; rows  448
+  corrected native tasks  449-- 512 / 1800; rows  512
+  corrected native tasks  513-- 576 / 1800; rows  576
+  corrected native tasks  577-- 640 / 1800; rows  640
+  corrected native tasks  641-- 704 / 1800; rows  704
+  corrected native tasks  705-- 768 / 1800; rows  768
+  corrected native tasks  769-- 832 / 1800; rows  832
+  corrected native tasks  833-- 896 / 1800; rows  896
+  corrected native tasks  897-- 960 / 1800; rows  960
+  corrected native tasks  961--1024 / 1800; rows 1024
+  corrected native tasks 1025--1088 / 1800; rows 1088
+  corrected native tasks 1089--1152 / 1800; rows 1152
+  corrected native tasks 1153--1216 / 1800; rows 1216
+  corrected native tasks 1217--1280 / 1800; rows 1280
+  corrected native tasks 1281--1344 / 1800; rows 1344
+  corrected native tasks 1345--1408 / 1800; rows 1408
+  corrected native tasks 1409--1472 / 1800; rows 1472
+  corrected native tasks 1473--1536 / 1800; rows 1536
+  corrected native tasks 1537--1600 / 1800; rows 1600
+  corrected native tasks 1601--1664 / 1800; rows 1664
+  corrected native tasks 1665--1728 / 1800; rows 1728
+  corrected native tasks 1729--1792 / 1800; rows 1792
+  corrected native tasks 1793--1800 / 1800; rows 1800
+
+EXP20A native correction integrity gates
+  [PASS] parent_formation_integrity             13/13 parent gates pass
+  [PASS] corrected_native_matrix_complete_unique 1800/1800 unique corrected rows
+  [PASS] exact_corrected_native_seeds           all and only 30 frozen native seeds
+  [PASS] corrected_native_absolute_draw_pairing five arms share one absolute draw tensor in every group
+  [PASS] corrected_private_feedback_causality   future reads 0; max queue 5
+  [PASS] corrected_native_accounting_finite     attempt/success/collision ordering and finite AoII hold
+  [PASS] corrected_feedback_paths_activated     public and delayed/lossy private feedback paths exercised
+
+CORRECTED EXP20A DEVELOPMENT VERDICT: PRIOR_ART_EXPLAINS_FRONTIER
+
+============================================================
+DONE : exp20a_native_protocol_correction
+TIME : 1 h 07 m
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp20a_native_protocol_correction\2026-09-01_005821
+============================================================

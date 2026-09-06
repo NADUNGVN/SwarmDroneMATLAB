@@ -1,0 +1,191 @@
+function net = initSharedMediumState(cfg, topology)
+%INITSHAREDMEDIUMSTATE Create bounded EXP12 broadcast/MAC protocol state.
+%
+%   net = initSharedMediumState(cfg, topology)
+%
+% topology(receiver,sender)=1 means that receiver is an intended listener of
+% sender's state broadcasts.  The t=0 state is common knowledge, matching the
+% convention used by the frozen Study-1 simulators.
+
+N = cfg.swarm.N;
+
+if nargin < 2 || isempty(topology)
+    topology = cfg.swarm.A;
+end
+
+if ~isequal(size(topology), [N N])
+    error('initSharedMediumState: topology must be N-by-N.');
+end
+
+mac = sharedMediumConfig(cfg);
+
+net.N        = N;
+net.topology = logical(topology);
+net.mac      = mac;
+
+% Build templates by field assignment.  MATLAB's struct(name,emptyStruct)
+% constructor creates an empty struct array rather than a scalar containing an
+% empty-struct field, which would silently corrupt every later queue shape.
+net.frameTemplate = struct();
+net.frameTemplate.id               = 0;
+net.frameTemplate.type             = '';
+net.frameTemplate.dataMode         = '';
+net.frameTemplate.sender           = 0;
+net.frameTemplate.seq              = 0;
+net.frameTemplate.genTime          = -inf;
+net.frameTemplate.pos              = nan(1,3);
+net.frameTemplate.vel              = nan(1,3);
+net.frameTemplate.acc              = nan(1,3);
+net.frameTemplate.dataReceiverMask = false(1,N);
+net.frameTemplate.ackReceiverMask  = false(1,N);
+net.frameTemplate.receiverMask     = false(1,N);
+net.frameTemplate.ackEntries       = emptyAckEntries();
+net.frameTemplate.bytes            = 0;
+net.frameTemplate.enqueueTime      = 0;
+net.frameTemplate.attempts         = 0;
+
+net.activeTemplate = struct();
+net.activeTemplate.frame         = net.frameTemplate;
+net.activeTemplate.startTime     = 0;
+net.activeTemplate.endTime       = 0;
+net.activeTemplate.collisionMask = false(1,N);
+net.activeTemplate.backgroundCollision = false;
+
+net.eventTemplate = struct();
+net.eventTemplate.frameId      = 0;
+net.eventTemplate.frameType    = '';
+net.eventTemplate.sender       = 0;
+net.eventTemplate.receiver     = 0;
+net.eventTemplate.seq          = 0;
+net.eventTemplate.genTime      = -inf;
+net.eventTemplate.pos          = nan(1,3);
+net.eventTemplate.vel          = nan(1,3);
+net.eventTemplate.acc          = nan(1,3);
+net.eventTemplate.dataIntended = false;
+net.eventTemplate.ackIntended  = false;
+net.eventTemplate.ackEntries   = emptyAckEntries();
+net.eventTemplate.success      = false;
+net.eventTemplate.collision    = false;
+net.eventTemplate.txStart      = 0;
+net.eventTemplate.txEnd        = 0;
+net.eventTemplate.bytes        = 0;
+
+net.queues = cell(N,1);
+net.pendingAck = cell(N,1);
+for n = 1:N
+    net.queues{n}    = repmat(net.frameTemplate,0,1);
+    net.pendingAck{n}= emptyAckEntries();
+end
+net.pendingAckDue = inf(N,1);
+net.pendingAckSince = inf(N,1);
+net.active = repmat(net.activeTemplate,0,1);
+
+% Locally observable carrier-busy state. The EWMA is updated on the slot
+% grid from carrierSenseMatrix and background occupancy only; no delivery or
+% collision truth enters this signal.
+net.localBusyEWMA = zeros(N,1);
+
+% Receiver truth and sender belief.  Indexing is (receiver,sender).
+net.acceptedSeq     = zeros(N,N);
+net.acceptedGenTime = -inf(N,N);
+net.ackedSeq        = zeros(N,N);
+net.ackedGenTime    = -inf(N,N);
+net.acceptedGenTime(net.topology) = 0;
+net.ackedGenTime(net.topology)    = 0;
+
+% Bounded sender history.  It supports sequence/gen-time consistency checks
+% without the unbounded outstanding list used in Study 1.
+W = mac.historySize;
+net.historySeq     = zeros(N,W);
+net.historyGenTime = nan(N,W);
+net.historyHead    = zeros(N,1);
+net.historyCount   = zeros(N,1);
+net.lastBroadcastSeq     = zeros(N,1);
+net.lastBroadcastGenTime = zeros(N,1);
+
+% Controller-facing received-state cache.  The simulator initializes these
+% arrays from the common t=0 state before the first control evaluation.  They
+% live in the same state object so a newly accepted DATA event updates the
+% protocol truth and the value consumed by formation control atomically.
+net.Pij = zeros(N,N,3);
+net.Vij = zeros(N,N,3);
+net.leaderPos = zeros(N,3);
+net.leaderVel = zeros(N,3);
+net.leaderAcc = zeros(N,3);
+
+net.nextFrameId = 1;
+
+net.stats = struct( ...
+    'dataFramesGenerated',          0, ...
+    'dataFramesAttempted',          0, ...
+    'dataFramesDeliveredAny',       0, ...
+    'framesAttempted',              0, ...
+    'ackFramesAttempted',           0, ...
+    'recipientAttempts',            0, ...
+    'recipientSuccess',             0, ...
+    'recipientLoss',                0, ...
+    'dataRecipientAttempts',        0, ...
+    'dataRecipientSuccess',         0, ...
+    'dataRecipientLoss',            0, ...
+    'ackRecipientAttempts',         0, ...
+    'ackRecipientSuccess',          0, ...
+    'ackRecipientLoss',             0, ...
+    'ackFramesStandalone',          0, ...
+    'adaptiveAckPermitted',         0, ...
+    'adaptiveAckDeferred',          0, ...
+    'adaptiveAckForced',            0, ...
+    'ackEntriesPiggybacked',        0, ...
+    'ackEntriesTransferred',        0, ...
+    'ackEntriesDelivered',          0, ...
+    'collisionFrames',              0, ...
+    'retryFrames',                  0, ...
+    'obsoleteRetryDrops',           0, ...
+    'queueDrops',                   0, ...
+    'supersededBeforeService',      0, ...
+    'busyTime',                     0, ...
+    'dataAirtime',                  0, ...
+    'ackAirtime',                   0, ...
+    'piggybackOverheadAirtime',     0, ...
+    'backgroundBusyTime',           0, ...
+    'backgroundCollisionFrames',    0, ...
+    'dataChannelRecipientAttempts', 0, ...
+    'ackChannelRecipientAttempts',  0, ...
+    'dataChannelBadStateAttempts',  0, ...
+    'ackChannelBadStateAttempts',   0, ...
+    'staleDataDiscarded',           0, ...
+    'staleAckDiscarded',            0, ...
+    'unknownSeqAckCount',           0, ...
+    'seqGenTimeMismatchCount',      0, ...
+    'futureGenTimeCount',           0, ...
+    'senderRollbackCount',          0, ...
+    'expiredHistoryAckCount',       0, ...
+    'ackBeforeAcceptCount',         0, ...
+    'causalConservatismViolationCount', 0, ...
+    'maxQueueDepth',                0, ...
+    'maxHistoryDepth',              0);
+
+net.stats.perNodeFramesAttempted = zeros(N,1);
+net.stats.perNodeDataFramesAttempted = zeros(N,1);
+net.stats.perNodeDataFramesDeliveredAny = zeros(N,1);
+net.stats.perNodeDataRecipientSuccess = zeros(N,1);
+net.stats.perNodeCollisionFrames = zeros(N,1);
+
+% Passive diagnostic samples.  They never feed the policy or MAC decisions.
+net.logs = struct();
+net.logs.accessDelay = zeros(0,1);
+net.logs.dataOneWayDelay = zeros(0,1);
+net.logs.confirmationDelay = zeros(0,1);
+net.logs.deliveredDataFrameIds = zeros(0,1);
+
+end
+
+
+function q = emptyAckEntries()
+
+q = struct( ...
+    'sourceReceiver', {}, ...
+    'targetSender',   {}, ...
+    'seq',            {}, ...
+    'genTime',        {});
+
+end

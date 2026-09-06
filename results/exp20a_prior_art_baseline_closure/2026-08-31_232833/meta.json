@@ -1,0 +1,18 @@
+{
+  "experiment": "exp20a_prior_art_baseline_closure",
+  "runId": "2026-08-31_232833",
+  "startedAt": "2026-08-31 23:28:34",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "",
+  "notes": "resumed development/falsification run",
+  "sourceFile": "",
+  "finishedAt": "2026-09-01 00:34:45",
+  "elapsedSec": 759.3640923,
+  "elapsedText": "12 m 39 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -1,0 +1,10 @@
+{
+  "status": "RECEIVER_LIFTED_CLOSURE_KERNEL_VALID",
+  "gatesPassed": 24,
+  "gatesTotal": 24,
+  "rows": 2400,
+  "developmentOnly": true,
+  "closedLoopClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "common_phy_then_online_plant_coupling"
+}

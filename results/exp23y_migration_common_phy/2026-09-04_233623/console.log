@@ -1,0 +1,36 @@
+
+============================================================
+RUN  : exp23y_migration_common_phy
+ID   : 2026-09-04_233623
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23y_migration_common_phy\2026-09-04_233623
+WHEN : 2026-09-04 23:36:23
+============================================================
+
+
+EXP23Y common-PHY migration gates
+  [PASS] registry_frozen                            hash 62867621 over 51 leaves
+  [PASS] matrix_complete_unique                     1800/1800 unique rows
+  [PASS] exact_matrix_coverage                      50 seeds, three sizes, six cases and two clocks exact
+  [PASS] clock_arm_pairing                          trace, kernel, native schedule and logical opportunity hashes pair
+  [PASS] selector_stimulus                          every row maps an admissible changed-slot union
+  [PASS] control_kind_mapping                       REVOKE/CLAIM/LOCK-PROOF/RESPONSE attempts and MTU exact
+  [PASS] control_accounting                         attempt, byte and exact airtime totals match kernel
+  [PASS] recipient_accounting                       recipient outcomes replay exactly
+  [PASS] fixed_proof_independence                   fixed LOCK-PROOF window continues after local receipt closure
+  [PASS] data_transition_mapping                    DATA follows old-slot to silence to new-slot/fail-silent sequence
+  [PASS] supported_collision_safety                 all covered transitions remain collision-free on common PHY
+  [PASS] affine_clock_safety                        analytical guard prevents every inter-group overlap
+  [PASS] logical_opportunities_preserved            affine mapping trims no registered event
+  [PASS] response_blackout_fail_silent              missing RESPONSE remains silent under both clocks
+  [PASS] revoke_blackout_equivalence                REVOKE loss cannot alter transition state under either clock
+  [FAIL] incomplete_union_visible                   oracle-negative collisions survive continuous mapping exactly
+  [PASS] bounds_and_causality                       control bounds hold with zero forbidden reads
+  [PASS] integration_scope_only                     common-PHY validation cannot promote closed-loop claims
+EXP23Y DECISION: LOCAL_MIGRATION_COMMON_PHY_INVALID
+
+============================================================
+DONE : exp23y_migration_common_phy
+TIME : 19.6 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23y_migration_common_phy\2026-09-04_233623
+============================================================

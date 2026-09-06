@@ -1,0 +1,73 @@
+\section{Introduction}
+\label{sec:s2-introduction}
+
+Distributed formation control depends on information that is both physically
+relevant and sufficiently fresh. Periodic communication ignores whether the
+plant state has changed, while a conventional event trigger can reset its
+local error after transmission even when no neighbor received the packet.
+Age-of-information (AoI) scheduling addresses freshness, but the sender does
+not directly observe receiver AoI when DATA and acknowledgement (ACK) traffic
+experience delay, loss, queueing, and contention. In a broadcast swarm this
+problem is receiver specific: one DATA frame may refresh several neighbors,
+yet every neighbor can hold a different generation and return feedback through
+a different reverse path.
+
+These facts create a coupled communication--control question. When should a
+UAV broadcast a new state, and when is a separate ACK worth occupying the same
+medium? A standalone ACK carries no plant state. Its only possible benefit is
+mediated: earlier confirmation changes sender belief, which can change future
+DATA generation, admission, service, or collisions. The same confirmation can
+therefore save redundant DATA or suppress a useful refresh. ACK rate and
+confirmation delay alone do not determine its control value.
+
+This paper develops and tests a causal semantic-freshness framework for that
+setting. Each sender keeps a last-transmitted state for innovation and a
+receiver-specific, ACK-confirmed generation time for freshness. Broadcast DATA
+is combined with cumulative ACK entries that can be piggybacked or transmitted
+separately. The network is an explicit discrete-event shared medium with
+multi-slot frames, finite queues, collision/interference and carrier-sense
+graphs, retry limits, background occupancy, and independent bursty DATA/ACK
+links. Thus a communication claim is made in airtime and contention terms,
+not by counting logical directed-link updates as independent transmissions.
+
+The investigation is structured to expose failure rather than tune it away.
+The first preregistered shared-medium holdout shows that broadcast aggregation
+substantially improves over causal unicast, but the proposed default is
+dominated by a delayed-ACK belief point in every primary regime and collapses
+at $N=20$ with fixed access probability. Separate development and holdout
+blocks isolate analytical access scaling, remove a harmful load guard, and
+then examine whether standalone feedback adds value beyond piggyback. Policy-
+level shadows and state-cloned branch replay distinguish correlation,
+full-policy effects, and the causal effect of one focal ACK decision.
+
+The contributions are:
+
+\begin{enumerate}
+\item An integrated receiver-confirmed broadcast protocol that separates innovation from
+freshness, aggregates cumulative ACK obligations, and preserves causal
+sender knowledge under a finite shared-medium implementation.
+
+\item A mathematical chain from ACK integrity to conservative sender-side
+age, semantic state-error envelopes, stochastic age tails, and formation ISS,
+together with an exact ACK-airtime identity and an explicit identification
+boundary for branch-at-decision replay.
+
+\item A preregistered mechanism study that retains three consequential
+negative results: the initial default is not frontier optimal; fixed access
+collapses at $N=20$; and positive causal confirmation lead is not a freshness
+or control-benefit certificate.
+
+\item A MAC-conditioned feedback hypothesis evaluated by disjoint directional
+validation, a matched factorial holdout, and a preregistered operating-envelope
+challenge. The base-cell interaction is supported for RMSE and offered airtime,
+but only 1/8 envelope contexts passes the full rule; configured MAC type alone
+is therefore rejected as a general selector.
+\end{enumerate}
+
+The claim is deliberately narrower than universal superiority. The interaction
+is validated only in the declared N5 Moderate base cell, while its general
+selector extension fails the frozen operating-envelope gate.
+The $N=20$ focal-decision
+effect is not identified because eligible events are rare. The channel and
+energy parameters are simulated rather than measured, and no security,
+hardware, HIL, flight, or population safety claim is made.

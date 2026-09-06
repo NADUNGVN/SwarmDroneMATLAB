@@ -1,0 +1,17 @@
+{
+  "status": "INTEGER_ACCOUNTED_RADIAL_CLOSURE_FRESH_VALID",
+  "gatesPassed": 28,
+  "gatesTotal": 28,
+  "rows": 300,
+  "onlinePlantCouplingValidated": true,
+  "radialContractionContractValidated": true,
+  "finiteRetryReliabilityValidated": true,
+  "integerPhyAccountingValidated": true,
+  "freshPhaseReservedEvidence": true,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "routed_multihop_management_then_online_renewal"
+}

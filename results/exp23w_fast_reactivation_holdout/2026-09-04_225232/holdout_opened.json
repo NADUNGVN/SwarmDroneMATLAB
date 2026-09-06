@@ -1,0 +1,17 @@
+{
+  "openedAt": "2026-09-04 22:52:32",
+  "registryHash": 1.74479477E+8,
+  "registryLeaves": 159,
+  "sourceHash": 3.5903784847E+10,
+  "sourceLeaves": 38,
+  "firstSeed": 1.6083001E+7,
+  "lastSeed": 1.60831E+7,
+  "freshSeedEvidence": true,
+  "confirmatory": true,
+  "performanceInspectedBeforeOpen": false,
+  "policyMayChange": false,
+  "matrixMayChange": false,
+  "analysisMayChange": false,
+  "primaryFamilySize": 6,
+  "submissionClaimPermitted": false
+}

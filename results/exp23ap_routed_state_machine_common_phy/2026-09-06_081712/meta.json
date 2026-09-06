@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ap_routed_state_machine_common_phy",
+  "runId": "2026-09-06_081712",
+  "startedAt": "2026-09-06 08:17:12",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen routed receiver-state migration and continuous common-PHY development diagnostic.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ap_routed_state_machine_common_phy.m",
+  "finishedAt": "2026-09-06 08:18:04",
+  "elapsedSec": 52.2192649,
+  "elapsedText": "52.2 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

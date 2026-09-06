@@ -1,0 +1,19 @@
+{
+  "status": "INTEGER_ACCOUNTED_ROUTING_PRIMITIVE_DIAGNOSTIC_INVALID",
+  "gatesPassed": 9,
+  "gatesTotal": 10,
+  "parentInvalidRetained": true,
+  "parentPassedScientificGates": 15,
+  "structuralRows": 210,
+  "conditionalTraceRows": 36000,
+  "semanticRows": 25,
+  "routingPrimitiveValidated": false,
+  "integerRoutedAccountingValidated": false,
+  "closedLoopManagementRelayingValidated": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "repair_routed_accounting_without_relaxing_registered_gates"
+}

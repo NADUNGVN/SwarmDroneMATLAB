@@ -1,0 +1,30 @@
+
+============================================================
+RUN  : exp23ah_phase_reserved_diagnostic
+ID   : 2026-09-05_235807
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ah_phase_reserved_diagnostic\2026-09-05_235807
+WHEN : 2026-09-05 23:58:07
+============================================================
+
+  calibration seed 10 / 50; rows  50
+  calibration seed 20 / 50; rows 100
+  calibration seed 30 / 50; rows 150
+  calibration seed 40 / 50; rows 200
+  calibration seed 50 / 50; rows 250
+                       arm                        nRuns    motionAuthorizationRate    reactivationRate    radialContractRate    maximumRadialRatio    maximumReliabilityBound    meanMissionRmse    minimumSeparation    safeFailures
+    __________________________________________    _____    _______________________    ________________    __________________    __________________    _______________________    _______________    _________________    ____________
+
+    {'closure-commit-blackout-emergency'     }     50                 1                      0                    0.9                 1.0468                0.00095744               0.14746             0.99625              0      
+    {'closure-iid20-emergency'               }     50                 1                      1                   0.84                 1.0548                0.00095744               0.14877             0.99862              0      
+    {'closure-prepare-blackout-emergency'    }     50                 0                      0                    0.9                 1.0468                0.00095744               0.15693              1.0229              0      
+    {'closure-response-blackout-emergency'   }     50                 1                      0                    0.9                 1.0468                0.00095744               0.14783             0.99728              0      
+    {'closure-response-blackout-no-emergency'}     50                 1                      0                      0                 6.9377                0.00095744               0.41192             0.74837              0      
+
+EXP23AH DIAGNOSIS: PHASE_RESERVED_FIXTURE_NOT_SUPPORTED
+
+============================================================
+DONE : exp23ah_phase_reserved_diagnostic
+TIME : 3 m 58 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ah_phase_reserved_diagnostic\2026-09-05_235807
+============================================================

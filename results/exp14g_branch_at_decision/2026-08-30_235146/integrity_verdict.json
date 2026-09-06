@@ -1,0 +1,11 @@
+{
+  "status": "FAIL",
+  "gatesPassed": 13,
+  "gatesTotal": 14,
+  "pilotRuns": 240,
+  "candidateEvents": 27658,
+  "selectedEvents": 64,
+  "branchPairs": 64,
+  "performanceIsIntegrityGate": false,
+  "negativeResultsRetained": true
+}

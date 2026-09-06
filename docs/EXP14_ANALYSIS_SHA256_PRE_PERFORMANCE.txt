@@ -1,0 +1,5 @@
+# EXP14 post-amendment analysis inventory
+# Recorded 2026-08-29 before any EXP14 performance value was inspected.
+# Amendment 005 only completes preregistered p95/p99 AoI outputs.
+11da340b344d7cafc257147000514c91d1ab658e21e43c94de025541814625ad  experiments/analyzeExp14Results.m
+8d2b864e27fefaae70347bb6a7f6f4ed9f625d4454822bb2022ba3ce45a7ee5d  docs/EXP14_AMENDMENTS.md

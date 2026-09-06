@@ -1,0 +1,10 @@
+{
+  "status": "COHERENCE_ELCS_W_GRAPH_REPAIR_PACKET_KERNEL_VALID",
+  "gatesPassed": 20,
+  "gatesTotal": 20,
+  "rows": 1800,
+  "staticCommonPhyIntegrationPermitted": true,
+  "dynamicRevocationIntegrationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

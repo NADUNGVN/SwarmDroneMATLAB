@@ -1,0 +1,15 @@
+gate,passed,detail
+registry_recorded,1,development hash 72002790 over 120 leaves
+matrix_completeness,1,400 selector runs
+unique_rows,1,one row per seed/context/MAC
+exact_reference_trace,1,selector matches canonical EXP18A realizations
+finite_outputs,1,all outcomes and certificate ratios are finite
+causal_conservatism,1,0 protocol violations
+bounded_memory,1,max queue=2 max history=32
+physical_accounting,1,terminal recipient and busy-union accounting close
+candidate_semantics,1,capacity certificate and closed route map are enabled
+access_geometry,1,CSMA 1/N and ALOHA 1/[N(2L-1)] are exact
+decision_accounting,1,every context decision has exactly one outcome
+static_certificate,1,certificate is seed-independent within context/MAC
+infeasible_abstention,1,certificate-infeasible trajectories emit no standalone ACK
+calibration_boundary,1,reverse boundary retains declared nominal mismatch

@@ -1,0 +1,61 @@
+
+============================================================
+RUN  : exp23ac_receiver_lift_diagnostic
+ID   : 2026-09-05_080210
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ac_receiver_lift_diagnostic\2026-09-05_080210
+WHEN : 2026-09-05 08:02:11
+============================================================
+
+    candidate    targetX    targetY     RMSE      minSepEval    maxNode10Accel    maxNode10Speed    minNode10Distance
+    _________    _______    _______    _______    __________    ______________    ______________    _________________
+
+        1          -1.2       0.6      0.10525       0.514         0.35072           0.35357             0.57477     
+        2          -1.1      0.55       0.1033     0.51401         0.34972           0.34656             0.52414     
+        3         -1.05      0.55      0.10383     0.47722         0.34992           0.34969             0.47722     
+        4         -1.05       0.5      0.10138     0.48387         0.34855           0.33798             0.48387     
+        5            -1       0.5      0.10208     0.43723         0.34875           0.34163             0.43723     
+
+No admissible online tube migration event found.
+First graph-change rows (up to 30):
+    horizon    radius    accelBound    eventTime    added    removed    oldSlot    newSlot    slotChanged    admissible            reason         
+    _______    ______    __________    _________    _____    _______    _______    _______    ___________    __________    _______________________
+
+      0.5       0.45        0.5             6         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.02         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.04         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.06         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5           6.7         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.72         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.74         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.76         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.78         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5           6.8         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.82         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.84         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.86         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.88         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5           6.9         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.92         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.94         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          6.96         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.02         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.04         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.06         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.08         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5           7.1         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.12         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.14         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.16         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.18         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5           7.2         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.22         2         0          7          7            0             0         "nonlocal_graph_change"
+      0.5       0.45        0.5          7.24         2         0          7          7            0             0         "nonlocal_graph_change"
+
+EXP23AC DIAGNOSTIC: ONE_SENDER_LOCALITY_REJECTED_BY_RECEIVER_LIFT
+
+============================================================
+DONE : exp23ac_receiver_lift_diagnostic
+TIME : 16.7 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ac_receiver_lift_diagnostic\2026-09-05_080210
+============================================================

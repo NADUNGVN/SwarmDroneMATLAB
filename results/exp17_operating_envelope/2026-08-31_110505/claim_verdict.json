@@ -1,0 +1,12 @@
+{
+  "status": "PARTIALLY_SUPPORTED_NO_CONTINUATION_GATE",
+  "holmTestsRejected": 11,
+  "holmTestsTotal": 48,
+  "coreCellsSupported": 1,
+  "coreCellsTotal": 8,
+  "continuationGatePassed": false,
+  "boundaryConfirmatory": false,
+  "populationSafetyClaimPermitted": false,
+  "namedMacClaimPermitted": false,
+  "hardwareClaimPermitted": false
+}

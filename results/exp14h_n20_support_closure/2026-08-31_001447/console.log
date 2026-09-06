@@ -1,0 +1,35 @@
+
+============================================================
+RUN  : exp14h_n20_support_closure
+ID   : 2026-08-31_001447
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14h_n20_support_closure\2026-08-31_001447
+WHEN : 2026-08-31 00:14:47
+============================================================
+
+EXP14H N20 pilot: 240 new fixed seeds.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  pilot   1-- 16 / 240; candidates 23; eligible 0
+  pilot  17-- 32 / 240; candidates 44; eligible 0
+  pilot  33-- 48 / 240; candidates 65; eligible 0
+  pilot  49-- 64 / 240; candidates 83; eligible 2
+  pilot  65-- 80 / 240; candidates 99; eligible 3
+  pilot  81-- 96 / 240; candidates 122; eligible 4
+  pilot  97--112 / 240; candidates 137; eligible 5
+  pilot 113--128 / 240; candidates 153; eligible 5
+  pilot 129--144 / 240; candidates 167; eligible 5
+  pilot 145--160 / 240; candidates 183; eligible 5
+  pilot 161--176 / 240; candidates 203; eligible 5
+  pilot 177--192 / 240; candidates 216; eligible 6
+  pilot 193--208 / 240; candidates 234; eligible 6
+  pilot 209--224 / 240; candidates 256; eligible 7
+  pilot 225--240 / 240; candidates 277; eligible 8
+
+EXP14H selection hash 82431794: 7 events from 7 seeds.
+
+============================================================
+DONE : exp14h_n20_support_closure
+TIME : 7 m 23 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14h_n20_support_closure\2026-08-31_001447
+============================================================

@@ -1,0 +1,170 @@
+
+============================================================
+RUN  : exp18b_preregistered_holdout
+ID   : 2026-08-31_152137
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp18b_preregistered_holdout\2026-08-31_152137
+WHEN : 2026-08-31 15:21:37
+============================================================
+
+EXP18B HOLDOUT IS NOW OPEN. Registry hash: 149048254
+Frozen matrix: 8000 runs (100 seeds, 2000 paired groups).
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 16 / 2000; rows   64 / 8000
+  groups  17-- 32 / 2000; rows  128 / 8000
+  groups  33-- 48 / 2000; rows  192 / 8000
+  groups  49-- 64 / 2000; rows  256 / 8000
+  groups  65-- 80 / 2000; rows  320 / 8000
+  groups  81-- 96 / 2000; rows  384 / 8000
+  groups  97--112 / 2000; rows  448 / 8000
+  groups 113--128 / 2000; rows  512 / 8000
+  groups 129--144 / 2000; rows  576 / 8000
+  groups 145--160 / 2000; rows  640 / 8000
+  groups 161--176 / 2000; rows  704 / 8000
+  groups 177--192 / 2000; rows  768 / 8000
+  groups 193--208 / 2000; rows  832 / 8000
+  groups 209--224 / 2000; rows  896 / 8000
+  groups 225--240 / 2000; rows  960 / 8000
+  groups 241--256 / 2000; rows 1024 / 8000
+  groups 257--272 / 2000; rows 1088 / 8000
+  groups 273--288 / 2000; rows 1152 / 8000
+  groups 289--304 / 2000; rows 1216 / 8000
+  groups 305--320 / 2000; rows 1280 / 8000
+  groups 321--336 / 2000; rows 1344 / 8000
+  groups 337--352 / 2000; rows 1408 / 8000
+  groups 353--368 / 2000; rows 1472 / 8000
+  groups 369--384 / 2000; rows 1536 / 8000
+  groups 385--400 / 2000; rows 1600 / 8000
+  groups 401--416 / 2000; rows 1664 / 8000
+  groups 417--432 / 2000; rows 1728 / 8000
+  groups 433--448 / 2000; rows 1792 / 8000
+  groups 449--464 / 2000; rows 1856 / 8000
+  groups 465--480 / 2000; rows 1920 / 8000
+  groups 481--496 / 2000; rows 1984 / 8000
+  groups 497--512 / 2000; rows 2048 / 8000
+  groups 513--528 / 2000; rows 2112 / 8000
+  groups 529--544 / 2000; rows 2176 / 8000
+  groups 545--560 / 2000; rows 2240 / 8000
+  groups 561--576 / 2000; rows 2304 / 8000
+  groups 577--592 / 2000; rows 2368 / 8000
+  groups 593--608 / 2000; rows 2432 / 8000
+  groups 609--624 / 2000; rows 2496 / 8000
+  groups 625--640 / 2000; rows 2560 / 8000
+  groups 641--656 / 2000; rows 2624 / 8000
+  groups 657--672 / 2000; rows 2688 / 8000
+  groups 673--688 / 2000; rows 2752 / 8000
+  groups 689--704 / 2000; rows 2816 / 8000
+  groups 705--720 / 2000; rows 2880 / 8000
+  groups 721--736 / 2000; rows 2944 / 8000
+  groups 737--752 / 2000; rows 3008 / 8000
+  groups 753--768 / 2000; rows 3072 / 8000
+  groups 769--784 / 2000; rows 3136 / 8000
+  groups 785--800 / 2000; rows 3200 / 8000
+  groups 801--816 / 2000; rows 3264 / 8000
+  groups 817--832 / 2000; rows 3328 / 8000
+  groups 833--848 / 2000; rows 3392 / 8000
+  groups 849--864 / 2000; rows 3456 / 8000
+  groups 865--880 / 2000; rows 3520 / 8000
+  groups 881--896 / 2000; rows 3584 / 8000
+  groups 897--912 / 2000; rows 3648 / 8000
+  groups 913--928 / 2000; rows 3712 / 8000
+  groups 929--944 / 2000; rows 3776 / 8000
+  groups 945--960 / 2000; rows 3840 / 8000
+  groups 961--976 / 2000; rows 3904 / 8000
+  groups 977--992 / 2000; rows 3968 / 8000
+  groups 993--1008 / 2000; rows 4032 / 8000
+  groups 1009--1024 / 2000; rows 4096 / 8000
+  groups 1025--1040 / 2000; rows 4160 / 8000
+  groups 1041--1056 / 2000; rows 4224 / 8000
+  groups 1057--1072 / 2000; rows 4288 / 8000
+  groups 1073--1088 / 2000; rows 4352 / 8000
+  groups 1089--1104 / 2000; rows 4416 / 8000
+  groups 1105--1120 / 2000; rows 4480 / 8000
+  groups 1121--1136 / 2000; rows 4544 / 8000
+  groups 1137--1152 / 2000; rows 4608 / 8000
+  groups 1153--1168 / 2000; rows 4672 / 8000
+  groups 1169--1184 / 2000; rows 4736 / 8000
+  groups 1185--1200 / 2000; rows 4800 / 8000
+  groups 1201--1216 / 2000; rows 4864 / 8000
+  groups 1217--1232 / 2000; rows 4928 / 8000
+  groups 1233--1248 / 2000; rows 4992 / 8000
+  groups 1249--1264 / 2000; rows 5056 / 8000
+  groups 1265--1280 / 2000; rows 5120 / 8000
+  groups 1281--1296 / 2000; rows 5184 / 8000
+  groups 1297--1312 / 2000; rows 5248 / 8000
+  groups 1313--1328 / 2000; rows 5312 / 8000
+  groups 1329--1344 / 2000; rows 5376 / 8000
+  groups 1345--1360 / 2000; rows 5440 / 8000
+  groups 1361--1376 / 2000; rows 5504 / 8000
+  groups 1377--1392 / 2000; rows 5568 / 8000
+  groups 1393--1408 / 2000; rows 5632 / 8000
+  groups 1409--1424 / 2000; rows 5696 / 8000
+  groups 1425--1440 / 2000; rows 5760 / 8000
+  groups 1441--1456 / 2000; rows 5824 / 8000
+  groups 1457--1472 / 2000; rows 5888 / 8000
+  groups 1473--1488 / 2000; rows 5952 / 8000
+  groups 1489--1504 / 2000; rows 6016 / 8000
+  groups 1505--1520 / 2000; rows 6080 / 8000
+  groups 1521--1536 / 2000; rows 6144 / 8000
+  groups 1537--1552 / 2000; rows 6208 / 8000
+  groups 1553--1568 / 2000; rows 6272 / 8000
+  groups 1569--1584 / 2000; rows 6336 / 8000
+  groups 1585--1600 / 2000; rows 6400 / 8000
+  groups 1601--1616 / 2000; rows 6464 / 8000
+  groups 1617--1632 / 2000; rows 6528 / 8000
+  groups 1633--1648 / 2000; rows 6592 / 8000
+  groups 1649--1664 / 2000; rows 6656 / 8000
+  groups 1665--1680 / 2000; rows 6720 / 8000
+  groups 1681--1696 / 2000; rows 6784 / 8000
+  groups 1697--1712 / 2000; rows 6848 / 8000
+  groups 1713--1728 / 2000; rows 6912 / 8000
+  groups 1729--1744 / 2000; rows 6976 / 8000
+  groups 1745--1760 / 2000; rows 7040 / 8000
+  groups 1761--1776 / 2000; rows 7104 / 8000
+  groups 1777--1792 / 2000; rows 7168 / 8000
+  groups 1793--1808 / 2000; rows 7232 / 8000
+  groups 1809--1824 / 2000; rows 7296 / 8000
+  groups 1825--1840 / 2000; rows 7360 / 8000
+  groups 1841--1856 / 2000; rows 7424 / 8000
+  groups 1857--1872 / 2000; rows 7488 / 8000
+  groups 1873--1888 / 2000; rows 7552 / 8000
+  groups 1889--1904 / 2000; rows 7616 / 8000
+  groups 1905--1920 / 2000; rows 7680 / 8000
+  groups 1921--1936 / 2000; rows 7744 / 8000
+  groups 1937--1952 / 2000; rows 7808 / 8000
+  groups 1953--1968 / 2000; rows 7872 / 8000
+  groups 1969--1984 / 2000; rows 7936 / 8000
+  groups 1985--2000 / 2000; rows 8000 / 8000
+
+EXP18B integrity gates
+  [PASS] registry_contract                      hash 149048254 over 153 leaves
+  [PASS] pre_run_freeze_artifacts               opening record, registry and source snapshot exist
+  [PASS] frozen_source_hash                     aggregate source hash 41305044133 over 58 leaves
+  [PASS] matrix_completeness                    8000 frozen rows
+  [PASS] unique_rows                            one row per seed/context/MAC/arm
+  [PASS] exact_holdout_seeds                    all and only 100 registered seeds are present
+  [PASS] complete_paired_groups                 all four arms occur once in every paired group
+  [PASS] finite_eligible_outputs                all nondivergent registered outcomes are finite
+  [PASS] causal_conservatism                    0 protocol violations
+  [PASS] bounded_memory                         max queue=2 max history=32
+  [PASS] physical_accounting                    recipient and channel busy-union accounting close
+  [PASS] paired_absolute_trace                  trace, channel state and estimator match within paired groups
+  [PASS] access_geometry                        frame-aware and legacy access probabilities are exact
+  [PASS] candidate_semantics                    capacity screen and fixed route map are enabled
+  [PASS] comparator_semantics                   all three fixed comparator contracts match
+  [PASS] static_service_screen                  screen is arm- and seed-independent within each context/MAC
+  [PASS] decision_accounting                    every candidate feedback decision has one outcome
+  [PASS] infeasible_abstention                  1100 screen-negative rows emit no standalone ACK
+  [PASS] exact_route_alias                      max difference 0 over 17 fields
+  [PASS] calibration_boundary                   reverse boundary retains declared nominal calibration mismatch
+  [PASS] divergence_accounting                  0 divergences retained
+
+EXP18B CLAIM VERDICT: SUPPORTED_WITHIN_REGISTERED_SCOPE
+  Holm tests: 9/9 | alias: 1 | safety guard: 1
+
+============================================================
+DONE : exp18b_preregistered_holdout
+TIME : 1 h 40 m
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp18b_preregistered_holdout\2026-08-31_152137
+============================================================

@@ -1,0 +1,26 @@
+{
+  "algorithm": "configHash over ordered path/content records",
+  "sourceHash": 2.5634156691E+10,
+  "sourceLeaves": 36,
+  "fileCount": 18,
+  "files": [
+    "docs/EXP23AO_MULTI_ORIGIN_ROUTING_PLAN.md",
+    "docs/EXP23AN_FULL_DETECTABILITY_ROUTING_RESULTS_2026-09-06.md",
+    "results/exp23an_full_detectability_routing/2026-09-06_072949/routed_management_verdict.json",
+    "network/buildSenderConflictGraph.m",
+    "network/buildSlottedManagementFloodPlan.m",
+    "network/repeatedHopManagementFloodReliabilityCertificate.m",
+    "network/simulateRepeatedHopManagementFlood.m",
+    "network/receiverLiftedClosureControlRecipients.m",
+    "network/buildMultiOriginRoutedControlSchedule.m",
+    "network/simulateMultiOriginRoutedControl.m",
+    "network/multiOriginRoutedReliabilityCertificate.m",
+    "network/receiverLiftedRoutedClosureReliabilityCertificate.m",
+    "network/receiverLiftedRoutedEndpointModel.m",
+    "utils/exp23aoMultiOriginRoutingRegistry.m",
+    "tests/test_exp23ao_multi_origin_routing_contracts.m",
+    "tests/test_multi_origin_routed_control_contracts.m",
+    "tests/test_receiver_lifted_routed_reliability_contracts.m",
+    "experiments/exp23ao_multi_origin_routing.m"
+  ]
+}

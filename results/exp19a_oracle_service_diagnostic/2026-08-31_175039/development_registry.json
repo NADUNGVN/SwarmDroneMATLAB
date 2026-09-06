@@ -1,0 +1,171 @@
+{
+  "version": "EXP19A-ORACLE-SERVICE-ACTION-SPACE-DEVELOPMENT-v1",
+  "frozenDate": "2026-08-31",
+  "stage": "development-only",
+  "seedStatus": "development outcomes may be inspected",
+  "seeds": [
+    1.6026001E+7,
+    1.6026002E+7,
+    1.6026003E+7,
+    1.6026004E+7,
+    1.6026005E+7,
+    1.6026006E+7,
+    1.6026007E+7,
+    1.6026008E+7,
+    1.6026009E+7,
+    1.602601E+7,
+    1.6026011E+7,
+    1.6026012E+7,
+    1.6026013E+7,
+    1.6026014E+7,
+    1.6026015E+7,
+    1.6026016E+7,
+    1.6026017E+7,
+    1.6026018E+7,
+    1.6026019E+7,
+    1.602602E+7,
+    1.6026021E+7,
+    1.6026022E+7,
+    1.6026023E+7,
+    1.6026024E+7,
+    1.6026025E+7,
+    1.6026026E+7,
+    1.6026027E+7,
+    1.6026028E+7,
+    1.6026029E+7,
+    1.602603E+7
+  ],
+  "targetRateHz": 8.3333333333333339,
+  "cells": [
+    {
+      "id": "n5-moderate-bg0",
+      "label": "N5 Moderate bg0 ALOHA",
+      "macType": "aloha"
+    },
+    {
+      "id": "n5-stressed-bg0",
+      "label": "N5 Stressed bg0 ALOHA",
+      "macType": "aloha"
+    },
+    {
+      "id": "n5-moderate-bg30",
+      "label": "N5 Moderate bg0.30 CSMA",
+      "macType": "csma"
+    },
+    {
+      "id": "n5-stressed-bg30",
+      "label": "N5 Stressed bg0.30 CSMA",
+      "macType": "csma"
+    },
+    {
+      "id": "n10-moderate-bg0",
+      "label": "N10 Moderate bg0 ALOHA",
+      "macType": "aloha"
+    },
+    {
+      "id": "n10-stressed-bg0",
+      "label": "N10 Stressed bg0 ALOHA",
+      "macType": "aloha"
+    }
+  ],
+  "periodicRatesHz": [
+    6.25,
+    8.3333333333333339,
+    10,
+    12.5
+  ],
+  "arms": [
+    {
+      "id": "frame-piggyback",
+      "label": "Frame-aware piggyback",
+      "kind": "baseline",
+      "schedulerMode": "native",
+      "periodicRateHz": null
+    },
+    {
+      "id": "capacity-gated-selector",
+      "label": "Capacity-gated selector",
+      "kind": "negative-control",
+      "schedulerMode": "native",
+      "periodicRateHz": null
+    },
+    {
+      "id": "collision-free-tdma-piggyback",
+      "label": "Collision-free TDMA piggyback",
+      "kind": "scheduled-causal",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": null
+    },
+    {
+      "id": "oracle-deficit-maxweight-piggyback",
+      "label": "Oracle deficit max-weight piggyback",
+      "kind": "oracle",
+      "schedulerMode": "deficit-maxweight",
+      "periodicRateHz": null
+    },
+    {
+      "id": "oracle-urgency-maxweight-piggyback",
+      "label": "Oracle urgency max-weight piggyback",
+      "kind": "oracle",
+      "schedulerMode": "urgency-maxweight",
+      "periodicRateHz": null
+    },
+    {
+      "id": "periodic-tdma-p6p25",
+      "label": "Periodic TDMA 6.25 Hz",
+      "kind": "periodic-frontier",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 6.25
+    },
+    {
+      "id": "periodic-tdma-p8p333",
+      "label": "Periodic TDMA 8.333 Hz",
+      "kind": "periodic-frontier",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 8.3333333333333339
+    },
+    {
+      "id": "periodic-tdma-p10",
+      "label": "Periodic TDMA 10 Hz",
+      "kind": "periodic-frontier",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 10
+    },
+    {
+      "id": "periodic-tdma-p12p5",
+      "label": "Periodic TDMA 12.5 Hz",
+      "kind": "periodic-frontier",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 12.5
+    }
+  ],
+  "baselineArm": "frame-piggyback",
+  "negativeControl": "capacity-gated-selector",
+  "oracleArms": [
+    "oracle-deficit-maxweight-piggyback",
+    "oracle-urgency-maxweight-piggyback"
+  ],
+  "scheduledArms": [
+    "collision-free-tdma-piggyback",
+    "oracle-deficit-maxweight-piggyback",
+    "oracle-urgency-maxweight-piggyback",
+    "periodic-tdma-p6p25",
+    "periodic-tdma-p8p333",
+    "periodic-tdma-p10",
+    "periodic-tdma-p12p5"
+  ],
+  "periodicArms": [
+    "periodic-tdma-p6p25",
+    "periodic-tdma-p8p333",
+    "periodic-tdma-p10",
+    "periodic-tdma-p12p5"
+  ],
+  "boundaryCell": "n5-stressed-bg0",
+  "failureCell": "n10-moderate-bg0",
+  "minimumPriorityDifferenceFraction": 0.1,
+  "expectedRuns": 1620,
+  "confirmatory": false,
+  "hypothesisTestsPermitted": false,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false
+}

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp14f_paired_shadow",
+  "runId": "2026-08-30_230947",
+  "startedAt": "2026-08-30 23:09:48",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development paired-shadow study of generation-matched confirmation lead; no confirmatory claim or threshold tuning.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp14f_paired_shadow.m",
+  "finishedAt": "2026-08-30 23:12:01",
+  "elapsedSec": 132.8462768,
+  "elapsedText": "2 m 13 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

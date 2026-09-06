@@ -1,0 +1,13 @@
+{
+  "status": "ELCS_W_IID5_ROBUSTNESS_SCREEN_SURVIVES",
+  "integrityGatesPassed": 19,
+  "integrityGatesTotal": 19,
+  "rows": 600,
+  "terminalOrSafetyFailureFound": false,
+  "epsilonDominanceFound": false,
+  "confidenceSupportedEpsilonDominanceFound": false,
+  "next": "bursty_loss_and_external_load",
+  "burstyRobustnessContinuationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

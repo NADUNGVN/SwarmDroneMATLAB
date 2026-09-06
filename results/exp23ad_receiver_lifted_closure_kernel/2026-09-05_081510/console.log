@@ -1,0 +1,100 @@
+
+============================================================
+RUN  : exp23ad_receiver_lifted_closure_kernel
+ID   : 2026-09-05_081510
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ad_receiver_lifted_closure_kernel\2026-09-05_081510
+WHEN : 2026-09-05 08:15:11
+============================================================
+
+  N= 5 seed  10 / 100; rows   80 / 2400
+  N= 5 seed  20 / 100; rows  160 / 2400
+  N= 5 seed  30 / 100; rows  240 / 2400
+  N= 5 seed  40 / 100; rows  320 / 2400
+  N= 5 seed  50 / 100; rows  400 / 2400
+  N= 5 seed  60 / 100; rows  480 / 2400
+  N= 5 seed  70 / 100; rows  560 / 2400
+  N= 5 seed  80 / 100; rows  640 / 2400
+  N= 5 seed  90 / 100; rows  720 / 2400
+  N= 5 seed 100 / 100; rows  800 / 2400
+  N=10 seed  10 / 100; rows  880 / 2400
+  N=10 seed  20 / 100; rows  960 / 2400
+  N=10 seed  30 / 100; rows 1040 / 2400
+  N=10 seed  40 / 100; rows 1120 / 2400
+  N=10 seed  50 / 100; rows 1200 / 2400
+  N=10 seed  60 / 100; rows 1280 / 2400
+  N=10 seed  70 / 100; rows 1360 / 2400
+  N=10 seed  80 / 100; rows 1440 / 2400
+  N=10 seed  90 / 100; rows 1520 / 2400
+  N=10 seed 100 / 100; rows 1600 / 2400
+  N=20 seed  10 / 100; rows 1680 / 2400
+  N=20 seed  20 / 100; rows 1760 / 2400
+  N=20 seed  30 / 100; rows 1840 / 2400
+  N=20 seed  40 / 100; rows 1920 / 2400
+  N=20 seed  50 / 100; rows 2000 / 2400
+  N=20 seed  60 / 100; rows 2080 / 2400
+  N=20 seed  70 / 100; rows 2160 / 2400
+  N=20 seed  80 / 100; rows 2240 / 2400
+  N=20 seed  90 / 100; rows 2320 / 2400
+  N=20 seed 100 / 100; rows 2400 / 2400
+
+EXP23AD receiver-lifted closure gates
+  [PASS] registry_frozen                            hash 88107209 over 49 leaves
+  [PASS] negative_parent_locked                     EXP23AC one-sender locality rejection retained
+  [PASS] matrix_complete_unique                     2400/2400 unique rows
+  [PASS] exact_coverage                             all seeds, sizes and fault conditions exact
+  [PASS] receiver_lift_nonincident_change           every moving receiver induces nonincident sender edges
+  [PASS] closure_membership_exact                   closure is initiator plus star centre and changed endpoints
+  [PASS] closure_size_varied                        affected-set sizes span three through at least six nodes
+  [PASS] joint_union_coloring                       every fixture has a proper union coloring and forced change
+  [PASS] outside_state_preserved                    outside subgraph and fixed slots remain unchanged
+  [PASS] payloads_within_mtu                        PREPARE and aggregate witness responses fit MTU
+  [PASS] nominal_barrier_and_activation             all 300 nominal barriers authorize next-frame activation
+  [PASS] nominal_full_reactivation                  all 300 nominal closures commit and reactivate
+  [PASS] iid20_completion_reliability               completion 1.0000, Wilson lower 0.9874
+  [PASS] prepare_blackout_blocks_motion             missing PREPARE member prevents every motion authorization
+  [PASS] quiescent_blackout_blocks_motion           missing positive QUIESCENT receipt prevents activation
+  [PASS] response_blackout_fail_silent              activated graph retains full closure silence without witness receipts
+  [PASS] commit_blackout_partial_safe               only initiator reactivates; remote closure stays suppressed
+  [PASS] revoke_loss_independence                   nominal and REVOKE-blackout state hashes are exact
+  [PASS] incomplete_union_detected                  independent post-activation oracle rejects omitted edge
+  [PASS] scheduled_collision_safety                 all supported nominal, lossy and blackout rows are collision-free
+  [PASS] faults_never_unsafe_activate               partial suppression/commit fault states remain safe
+  [PASS] control_accounting_and_bounds              attempt, byte, airtime, recipient and upper bounds close
+  [PASS] causal_instrumentation                     no future random or receiver-private truth reads
+  [PASS] finite_retry_behavior                      PREPARE, CLAIM and COMMIT transmissions respect hard budgets
+    N          condition          nRuns    meanAffectedCount    meanChangedSlots    barrierRate    motionAuthorizationRate    reactivationRate    meanCollisionFrames    meanControlAttempts    meanControlBytes    actualSubsetRate
+    __    ____________________    _____    _________________    ________________    ___________    _______________________    ________________    ___________________    ___________________    ________________    ________________
+
+     5    "nominal-zero"           100           3.99                 1.99               1                    1                      1                     0                    15.96                 608.5                1        
+     5    "iid20"                  100           3.99                 1.99               1                    1                      1                     0                    26.41                1163.5                1        
+     5    "prepare-blackout"       100           3.99                 1.99               0                    0                      0                     0                    26.91                837.52                1        
+     5    "quiescent-blackout"     100           3.99                 1.99               0                    0                      0                     0                    35.91                1053.5                1        
+     5    "response-blackout"      100           3.99                 1.99               1                    1                      0                     0                    77.78                3865.7                1        
+     5    "commit-blackout"        100           3.99                 1.99               1                    1                      0                     0                    20.96                 748.5                1        
+     5    "revoke-blackout"        100           3.99                 1.99               1                    1                      1                     0                    15.96                 608.5                1        
+     5    "incomplete-union"       100           3.99                 1.99               1                    1                      1                    53                    15.96                 608.5                0        
+    10    "nominal-zero"           100            4.5                  2.5               1                    1                      1                     0                       18                   685                1        
+    10    "iid20"                  100            4.5                  2.5               1                    1                      1                     0                    31.87                  1399                1        
+    10    "prepare-blackout"       100            4.5                  2.5               0                    0                      0                     0                     31.5                   964                1        
+    10    "quiescent-blackout"     100            4.5                  2.5               0                    0                      0                     0                     40.5                  1180                1        
+    10    "response-blackout"      100            4.5                  2.5               1                    1                      0                     0                       89                  4392                1        
+    10    "commit-blackout"        100            4.5                  2.5               1                    1                      0                     0                       23                   825                1        
+    10    "revoke-blackout"        100            4.5                  2.5               1                    1                      1                     0                       18                   685                1        
+    10    "incomplete-union"       100            4.5                  2.5               1                    1                      1                    53                       18                   685                0        
+    20    "nominal-zero"           100            4.5                  2.5               1                    1                      1                     0                       18                   685                1        
+    20    "iid20"                  100            4.5                  2.5               1                    1                      1                     0                    31.76                1401.3                1        
+    20    "prepare-blackout"       100            4.5                  2.5               0                    0                      0                     0                     31.5                   964                1        
+    20    "quiescent-blackout"     100            4.5                  2.5               0                    0                      0                     0                     40.5                  1180                1        
+    20    "response-blackout"      100            4.5                  2.5               1                    1                      0                     0                       89                  4392                1        
+    20    "commit-blackout"        100            4.5                  2.5               1                    1                      0                     0                       23                   825                1        
+    20    "revoke-blackout"        100            4.5                  2.5               1                    1                      1                     0                       18                   685                1        
+    20    "incomplete-union"       100            4.5                  2.5               1                    1                      1                    53                       18                   685                0        
+
+EXP23AD DECISION: RECEIVER_LIFTED_CLOSURE_KERNEL_VALID
+
+============================================================
+DONE : exp23ad_receiver_lifted_closure_kernel
+TIME : 24.5 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ad_receiver_lifted_closure_kernel\2026-09-05_081510
+============================================================

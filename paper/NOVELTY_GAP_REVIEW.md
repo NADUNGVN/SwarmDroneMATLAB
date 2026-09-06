@@ -49,13 +49,18 @@ different-in-kind, **—** not applicable.
 | Onozuka et al. 2024 `10.1109/ICIT58233.2024.10541007` | **Y** | **Y** | feedback path is triggered, not ACK-derived | forward + feedback control data | causal | ~ | n | **Y** | n | n | **Y** | railway vehicle control | n | Important bidirectional AoI/event-trigger precedent; no distributed multi-agent/UAV formation, confirmed receiver-state memory, state-innovation modulation or in-flight semantic split |
 | Rajaraman et al. 2021 `10.1109/JSAC.2021.3065061` | **Y** | ~ | n | assumed | oracle | ~ | n | Y | n | n | Y | n | n | Goes beyond pure age by adding a **quality/content** term — conceptually adjacent to our innovation-times-age composition — but as a remote-estimation/scheduling formulation, not a multi-agent event trigger |
 | Ayan et al. 2019 `10.1145/3302509.3311050` | **Y** | ~ | n | scheduler-side | oracle | n | n | Y | ~ multi-loop | n | Y | Y | n | Establishes that age alone is a poor control proxy and proposes value-of-information instead; **centralised cellular scheduling**, not a distributed sender policy |
+| Maatouk et al. 2020 `10.1109/TNET.2020.3005549` | **Y** (AoII) | ~ | n | monitor correctness | causal | ~ | n | Y | n | n | Y | discrete status source | n | Establishes semantic freshness: informative/correct content and age are already combined. No continuous formation state, ACK-confirmed dual memory or refresh branch |
+| Wang et al. 2022 `10.1109/TCOMM.2021.3119082` | **Y** (AoCI) | ~ | n | receiver content change | causal | **Y** | n | Y | n | n | Y | discrete Markov source | n | Direct age-plus-content-change precedent; no delayed ACK belief, multi-agent formation or new-information/refresh protocol split |
+| Nayak et al. 2023 `10.1109/ICC45041.2023.10279616` | **Y** (AoII) | ~ | n | gateway correctness | causal | **Y** | n | **Y** (collisions) | **Y** sensors | n | Y | discrete status source | n | Decentralized semantic freshness under slotted ALOHA is established, but not physical formation control or confirmed receiver-state memory |
 | Tang et al. 2022 `10.1109/LCOMM.2021.3125669` | **Y** | n | n | assumed | oracle | n | n | Y | n | n | Y | n | n | Index-based centralised AoI scheduling; no trigger, no agents |
+| Pan et al. 2023 `10.1109/TNET.2022.3194417` | **Y** | ~ threshold sampling | **Y** | inferred from delayed ACK | **causal** | **Y** | ~ retransmission | **Y** | n | n | Y | remote estimation | n | Random two-way delay and unreliable transmission are handled optimally, but for one source--estimator link without physical state innovation or formation |
 | Dimarogonas et al. 2012 `10.1109/TAC.2011.2174666` | n | **Y** | n | none | **causal** | n | n | ~ | **Y** | n | ~ | n | n | Canonical distributed event trigger on **local state error only**; entirely blind to receiver staleness — this is our baseline |
 | Seyboth et al. 2013 `10.1016/j.automatica.2012.08.042` | n | **Y** | n | none | causal | ~ (time-dependent) | n | ~ | **Y** | n | Y (broadcast count) | n | n | Event-based broadcasting for consensus; threshold decays with time, not with receiver freshness |
 | Girard 2015 `10.1109/TAC.2014.2366855` | n | **Y** | n | none | causal | **Y** | n | n | ~ | n | n | n | n | Dynamic threshold precedent, but driven by an **internal auxiliary variable**, not by any estimate of what a receiver holds |
 | Yi et al. 2017 `10.1109/CDC.2017.8264666` | n | **Y** | n | none | causal | **Y** | n | ~ | **Y** | n | ~ | n | n | Dynamic triggering in the distributed setting; still no freshness term |
 | Nowzari et al. 2019 `10.1016/j.automatica.2019.03.009` | n | **Y** | n | none | causal | ~ | n | ~ | **Y** | n | Y | n | n | Survey of the field we extend; documents that freshness is not a standard ingredient |
 | Yin et al. 2023 `10.1016/j.isatra.2023.01.018` | n | **Y** | n | none | causal | ~ | n | Y (directed topology) | **Y** | **Y** | ~ | Y | n | Event-triggered **multi-UAV formation** — so our contribution is *not* the absence of event-triggered UAV work. No freshness estimate, no ACK channel |
+| Wang et al. 2022 `10.1016/j.isatra.2021.07.049` | n | **Y** | n | none | causal | **Y** | n | ~ | **Y** | **Y** | ~ | **Y** | **Y** | Finite-time formation, Zeno exclusion and three-Bebop2 experiments are established; no freshness or ACK channel |
 | Ji et al. 2023 `10.1177/01423312221151193` | n | **Y** | n | none | causal | **Y** (dynamic) | n | **Y** (delay) | **Y** | **Y** | ~ | Y | n | Handles communication delay in ET UAV formation, but the trigger never asks how stale the receiver's copy is |
 | Chen et al. 2024 `10.1016/j.jfranklin.2024.106997` | n | **Y** | n | none | causal | ~ | n | Y | **Y** | **Y** | ~ | Y | n | Recent ET multi-UAV formation tracking with disturbances; same structural gap |
 | Yang et al. 2025 `10.1016/j.dt.2025.04.004` | n | **Y** | n | none | causal | ~ | n | Y | **Y** | **Y** | ~ | Y | n | ET UAV swarm with connectivity and collision constraints; no freshness, no reverse channel |
@@ -81,7 +86,8 @@ gap in the literature.
 **E3 — age modulating the innovation threshold.** *Adjacent precedent
 exists.* Dynamic and adaptive thresholds are well established (Girard
 2015; Yi et al. 2017; Ji et al. 2023), and combining age with a content
-term has been done (Rajaraman et al. 2021). We did not find a threshold
+term has been done in quality-aware, AoII and AoCI formulations (Rajaraman
+et al. 2021; Maatouk et al. 2020; Wang et al. 2022). We did not find a threshold
 modulated specifically by an **ACK-derived estimate of receiver age**.
 
 **E4 — event-triggered multi-agent communication.** *Thoroughly
@@ -90,8 +96,9 @@ must not, and do not, claim novelty here.
 
 **E5 — new information separated from refresh.** *We did not identify a
 matching implementation.*
-Repetition-suppression and duplicate-suppression exist in networking, and
-minimum inter-event times are standard in event-triggered control, but we
+Semantic-freshness metrics already distinguish useful content from stale or
+incorrect content; repetition- and duplicate-suppression exist in networking;
+and minimum inter-event times are standard in event-triggered control. We
 found no work that applies a repetition cooldown **only** to
 retransmission traffic while exempting genuinely new information, and
 identifies the conflation as the cause of lost adaptivity. This is the

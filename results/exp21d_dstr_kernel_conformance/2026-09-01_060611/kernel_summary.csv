@@ -1,0 +1,9 @@
+N,condition,conditionLabel,scope,n,finalResolvedRate,finalPhysicallyValidRate,finalAgreementRate,finalConvergedRate,medianResolutionFrame,medianRecoveryFrame,meanFinalDataSlots,meanConflictFrameFraction,meanFalseResolvedNodeFrames,meanOfferedUtilization,meanChannelUtilization
+5,beacon-loss,Beacon loss 0.05,boundary,100,0.55,0.55,1,0.26,8,NaN,6.66,0.07115,2.37,0.499053083755782,0.446368601042283
+5,churn-rejoin,State-loss and rejoin,boundary,100,1,1,1,1,6,3,5,0.00995,0.84,0.55731224177868,0.514944185384091
+5,native,Native hex safety graph,source-native,100,1,1,1,1,6,NaN,5,0.00995,0.84,0.555364123047353,0.515130668014287
+5,restricted-management,Local-only management,boundary,100,0.57,0.37,0.01,0,6,NaN,6.51,0.27935,104.24,0.443783526987888,0.386126406644822
+10,beacon-loss,Beacon loss 0.05,boundary,100,0.28,0.28,1,0,19.5,NaN,17.57,0.1138,5.03,0.636735119421279,0.438033204867154
+10,churn-rejoin,State-loss and rejoin,boundary,100,1,1,1,0.9,11,2,8.52,0.0339,2.4,0.954067882627906,0.607879244043897
+10,native,Native hex safety graph,source-native,100,1,1,1,0.82,11,NaN,8.71,0.0339,2.4,0.936293794899874,0.603682954818064
+10,restricted-management,Local-only management,boundary,100,0.51,0.42,0,0,12,NaN,12.59,0.2692,93.8,0.669656994653004,0.462709618692132

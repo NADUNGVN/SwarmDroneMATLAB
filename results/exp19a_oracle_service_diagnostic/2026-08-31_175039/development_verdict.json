@@ -1,0 +1,12 @@
+{
+  "status": "NO_SERVICE_SCHEDULING_HEADROOM",
+  "developmentOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "hypothesisTestsRun": false,
+  "gatesPassed": 3,
+  "gatesTotal": 5,
+  "exp19bPermitted": false,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false,
+  "negativeResultsRetained": true
+}

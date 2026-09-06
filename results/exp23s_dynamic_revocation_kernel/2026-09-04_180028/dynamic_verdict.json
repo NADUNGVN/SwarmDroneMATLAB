@@ -1,0 +1,10 @@
+{
+  "status": "DYNAMIC_COHERENCE_REVOCATION_KERNEL_VALID",
+  "gatesPassed": 25,
+  "gatesTotal": 25,
+  "rows": 800,
+  "fixedSupergraphClosedLoopPermitted": true,
+  "onlineGraphMigrationValidated": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

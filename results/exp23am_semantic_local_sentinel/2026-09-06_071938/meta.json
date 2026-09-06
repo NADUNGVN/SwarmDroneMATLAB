@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23am_semantic_local_sentinel",
+  "runId": "2026-09-06_071938",
+  "startedAt": "2026-09-06 07:19:38",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Deterministic confirmation of NaN route-hash semantics for local-only closure control delivery.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23am_semantic_local_sentinel.m",
+  "finishedAt": "2026-09-06 07:19:47",
+  "elapsedSec": 8.3682387,
+  "elapsedText": "8.4 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

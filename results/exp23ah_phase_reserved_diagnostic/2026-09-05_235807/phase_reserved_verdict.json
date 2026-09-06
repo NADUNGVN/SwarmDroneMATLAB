@@ -1,0 +1,12 @@
+{
+  "status": "PHASE_RESERVED_FIXTURE_NOT_SUPPORTED",
+  "rows": 250,
+  "calibrationSeedsOnly": true,
+  "freshConfirmation": false,
+  "normalCompletionRate": 1,
+  "maximumTransactionFailureUpperBound": 0.0009574404259840004,
+  "maximumProtectedRadialRatio": 1.0548098886818724,
+  "minimumProtectedSeparation": 0.99625486899408655,
+  "submissionClaimPermitted": false,
+  "next": "preregister_exp23ah_on_untouched_seeds"
+}

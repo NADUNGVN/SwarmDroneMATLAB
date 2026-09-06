@@ -1,0 +1,5 @@
+scenario,scenarioLabel,arm,methodLabel,armKind,nRuns,meanRMSE,meanTrueAoI,meanOfferedUtil,meanChannelUtil,meanGoodputHz,meanManagementUtil,meanControlBytes,meanFallbackOpportunities,safeFailures
+n10-ring2-zero-loss,N10 ring2 zero-loss,elcs-w-affine-clock,ELCS-W local witness / affine clock,candidate-clock-composition,30,0.0508577067308169,0.0653699451460644,0.309759999999997,0.200212722736698,95.8333333333333,0.01536,5760,0,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,elcs-w-zero-clock,ELCS-W local witness / zero clock,clock-paired-reference,30,0.0508703700205018,0.0655453501722157,0.309759999999997,0.191999999999997,95.8333333333333,0.01536,5760,0,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,elcs-w-affine-clock,ELCS-W local witness / affine clock,candidate-clock-composition,30,0.0299136224447836,0.0405505804311776,0.290453333333331,0.290453333333327,90.4166666666667,0.0126933333333333,4760,0,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,elcs-w-zero-clock,ELCS-W local witness / zero clock,clock-paired-reference,30,0.0299149660270941,0.0406053067993368,0.290453333333331,0.290453333333327,90.4166666666667,0.0126933333333333,4760,0,0

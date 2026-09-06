@@ -1,0 +1,18 @@
+{
+  "experiment": "exp21a_distributed_scheduling_reality_check",
+  "runId": "2026-09-01_030941",
+  "startedAt": "2026-09-01 03:09:41",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development/falsification of ideal-versus-distributed scheduling; no tuning, confirmatory, manuscript, or hardware promotion.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp21a_distributed_scheduling_reality_check.m",
+  "finishedAt": "2026-09-01 03:24:44",
+  "elapsedSec": 903.0246947,
+  "elapsedText": "15 m 03 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

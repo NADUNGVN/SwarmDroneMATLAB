@@ -1,0 +1,48 @@
+
+============================================================
+RUN  : exp16_factorial_interaction
+ID   : 2026-08-31_104551
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp16_factorial_interaction\2026-08-31_104551
+WHEN : 2026-08-31 10:45:52
+============================================================
+
+EXP16 HOLDOUT IS NOW OPEN. Registry hash: 89775929
+Frozen matrix: 600 runs (100 seeds).
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  seeds   1-- 12 / 100; rows  72 / 600
+  seeds  13-- 24 / 100; rows 144 / 600
+  seeds  25-- 36 / 100; rows 216 / 600
+  seeds  37-- 48 / 100; rows 288 / 600
+  seeds  49-- 60 / 100; rows 360 / 600
+  seeds  61-- 72 / 100; rows 432 / 600
+  seeds  73-- 84 / 100; rows 504 / 600
+  seeds  85-- 96 / 100; rows 576 / 600
+  seeds  97--100 / 100; rows 600 / 600
+
+EXP16 integrity gates
+  [PASS] registry_contract                    hash 89775929 over 56 leaves
+  [PASS] matrix_completeness                  600 frozen runs
+  [PASS] unique_seed_arms                     one row per seed/arm
+  [PASS] complete_matched_groups              all six arms occur once per seed
+  [PASS] finite_eligible_outputs              all nondivergent outcomes are finite
+  [PASS] causal_conservatism                  0 protocol violations
+  [PASS] bounded_memory                       max queue=2 max history=32
+  [PASS] physical_accounting                  terminal accounting and busy union close
+  [PASS] cross_mac_absolute_trace             one trace/channel/estimator realization per seed across all arms
+  [PASS] factor_route_semantics               MAC and feedback-route factors match their method contracts
+  [PASS] ack_route_actions                    standalone/adaptive actions occur only in registered routes
+  [PASS] matched_access_scaling               configured and actual pAccess equal 1/N under both MACs
+  [PASS] primary_factorial_flags              only the four registered 2-by-2 cells enter primary estimands
+  [PASS] divergence_accounting                0 divergences retained
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp16_factorial_interaction\2026-08-31_104551\figures
+
+EXP16 CLAIM VERDICT: SUPPORTED_REGISTERED_FACTORIAL_INTERACTION
+  Holm tests: 6/6 | metric reversals: 2/2
+
+============================================================
+DONE : exp16_factorial_interaction
+TIME : 3 m 25 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp16_factorial_interaction\2026-08-31_104551
+============================================================

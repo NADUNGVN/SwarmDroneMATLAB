@@ -1,0 +1,16 @@
+{
+  "status": "PRIOR_ART_EXPLAINS_FRONTIER",
+  "developmentFalsificationOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "candidateOptimizationWasAllowed": false,
+  "newCandidatePermitted": false,
+  "exp20bPermitted": false,
+  "nativeGapSupportedCells": 0,
+  "nativeGapRequiredCells": 4,
+  "priorArtExplainsFrontier": true,
+  "existingPrivateBaselineMatches": false,
+  "formationPrivateLossAfterCharging": true,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false,
+  "negativeResultsRetained": true
+}

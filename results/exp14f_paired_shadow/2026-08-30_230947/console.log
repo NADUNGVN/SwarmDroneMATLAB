@@ -1,0 +1,49 @@
+
+============================================================
+RUN  : exp14f_paired_shadow
+ID   : 2026-08-30_230947
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14f_paired_shadow\2026-08-30_230947
+WHEN : 2026-08-30 23:09:48
+============================================================
+
+EXP14F development matrix: 80 paired groups, 160 runs.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 12 /  80; runs  24 / 160; events 1513
+  groups  13-- 24 /  80; runs  48 / 160; events 2952
+  groups  25-- 36 /  80; runs  72 / 160; events 4344
+  groups  37-- 48 /  80; runs  96 / 160; events 5749
+  groups  49-- 60 /  80; runs 120 / 160; events 7215
+  groups  61-- 72 /  80; runs 144 / 160; events 8704
+  groups  73-- 80 /  80; runs 160 / 160; events 9694
+
+EXP14F integrity gates
+  [PASS] registry_contract               hash 20176987 over 25 leaves
+  [PASS] matrix_completeness             160 unique runs
+  [PASS] complete_paired_groups          both declared arms occur once per group
+  [PASS] finite_eligible_outputs         nondivergent control and freshness outcomes are finite
+  [PASS] causal_conservatism             0 protocol violations
+  [PASS] bounded_memory                  max queue=2, history=32
+  [PASS] physical_accounting             terminal recipient accounting closes
+  [PASS] paired_absolute_trace           one absolute trace per seed/cell pair
+  [PASS] arm_semantics                   adaptive actual and piggyback-only shadow
+  [PASS] event_accounting                9694 selected standalone confirmation events
+  [PASS] lead_matching_contract          generation threshold, horizon cap and censor metadata are valid
+  [PASS] divergence_accounting           0 divergences retained
+
+Generation-matched confirmation lead
+      scenario       scenarioLabel    nSeeds    runsWithStandaloneEvents    standaloneEvents    matchedEvents    censoredEvents    fractionMatched    fractionCensored    fractionPositiveLead    fractionShadowEarlierOrEqual    meanHorizonCappedLead    medianHorizonCappedLead    p95HorizonCappedLead    maxHorizonCappedLead
+    _____________    _____________    ______    ________________________    ________________    _____________    ______________    _______________    ________________    ____________________    ____________________________    _____________________    _______________________    ____________________    ____________________
+
+    {'n5-csma'  }    {'N5 CSMA'  }      20                 20                     2199              2188               11                0.995           0.0050023              0.83674                      0.16326                    0.070684                    0.054                    0.1971                  0.632        
+    {'n10-ring2'}    {'N10 ring2'}      20                 20                     2632              2608               24              0.99088           0.0091185              0.78533                      0.21467                    0.064374                    0.046                       0.2                  0.684        
+    {'n20-ring2'}    {'N20 ring2'}      20                  9                       20                20                0                    1                   0                    1                            0                     0.09935                    0.002                   0.54355                  0.554        
+    {'n5-aloha' }    {'N5 ALOHA' }      20                 20                     4843              4720              123               0.9746            0.025397              0.96531                     0.034483                     0.25117                     0.16                    0.8057                  3.523        
+
+
+============================================================
+DONE : exp14f_paired_shadow
+TIME : 2 m 13 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14f_paired_shadow\2026-08-30_230947
+============================================================

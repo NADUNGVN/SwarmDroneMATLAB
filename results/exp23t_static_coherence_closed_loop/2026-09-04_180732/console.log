@@ -1,0 +1,43 @@
+
+============================================================
+RUN  : exp23t_static_coherence_closed_loop
+ID   : 2026-09-04_180732
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23t_static_coherence_closed_loop\2026-09-04_180732
+WHEN : 2026-09-04 18:07:32
+============================================================
+
+  seeds   1--  4 / 100; rows  12 / 300
+  seeds   5--  8 / 100; rows  24 / 300
+  seeds   9-- 12 / 100; rows  36 / 300
+  seeds  13-- 16 / 100; rows  48 / 300
+  seeds  17-- 20 / 100; rows  60 / 300
+  seeds  21-- 24 / 100; rows  72 / 300
+  seeds  25-- 28 / 100; rows  84 / 300
+  seeds  29-- 32 / 100; rows  96 / 300
+  seeds  33-- 36 / 100; rows 108 / 300
+  seeds  37-- 40 / 100; rows 120 / 300
+  seeds  41-- 44 / 100; rows 132 / 300
+  seeds  45-- 48 / 100; rows 144 / 300
+  seeds  49-- 52 / 100; rows 156 / 300
+  seeds  53-- 56 / 100; rows 168 / 300
+  seeds  57-- 60 / 100; rows 180 / 300
+  seeds  61-- 64 / 100; rows 192 / 300
+  seeds  65-- 68 / 100; rows 204 / 300
+  seeds  69-- 72 / 100; rows 216 / 300
+  seeds  73-- 76 / 100; rows 228 / 300
+  seeds  77-- 80 / 100; rows 240 / 300
+  seeds  81-- 84 / 100; rows 252 / 300
+  seeds  85-- 88 / 100; rows 264 / 300
+  seeds  89-- 92 / 100; rows 276 / 300
+  seeds  93-- 96 / 100; rows 288 / 300
+  seeds  97--100 / 100; rows 300 / 300
+{Error using () (line 133)
+Unrecognized table variable name 'armLabel'.
+
+Error in exp23t_static_coherence_closed_loop>summaryTable (line 259)
+[group,S]=findgroups(T(:,{'arm','armLabel'}));
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+Error in exp23t_static_coherence_closed_loop (line 40)
+S=summaryTable(T); writetable(S,fullfile(expRun.dir,'summary.csv'));
+  ^^^^^^^^^^^^^^^
+} 

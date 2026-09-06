@@ -1,0 +1,8 @@
+gate,passed,detail
+feasible_coverage,1,"5 feasible core context--MAC cells; both N and MAC required"
+feasible_failure_nonincrease,1,"within feasible cells, failures do not exceed either fixed route"
+feasible_not_jointly_worse,1,"1 jointly-worse feasible cells (maximum 2)"
+infeasible_exact_abstention,1,"11 certificate-infeasible cells emit zero standalone ACKs"
+second_layer_active,1,"standalone permits and value blocks both occur in feasible cells"
+n10_aloha_collision_frame_repair,1,"four N10 ALOHA cells reduce absolute collisions by >= 10%"
+reverse_mismatch_reported,1,"reverse boundary retains nominal calibration mismatch"

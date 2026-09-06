@@ -1,0 +1,18 @@
+{
+  "experiment": "exp18a2_service_certificate_development",
+  "runId": "2026-08-31_123541",
+  "startedAt": "2026-08-31 12:35:41",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development amendment: analytical service-capacity abstention before ACK marginal value; reference arms are canonical EXP18A rows.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp18a2_service_certificate_development.m",
+  "finishedAt": "2026-08-31 12:39:09",
+  "elapsedSec": 207.232947,
+  "elapsedText": "3 m 27 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

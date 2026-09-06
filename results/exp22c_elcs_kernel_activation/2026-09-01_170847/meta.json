@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22c_elcs_kernel_activation",
+  "runId": "2026-09-01_170847",
+  "startedAt": "2026-09-01 17:08:47",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F edge-lease safety invariant; no tuning or performance claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22c_elcs_kernel_activation.m",
+  "finishedAt": "2026-09-01 17:17:47",
+  "elapsedSec": 539.7790215,
+  "elapsedText": "8 m 60 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

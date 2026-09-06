@@ -1,0 +1,15 @@
+scenario,scenarioLabel,condition,conditionLabel,conditionKind,n,finalCertified,meanFirstCertifiedFrame,meanCertifiedNodeFrameFraction,meanRecoveryFrame,meanAutomaticRecolorCount,meanControlAttempts,meanScheduledAttempts,meanFallbackAttempts,meanOfferedUtilization,meanChannelUtilization,fallbackCollisionFrames
+n10-ring2,N10 ring2 graph,data-erasure-5,DATA erasure 5%,data-separation,100,100,10,0.98875,NaN,0,3774,3955,8.09,0.537328470514909,0.37485450378166,130
+n10-ring2,N10 ring2 graph,directed-grant-blackout,Directed GRANT blackout,grant-loss-witness,100,0,NaN,0.889,NaN,0,4168,3556,84.54,0.517649407515236,0.395881410214187,188
+n10-ring2,N10 ring2 graph,local-management,Local management reach,visibility-boundary,100,0,NaN,0.19975,NaN,0,600,799,605.66,0.16514358179929,0.14786518266908,11614
+n10-ring2,N10 ring2 graph,management-erasure-5,Management erasure 5%,control-loss,100,100,11.34,0.9871075,NaN,0,3759.51,3948.43,9.35,0.536284912428183,0.374108370041151,150
+n10-ring2,N10 ring2 graph,owner-reconfiguration,Owner tuple reconfiguration,lease-fence-boundary,100,100,10,0.94075,NaN,5,3917,3763,44.66,0.526238007205985,0.37745893934853,563
+n10-ring2,N10 ring2 graph,state-loss,Local client state loss,rejoin-boundary,100,100,10,0.98825,2,0,3775,3953,8.45,0.537193994916619,0.374925858180752,130
+n10-ring2,N10 ring2 graph,zero,Zero loss,native,100,100,10,0.98875,NaN,0,3774,3955,8.09,0.537328470514909,0.37485450378166,130
+n5-6dof,N5 6-DOF graph,data-erasure-5,DATA erasure 5%,data-separation,100,100,5,0.995,NaN,0,1794,1990,3.52,0.486333081110084,0.48623361958442,82
+n5-6dof,N5 6-DOF graph,directed-grant-blackout,Directed GRANT blackout,grant-loss-witness,100,0,NaN,0.7955,NaN,0,2191,1591,147.12,0.463237989742104,0.463082229239649,133
+n5-6dof,N5 6-DOF graph,local-management,Local management reach,visibility-boundary,100,0,NaN,0.3995,NaN,0,600,799,429.47,0.268071331254755,0.254257438982839,9548
+n5-6dof,N5 6-DOF graph,management-erasure-5,Management erasure 5%,control-loss,100,100,5.86,0.994005,NaN,0,1784.21,1988.01,4.15,0.485465451323318,0.485343470206938,105
+n5-6dof,N5 6-DOF graph,owner-reconfiguration,Owner tuple reconfiguration,lease-fence-boundary,100,100,5,0.972,NaN,1,1819,1944,19.5,0.482263290632292,0.481803515655167,325
+n5-6dof,N5 6-DOF graph,state-loss,Local client state loss,rejoin-boundary,100,100,5,0.994,2,0,1795,1988,4.24,0.486155426561099,0.486055965035435,82
+n5-6dof,N5 6-DOF graph,zero,Zero loss,native,100,100,5,0.995,NaN,0,1794,1990,3.52,0.486333081110084,0.48623361958442,82

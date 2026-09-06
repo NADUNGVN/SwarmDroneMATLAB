@@ -1,0 +1,9 @@
+{
+  "status": "LOCAL_MIGRATION_COMMON_PHY_INVALID",
+  "gatesPassed": 17,
+  "gatesTotal": 18,
+  "rows": 1800,
+  "closedLoopClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "repair_common_phy_mapping_without_relaxing_gates"
+}

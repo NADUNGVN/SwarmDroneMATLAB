@@ -1,0 +1,12 @@
+{
+  "status": "ELCS_FEASIBILITY_NONDOMINATED_CONTINUE_REFERENCES",
+  "integrityGatesPassed": 14,
+  "integrityGatesTotal": 14,
+  "rows": 600,
+  "periodicDominanceFound": false,
+  "confidenceSupportedPeriodicDominanceFound": false,
+  "next": "robustness_and_remaining_direct_references",
+  "robustnessContinuationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

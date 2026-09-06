@@ -1,0 +1,10 @@
+gate,passed,detail
+matrix_completeness,1,"4800 frozen OOD runs"
+unique_cells,1,"every seed/point/method occurs once"
+finite_outputs,1,"required control, freshness and PHY outputs are finite"
+causal_conservatism,1,"0 protocol violations"
+bounded_memory,1,"max queue=2 max history=32"
+physical_accounting,1,"DATA/ACK success, loss and terminal in-flight outcomes plus channel union close"
+paired_absolute_trace,1,"one channel trace and state realization per seed/OOD point"
+divergence_accounting,1,"0 diverged runs retained as safety failures"
+ood_perturbations_exercised,1,"background, hidden collision, ACK asymmetry and C3 noise are active"

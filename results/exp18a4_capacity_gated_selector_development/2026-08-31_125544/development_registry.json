@@ -1,0 +1,177 @@
+{
+  "version": "EXP18A4-CAPACITY-GATED-SELECTOR-DEVELOPMENT-v1",
+  "stage": "development-amendment-4",
+  "seeds": [
+    1.6024001E+7,
+    1.6024002E+7,
+    1.6024003E+7,
+    1.6024004E+7,
+    1.6024005E+7,
+    1.6024006E+7,
+    1.6024007E+7,
+    1.6024008E+7,
+    1.6024009E+7,
+    1.602401E+7,
+    1.6024011E+7,
+    1.6024012E+7,
+    1.6024013E+7,
+    1.6024014E+7,
+    1.6024015E+7,
+    1.6024016E+7,
+    1.6024017E+7,
+    1.6024018E+7,
+    1.6024019E+7,
+    1.602402E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-moderate-bg0",
+      "label": "N5 Moderate bg0",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-moderate-bg30",
+      "label": "N5 Moderate bg0.30",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-stressed-bg0",
+      "label": "N5 Stressed bg0",
+      "N": 5,
+      "channel": "stressed",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-stressed-bg30",
+      "label": "N5 Stressed bg0.30",
+      "N": 5,
+      "channel": "stressed",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-moderate-bg0",
+      "label": "N10 Moderate bg0",
+      "N": 10,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-moderate-bg30",
+      "label": "N10 Moderate bg0.30",
+      "N": 10,
+      "channel": "moderate",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-stressed-bg0",
+      "label": "N10 Stressed bg0",
+      "N": 10,
+      "channel": "stressed",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-stressed-bg30",
+      "label": "N10 Stressed bg0.30",
+      "N": 10,
+      "channel": "stressed",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-moderate-reverse",
+      "label": "N5 Moderate reverse-asymmetric",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "reverse-asymmetric",
+      "role": "boundary"
+    },
+    {
+      "id": "n5-moderate-hidden",
+      "label": "N5 Moderate hidden-terminal",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "hidden-terminal",
+      "role": "boundary"
+    }
+  ],
+  "coreCells": [
+    "n5-moderate-bg0",
+    "n5-moderate-bg30",
+    "n5-stressed-bg0",
+    "n5-stressed-bg30",
+    "n10-moderate-bg0",
+    "n10-moderate-bg30",
+    "n10-stressed-bg0",
+    "n10-stressed-bg30"
+  ],
+  "boundaryCells": [
+    "n5-moderate-reverse",
+    "n5-moderate-hidden"
+  ],
+  "macTypes": [
+    "csma",
+    "aloha"
+  ],
+  "referenceRun": "D:\\Research\\Drone\\SwarmDroneMATLAB\\results\\exp18a_context_aware_development\\2026-08-31_121134",
+  "referenceArms": [
+    "legacy-selector",
+    "frame-piggyback",
+    "frame-adaptive"
+  ],
+  "arm": {
+    "id": "capacity-gated-selector",
+    "label": "Capacity-gated fixed feedback route",
+    "accessDesign": "frame-aware",
+    "ackDesign": "capacity-gated-mac"
+  },
+  "expectedRuns": 400,
+  "minimumFeasibleCoreMacCells": 5,
+  "maxJointlyWorseFeasibleCells": 2,
+  "minimumCollisionFrameReduction": 0.1,
+  "futureHoldoutMinimumSeed": 1.6025001E+7,
+  "confirmatory": false,
+  "futureHoldoutOpened": false,
+  "hardwareClaimPermitted": false,
+  "superiorityClaimPermitted": false,
+  "aliasFields": [
+    "RMSE",
+    "MINSEP",
+    "SAFEFAIL",
+    "DIVERGED",
+    "CONTROL_EFFORT",
+    "MEAN_TRUE_AOI",
+    "MEAN_EST_AOI",
+    "DATA_GENERATED",
+    "DATA_ATTEMPTED",
+    "DATA_RECIPIENT_SUCCESS",
+    "COLLISION_FRAMES",
+    "QUEUE_DROPS",
+    "OFFERED_UTIL",
+    "DATA_AIRTIME",
+    "ACK_AIRTIME",
+    "ACK_STANDALONE",
+    "RECIPIENT_GOODPUT_HZ"
+  ],
+  "requireExactAlias": true
+}

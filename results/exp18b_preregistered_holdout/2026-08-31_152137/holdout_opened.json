@@ -1,0 +1,16 @@
+{
+  "openedAt": "2026-08-31 15:21:38",
+  "registryHash": 1.49048254E+8,
+  "registryLeaves": 153,
+  "sourceHash": 4.1305044133E+10,
+  "sourceLeaves": 58,
+  "firstSeed": 1.6025001E+7,
+  "lastSeed": 1.60251E+7,
+  "policyMayChange": false,
+  "matrixMayChange": false,
+  "analysisMayChange": false,
+  "primaryFamilySize": 9,
+  "performanceInspectedBeforeOpen": false,
+  "developmentEvidenceEndsAt": "EXP18A4",
+  "hardwareClaimPermitted": false
+}

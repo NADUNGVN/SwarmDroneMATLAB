@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "gatesPassed": 18,
+  "gatesTotal": 18,
+  "totalRuns": 1620,
+  "developmentOnly": true,
+  "performanceIsIntegrityGate": false,
+  "negativeResultsRetained": true,
+  "hypothesisTestsRun": false,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false
+}

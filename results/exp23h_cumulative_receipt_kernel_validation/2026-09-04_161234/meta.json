@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23h_cumulative_receipt_kernel_validation",
+  "runId": "2026-09-04_161234",
+  "startedAt": "2026-09-04 16:12:34",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Paired kernel falsification of same-sequence cumulative witness receipts after EXP23G retry amplification.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23h_cumulative_receipt_kernel_validation.m",
+  "finishedAt": "2026-09-04 16:21:46",
+  "elapsedSec": 551.2761578,
+  "elapsedText": "9 m 11 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

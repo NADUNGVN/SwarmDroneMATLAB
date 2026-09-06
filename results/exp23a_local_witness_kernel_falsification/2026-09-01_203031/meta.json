@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23a_local_witness_kernel_falsification",
+  "runId": "2026-09-01_203031",
+  "startedAt": "2026-09-01 20:30:32",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "One-hop conflict-witness CLAIM/CERT kernel falsification with exact byte bounds and fail-silent loss boundaries.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23a_local_witness_kernel_falsification.m",
+  "finishedAt": "2026-09-01 20:32:19",
+  "elapsedSec": 106.7391399,
+  "elapsedText": "1 m 47 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

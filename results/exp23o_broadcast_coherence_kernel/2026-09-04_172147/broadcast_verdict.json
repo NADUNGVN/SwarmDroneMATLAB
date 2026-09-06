@@ -1,0 +1,9 @@
+{
+  "status": "BROADCAST_COHERENCE_KERNEL_VALID",
+  "gatesPassed": 17,
+  "gatesTotal": 17,
+  "rows": 600,
+  "elcsPacketKernelValidationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp19a_oracle_service_diagnostic",
+  "runId": "2026-08-31_175039",
+  "startedAt": "2026-08-31 17:50:39",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Development-only oracle/TDMA service action-space diagnostic; no hypothesis test, manuscript claim or hardware policy claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp19a_oracle_service_diagnostic.m",
+  "finishedAt": "2026-08-31 17:57:52",
+  "elapsedSec": 432.4360027,
+  "elapsedText": "7 m 12 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

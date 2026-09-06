@@ -1,0 +1,110 @@
+{
+  "version": "EXP23D-ELCS-W-SHARP-PERIODIC-FRONTIER-v1",
+  "frozenDate": "2026-09-03",
+  "stage": "local-witness-sharp-frontier-falsification",
+  "policyOptimizationAllowed": false,
+  "robustnessClaimPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6061001E+7,
+    1.6061002E+7,
+    1.6061003E+7,
+    1.6061004E+7,
+    1.6061005E+7,
+    1.6061006E+7,
+    1.6061007E+7,
+    1.6061008E+7,
+    1.6061009E+7,
+    1.606101E+7,
+    1.6061011E+7,
+    1.6061012E+7,
+    1.6061013E+7,
+    1.6061014E+7,
+    1.6061015E+7,
+    1.6061016E+7,
+    1.6061017E+7,
+    1.6061018E+7,
+    1.6061019E+7,
+    1.606102E+7,
+    1.6061021E+7,
+    1.6061022E+7,
+    1.6061023E+7,
+    1.6061024E+7,
+    1.6061025E+7,
+    1.6061026E+7,
+    1.6061027E+7,
+    1.6061028E+7,
+    1.6061029E+7,
+    1.606103E+7
+  ],
+  "pilotSeeds": [
+    1.6059801E+7,
+    1.6059802E+7,
+    1.6059803E+7,
+    1.6059804E+7,
+    1.6059805E+7,
+    1.6059806E+7,
+    1.6059807E+7,
+    1.6059808E+7,
+    1.6059809E+7,
+    1.605981E+7
+  ],
+  "parentRun": "2026-09-03_161908",
+  "parentDecision": "ELCS_W_CLOSED_LOOP_VALID",
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed",
+      "parentElcsWCost": 0.290453333333331,
+      "costMatchRateHz": 18.909722222222072,
+      "boundaryFactor": 0.9875,
+      "lowerCostRateHz": 18.6733506944443
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate",
+      "parentElcsWCost": 0.309759999999997,
+      "costMatchRateHz": 10.083333333333234,
+      "boundaryFactor": 0.9866,
+      "lowerCostRateHz": 9.94821666666657
+    }
+  ],
+  "boundarySelectionRule": "largest retained pilot-tested rate factor whose measured finite-horizon airtime is at least 1% below the EXP23C parent mean; selection uses cost only, never pilot RMSE",
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "elcsMaxFrames": 400,
+  "strictMargin": 0.01,
+  "epsilonRmse": 0.01,
+  "requiredCostImprovement": 0.01,
+  "arms": [
+    {
+      "id": "periodic-cost-match",
+      "label": "Periodic static TDMA / ELCS-W cost match",
+      "family": "periodic-static",
+      "rateRule": "cost-match"
+    },
+    {
+      "id": "periodic-cost-minus1pct",
+      "label": "Periodic static TDMA / measured cost at least 1% lower",
+      "family": "periodic-static",
+      "rateRule": "cost-minus1pct"
+    },
+    {
+      "id": "elcs-w-mission-affine",
+      "label": "ELCS-W local witness / mission affine clock",
+      "family": "candidate-elcs-w",
+      "rateRule": "candidate"
+    }
+  ],
+  "elcsWArm": "elcs-w-mission-affine",
+  "lowerCostArm": "periodic-cost-minus1pct",
+  "bootstrapSeedBase": 1.60619E+7,
+  "requiredIntegrityContracts": 15,
+  "expectedRuns": 180
+}

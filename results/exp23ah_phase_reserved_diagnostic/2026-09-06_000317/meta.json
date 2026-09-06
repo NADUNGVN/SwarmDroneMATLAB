@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ah_phase_reserved_diagnostic",
+  "runId": "2026-09-06_000317",
+  "startedAt": "2026-09-06 00:03:17",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Prior-seed diagnosis of persistent QUIET and reserved control phases.",
+  "sourceFile": "",
+  "finishedAt": "2026-09-06 00:07:21",
+  "elapsedSec": 244.1502222,
+  "elapsedText": "4 m 04 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

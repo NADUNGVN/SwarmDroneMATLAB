@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23w_fast_reactivation_holdout",
+  "runId": "2026-09-04_225232",
+  "startedAt": "2026-09-04 22:52:32",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed fixed-graph fast-reactivation confirmation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23w_fast_reactivation_holdout.m",
+  "finishedAt": "2026-09-04 23:13:11",
+  "elapsedSec": 1239.0690214,
+  "elapsedText": "20 m 39 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

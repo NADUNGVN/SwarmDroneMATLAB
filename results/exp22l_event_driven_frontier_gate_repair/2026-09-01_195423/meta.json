@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22l_event_driven_frontier_gate_repair",
+  "runId": "2026-09-01_195423",
+  "startedAt": "2026-09-01 19:54:24",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh-seed event-driven frontier rerun after separating logical protocol and physical replay horizons.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22l_event_driven_frontier_gate_repair.m",
+  "finishedAt": "2026-09-01 19:59:50",
+  "elapsedSec": 326.2645806,
+  "elapsedText": "5 m 26 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

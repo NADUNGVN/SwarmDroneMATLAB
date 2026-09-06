@@ -1,0 +1,17 @@
+cell,arm,failures,n,rate,wilsonLo,wilsonHi,divergences
+n5-csma,mac-selective-scaled,0,100,0,0,0.0369934982069857,0
+n5-csma,fixed-adaptive-scaled,0,100,0,0,0.0369934982069857,0
+n5-csma,fixed-piggyback-scaled,0,100,0,0,0.0369934982069857,0
+n5-csma,access-only-scaled,0,100,0,0,0.0369934982069857,0
+n10-ring2,mac-selective-scaled,0,100,0,0,0.0369934982069857,0
+n10-ring2,fixed-adaptive-scaled,0,100,0,0,0.0369934982069857,0
+n10-ring2,fixed-piggyback-scaled,0,100,0,0,0.0369934982069857,0
+n10-ring2,access-only-scaled,0,100,0,0,0.0369934982069857,0
+n20-ring2,mac-selective-scaled,0,100,0,0,0.0369934982069857,0
+n20-ring2,fixed-adaptive-scaled,0,100,0,0,0.0369934982069857,0
+n20-ring2,fixed-piggyback-scaled,0,100,0,0,0.0369934982069857,0
+n20-ring2,access-only-scaled,6,100,0.06,0.0277861239631882,0.124768154458959,0
+n5-aloha,mac-selective-scaled,0,100,0,0,0.0369934982069857,0
+n5-aloha,fixed-adaptive-scaled,0,100,0,0,0.0369934982069857,0
+n5-aloha,fixed-piggyback-scaled,1,100,0.01,0.00176743206414065,0.0544861961787053,0
+n5-aloha,access-only-scaled,0,100,0,0,0.0369934982069857,0

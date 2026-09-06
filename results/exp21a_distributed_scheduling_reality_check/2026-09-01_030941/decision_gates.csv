@@ -1,0 +1,9 @@
+gate,passed,detail
+all_integrity_gates,1,all integrity gates passed
+dominates_current_both_nominal,1,2/2 nominal cells dominated
+retains_4_of_5_single_fault_cells,0,1/5 single-fault cells retain safety and mean RMSE
+mean_control_overhead_at_most_0p15,1,mean control overhead 0.048842
+nominal_convergence_at_least_0p90,0,nominal convergence fraction 0.833333
+churn_recovery_at_least_0p90,0,churn recovery fraction 0.333333
+within_registered_ideal_gap_both_nominal,1,2/2 nominal cells within ideal gap
+compound_safety_no_worse_than_current,1,compound failures candidate/current 16/25

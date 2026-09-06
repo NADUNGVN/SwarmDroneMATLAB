@@ -1,0 +1,18 @@
+{
+  "status": "FULL_DETECTABILITY_ROUTING_PRIMITIVE_DIAGNOSTIC_VALID",
+  "gatesPassed": 19,
+  "gatesTotal": 19,
+  "structuralRows": 210,
+  "monteCarloRows": 6,
+  "semanticRows": 25,
+  "routingPrimitiveValidated": true,
+  "fullDirectReachDetectabilityValidated": true,
+  "semanticMulticastDiagnosticValidated": true,
+  "closedLoopManagementRelayingValidated": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "multi_origin_common_phy_routing_integration"
+}

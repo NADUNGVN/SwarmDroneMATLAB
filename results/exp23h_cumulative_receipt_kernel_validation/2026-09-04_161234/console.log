@@ -1,0 +1,156 @@
+
+============================================================
+RUN  : exp23h_cumulative_receipt_kernel_validation
+ID   : 2026-09-04_161234
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23h_cumulative_receipt_kernel_validation\2026-09-04_161234
+WHEN : 2026-09-04 16:12:34
+============================================================
+
+  groups    1--  10 / 1200; rows   20 / 2400
+  groups   11--  20 / 1200; rows   40 / 2400
+  groups   21--  30 / 1200; rows   60 / 2400
+  groups   31--  40 / 1200; rows   80 / 2400
+  groups   41--  50 / 1200; rows  100 / 2400
+  groups   51--  60 / 1200; rows  120 / 2400
+  groups   61--  70 / 1200; rows  140 / 2400
+  groups   71--  80 / 1200; rows  160 / 2400
+  groups   81--  90 / 1200; rows  180 / 2400
+  groups   91-- 100 / 1200; rows  200 / 2400
+  groups  101-- 110 / 1200; rows  220 / 2400
+  groups  111-- 120 / 1200; rows  240 / 2400
+  groups  121-- 130 / 1200; rows  260 / 2400
+  groups  131-- 140 / 1200; rows  280 / 2400
+  groups  141-- 150 / 1200; rows  300 / 2400
+  groups  151-- 160 / 1200; rows  320 / 2400
+  groups  161-- 170 / 1200; rows  340 / 2400
+  groups  171-- 180 / 1200; rows  360 / 2400
+  groups  181-- 190 / 1200; rows  380 / 2400
+  groups  191-- 200 / 1200; rows  400 / 2400
+  groups  201-- 210 / 1200; rows  420 / 2400
+  groups  211-- 220 / 1200; rows  440 / 2400
+  groups  221-- 230 / 1200; rows  460 / 2400
+  groups  231-- 240 / 1200; rows  480 / 2400
+  groups  241-- 250 / 1200; rows  500 / 2400
+  groups  251-- 260 / 1200; rows  520 / 2400
+  groups  261-- 270 / 1200; rows  540 / 2400
+  groups  271-- 280 / 1200; rows  560 / 2400
+  groups  281-- 290 / 1200; rows  580 / 2400
+  groups  291-- 300 / 1200; rows  600 / 2400
+  groups  301-- 310 / 1200; rows  620 / 2400
+  groups  311-- 320 / 1200; rows  640 / 2400
+  groups  321-- 330 / 1200; rows  660 / 2400
+  groups  331-- 340 / 1200; rows  680 / 2400
+  groups  341-- 350 / 1200; rows  700 / 2400
+  groups  351-- 360 / 1200; rows  720 / 2400
+  groups  361-- 370 / 1200; rows  740 / 2400
+  groups  371-- 380 / 1200; rows  760 / 2400
+  groups  381-- 390 / 1200; rows  780 / 2400
+  groups  391-- 400 / 1200; rows  800 / 2400
+  groups  401-- 410 / 1200; rows  820 / 2400
+  groups  411-- 420 / 1200; rows  840 / 2400
+  groups  421-- 430 / 1200; rows  860 / 2400
+  groups  431-- 440 / 1200; rows  880 / 2400
+  groups  441-- 450 / 1200; rows  900 / 2400
+  groups  451-- 460 / 1200; rows  920 / 2400
+  groups  461-- 470 / 1200; rows  940 / 2400
+  groups  471-- 480 / 1200; rows  960 / 2400
+  groups  481-- 490 / 1200; rows  980 / 2400
+  groups  491-- 500 / 1200; rows 1000 / 2400
+  groups  501-- 510 / 1200; rows 1020 / 2400
+  groups  511-- 520 / 1200; rows 1040 / 2400
+  groups  521-- 530 / 1200; rows 1060 / 2400
+  groups  531-- 540 / 1200; rows 1080 / 2400
+  groups  541-- 550 / 1200; rows 1100 / 2400
+  groups  551-- 560 / 1200; rows 1120 / 2400
+  groups  561-- 570 / 1200; rows 1140 / 2400
+  groups  571-- 580 / 1200; rows 1160 / 2400
+  groups  581-- 590 / 1200; rows 1180 / 2400
+  groups  591-- 600 / 1200; rows 1200 / 2400
+  groups  601-- 610 / 1200; rows 1220 / 2400
+  groups  611-- 620 / 1200; rows 1240 / 2400
+  groups  621-- 630 / 1200; rows 1260 / 2400
+  groups  631-- 640 / 1200; rows 1280 / 2400
+  groups  641-- 650 / 1200; rows 1300 / 2400
+  groups  651-- 660 / 1200; rows 1320 / 2400
+  groups  661-- 670 / 1200; rows 1340 / 2400
+  groups  671-- 680 / 1200; rows 1360 / 2400
+  groups  681-- 690 / 1200; rows 1380 / 2400
+  groups  691-- 700 / 1200; rows 1400 / 2400
+  groups  701-- 710 / 1200; rows 1420 / 2400
+  groups  711-- 720 / 1200; rows 1440 / 2400
+  groups  721-- 730 / 1200; rows 1460 / 2400
+  groups  731-- 740 / 1200; rows 1480 / 2400
+  groups  741-- 750 / 1200; rows 1500 / 2400
+  groups  751-- 760 / 1200; rows 1520 / 2400
+  groups  761-- 770 / 1200; rows 1540 / 2400
+  groups  771-- 780 / 1200; rows 1560 / 2400
+  groups  781-- 790 / 1200; rows 1580 / 2400
+  groups  791-- 800 / 1200; rows 1600 / 2400
+  groups  801-- 810 / 1200; rows 1620 / 2400
+  groups  811-- 820 / 1200; rows 1640 / 2400
+  groups  821-- 830 / 1200; rows 1660 / 2400
+  groups  831-- 840 / 1200; rows 1680 / 2400
+  groups  841-- 850 / 1200; rows 1700 / 2400
+  groups  851-- 860 / 1200; rows 1720 / 2400
+  groups  861-- 870 / 1200; rows 1740 / 2400
+  groups  871-- 880 / 1200; rows 1760 / 2400
+  groups  881-- 890 / 1200; rows 1780 / 2400
+  groups  891-- 900 / 1200; rows 1800 / 2400
+  groups  901-- 910 / 1200; rows 1820 / 2400
+  groups  911-- 920 / 1200; rows 1840 / 2400
+  groups  921-- 930 / 1200; rows 1860 / 2400
+  groups  931-- 940 / 1200; rows 1880 / 2400
+  groups  941-- 950 / 1200; rows 1900 / 2400
+  groups  951-- 960 / 1200; rows 1920 / 2400
+  groups  961-- 970 / 1200; rows 1940 / 2400
+  groups  971-- 980 / 1200; rows 1960 / 2400
+  groups  981-- 990 / 1200; rows 1980 / 2400
+  groups  991--1000 / 1200; rows 2000 / 2400
+  groups 1001--1010 / 1200; rows 2020 / 2400
+  groups 1011--1020 / 1200; rows 2040 / 2400
+  groups 1021--1030 / 1200; rows 2060 / 2400
+  groups 1031--1040 / 1200; rows 2080 / 2400
+  groups 1041--1050 / 1200; rows 2100 / 2400
+  groups 1051--1060 / 1200; rows 2120 / 2400
+  groups 1061--1070 / 1200; rows 2140 / 2400
+  groups 1071--1080 / 1200; rows 2160 / 2400
+  groups 1081--1090 / 1200; rows 2180 / 2400
+  groups 1091--1100 / 1200; rows 2200 / 2400
+  groups 1101--1110 / 1200; rows 2220 / 2400
+  groups 1111--1120 / 1200; rows 2240 / 2400
+  groups 1121--1130 / 1200; rows 2260 / 2400
+  groups 1131--1140 / 1200; rows 2280 / 2400
+  groups 1141--1150 / 1200; rows 2300 / 2400
+  groups 1151--1160 / 1200; rows 2320 / 2400
+  groups 1161--1170 / 1200; rows 2340 / 2400
+  groups 1171--1180 / 1200; rows 2360 / 2400
+  groups 1181--1190 / 1200; rows 2380 / 2400
+  groups 1191--1200 / 1200; rows 2400 / 2400
+
+EXP23H cumulative-receipt kernel gates
+  [PASS] registry_frozen                             hash 114741684 over 75 leaves
+  [PASS] matrix_complete_unique                      2400/2400 unique rows
+  [PASS] exact_matrix_coverage                       100 seeds, two graphs, six conditions and two retry modes exact
+  [PASS] paired_absolute_realizations                loss, occupancy and witness assignments pair exactly by retry mode
+  [PASS] mode_declaration_exact                      only the candidate mode enables cumulative receipt state
+  [PASS] one_hop_witness_cover                       hidden conflicts covered within the 96-byte response MTU
+  [PASS] zero_loss_effort_equivalence                attempts, bytes, DATA regions and certification match legacy exactly
+  [PASS] zero_loss_nominal_bound_exact               both modes equal the scheduled renewal bound with zero retry
+  [PASS] cumulative_safety                           zero false-valid, scheduled-collision and unsupported certificates
+  [PASS] nonblackout_terminal_liveness               1000/1000 cumulative rows terminally certified
+  [PASS] blackout_fail_silent                        permanent missing witness response never creates validity
+  [PASS] recipient_accounting_closes                 management/DATA recipient partitions and fallback bound close
+  [PASS] causal_information_contract                 zero future-random and receiver-truth reads
+  [PASS] absolute_attempt_byte_bounds                max attempt/byte ratios 0.354250/0.367429
+  [PASS] cumulative_receipt_stimulus                 every stochastic cell has same-sequence retries after transaction start
+  [PASS] fragmented_load_efficiency                  attempt reduction range -27.28% to -24.91%
+  [PASS] kernel_scope_only                           no tuning, closed-loop, promotion or submission decision
+
+EXP23H DECISION: ELCS_W_CUMULATIVE_KERNEL_VALID
+
+============================================================
+DONE : exp23h_cumulative_receipt_kernel_validation
+TIME : 9 m 11 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23h_cumulative_receipt_kernel_validation\2026-09-04_161234
+============================================================

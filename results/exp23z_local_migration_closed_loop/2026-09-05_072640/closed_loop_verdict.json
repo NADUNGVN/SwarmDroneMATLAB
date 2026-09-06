@@ -1,0 +1,11 @@
+{
+  "status": "LOCAL_MIGRATION_GRAPH_INPUT_CLOSED_LOOP_INVALID",
+  "gatesPassed": 15,
+  "gatesTotal": 16,
+  "rows": 120,
+  "developmentOnly": true,
+  "geometryCoupledToPlant": false,
+  "freshSeedEvidence": false,
+  "submissionClaimPermitted": false,
+  "next": "online_state_tube_coupling_before_confirmation"
+}

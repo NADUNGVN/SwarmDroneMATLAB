@@ -1,0 +1,13 @@
+{
+  "status": "ELCS_W_SHARP_PERIODIC_FRONTIER_SURVIVES",
+  "integrityGatesPassed": 15,
+  "integrityGatesTotal": 15,
+  "rows": 180,
+  "strictDominanceFound": false,
+  "epsilonDominanceFound": false,
+  "confidenceSupportedEpsilonDominanceFound": false,
+  "next": "loss_and_load_robustness",
+  "robustnessContinuationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

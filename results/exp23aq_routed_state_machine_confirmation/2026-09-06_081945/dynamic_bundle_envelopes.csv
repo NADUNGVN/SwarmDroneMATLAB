@@ -1,0 +1,6 @@
+bundle,registeredSlotEnvelope,maximumObservedSlots,slotHeadroom,envelopeSatisfied
+prepare,16,16,0,1
+quiescent,24,24,0,1
+evidence,112,112,0,1
+response,64,64,0,1
+commit,16,16,0,1

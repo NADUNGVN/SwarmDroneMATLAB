@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23m_coherence_geometry_stimulus_repair",
+  "runId": "2026-09-04_170157",
+  "startedAt": "2026-09-04 17:01:57",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh repaired geometry-kernel matrix with static/wide positive control and mobile limited-reach boundary cells.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23m_coherence_geometry_stimulus_repair.m",
+  "finishedAt": "2026-09-04 17:02:01",
+  "elapsedSec": 3.3233709,
+  "elapsedText": "3.3 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

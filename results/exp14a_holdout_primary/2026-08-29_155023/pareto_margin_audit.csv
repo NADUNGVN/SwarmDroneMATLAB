@@ -1,0 +1,361 @@
+scenarioLabel,family,arm,pointIndex,parameterValue,meanRMSE,meanOfferedUtil,safeFailures,divergences,margin,eligible,dominated,dominatedBy
+Clean,AoCI-inspired,aoci-1,1,0.5,0.0576073737553184,0.258061666666667,0,0,0,1,1,Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Clean,AoCI-inspired,aoci-2,2,0.75,0.0643952904600351,0.2145975,0,0,0,1,0,
+Clean,AoCI-inspired,aoci-3,3,1,0.0701479970129316,0.187425833333333,0,0,0,1,0,
+Clean,AoCI-inspired,aoci-4,4,1.5,0.0812551603844417,0.154704166666667,0,0,0,1,1,State-event/state-2
+Clean,AoCI-inspired,aoci-5,5,2,0.0915003041890135,0.1340625,0,0,0,1,1,Delayed-ACK belief/belief-5
+Clean,Causal AoI-only,aoi-1,1,0.06,0.0362559234401964,0.917636666666607,0,0,0,1,0,
+Clean,Causal AoI-only,aoi-2,2,0.09,0.0437892937985202,0.598712499999978,0,0,0,1,1,Delayed-ACK belief/belief-1
+Clean,Causal AoI-only,aoi-3,3,0.12,0.048259644629247,0.510204166666655,0,0,0,1,1,Delayed-ACK belief/belief-2
+Clean,Causal AoI-only,aoi-4,4,0.18,0.0637074245962381,0.362539166666667,0,0,0,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-2; State-event/state-1
+Clean,Causal AoI-only,aoi-5,5,0.24,0.0806595468057275,0.280631666666667,0,0,0,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; State-event/state-1; State-event/state-2
+Clean,Causal-Broadcast,proposed-1,1,0.5,0.0555951582953268,0.315793333333334,0,0,0,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-2,2,0.75,0.0562385232961427,0.2854225,0,0,0,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-3,3,1,0.0568678126695362,0.264458333333334,0,0,0,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-4,4,1.5,0.057241520549162,0.245515,0,0,0,1,0,
+Clean,Causal-Broadcast,proposed-5,5,2,0.0576696252300758,0.2416225,0,0,0,1,0,
+Clean,Delayed-ACK belief,belief-1,1,0.06,0.0380010411758173,0.533576666666653,0,0,0,1,0,
+Clean,Delayed-ACK belief,belief-2,2,0.09,0.0481067970864533,0.305339166666667,0,0,0,1,0,
+Clean,Delayed-ACK belief,belief-3,3,0.12,0.0537692080088591,0.255070833333334,0,0,0,1,0,
+Clean,Delayed-ACK belief,belief-4,4,0.18,0.0709624862586577,0.173516666666667,0,0,0,1,0,
+Clean,Delayed-ACK belief,belief-5,5,0.24,0.0885718937664448,0.132285833333333,0,0,0,1,0,
+Clean,Periodic,periodic-1,1,5,0.0870360978091676,0.156493333333333,0,0,0,1,1,AoCI-inspired/aoci-4; State-event/state-2
+Clean,Periodic,periodic-2,2,10,0.0557244657744107,0.313346666666667,0,0,0,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Periodic,periodic-3,3,12.5,0.0493135400285009,0.390616666666661,0,0,0,1,1,Delayed-ACK belief/belief-2
+Clean,Periodic,periodic-4,4,20,0.0409940224729594,0.621349999999969,0,0,0,1,1,Delayed-ACK belief/belief-1
+Clean,Periodic,periodic-5,5,25,0.0377878552170916,0.772599999999952,0,0,0,1,0,
+Clean,State-event,state-1,1,0.5,0.058916501093811,0.21612,0,0,0,1,0,
+Clean,State-event,state-2,2,0.75,0.0765459855045282,0.14222,0,0,0,1,0,
+Clean,State-event,state-3,3,1,0.0942972028662046,0.108543333333333,0,0,0,1,0,
+Clean,State-event,state-4,4,1.5,0.129436975226784,0.0724900000000001,0,0,0,1,0,
+Clean,State-event,state-5,5,2,0.171136402808751,0.0537733333333334,94,0,0,0,0,
+Clean,AoCI-inspired,aoci-1,1,0.5,0.0576073737553184,0.258061666666667,0,0,0.005,1,1,Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Clean,AoCI-inspired,aoci-2,2,0.75,0.0643952904600351,0.2145975,0,0,0.005,1,0,
+Clean,AoCI-inspired,aoci-3,3,1,0.0701479970129316,0.187425833333333,0,0,0.005,1,0,
+Clean,AoCI-inspired,aoci-4,4,1.5,0.0812551603844417,0.154704166666667,0,0,0.005,1,1,State-event/state-2
+Clean,AoCI-inspired,aoci-5,5,2,0.0915003041890135,0.1340625,0,0,0.005,1,1,Delayed-ACK belief/belief-5
+Clean,Causal AoI-only,aoi-1,1,0.06,0.0362559234401964,0.917636666666607,0,0,0.005,1,0,
+Clean,Causal AoI-only,aoi-2,2,0.09,0.0437892937985202,0.598712499999978,0,0,0.005,1,1,Delayed-ACK belief/belief-1
+Clean,Causal AoI-only,aoi-3,3,0.12,0.048259644629247,0.510204166666655,0,0,0.005,1,0,
+Clean,Causal AoI-only,aoi-4,4,0.18,0.0637074245962381,0.362539166666667,0,0,0.005,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-2; State-event/state-1
+Clean,Causal AoI-only,aoi-5,5,0.24,0.0806595468057275,0.280631666666667,0,0,0.005,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; State-event/state-1; State-event/state-2
+Clean,Causal-Broadcast,proposed-1,1,0.5,0.0555951582953268,0.315793333333334,0,0,0.005,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-2,2,0.75,0.0562385232961427,0.2854225,0,0,0.005,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-3,3,1,0.0568678126695362,0.264458333333334,0,0,0.005,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-4,4,1.5,0.057241520549162,0.245515,0,0,0.005,1,0,
+Clean,Causal-Broadcast,proposed-5,5,2,0.0576696252300758,0.2416225,0,0,0.005,1,0,
+Clean,Delayed-ACK belief,belief-1,1,0.06,0.0380010411758173,0.533576666666653,0,0,0.005,1,0,
+Clean,Delayed-ACK belief,belief-2,2,0.09,0.0481067970864533,0.305339166666667,0,0,0.005,1,0,
+Clean,Delayed-ACK belief,belief-3,3,0.12,0.0537692080088591,0.255070833333334,0,0,0.005,1,0,
+Clean,Delayed-ACK belief,belief-4,4,0.18,0.0709624862586577,0.173516666666667,0,0,0.005,1,0,
+Clean,Delayed-ACK belief,belief-5,5,0.24,0.0885718937664448,0.132285833333333,0,0,0.005,1,0,
+Clean,Periodic,periodic-1,1,5,0.0870360978091676,0.156493333333333,0,0,0.005,1,1,AoCI-inspired/aoci-4; State-event/state-2
+Clean,Periodic,periodic-2,2,10,0.0557244657744107,0.313346666666667,0,0,0.005,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Periodic,periodic-3,3,12.5,0.0493135400285009,0.390616666666661,0,0,0.005,1,1,Delayed-ACK belief/belief-2
+Clean,Periodic,periodic-4,4,20,0.0409940224729594,0.621349999999969,0,0,0.005,1,1,Delayed-ACK belief/belief-1
+Clean,Periodic,periodic-5,5,25,0.0377878552170916,0.772599999999952,0,0,0.005,1,0,
+Clean,State-event,state-1,1,0.5,0.058916501093811,0.21612,0,0,0.005,1,0,
+Clean,State-event,state-2,2,0.75,0.0765459855045282,0.14222,0,0,0.005,1,0,
+Clean,State-event,state-3,3,1,0.0942972028662046,0.108543333333333,0,0,0.005,1,0,
+Clean,State-event,state-4,4,1.5,0.129436975226784,0.0724900000000001,0,0,0.005,1,0,
+Clean,State-event,state-5,5,2,0.171136402808751,0.0537733333333334,94,0,0.005,0,0,
+Clean,AoCI-inspired,aoci-1,1,0.5,0.0576073737553184,0.258061666666667,0,0,0.01,1,1,Delayed-ACK belief/belief-3
+Clean,AoCI-inspired,aoci-2,2,0.75,0.0643952904600351,0.2145975,0,0,0.01,1,0,
+Clean,AoCI-inspired,aoci-3,3,1,0.0701479970129316,0.187425833333333,0,0,0.01,1,0,
+Clean,AoCI-inspired,aoci-4,4,1.5,0.0812551603844417,0.154704166666667,0,0,0.01,1,1,State-event/state-2
+Clean,AoCI-inspired,aoci-5,5,2,0.0915003041890135,0.1340625,0,0,0.01,1,1,Delayed-ACK belief/belief-5
+Clean,Causal AoI-only,aoi-1,1,0.06,0.0362559234401964,0.917636666666607,0,0,0.01,1,0,
+Clean,Causal AoI-only,aoi-2,2,0.09,0.0437892937985202,0.598712499999978,0,0,0.01,1,1,Delayed-ACK belief/belief-1
+Clean,Causal AoI-only,aoi-3,3,0.12,0.048259644629247,0.510204166666655,0,0,0.01,1,0,
+Clean,Causal AoI-only,aoi-4,4,0.18,0.0637074245962381,0.362539166666667,0,0,0.01,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-2; State-event/state-1
+Clean,Causal AoI-only,aoi-5,5,0.24,0.0806595468057275,0.280631666666667,0,0,0.01,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; State-event/state-1; State-event/state-2
+Clean,Causal-Broadcast,proposed-1,1,0.5,0.0555951582953268,0.315793333333334,0,0,0.01,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-2,2,0.75,0.0562385232961427,0.2854225,0,0,0.01,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-3,3,1,0.0568678126695362,0.264458333333334,0,0,0.01,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-4,4,1.5,0.057241520549162,0.245515,0,0,0.01,1,0,
+Clean,Causal-Broadcast,proposed-5,5,2,0.0576696252300758,0.2416225,0,0,0.01,1,0,
+Clean,Delayed-ACK belief,belief-1,1,0.06,0.0380010411758173,0.533576666666653,0,0,0.01,1,0,
+Clean,Delayed-ACK belief,belief-2,2,0.09,0.0481067970864533,0.305339166666667,0,0,0.01,1,0,
+Clean,Delayed-ACK belief,belief-3,3,0.12,0.0537692080088591,0.255070833333334,0,0,0.01,1,0,
+Clean,Delayed-ACK belief,belief-4,4,0.18,0.0709624862586577,0.173516666666667,0,0,0.01,1,0,
+Clean,Delayed-ACK belief,belief-5,5,0.24,0.0885718937664448,0.132285833333333,0,0,0.01,1,0,
+Clean,Periodic,periodic-1,1,5,0.0870360978091676,0.156493333333333,0,0,0.01,1,1,AoCI-inspired/aoci-4; State-event/state-2
+Clean,Periodic,periodic-2,2,10,0.0557244657744107,0.313346666666667,0,0,0.01,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Periodic,periodic-3,3,12.5,0.0493135400285009,0.390616666666661,0,0,0.01,1,1,Delayed-ACK belief/belief-2
+Clean,Periodic,periodic-4,4,20,0.0409940224729594,0.621349999999969,0,0,0.01,1,1,Delayed-ACK belief/belief-1
+Clean,Periodic,periodic-5,5,25,0.0377878552170916,0.772599999999952,0,0,0.01,1,0,
+Clean,State-event,state-1,1,0.5,0.058916501093811,0.21612,0,0,0.01,1,0,
+Clean,State-event,state-2,2,0.75,0.0765459855045282,0.14222,0,0,0.01,1,0,
+Clean,State-event,state-3,3,1,0.0942972028662046,0.108543333333333,0,0,0.01,1,0,
+Clean,State-event,state-4,4,1.5,0.129436975226784,0.0724900000000001,0,0,0.01,1,0,
+Clean,State-event,state-5,5,2,0.171136402808751,0.0537733333333334,94,0,0.01,0,0,
+Clean,AoCI-inspired,aoci-1,1,0.5,0.0576073737553184,0.258061666666667,0,0,0.02,1,0,
+Clean,AoCI-inspired,aoci-2,2,0.75,0.0643952904600351,0.2145975,0,0,0.02,1,0,
+Clean,AoCI-inspired,aoci-3,3,1,0.0701479970129316,0.187425833333333,0,0,0.02,1,0,
+Clean,AoCI-inspired,aoci-4,4,1.5,0.0812551603844417,0.154704166666667,0,0,0.02,1,1,State-event/state-2
+Clean,AoCI-inspired,aoci-5,5,2,0.0915003041890135,0.1340625,0,0,0.02,1,0,
+Clean,Causal AoI-only,aoi-1,1,0.06,0.0362559234401964,0.917636666666607,0,0,0.02,1,0,
+Clean,Causal AoI-only,aoi-2,2,0.09,0.0437892937985202,0.598712499999978,0,0,0.02,1,1,Delayed-ACK belief/belief-1
+Clean,Causal AoI-only,aoi-3,3,0.12,0.048259644629247,0.510204166666655,0,0,0.02,1,0,
+Clean,Causal AoI-only,aoi-4,4,0.18,0.0637074245962381,0.362539166666667,0,0,0.02,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-2; State-event/state-1
+Clean,Causal AoI-only,aoi-5,5,0.24,0.0806595468057275,0.280631666666667,0,0,0.02,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; State-event/state-1; State-event/state-2
+Clean,Causal-Broadcast,proposed-1,1,0.5,0.0555951582953268,0.315793333333334,0,0,0.02,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-2,2,0.75,0.0562385232961427,0.2854225,0,0,0.02,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-3,3,1,0.0568678126695362,0.264458333333334,0,0,0.02,1,1,Delayed-ACK belief/belief-3
+Clean,Causal-Broadcast,proposed-4,4,1.5,0.057241520549162,0.245515,0,0,0.02,1,0,
+Clean,Causal-Broadcast,proposed-5,5,2,0.0576696252300758,0.2416225,0,0,0.02,1,0,
+Clean,Delayed-ACK belief,belief-1,1,0.06,0.0380010411758173,0.533576666666653,0,0,0.02,1,0,
+Clean,Delayed-ACK belief,belief-2,2,0.09,0.0481067970864533,0.305339166666667,0,0,0.02,1,0,
+Clean,Delayed-ACK belief,belief-3,3,0.12,0.0537692080088591,0.255070833333334,0,0,0.02,1,0,
+Clean,Delayed-ACK belief,belief-4,4,0.18,0.0709624862586577,0.173516666666667,0,0,0.02,1,0,
+Clean,Delayed-ACK belief,belief-5,5,0.24,0.0885718937664448,0.132285833333333,0,0,0.02,1,0,
+Clean,Periodic,periodic-1,1,5,0.0870360978091676,0.156493333333333,0,0,0.02,1,1,State-event/state-2
+Clean,Periodic,periodic-2,2,10,0.0557244657744107,0.313346666666667,0,0,0.02,1,1,Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3
+Clean,Periodic,periodic-3,3,12.5,0.0493135400285009,0.390616666666661,0,0,0.02,1,1,Delayed-ACK belief/belief-2
+Clean,Periodic,periodic-4,4,20,0.0409940224729594,0.621349999999969,0,0,0.02,1,1,Delayed-ACK belief/belief-1
+Clean,Periodic,periodic-5,5,25,0.0377878552170916,0.772599999999952,0,0,0.02,1,0,
+Clean,State-event,state-1,1,0.5,0.058916501093811,0.21612,0,0,0.02,1,0,
+Clean,State-event,state-2,2,0.75,0.0765459855045282,0.14222,0,0,0.02,1,0,
+Clean,State-event,state-3,3,1,0.0942972028662046,0.108543333333333,0,0,0.02,1,0,
+Clean,State-event,state-4,4,1.5,0.129436975226784,0.0724900000000001,0,0,0.02,1,0,
+Clean,State-event,state-5,5,2,0.171136402808751,0.0537733333333334,94,0,0.02,0,0,
+Moderate,AoCI-inspired,aoci-1,1,0.5,0.0589761688254105,0.288916666666667,0,0,0,1,1,Delayed-ACK belief/belief-3
+Moderate,AoCI-inspired,aoci-2,2,0.75,0.0663458598494945,0.2390125,0,0,0,1,0,
+Moderate,AoCI-inspired,aoci-3,3,1,0.0724491278007336,0.20639,0,0,0,1,0,
+Moderate,AoCI-inspired,aoci-4,4,1.5,0.0836628139386204,0.170573333333333,0,0,0,1,0,
+Moderate,AoCI-inspired,aoci-5,5,2,0.0942191062146018,0.147065,0,0,0,1,1,Delayed-ACK belief/belief-5; State-event/state-2
+Moderate,Causal AoI-only,aoi-1,1,0.06,0.0378612166541653,0.968331666666601,0,0,0,1,0,
+Moderate,Causal AoI-only,aoi-2,2,0.09,0.0437960207271643,0.673791666666636,0,0,0,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-3,3,0.12,0.0479263996707892,0.58182999999998,0,0,0,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-4,4,0.18,0.0626129118172969,0.415554999999998,0,0,0,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-2; Periodic/periodic-3
+Moderate,Causal AoI-only,aoi-5,5,0.24,0.0790950076414476,0.32315,0,0,0,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; Periodic/periodic-2; State-event/state-1
+Moderate,Causal-Broadcast,proposed-1,1,0.5,0.0551403311631276,0.361978333333334,0,0,0,1,1,Delayed-ACK belief/belief-2
+Moderate,Causal-Broadcast,proposed-2,2,0.75,0.0560343048098543,0.323256666666667,0,0,0,1,1,Delayed-ACK belief/belief-2
+Moderate,Causal-Broadcast,proposed-3,3,1,0.0579722497542287,0.288950833333334,0,0,0,1,1,Delayed-ACK belief/belief-3
+Moderate,Causal-Broadcast,proposed-4,4,1.5,0.0599566425978016,0.258160833333334,0,0,0,1,0,
+Moderate,Causal-Broadcast,proposed-5,5,2,0.0627294430397919,0.2437075,0,0,0,1,0,
+Moderate,Delayed-ACK belief,belief-1,1,0.06,0.040549255032983,0.540217499999985,0,0,0,1,0,
+Moderate,Delayed-ACK belief,belief-2,2,0.09,0.0505408408242811,0.32318,0,0,0,1,0,
+Moderate,Delayed-ACK belief,belief-3,3,0.12,0.0569980791235826,0.262043333333334,0,0,0,1,0,
+Moderate,Delayed-ACK belief,belief-4,4,0.18,0.0750131776626963,0.175986666666667,0,0,0,1,0,
+Moderate,Delayed-ACK belief,belief-5,5,0.24,0.0942163977381669,0.132024166666667,0,0,0,1,0,
+Moderate,Periodic,periodic-1,1,5,0.100597987630611,0.156493333333333,0,0,0,1,1,AoCI-inspired/aoci-5; Delayed-ACK belief/belief-5; State-event/state-2
+Moderate,Periodic,periodic-2,2,10,0.0620348909298704,0.313346666666667,0,0,0,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Moderate,Periodic,periodic-3,3,12.5,0.0543956671576785,0.390616666666661,0,0,0,1,1,Delayed-ACK belief/belief-2
+Moderate,Periodic,periodic-4,4,20,0.0441368200688701,0.621349999999969,0,0,0,1,1,Delayed-ACK belief/belief-1
+Moderate,Periodic,periodic-5,5,25,0.040388932248034,0.772599999999952,0,0,0,1,0,
+Moderate,State-event,state-1,1,0.5,0.0672200087591462,0.21415,0,0,0,1,0,
+Moderate,State-event,state-2,2,0.75,0.0882370300739682,0.143206666666667,0,0,0,1,0,
+Moderate,State-event,state-3,3,1,0.10978295929893,0.10896,0,0,0,1,0,
+Moderate,State-event,state-4,4,1.5,0.155672444153087,0.07155,47,0,0,0,0,
+Moderate,State-event,state-5,5,2,0.196752552668475,0.0539966666666667,100,0,0,0,0,
+Moderate,AoCI-inspired,aoci-1,1,0.5,0.0589761688254105,0.288916666666667,0,0,0.005,1,1,Delayed-ACK belief/belief-3
+Moderate,AoCI-inspired,aoci-2,2,0.75,0.0663458598494945,0.2390125,0,0,0.005,1,0,
+Moderate,AoCI-inspired,aoci-3,3,1,0.0724491278007336,0.20639,0,0,0.005,1,0,
+Moderate,AoCI-inspired,aoci-4,4,1.5,0.0836628139386204,0.170573333333333,0,0,0.005,1,0,
+Moderate,AoCI-inspired,aoci-5,5,2,0.0942191062146018,0.147065,0,0,0.005,1,1,State-event/state-2
+Moderate,Causal AoI-only,aoi-1,1,0.06,0.0378612166541653,0.968331666666601,0,0,0.005,1,0,
+Moderate,Causal AoI-only,aoi-2,2,0.09,0.0437960207271643,0.673791666666636,0,0,0.005,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-3,3,0.12,0.0479263996707892,0.58182999999998,0,0,0.005,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-4,4,0.18,0.0626129118172969,0.415554999999998,0,0,0.005,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-2; Periodic/periodic-3
+Moderate,Causal AoI-only,aoi-5,5,0.24,0.0790950076414476,0.32315,0,0,0.005,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; Periodic/periodic-2; State-event/state-1
+Moderate,Causal-Broadcast,proposed-1,1,0.5,0.0551403311631276,0.361978333333334,0,0,0.005,1,1,Delayed-ACK belief/belief-2
+Moderate,Causal-Broadcast,proposed-2,2,0.75,0.0560343048098543,0.323256666666667,0,0,0.005,1,0,
+Moderate,Causal-Broadcast,proposed-3,3,1,0.0579722497542287,0.288950833333334,0,0,0.005,1,1,Delayed-ACK belief/belief-3
+Moderate,Causal-Broadcast,proposed-4,4,1.5,0.0599566425978016,0.258160833333334,0,0,0.005,1,0,
+Moderate,Causal-Broadcast,proposed-5,5,2,0.0627294430397919,0.2437075,0,0,0.005,1,0,
+Moderate,Delayed-ACK belief,belief-1,1,0.06,0.040549255032983,0.540217499999985,0,0,0.005,1,0,
+Moderate,Delayed-ACK belief,belief-2,2,0.09,0.0505408408242811,0.32318,0,0,0.005,1,0,
+Moderate,Delayed-ACK belief,belief-3,3,0.12,0.0569980791235826,0.262043333333334,0,0,0.005,1,0,
+Moderate,Delayed-ACK belief,belief-4,4,0.18,0.0750131776626963,0.175986666666667,0,0,0.005,1,0,
+Moderate,Delayed-ACK belief,belief-5,5,0.24,0.0942163977381669,0.132024166666667,0,0,0.005,1,0,
+Moderate,Periodic,periodic-1,1,5,0.100597987630611,0.156493333333333,0,0,0.005,1,1,AoCI-inspired/aoci-5; Delayed-ACK belief/belief-5; State-event/state-2
+Moderate,Periodic,periodic-2,2,10,0.0620348909298704,0.313346666666667,0,0,0.005,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Moderate,Periodic,periodic-3,3,12.5,0.0543956671576785,0.390616666666661,0,0,0.005,1,1,Delayed-ACK belief/belief-2
+Moderate,Periodic,periodic-4,4,20,0.0441368200688701,0.621349999999969,0,0,0.005,1,1,Delayed-ACK belief/belief-1
+Moderate,Periodic,periodic-5,5,25,0.040388932248034,0.772599999999952,0,0,0.005,1,0,
+Moderate,State-event,state-1,1,0.5,0.0672200087591462,0.21415,0,0,0.005,1,0,
+Moderate,State-event,state-2,2,0.75,0.0882370300739682,0.143206666666667,0,0,0.005,1,0,
+Moderate,State-event,state-3,3,1,0.10978295929893,0.10896,0,0,0.005,1,0,
+Moderate,State-event,state-4,4,1.5,0.155672444153087,0.07155,47,0,0.005,0,0,
+Moderate,State-event,state-5,5,2,0.196752552668475,0.0539966666666667,100,0,0.005,0,0,
+Moderate,AoCI-inspired,aoci-1,1,0.5,0.0589761688254105,0.288916666666667,0,0,0.01,1,1,Delayed-ACK belief/belief-3
+Moderate,AoCI-inspired,aoci-2,2,0.75,0.0663458598494945,0.2390125,0,0,0.01,1,0,
+Moderate,AoCI-inspired,aoci-3,3,1,0.0724491278007336,0.20639,0,0,0.01,1,0,
+Moderate,AoCI-inspired,aoci-4,4,1.5,0.0836628139386204,0.170573333333333,0,0,0.01,1,0,
+Moderate,AoCI-inspired,aoci-5,5,2,0.0942191062146018,0.147065,0,0,0.01,1,1,State-event/state-2
+Moderate,Causal AoI-only,aoi-1,1,0.06,0.0378612166541653,0.968331666666601,0,0,0.01,1,0,
+Moderate,Causal AoI-only,aoi-2,2,0.09,0.0437960207271643,0.673791666666636,0,0,0.01,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-3,3,0.12,0.0479263996707892,0.58182999999998,0,0,0.01,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-4,4,0.18,0.0626129118172969,0.415554999999998,0,0,0.01,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-3
+Moderate,Causal AoI-only,aoi-5,5,0.24,0.0790950076414476,0.32315,0,0,0.01,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; Periodic/periodic-2; State-event/state-1
+Moderate,Causal-Broadcast,proposed-1,1,0.5,0.0551403311631276,0.361978333333334,0,0,0.01,1,1,Delayed-ACK belief/belief-2
+Moderate,Causal-Broadcast,proposed-2,2,0.75,0.0560343048098543,0.323256666666667,0,0,0.01,1,0,
+Moderate,Causal-Broadcast,proposed-3,3,1,0.0579722497542287,0.288950833333334,0,0,0.01,1,1,Delayed-ACK belief/belief-3
+Moderate,Causal-Broadcast,proposed-4,4,1.5,0.0599566425978016,0.258160833333334,0,0,0.01,1,0,
+Moderate,Causal-Broadcast,proposed-5,5,2,0.0627294430397919,0.2437075,0,0,0.01,1,0,
+Moderate,Delayed-ACK belief,belief-1,1,0.06,0.040549255032983,0.540217499999985,0,0,0.01,1,0,
+Moderate,Delayed-ACK belief,belief-2,2,0.09,0.0505408408242811,0.32318,0,0,0.01,1,0,
+Moderate,Delayed-ACK belief,belief-3,3,0.12,0.0569980791235826,0.262043333333334,0,0,0.01,1,0,
+Moderate,Delayed-ACK belief,belief-4,4,0.18,0.0750131776626963,0.175986666666667,0,0,0.01,1,0,
+Moderate,Delayed-ACK belief,belief-5,5,0.24,0.0942163977381669,0.132024166666667,0,0,0.01,1,0,
+Moderate,Periodic,periodic-1,1,5,0.100597987630611,0.156493333333333,0,0,0.01,1,1,AoCI-inspired/aoci-5; Delayed-ACK belief/belief-5; State-event/state-2
+Moderate,Periodic,periodic-2,2,10,0.0620348909298704,0.313346666666667,0,0,0.01,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Moderate,Periodic,periodic-3,3,12.5,0.0543956671576785,0.390616666666661,0,0,0.01,1,1,Delayed-ACK belief/belief-2
+Moderate,Periodic,periodic-4,4,20,0.0441368200688701,0.621349999999969,0,0,0.01,1,1,Delayed-ACK belief/belief-1
+Moderate,Periodic,periodic-5,5,25,0.040388932248034,0.772599999999952,0,0,0.01,1,0,
+Moderate,State-event,state-1,1,0.5,0.0672200087591462,0.21415,0,0,0.01,1,0,
+Moderate,State-event,state-2,2,0.75,0.0882370300739682,0.143206666666667,0,0,0.01,1,0,
+Moderate,State-event,state-3,3,1,0.10978295929893,0.10896,0,0,0.01,1,0,
+Moderate,State-event,state-4,4,1.5,0.155672444153087,0.07155,47,0,0.01,0,0,
+Moderate,State-event,state-5,5,2,0.196752552668475,0.0539966666666667,100,0,0.01,0,0,
+Moderate,AoCI-inspired,aoci-1,1,0.5,0.0589761688254105,0.288916666666667,0,0,0.02,1,1,Delayed-ACK belief/belief-3
+Moderate,AoCI-inspired,aoci-2,2,0.75,0.0663458598494945,0.2390125,0,0,0.02,1,0,
+Moderate,AoCI-inspired,aoci-3,3,1,0.0724491278007336,0.20639,0,0,0.02,1,0,
+Moderate,AoCI-inspired,aoci-4,4,1.5,0.0836628139386204,0.170573333333333,0,0,0.02,1,0,
+Moderate,AoCI-inspired,aoci-5,5,2,0.0942191062146018,0.147065,0,0,0.02,1,1,State-event/state-2
+Moderate,Causal AoI-only,aoi-1,1,0.06,0.0378612166541653,0.968331666666601,0,0,0.02,1,0,
+Moderate,Causal AoI-only,aoi-2,2,0.09,0.0437960207271643,0.673791666666636,0,0,0.02,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-3,3,0.12,0.0479263996707892,0.58182999999998,0,0,0.02,1,1,Delayed-ACK belief/belief-1
+Moderate,Causal AoI-only,aoi-4,4,0.18,0.0626129118172969,0.415554999999998,0,0,0.02,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-3
+Moderate,Causal AoI-only,aoi-5,5,0.24,0.0790950076414476,0.32315,0,0,0.02,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3; Delayed-ACK belief/belief-4; Periodic/periodic-2; State-event/state-1
+Moderate,Causal-Broadcast,proposed-1,1,0.5,0.0551403311631276,0.361978333333334,0,0,0.02,1,1,Delayed-ACK belief/belief-2
+Moderate,Causal-Broadcast,proposed-2,2,0.75,0.0560343048098543,0.323256666666667,0,0,0.02,1,0,
+Moderate,Causal-Broadcast,proposed-3,3,1,0.0579722497542287,0.288950833333334,0,0,0.02,1,0,
+Moderate,Causal-Broadcast,proposed-4,4,1.5,0.0599566425978016,0.258160833333334,0,0,0.02,1,0,
+Moderate,Causal-Broadcast,proposed-5,5,2,0.0627294430397919,0.2437075,0,0,0.02,1,0,
+Moderate,Delayed-ACK belief,belief-1,1,0.06,0.040549255032983,0.540217499999985,0,0,0.02,1,0,
+Moderate,Delayed-ACK belief,belief-2,2,0.09,0.0505408408242811,0.32318,0,0,0.02,1,0,
+Moderate,Delayed-ACK belief,belief-3,3,0.12,0.0569980791235826,0.262043333333334,0,0,0.02,1,0,
+Moderate,Delayed-ACK belief,belief-4,4,0.18,0.0750131776626963,0.175986666666667,0,0,0.02,1,0,
+Moderate,Delayed-ACK belief,belief-5,5,0.24,0.0942163977381669,0.132024166666667,0,0,0.02,1,0,
+Moderate,Periodic,periodic-1,1,5,0.100597987630611,0.156493333333333,0,0,0.02,1,1,AoCI-inspired/aoci-5; Delayed-ACK belief/belief-5; State-event/state-2
+Moderate,Periodic,periodic-2,2,10,0.0620348909298704,0.313346666666667,0,0,0.02,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Moderate,Periodic,periodic-3,3,12.5,0.0543956671576785,0.390616666666661,0,0,0.02,1,1,Delayed-ACK belief/belief-2
+Moderate,Periodic,periodic-4,4,20,0.0441368200688701,0.621349999999969,0,0,0.02,1,1,Delayed-ACK belief/belief-1
+Moderate,Periodic,periodic-5,5,25,0.040388932248034,0.772599999999952,0,0,0.02,1,0,
+Moderate,State-event,state-1,1,0.5,0.0672200087591462,0.21415,0,0,0.02,1,0,
+Moderate,State-event,state-2,2,0.75,0.0882370300739682,0.143206666666667,0,0,0.02,1,0,
+Moderate,State-event,state-3,3,1,0.10978295929893,0.10896,0,0,0.02,1,0,
+Moderate,State-event,state-4,4,1.5,0.155672444153087,0.07155,47,0,0.02,0,0,
+Moderate,State-event,state-5,5,2,0.196752552668475,0.0539966666666667,100,0,0.02,0,0,
+Stressed,AoCI-inspired,aoci-1,1,0.5,0.0650178987146682,0.373295,0,0,0,1,1,Delayed-ACK belief/belief-2
+Stressed,AoCI-inspired,aoci-2,2,0.75,0.0738978027579201,0.301083333333334,0,0,0,1,1,Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Stressed,AoCI-inspired,aoci-3,3,1,0.0810485937395659,0.25796,0,0,0,1,0,
+Stressed,AoCI-inspired,aoci-4,4,1.5,0.0932759871879324,0.208258333333333,0,0,0,1,0,
+Stressed,AoCI-inspired,aoci-5,5,2,0.105803001145953,0.179686666666667,0,0,0,1,0,
+Stressed,Causal AoI-only,aoi-1,1,0.06,0.0456440894827451,1.04295333333326,0,0,0,1,0,
+Stressed,Causal AoI-only,aoi-2,2,0.09,0.048021145835332,0.869089999999946,0,0,0,1,0,
+Stressed,Causal AoI-only,aoi-3,3,0.12,0.0506909960224518,0.785584166666622,0,0,0,1,1,Periodic/periodic-5
+Stressed,Causal AoI-only,aoi-4,4,0.18,0.0620498181638473,0.593683333333311,0,0,0,1,1,Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Delayed-ACK belief/belief-1
+Stressed,Causal AoI-only,aoi-5,5,0.24,0.07641588975254,0.474389166666657,0,0,0,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-3
+Stressed,Causal-Broadcast,proposed-1,1,0.5,0.0581828415892347,0.490536666666655,0,0,0,1,0,
+Stressed,Causal-Broadcast,proposed-2,2,0.75,0.0600814729232532,0.432950833333328,0,0,0,1,0,
+Stressed,Causal-Broadcast,proposed-3,3,1,0.0651453377328109,0.359801666666667,0,0,0,1,1,Delayed-ACK belief/belief-2
+Stressed,Causal-Broadcast,proposed-4,4,1.5,0.071959812372049,0.299773333333334,0,0,0,1,0,
+Stressed,Causal-Broadcast,proposed-5,5,2,0.0809674044253973,0.25938,0,0,0,1,0,
+Stressed,Delayed-ACK belief,belief-1,1,0.06,0.050844079733906,0.542389999999983,0,0,0,1,0,
+Stressed,Delayed-ACK belief,belief-2,2,0.09,0.0639909846640532,0.331830833333334,0,0,0,1,0,
+Stressed,Delayed-ACK belief,belief-3,3,0.12,0.0738064302078477,0.264396666666667,0,0,0,1,0,
+Stressed,Delayed-ACK belief,belief-4,4,0.18,0.0968377758343938,0.181125,0,0,0,1,0,
+Stressed,Delayed-ACK belief,belief-5,5,0.24,0.121981485809309,0.135879166666667,4,0,0,0,0,
+Stressed,Periodic,periodic-1,1,5,0.13906565437729,0.156493333333333,14,0,0,0,0,
+Stressed,Periodic,periodic-2,2,10,0.0819779421982812,0.313346666666667,0,0,0,1,1,AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3
+Stressed,Periodic,periodic-3,3,12.5,0.0708425241674023,0.390616666666661,0,0,0,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Delayed-ACK belief/belief-2
+Stressed,Periodic,periodic-4,4,20,0.0553482699723368,0.621349999999969,0,0,0,1,1,Delayed-ACK belief/belief-1
+Stressed,Periodic,periodic-5,5,25,0.0499096885288171,0.772599999999952,0,0,0,1,0,
+Stressed,State-event,state-1,1,0.5,0.091529548819308,0.214066666666667,0,0,0,1,0,
+Stressed,State-event,state-2,2,0.75,0.122672014099799,0.142986666666667,2,0,0,0,0,
+Stressed,State-event,state-3,3,1,0.159344456038532,0.10751,62,0,0,0,0,
+Stressed,State-event,state-4,4,1.5,0.229201109360031,0.0700233333333334,100,0,0,0,0,
+Stressed,State-event,state-5,5,2,0.281112508206066,0.05395,100,0,0,0,0,
+Stressed,AoCI-inspired,aoci-1,1,0.5,0.0650178987146682,0.373295,0,0,0.005,1,1,Delayed-ACK belief/belief-2
+Stressed,AoCI-inspired,aoci-2,2,0.75,0.0738978027579201,0.301083333333334,0,0,0.005,1,0,
+Stressed,AoCI-inspired,aoci-3,3,1,0.0810485937395659,0.25796,0,0,0.005,1,0,
+Stressed,AoCI-inspired,aoci-4,4,1.5,0.0932759871879324,0.208258333333333,0,0,0.005,1,0,
+Stressed,AoCI-inspired,aoci-5,5,2,0.105803001145953,0.179686666666667,0,0,0.005,1,0,
+Stressed,Causal AoI-only,aoi-1,1,0.06,0.0456440894827451,1.04295333333326,0,0,0.005,1,0,
+Stressed,Causal AoI-only,aoi-2,2,0.09,0.048021145835332,0.869089999999946,0,0,0.005,1,0,
+Stressed,Causal AoI-only,aoi-3,3,0.12,0.0506909960224518,0.785584166666622,0,0,0.005,1,1,Periodic/periodic-5
+Stressed,Causal AoI-only,aoi-4,4,0.18,0.0620498181638473,0.593683333333311,0,0,0.005,1,1,Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Delayed-ACK belief/belief-1
+Stressed,Causal AoI-only,aoi-5,5,0.24,0.07641588975254,0.474389166666657,0,0,0.005,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-3
+Stressed,Causal-Broadcast,proposed-1,1,0.5,0.0581828415892347,0.490536666666655,0,0,0.005,1,0,
+Stressed,Causal-Broadcast,proposed-2,2,0.75,0.0600814729232532,0.432950833333328,0,0,0.005,1,0,
+Stressed,Causal-Broadcast,proposed-3,3,1,0.0651453377328109,0.359801666666667,0,0,0.005,1,1,Delayed-ACK belief/belief-2
+Stressed,Causal-Broadcast,proposed-4,4,1.5,0.071959812372049,0.299773333333334,0,0,0.005,1,0,
+Stressed,Causal-Broadcast,proposed-5,5,2,0.0809674044253973,0.25938,0,0,0.005,1,0,
+Stressed,Delayed-ACK belief,belief-1,1,0.06,0.050844079733906,0.542389999999983,0,0,0.005,1,0,
+Stressed,Delayed-ACK belief,belief-2,2,0.09,0.0639909846640532,0.331830833333334,0,0,0.005,1,0,
+Stressed,Delayed-ACK belief,belief-3,3,0.12,0.0738064302078477,0.264396666666667,0,0,0.005,1,0,
+Stressed,Delayed-ACK belief,belief-4,4,0.18,0.0968377758343938,0.181125,0,0,0.005,1,0,
+Stressed,Delayed-ACK belief,belief-5,5,0.24,0.121981485809309,0.135879166666667,4,0,0.005,0,0,
+Stressed,Periodic,periodic-1,1,5,0.13906565437729,0.156493333333333,14,0,0.005,0,0,
+Stressed,Periodic,periodic-2,2,10,0.0819779421982812,0.313346666666667,0,0,0.005,1,1,AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3
+Stressed,Periodic,periodic-3,3,12.5,0.0708425241674023,0.390616666666661,0,0,0.005,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Delayed-ACK belief/belief-2
+Stressed,Periodic,periodic-4,4,20,0.0553482699723368,0.621349999999969,0,0,0.005,1,1,Delayed-ACK belief/belief-1
+Stressed,Periodic,periodic-5,5,25,0.0499096885288171,0.772599999999952,0,0,0.005,1,0,
+Stressed,State-event,state-1,1,0.5,0.091529548819308,0.214066666666667,0,0,0.005,1,0,
+Stressed,State-event,state-2,2,0.75,0.122672014099799,0.142986666666667,2,0,0.005,0,0,
+Stressed,State-event,state-3,3,1,0.159344456038532,0.10751,62,0,0.005,0,0,
+Stressed,State-event,state-4,4,1.5,0.229201109360031,0.0700233333333334,100,0,0.005,0,0,
+Stressed,State-event,state-5,5,2,0.281112508206066,0.05395,100,0,0.005,0,0,
+Stressed,AoCI-inspired,aoci-1,1,0.5,0.0650178987146682,0.373295,0,0,0.01,1,1,Delayed-ACK belief/belief-2
+Stressed,AoCI-inspired,aoci-2,2,0.75,0.0738978027579201,0.301083333333334,0,0,0.01,1,0,
+Stressed,AoCI-inspired,aoci-3,3,1,0.0810485937395659,0.25796,0,0,0.01,1,0,
+Stressed,AoCI-inspired,aoci-4,4,1.5,0.0932759871879324,0.208258333333333,0,0,0.01,1,0,
+Stressed,AoCI-inspired,aoci-5,5,2,0.105803001145953,0.179686666666667,0,0,0.01,1,0,
+Stressed,Causal AoI-only,aoi-1,1,0.06,0.0456440894827451,1.04295333333326,0,0,0.01,1,0,
+Stressed,Causal AoI-only,aoi-2,2,0.09,0.048021145835332,0.869089999999946,0,0,0.01,1,0,
+Stressed,Causal AoI-only,aoi-3,3,0.12,0.0506909960224518,0.785584166666622,0,0,0.01,1,1,Periodic/periodic-5
+Stressed,Causal AoI-only,aoi-4,4,0.18,0.0620498181638473,0.593683333333311,0,0,0.01,1,1,Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Delayed-ACK belief/belief-1
+Stressed,Causal AoI-only,aoi-5,5,0.24,0.07641588975254,0.474389166666657,0,0,0.01,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-3
+Stressed,Causal-Broadcast,proposed-1,1,0.5,0.0581828415892347,0.490536666666655,0,0,0.01,1,0,
+Stressed,Causal-Broadcast,proposed-2,2,0.75,0.0600814729232532,0.432950833333328,0,0,0.01,1,0,
+Stressed,Causal-Broadcast,proposed-3,3,1,0.0651453377328109,0.359801666666667,0,0,0.01,1,1,Delayed-ACK belief/belief-2
+Stressed,Causal-Broadcast,proposed-4,4,1.5,0.071959812372049,0.299773333333334,0,0,0.01,1,0,
+Stressed,Causal-Broadcast,proposed-5,5,2,0.0809674044253973,0.25938,0,0,0.01,1,0,
+Stressed,Delayed-ACK belief,belief-1,1,0.06,0.050844079733906,0.542389999999983,0,0,0.01,1,0,
+Stressed,Delayed-ACK belief,belief-2,2,0.09,0.0639909846640532,0.331830833333334,0,0,0.01,1,0,
+Stressed,Delayed-ACK belief,belief-3,3,0.12,0.0738064302078477,0.264396666666667,0,0,0.01,1,0,
+Stressed,Delayed-ACK belief,belief-4,4,0.18,0.0968377758343938,0.181125,0,0,0.01,1,0,
+Stressed,Delayed-ACK belief,belief-5,5,0.24,0.121981485809309,0.135879166666667,4,0,0.01,0,0,
+Stressed,Periodic,periodic-1,1,5,0.13906565437729,0.156493333333333,14,0,0.01,0,0,
+Stressed,Periodic,periodic-2,2,10,0.0819779421982812,0.313346666666667,0,0,0.01,1,1,AoCI-inspired/aoci-2; AoCI-inspired/aoci-3; Causal-Broadcast/proposed-4; Causal-Broadcast/proposed-5; Delayed-ACK belief/belief-3
+Stressed,Periodic,periodic-3,3,12.5,0.0708425241674023,0.390616666666661,0,0,0.01,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Delayed-ACK belief/belief-2
+Stressed,Periodic,periodic-4,4,20,0.0553482699723368,0.621349999999969,0,0,0.01,1,1,Delayed-ACK belief/belief-1
+Stressed,Periodic,periodic-5,5,25,0.0499096885288171,0.772599999999952,0,0,0.01,1,0,
+Stressed,State-event,state-1,1,0.5,0.091529548819308,0.214066666666667,0,0,0.01,1,0,
+Stressed,State-event,state-2,2,0.75,0.122672014099799,0.142986666666667,2,0,0.01,0,0,
+Stressed,State-event,state-3,3,1,0.159344456038532,0.10751,62,0,0.01,0,0,
+Stressed,State-event,state-4,4,1.5,0.229201109360031,0.0700233333333334,100,0,0.01,0,0,
+Stressed,State-event,state-5,5,2,0.281112508206066,0.05395,100,0,0.01,0,0,
+Stressed,AoCI-inspired,aoci-1,1,0.5,0.0650178987146682,0.373295,0,0,0.02,1,0,
+Stressed,AoCI-inspired,aoci-2,2,0.75,0.0738978027579201,0.301083333333334,0,0,0.02,1,0,
+Stressed,AoCI-inspired,aoci-3,3,1,0.0810485937395659,0.25796,0,0,0.02,1,0,
+Stressed,AoCI-inspired,aoci-4,4,1.5,0.0932759871879324,0.208258333333333,0,0,0.02,1,0,
+Stressed,AoCI-inspired,aoci-5,5,2,0.105803001145953,0.179686666666667,0,0,0.02,1,0,
+Stressed,Causal AoI-only,aoi-1,1,0.06,0.0456440894827451,1.04295333333326,0,0,0.02,1,0,
+Stressed,Causal AoI-only,aoi-2,2,0.09,0.048021145835332,0.869089999999946,0,0,0.02,1,0,
+Stressed,Causal AoI-only,aoi-3,3,0.12,0.0506909960224518,0.785584166666622,0,0,0.02,1,0,
+Stressed,Causal AoI-only,aoi-4,4,0.18,0.0620498181638473,0.593683333333311,0,0,0.02,1,1,Causal-Broadcast/proposed-1; Causal-Broadcast/proposed-2; Delayed-ACK belief/belief-1
+Stressed,Causal AoI-only,aoi-5,5,0.24,0.07641588975254,0.474389166666657,0,0,0.02,1,1,AoCI-inspired/aoci-1; AoCI-inspired/aoci-2; Causal-Broadcast/proposed-2; Causal-Broadcast/proposed-3; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-2; Delayed-ACK belief/belief-3; Periodic/periodic-3
+Stressed,Causal-Broadcast,proposed-1,1,0.5,0.0581828415892347,0.490536666666655,0,0,0.02,1,0,
+Stressed,Causal-Broadcast,proposed-2,2,0.75,0.0600814729232532,0.432950833333328,0,0,0.02,1,0,
+Stressed,Causal-Broadcast,proposed-3,3,1,0.0651453377328109,0.359801666666667,0,0,0.02,1,0,
+Stressed,Causal-Broadcast,proposed-4,4,1.5,0.071959812372049,0.299773333333334,0,0,0.02,1,0,
+Stressed,Causal-Broadcast,proposed-5,5,2,0.0809674044253973,0.25938,0,0,0.02,1,0,
+Stressed,Delayed-ACK belief,belief-1,1,0.06,0.050844079733906,0.542389999999983,0,0,0.02,1,0,
+Stressed,Delayed-ACK belief,belief-2,2,0.09,0.0639909846640532,0.331830833333334,0,0,0.02,1,0,
+Stressed,Delayed-ACK belief,belief-3,3,0.12,0.0738064302078477,0.264396666666667,0,0,0.02,1,0,
+Stressed,Delayed-ACK belief,belief-4,4,0.18,0.0968377758343938,0.181125,0,0,0.02,1,0,
+Stressed,Delayed-ACK belief,belief-5,5,0.24,0.121981485809309,0.135879166666667,4,0,0.02,0,0,
+Stressed,Periodic,periodic-1,1,5,0.13906565437729,0.156493333333333,14,0,0.02,0,0,
+Stressed,Periodic,periodic-2,2,10,0.0819779421982812,0.313346666666667,0,0,0.02,1,1,AoCI-inspired/aoci-2; Causal-Broadcast/proposed-4; Delayed-ACK belief/belief-3
+Stressed,Periodic,periodic-3,3,12.5,0.0708425241674023,0.390616666666661,0,0,0.02,1,1,AoCI-inspired/aoci-1; Causal-Broadcast/proposed-3; Delayed-ACK belief/belief-2
+Stressed,Periodic,periodic-4,4,20,0.0553482699723368,0.621349999999969,0,0,0.02,1,1,Delayed-ACK belief/belief-1
+Stressed,Periodic,periodic-5,5,25,0.0499096885288171,0.772599999999952,0,0,0.02,1,0,
+Stressed,State-event,state-1,1,0.5,0.091529548819308,0.214066666666667,0,0,0.02,1,0,
+Stressed,State-event,state-2,2,0.75,0.122672014099799,0.142986666666667,2,0,0.02,0,0,
+Stressed,State-event,state-3,3,1,0.159344456038532,0.10751,62,0,0.02,0,0,
+Stressed,State-event,state-4,4,1.5,0.229201109360031,0.0700233333333334,100,0,0.02,0,0,
+Stressed,State-event,state-5,5,2,0.281112508206066,0.05395,100,0,0.02,0,0,

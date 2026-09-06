@@ -1,0 +1,125 @@
+{
+  "version": "EXP23E-ELCS-W-IID-LOSS-ROBUSTNESS-v1",
+  "frozenDate": "2026-09-03",
+  "stage": "local-witness-iid-loss-robustness-falsification",
+  "policyOptimizationAllowed": false,
+  "robustnessClaimPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6063001E+7,
+    1.6063002E+7,
+    1.6063003E+7,
+    1.6063004E+7,
+    1.6063005E+7,
+    1.6063006E+7,
+    1.6063007E+7,
+    1.6063008E+7,
+    1.6063009E+7,
+    1.606301E+7,
+    1.6063011E+7,
+    1.6063012E+7,
+    1.6063013E+7,
+    1.6063014E+7,
+    1.6063015E+7,
+    1.6063016E+7,
+    1.6063017E+7,
+    1.6063018E+7,
+    1.6063019E+7,
+    1.606302E+7,
+    1.6063021E+7,
+    1.6063022E+7,
+    1.6063023E+7,
+    1.6063024E+7,
+    1.6063025E+7,
+    1.6063026E+7,
+    1.6063027E+7,
+    1.6063028E+7,
+    1.6063029E+7,
+    1.606303E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed",
+      "parentElcsWCost": 0.290453333333331,
+      "costMatchRateHz": 18.909722222222072,
+      "boundaryFactor": 0.9875,
+      "lowerCostRateHz": 18.6733506944443
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate",
+      "parentElcsWCost": 0.309759999999997,
+      "costMatchRateHz": 10.083333333333234,
+      "boundaryFactor": 0.9866,
+      "lowerCostRateHz": 9.94821666666657
+    }
+  ],
+  "parentFrontierRun": "2026-09-03_163244",
+  "parentFrontierDecision": "ELCS_W_SHARP_PERIODIC_FRONTIER_SURVIVES",
+  "conditions": [
+    {
+      "id": "clean",
+      "label": "Clean",
+      "claimLoss": 0,
+      "responseLoss": 0,
+      "dataLoss": 0
+    },
+    {
+      "id": "claim-iid5",
+      "label": "CLAIM IID loss 5%",
+      "claimLoss": 0.05,
+      "responseLoss": 0,
+      "dataLoss": 0
+    },
+    {
+      "id": "response-iid5",
+      "label": "RESPONSE IID loss 5%",
+      "claimLoss": 0,
+      "responseLoss": 0.05,
+      "dataLoss": 0
+    },
+    {
+      "id": "data-iid5",
+      "label": "DATA IID loss 5%",
+      "claimLoss": 0,
+      "responseLoss": 0,
+      "dataLoss": 0.05
+    },
+    {
+      "id": "joint-iid5",
+      "label": "CLAIM/RESPONSE/DATA IID loss 5%",
+      "claimLoss": 0.05,
+      "responseLoss": 0.05,
+      "dataLoss": 0.05
+    }
+  ],
+  "arms": [
+    {
+      "id": "periodic-exp23d-lower",
+      "label": "Periodic static TDMA / EXP23D lower-cost boundary",
+      "family": "periodic-static"
+    },
+    {
+      "id": "elcs-w-affine",
+      "label": "ELCS-W local witness / affine clock",
+      "family": "candidate-elcs-w"
+    }
+  ],
+  "periodicArm": "periodic-exp23d-lower",
+  "elcsWArm": "elcs-w-affine",
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "elcsMaxFrames": 400,
+  "epsilonRmse": 0.01,
+  "requiredCostImprovement": 0.01,
+  "bootstrapSeedBase": 1.60639E+7,
+  "requiredIntegrityContracts": 19,
+  "expectedRuns": 600
+}

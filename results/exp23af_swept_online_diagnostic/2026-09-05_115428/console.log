@@ -1,0 +1,19 @@
+
+============================================================
+RUN  : exp23af_swept_online_diagnostic
+ID   : 2026-09-05_115428
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_swept_online_diagnostic\2026-09-05_115428
+WHEN : 2026-09-05 11:54:29
+============================================================
+
+    interferenceRadius    trackingRadius    nSeeds    validSeeds    meanAffected    maxPrepareBytes    maxResponseBytes
+    __________________    ______________    ______    __________    ____________    _______________    ________________
+
+
+
+============================================================
+DONE : exp23af_swept_online_diagnostic
+TIME : 21.6 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_swept_online_diagnostic\2026-09-05_115428
+============================================================

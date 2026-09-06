@@ -1,0 +1,22 @@
+# Claim-to-source ledger
+
+| ID | Consequential claim | Primary source | Evidence status | Confidence / limitation |
+|---|---|---|---|---|
+| C01 | Generic contention-aware CSMA/TDMA hybridization is established | [Rhee et al., Z-MAC](https://ieeexplore.ieee.org/document/4453818/) | Verified | High; original journal article and implementation |
+| C02 | Queue/collision-driven adaptive division between CSMA/CA and TDMA is established | [Gilani et al.](https://www.sciencedirect.com/science/article/pii/S1570870511000175) | Verified | High; coordinator-based IEEE 802.15.4 WSN, not peer UAV control |
+| C03 | Hybrid CSMA request plus queue/BER-aware TDMA allocation exists for UAV formations | [Xiao et al.](https://www.nature.com/articles/s41598-025-30533-0) | Verified | High; centralized leader and semi-physical validation |
+| C04 | Decentralized flight-aware dynamic slot selection for quadcopter swarms exists and was flight-tested | [Azem et al., DTSA](https://ar5iv.labs.arxiv.org/html/2202.00919) | Verified | High; no ACK and collision-free scheduled access |
+| C05 | UAV self-organizing TDMA includes demand slots, migration ACKs, frame resizing, recovery, and COTS PoC | [Aydin et al.](https://napier-repository.worktribe.com/output/3595870/distributed-tdma-scheduling-for-autonomous-aerial-swarms-a-self-organizing-approach) | Verified | High for mechanism and publication metadata; repository may intermittently block automated fetches |
+| C06 | Distributed UAV TDMA with dynamic superframe and spatial reuse continues in 2025 work | [Samandari thesis](https://ir.canterbury.ac.nz/items/b5f2aa71-ddb3-4a38-840c-b7f7ec2a6775); [D-STR](https://arxiv.org/abs/2511.12888) | Verified | Medium-high; thesis and preprint, not both peer-reviewed journal evidence |
+| C07 | Event-triggered control has been compared across TDMA/FDMA/CSMA | [Cervin and Henningsson](https://lup.lub.lu.se/search/publication/1445340) | Verified | High; simplified independent first-order plants |
+| C08 | Error-dependent multi-loop shared-channel scheduling with stability/performance bounds exists | [Mamduhi et al.](https://www.sciencedirect.com/science/article/pii/S0005109817301279) | Verified | High; centralized/shared resource rather than peer broadcast |
+| C09 | Decentralized age-gain thinning with collision feedback exists | [Chen et al.](https://ora.ox.ac.uk/objects/uuid%3Ab5c1cebe-9ad7-400c-a48d-aa4e0ff82d4f) | Verified | High; IEEE TIT, random-access status updates |
+| C10 | Delayed-feedback receiver-AoI belief for decentralized agents exists | [Tahir et al.](https://arxiv.org/abs/2312.12977) | Verified | High; common receiver, non-FIFO duplex channel, no continuous formation control |
+| C11 | ACK-derived distributed semantic belief and goal-oriented random access is direct prior art | [Chiariotti et al., DELTA](https://www.research.unipd.it/retrieve/bd3d2509-7171-4b37-82db-5fc8c770de9f/Goal-Oriented_Medium_Access_With_Distributed_Belief_Processing.pdf) | Verified | Very high; IEEE Transactions on Networking 2026, closest neighbor |
+| C12 | General distributed VoI-aware threshold MAC and limited-feedback learning are active prior art | [Chiariotti and Zanella](https://arxiv.org/pdf/2508.19141) | Verified | Medium; current source is a 2025 preprint |
+| C13 | Distributed and self-stabilizing TDMA is established | [Leone and Schiller](https://journals.sagepub.com/doi/10.1155/2013/639761) | Verified | High; not semantic/control-aware |
+| C14 | Event-triggered distributed TDMA schedule construction with interference testing is established | [DATP](https://www.sciencedirect.com/science/article/abs/pii/S0140366411001678) | Verified | High; data aggregation rather than UAV control |
+| C15 | No exact source found combining continuous peer state, multi-receiver broadcast, and private delayed per-receiver ACK in a semantic MAC | Targeted searches through 2026-08-31 | Unresolved/open conditional | Medium; absence of an identified match is not proof of priority |
+| C16 | EXP19A semantic scheduling failed its registered promotion rule and periodic TDMA reproduced a major gain | `docs/EXP19A_ORACLE_SERVICE_RESULTS.md` | Verified internally | High; 1620/1620 completed trajectories and integrity gates |
+| C17 | The Munari--Badia DOI in the current BibTeX is incorrect | [correct DOI metadata](https://doi.org/10.1109/TCOMM.2025.3583639); [paper reached by incorrect DOI](https://elib.dlr.de/213518/) | Verified | High; correction recorded, manuscript not edited |
+

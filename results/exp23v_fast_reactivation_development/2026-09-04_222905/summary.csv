@@ -1,0 +1,4 @@
+arm,methodLabel,nRuns,meanRMSE,meanOfferedUtil,meanManagementAirtime
+fast-early-delivered,Witness-confirmed early reactivation / event 3 s,60,0.0557417288509282,0.274266399999997,0.0647264
+fast-early-response-blackout,Witness-confirmed reactivation / event 3 s / RESPONSE blackout,60,0.0640945598551024,0.294706577777776,0.603026133333337
+fast-late-delivered,Witness-confirmed early reactivation / event 8 s,60,0.0566253514452559,0.274307111111109,0.0651125333333333

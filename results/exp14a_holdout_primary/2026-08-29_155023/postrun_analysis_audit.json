@@ -1,0 +1,26 @@
+{
+  "registryHash": 2.01658753E+8,
+  "primaryRows": 10500,
+  "oodRows": 4800,
+  "primaryContrasts": 25,
+  "secondaryOODContrasts": 200,
+  "secondaryOODMultiplicity": "DESCRIPTIVE_UNADJUSTED",
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.4141414E+7,
+  "performanceGate": "NONE",
+  "negativeResultsRetained": true,
+  "proposedPareto": {
+    "clean": {
+      "exact": 2,
+      "margin1pct": 2
+    },
+    "moderate": {
+      "exact": 2,
+      "margin1pct": 3
+    },
+    "stressed": {
+      "exact": 4,
+      "margin1pct": 4
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "algorithm": "configHash over ordered path/content records",
+  "sourceHash": 4.2174946297E+10,
+  "sourceLeaves": 42,
+  "fileCount": 21,
+  "files": [
+    "docs/EXP23AQ_ROUTED_STATE_MACHINE_CONFIRMATION_PLAN.md",
+    "docs/EXP23AO_MULTI_ORIGIN_ROUTING_RESULTS_2026-09-06.md",
+    "results/exp23ao_multi_origin_routing/2026-09-06_075633/multi_origin_verdict.json",
+    "results/exp23ao_multi_origin_routing/2026-09-06_075633/selected_transaction_certificate.json",
+    "network/buildSenderConflictGraph.m",
+    "network/buildSlottedManagementFloodPlan.m",
+    "network/receiverLiftedClosureControlRecipients.m",
+    "network/buildMultiOriginRoutedControlSchedule.m",
+    "network/simulateMultiOriginRoutedControl.m",
+    "network/receiverLiftedRoutedClosureReliabilityCertificate.m",
+    "network/generateReceiverLiftedRoutedClosureTrace.m",
+    "network/receiverLiftedRoutedClosureTraceHash.m",
+    "network/simulateReceiverLiftedRoutedClosureMigration.m",
+    "network/buildReceiverLiftedRoutedClosureContinuousSchedule.m",
+    "network/bindReplayDataOutcomes.m",
+    "network/applyDstrAffineClockSchedule.m",
+    "utils/exp23aqRoutedStateMachineConfirmationRegistry.m",
+    "tests/test_exp23aq_routed_state_machine_confirmation_contracts.m",
+    "tests/test_receiver_lifted_routed_closure_kernel_contracts.m",
+    "experiments/exp23ap_routed_state_machine_common_phy.m",
+    "experiments/exp23aq_routed_state_machine_confirmation.m"
+  ]
+}

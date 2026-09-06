@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23d_local_witness_sharp_frontier",
+  "runId": "2026-09-03_163244",
+  "startedAt": "2026-09-03 16:32:44",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh measured-cost frontier falsification of ELCS-W against guarded static periodic TDMA.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23d_local_witness_sharp_frontier.m",
+  "finishedAt": "2026-09-03 16:37:40",
+  "elapsedSec": 296.3142905,
+  "elapsedText": "4 m 56 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

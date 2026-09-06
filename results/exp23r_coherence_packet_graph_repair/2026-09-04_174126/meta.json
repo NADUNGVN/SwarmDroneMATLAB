@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23r_coherence_packet_graph_repair",
+  "runId": "2026-09-04_174126",
+  "startedAt": "2026-09-04 17:41:27",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh packet-kernel validation after receiver detectability graph repair.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23r_coherence_packet_graph_repair.m",
+  "finishedAt": "2026-09-04 17:45:26",
+  "elapsedSec": 239.421838,
+  "elapsedText": "3 m 59 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

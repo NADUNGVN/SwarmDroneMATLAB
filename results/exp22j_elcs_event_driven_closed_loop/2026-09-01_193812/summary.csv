@@ -1,0 +1,5 @@
+scenario,scenarioLabel,arm,methodLabel,armKind,n,meanRMSE,meanTrueAoI,meanOfferedUtil,meanChannelUtil,meanGoodputHz,meanManagementUtil,meanFallbackOpportunities,safeFailures
+n10-ring2-zero-loss,N10 ring2 zero-loss,elcs-mission-affine-clock,ELCS-F mission guard / affine clock,candidate-clock-composition,30,0.0508585709149901,0.0653884424033676,0.318873599999998,0.215014810394726,92.7583333333333,0.0338773333333336,8.26666666666667,0
+n10-ring2-zero-loss,N10 ring2 zero-loss,elcs-mission-zero-clock,ELCS-F mission guard / zero clock,clock-paired-reference,30,0.0508664720031365,0.0655453501722157,0.318873599999998,0.206591999999989,92.7583333333333,0.0338773333333336,8.26666666666667,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,elcs-mission-affine-clock,ELCS-F mission guard / affine clock,candidate-clock-composition,30,0.0301085191615784,0.0409513543394142,0.293563733333331,0.293440823175544,87.7666666666666,0.0238933333333334,3.4,0
+n5-6dof-zero-loss,N5 6-DOF zero-loss,elcs-mission-zero-clock,ELCS-F mission guard / zero clock,clock-paired-reference,30,0.030146699475422,0.0409452736318409,0.293563733333331,0.293435733333323,87.7666666666666,0.0238933333333334,3.4,0

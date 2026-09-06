@@ -1,0 +1,18 @@
+gate,passed,detail
+registry_and_valid_parent,1,registry 36208820/36 leaves; retained parent 28/28
+structural_matrix_complete_unique,1,210/210 unique structural rows
+connected_direct_graph_and_finite_ttl,1,maximum observed diameter 4 and route depth 4
+one_parent_tree_duplicate_suppression,1,all all-node routes are one-parent trees; duplicate forwards zero
+receiver_conflict_coloring,1,zero collisions over 210 no-loss structural replays
+causal_depth_schedule,1,every forwarding parent is scheduled before its relay child
+minimum_integer_repetition,1,selected repetition range 3--9
+exact_route_reliability_target,1,maximum exact logical-packet failure 0.000874513064
+analytical_union_bound_ordering,1,maximum union upper bound 0.0008748
+no_loss_replay_delivery,1,all intended recipients receive; all planned relays execute
+integer_bytes_and_derived_airtime,0,maximum exact physical bytes 9504
+upstream_erasure_causal_silence,1,erasing every source-child link suppresses all descendant relays
+monte_carlo_probability_replay,1,maximum absolute probability error 0.004053 vs tolerance 0.025022
+semantic_recipient_contract,1,25/25 exact sender-kind recipient sets; 1 local-only
+semantic_routes_reliable_and_accounted,0,maximum semantic duration 0.124899 s; maximum attempts 30
+negative_accounting_and_efficiency_comparators,1,logical-clique undercount up to 99x; hop-local saves up to 264 slots
+diagnostic_scope_not_promoted,1,primitive evidence only; all downstream claim flags remain false

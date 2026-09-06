@@ -1,0 +1,84 @@
+{
+  "version": "EXP22J-ELCS-EVENT-DRIVEN-CLOSED-LOOP-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "candidate-event-driven-closed-loop-integration",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "robustnessContinuationPermitted": false,
+  "seeds": [
+    1.6051001E+7,
+    1.6051002E+7,
+    1.6051003E+7,
+    1.6051004E+7,
+    1.6051005E+7,
+    1.6051006E+7,
+    1.6051007E+7,
+    1.6051008E+7,
+    1.6051009E+7,
+    1.605101E+7,
+    1.6051011E+7,
+    1.6051012E+7,
+    1.6051013E+7,
+    1.6051014E+7,
+    1.6051015E+7,
+    1.6051016E+7,
+    1.6051017E+7,
+    1.6051018E+7,
+    1.6051019E+7,
+    1.605102E+7,
+    1.6051021E+7,
+    1.6051022E+7,
+    1.6051023E+7,
+    1.6051024E+7,
+    1.6051025E+7,
+    1.6051026E+7,
+    1.6051027E+7,
+    1.6051028E+7,
+    1.6051029E+7,
+    1.605103E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "maxFrames": 400,
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockResetHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "arms": [
+    {
+      "id": "elcs-mission-zero-clock",
+      "label": "ELCS-F mission guard / zero clock",
+      "kind": "clock-paired-reference",
+      "clockEnabled": false
+    },
+    {
+      "id": "elcs-mission-affine-clock",
+      "label": "ELCS-F mission guard / affine clock",
+      "kind": "candidate-clock-composition",
+      "clockEnabled": true
+    }
+  ],
+  "zeroArm": "elcs-mission-zero-clock",
+  "clockArm": "elcs-mission-affine-clock",
+  "expectedRuns": 120,
+  "requiredIntegrationContracts": 15,
+  "parentInvalidRun": "2026-09-01_173320",
+  "parentInvalidGates": "14/17",
+  "parentKernelRun": "2026-09-01_192508",
+  "parentKernelGates": "20/20",
+  "fallbackAttemptCapPerNodeFrame": 1,
+  "grantRequiresDecodedRequest": true,
+  "analyticalControlBoundRequired": true
+}

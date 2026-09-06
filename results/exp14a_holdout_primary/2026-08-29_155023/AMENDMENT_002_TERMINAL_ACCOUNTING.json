@@ -1,0 +1,18 @@
+{
+  "amendment": "EXP14 Amendment 002",
+  "reason": "multi-slot frames active at finite mission horizon",
+  "simulationRerun": false,
+  "performanceMetricRead": false,
+  "rows": 10500,
+  "dataInFlightRecipients": 1312,
+  "rowsWithDataInFlight": 674,
+  "ackInFlightRecipients": 609,
+  "rowsWithAckInFlight": 361,
+  "minimumDataResidual": 0,
+  "maximumDataResidual": 5,
+  "minimumAckResidual": 0,
+  "maximumAckResidual": 3,
+  "correctedAccountingPassed": true,
+  "finalGatesPassed": 11,
+  "finalGatesTotal": 11
+}

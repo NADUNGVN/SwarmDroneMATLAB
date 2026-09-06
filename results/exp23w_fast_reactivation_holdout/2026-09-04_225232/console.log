@@ -1,0 +1,110 @@
+
+============================================================
+RUN  : exp23w_fast_reactivation_holdout
+ID   : 2026-09-04_225232
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23w_fast_reactivation_holdout\2026-09-04_225232
+WHEN : 2026-09-04 22:52:32
+============================================================
+
+  seeds   1--  2 / 100; rows   16 /  800
+  seeds   3--  4 / 100; rows   32 /  800
+  seeds   5--  6 / 100; rows   48 /  800
+  seeds   7--  8 / 100; rows   64 /  800
+  seeds   9-- 10 / 100; rows   80 /  800
+  seeds  11-- 12 / 100; rows   96 /  800
+  seeds  13-- 14 / 100; rows  112 /  800
+  seeds  15-- 16 / 100; rows  128 /  800
+  seeds  17-- 18 / 100; rows  144 /  800
+  seeds  19-- 20 / 100; rows  160 /  800
+  seeds  21-- 22 / 100; rows  176 /  800
+  seeds  23-- 24 / 100; rows  192 /  800
+  seeds  25-- 26 / 100; rows  208 /  800
+  seeds  27-- 28 / 100; rows  224 /  800
+  seeds  29-- 30 / 100; rows  240 /  800
+  seeds  31-- 32 / 100; rows  256 /  800
+  seeds  33-- 34 / 100; rows  272 /  800
+  seeds  35-- 36 / 100; rows  288 /  800
+  seeds  37-- 38 / 100; rows  304 /  800
+  seeds  39-- 40 / 100; rows  320 /  800
+  seeds  41-- 42 / 100; rows  336 /  800
+  seeds  43-- 44 / 100; rows  352 /  800
+  seeds  45-- 46 / 100; rows  368 /  800
+  seeds  47-- 48 / 100; rows  384 /  800
+  seeds  49-- 50 / 100; rows  400 /  800
+  seeds  51-- 52 / 100; rows  416 /  800
+  seeds  53-- 54 / 100; rows  432 /  800
+  seeds  55-- 56 / 100; rows  448 /  800
+  seeds  57-- 58 / 100; rows  464 /  800
+  seeds  59-- 60 / 100; rows  480 /  800
+  seeds  61-- 62 / 100; rows  496 /  800
+  seeds  63-- 64 / 100; rows  512 /  800
+  seeds  65-- 66 / 100; rows  528 /  800
+  seeds  67-- 68 / 100; rows  544 /  800
+  seeds  69-- 70 / 100; rows  560 /  800
+  seeds  71-- 72 / 100; rows  576 /  800
+  seeds  73-- 74 / 100; rows  592 /  800
+  seeds  75-- 76 / 100; rows  608 /  800
+  seeds  77-- 78 / 100; rows  624 /  800
+  seeds  79-- 80 / 100; rows  640 /  800
+  seeds  81-- 82 / 100; rows  656 /  800
+  seeds  83-- 84 / 100; rows  672 /  800
+  seeds  85-- 86 / 100; rows  688 /  800
+  seeds  87-- 88 / 100; rows  704 /  800
+  seeds  89-- 90 / 100; rows  720 /  800
+  seeds  91-- 92 / 100; rows  736 /  800
+  seeds  93-- 94 / 100; rows  752 /  800
+  seeds  95-- 96 / 100; rows  768 /  800
+  seeds  97-- 98 / 100; rows  784 /  800
+  seeds  99--100 / 100; rows  800 /  800
+
+EXP23W integrity gates
+  [PASS] registry_contract                           hash 174479477 over 159 leaves
+  [PASS] pre_run_freeze_artifacts                    opening record, frozen registry, source manifest and snapshot exist
+  [PASS] frozen_source_hash                          source hash 35903784847 over 38 leaves
+  [PASS] matrix_complete_unique                      800/800 unique rows
+  [PASS] exact_holdout_seeds                         all and only 100 registered seeds are disjoint from prior blocks
+  [PASS] exact_arm_coverage                          all eight arms occur once per seed
+  [PASS] paired_realizations                         channel, estimator, clocks and shared occupancy pair by seed
+  [PASS] mode_assignment_exact                       four fast arms enabled; static/conservative/periodic modes exact
+  [PASS] dynamic_event_stimulus                      all 600 dynamic events follow positive state and suppress locally
+  [PASS] exact_revoke_mapping                        one exact 24-byte common-PHY REVOKE per dynamic trajectory
+  [PASS] fresh_response_reactivation                 300/300 normal fast rows reactivate after eligibility
+  [PASS] old_fence_bypass                            fresh incident-witness closure reuses before old fence
+  [PASS] revoke_blackout_equivalence                 REVOKE delivery cannot alter local suppression, reuse or endpoint metrics
+  [PASS] response_blackout_fail_silent               missing required witness RESPONSE leaves sender suppressed
+  [PASS] candidate_safety                            zero certificate, collision, safety or divergence failures
+  [PASS] exact_continuous_replay                     DATA/control outcomes and affine-clock timeline replay exactly
+  [PASS] management_airtime_accounting               management attempts, bytes, recipients and airtime close
+  [PASS] shared_background_certificate               every certified schedule composes its paired IID-15 trace
+  [PASS] absolute_control_bounds                     absolute management attempt and byte bounds hold
+  [PASS] causal_recipient_airtime                    recipient/airtime accounting closes with zero forbidden reads
+  [PASS] confirmatory_scope                          fresh holdout may promote only the fixed-graph mechanism
+
+EXP23W six-test Holm family
+     id      meanDelta     bootstrapLo    bootstrapHi    oneSidedPRaw    holmAdjustedP    rejectAfterHolm
+    ____    ___________    ___________    ___________    ____________    _____________    _______________
+
+    "H1"        -0.0015    -0.0018336      -0.0012194     1.1386e-15       1.1386e-15          true      
+    "H2"     -0.0035709    -0.0040685      -0.0031349     2.3005e-27       4.6011e-27          true      
+    "H3"    -0.00055514    -0.0005624     -0.00054822    9.2445e-120      5.5467e-119          true      
+    "H4"    -0.00098325    -0.0010634     -0.00089909     5.4858e-43       1.6457e-42          true      
+    "H5"     -0.0031448     -0.003351      -0.0029373     1.8264e-51       7.3056e-51          true      
+    "H6"     -0.0032224    -0.0034274      -0.0030187     1.9929e-53       9.9645e-53          true      
+
+EXP23W frontier audit
+          candidate                   reference            candidateMeanRMSE    referenceMeanRMSE    candidateMeanCost    referenceMeanCost    referenceDominates    nPairs
+    ______________________    _________________________    _________________    _________________    _________________    _________________    __________________    ______
+
+    "fast-early-delivered"    "coherence-static-target"        0.055318              0.05532              0.27428              0.27526                 0              100  
+    "fast-early-delivered"    "periodic-exp23d-lower"          0.055318             0.054238              0.27428              0.28672                 0              100  
+    "fast-late-delivered"     "coherence-static-target"        0.056185              0.05532              0.27427              0.27526                 0              100  
+    "fast-late-delivered"     "periodic-exp23d-lower"          0.056185             0.054238              0.27427              0.28672                 0              100  
+
+EXP23W DECISION: FAST_REACTIVATION_FIXED_GRAPH_CONFIRMED
+
+============================================================
+DONE : exp23w_fast_reactivation_holdout
+TIME : 20 m 39 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23w_fast_reactivation_holdout\2026-09-04_225232
+============================================================

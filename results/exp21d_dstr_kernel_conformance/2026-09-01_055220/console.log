@@ -1,0 +1,58 @@
+
+============================================================
+RUN  : exp21d_dstr_kernel_conformance
+ID   : 2026-09-01_055220
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_dstr_kernel_conformance\2026-09-01_055220
+WHEN : 2026-09-01 05:52:20
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 10 / 200; rows   40 /  800
+  groups  11-- 20 / 200; rows   80 /  800
+  groups  21-- 30 / 200; rows  120 /  800
+  groups  31-- 40 / 200; rows  160 /  800
+  groups  41-- 50 / 200; rows  200 /  800
+  groups  51-- 60 / 200; rows  240 /  800
+  groups  61-- 70 / 200; rows  280 /  800
+  groups  71-- 80 / 200; rows  320 /  800
+  groups  81-- 90 / 200; rows  360 /  800
+  groups  91--100 / 200; rows  400 /  800
+  groups 101--110 / 200; rows  440 /  800
+  groups 111--120 / 200; rows  480 /  800
+  groups 121--130 / 200; rows  520 /  800
+  groups 131--140 / 200; rows  560 /  800
+  groups 141--150 / 200; rows  600 /  800
+  groups 151--160 / 200; rows  640 /  800
+  groups 161--170 / 200; rows  680 /  800
+  groups 171--180 / 200; rows  720 /  800
+  groups 181--190 / 200; rows  760 /  800
+  groups 191--200 / 200; rows  800 /  800
+
+EXP21D-K conformance gates
+  [PASS] registry_frozen                            hash 80214145 over 45 leaves
+  [PASS] source_snapshot_frozen                     11 files, hash 5061914
+  [PASS] matrix_complete_unique                     800/800 unique rows
+  [PASS] exact_declared_seeds                       all and only 100 registered seeds
+  [PASS] exact_factor_coverage                      N={5,10} and four registered conditions exact
+  [PASS] paired_absolute_draws                      four conditions share one absolute trace per seed/N
+  [PASS] source_mapped_transition_contracts         14 contract checks passed
+  [PASS] deterministic_replay                       trace, configuration and realization hashes repeat exactly
+  [PASS] named_management_paths                     TG 5, TGn 7, TS 235, TSo 155, TSn 394, shrink 4
+  [FAIL] native_resolves_physically                 194/200 final physically valid
+  [FAIL] native_converges_without_unused_slots      189/200 converged by frame 200
+  [PASS] native_frame_agreement                     maximum native disagreement 0 slots
+  [PASS] delivery_witnesses_valid                   every success/collision has its physical witness
+  [PASS] terminal_accounting_closes                 DATA and management recipient outcomes close in every row
+  [PASS] causal_information_only                    zero future-random and receiver-truth decision reads
+  [PASS] all_boundary_outcomes_retained             600 boundary rows retained; 189 nonresolved final rows
+  [PASS] conformance_scope_only                     no performance promotion or paper decision in kernel study
+
+EXP21D-K VERDICT: DSTR_KERNEL_INVALID_NO_CLOSED_LOOP
+
+============================================================
+DONE : exp21d_dstr_kernel_conformance
+TIME : 4 m 06 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_dstr_kernel_conformance\2026-09-01_055220
+============================================================

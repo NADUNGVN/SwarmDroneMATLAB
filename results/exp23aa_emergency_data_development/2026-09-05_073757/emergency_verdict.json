@@ -1,0 +1,11 @@
+{
+  "status": "PROTECTED_EMERGENCY_DATA_DEVELOPMENT_FEASIBLE",
+  "gatesPassed": 19,
+  "gatesTotal": 19,
+  "rows": 120,
+  "developmentOnly": true,
+  "geometryCoupledToPlant": false,
+  "freshSeedEvidence": false,
+  "submissionClaimPermitted": false,
+  "next": "bounded_retry_then_online_state_tube_coupling"
+}

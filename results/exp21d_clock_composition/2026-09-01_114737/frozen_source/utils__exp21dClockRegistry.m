@@ -1,0 +1,36 @@
+function R=exp21dClockRegistry()
+%EXP21DCLOCKREGISTRY Frozen D-STR affine-clock composition matrix.
+
+base=exp21dClosedLoopRegistry();
+R=rmfield(base,{'periodicArm','nativeArm','warmArm','warmAssignment', ...
+    'requiredIntegrationContracts','boundaryContinuationPermitted'});
+R.version='EXP21D-AFFINE-CLOCK-COMPOSITION-v1';
+R.frozenDate='2026-09-01';
+R.stage='prior-art-clock-composition-falsification';
+R.seeds=(16038001:16038030)';
+R.maxOffsetSec=0.25e-3;
+R.maxDriftPpm=40;
+R.clockResetHorizonSec=12;
+B=continuousTdmaGuardBound( ...
+    R.maxOffsetSec,R.maxDriftPpm,R.clockResetHorizonSec);
+R.clockLeadTimeSec=B.maxBoundaryErrorSec;
+R.missionSafeGuardSec=B.safeGuardSec;
+R.shortGuardSec=base.safeGuardSec;
+R.arms=struct( ...
+    'id',{'short-guard-zero-clock','mission-guard-zero-clock', ...
+        'mission-guard-affine-clock'}, ...
+    'label',{'D-STR short guard / zero clock', ...
+        'D-STR mission guard / zero clock', ...
+        'D-STR mission guard / affine clock'}, ...
+    'kind',{'guard-cost-reference','clock-paired-reference', ...
+        'clock-composition'}, ...
+    'guardKind',{'short','mission','mission'}, ...
+    'clockEnabled',{false,false,true});
+R.shortArm=R.arms(1).id;
+R.missionZeroArm=R.arms(2).id;
+R.missionClockArm=R.arms(3).id;
+R.expectedRuns=numel(R.seeds)*numel(R.cells)*numel(R.arms);
+R.clockCompositionContracts=6;
+R.candidateDesignPermitted=false;
+
+end

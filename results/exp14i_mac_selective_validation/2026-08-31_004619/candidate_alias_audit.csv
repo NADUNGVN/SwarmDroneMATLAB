@@ -1,0 +1,5 @@
+cell,routedReference,allFieldsExact,maxAbsDifference,fieldsChecked
+n5-csma,fixed-piggyback-scaled,1,0,16
+n10-ring2,fixed-piggyback-scaled,1,0,16
+n20-ring2,fixed-piggyback-scaled,1,0,16
+n5-aloha,fixed-adaptive-scaled,1,0,16

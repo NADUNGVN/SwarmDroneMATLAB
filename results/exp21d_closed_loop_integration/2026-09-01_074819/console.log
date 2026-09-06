@@ -1,0 +1,46 @@
+
+============================================================
+RUN  : exp21d_closed_loop_integration
+ID   : 2026-09-01_074819
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_closed_loop_integration\2026-09-01_074819
+WHEN : 2026-09-01 07:48:19
+============================================================
+
+  groups  1-- 6 / 60; rows  18 / 180
+  groups  7--12 / 60; rows  36 / 180
+  groups 13--18 / 60; rows  54 / 180
+  groups 19--24 / 60; rows  72 / 180
+  groups 25--30 / 60; rows  90 / 180
+  groups 31--36 / 60; rows 108 / 180
+  groups 37--42 / 60; rows 126 / 180
+  groups 43--48 / 60; rows 144 / 180
+  groups 49--54 / 60; rows 162 / 180
+  groups 55--60 / 60; rows 180 / 180
+
+EXP21D-CL integration gates
+  [PASS] registry_frozen                             hash 46360353 over 49 leaves
+  [PASS] matrix_complete_unique                      180/180 unique rows
+  [PASS] exact_seed_cell_arm_coverage                30 seeds, two cells and three arms exact
+  [PASS] paired_absolute_shared_traces               channel, clock and estimator hashes match within seed/cell
+  [PASS] paired_dstr_kernel_traces                   native and oracle-warm derive from the same D-STR realization
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] exact_common_data_airtime                   all arms use 96 B / 250 kbit/s exact DATA airtime
+  [PASS] all_dstr_opportunities_served               0 skipped D-STR opportunities
+  [FAIL] data_collision_witness_match                event-engine collision frames equal translated kernel witnesses
+  [PASS] management_accounting_closes                recipient partition and attempt-times-airtime close
+  [PASS] cross_plane_nonoverlap                      0 DATA/control overlaps
+  [PASS] native_kernel_status_retained               2 unresolved, 2 physically invalid, 0 disagreeing retained
+  [PASS] warm_reference_has_no_management            oracle-warm removes attempts and begins valid at t=0
+  [PASS] recipient_and_airtime_accounting            terminal DATA partition and fully charged utilization close
+  [PASS] protocol_invariants                         0 invariant violations
+  [PASS] all_failures_retained                       7 unsafe retained
+  [PASS] integration_scope_only                      no superiority threshold, policy promotion or submission claim
+
+EXP21D-CL VERDICT: DSTR_CLOSED_LOOP_INTEGRATION_INVALID
+
+============================================================
+DONE : exp21d_closed_loop_integration
+TIME : 9 m 24 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_closed_loop_integration\2026-09-01_074819
+============================================================

@@ -1,0 +1,12 @@
+{
+  "originalStatus": "ROUTED_MANAGEMENT_STATE_MACHINE_DIAGNOSTIC_VALID",
+  "originalGatesPassed": 18,
+  "originalGatesTotal": 18,
+  "scientificStatus": "SUPERSEDED_BY_CONTINUOUS_VERSION_IDENTITY_AUDIT",
+  "reasonCode": "CONTINUOUS_VERSION_HASH_NOT_ASSERTED",
+  "affectedGate": "implementation_version_identity",
+  "coreNumericalResultsRetained": true,
+  "managementRelayingValidated": false,
+  "closedLoopManagementRelayingValidated": false,
+  "next": "fresh_seed_version_identity_confirmation"
+}

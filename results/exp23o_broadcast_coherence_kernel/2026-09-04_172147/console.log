@@ -1,0 +1,46 @@
+
+============================================================
+RUN  : exp23o_broadcast_coherence_kernel
+ID   : 2026-09-04_172147
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23o_broadcast_coherence_kernel\2026-09-04_172147
+WHEN : 2026-09-04 17:21:47
+============================================================
+
+  seeds  10 / 100; rows  60 / 600
+  seeds  20 / 100; rows 120 / 600
+  seeds  30 / 100; rows 180 / 600
+  seeds  40 / 100; rows 240 / 600
+  seeds  50 / 100; rows 300 / 600
+  seeds  60 / 100; rows 360 / 600
+  seeds  70 / 100; rows 420 / 600
+  seeds  80 / 100; rows 480 / 600
+  seeds  90 / 100; rows 540 / 600
+  seeds 100 / 100; rows 600 / 600
+
+EXP23O broadcast coherence-kernel gates
+  [PASS] registry_frozen                             hash 114879144 over 51 leaves
+  [PASS] matrix_complete_unique                      600/600 unique rows
+  [PASS] exact_matrix_coverage                       100 seeds, N5/N10 and three broadcast conditions exact
+  [PASS] paired_base_and_receiver_graph              conditions share motion base and intended receiver graph
+  [PASS] deterministic_reproduction                  repeated seed/cell is bit-identical
+  [PASS] actual_sender_graph_subset                  every actual receiver-lifted conflict belongs to supergraph
+  [PASS] proper_sender_color_safety                  no actual broadcast sender conflict shares a color
+  [PASS] sender_graph_horizon_monotonicity           receiver-lifted sender edges never disappear with horizon
+  [PASS] static_target_activation                    200/200 static/wide rows select 6.8 s
+  [PASS] uncertainty_horizon_contraction             mobile high uncertainty never lengthens paired horizon
+  [PASS] issued_witness_payload_slot_feasibility     issued sender graph has witness, MTU and color feasibility
+  [PASS] uncovered_fail_silent                       no feasible receiver-lifted horizon yields no lease
+  [PASS] self_revocation_contract                    bounded motion stays active; injected bound violation self-revokes
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] hidden_sender_conflict_stimulus             aggregate receiver-lifted hidden-edge count 17040
+  [PASS] selector_boundary_stimulus                  target/contracted/no-lease rows 250/295/55
+  [PASS] kernel_scope_only                           no closed-loop, promotion or submission decision
+
+EXP23O DECISION: BROADCAST_COHERENCE_KERNEL_VALID
+
+============================================================
+DONE : exp23o_broadcast_coherence_kernel
+TIME : 16.7 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23o_broadcast_coherence_kernel\2026-09-04_172147
+============================================================

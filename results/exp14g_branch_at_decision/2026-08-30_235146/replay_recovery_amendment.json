@@ -1,0 +1,10 @@
+{
+  "status": "RECOVERY_BEFORE_ANY_OUTCOME_ROW",
+  "createdAt": "2026-08-31 00:05:23",
+  "failure": "shortening cfg.swarm.T changed colon-grid rounding and prehistory",
+  "repair": "retain the full 12 s branch grid and extract cumulative/local outcomes at the frozen first-control-tick window end",
+  "selectionHash": 7.88188353E+8,
+  "selectionChanged": false,
+  "outcomeRowsPreviouslyWritten": false,
+  "performanceOutcomeInspected": false
+}

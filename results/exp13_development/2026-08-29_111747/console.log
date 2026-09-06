@@ -1,0 +1,169 @@
+
+============================================================
+RUN  : exp13_development
+ID   : 2026-08-29_111747
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp13_development\2026-08-29_111747
+WHEN : 2026-08-29 11:17:48
+============================================================
+
+EXP13 status: DEVELOPMENT ONLY; holdout remains unopened.
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_infrastructure
+============================================================
+
+    ok   one broadcast frame reaches all three intended receivers
+    ok   frame and recipient accounting remain distinct
+    ok   one broadcast can succeed at a strict subset of receivers
+    ok   simultaneous senders collide at their shared receiver
+    ok   serialized TDMA service delivers the same two frames without collision
+    ok   queued state DATA uses latest-generated-wins replacement
+    ok   finite queue preserves due feedback and rejects lower-priority DATA
+    ok   cumulative ACK merge retains only the newest sequence per sender
+    ok   a pending ACK summary piggybacks on the next DATA frame
+    ok   latest-generated-wins transfers piggyback ACKs to the newer DATA
+    ok   ACK priority transfers feedback from a displaced piggyback DATA frame
+    ok   ACK deadline materializes exactly one standalone cumulative summary
+    ok   a DATA loss neither advances receiver state nor creates an ACK
+    ok   delivered ACK summaries advance exactly the confirmed receiver beliefs
+    ok   sender history remains bounded during prolonged missing feedback
+    ok   identical actions on one pre-drawn trace are bit-identical
+    ok   busy-time union and offered frame airtime are separately accounted
+    ok   fully-conflicting interference corrupts disjoint intended receivers
+    ok   a declared sparse interference matrix permits spatial reuse
+    ok   collision retries are bounded and preserve logical frame identity
+    ok   inline mode applies DATA and causal ACK at their MAC event times
+    ok   an ACK outside bounded history is counted and rejected
+    ok   zero-load CSMA, ALOHA and TDMA preserve payload/sequence order
+
+test_shared_medium_infrastructure: PASS (23 checks)
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_causal_broadcast_policy
+============================================================
+
+    ok   one-receiver Causal-Broadcast is decision-equivalent to Causal-v3
+    ok   receiver permutation leaves the aggregate decision invariant
+    ok   worst confirmed receiver age drives adaptive new information
+    ok   hard new information is not blocked by unconfirmed receivers
+    ok   pure refresh is suppressed while useful broadcast information is pending
+    ok   max silence recovers from prolonged missing confirmation
+    ok   a sender with no out-neighbour never generates a frame
+
+test_causal_broadcast_policy: PASS (7 checks)
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_shared_medium_end_to_end
+============================================================
+
+    ok   one method/action sequence is bit-identical on one MAC trace
+    ok   periodic broadcast does not pay for unused causal feedback
+    ok   control, freshness and channel metrics share one finite output contract
+    ok   Causal-Broadcast receives real aggregated feedback with zero violations
+    ok   sender confirmed age remains conservative at every logged active link
+    ok   p=1 synchronized periodic load produces the declared collision collapse
+    ok   completed recipient outcomes and airtime accounting close exactly
+    ok   finite queue/history bounds hold and plant state remains finite
+
+test_shared_medium_end_to_end: PASS (8 checks)
+SwarmDroneMATLAB ready. Root: D:\Research\Drone\SwarmDroneMATLAB
+
+============================================================
+test_exp13_policy_contracts
+============================================================
+
+    ok   standalone feedback mode is explicit
+    ok   piggyback feedback mode is explicit
+    ok   unknown feedback modes fail at the boundary
+    ok   standalone-only never attaches pending ACKs to DATA
+    ok   piggyback-only never schedules a standalone deadline
+    ok   piggyback-only attaches the obligation to the next DATA
+    ok   unicast ablation materializes one physical frame per receiver
+    ok   unicast frames retain one logical generation sequence
+    ok   zero background load is inert
+    ok   full external occupancy blocks carrier-sensing service
+    ok   AoI-only baseline responds to confirmed age without state input
+    ok   AoCI-inspired baseline responds to age-times-change score
+    ok   delayed-ACK belief baseline responds to expected age
+    ok   causal-aoi-only runs end-to-end with finite causal state
+    ok   causal-aoci runs end-to-end with finite causal state
+    ok   delayed-ack-belief runs end-to-end with finite causal state
+    ok   causal-broadcast runs end-to-end with finite causal state
+    ok   causal-unicast runs end-to-end with finite causal state
+    ok   all EXP13 causal methods consume the paired absolute MAC trace
+    ok   causal-unicast rejects hybrid feedback instead of silently changing it
+    ok   deterministic LHS occupies every stratum once per parameter
+
+test_exp13_policy_contracts: PASS (21 checks)
+
+Declared development seeds: [13013001 13013002 13013003 13013004]
+No EXP14 seed is accessed by this script.
+
+[1/4] Equal-budget frontiers: 360 runs
+  completed  20 / 360 runs
+  completed  40 / 360 runs
+  completed  60 / 360 runs
+  completed  80 / 360 runs
+  completed 100 / 360 runs
+  completed 120 / 360 runs
+  completed 140 / 360 runs
+  completed 160 / 360 runs
+  completed 180 / 360 runs
+  completed 200 / 360 runs
+  completed 220 / 360 runs
+  completed 240 / 360 runs
+  completed 260 / 360 runs
+  completed 280 / 360 runs
+  completed 300 / 360 runs
+  completed 320 / 360 runs
+  completed 340 / 360 runs
+  completed 360 / 360 runs
+
+[2/4] Mechanism ablation: 60 runs
+  completed  15 /  60 runs
+  completed  30 /  60 runs
+  completed  45 /  60 runs
+  completed  60 /  60 runs
+
+[3/4] Trigger sensitivity: 39 runs
+  completed  13 /  39 runs
+  completed  26 /  39 runs
+  completed  39 /  39 runs
+
+[4/4] Contention and memory boundaries: 72 runs
+  completed  18 /  72 runs
+  completed  36 /  72 runs
+  completed  54 /  72 runs
+  completed  72 /  72 runs
+
+EXP13 machine gates
+  [PASS] contract_tests                   23 kernel + 7 trigger + 8 end-to-end + 21 EXP13 checks
+  [PASS] matrix_completeness              frontier=360 mechanism=60 sensitivity=39 contention=72
+  [PASS] finite_outputs                   formation, separation and true-age outputs are finite
+  [PASS] causal_conservatism              0 total protocol violations
+  [PASS] bounded_memory                   max queue=4; max history=32
+  [PASS] physical_accounting              recipient outcomes close and busy-time union includes external occupancy
+  [PASS] paired_absolute_trace            one trace hash per development seed across every matrix
+  [PASS] feedback_information_constraint  non-feedback arms emit no ACK; causal frontier cells confirm feedback
+  [PASS] feedback_ablation_semantics      standalone, piggyback and hybrid traffic are separated
+  [PASS] unicast_physical_frame_order     unicast generates no fewer physical DATA frames than paired hybrid broadcast
+  [PASS] lhs_strata                       12 points occupy each of nine strata exactly once
+  [PASS] background_load_exercised        zero-load arm is inert and both external-load arms occupy airtime
+  [PASS] finite_history_boundary          expired=46 stale=0
+  [PASS] declared_selection_rule          selected development design 0
+
+EXP13 VERDICT: PASS (14/14 gates)
+Selected development design: 0
+Policy superiority claim permitted: NO
+Holdout opened: NO
+saveAllFigures: 4 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp13_development\2026-08-29_111747\figures
+
+============================================================
+DONE : exp13_development
+TIME : 7 m 40 s
+FIGS : 4
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp13_development\2026-08-29_111747
+============================================================

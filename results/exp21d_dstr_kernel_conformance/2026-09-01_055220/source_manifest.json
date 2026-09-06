@@ -1,0 +1,30 @@
+{
+  "files": [
+    "docs/EXP21D_DSTR_KERNEL_CONFORMANCE_PLAN.md",
+    "docs/EXP21D_DSTR_KERNEL_AMENDMENT_01.md",
+    "docs/EXP21D_DSTR_RULE_MAP.md",
+    "network/simulateDstrScheduling.m",
+    "utils/exp21dDstrRegistry.m",
+    "utils/exp21dDstrEmptyRow.m",
+    "utils/generateExp21dDstrTrace.m",
+    "utils/applyExp21dDstrCondition.m",
+    "utils/runExp21dDstrKernelCell.m",
+    "tests/test_exp21d_dstr_kernel_contracts.m",
+    "experiments/exp21d_dstr_kernel_conformance.m"
+  ],
+  "fileHashes": [
+    4.165759767E+9,
+    3.55703112E+8,
+    7.62722559E+8,
+    1.1885660753E+10,
+    8.7075872E+7,
+    1.13429055E+8,
+    8.59795E+6,
+    1.72253143E+8,
+    4.00816775E+8,
+    1.747227704E+9,
+    4.611917709E+9
+  ],
+  "fileCount": 11,
+  "combinedHash": 5.061914E+6
+}

@@ -1,0 +1,3 @@
+contrast,nPairs,meanDeltaMissionRmse,minimumDeltaMissionRmse,maximumDeltaMissionRmse,meanDeltaMinimumSeparation,meanDeltaTotalCost,meanDeltaDataAirtime
+normal_closure_minus_periodic,50,0.0388015793642034,0.0283833328169881,0.0477330464285259,-0.0309139019856242,-0.103090834285713,-1.22671103999999
+response_no_emergency_minus_protected,50,0.22347982021254,0.172488900193756,0.251042381689538,-0.260128701227098,-0.0331483428571425,-0.348057599999996

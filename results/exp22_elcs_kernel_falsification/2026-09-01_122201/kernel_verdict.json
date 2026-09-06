@@ -1,0 +1,9 @@
+{
+  "status": "ELCS_F_KERNEL_INVALID",
+  "gatesPassed": 13,
+  "gatesTotal": 15,
+  "rows": 1400,
+  "closedLoopIntegrationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

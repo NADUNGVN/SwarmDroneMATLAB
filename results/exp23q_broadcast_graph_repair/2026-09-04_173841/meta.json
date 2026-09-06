@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23q_broadcast_graph_repair",
+  "runId": "2026-09-04_173841",
+  "startedAt": "2026-09-04 17:38:41",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh independent-oracle validation of repaired broadcast graph.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23q_broadcast_graph_repair.m",
+  "finishedAt": "2026-09-04 17:38:59",
+  "elapsedSec": 18.1145476,
+  "elapsedText": "18.1 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

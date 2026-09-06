@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22f_direct_feasibility",
+  "runId": "2026-09-01_180435",
+  "startedAt": "2026-09-01 18:04:36",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F direct common-PHY feasibility against full-mission periodic static TDMA and native D-STR.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22f_direct_feasibility.m",
+  "finishedAt": "2026-09-01 18:25:30",
+  "elapsedSec": 1253.9416832,
+  "elapsedText": "20 m 54 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

@@ -3,10 +3,20 @@
 **Status: PLAN ONLY. No hardware work has been done, and nothing in the
 frozen campaign is a hardware result.**
 
+**Current transition gate (post-EXP21A): CLOSED.** EXP21A returned
+`SCHEDULING_GAIN_FRAGILE`: distributed reservation survived both nominal cells
+but failed clock, hidden-control, churn, convergence and recovery requirements.
+The next authorized work is a simulation-level timing/coordination repair, not
+procurement or flight.  This roadmap remains a deferred validation sequence.
+
 This document stages the transition from `simulation-v1.0` to a hardware
 validation. Its organising principle is that each phase must **test a
 named simulation assumption** — not merely demonstrate that something
 flies. Phases that only produce a video are excluded.
+
+The provisional Study 2 platform choice, staged bill of materials and
+procurement gates are specified in `docs/STUDY2_HARDWARE_BOM.md`. That choice
+does not alter the frozen Study 1 results and is not required for EXP12--EXP14.
 
 Two rules apply throughout:
 

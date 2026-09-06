@@ -1,0 +1,193 @@
+{
+  "version": "EXP14E-PREREGISTERED-HOLDOUT-v1",
+  "frozenDate": "2026-08-30",
+  "seedStatus": "unopened when this registry was written",
+  "seeds": [
+    1.4015001E+7,
+    1.4015002E+7,
+    1.4015003E+7,
+    1.4015004E+7,
+    1.4015005E+7,
+    1.4015006E+7,
+    1.4015007E+7,
+    1.4015008E+7,
+    1.4015009E+7,
+    1.401501E+7,
+    1.4015011E+7,
+    1.4015012E+7,
+    1.4015013E+7,
+    1.4015014E+7,
+    1.4015015E+7,
+    1.4015016E+7,
+    1.4015017E+7,
+    1.4015018E+7,
+    1.4015019E+7,
+    1.401502E+7,
+    1.4015021E+7,
+    1.4015022E+7,
+    1.4015023E+7,
+    1.4015024E+7,
+    1.4015025E+7,
+    1.4015026E+7,
+    1.4015027E+7,
+    1.4015028E+7,
+    1.4015029E+7,
+    1.401503E+7,
+    1.4015031E+7,
+    1.4015032E+7,
+    1.4015033E+7,
+    1.4015034E+7,
+    1.4015035E+7,
+    1.4015036E+7,
+    1.4015037E+7,
+    1.4015038E+7,
+    1.4015039E+7,
+    1.401504E+7,
+    1.4015041E+7,
+    1.4015042E+7,
+    1.4015043E+7,
+    1.4015044E+7,
+    1.4015045E+7,
+    1.4015046E+7,
+    1.4015047E+7,
+    1.4015048E+7,
+    1.4015049E+7,
+    1.401505E+7,
+    1.4015051E+7,
+    1.4015052E+7,
+    1.4015053E+7,
+    1.4015054E+7,
+    1.4015055E+7,
+    1.4015056E+7,
+    1.4015057E+7,
+    1.4015058E+7,
+    1.4015059E+7,
+    1.401506E+7,
+    1.4015061E+7,
+    1.4015062E+7,
+    1.4015063E+7,
+    1.4015064E+7,
+    1.4015065E+7,
+    1.4015066E+7,
+    1.4015067E+7,
+    1.4015068E+7,
+    1.4015069E+7,
+    1.401507E+7,
+    1.4015071E+7,
+    1.4015072E+7,
+    1.4015073E+7,
+    1.4015074E+7,
+    1.4015075E+7,
+    1.4015076E+7,
+    1.4015077E+7,
+    1.4015078E+7,
+    1.4015079E+7,
+    1.401508E+7,
+    1.4015081E+7,
+    1.4015082E+7,
+    1.4015083E+7,
+    1.4015084E+7,
+    1.4015085E+7,
+    1.4015086E+7,
+    1.4015087E+7,
+    1.4015088E+7,
+    1.4015089E+7,
+    1.401509E+7,
+    1.4015091E+7,
+    1.4015092E+7,
+    1.4015093E+7,
+    1.4015094E+7,
+    1.4015095E+7,
+    1.4015096E+7,
+    1.4015097E+7,
+    1.4015098E+7,
+    1.4015099E+7,
+    1.40151E+7
+  ],
+  "bootstrapReplicates": 10000,
+  "bootstrapSeed": 1.4151515E+7,
+  "familywiseAlpha": 0.05,
+  "primaryMetrics": [
+    "RMSE",
+    "OFFERED_UTIL"
+  ],
+  "primaryCells": [
+    "n5-csma",
+    "n10-ring2",
+    "n20-ring2"
+  ],
+  "boundaryCells": [
+    "n5-aloha"
+  ],
+  "candidate": "selected-adaptive-scaled",
+  "primaryComparator": "access-only",
+  "cells": [
+    {
+      "id": "n5-csma",
+      "label": "N5 CSMA",
+      "role": "primary"
+    },
+    {
+      "id": "n10-ring2",
+      "label": "N10 ring2",
+      "role": "primary"
+    },
+    {
+      "id": "n20-ring2",
+      "label": "N20 ring2",
+      "role": "primary"
+    },
+    {
+      "id": "n5-aloha",
+      "label": "N5 ALOHA",
+      "role": "boundary"
+    }
+  ],
+  "arms": [
+    {
+      "id": "selected-adaptive-scaled",
+      "label": "Selected adaptive + scaled",
+      "scaledAccess": true,
+      "historicalReference": false
+    },
+    {
+      "id": "access-only",
+      "label": "Access-only hybrid",
+      "scaledAccess": true,
+      "historicalReference": false
+    },
+    {
+      "id": "historical-hybrid",
+      "label": "Historical hybrid p=0.2",
+      "scaledAccess": false,
+      "historicalReference": true
+    },
+    {
+      "id": "piggyback-scaled",
+      "label": "Piggyback-only + scaled",
+      "scaledAccess": true,
+      "historicalReference": false
+    },
+    {
+      "id": "state-scaled",
+      "label": "State-event + scaled",
+      "scaledAccess": true,
+      "historicalReference": false
+    },
+    {
+      "id": "belief-scaled",
+      "label": "Delayed-belief + scaled",
+      "scaledAccess": true,
+      "historicalReference": false
+    },
+    {
+      "id": "periodic-p10-scaled",
+      "label": "Periodic-P10 + scaled",
+      "scaledAccess": true,
+      "historicalReference": false
+    }
+  ],
+  "expectedRuns": 2800,
+  "confirmatoryClaimPermitted": true,
+  "universalMacClaimPermitted": false
+}

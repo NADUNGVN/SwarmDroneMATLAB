@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "gatesPassed": 6,
+  "gatesTotal": 6,
+  "totalDevelopmentRuns": 96,
+  "policyClaimPermitted": false,
+  "note": "Post-EXP13 diagnostic confirms whether multi-slot service distinguishes abstract CSMA from ALOHA; it does not rank policies."
+}

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23an_full_detectability_routing",
+  "runId": "2026-09-06_072949",
+  "startedAt": "2026-09-06 07:29:49",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen routed-management primitive, reliability, accounting, and semantic-multicast diagnostic.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23an_full_detectability_routing.m",
+  "finishedAt": "2026-09-06 07:30:18",
+  "elapsedSec": 29.2037049,
+  "elapsedText": "29.2 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

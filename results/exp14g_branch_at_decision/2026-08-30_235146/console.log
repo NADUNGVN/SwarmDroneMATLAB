@@ -1,0 +1,86 @@
+
+============================================================
+RUN  : exp14g_branch_at_decision
+ID   : 2026-08-30_235146
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14g_branch_at_decision\2026-08-30_235146
+WHEN : 2026-08-30 23:51:46
+============================================================
+
+EXP14G pilot: 240 selected-policy runs.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  pilot   1-- 16 / 240; candidates 1889
+  pilot  17-- 32 / 240; candidates 3748
+  pilot  33-- 48 / 240; candidates 5625
+  pilot  49-- 64 / 240; candidates 7461
+  pilot  65-- 80 / 240; candidates 9349
+  pilot  81-- 96 / 240; candidates 11084
+  pilot  97--112 / 240; candidates 12923
+  pilot 113--128 / 240; candidates 14769
+  pilot 129--144 / 240; candidates 16671
+  pilot 145--160 / 240; candidates 18482
+  pilot 161--176 / 240; candidates 20267
+  pilot 177--192 / 240; candidates 22062
+  pilot 193--208 / 240; candidates 23931
+  pilot 209--224 / 240; candidates 25754
+  pilot 225--240 / 240; candidates 27658
+
+Outcome-blind selection locked: hash 788188353, 64 events.
+  n5-csma      20 events from 20 distinct seeds
+  n10-ring2    20 events from 20 distinct seeds
+  n20-ring2     4 events from  4 distinct seeds
+  n5-aloha     20 events from 20 distinct seeds
+
+EXP14G causal replay: 64 pairs, 128 simulations.
+{Error using analyzeAckBranchPair (line 21)
+analyzeAckBranchPair: target entry hash differs from selection.
+
+Error in exp14g_branch_at_decision>runReplay (line 165)
+row=analyzeAckBranchPair(outA,outS,actual,selection);
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in exp14g_branch_at_decision (line 76)
+    parfor (q=1:numel(index),12)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 
+
+EXP14G REPLAY RECOVERY: 2026-08-30_235146
+Selection hash 788188353 unchanged; zero prior outcome rows.
+
+Outcome-blind selection locked: hash 788188353, 64 events.
+  n5-csma      20 events from 20 distinct seeds
+  n10-ring2    20 events from 20 distinct seeds
+  n20-ring2     4 events from  4 distinct seeds
+  n5-aloha     20 events from 20 distinct seeds
+
+EXP14G causal replay: 64 pairs, 128 simulations.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  replay pairs   1-- 16 /  64
+  replay pairs  17-- 32 /  64
+  replay pairs  33-- 48 /  64
+  replay pairs  49-- 64 /  64
+
+EXP14G integrity gates
+  [PASS] registry_contract               hash 52831592 over 31 leaves
+  [PASS] pilot_matrix                    240 unique pilot runs
+  [PASS] pilot_integrity                 finite causal bounded pilot runs
+  [PASS] candidate_accounting            27658 permitted-decision rows
+  [PASS] selection_reproducible          selection recomputes exactly from pre-decision covariates
+  [FAIL] selection_support               n5-csma=20, n10-ring2=20, n20-ring2=4, n5-aloha=20
+  [PASS] replay_completeness             64 branch pairs
+  [PASS] shared_predecision_state        target hashes matched inside pair analyzer
+  [PASS] intervention_semantics          only target obligations are excluded from standalone service
+  [PASS] finite_pair_outputs             all causal effects are finite
+  [PASS] causal_protocol                 zero divergence and invariant violations in both branches
+  [PASS] airtime_identity                max residual 1.11e-15 s
+  [PASS] lead_contract                   entry leads respect censoring and local horizon
+  [PASS] development_claim_boundary      performance is reported but never gates or fits a predictor
+
+EXP14G analysis withheld because integrity failed.
+
+============================================================
+DONE : exp14g_branch_at_decision
+TIME : 2 m 45 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14g_branch_at_decision\2026-08-30_235146
+============================================================

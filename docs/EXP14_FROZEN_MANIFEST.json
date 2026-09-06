@@ -1,0 +1,23 @@
+{
+  "version": "EXP14-FROZEN-v1",
+  "frozen_date": "2026-08-29",
+  "status_at_write": "holdout unopened",
+  "registry_hash": 201658753,
+  "registry_leaves": 139,
+  "primary_config_hash_seed_zero": {
+    "clean": 103822268,
+    "moderate": 103613168,
+    "stressed": 101886664,
+    "leaves_each": 102
+  },
+  "holdout_seed_first": 14014001,
+  "holdout_seed_last": 14014100,
+  "holdout_seed_count": 100,
+  "primary_frontier_runs": 9000,
+  "primary_mechanism_runs": 1500,
+  "ood_runs": 4800,
+  "total_runs": 15300,
+  "policy_performance_gate": null,
+  "negative_results_retained": true,
+  "configuration_changes_after_opening": false
+}

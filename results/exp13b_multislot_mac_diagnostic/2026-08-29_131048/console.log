@@ -1,0 +1,32 @@
+
+============================================================
+RUN  : exp13b_multislot_mac_diagnostic
+ID   : 2026-08-29_131048
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp13b_multislot_mac_diagnostic\2026-08-29_131048
+WHEN : 2026-08-29 13:10:49
+============================================================
+
+EXP13B matrix: 96 development diagnostic runs
+  completed 24 / 96 runs
+  completed 48 / 96 runs
+  completed 72 / 96 runs
+  completed 96 / 96 runs
+
+EXP13B gates
+  [PASS] matrix_completeness                96 declared runs
+  [PASS] one_slot_degeneracy_reproduced     one-slot CSMA and ALOHA are exactly identical on physical outcomes
+  [PASS] multi_slot_duration                multi-slot bare DATA duration=4 slots
+  [PASS] multi_slot_mac_distinguishable     multi-slot CSMA and ALOHA differ in at least one paired outcome
+  [PASS] protocol_and_accounting            0 invariant violations; max queue=2; max history=32
+  [PASS] paired_absolute_trace              one absolute random trace per development seed
+
+EXP13B VERDICT: PASS (6/6)
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp13b_multislot_mac_diagnostic\2026-08-29_131048\figures
+
+============================================================
+DONE : exp13b_multislot_mac_diagnostic
+TIME : 1 m 04 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp13b_multislot_mac_diagnostic\2026-08-29_131048
+============================================================

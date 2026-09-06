@@ -1,0 +1,18 @@
+{
+  "experiment": "exp21d_dstr_kernel_conformance",
+  "runId": "2026-09-01_070545",
+  "startedAt": "2026-09-01 07:05:45",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Rule-mapped prior-art kernel conformance and boundary study; no closed-loop, policy-promotion, or submission claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp21d_dstr_kernel_conformance.m",
+  "finishedAt": "2026-09-01 07:17:58",
+  "elapsedSec": 732.8671388,
+  "elapsedText": "12 m 13 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

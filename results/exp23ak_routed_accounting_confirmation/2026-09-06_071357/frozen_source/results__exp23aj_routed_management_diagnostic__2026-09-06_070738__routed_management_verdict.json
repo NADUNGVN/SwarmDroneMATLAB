@@ -1,0 +1,17 @@
+{
+  "status": "ROUTED_MANAGEMENT_PRIMITIVE_DIAGNOSTIC_INVALID",
+  "gatesPassed": 15,
+  "gatesTotal": 17,
+  "structuralRows": 210,
+  "monteCarloRows": 6,
+  "semanticRows": 25,
+  "routingPrimitiveValidated": false,
+  "semanticMulticastDiagnosticValidated": false,
+  "closedLoopManagementRelayingValidated": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "repair_routing_primitive_without_relaxing_registered_gates"
+}

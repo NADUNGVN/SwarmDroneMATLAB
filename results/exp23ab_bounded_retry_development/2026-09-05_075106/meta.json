@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ab_bounded_retry_development",
+  "runId": "2026-09-05_075106",
+  "startedAt": "2026-09-05 07:51:06",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Finite CLAIM retry/backoff with protected emergency DATA.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ab_bounded_retry_development.m",
+  "finishedAt": "2026-09-05 07:53:33",
+  "elapsedSec": 146.9715296,
+  "elapsedText": "2 m 27 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

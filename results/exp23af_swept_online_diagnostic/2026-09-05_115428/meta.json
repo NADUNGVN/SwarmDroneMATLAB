@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23af_swept_online_diagnostic",
+  "runId": "2026-09-05_115428",
+  "startedAt": "2026-09-05 11:54:29",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Causal online command-sweep closure calibration.",
+  "sourceFile": "",
+  "finishedAt": "2026-09-05 11:54:51",
+  "elapsedSec": 21.613232,
+  "elapsedText": "21.6 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

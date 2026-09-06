@@ -1,0 +1,99 @@
+
+============================================================
+RUN  : exp23r_coherence_packet_graph_repair
+ID   : 2026-09-04_174126
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23r_coherence_packet_graph_repair\2026-09-04_174126
+WHEN : 2026-09-04 17:41:27
+============================================================
+
+  groups   1--  5 / 300; rows   30 / 1800
+  groups   6-- 10 / 300; rows   60 / 1800
+  groups  11-- 15 / 300; rows   90 / 1800
+  groups  16-- 20 / 300; rows  120 / 1800
+  groups  21-- 25 / 300; rows  150 / 1800
+  groups  26-- 30 / 300; rows  180 / 1800
+  groups  31-- 35 / 300; rows  210 / 1800
+  groups  36-- 40 / 300; rows  240 / 1800
+  groups  41-- 45 / 300; rows  270 / 1800
+  groups  46-- 50 / 300; rows  300 / 1800
+  groups  51-- 55 / 300; rows  330 / 1800
+  groups  56-- 60 / 300; rows  360 / 1800
+  groups  61-- 65 / 300; rows  390 / 1800
+  groups  66-- 70 / 300; rows  420 / 1800
+  groups  71-- 75 / 300; rows  450 / 1800
+  groups  76-- 80 / 300; rows  480 / 1800
+  groups  81-- 85 / 300; rows  510 / 1800
+  groups  86-- 90 / 300; rows  540 / 1800
+  groups  91-- 95 / 300; rows  570 / 1800
+  groups  96--100 / 300; rows  600 / 1800
+  groups 101--105 / 300; rows  630 / 1800
+  groups 106--110 / 300; rows  660 / 1800
+  groups 111--115 / 300; rows  690 / 1800
+  groups 116--120 / 300; rows  720 / 1800
+  groups 121--125 / 300; rows  750 / 1800
+  groups 126--130 / 300; rows  780 / 1800
+  groups 131--135 / 300; rows  810 / 1800
+  groups 136--140 / 300; rows  840 / 1800
+  groups 141--145 / 300; rows  870 / 1800
+  groups 146--150 / 300; rows  900 / 1800
+  groups 151--155 / 300; rows  930 / 1800
+  groups 156--160 / 300; rows  960 / 1800
+  groups 161--165 / 300; rows  990 / 1800
+  groups 166--170 / 300; rows 1020 / 1800
+  groups 171--175 / 300; rows 1050 / 1800
+  groups 176--180 / 300; rows 1080 / 1800
+  groups 181--185 / 300; rows 1110 / 1800
+  groups 186--190 / 300; rows 1140 / 1800
+  groups 191--195 / 300; rows 1170 / 1800
+  groups 196--200 / 300; rows 1200 / 1800
+  groups 201--205 / 300; rows 1230 / 1800
+  groups 206--210 / 300; rows 1260 / 1800
+  groups 211--215 / 300; rows 1290 / 1800
+  groups 216--220 / 300; rows 1320 / 1800
+  groups 221--225 / 300; rows 1350 / 1800
+  groups 226--230 / 300; rows 1380 / 1800
+  groups 231--235 / 300; rows 1410 / 1800
+  groups 236--240 / 300; rows 1440 / 1800
+  groups 241--245 / 300; rows 1470 / 1800
+  groups 246--250 / 300; rows 1500 / 1800
+  groups 251--255 / 300; rows 1530 / 1800
+  groups 256--260 / 300; rows 1560 / 1800
+  groups 261--265 / 300; rows 1590 / 1800
+  groups 266--270 / 300; rows 1620 / 1800
+  groups 271--275 / 300; rows 1650 / 1800
+  groups 276--280 / 300; rows 1680 / 1800
+  groups 281--285 / 300; rows 1710 / 1800
+  groups 286--290 / 300; rows 1740 / 1800
+  groups 291--295 / 300; rows 1770 / 1800
+  groups 296--300 / 300; rows 1800 / 1800
+
+EXP23R coherence packet-kernel gates
+  [PASS] registry_frozen                             hash 131713027 over 91 leaves
+  [PASS] matrix_complete_unique                      1800/1800 unique rows
+  [PASS] exact_matrix_coverage                       50 seeds, N5/N10, three geometry and six channel cells exact
+  [PASS] paired_absolute_realizations                geometry, receiver graph, selector, packet draws and occupancy pair
+  [PASS] coherence_mode_exact                        every row uses coherence binding and cumulative receipts
+  [PASS] packet_format_exact                         28-byte CLAIM, 16+10e RESPONSE and 24-byte REVOKE exact
+  [PASS] packet_mtu_closure                          maximum observed response packet 66 bytes
+  [PASS] admitted_binding_exact                      lease horizon, renewal slack and certified sender graph bind exactly
+  [PASS] inadmissible_fail_silent                    no/too-short horizon produces no control or scheduled validity
+  [PASS] admitted_nonblackout_liveness               1185/1185 admitted nonblackout rows terminally certify
+  [PASS] global_certificate_safety                   zero false-valid, scheduled-collision and unsupported certificates
+  [PASS] blackout_stimulus                           183 admitted rows lose one required witness response permanently
+  [PASS] blackout_fail_silent                        missing required response never creates complete validity
+  [PASS] attempt_byte_recipient_accounting           control bytes and management/DATA recipient partitions close
+  [PASS] absolute_control_bounds                     max attempt/byte ratios 0.631250/0.634177
+  [PASS] loss_retry_stimulus                         loss and fragmented occupancy activate same-sequence retry
+  [PASS] selector_binding_branch_stimulus            target/contract/no-selector/binding-reject/admit 816/786/198/180/1422
+  [PASS] hidden_sender_witness_stimulus              maximum witness load 5 with receiver-lifted hidden edges
+  [PASS] revocation_not_yet_claimed                  static per-run packet kernel does not claim dynamic revocation
+  [PASS] causal_kernel_scope_only                    causal kernel only; no closed-loop, promotion or submission claim
+
+EXP23R DECISION: COHERENCE_ELCS_W_GRAPH_REPAIR_PACKET_KERNEL_VALID
+
+============================================================
+DONE : exp23r_coherence_packet_graph_repair
+TIME : 3 m 59 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23r_coherence_packet_graph_repair\2026-09-04_174126
+============================================================

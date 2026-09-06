@@ -1,0 +1,99 @@
+{
+  "version": "EXP14D-FACTORIAL-DEVELOPMENT-v1",
+  "seeds": [
+    1.6017001E+7,
+    1.6017002E+7,
+    1.6017003E+7,
+    1.6017004E+7,
+    1.6017005E+7,
+    1.6017006E+7,
+    1.6017007E+7,
+    1.6017008E+7,
+    1.6017009E+7,
+    1.601701E+7,
+    1.6017011E+7,
+    1.6017012E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-csma",
+      "label": "N5 CSMA"
+    },
+    {
+      "id": "n5-aloha",
+      "label": "N5 ALOHA"
+    },
+    {
+      "id": "n10-ring2",
+      "label": "N10 ring2"
+    },
+    {
+      "id": "n20-ring2",
+      "label": "N20 ring2"
+    }
+  ],
+  "arms": [
+    {
+      "id": "a0-g0-s0",
+      "label": "A0 G0 S0",
+      "adaptiveAck": false,
+      "loadGuard": false,
+      "accessScaling": false
+    },
+    {
+      "id": "a1-g0-s0",
+      "label": "A1 G0 S0",
+      "adaptiveAck": true,
+      "loadGuard": false,
+      "accessScaling": false
+    },
+    {
+      "id": "a0-g1-s0",
+      "label": "A0 G1 S0",
+      "adaptiveAck": false,
+      "loadGuard": true,
+      "accessScaling": false
+    },
+    {
+      "id": "a1-g1-s0",
+      "label": "A1 G1 S0",
+      "adaptiveAck": true,
+      "loadGuard": true,
+      "accessScaling": false
+    },
+    {
+      "id": "a0-g0-s1",
+      "label": "A0 G0 S1",
+      "adaptiveAck": false,
+      "loadGuard": false,
+      "accessScaling": true
+    },
+    {
+      "id": "a1-g0-s1",
+      "label": "A1 G0 S1",
+      "adaptiveAck": true,
+      "loadGuard": false,
+      "accessScaling": true
+    },
+    {
+      "id": "a0-g1-s1",
+      "label": "A0 G1 S1",
+      "adaptiveAck": false,
+      "loadGuard": true,
+      "accessScaling": true
+    },
+    {
+      "id": "a1-g1-s1",
+      "label": "A1 G1 S1",
+      "adaptiveAck": true,
+      "loadGuard": true,
+      "accessScaling": true
+    }
+  ],
+  "expectedRuns": 384,
+  "confirmatoryClaimPermitted": false,
+  "n20OfferedUtilCeiling": 1.2,
+  "regretTieMargin": 0.01,
+  "contractHash": 8.052507E+6,
+  "expectedContractHash": 8.052507E+6
+}

@@ -1,0 +1,65 @@
+
+============================================================
+RUN  : exp23v_fast_reactivation_development
+ID   : 2026-09-04_222905
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23v_fast_reactivation_development\2026-09-04_222905
+WHEN : 2026-09-04 22:29:06
+============================================================
+
+  seeds  1-- 3 / 60; rows   9 / 180
+  seeds  4-- 6 / 60; rows  18 / 180
+  seeds  7-- 9 / 60; rows  27 / 180
+  seeds 10--12 / 60; rows  36 / 180
+  seeds 13--15 / 60; rows  45 / 180
+  seeds 16--18 / 60; rows  54 / 180
+  seeds 19--21 / 60; rows  63 / 180
+  seeds 22--24 / 60; rows  72 / 180
+  seeds 25--27 / 60; rows  81 / 180
+  seeds 28--30 / 60; rows  90 / 180
+  seeds 31--33 / 60; rows  99 / 180
+  seeds 34--36 / 60; rows 108 / 180
+  seeds 37--39 / 60; rows 117 / 180
+  seeds 40--42 / 60; rows 126 / 180
+  seeds 43--45 / 60; rows 135 / 180
+  seeds 46--48 / 60; rows 144 / 180
+  seeds 49--51 / 60; rows 153 / 180
+  seeds 52--54 / 60; rows 162 / 180
+  seeds 55--57 / 60; rows 171 / 180
+  seeds 58--60 / 60; rows 180 / 180
+
+EXP23V fast-reactivation development gates
+  [PASS] registry_frozen                             hash 103636012 over 97 leaves
+  [PASS] source_envelope_valid                       valid 360-row EXP23U operating envelope is fixed
+  [PASS] matrix_complete_unique                      180/180 unique rows
+  [PASS] exact_matrix_coverage                       60 reused paired seeds and three fast arms exact
+  [PASS] source_realization_pairing                  channel, estimator, clocks and occupancy match EXP23U by seed
+  [PASS] fast_mode_exact                             every row activates union-graph fast mode
+  [PASS] dynamic_event_stimulus                      every event follows positive state and suppresses immediately
+  [PASS] exact_revoke_mapping                        one exact 24-byte common-PHY REVOKE per trajectory
+  [PASS] fresh_response_reactivation                 120/120 early/late rows reactivate after eligibility
+  [PASS] old_fence_bypass_stimulus                   fresh union-witness closure reuses before conservative old fence
+  [PASS] response_blackout_fail_silent               missing required witness RESPONSE prevents fast reactivation
+  [PASS] candidate_safety                            zero certificate, collision, safety or divergence failures
+  [PASS] exact_continuous_replay                     DATA/control outcomes and affine-clock timeline replay exactly
+  [PASS] management_airtime_accounting               REVOKE/CLAIM/RESPONSE recipient, byte and airtime totals close
+  [PASS] shared_background_certificate               every fast schedule composes the paired IID-15 trace
+  [PASS] absolute_control_bounds                     absolute attempt and byte bounds hold
+  [PASS] causal_recipient_airtime                    recipient/airtime accounting closes with zero forbidden reads
+  [PASS] development_scope_only                      same-seed mechanism probe cannot promote
+
+EXP23V repair effects
+                 arm                  relativeRmseVsOld    relativeCostVsOld    physicalReacquisitionRate    periodicEpsilonDominates    mechanismRelief
+    ______________________________    _________________    _________________    _________________________    ________________________    _______________
+
+    "fast-early-delivered"                -0.022725              0.037577                   1                           0                       1       
+    "fast-late-delivered"                 -0.061663              0.037839                   1                           0                       1       
+    "fast-early-response-blackout"                0           -2.2204e-16                   0                           1                       1       
+
+EXP23V DECISION: FAST_REACTIVATION_DEVELOPMENT_FEASIBLE
+
+============================================================
+DONE : exp23v_fast_reactivation_development
+TIME : 9 m 49 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23v_fast_reactivation_development\2026-09-04_222905
+============================================================

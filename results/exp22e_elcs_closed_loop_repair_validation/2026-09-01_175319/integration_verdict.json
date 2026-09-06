@@ -1,0 +1,9 @@
+{
+  "status": "ELCS_F_FALLBACK_REPAIR_CLOSED_LOOP_VALID",
+  "gatesPassed": 17,
+  "gatesTotal": 17,
+  "rows": 120,
+  "robustnessContinuationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

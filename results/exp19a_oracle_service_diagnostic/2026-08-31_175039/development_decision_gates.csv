@@ -1,0 +1,6 @@
+gate,passed,detail
+boundary_oracle_pareto_headroom,1,an oracle lowers mean RMSE and offered utilization with no extra failures
+n10_moderate_failure_reduction,0,an oracle reduces failures without increasing mean offered utilization
+not_reproduced_by_periodic_tdma,0,no periodic TDMA arm Pareto-reproduces a boundary-qualified oracle
+semantic_priority_changes_fifo,1,an oracle differs from FIFO in at least 10% of comparable decisions
+all_integrity_gates,1,all declared EXP19A integrity gates pass

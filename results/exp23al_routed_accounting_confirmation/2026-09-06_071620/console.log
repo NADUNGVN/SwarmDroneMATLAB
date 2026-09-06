@@ -1,0 +1,70 @@
+
+============================================================
+RUN  : exp23al_routed_accounting_confirmation
+ID   : 2026-09-06_071620
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23al_routed_accounting_confirmation\2026-09-06_071620
+WHEN : 2026-09-06 07:16:20
+============================================================
+
+  conditional accounting N=5, spatial-reuse-lower-bound           p=0.05 complete
+  conditional accounting N=5, spatial-reuse-lower-bound           p=0.20 complete
+  conditional accounting N=5, spatial-reuse-lower-bound           p=0.30 complete
+  conditional accounting N=5, complete-interference-upper-bound   p=0.05 complete
+  conditional accounting N=5, complete-interference-upper-bound   p=0.20 complete
+  conditional accounting N=5, complete-interference-upper-bound   p=0.30 complete
+  conditional accounting N=10, spatial-reuse-lower-bound           p=0.05 complete
+  conditional accounting N=10, spatial-reuse-lower-bound           p=0.20 complete
+  conditional accounting N=10, spatial-reuse-lower-bound           p=0.30 complete
+  conditional accounting N=10, complete-interference-upper-bound   p=0.05 complete
+  conditional accounting N=10, complete-interference-upper-bound   p=0.20 complete
+  conditional accounting N=10, complete-interference-upper-bound   p=0.30 complete
+  conditional accounting N=20, spatial-reuse-lower-bound           p=0.05 complete
+  conditional accounting N=20, spatial-reuse-lower-bound           p=0.20 complete
+  conditional accounting N=20, spatial-reuse-lower-bound           p=0.30 complete
+  conditional accounting N=20, complete-interference-upper-bound   p=0.05 complete
+  conditional accounting N=20, complete-interference-upper-bound   p=0.20 complete
+  conditional accounting N=20, complete-interference-upper-bound   p=0.30 complete
+
+EXP23AK routed integer-accounting gates
+  [PASS] registry_and_invalid_parent_retained         registry 52896360/47 leaves; parent retained at 15/17
+  [PASS] replay_v2_narrow_repair                      all radio replays use integer-derived-airtime version v2
+  [PASS] parent_scientific_gates_retained             all 15 routing/reliability/causality parent gates remain passed
+  [PASS] structural_matrix_and_mechanism_identity     210/210 route plans and certificates reproduce exactly
+  [PASS] structural_integer_attempts_and_bytes        maximum confirmed bytes 9504
+  [PASS] structural_derived_airtime_exact             210/210 offered airtimes equal 8*integer bytes/rate exactly
+  [PASS] conditional_random_matrix_and_path_diversity 36000 new traces across 18 cells; attempt paths vary
+  [PASS] conditional_random_accounting_exact          attempt range 1--11; every trace byte/airtime exact
+  [FAIL] semantic_routes_reproduced_and_accounted     25/25 semantic routes exact, including 1 local-only packet
+  [PASS] primitive_scope_only                         routed primitive repaired; closed-loop and renewal flags remain false
+
+Conditional replay summary
+    N              interferenceMode              linkErasureProbability    GroupCount    min_attempts    max_attempts    mean_attempts    min_physicalBytes    max_physicalBytes    mean_physicalBytes
+    __    ___________________________________    ______________________    __________    ____________    ____________    _____________    _________________    _________________    __________________
+
+     5    "complete-interference-upper-bound"             0.05                2000            1                3            2.9065               24                   288                 143.89      
+     5    "complete-interference-upper-bound"              0.2                2000            1                3             2.598               24                   288                 128.52      
+     5    "complete-interference-upper-bound"              0.3                2000            1                3            2.3955               24                   288                 118.73      
+     5    "spatial-reuse-lower-bound"                     0.05                2000            1                3             2.899               24                   288                 143.63      
+     5    "spatial-reuse-lower-bound"                      0.2                2000            1                3            2.5985               24                   288                 128.78      
+     5    "spatial-reuse-lower-bound"                      0.3                2000            1                3              2.42               24                   288                 119.49      
+    10    "complete-interference-upper-bound"             0.05                2000            1                6             5.501               24                   576                 272.62      
+    10    "complete-interference-upper-bound"              0.2                2000            1                6             4.243               24                   576                 210.26      
+    10    "complete-interference-upper-bound"              0.3                2000            1                6             3.579               24                   576                  177.9      
+    10    "spatial-reuse-lower-bound"                     0.05                2000            1                6            5.5215               24                   576                 273.47      
+    10    "spatial-reuse-lower-bound"                      0.2                2000            1                6             4.304               24                   576                 212.18      
+    10    "spatial-reuse-lower-bound"                      0.3                2000            1                6             3.579               24                   576                 178.26      
+    20    "complete-interference-upper-bound"             0.05                2000            1               11            9.7335               28                  1056                 480.51      
+    20    "complete-interference-upper-bound"              0.2                2000            1               11            6.7005               24                  1056                 334.58      
+    20    "complete-interference-upper-bound"              0.3                2000            1               11             5.236               24                  1056                 259.45      
+    20    "spatial-reuse-lower-bound"                     0.05                2000            1               11            9.7445               28                  1056                 480.36      
+    20    "spatial-reuse-lower-bound"                      0.2                2000            1               11            6.8405               24                  1056                 339.71      
+    20    "spatial-reuse-lower-bound"                      0.3                2000            1               11            5.2645               24                  1056                 260.59      
+
+EXP23AK DECISION: INTEGER_ACCOUNTED_ROUTING_PRIMITIVE_DIAGNOSTIC_INVALID
+
+============================================================
+DONE : exp23al_routed_accounting_confirmation
+TIME : 18.3 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23al_routed_accounting_confirmation\2026-09-06_071620
+============================================================

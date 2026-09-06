@@ -1,0 +1,16 @@
+{
+  "status": "ACCESS_HEADROOM_BUT_NO_REGISTERED_SEMANTIC_PROMOTION",
+  "analysisType": "post-hoc descriptive mechanism audit",
+  "registeredVerdictChanged": false,
+  "hypothesisTestsRun": false,
+  "boundaryAccessParetoInterval": true,
+  "n10ModerateAccessFailureRepair": true,
+  "periodicFrontierExplainsMajorGain": true,
+  "semanticSchedulerPrimaryNoveltyPermitted": false,
+  "exp19bPermitted": false,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false,
+  "retainedMechanism": "collision-free scheduled access",
+  "retiredMechanism": "oracle semantic priority as primary contribution",
+  "nextResearchQuestion": "Can a causal implementable contention-to-scheduled access mode achieve the periodic TDMA frontier without receiver-truth oracle state?"
+}

@@ -1,0 +1,7 @@
+gate,passed,detail
+exact_fixed_route_alias,1,400/400 rows have zero difference on 17 registered fields
+feasible_coverage,1,5 feasible core context--MAC cells with both N and access types
+infeasible_exact_abstention,1,220 infeasible trajectories emit zero standalone ACK
+feasible_aloha_ack_activity,1,9611 standalone ACK attempts in feasible ALOHA trajectories
+n10_aloha_collision_frame_repair,1,N10 ALOHA absolute collision reduction >= 10%
+reverse_mismatch_reported,1,reverse boundary retains nominal ACK calibration mismatch

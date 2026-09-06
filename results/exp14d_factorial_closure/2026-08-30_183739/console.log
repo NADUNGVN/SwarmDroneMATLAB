@@ -1,0 +1,106 @@
+
+============================================================
+RUN  : exp14d_factorial_closure
+ID   : 2026-08-30_183739
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739
+WHEN : 2026-08-30 18:37:39
+============================================================
+
+EXP14D factorial matrix: 384 runs, 48 seed/cell groups.
+  groups  1-- 8 / 48; rows  64 / 384
+  groups  9--16 / 48; rows 128 / 384
+  groups 17--24 / 48; rows 192 / 384
+  groups 25--32 / 48; rows 256 / 384
+  groups 33--40 / 48; rows 320 / 384
+  groups 41--48 / 48; rows 384 / 384
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739\figures
+
+EXP14D integrity gates
+  [PASS] contract_hash                      hash 8052507
+  [PASS] matrix_completeness                384 development runs
+  [PASS] unique_cells                       one row per seed/cell/factor arm
+  [PASS] finite_outputs                     control, AoI and medium outputs are finite
+  [PASS] complete_factorial_cube            all eight binary combinations occur once per seed/cell
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=2 max history=32
+  [PASS] physical_accounting                terminal DATA/ACK accounting and busy union close
+  [PASS] paired_absolute_trace              one trace and channel-state realization per seed/cell
+  [PASS] adaptive_factor_semantics          adaptive feedback and decisions occur iff A=1
+  [PASS] guard_factor_semantics             guard blocks iff G=1 and method contracts match factors
+  [PASS] access_factor_semantics            actual access equals declared S factor
+  [FAIL] n5_scaling_negative_control        S=0/S=1 physical rows are bit-identical when p=1/N
+  [PASS] local_busy_contract                causal local busy estimates remain in [0,1]
+  [PASS] divergence_accounting              0 divergences retained
+
+EXP14D DEVELOPMENT DECISION: FREEZE_FOR_NEW_PREREGISTRATION
+  candidate: a1-g0-s1 | eligible arms: 2
+
+============================================================
+DONE : exp14d_factorial_closure
+TIME : 3 m 02 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739
+============================================================
+
+Finalizing existing EXP14D run; no simulations rerun.
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739\figures
+
+EXP14D integrity gates
+  [PASS] contract_hash                      hash 8052507
+  [PASS] matrix_completeness                384 development runs
+  [PASS] unique_cells                       one row per seed/cell/factor arm
+  [PASS] finite_outputs                     control, AoI and medium outputs are finite
+  [PASS] complete_factorial_cube            all eight binary combinations occur once per seed/cell
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=2 max history=32
+  [PASS] physical_accounting                terminal DATA/ACK accounting and busy union close
+  [PASS] paired_absolute_trace              one trace and channel-state realization per seed/cell
+  [PASS] adaptive_factor_semantics          adaptive feedback and decisions occur iff A=1
+  [PASS] guard_factor_semantics             guard blocks iff G=1 and method contracts match factors
+  [PASS] access_factor_semantics            actual access equals declared S factor
+  [PASS] n5_scaling_negative_control        S=0/S=1 physical rows are bit-identical when p=1/N
+  [PASS] local_busy_contract                causal local busy estimates remain in [0,1]
+  [PASS] divergence_accounting              0 divergences retained
+
+EXP14D DEVELOPMENT DECISION: FREEZE_FOR_NEW_PREREGISTRATION
+  candidate: a1-g0-s1 | eligible arms: 2
+
+============================================================
+DONE : exp14d_factorial_closure
+TIME : 6.5 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739
+============================================================
+
+Finalizing existing EXP14D run; no simulations rerun.
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739\figures
+
+EXP14D integrity gates
+  [PASS] contract_hash                      hash 8052507
+  [PASS] matrix_completeness                384 development runs
+  [PASS] unique_cells                       one row per seed/cell/factor arm
+  [PASS] finite_outputs                     control, AoI and medium outputs are finite
+  [PASS] complete_factorial_cube            all eight binary combinations occur once per seed/cell
+  [PASS] causal_conservatism                0 protocol violations
+  [PASS] bounded_memory                     max queue=2 max history=32
+  [PASS] physical_accounting                terminal DATA/ACK accounting and busy union close
+  [PASS] paired_absolute_trace              one trace and channel-state realization per seed/cell
+  [PASS] adaptive_factor_semantics          adaptive feedback and decisions occur iff A=1
+  [PASS] guard_factor_semantics             guard blocks iff G=1 and method contracts match factors
+  [PASS] access_factor_semantics            actual access equals declared S factor
+  [PASS] n5_scaling_negative_control        S=0/S=1 physical rows are bit-identical when p=1/N
+  [PASS] local_busy_contract                causal local busy estimates remain in [0,1]
+  [PASS] divergence_accounting              0 divergences retained
+
+EXP14D DEVELOPMENT DECISION: FREEZE_FOR_NEW_PREREGISTRATION
+  candidate: a1-g0-s1 | eligible arms: 2
+
+============================================================
+DONE : exp14d_factorial_closure
+TIME : 6.5 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp14d_factorial_closure\2026-08-30_183739
+============================================================

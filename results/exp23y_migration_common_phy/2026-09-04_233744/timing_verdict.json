@@ -1,0 +1,9 @@
+{
+  "status": "LOCAL_MIGRATION_COMMON_PHY_VALID",
+  "gatesPassed": 18,
+  "gatesTotal": 18,
+  "rows": 1800,
+  "closedLoopClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "closed_loop_local_migration_integration"
+}

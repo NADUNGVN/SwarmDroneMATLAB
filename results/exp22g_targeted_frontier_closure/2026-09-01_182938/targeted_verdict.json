@@ -1,0 +1,13 @@
+{
+  "status": "ELCS_EPSILON_DOMINATED_RETURN_TO_DESIGN",
+  "integrityGatesPassed": 10,
+  "integrityGatesTotal": 10,
+  "rows": 180,
+  "strictDominanceFound": true,
+  "epsilonDominanceFound": true,
+  "confidenceSupportedEpsilonDominanceFound": true,
+  "next": "redesign_allocation_or_control_overhead",
+  "robustnessContinuationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

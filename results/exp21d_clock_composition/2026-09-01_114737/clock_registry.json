@@ -1,0 +1,98 @@
+{
+  "version": "EXP21D-AFFINE-CLOCK-COMPOSITION-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "prior-art-clock-composition-falsification",
+  "policyOptimizationAllowed": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6038001E+7,
+    1.6038002E+7,
+    1.6038003E+7,
+    1.6038004E+7,
+    1.6038005E+7,
+    1.6038006E+7,
+    1.6038007E+7,
+    1.6038008E+7,
+    1.6038009E+7,
+    1.603801E+7,
+    1.6038011E+7,
+    1.6038012E+7,
+    1.6038013E+7,
+    1.6038014E+7,
+    1.6038015E+7,
+    1.6038016E+7,
+    1.6038017E+7,
+    1.6038018E+7,
+    1.6038019E+7,
+    1.603802E+7,
+    1.6038021E+7,
+    1.6038022E+7,
+    1.6038023E+7,
+    1.6038024E+7,
+    1.6038025E+7,
+    1.6038026E+7,
+    1.6038027E+7,
+    1.6038028E+7,
+    1.6038029E+7,
+    1.603803E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "arms": [
+    {
+      "id": "short-guard-zero-clock",
+      "label": "D-STR short guard / zero clock",
+      "kind": "guard-cost-reference",
+      "guardKind": "short",
+      "clockEnabled": false
+    },
+    {
+      "id": "mission-guard-zero-clock",
+      "label": "D-STR mission guard / zero clock",
+      "kind": "clock-paired-reference",
+      "guardKind": "mission",
+      "clockEnabled": false
+    },
+    {
+      "id": "mission-guard-affine-clock",
+      "label": "D-STR mission guard / affine clock",
+      "kind": "clock-composition",
+      "guardKind": "mission",
+      "clockEnabled": true
+    }
+  ],
+  "maxFrames": 1200,
+  "initialDataSlots": 10,
+  "maxDataSlots": 64,
+  "collisionThreshold": 3,
+  "growthMargin": 3,
+  "shrinkThreshold": 5,
+  "failedShrinkTimeout": 30,
+  "shrinkBackoffExponentCap": 6,
+  "retentionProbability": 0.75,
+  "traceSeedOffset": 2.1092026E+7,
+  "safeGuardSec": 0.00054002160086403454,
+  "expectedRuns": 180,
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockResetHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "shortGuardSec": 0.00054002160086403454,
+  "shortArm": "short-guard-zero-clock",
+  "missionZeroArm": "mission-guard-zero-clock",
+  "missionClockArm": "mission-guard-affine-clock",
+  "clockCompositionContracts": 6,
+  "candidateDesignPermitted": false
+}

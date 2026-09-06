@@ -1,0 +1,42 @@
+
+============================================================
+RUN  : exp21b_continuous_timing_validity
+ID   : 2026-09-01_040346
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21b_continuous_timing_validity\2026-09-01_040346
+WHEN : 2026-09-01 04:03:47
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups   1-- 20 / 200; rows  160 / 1600
+  groups  21-- 40 / 200; rows  320 / 1600
+  groups  41-- 60 / 200; rows  480 / 1600
+  groups  61-- 80 / 200; rows  640 / 1600
+  groups  81--100 / 200; rows  800 / 1600
+  groups 101--120 / 200; rows  960 / 1600
+  groups 121--140 / 200; rows 1120 / 1600
+  groups 141--160 / 200; rows 1280 / 1600
+  groups 161--180 / 200; rows 1440 / 1600
+  groups 181--200 / 200; rows 1600 / 1600
+
+EXP21B model-validity gates
+  [PASS] registry_frozen                          hash 65243571 over 18 leaves
+  [PASS] matrix_complete_unique                   1600/1600 unique rows
+  [PASS] exact_declared_seeds                     all and only 100 registered seeds
+  [PASS] exact_factor_coverage                    N, sync and guard factors exact
+  [PASS] paired_absolute_clock_draws              all eight arms in each seed/N group share one master clock draw
+  [PASS] sufficient_guard_collision_free          800 safe-bound rows, 0 collision frames
+  [PASS] clock_equation_closes                    maximum residual 1.78e-15 s
+  [PASS] collision_witnesses_valid                every marked collision has positive overlap and declared interference
+  [PASS] interval_accounting_closes               offered sum and busy-time union are consistent
+  [PASS] synchronization_reduces_guard            0.5-s 0.000540022 s versus 12-s 0.00146006 s
+  [PASS] model_validity_scope_only                no policy or formation outcome enters a validity gate
+
+EXP21B MODEL VERDICT: TIMING_MODEL_VALID_FOR_INTEGRATION
+
+============================================================
+DONE : exp21b_continuous_timing_validity
+TIME : 1 m 11 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21b_continuous_timing_validity\2026-09-01_040346
+============================================================

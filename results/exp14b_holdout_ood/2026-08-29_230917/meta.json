@@ -1,0 +1,18 @@
+{
+  "experiment": "exp14b_holdout_ood",
+  "runId": "2026-08-29_230917",
+  "startedAt": "2026-08-29 23:09:17",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed fixed-method secondary/OOD matrix; no retuning and no performance gate.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp14b_holdout_ood.m",
+  "finishedAt": "2026-08-29 23:53:01",
+  "elapsedSec": 2624.272762,
+  "elapsedText": "43 m 44 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

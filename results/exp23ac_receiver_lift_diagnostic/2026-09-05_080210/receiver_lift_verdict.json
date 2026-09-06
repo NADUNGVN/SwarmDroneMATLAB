@@ -1,0 +1,11 @@
+{
+  "status": "ONE_SENDER_LOCALITY_REJECTED_BY_RECEIVER_LIFT",
+  "developmentDiagnostic": true,
+  "seed": 1.6089999E+7,
+  "safeFormationCandidates": 5,
+  "graphChangeRows": 89,
+  "nonlocalGraphChangeRows": 86,
+  "admissibleLocalMigrationRows": 0,
+  "onlinePlantCouplingPermitted": false,
+  "requiredNextMechanism": "receiver_lifted_dependency_closure"
+}

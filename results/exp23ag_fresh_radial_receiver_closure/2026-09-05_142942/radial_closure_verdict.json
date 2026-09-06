@@ -1,0 +1,15 @@
+{
+  "status": "ONLINE_RADIAL_RECEIVER_CLOSURE_FRESH_INVALID",
+  "gatesPassed": 22,
+  "gatesTotal": 25,
+  "rows": 300,
+  "onlinePlantCouplingValidated": false,
+  "radialContractionContractValidated": false,
+  "freshRadialContractEvidence": false,
+  "managementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false,
+  "next": "repair_radial_contract_without_relaxing_registered_gates"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "REJECT_OR_REVISE_CANDIDATE",
+  "developmentOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "gatesPassed": 4,
+  "gatesTotal": 6,
+  "jointlyWorseCoreMacCells": 1,
+  "futureHoldoutOpened": false,
+  "hardwareClaimPermitted": false
+}

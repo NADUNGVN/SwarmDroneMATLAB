@@ -1,0 +1,10 @@
+{
+  "source": "tidy.csv",
+  "registryVersion": "EXP14C-DEVELOPMENT-v1",
+  "rows": 288,
+  "pairedEffects": 252,
+  "pairedSafetyEffects": 36,
+  "postHocDescriptive": true,
+  "confirmatoryClaimPermitted": false,
+  "createdAt": "2026-08-30 08:11:13"
+}

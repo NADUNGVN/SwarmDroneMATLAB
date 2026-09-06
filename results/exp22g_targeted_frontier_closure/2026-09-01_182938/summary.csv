@@ -1,0 +1,7 @@
+scenario,scenarioLabel,arm,methodLabel,ENGINE_FAMILY,PERIODIC_RATE_HZ,n,meanRMSE,meanTrueAoI,meanTotalOfferedUtil,meanChannelUtil,meanGoodputHz
+n10-ring2-zero-loss,N10 ring2 zero-loss,elcs-f-mission-affine,ELCS-F / mission affine clock,candidate-elcs,50,30,0.0508761937197682,0.0654337287919376,0.376977066666665,0.271852797158218,92.8
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-cost-match,Periodic static TDMA / ELCS cost match,periodic-static,12.2705555555555,30,0.0507375562987792,0.067055746906493,0.377207466666669,0.377207466666618,122.788888888889
+n10-ring2-zero-loss,N10 ring2 zero-loss,periodic-cost-minus2pct,Periodic static TDMA / 2% below ELCS cost,periodic-static,12.0251444444444,30,0.0513188027410478,0.0680073989029205,0.369527466666668,0.369527466666619,120.288888888889
+n5-6dof-zero-loss,N5 6-DOF zero-loss,elcs-f-mission-affine,ELCS-F / mission affine clock,candidate-elcs,50,30,0.0301117066216521,0.0409414040906579,0.350719999999999,0.350608241974523,87.7611111111111
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-cost-match,Periodic static TDMA / ELCS cost match,periodic-static,22.8377777777777,30,0.02865904564931,0.0375132669983416,0.350719999999999,0.350719999999955,114.166666666667
+n5-6dof-zero-loss,N5 6-DOF zero-loss,periodic-cost-minus2pct,Periodic static TDMA / 2% below ELCS cost,periodic-static,22.3810222222222,30,0.0289434820815614,0.03816362631288,0.343884799999998,0.343884799999955,111.941666666667

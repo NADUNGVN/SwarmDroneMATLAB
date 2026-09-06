@@ -1,0 +1,53 @@
+function R=exp23hCumulativeReceiptRegistry()
+%EXP23HCUMULATIVERECEIPTREGISTRY Frozen cumulative-receipt kernel study.
+
+base=exp23aWitnessKernelRegistry();
+R.version='EXP23H-ELCS-W-CUMULATIVE-RECEIPT-v1';
+R.frozenDate='2026-09-04';
+R.stage='cumulative-receipt-kernel-falsification';
+R.policyOptimizationAllowed=false;
+R.closedLoopClaimPermitted=false;
+R.newMethodPromotionAllowed=false;
+R.submissionClaimPermitted=false;
+R.seeds=(16071001:16071100)';
+R.cells=base.cells;
+R.maxFrames=400;
+R.parentNegativeRun='2026-09-04_154603';
+R.parentNegativeDecision='ELCS_W_BACKGROUND_EPSILON_DOMINATED_RETURN_TO_DESIGN';
+R.conditions=struct( ...
+    'id',{'zero','claim-iid5','response-iid5','joint-control-iid5', ...
+        'iid-occupancy15','directed-response-blackout'}, ...
+    'label',{'Zero loss','CLAIM IID loss 5%', ...
+        'RESPONSE IID loss 5%','CLAIM/RESPONSE IID loss 5%', ...
+        'Shared IID occupancy 15%','Directed RESPONSE blackout'}, ...
+    'kind',{'nominal','claim-loss','response-loss','joint-control-loss', ...
+        'fragmented-occupancy','fail-silent-boundary'}, ...
+    'claimLoss',{0,.05,0,.05,0,0}, ...
+    'responseLoss',{0,0,.05,.05,0,0}, ...
+    'backgroundLoad',{0,0,0,0,.15,0});
+R.zeroCondition='zero';
+R.backgroundCondition='iid-occupancy15';
+R.blackoutCondition='directed-response-blackout';
+R.modes=struct( ...
+    'id',{'same-frame-new-sequence','cumulative-same-sequence'}, ...
+    'label',{'ELCS-W v1 same-frame receipt', ...
+        'ELCS-W v2 cumulative receipt'}, ...
+    'cumulativeReceiptRetry',{false,true});
+R.legacyMode=R.modes(1).id;
+R.cumulativeMode=R.modes(2).id;
+R.maxOffsetSec=0.25e-3;
+R.maxDriftPpm=40;
+R.clockHorizonSec=12;
+B=continuousTdmaGuardBound( ...
+    R.maxOffsetSec,R.maxDriftPpm,R.clockHorizonSec);
+R.clockLeadTimeSec=B.maxBoundaryErrorSec;
+R.missionSafeGuardSec=B.safeGuardSec;
+R.claimBytes=24;
+R.certificateHeaderBytes=16;
+R.certificateEntryBytes=8;
+R.maxControlPacketBytes=96;
+R.requiredGates=17;
+R.expectedRuns=numel(R.seeds)*numel(R.cells)* ...
+    numel(R.conditions)*numel(R.modes);
+
+end

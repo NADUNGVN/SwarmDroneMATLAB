@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22b_elcs_kernel_repair",
+  "runId": "2026-09-01_165537",
+  "startedAt": "2026-09-01 16:55:38",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F edge-lease safety invariant; no tuning or performance claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22b_elcs_kernel_repair.m",
+  "finishedAt": "2026-09-01 17:06:21",
+  "elapsedSec": 642.5810935,
+  "elapsedText": "10 m 43 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

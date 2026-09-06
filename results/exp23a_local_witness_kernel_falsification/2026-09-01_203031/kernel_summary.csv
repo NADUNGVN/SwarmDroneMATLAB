@@ -1,0 +1,11 @@
+scenario,scenarioLabel,condition,conditionLabel,conditionKind,N,n,certifiedFraction,meanCertifiedNodeFrameFraction,meanControlAttempts,meanControlBytes,meanFallbackAttempts,meanFallbackCollisions
+n10-ring2,N10 ring2 graph,certificate-erasure-5,CERT erasure 5%,certificate-loss,10,100,0.45,0.9590525,620,17608,31.08,0.33
+n10-ring2,N10 ring2 graph,claim-erasure-5,CLAIM erasure 5%,claim-loss,10,100,0.27,0.892775,618.41,17544.32,82.99,3.56
+n10-ring2,N10 ring2 graph,data-erasure-5,DATA erasure 5%,data-separation,10,100,1,1,620,17608,0,0
+n10-ring2,N10 ring2 graph,directed-certificate-blackout,Directed transmitted-CERT blackout,fail-silent-boundary,10,100,0,0.9,620,17608,76.26,0
+n10-ring2,N10 ring2 graph,zero,Zero loss,nominal,10,100,1,1,620,17608,0,0
+n5-6dof,N5 6-DOF graph,certificate-erasure-5,CERT erasure 5%,certificate-loss,5,100,0.61,0.9674,279,7192,23.23,0.25
+n5-6dof,N5 6-DOF graph,claim-erasure-5,CLAIM erasure 5%,claim-loss,5,100,0.48,0.92833,278.46,7175.52,51.25,2.47
+n5-6dof,N5 6-DOF graph,data-erasure-5,DATA erasure 5%,data-separation,5,100,1,1,279,7192,0,0
+n5-6dof,N5 6-DOF graph,directed-certificate-blackout,Directed transmitted-CERT blackout,fail-silent-boundary,5,100,0,0.8,279,7192,142.17,0
+n5-6dof,N5 6-DOF graph,zero,Zero loss,nominal,5,100,1,1,279,7192,0,0

@@ -1,0 +1,379 @@
+function exp23y_migration_common_phy()
+%EXP23Y_MIGRATION_COMMON_PHY Randomized continuous-time integration.
+
+startup; close all; runRequiredTests();
+R=exp23yMigrationContinuousRegistry();
+[registryHash,registryLeaves]=configHash(R);
+expRun=startExperiment('exp23y_migration_common_phy', ...
+    'Randomized local migration common-PHY and affine-clock validation.');
+writeJson(fullfile(expRun.dir,'timing_registry.json'),R);
+snapshotSource(expRun.dir);
+
+rows=repmat(emptyRow(),R.expectedRuns,1); q=0;
+for seed=reshape(R.seeds,1,[])
+    for N=R.swarmSizes
+        for c=1:numel(R.cases)
+            [Q,M,C,T,P]=buildCase(seed,N,R.cases(c),R);
+            for a=1:numel(R.clockArms)
+                q=q+1; rows(q)=runClockArm( ...
+                    seed,N,R.cases(c),R.clockArms(a),Q,M,C,T,P,R);
+            end
+        end
+    end
+end
+T=struct2table(rows); writetable(T,fullfile(expRun.dir,'timing_tidy.csv'));
+S=summaryTable(T); writetable(S,fullfile(expRun.dir,'summary.csv'));
+gates=validationGates(T,R,registryHash,registryLeaves);
+writetable(gates,fullfile(expRun.dir,'validation_gates.csv'));
+valid=all(gates.passed==1);
+status=ternary(valid,'LOCAL_MIGRATION_COMMON_PHY_VALID', ...
+    'LOCAL_MIGRATION_COMMON_PHY_INVALID');
+next=ternary(valid,'closed_loop_local_migration_integration', ...
+    'repair_common_phy_mapping_without_relaxing_gates');
+verdict=struct('status',status,'gatesPassed',sum(gates.passed), ...
+    'gatesTotal',height(gates),'rows',height(T), ...
+    'closedLoopClaimPermitted',false,'submissionClaimPermitted',false, ...
+    'next',next);
+writeJson(fullfile(expRun.dir,'timing_verdict.json'),verdict);
+save(fullfile(expRun.dir,'workspace.mat'),'T','S','gates','verdict','R');
+
+fprintf('\nEXP23Y common-PHY migration gates\n');
+for k=1:height(gates)
+    fprintf('  [%-4s] %-42s %s\n', ...
+        ternary(gates.passed(k)==1,'PASS','FAIL'), ...
+        char(gates.gate(k)),char(gates.detail(k)));
+end
+fprintf('EXP23Y DECISION: %s\n',status);
+finishExperiment(expRun);
+if ~valid, error('exp23y: common-PHY migration invalid.'); end
+
+end
+
+
+function [Q,M,C,T,P]=buildCase(seed,N,testCase,R)
+
+node=N; G0=false(N);
+for k=1:N-1, G0(k,k+1)=true; G0(k+1,k)=true; end
+G1=G0; G1(N-1,N)=false; G1(N,N-1)=false;
+G1(N-2,N)=true; G1(N,N-2)=true;
+slot=elcsWitnessPriorityColor(G0); reach=true(N); reach(1:N+1:end)=false;
+packet=struct('maxDataSlots',N,'claimBytes',R.claimBytes, ...
+    'certificateHeaderBytes',R.certificateHeaderBytes, ...
+    'certificateEntryBytes',R.certificateEntryBytes, ...
+    'maxControlPacketBytes',R.maxControlPacketBytes, ...
+    'revokeBytes',R.revokeBytes);
+M=buildLocalUnionGraphMigration(G0,G1,slot,node,reach,packet);
+C=struct('maxFrames',R.maxFrames,'transitionFrame',R.transitionFrame, ...
+    'eligibleFrame',R.eligibleFrame, ...
+    'newGraphActivationFrame',R.newGraphActivationFrame, ...
+    'lockProofRepeatFrames',R.lockProofRepeatFrames, ...
+    'phyRateBps',R.phyRateBps, ...
+    'claimErasureProbability',testCase.erasureProbability, ...
+    'lockProofErasureProbability',testCase.erasureProbability, ...
+    'responseErasureProbability',testCase.erasureProbability, ...
+    'revokeErasureProbability',testCase.erasureProbability);
+T=generateLocalUnionMigrationTrace(seed,M,C);
+switch testCase.kind
+    case 'valid'
+        if testCase.erasureProbability==0
+            T.claimDeliveryU(:)=1; T.lockProofDeliveryU(:)=1;
+            T.responseDeliveryU(:)=1; T.revokeDeliveryU(:)=1;
+        end
+    case 'revoke-blackout'
+        T.revokeDeliveryU(R.transitionFrame,:,node)=0;
+    case 'response-blackout'
+        T.responseDeliveryU(R.eligibleFrame:end,node,:)=0;
+    case 'incomplete-union'
+        T.actualGraph(R.newGraphActivationFrame:end,1,3)=true;
+        T.actualGraph(R.newGraphActivationFrame:end,3,1)=true;
+end
+T.hashExact=localUnionMigrationTraceHash(T);
+controlSlot=8*R.maxControlPacketBytes/R.phyRateBps+R.safeGuardSec;
+dataSlot=8*R.dataBytes/R.phyRateBps+R.safeGuardSec;
+frameDuration=2*N*controlSlot+N*dataSlot;
+P=struct('guardSec',R.safeGuardSec,'dataBytes',R.dataBytes, ...
+    'horizonSec',R.maxFrames*frameDuration+0.1);
+Q=buildLocalUnionMigrationContinuousSchedule(M,C,T,P);
+
+end
+
+
+function row=runClockArm(seed,N,testCase,arm,Q,M,C,T,P,R)
+
+if arm.impaired
+    stream=RandStream('mrg32k3a','Seed',mod(seed+72311+1000*N,2^32));
+    stream.Substream=13;
+    offset=(2*rand(stream,N,1)-1)*R.maxOffsetSec;
+    drift=(2*rand(stream,N,1)-1)*R.maxDriftPpm;
+else
+    offset=zeros(N,1); drift=zeros(N,1);
+end
+spec=struct('clockOffsetSec',offset,'clockDriftPpm',drift, ...
+    'maxOffsetSec',R.maxOffsetSec,'maxDriftPpm',R.maxDriftPpm, ...
+    'leadTimeSec',R.clockLeadTimeSec,'safeGuardSec',R.safeGuardSec);
+A=applyDstrAffineClockSchedule(Q,spec); K=Q.kernel; node=M.transitionNode;
+before=A.dataNode==node & A.dataFrame<C.transitionFrame;
+if K.reacquired
+    during=A.dataNode==node & A.dataFrame>=C.transitionFrame & ...
+        A.dataFrame<K.firstReacquiredFrame;
+    after=A.dataNode==node & A.dataFrame>=K.firstReacquiredFrame;
+    transitionExact=all(A.dataSlot(before)==M.oldSlot(node)) && ...
+        ~any(during) && all(A.dataSlot(after)==M.newSlot);
+    proofAfter=any(A.controlKind=="lock-proof" & ...
+        A.controlFrame>K.firstReacquiredFrame);
+else
+    transitionExact=all(A.dataSlot(before)==M.oldSlot(node)) && ...
+        ~any(A.dataNode==node & A.dataFrame>=C.transitionFrame);
+    proofAfter=false;
+end
+row=emptyRow();
+row.seed=seed; row.N=N; row.caseId=testCase.id;
+row.caseKind=testCase.kind; row.clockArm=arm.id;
+row.clockImpaired=double(arm.impaired); row.selectorHash=M.hashExact;
+row.traceHash=T.hashExact; row.kernelStateHash=K.stateHashExact;
+row.nativeScheduleHash=Q.hashExact; row.scheduleHash=A.hashExact;
+row.logicalHash=A.logicalOpportunityHashExact;
+row.selectorAdmissible=M.admissible; row.slotChanged=M.slotChanged;
+row.actualSubsetUnion=K.actualSubsetUnion; row.reacquired=K.reacquired;
+row.firstReacquiredFrame=K.firstReacquiredFrame;
+row.finalSuppressed=K.finalSuppressed; row.dataTransitionExact=transitionExact;
+row.fixedProofAfterReacquisition=double(proofAfter);
+row.kernelControlAttempts=K.controlAttempts;
+row.physicalControlAttempts=numel(A.controlStartTime);
+row.kernelControlBytes=K.controlBytes;
+row.physicalControlBytes=sum(A.controlAttemptBytes);
+row.kernelControlAirtime=K.controlAirtimeSec;
+row.physicalControlAirtime=sum(A.controlAttemptAirtimeSec);
+row.kernelRecipientAttempts=K.recipientAttempts;
+row.physicalRecipientAttempts=A.expectedManagementRecipientAttempts;
+row.kernelRecipientSuccess=K.recipientSuccess;
+row.physicalRecipientSuccess=A.expectedManagementRecipientSuccess;
+row.kernelRecipientErasure=K.recipientErasure;
+row.physicalRecipientErasure=A.expectedManagementRecipientErasure;
+row.revokeMapped=nnz(A.controlKind=="revoke");
+row.claimMapped=nnz(A.controlKind=="claim");
+row.proofMapped=nnz(A.controlKind=="lock-proof");
+row.responseMapped=nnz(A.controlKind=="response");
+row.kernelRevokeAttempts=K.revokeAttempts;
+row.kernelClaimAttempts=K.claimAttempts;
+row.kernelProofAttempts=K.lockProofAttempts;
+row.kernelResponseAttempts=K.responseAttempts;
+row.maxControlPacketBytes=max(A.controlAttemptBytes);
+row.kernelCollisionFrames=K.scheduledCollisionFrames;
+row.physicalCollisionFrames=A.expectedDataCollisionFrames;
+row.clockTimingConflictFree=A.clockTimingConflictFree;
+row.clockEquationResidual=A.clockEquationMaxResidualSec;
+row.clockMinIntergroupGap=A.clockMinimumIntergroupGapSec;
+row.clockMaxIntragroupSkew=A.clockMaximumIntragroupSkewSec;
+row.nativeDataAttempts=numel(Q.dataStartTime);
+row.physicalDataAttempts=numel(A.dataStartTime);
+row.nativeControlAttempts=numel(Q.controlStartTime);
+row.physicalFrameDuration=Q.frameDurationSec;
+row.horizonSec=P.horizonSec;
+row.attemptBoundRatio=K.controlAttemptBoundRatio;
+row.byteBoundRatio=K.controlByteBoundRatio;
+row.futureRandomReads=A.futureRandomReads;
+row.receiverTruthReads=A.receiverTruthDecisionReads;
+
+end
+
+
+function gates=validationGates(T,R,registryHash,registryLeaves)
+
+name=cell(0,1); pass=false(0,1); detail=cell(0,1);
+add('registry_frozen',isfinite(registryHash) && registryLeaves>0, ...
+    sprintf('hash %.0f over %d leaves',registryHash,registryLeaves));
+key=string(T.seed)+'|'+string(T.N)+'|'+string(T.caseId)+'|'+ ...
+    string(T.clockArm);
+add('matrix_complete_unique',height(T)==R.expectedRuns && ...
+    numel(unique(key))==height(T),sprintf('%d/%d unique rows', ...
+    numel(unique(key)),R.expectedRuns));
+coverage=isequal(unique(T.seed),R.seeds) && ...
+    isequal(unique(T.N)',R.swarmSizes) && ...
+    isequal(sort(unique(string(T.caseId))), ...
+    sort(reshape(string({R.cases.id}),[],1))) && ...
+    isequal(sort(unique(string(T.clockArm))), ...
+    sort(reshape(string({R.clockArms.id}),[],1)));
+add('exact_matrix_coverage',coverage, ...
+    '50 seeds, three sizes, six cases and two clocks exact');
+paired=true;
+for seed=R.seeds'
+    for N=R.swarmSizes
+        for c=string({R.cases.id})
+            index=T.seed==seed & T.N==N & string(T.caseId)==c;
+            paired=paired && isscalar(unique(T.traceHash(index))) && ...
+                isscalar(unique(T.kernelStateHash(index))) && ...
+                isscalar(unique(T.nativeScheduleHash(index))) && ...
+                isscalar(unique(T.logicalHash(index)));
+        end
+    end
+end
+add('clock_arm_pairing',paired, ...
+    'trace, kernel, native schedule and logical opportunity hashes pair');
+add('selector_stimulus',all(T.selectorAdmissible==1) && ...
+    all(T.slotChanged==1),'every row maps an admissible changed-slot union');
+add('control_kind_mapping',all(T.revokeMapped==T.kernelRevokeAttempts) && ...
+    all(T.claimMapped==T.kernelClaimAttempts) && all( ...
+    T.proofMapped==T.kernelProofAttempts) && all( ...
+    T.responseMapped==T.kernelResponseAttempts) && all( ...
+    T.maxControlPacketBytes<=R.maxControlPacketBytes), ...
+    'REVOKE/CLAIM/LOCK-PROOF/RESPONSE attempts and MTU exact');
+add('control_accounting',all(T.physicalControlAttempts== ...
+    T.kernelControlAttempts) && all(T.physicalControlBytes== ...
+    T.kernelControlBytes) && all(abs(T.physicalControlAirtime- ...
+    T.kernelControlAirtime)<=1e-12), ...
+    'attempt, byte and exact airtime totals match kernel');
+add('recipient_accounting',all(T.physicalRecipientAttempts== ...
+    T.kernelRecipientAttempts) && all(T.physicalRecipientSuccess== ...
+    T.kernelRecipientSuccess) && all(T.physicalRecipientErasure== ...
+    T.kernelRecipientErasure),'recipient outcomes replay exactly');
+normal=ismember(string(T.caseKind),["valid" "revoke-blackout"]);
+add('fixed_proof_independence',all( ...
+    T.fixedProofAfterReacquisition(normal)==1), ...
+    'fixed LOCK-PROOF window continues after local receipt closure');
+add('data_transition_mapping',all(T.dataTransitionExact==1), ...
+    'DATA follows old-slot to silence to new-slot/fail-silent sequence');
+supported=string(T.caseKind)~="incomplete-union";
+add('supported_collision_safety',all(T.actualSubsetUnion(supported)==1) && ...
+    all(T.kernelCollisionFrames(supported)==0) && all( ...
+    T.physicalCollisionFrames(supported)==0), ...
+    'all covered transitions remain collision-free on common PHY');
+add('affine_clock_safety',all(T.clockTimingConflictFree==1) && ...
+    all(T.clockEquationResidual<1e-12) && all( ...
+    T.clockMinIntergroupGap>=-1e-12), ...
+    'analytical guard prevents every inter-group overlap');
+add('logical_opportunities_preserved',all(T.nativeDataAttempts== ...
+    T.physicalDataAttempts) && all(T.nativeControlAttempts== ...
+    T.physicalControlAttempts),'affine mapping trims no registered event');
+blocked=string(T.caseKind)=="response-blackout";
+add('response_blackout_fail_silent',all(T.reacquired(blocked)==0) && ...
+    all(T.finalSuppressed(blocked)==1), ...
+    'missing RESPONSE remains silent under both clocks');
+revoke=string(T.caseKind)=="revoke-blackout";
+iid20=string(T.caseId)=="iid20-valid"; equivalent=true;
+for seed=R.seeds'
+    for N=R.swarmSizes
+        for arm=string({R.clockArms.id})
+            a=T.seed==seed & T.N==N & string(T.clockArm)==arm & iid20;
+            b=T.seed==seed & T.N==N & string(T.clockArm)==arm & revoke;
+            equivalent=equivalent && T.kernelStateHash(a)==T.kernelStateHash(b) && ...
+                T.firstReacquiredFrame(a)==T.firstReacquiredFrame(b);
+        end
+    end
+end
+add('revoke_blackout_equivalence',equivalent, ...
+    'REVOKE loss cannot alter transition state under either clock');
+outside=string(T.caseKind)=="incomplete-union";
+add('incomplete_union_visible',all(T.actualSubsetUnion(outside)==0) && ...
+    all(T.kernelCollisionFrames(outside)>0) && all( ...
+    T.physicalCollisionFrames(outside)==T.kernelCollisionFrames(outside)), ...
+    'oracle-negative collisions survive continuous mapping exactly');
+add('bounds_and_causality',all(T.attemptBoundRatio<=1+1e-12) && ...
+    all(T.byteBoundRatio<=1+1e-12) && all(T.futureRandomReads==0) && ...
+    all(T.receiverTruthReads==0), ...
+    'control bounds hold with zero forbidden reads');
+add('integration_scope_only',~R.freshSeedEvidence && ...
+    ~R.closedLoopClaimPermitted && ~R.submissionClaimPermitted, ...
+    'common-PHY validation cannot promote closed-loop claims');
+gates=table(string(name),double(pass),string(detail), ...
+    'VariableNames',{'gate','passed','detail'});
+if height(gates)~=R.requiredValidationContracts
+    error('exp23y: gate count differs from registry.');
+end
+
+    function add(n,p,d)
+        name{end+1,1}=n; pass(end+1,1)=logical(p); detail{end+1,1}=d;
+    end
+end
+
+
+function row=emptyRow()
+
+names={'seed','N','clockImpaired','selectorHash','traceHash', ...
+    'kernelStateHash','nativeScheduleHash','scheduleHash','logicalHash', ...
+    'selectorAdmissible','slotChanged','actualSubsetUnion','reacquired', ...
+    'firstReacquiredFrame','finalSuppressed','dataTransitionExact', ...
+    'fixedProofAfterReacquisition','kernelControlAttempts', ...
+    'physicalControlAttempts','kernelControlBytes','physicalControlBytes', ...
+    'kernelControlAirtime','physicalControlAirtime', ...
+    'kernelRecipientAttempts','physicalRecipientAttempts', ...
+    'kernelRecipientSuccess','physicalRecipientSuccess', ...
+    'kernelRecipientErasure','physicalRecipientErasure','revokeMapped', ...
+    'claimMapped','proofMapped','responseMapped','kernelRevokeAttempts', ...
+    'kernelClaimAttempts','kernelProofAttempts','kernelResponseAttempts', ...
+    'maxControlPacketBytes','kernelCollisionFrames', ...
+    'physicalCollisionFrames','clockTimingConflictFree', ...
+    'clockEquationResidual','clockMinIntergroupGap', ...
+    'clockMaxIntragroupSkew','nativeDataAttempts','physicalDataAttempts', ...
+    'nativeControlAttempts','physicalFrameDuration','horizonSec', ...
+    'attemptBoundRatio','byteBoundRatio','futureRandomReads', ...
+    'receiverTruthReads'};
+row=struct('caseId','','caseKind','','clockArm','');
+for k=1:numel(names), row.(names{k})=NaN; end
+
+end
+
+
+function S=summaryTable(T)
+
+[group,S]=findgroups(T(:,{'N','caseId','clockArm'}));
+S.nRuns=splitapply(@numel,T.reacquired,group);
+S.reacquisitionRate=splitapply(@mean,T.reacquired,group);
+S.meanControlAirtime=splitapply(@mean,T.physicalControlAirtime,group);
+S.meanFirstReacquiredFrame=splitapply(@(x) mean(x,'omitnan'), ...
+    T.firstReacquiredFrame,group);
+S.collisionFrames=splitapply(@sum,T.physicalCollisionFrames,group);
+
+end
+
+
+function runRequiredTests()
+
+names={'test_exp23y_migration_continuous_contracts', ...
+    'test_local_union_graph_migration_contracts', ...
+    'test_local_union_graph_migration_kernel_contracts', ...
+    'test_local_union_migration_continuous_contracts'};
+for k=1:numel(names), runScriptIsolated(names{k}); end
+
+end
+
+
+function snapshotSource(target)
+
+root=projectRoot(); files={ ...
+    'docs/EXP23Y_MIGRATION_COMMON_PHY_PLAN.md', ...
+    'docs/EXP23X_LOCAL_UNION_GRAPH_MIGRATION_RESULTS_2026-09-04.md', ...
+    'network/buildLocalUnionGraphMigration.m', ...
+    'network/generateLocalUnionMigrationTrace.m', ...
+    'network/localUnionMigrationTraceHash.m', ...
+    'network/simulateLocalUnionGraphMigration.m', ...
+    'network/buildLocalUnionMigrationContinuousSchedule.m', ...
+    'network/applyDstrAffineClockSchedule.m', ...
+    'network/continuousTdmaGuardBound.m', ...
+    'utils/exp23yMigrationContinuousRegistry.m', ...
+    'tests/test_exp23y_migration_continuous_contracts.m', ...
+    'tests/test_local_union_migration_continuous_contracts.m', ...
+    'experiments/exp23y_migration_common_phy.m'};
+freeze=fullfile(target,'frozen_source'); mkdir(freeze);
+for k=1:numel(files)
+    name=replace(files{k},{'/' '\'},'__');
+    copyfile(fullfile(root,files{k}),fullfile(freeze,name));
+end
+
+end
+
+
+function writeJson(path,value)
+
+fid=fopen(path,'w'); if fid<0, error('exp23y: cannot write.'); end
+cleanup=onCleanup(@() fclose(fid));
+fprintf(fid,'%s',jsonencode(value,'PrettyPrint',true));
+
+end
+
+
+function value=ternary(condition,a,b)
+
+if condition, value=a; else, value=b; end
+
+end

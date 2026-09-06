@@ -1,0 +1,45 @@
+
+============================================================
+RUN  : exp23u_dynamic_closed_loop_envelope
+ID   : 2026-09-04_203719
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23u_dynamic_closed_loop_envelope\2026-09-04_203719
+WHEN : 2026-09-04 20:37:19
+============================================================
+
+  seeds  1-- 2 / 60; rows  12 / 360
+  seeds  3-- 4 / 60; rows  24 / 360
+  seeds  5-- 6 / 60; rows  36 / 360
+  seeds  7-- 8 / 60; rows  48 / 360
+  seeds  9--10 / 60; rows  60 / 360
+  seeds 11--12 / 60; rows  72 / 360
+  seeds 13--14 / 60; rows  84 / 360
+  seeds 15--16 / 60; rows  96 / 360
+  seeds 17--18 / 60; rows 108 / 360
+  seeds 19--20 / 60; rows 120 / 360
+  seeds 21--22 / 60; rows 132 / 360
+  seeds 23--24 / 60; rows 144 / 360
+  seeds 25--26 / 60; rows 156 / 360
+  seeds 27--28 / 60; rows 168 / 360
+  seeds 29--30 / 60; rows 180 / 360
+  seeds 31--32 / 60; rows 192 / 360
+  seeds 33--34 / 60; rows 204 / 360
+  seeds 35--36 / 60; rows 216 / 360
+  seeds 37--38 / 60; rows 228 / 360
+  seeds 39--40 / 60; rows 240 / 360
+  seeds 41--42 / 60; rows 252 / 360
+  seeds 43--44 / 60; rows 264 / 360
+  seeds 45--46 / 60; rows 276 / 360
+  seeds 47--48 / 60; rows 288 / 360
+  seeds 49--50 / 60; rows 300 / 360
+  seeds 51--52 / 60; rows 312 / 360
+  seeds 53--54 / 60; rows 324 / 360
+  seeds 55--56 / 60; rows 336 / 360
+  seeds 57--58 / 60; rows 348 / 360
+  seeds 59--60 / 60; rows 360 / 360
+{Error using exp23u_dynamic_closed_loop_envelope>validationGates (line 219)
+exp23u: registry contract count differs from implemented gates.
+
+Error in exp23u_dynamic_closed_loop_envelope (line 42)
+gates=validationGates(T,R,registryHash,registryLeaves);
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 

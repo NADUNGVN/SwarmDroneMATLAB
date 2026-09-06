@@ -1,0 +1,80 @@
+
+============================================================
+RUN  : exp23ab_bounded_retry_development
+ID   : 2026-09-05_075106
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ab_bounded_retry_development\2026-09-05_075106
+WHEN : 2026-09-05 07:51:06
+============================================================
+
+  seed  1 / 20; rows   6 / 120
+  seed  2 / 20; rows  12 / 120
+  seed  3 / 20; rows  18 / 120
+  seed  4 / 20; rows  24 / 120
+  seed  5 / 20; rows  30 / 120
+  seed  6 / 20; rows  36 / 120
+  seed  7 / 20; rows  42 / 120
+  seed  8 / 20; rows  48 / 120
+  seed  9 / 20; rows  54 / 120
+  seed 10 / 20; rows  60 / 120
+  seed 11 / 20; rows  66 / 120
+  seed 12 / 20; rows  72 / 120
+  seed 13 / 20; rows  78 / 120
+  seed 14 / 20; rows  84 / 120
+  seed 15 / 20; rows  90 / 120
+  seed 16 / 20; rows  96 / 120
+  seed 17 / 20; rows 102 / 120
+  seed 18 / 20; rows 108 / 120
+  seed 19 / 20; rows 114 / 120
+  seed 20 / 20; rows 120 / 120
+
+EXP23AB bounded retry gates
+  [PASS] registry_frozen                            hash 121752855 over 115 leaves
+  [PASS] positive_parent_locked                     EXP23AA remains feasible at 19/19 gates
+  [PASS] matrix_complete_unique                     120/120 unique rows
+  [PASS] exact_matrix_coverage                      20 new seeds and six paired arms exact
+  [PASS] paired_realizations                        DATA field, clocks, geometry and event pair by seed
+  [PASS] geometry_selector_stimulus                 same one-edge local migration fixture retained
+  [PASS] all_migration_arms_protected               every migration arm carries protected emergency DATA
+  [PASS] backoff_policy_exact                       dense 6, capped 8-frame backoff, ten-attempt budget
+  [PASS] local_schedule_deterministic               ten public opportunities; schedule independent of seed and outcomes
+  [PASS] analytical_retry_certificate               max union failure bound 0.000585 < 0.001
+  [PASS] finite_retry_exhaustion                    all blackout rows stop after exactly ten CLAIM attempts
+  [PASS] persistent_comparator_visible              legacy dense retry remains active through the blackout
+  [PASS] claim_response_attempt_reduction           every pair uses fewer CLAIM and RESPONSE attempts
+  [PASS] total_control_overhead_reduction           every pair reduces control attempts, airtime and total cost
+  [PASS] blackout_closed_loop_equivalence           paired DATA service, RMSE, separation and safety are exact
+  [PASS] fixed_proof_window_invariant               CLAIM backoff does not alter LOCK-PROOF attempts
+  [PASS] emergency_mapping_safe                     protected DATA has delivered recipients and zero collision recipients
+  [PASS] collision_safety                           all six arms remain collision-free
+  [PASS] exact_closed_loop_replay                   recipient outcomes replay exactly
+  [PASS] control_airtime_accounting                 attempts, bytes and PHY airtime close
+  [PASS] timing_and_causality                       affine timing closes and forbidden reads remain zero
+  [PASS] ordinary_reacquisition_and_safety          60/60 rows reacquire safely
+  [PASS] blackout_lease_silence_and_safety          both retry policies stay silent on shared slots and remain safe
+  [PASS] revoke_loss_independence                   backoff local state, performance and cost ignore REVOKE delivery
+                             arm                             meanRMSE    meanCost    safeFailureRate    meanControlAttempts    meanClaimAttempts    meanManagementAirtime
+    _____________________________________________________    ________    ________    _______________    ___________________    _________________    _____________________
+
+    "periodic-iid20"                                         0.082987      0.256            0                      0                  NaN                        0       
+    "migration-dense-iid20-emergency"                          0.0848    0.23711            0                 192.65                  3.3                  0.17272       
+    "migration-backoff-iid20-emergency"                        0.0848    0.23711            0                 192.65                  3.3                  0.17272       
+    "migration-dense-iid20-emergency-response-blackout"       0.08462    0.25296            0                 382.65                   40                  0.36283       
+    "migration-backoff-iid20-emergency-response-blackout"     0.08462    0.24041            0                 231.85                   10                  0.21223       
+    "migration-backoff-iid20-emergency-revoke-blackout"        0.0848    0.23711            0                 192.65                  3.3                  0.17272       
+
+                          candidate                                               reference                         nPairs    relativeRmse    rmseDelta     rmseCiLo     rmseCiHi     relativeCost    costDelta    costCiLo     costCiHi     managementAirtimeDelta    managementAirtimeCiLo    managementAirtimeCiHi    controlAttemptDelta    claimAttemptDelta    responseAttemptDelta
+    _____________________________________________________    ___________________________________________________    ______    ____________    _________    __________    _________    ____________    _________    _________    _________    ______________________    _____________________    _____________________    ___________________    _________________    ____________________
+
+    "migration-backoff-iid20-emergency"                      "migration-dense-iid20-emergency"                        20               0              0             0            0             0              0            0            0                 0                         0                        0                      0                    0                       0       
+    "migration-backoff-iid20-emergency-response-blackout"    "migration-dense-iid20-emergency-response-blackout"      20               0              0             0            0     -0.049614       -0.01255    -0.012687    -0.012413           -0.1506                  -0.15227                 -0.14895                 -150.8                  -30                  -120.8       
+    "migration-backoff-iid20-emergency-revoke-blackout"      "migration-backoff-iid20-emergency"                      20               0              0             0            0             0              0            0            0                 0                         0                        0                      0                    0                       0       
+    "migration-backoff-iid20-emergency-response-blackout"    "periodic-iid20"                                         20        0.019684      0.0016335    0.00060858    0.0027801     -0.060916      -0.015594    -0.015716    -0.015475           0.21223                   0.21074                  0.21367                 231.85                  NaN                     NaN       
+
+EXP23AB DECISION: BOUNDED_RETRY_DEVELOPMENT_FEASIBLE
+
+============================================================
+DONE : exp23ab_bounded_retry_development
+TIME : 2 m 27 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ab_bounded_retry_development\2026-09-05_075106
+============================================================

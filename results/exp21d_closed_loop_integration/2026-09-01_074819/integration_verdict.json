@@ -1,0 +1,9 @@
+{
+  "status": "DSTR_CLOSED_LOOP_INTEGRATION_INVALID",
+  "gatesPassed": 16,
+  "gatesTotal": 17,
+  "rows": 180,
+  "boundaryContinuationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

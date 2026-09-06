@@ -1,0 +1,18 @@
+
+============================================================
+RUN  : exp23ak_routed_accounting_confirmation
+ID   : 2026-09-06_071357
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23ak_routed_accounting_confirmation\2026-09-06_071357
+WHEN : 2026-09-06 07:13:57
+============================================================
+
+{Error using simulateRepeatedHopManagementFlood (line 33)
+simulateRepeatedHopManagementFlood: invalid physical input.
+
+Error in exp23ak_routed_accounting_confirmation>confirmRandom (line 145)
+                O=simulateRepeatedHopManagementFlood(P,U,p, ...
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in exp23ak_routed_accounting_confirmation (line 19)
+Q=confirmRandom(W.S,R);
+  ^^^^^^^^^^^^^^^^^^^^
+} 

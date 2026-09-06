@@ -1,0 +1,135 @@
+{
+  "version": "EXP22F-DIRECT-FEASIBILITY-KILL-TEST-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "candidate-feasibility-falsification",
+  "policyOptimizationAllowed": false,
+  "confirmationAllowed": false,
+  "robustnessContinuationPermitted": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6047001E+7,
+    1.6047002E+7,
+    1.6047003E+7,
+    1.6047004E+7,
+    1.6047005E+7,
+    1.6047006E+7,
+    1.6047007E+7,
+    1.6047008E+7,
+    1.6047009E+7,
+    1.604701E+7,
+    1.6047011E+7,
+    1.6047012E+7,
+    1.6047013E+7,
+    1.6047014E+7,
+    1.6047015E+7,
+    1.6047016E+7,
+    1.6047017E+7,
+    1.6047018E+7,
+    1.6047019E+7,
+    1.604702E+7,
+    1.6047021E+7,
+    1.6047022E+7,
+    1.6047023E+7,
+    1.6047024E+7,
+    1.6047025E+7,
+    1.6047026E+7,
+    1.6047027E+7,
+    1.6047028E+7,
+    1.6047029E+7,
+    1.604703E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed"
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate"
+    }
+  ],
+  "periodicRates": [
+    5,
+    8.3333333333333339,
+    10,
+    12.5,
+    15,
+    17.5,
+    20,
+    25
+  ],
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "elcsMaxFrames": 400,
+  "dominanceMargin": 0.01,
+  "arms": [
+    {
+      "id": "periodic-static-p5",
+      "label": "Periodic static TDMA 5 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 5
+    },
+    {
+      "id": "periodic-static-p8p33333",
+      "label": "Periodic static TDMA 8.33333 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 8.3333333333333339
+    },
+    {
+      "id": "periodic-static-p10",
+      "label": "Periodic static TDMA 10 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 10
+    },
+    {
+      "id": "periodic-static-p12p5",
+      "label": "Periodic static TDMA 12.5 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 12.5
+    },
+    {
+      "id": "periodic-static-p15",
+      "label": "Periodic static TDMA 15 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 15
+    },
+    {
+      "id": "periodic-static-p17p5",
+      "label": "Periodic static TDMA 17.5 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 17.5
+    },
+    {
+      "id": "periodic-static-p20",
+      "label": "Periodic static TDMA 20 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 20
+    },
+    {
+      "id": "periodic-static-p25",
+      "label": "Periodic static TDMA 25 Hz",
+      "family": "periodic-static",
+      "periodicRateHz": 25
+    },
+    {
+      "id": "dstr-native-mission-affine",
+      "label": "D-STR native / mission affine clock",
+      "family": "prior-art-dstr",
+      "periodicRateHz": 50
+    },
+    {
+      "id": "elcs-f-mission-affine",
+      "label": "ELCS-F / mission affine clock",
+      "family": "candidate-elcs",
+      "periodicRateHz": 50
+    }
+  ],
+  "dstrArm": "dstr-native-mission-affine",
+  "elcsArm": "elcs-f-mission-affine",
+  "expectedRuns": 600
+}

@@ -1,0 +1,10 @@
+{
+  "status": "COHERENCE_ELCS_W_PACKET_KERNEL_INVALID",
+  "gatesPassed": 18,
+  "gatesTotal": 20,
+  "rows": 1800,
+  "staticCommonPhyIntegrationPermitted": false,
+  "dynamicRevocationIntegrationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

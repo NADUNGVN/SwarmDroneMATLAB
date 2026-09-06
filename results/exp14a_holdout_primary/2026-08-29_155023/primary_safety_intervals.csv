@@ -1,0 +1,6 @@
+contrast,failuresA,totalA,rateA,loA,hiA,failuresB,totalB,rateB,loB,hiB
+clean-proposed-default-vs-p10,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+stressed-proposed-default-vs-p10,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+stressed-proposed-default-vs-belief,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+moderate-hybrid-vs-unicast,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857
+moderate-piggyback-vs-hybrid,0,100,0,0,0.0369934982069857,0,100,0,0,0.0369934982069857

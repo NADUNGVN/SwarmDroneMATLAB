@@ -1,0 +1,9 @@
+{
+  "status": "ELCS_F_CONTINUOUS_INTEGRATION_INVALID",
+  "gatesPassed": 14,
+  "gatesTotal": 17,
+  "rows": 120,
+  "robustnessContinuationPermitted": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

@@ -1,0 +1,9 @@
+{
+  "status": "ELCS_EVENT_DRIVEN_CLOSED_LOOP_VALID",
+  "gatesPassed": 20,
+  "gatesTotal": 20,
+  "rows": 120,
+  "robustnessContinuationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

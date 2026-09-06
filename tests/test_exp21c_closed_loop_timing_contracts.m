@@ -1,0 +1,139 @@
+%% TEST_EXP21C_CLOSED_LOOP_TIMING_CONTRACTS Event-engine integration cases.
+
+startup;
+fprintf('\n============================================================\n');
+fprintf('test_exp21c_closed_loop_timing_contracts\n');
+fprintf('============================================================\n\n');
+checks=cell(0,2);
+D=8*96/250e3;
+
+%% Zero-clock event starts equal standalone kernel boundaries.
+c=localCfg(3,0,0,inf,0.030);
+[net,events,trace]=runQueued(c,[]);
+kernelCfg=struct('N',3,'horizonSec',c.swarm.T, ...
+    'dataAirtimeSec',D,'guardTimeSec',0,'frameSlots',3, ...
+    'assignedSlot',(1:3)','clockOffsetSec',zeros(3,1), ...
+    'clockDriftPpm',zeros(3,1),'syncPeriodSec',inf, ...
+    'topology',c.swarm.A,'interferenceMatrix',true(3), ...
+    'epochLeadTimeSec',0);
+kernel=simulateContinuousLocalTdma(kernelCfg);
+eventStarts=unique([[events.frameId]' [events.txStart]'],'rows');
+eventStarts=sort(eventStarts(:,2));
+expected=kernel.startTime(kernel.slotOrdinal==0);
+checks(end+1,:)={numel(eventStarts)==3 && ...
+    max(abs(eventStarts-expected))<1e-12 && ...
+    net.stats.collisionFrames==0, ...
+    'integrated zero-clock starts equal standalone kernel starts'};
+checks(end+1,:)={all(abs([events.txEnd]-[events.txStart]-D)<1e-12) && ...
+    abs(net.stats.dataAirtime-3*D)<1e-12, ...
+    'integrated DATA uses exact non-rounded physical airtime'};
+checks(end+1,:)={net.serviceScheduler.continuousMaxClockEquationResidual<1e-12 && ...
+    net.serviceScheduler.futureRandomReadCount==0 && ...
+    net.serviceScheduler.receiverTruthReadCount==0, ...
+    'clock equation closes without future or receiver-truth reads'};
+
+%% Adversarial offsets collide below bound and clear at sufficient guard.
+theta=0.25e-3;
+c=localCfg(2,theta,0,inf,0.025);
+trace=generateSharedMediumTrace(c);
+trace.exp21cClockOffsetU(:,:)=0.5;
+trace.exp21cClockOffsetU(:,1)=0;
+trace.exp21cClockOffsetU(:,2)=1;
+trace.exp21cClockDriftU(:)=0.5;
+[bad,badEvents]=runQueued(c,trace);
+B=continuousTdmaGuardBound(theta,0,c.swarm.T);
+c.shared.serviceScheduler.continuousGuardTime=B.safeGuardSec;
+c.shared.serviceScheduler=serviceSchedulerConfig(c);
+[safe,safeEvents]=runQueued(c,trace);
+checks(end+1,:)={bad.stats.collisionFrames==2 && ...
+    any([badEvents.collision]) && safe.stats.collisionFrames==0 && ...
+    ~any([safeEvents.collision]), ...
+    'integrated adversarial offset witness obeys analytical guard boundary'};
+
+%% Sparse receiver interference preserves overlap without corruption.
+c=localCfg(2,0,0,inf,0.010);
+c.shared.serviceScheduler.reservationFrameSlots=1;
+c.shared.serviceScheduler=serviceSchedulerConfig(c);
+c.mac.interferenceMatrix=false(2);
+c.mac=sharedMediumConfig(c);
+[sparse,sparseEvents]=runQueued(c,[]);
+c.mac.interferenceMatrix=true(2);
+c.mac=sharedMediumConfig(c);
+[full,fullEvents]=runQueued(c,[]);
+checks(end+1,:)={numel(unique([sparseEvents.txStart]))==1 && ...
+    sparse.stats.collisionFrames==0 && full.stats.collisionFrames==2 && ...
+    ~any([sparseEvents.collision]) && all([fullEvents.collision]), ...
+    'event engine retains receiver-specific interference under exact overlap'};
+
+%% Inline delivery occurs at physical completion time and accounting closes.
+c=localCfg(2,0,0,inf,0.020);
+c.mac.applyDeliveriesInline=true;
+[inline,inlineEvents]=runQueued(c,[]);
+checks(end+1,:)={inline.acceptedSeq(2,1)==1 && ...
+    inline.stats.dataRecipientSuccess==numel(inlineEvents) && ...
+    inline.stats.dataRecipientSuccess+inline.stats.dataRecipientLoss== ...
+    inline.stats.dataRecipientAttempts, ...
+    'event-time inline delivery and recipient accounting close'};
+checks(end+1,:)={inline.stats.busyTime<=inline.stats.dataAirtime+1e-12 && ...
+    inline.stats.busyTime>0 && ...
+    inline.serviceScheduler.continuousStartAttempts==2, ...
+    'busy-time union and continuous attempt accounting are finite'};
+
+%% Trace replay is deterministic.
+[repeat,repeatEvents,repeatTrace]=runQueued(c,[]);
+[repeat2,repeatEvents2]=runQueued(c,repeatTrace);
+checks(end+1,:)={configHash(repeat.stats)==configHash(repeat2.stats) && ...
+    configHash(repeatEvents)==configHash(repeatEvents2), ...
+    'identical absolute trace produces bit-identical integrated events'};
+
+flags=cellfun(@logical,checks(:,1));
+for k=1:size(checks,1)
+    if flags(k), tag='ok'; else, tag='FAIL'; end
+    fprintf('    %-4s %s\n',tag,checks{k,2});
+end
+if ~all(flags)
+    error('test_exp21c_closed_loop_timing_contracts: %d of %d failed.', ...
+        nnz(~flags),numel(flags));
+end
+fprintf('\ntest_exp21c_closed_loop_timing_contracts: PASS (%d checks)\n', ...
+    numel(flags));
+
+
+function [net,events,trace]=runQueued(cfg,trace)
+
+if nargin<2 || isempty(trace), trace=generateSharedMediumTrace(cfg); end
+net=initSharedMediumState(cfg,cfg.swarm.A);
+for sender=1:cfg.swarm.N
+    net=enqueueBroadcastState(net,sender,[sender 0 0],[0 0 0],0,cfg);
+end
+[net,events]=advanceSharedMedium(net,0,cfg.swarm.T,cfg,trace);
+
+end
+
+
+function c=localCfg(N,offsetMax,driftMax,syncPeriod,horizon)
+
+c=struct();
+c.swarm=struct('N',N,'T',horizon,'A',true(N)-eye(N)>0);
+c.net=struct('seed',16032999);
+c.mac=struct('type','tdma','slotTime',1e-3,'queueCapacity',4, ...
+    'dataBytes',96,'ackBaseBytes',16,'ackEntryBytes',8, ...
+    'phyRateBps',250e3,'ackDeadline',0.02,'pAccess',1, ...
+    'historySize',32,'residualLoss',0,'dataResidualLoss',0, ...
+    'ackResidualLoss',0,'lossModel','iid','separateAckTrace',false, ...
+    'maxRetries',0,'backgroundLoad',0,'interferenceMatrix',true(N), ...
+    'carrierSenseMatrix',true(N),'applyDeliveriesInline',false);
+c.aoiEvent=struct('posThreshold',0.05,'velThreshold',0.10, ...
+    'aoiThreshold',0.12,'maxSilence',0.50);
+c.shared=struct('feedbackMode','none');
+c.shared.serviceScheduler=struct( ...
+    'mode','continuous-local-static-tdma','logDecisions',true, ...
+    'reservationFrameSlots',N,'clockOffsetMaxSec',offsetMax, ...
+    'clockDriftMaxPpm',driftMax,'continuousGuardTime',0, ...
+    'continuousSyncPeriod',syncPeriod,'continuousEpochLeadTime',0, ...
+    'continuousExactAirtime',true);
+c.exp21c=struct('version','EXP21C-INTEGRATION-CONTRACT-v1');
+c.mac=sharedMediumConfig(c);
+c.shared.serviceScheduler=serviceSchedulerConfig(c);
+
+end

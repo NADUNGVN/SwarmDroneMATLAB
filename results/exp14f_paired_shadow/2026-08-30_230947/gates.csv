@@ -1,0 +1,13 @@
+gate,passed,detail
+registry_contract,1,"hash 20176987 over 25 leaves"
+matrix_completeness,1,"160 unique runs"
+complete_paired_groups,1,"both declared arms occur once per group"
+finite_eligible_outputs,1,"nondivergent control and freshness outcomes are finite"
+causal_conservatism,1,"0 protocol violations"
+bounded_memory,1,"max queue=2, history=32"
+physical_accounting,1,"terminal recipient accounting closes"
+paired_absolute_trace,1,"one absolute trace per seed/cell pair"
+arm_semantics,1,"adaptive actual and piggyback-only shadow"
+event_accounting,1,"9694 selected standalone confirmation events"
+lead_matching_contract,1,"generation threshold, horizon cap and censor metadata are valid"
+divergence_accounting,1,"0 divergences retained"

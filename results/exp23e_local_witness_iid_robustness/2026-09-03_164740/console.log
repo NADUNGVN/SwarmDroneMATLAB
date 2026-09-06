@@ -1,0 +1,113 @@
+
+============================================================
+RUN  : exp23e_local_witness_iid_robustness
+ID   : 2026-09-03_164740
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23e_local_witness_iid_robustness\2026-09-03_164740
+WHEN : 2026-09-03 16:47:40
+============================================================
+
+  groups   1--  4 / 300; rows   8 / 600
+  groups   5--  8 / 300; rows  16 / 600
+  groups   9-- 12 / 300; rows  24 / 600
+  groups  13-- 16 / 300; rows  32 / 600
+  groups  17-- 20 / 300; rows  40 / 600
+  groups  21-- 24 / 300; rows  48 / 600
+  groups  25-- 28 / 300; rows  56 / 600
+  groups  29-- 32 / 300; rows  64 / 600
+  groups  33-- 36 / 300; rows  72 / 600
+  groups  37-- 40 / 300; rows  80 / 600
+  groups  41-- 44 / 300; rows  88 / 600
+  groups  45-- 48 / 300; rows  96 / 600
+  groups  49-- 52 / 300; rows 104 / 600
+  groups  53-- 56 / 300; rows 112 / 600
+  groups  57-- 60 / 300; rows 120 / 600
+  groups  61-- 64 / 300; rows 128 / 600
+  groups  65-- 68 / 300; rows 136 / 600
+  groups  69-- 72 / 300; rows 144 / 600
+  groups  73-- 76 / 300; rows 152 / 600
+  groups  77-- 80 / 300; rows 160 / 600
+  groups  81-- 84 / 300; rows 168 / 600
+  groups  85-- 88 / 300; rows 176 / 600
+  groups  89-- 92 / 300; rows 184 / 600
+  groups  93-- 96 / 300; rows 192 / 600
+  groups  97--100 / 300; rows 200 / 600
+  groups 101--104 / 300; rows 208 / 600
+  groups 105--108 / 300; rows 216 / 600
+  groups 109--112 / 300; rows 224 / 600
+  groups 113--116 / 300; rows 232 / 600
+  groups 117--120 / 300; rows 240 / 600
+  groups 121--124 / 300; rows 248 / 600
+  groups 125--128 / 300; rows 256 / 600
+  groups 129--132 / 300; rows 264 / 600
+  groups 133--136 / 300; rows 272 / 600
+  groups 137--140 / 300; rows 280 / 600
+  groups 141--144 / 300; rows 288 / 600
+  groups 145--148 / 300; rows 296 / 600
+  groups 149--152 / 300; rows 304 / 600
+  groups 153--156 / 300; rows 312 / 600
+  groups 157--160 / 300; rows 320 / 600
+  groups 161--164 / 300; rows 328 / 600
+  groups 165--168 / 300; rows 336 / 600
+  groups 169--172 / 300; rows 344 / 600
+  groups 173--176 / 300; rows 352 / 600
+  groups 177--180 / 300; rows 360 / 600
+  groups 181--184 / 300; rows 368 / 600
+  groups 185--188 / 300; rows 376 / 600
+  groups 189--192 / 300; rows 384 / 600
+  groups 193--196 / 300; rows 392 / 600
+  groups 197--200 / 300; rows 400 / 600
+  groups 201--204 / 300; rows 408 / 600
+  groups 205--208 / 300; rows 416 / 600
+  groups 209--212 / 300; rows 424 / 600
+  groups 213--216 / 300; rows 432 / 600
+  groups 217--220 / 300; rows 440 / 600
+  groups 221--224 / 300; rows 448 / 600
+  groups 225--228 / 300; rows 456 / 600
+  groups 229--232 / 300; rows 464 / 600
+  groups 233--236 / 300; rows 472 / 600
+  groups 237--240 / 300; rows 480 / 600
+  groups 241--244 / 300; rows 488 / 600
+  groups 245--248 / 300; rows 496 / 600
+  groups 249--252 / 300; rows 504 / 600
+  groups 253--256 / 300; rows 512 / 600
+  groups 257--260 / 300; rows 520 / 600
+  groups 261--264 / 300; rows 528 / 600
+  groups 265--268 / 300; rows 536 / 600
+  groups 269--272 / 300; rows 544 / 600
+  groups 273--276 / 300; rows 552 / 600
+  groups 277--280 / 300; rows 560 / 600
+  groups 281--284 / 300; rows 568 / 600
+  groups 285--288 / 300; rows 576 / 600
+  groups 289--292 / 300; rows 584 / 600
+  groups 293--296 / 300; rows 592 / 600
+  groups 297--300 / 300; rows 600 / 600
+
+EXP23E ELCS-W IID robustness integrity gates
+  [PASS] registry_frozen                             hash 77758983 over 68 leaves
+  [PASS] matrix_complete_unique                      600/600 unique rows
+  [PASS] exact_matrix_coverage                       30 seeds, two cells, five loss conditions and two arms exact
+  [PASS] paired_shared_realizations                  each seed/cell/condition shares channel, estimator and clocks by arm
+  [PASS] nested_absolute_loss_fields                 all five conditions threshold the same absolute random fields
+  [PASS] periodic_boundary_rate_frozen               EXP23D lower-cost rates remain guarded and collision-free
+  [PASS] one_hop_witness_cover                       all hidden conflict edges retain a bounded one-hop witness
+  [PASS] absolute_control_bounds                     maximum attempt/byte ratios 0.146000/0.141437
+  [PASS] shared_trace_data_loss_overlay              candidate and periodic consume the same absolute link-time field
+  [PASS] exact_elcs_w_replay                         queue, receiver outcomes, clock guard and control/DATA planes close
+  [PASS] variable_payload_management_accounting      attempt, recipient, byte and airtime accounting close exactly
+  [PASS] control_loss_retry_stimulus                 retry is absent without control loss and active in every control-loss cell
+  [PASS] data_loss_stimulus                          shared DATA loss activates only in DATA and joint conditions
+  [PASS] data_loss_schedule_isolation                DATA erasure changes delivery but never witness state or control effort
+  [PASS] periodic_cost_eligibility                   periodic is at least 1% cheaper in every robustness contrast
+  [PASS] recipient_and_airtime_accounting            actual DATA and variable management airtime and recipients close
+  [PASS] causal_and_protocol_invariants              zero future/random truth reads and protocol invariant violations
+  [PASS] all_robustness_failures_retained            unsafe, divergent and terminal-uncertified outcomes remain observable
+  [PASS] robustness_screen_scope_only                no tuning, broad robustness, promotion or submission decision
+
+EXP23E DECISION: ELCS_W_IID5_ROBUSTNESS_SCREEN_SURVIVES
+
+============================================================
+DONE : exp23e_local_witness_iid_robustness
+TIME : 16 m 44 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23e_local_witness_iid_robustness\2026-09-03_164740
+============================================================

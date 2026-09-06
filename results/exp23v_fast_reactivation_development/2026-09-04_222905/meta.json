@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23v_fast_reactivation_development",
+  "runId": "2026-09-04_222905",
+  "startedAt": "2026-09-04 22:29:06",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Same-seed witness-confirmed early-reactivation mechanism probe.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23v_fast_reactivation_development.m",
+  "finishedAt": "2026-09-04 22:38:55",
+  "elapsedSec": 588.6934051,
+  "elapsedText": "9 m 49 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

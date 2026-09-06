@@ -1,0 +1,304 @@
+{
+  "version": "EXP20A-PRIOR-ART-BASELINE-CLOSURE-v1",
+  "frozenDate": "2026-08-31",
+  "stage": "development-falsification",
+  "candidateOptimizationAllowed": false,
+  "confirmatory": false,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false,
+  "formationSeeds": [
+    1.6027001E+7,
+    1.6027002E+7,
+    1.6027003E+7,
+    1.6027004E+7,
+    1.6027005E+7,
+    1.6027006E+7,
+    1.6027007E+7,
+    1.6027008E+7,
+    1.6027009E+7,
+    1.602701E+7,
+    1.6027011E+7,
+    1.6027012E+7,
+    1.6027013E+7,
+    1.6027014E+7,
+    1.6027015E+7,
+    1.6027016E+7,
+    1.6027017E+7,
+    1.6027018E+7,
+    1.6027019E+7,
+    1.602702E+7,
+    1.6027021E+7,
+    1.6027022E+7,
+    1.6027023E+7,
+    1.6027024E+7,
+    1.6027025E+7,
+    1.6027026E+7,
+    1.6027027E+7,
+    1.6027028E+7,
+    1.6027029E+7,
+    1.602703E+7
+  ],
+  "nativeSeeds": [
+    1.6027101E+7,
+    1.6027102E+7,
+    1.6027103E+7,
+    1.6027104E+7,
+    1.6027105E+7,
+    1.6027106E+7,
+    1.6027107E+7,
+    1.6027108E+7,
+    1.6027109E+7,
+    1.602711E+7,
+    1.6027111E+7,
+    1.6027112E+7,
+    1.6027113E+7,
+    1.6027114E+7,
+    1.6027115E+7,
+    1.6027116E+7,
+    1.6027117E+7,
+    1.6027118E+7,
+    1.6027119E+7,
+    1.602712E+7,
+    1.6027121E+7,
+    1.6027122E+7,
+    1.6027123E+7,
+    1.6027124E+7,
+    1.6027125E+7,
+    1.6027126E+7,
+    1.6027127E+7,
+    1.6027128E+7,
+    1.6027129E+7,
+    1.602713E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-moderate-bg0",
+      "label": "N5 Moderate bg0 ALOHA",
+      "macType": "aloha"
+    },
+    {
+      "id": "n5-stressed-bg0",
+      "label": "N5 Stressed bg0 ALOHA",
+      "macType": "aloha"
+    },
+    {
+      "id": "n5-moderate-bg30",
+      "label": "N5 Moderate bg0.30 CSMA",
+      "macType": "csma"
+    },
+    {
+      "id": "n5-stressed-bg30",
+      "label": "N5 Stressed bg0.30 CSMA",
+      "macType": "csma"
+    },
+    {
+      "id": "n10-moderate-bg0",
+      "label": "N10 Moderate bg0 ALOHA",
+      "macType": "aloha"
+    },
+    {
+      "id": "n10-stressed-bg0",
+      "label": "N10 Stressed bg0 ALOHA",
+      "macType": "aloha"
+    }
+  ],
+  "formationArms": [
+    {
+      "id": "frame-piggyback",
+      "label": "Frame-aware piggyback",
+      "kind": "current",
+      "schedulerMode": "native",
+      "periodicRateHz": null
+    },
+    {
+      "id": "collision-free-rr-piggyback",
+      "label": "Collision-free RR piggyback",
+      "kind": "scheduled-current",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": null
+    },
+    {
+      "id": "periodic-tdma-p6p25",
+      "label": "Periodic TDMA 6.25 Hz",
+      "kind": "periodic",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 6.25
+    },
+    {
+      "id": "periodic-tdma-p8p333",
+      "label": "Periodic TDMA 8.333 Hz",
+      "kind": "periodic",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 8.3333333333333339
+    },
+    {
+      "id": "periodic-tdma-p10",
+      "label": "Periodic TDMA 10 Hz",
+      "kind": "periodic",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 10
+    },
+    {
+      "id": "periodic-tdma-p12p5",
+      "label": "Periodic TDMA 12.5 Hz",
+      "kind": "periodic",
+      "schedulerMode": "round-robin",
+      "periodicRateHz": 12.5
+    },
+    {
+      "id": "dtsa-common-view",
+      "label": "DTSA common-view reference",
+      "kind": "prior-art-reference",
+      "schedulerMode": "dtsa-common",
+      "periodicRateHz": null
+    },
+    {
+      "id": "dtsa-private-view",
+      "label": "DTSA private-view projection",
+      "kind": "prior-art-projection",
+      "schedulerMode": "dtsa-private",
+      "periodicRateHz": null
+    },
+    {
+      "id": "chen-age-gain-private",
+      "label": "Chen age-gain private projection",
+      "kind": "prior-art-projection",
+      "schedulerMode": "age-gain-thinning",
+      "periodicRateHz": null
+    },
+    {
+      "id": "zmac-like-hybrid",
+      "label": "Z-MAC-like hybrid",
+      "kind": "prior-art-projection",
+      "schedulerMode": "zmac-like",
+      "periodicRateHz": null
+    },
+    {
+      "id": "delta-public-projection",
+      "label": "DELTA public-feedback projection",
+      "kind": "prior-art-projection",
+      "schedulerMode": "delta-public",
+      "periodicRateHz": null
+    },
+    {
+      "id": "delta-private-projection",
+      "label": "DELTA private-delayed projection",
+      "kind": "prior-art-projection",
+      "schedulerMode": "delta-private",
+      "periodicRateHz": null
+    },
+    {
+      "id": "oracle-deficit-maxweight",
+      "label": "Oracle deficit max-weight",
+      "kind": "oracle",
+      "schedulerMode": "deficit-maxweight",
+      "periodicRateHz": null
+    },
+    {
+      "id": "oracle-urgency-maxweight",
+      "label": "Oracle urgency max-weight",
+      "kind": "oracle",
+      "schedulerMode": "urgency-maxweight",
+      "periodicRateHz": null
+    }
+  ],
+  "nativeCells": [
+    {
+      "id": "n5-rho20-eps05",
+      "N": 5,
+      "rho": 0.2,
+      "epsilon": 0.05
+    },
+    {
+      "id": "n5-rho20-eps20",
+      "N": 5,
+      "rho": 0.2,
+      "epsilon": 0.2
+    },
+    {
+      "id": "n5-rho50-eps05",
+      "N": 5,
+      "rho": 0.5,
+      "epsilon": 0.05
+    },
+    {
+      "id": "n5-rho50-eps20",
+      "N": 5,
+      "rho": 0.5,
+      "epsilon": 0.2
+    },
+    {
+      "id": "n10-rho20-eps05",
+      "N": 10,
+      "rho": 0.2,
+      "epsilon": 0.05
+    },
+    {
+      "id": "n10-rho20-eps20",
+      "N": 10,
+      "rho": 0.2,
+      "epsilon": 0.2
+    },
+    {
+      "id": "n10-rho50-eps05",
+      "N": 10,
+      "rho": 0.5,
+      "epsilon": 0.05
+    },
+    {
+      "id": "n10-rho50-eps20",
+      "N": 10,
+      "rho": 0.5,
+      "epsilon": 0.2
+    },
+    {
+      "id": "n20-rho20-eps05",
+      "N": 20,
+      "rho": 0.2,
+      "epsilon": 0.05
+    },
+    {
+      "id": "n20-rho20-eps20",
+      "N": 20,
+      "rho": 0.2,
+      "epsilon": 0.2
+    },
+    {
+      "id": "n20-rho50-eps05",
+      "N": 20,
+      "rho": 0.5,
+      "epsilon": 0.05
+    },
+    {
+      "id": "n20-rho50-eps20",
+      "N": 20,
+      "rho": 0.5,
+      "epsilon": 0.2
+    }
+  ],
+  "nativeArms": [
+    "delta-public",
+    "delta-private-delayed",
+    "zero-wait",
+    "max-age-first",
+    "round-robin"
+  ],
+  "nativeSlots": 20000,
+  "nativeBurnIn": 1000,
+  "privateFeedbackLoss": 0.1,
+  "privateFeedbackDelaySlots": [
+    1,
+    5
+  ],
+  "nativeBootstrapResamples": 10000,
+  "nativeBootstrapSeed": 1.6027991E+7,
+  "upstreamDeltaUrl": "https://github.com/signetlabdei/delta_medium_access",
+  "upstreamDeltaCommit": "813dd2d952e172fff302356cd936e0d20a30a328",
+  "primaryBoundaryCell": "n5-stressed-bg0",
+  "primaryFailureCell": "n10-moderate-bg0",
+  "dominanceMargin": 0.01,
+  "privatePenaltyThreshold": 0.1,
+  "targetRateHz": 8.3333333333333339,
+  "expectedFormationRuns": 2520,
+  "expectedNativeRuns": 1800
+}

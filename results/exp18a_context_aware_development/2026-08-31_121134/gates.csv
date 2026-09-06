@@ -1,0 +1,13 @@
+gate,passed,detail
+registry_recorded,1,"development hash 67884206 over 112 leaves"
+matrix_completeness,1,"1600 development runs"
+unique_rows,1,"one row per seed/context/MAC/arm"
+complete_groups,1,"all four arms occur once per seed/context/MAC"
+absolute_trace_crn,1,"both MAC types and four arms share one absolute realization"
+finite_outputs,1,"all development outcomes are finite"
+causal_conservatism,1,"0 protocol violations"
+bounded_memory,1,"max queue=2 max history=32"
+physical_accounting,1,"terminal recipient and busy-union accounting close"
+arm_semantics,1,"legacy, fixed-route and context-aware contracts are exact"
+access_geometry,1,"CSMA/legacy use 1/N; frame-aware ALOHA uses 1/[N(2L-1)]"
+decision_accounting,1,"context decisions close and fixed arms remain inert"

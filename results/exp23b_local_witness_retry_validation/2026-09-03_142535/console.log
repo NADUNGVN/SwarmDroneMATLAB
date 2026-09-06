@@ -1,0 +1,85 @@
+
+============================================================
+RUN  : exp23b_local_witness_retry_validation
+ID   : 2026-09-03_142535
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23b_local_witness_retry_validation\2026-09-03_142535
+WHEN : 2026-09-03 14:25:36
+============================================================
+
+  groups   1--  4 / 200; rows   20 / 1000
+  groups   5--  8 / 200; rows   40 / 1000
+  groups   9-- 12 / 200; rows   60 / 1000
+  groups  13-- 16 / 200; rows   80 / 1000
+  groups  17-- 20 / 200; rows  100 / 1000
+  groups  21-- 24 / 200; rows  120 / 1000
+  groups  25-- 28 / 200; rows  140 / 1000
+  groups  29-- 32 / 200; rows  160 / 1000
+  groups  33-- 36 / 200; rows  180 / 1000
+  groups  37-- 40 / 200; rows  200 / 1000
+  groups  41-- 44 / 200; rows  220 / 1000
+  groups  45-- 48 / 200; rows  240 / 1000
+  groups  49-- 52 / 200; rows  260 / 1000
+  groups  53-- 56 / 200; rows  280 / 1000
+  groups  57-- 60 / 200; rows  300 / 1000
+  groups  61-- 64 / 200; rows  320 / 1000
+  groups  65-- 68 / 200; rows  340 / 1000
+  groups  69-- 72 / 200; rows  360 / 1000
+  groups  73-- 76 / 200; rows  380 / 1000
+  groups  77-- 80 / 200; rows  400 / 1000
+  groups  81-- 84 / 200; rows  420 / 1000
+  groups  85-- 88 / 200; rows  440 / 1000
+  groups  89-- 92 / 200; rows  460 / 1000
+  groups  93-- 96 / 200; rows  480 / 1000
+  groups  97--100 / 200; rows  500 / 1000
+  groups 101--104 / 200; rows  520 / 1000
+  groups 105--108 / 200; rows  540 / 1000
+  groups 109--112 / 200; rows  560 / 1000
+  groups 113--116 / 200; rows  580 / 1000
+  groups 117--120 / 200; rows  600 / 1000
+  groups 121--124 / 200; rows  620 / 1000
+  groups 125--128 / 200; rows  640 / 1000
+  groups 129--132 / 200; rows  660 / 1000
+  groups 133--136 / 200; rows  680 / 1000
+  groups 137--140 / 200; rows  700 / 1000
+  groups 141--144 / 200; rows  720 / 1000
+  groups 145--148 / 200; rows  740 / 1000
+  groups 149--152 / 200; rows  760 / 1000
+  groups 153--156 / 200; rows  780 / 1000
+  groups 157--160 / 200; rows  800 / 1000
+  groups 161--164 / 200; rows  820 / 1000
+  groups 165--168 / 200; rows  840 / 1000
+  groups 169--172 / 200; rows  860 / 1000
+  groups 173--176 / 200; rows  880 / 1000
+  groups 177--180 / 200; rows  900 / 1000
+  groups 181--184 / 200; rows  920 / 1000
+  groups 185--188 / 200; rows  940 / 1000
+  groups 189--192 / 200; rows  960 / 1000
+  groups 193--196 / 200; rows  980 / 1000
+  groups 197--200 / 200; rows 1000 / 1000
+
+EXP23B local-witness kernel gates
+  [PASS] registry_frozen                             hash 93004064 over 50 leaves
+  [PASS] matrix_complete_unique                      1000/1000 unique rows
+  [PASS] exact_matrix_coverage                       100 fresh seeds, two cells and five conditions exact
+  [PASS] one_hop_witness_cover                       all hidden conflict edges covered; no response exceeds one MTU
+  [PASS] zero_loss_liveness                          200/200 certify in frame one
+  [PASS] zero_loss_nominal_control_bound             zero loss uses scheduled epochs exactly and requires no retry
+  [PASS] claim_erasure_5_liveness                    terminal certification 100.0% (required 95.0%)
+  [PASS] certificate_erasure_5_liveness              terminal certification 100.0% (required 95.0%)
+  [PASS] causal_retry_activated                      retry range 11--113 attempts
+  [PASS] data_information_separation                 DATA erasure changes delivery only, never certificate state
+  [PASS] directed_certificate_blackout_boundary      200/200 failures retained with target inactive
+  [PASS] edge_safety_all_conditions                  zero false-valid, scheduled collision and unsupported CERT events
+  [PASS] attempt_byte_and_recipient_accounting       max attempt/byte ratios 0.354250/0.367429
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] all_failures_retained                       no terminal failure row discarded
+  [PASS] kernel_scope_only                           no tuning, closed-loop, promotion or submission claim
+
+EXP23B VERDICT: ELCS_W_KERNEL_VALID
+
+============================================================
+DONE : exp23b_local_witness_retry_validation
+TIME : 2 m 27 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23b_local_witness_retry_validation\2026-09-03_142535
+============================================================

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22h_elcs_event_driven_renewal",
+  "runId": "2026-09-01_191307",
+  "startedAt": "2026-09-01 19:13:07",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F edge-lease safety invariant; no tuning or performance claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22h_elcs_event_driven_renewal.m",
+  "finishedAt": "2026-09-01 19:22:58",
+  "elapsedSec": 591.0761825,
+  "elapsedText": "9 m 51 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

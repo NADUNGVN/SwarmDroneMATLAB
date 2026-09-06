@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23af_online_swept_receiver_closure",
+  "runId": "2026-09-05_135215",
+  "startedAt": "2026-09-05 13:52:15",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Causal online swept receiver-closure and protected DATA validation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23af_online_swept_receiver_closure.m",
+  "finishedAt": "2026-09-05 13:54:24",
+  "elapsedSec": 128.6627315,
+  "elapsedText": "2 m 09 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

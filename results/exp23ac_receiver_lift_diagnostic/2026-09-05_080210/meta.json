@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ac_receiver_lift_diagnostic",
+  "runId": "2026-09-05_080210",
+  "startedAt": "2026-09-05 08:02:11",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Falsify one-sender locality under online receiver-lifted tubes.",
+  "sourceFile": "",
+  "finishedAt": "2026-09-05 08:02:27",
+  "elapsedSec": 16.6807727,
+  "elapsedText": "16.7 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

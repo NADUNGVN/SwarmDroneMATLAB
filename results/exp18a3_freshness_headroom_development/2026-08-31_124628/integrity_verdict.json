@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "gatesPassed": 14,
+  "gatesTotal": 14,
+  "totalRuns": 400,
+  "developmentOnly": true,
+  "futureHoldoutOpened": false
+}

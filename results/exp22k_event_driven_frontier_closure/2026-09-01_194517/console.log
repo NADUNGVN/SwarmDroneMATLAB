@@ -1,0 +1,47 @@
+
+============================================================
+RUN  : exp22k_event_driven_frontier_closure
+ID   : 2026-09-01_194517
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22k_event_driven_frontier_closure\2026-09-01_194517
+WHEN : 2026-09-01 19:45:18
+============================================================
+
+  groups  1-- 4 / 60; rows  12 / 180
+  groups  5-- 8 / 60; rows  24 / 180
+  groups  9--12 / 60; rows  36 / 180
+  groups 13--16 / 60; rows  48 / 180
+  groups 17--20 / 60; rows  60 / 180
+  groups 21--24 / 60; rows  72 / 180
+  groups 25--28 / 60; rows  84 / 180
+  groups 29--32 / 60; rows  96 / 180
+  groups 33--36 / 60; rows 108 / 180
+  groups 37--40 / 60; rows 120 / 180
+  groups 41--44 / 60; rows 132 / 180
+  groups 45--48 / 60; rows 144 / 180
+  groups 49--52 / 60; rows 156 / 180
+  groups 53--56 / 60; rows 168 / 180
+  groups 57--60 / 60; rows 180 / 180
+
+EXP22K targeted-frontier integrity gates
+  [PASS] registry_frozen                             hash 54681516 over 50 leaves
+  [PASS] matrix_complete_unique                      180/180 unique rows
+  [PASS] exact_matrix_coverage                       30 fresh seeds, two cells and three arms exact
+  [PASS] paired_shared_realizations                  channel, initial state, estimator and clock draws paired
+  [PASS] static_guarded_collision_free               targeted static arms remain physically collision-free
+  [PASS] exact_elcs_replay                           ELCS queue opportunities, receiver outcomes and control accounting close
+  [PASS] elcs_safety                                 lease safety remains valid on every fresh seed
+  [FAIL] event_driven_request_discipline             STATUS partition closes and every GRANT follows a decoded request
+  [PASS] event_driven_control_bound                  maximum observed/bound ratio 0.982967
+  [PASS] event_driven_acquisition_deadline           maximum first-certification excess 0 frames
+  [PASS] recipient_and_airtime_accounting            all actual DATA and management airtime and recipients close
+  [PASS] causal_and_closed_loop_invariants           zero causal, protocol, safety and divergence failures
+  [PASS] targeted_scope_only                         no tuning, robustness, promotion or submission decision
+
+EXP22K DECISION: ELCS_TARGETED_FRONTIER_STUDY_INVALID
+
+============================================================
+DONE : exp22k_event_driven_frontier_closure
+TIME : 5 m 44 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22k_event_driven_frontier_closure\2026-09-01_194517
+============================================================

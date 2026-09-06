@@ -1,0 +1,11 @@
+scenario,metric,nPairs,meanDelta,ciLo,ciHi,relativeDelta,contrast
+n5-6dof-zero-loss,RMSE,30,-1.34358231042159e-06,-1.42027297585884e-05,1.13915164746669e-05,-4.49133824589572e-05,elcs-w-affine-clock minus elcs-w-zero-clock
+n5-6dof-zero-loss,MEAN_TRUE_AOI,30,-5.47263681592053e-05,-8.9552238805971e-05,-2.26644555002773e-05,-0.00134776393710438,elcs-w-affine-clock minus elcs-w-zero-clock
+n5-6dof-zero-loss,OFFERED_UTIL,30,0,0,0,0,elcs-w-affine-clock minus elcs-w-zero-clock
+n5-6dof-zero-loss,CHANNEL_UTIL,30,7.03141248929266e-17,1.29526019539602e-17,1.25825276124184e-16,2.4208406936144e-16,elcs-w-affine-clock minus elcs-w-zero-clock
+n5-6dof-zero-loss,DATA_GOODPUT_HZ,30,0,0,0,0,elcs-w-affine-clock minus elcs-w-zero-clock
+n10-ring2-zero-loss,RMSE,30,-1.2663289684874e-05,-2.73335724159512e-05,8.55791324012429e-07,-0.000248932525550148,elcs-w-affine-clock minus elcs-w-zero-clock
+n10-ring2-zero-loss,MEAN_TRUE_AOI,30,-0.000175405026151296,-0.000213675213675218,-0.000137772675086121,-0.00267608649111542,elcs-w-affine-clock minus elcs-w-zero-clock
+n10-ring2-zero-loss,OFFERED_UTIL,30,0,0,0,0,elcs-w-affine-clock minus elcs-w-zero-clock
+n10-ring2-zero-loss,CHANNEL_UTIL,30,0.00821272273670134,0.00719119579829603,0.00927552062284931,0.0427745975869869,elcs-w-affine-clock minus elcs-w-zero-clock
+n10-ring2-zero-loss,DATA_GOODPUT_HZ,30,0,0,0,0,elcs-w-affine-clock minus elcs-w-zero-clock

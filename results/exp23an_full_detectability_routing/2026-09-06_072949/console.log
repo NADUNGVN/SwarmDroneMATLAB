@@ -1,0 +1,71 @@
+
+============================================================
+RUN  : exp23an_full_detectability_routing
+ID   : 2026-09-06_072949
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23an_full_detectability_routing\2026-09-06_072949
+WHEN : 2026-09-06 07:29:49
+============================================================
+
+  structural N=5, spatial-reuse-lower-bound           complete
+  structural N=5, complete-interference-upper-bound   complete
+  structural N=10, spatial-reuse-lower-bound           complete
+  structural N=10, complete-interference-upper-bound   complete
+  structural N=20, spatial-reuse-lower-bound           complete
+  structural N=20, complete-interference-upper-bound   complete
+  Monte Carlo N=5, spatial-reuse-lower-bound           source=3: 1465/10000 failures
+  Monte Carlo N=5, complete-interference-upper-bound   source=3: 1549/10000 failures
+  Monte Carlo N=10, spatial-reuse-lower-bound           source=3: 3132/10000 failures
+  Monte Carlo N=10, complete-interference-upper-bound   source=3: 3124/10000 failures
+  Monte Carlo N=20, spatial-reuse-lower-bound           source=3: 5434/10000 failures
+  Monte Carlo N=20, complete-interference-upper-bound   source=3: 5370/10000 failures
+
+EXP23AN-FULL-DETECTABILITY-ROUTING-v1 routed-management gates
+  [PASS] registry_and_valid_parent                      registry 51249367/51 leaves; retained parent 28/28
+  [PASS] structural_matrix_complete_unique              210/210 unique structural rows
+  [PASS] connected_direct_graph_and_finite_ttl          maximum observed diameter 4 and route depth 4
+  [PASS] one_parent_tree_duplicate_suppression          all all-node routes are one-parent trees; duplicate forwards zero
+  [PASS] receiver_conflict_coloring                     zero collisions over 210 no-loss structural replays
+  [PASS] causal_depth_schedule                          every forwarding parent is scheduled before its relay child
+  [PASS] minimum_integer_repetition                     selected repetition range 3--9
+  [PASS] exact_route_reliability_target                 maximum exact logical-packet failure 0.000874513064
+  [PASS] analytical_union_bound_ordering                maximum union upper bound 0.0008748
+  [PASS] no_loss_replay_delivery                        all intended recipients receive; all planned relays execute
+  [PASS] integer_bytes_and_derived_airtime              maximum exact physical bytes 9504
+  [PASS] upstream_erasure_causal_silence                erasing every source-child link suppresses all descendant relays
+  [PASS] monte_carlo_probability_replay                 maximum absolute probability error 0.005734 vs tolerance 0.025022
+  [PASS] semantic_recipient_contract                    25/25 exact sender-kind recipient sets; 1 local-only
+  [PASS] semantic_routes_reliable_and_accounted         maximum semantic duration 0.156123 s; maximum attempts 30
+  [PASS] negative_accounting_and_efficiency_comparators logical-clique undercount up to 99x; hop-local saves up to 264 slots
+  [PASS] legacy_detectability_gap_exposed               legacy oracle rejects 30 structural and 5 semantic routes
+  [PASS] full_direct_reach_detectability_repair         independent oracle accepts 94/94 corrected routes; max added slots 2
+  [PASS] diagnostic_scope_not_promoted                  primitive evidence only; all downstream claim flags remain false
+
+Structural worst cases by size and interference
+    N              interferenceMode              GroupCount    max_maximumRecipientDepth    max_maximumPhysicalAttempts    max_reservedSlotCount    max_reservedDurationSec
+    __    ___________________________________    __________    _________________________    ___________________________    _____________________    _______________________
+
+     5    "complete-interference-upper-bound"        15                    2                            21                          21                      0.12541        
+     5    "spatial-reuse-lower-bound"                15                    2                            21                          21                      0.12541        
+    10    "complete-interference-upper-bound"        30                    4                            48                          48                      0.28666        
+    10    "spatial-reuse-lower-bound"                30                    4                            48                          48                      0.28666        
+    20    "complete-interference-upper-bound"        60                    4                            99                          99                      0.59124        
+    20    "spatial-reuse-lower-bound"                60                    4                            99                          54                      0.32249        
+
+    N              interferenceMode              source       seed        planHash     trials    failures    linkErasureProbability    repetitionsPerHop    failureProbabilityExact    failureProbabilityEmpirical    absoluteError    registeredTolerance    probabilityAgreement    meanPhysicalAttempts    maximumObservedAttempts    analyticalAttemptBound    attemptBoundSatisfied    collisionRecipients    duplicateForwards    forbiddenReads    simulatorVersionHash
+    __    ___________________________________    ______    __________    __________    ______    ________    ______________________    _________________    _______________________    ___________________________    _____________    ___________________    ____________________    ____________________    _______________________    ______________________    _____________________    ___________________    _________________    ______________    ____________________
+
+     5    "spatial-reuse-lower-bound"              3       1.6095e+07         65183    10000       1465               0.2                      2                    0.15065                      0.1465                 0.0041534           0.017986                   1                      5.848                      6                          6                        1                       0                     0                  0                  64337        
+     5    "complete-interference-upper-bound"      3       1.6095e+07         65963    10000       1549               0.2                      2                    0.15065                      0.1549                 0.0042466           0.017986                   1                     5.8336                      6                          6                        1                       0                     0                  0                  64337        
+    10    "spatial-reuse-lower-bound"              3       1.6095e+07    7.7306e+05    10000       3132               0.2                      2                    0.30747                      0.3132                  0.005734           0.023172                   1                     11.204                     12                         12                        1                       0                     0                  0                  64337        
+    10    "complete-interference-upper-bound"      3       1.6095e+07    8.0132e+05    10000       3124               0.2                      2                    0.30747                      0.3124                  0.004934           0.023172                   1                     11.192                     12                         12                        1                       0                     0                  0                  64337        
+    20    "spatial-reuse-lower-bound"              3       1.6095e+07    1.0597e+07    10000       5434               0.2                      2                    0.53958                      0.5434                 0.0038192           0.025022                   1                      20.04                     22                         22                        1                       0                     0                  0                  64337        
+    20    "complete-interference-upper-bound"      3       1.6095e+07    1.1174e+07    10000       5370               0.2                      2                    0.53958                       0.537                 0.0025808           0.025022                   1                     20.065                     22                         22                        1                       0                     0                  0                  64337        
+
+EXP23AN-FULL-DETECTABILITY-ROUTING-v1 DECISION: FULL_DETECTABILITY_ROUTING_PRIMITIVE_DIAGNOSTIC_VALID
+
+============================================================
+DONE : exp23an_full_detectability_routing
+TIME : 29.2 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23an_full_detectability_routing\2026-09-06_072949
+============================================================

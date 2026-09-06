@@ -1,0 +1,60 @@
+
+============================================================
+RUN  : exp18a3_freshness_headroom_development
+ID   : 2026-08-31_124628
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp18a3_freshness_headroom_development\2026-08-31_124628
+WHEN : 2026-08-31 12:46:28
+============================================================
+
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+  groups    1--  16 /  400; rows  16 / 400
+  groups   17--  32 /  400; rows  32 / 400
+  groups   33--  48 /  400; rows  48 / 400
+  groups   49--  64 /  400; rows  64 / 400
+  groups   65--  80 /  400; rows  80 / 400
+  groups   81--  96 /  400; rows  96 / 400
+  groups   97-- 112 /  400; rows 112 / 400
+  groups  113-- 128 /  400; rows 128 / 400
+  groups  129-- 144 /  400; rows 144 / 400
+  groups  145-- 160 /  400; rows 160 / 400
+  groups  161-- 176 /  400; rows 176 / 400
+  groups  177-- 192 /  400; rows 192 / 400
+  groups  193-- 208 /  400; rows 208 / 400
+  groups  209-- 224 /  400; rows 224 / 400
+  groups  225-- 240 /  400; rows 240 / 400
+  groups  241-- 256 /  400; rows 256 / 400
+  groups  257-- 272 /  400; rows 272 / 400
+  groups  273-- 288 /  400; rows 288 / 400
+  groups  289-- 304 /  400; rows 304 / 400
+  groups  305-- 320 /  400; rows 320 / 400
+  groups  321-- 336 /  400; rows 336 / 400
+  groups  337-- 352 /  400; rows 352 / 400
+  groups  353-- 368 /  400; rows 368 / 400
+  groups  369-- 384 /  400; rows 384 / 400
+  groups  385-- 400 /  400; rows 400 / 400
+
+EXP18A3 integrity gates
+  [PASS] registry_recorded                      development hash 66985181 over 104 leaves
+  [PASS] matrix_completeness                    400 amendment runs
+  [PASS] unique_rows                            one row per seed/context/MAC
+  [PASS] exact_reference_trace                  candidate matches canonical EXP18A exogenous realizations
+  [PASS] finite_outputs                         all outcomes and certificate ratios are finite
+  [PASS] causal_conservatism                    0 protocol violations
+  [PASS] bounded_memory                         max queue=2 max history=32
+  [PASS] physical_accounting                    terminal recipient and busy-union accounting close
+  [PASS] candidate_semantics                    service certificate and freshness headroom are enabled
+  [PASS] access_geometry                        CSMA 1/N and ALOHA 1/[N(2L-1)] are exact
+  [PASS] decision_accounting                    every context decision has exactly one outcome
+  [PASS] static_certificate                     certificate is seed-independent within context/MAC
+  [PASS] infeasible_abstention                  certificate-infeasible trajectories emit no standalone ACK
+  [PASS] calibration_boundary                   reverse boundary retains declared nominal mismatch
+
+EXP18A3 DEVELOPMENT VERDICT: REJECT_OR_REVISE_FRESHNESS_HEADROOM (7/8 gates)
+
+============================================================
+DONE : exp18a3_freshness_headroom_development
+TIME : 3 m 11 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp18a3_freshness_headroom_development\2026-08-31_124628
+============================================================

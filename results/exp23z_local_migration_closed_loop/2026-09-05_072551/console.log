@@ -1,0 +1,14 @@
+
+============================================================
+RUN  : exp23z_local_migration_closed_loop
+ID   : 2026-09-05_072551
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23z_local_migration_closed_loop\2026-09-05_072551
+WHEN : 2026-09-05 07:25:51
+============================================================
+
+{Unrecognized function or variable 'writeJson'.
+
+Error in exp23z_local_migration_closed_loop (line 11)
+writeJson(fullfile(expRun.dir,'closed_loop_registry.json'),R);
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 

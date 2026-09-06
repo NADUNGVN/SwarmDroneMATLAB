@@ -1,0 +1,15 @@
+{
+  "status": "STATIC_COHERENCE_COMMON_PHY_SURVIVES",
+  "validationGatesPassed": 17,
+  "validationGatesTotal": 17,
+  "rows": 300,
+  "structuralIntegrityPassed": true,
+  "candidateSafetyAndLivenessPassed": true,
+  "mechanismPassed": true,
+  "periodicEpsilonDominanceFound": false,
+  "next": "design_dynamic_closed_loop_operating_envelope",
+  "freshSeedEvidence": true,
+  "dynamicClosedLoopValidated": false,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

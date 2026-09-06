@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23aa_emergency_data_development",
+  "runId": "2026-09-05_073757",
+  "startedAt": "2026-09-05 07:37:57",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Protected emergency DATA development after EXP23Z boundary.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23aa_emergency_data_development.m",
+  "finishedAt": "2026-09-05 07:40:21",
+  "elapsedSec": 143.6856114,
+  "elapsedText": "2 m 24 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

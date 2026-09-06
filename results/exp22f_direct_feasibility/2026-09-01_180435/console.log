@@ -1,0 +1,63 @@
+
+============================================================
+RUN  : exp22f_direct_feasibility
+ID   : 2026-09-01_180435
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22f_direct_feasibility\2026-09-01_180435
+WHEN : 2026-09-01 18:04:36
+============================================================
+
+  groups  1-- 2 / 60; rows  20 / 600
+  groups  3-- 4 / 60; rows  40 / 600
+  groups  5-- 6 / 60; rows  60 / 600
+  groups  7-- 8 / 60; rows  80 / 600
+  groups  9--10 / 60; rows 100 / 600
+  groups 11--12 / 60; rows 120 / 600
+  groups 13--14 / 60; rows 140 / 600
+  groups 15--16 / 60; rows 160 / 600
+  groups 17--18 / 60; rows 180 / 600
+  groups 19--20 / 60; rows 200 / 600
+  groups 21--22 / 60; rows 220 / 600
+  groups 23--24 / 60; rows 240 / 600
+  groups 25--26 / 60; rows 260 / 600
+  groups 27--28 / 60; rows 280 / 600
+  groups 29--30 / 60; rows 300 / 600
+  groups 31--32 / 60; rows 320 / 600
+  groups 33--34 / 60; rows 340 / 600
+  groups 35--36 / 60; rows 360 / 600
+  groups 37--38 / 60; rows 380 / 600
+  groups 39--40 / 60; rows 400 / 600
+  groups 41--42 / 60; rows 420 / 600
+  groups 43--44 / 60; rows 440 / 600
+  groups 45--46 / 60; rows 460 / 600
+  groups 47--48 / 60; rows 480 / 600
+  groups 49--50 / 60; rows 500 / 600
+  groups 51--52 / 60; rows 520 / 600
+  groups 53--54 / 60; rows 540 / 600
+  groups 55--56 / 60; rows 560 / 600
+  groups 57--58 / 60; rows 580 / 600
+  groups 59--60 / 60; rows 600 / 600
+
+EXP22F direct-feasibility integrity gates
+  [PASS] registry_frozen                             hash 55155660 over 65 leaves
+  [PASS] matrix_complete_unique                      600/600 unique rows
+  [PASS] exact_matrix_coverage                       30 fresh seeds, two cells and ten arms exact
+  [PASS] paired_shared_realizations                  channel, initial state, estimator and clock draws paired
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] static_guarded_collision_free               0 collision frames; max clock residual 1.78e-15 s
+  [PASS] exact_replay_outcomes                       D-STR and ELCS attempts, recipient masks and collision witnesses match
+  [PASS] replay_control_and_timing                   management partitions, cross-plane separation and clock guards close
+  [PASS] elcs_safety                                 ELCS certification, edge locks and scheduled safety remain valid
+  [PASS] dstr_native_valid                           native D-STR resolves and remains physically collision-free
+  [PASS] recipient_and_airtime_accounting            recipient partition and all DATA/management attempt-airtime close
+  [PASS] closed_loop_invariants                      0 invariant, 0 unsafe and 0 divergent rows
+  [PASS] all_outcomes_retained                       all favorable and unfavorable performance rows retained
+  [PASS] feasibility_scope_only                      no tuning, confirmation, robustness or submission decision
+
+EXP22F DECISION: ELCS_FEASIBILITY_NONDOMINATED_CONTINUE_REFERENCES
+
+============================================================
+DONE : exp22f_direct_feasibility
+TIME : 20 m 54 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp22f_direct_feasibility\2026-09-01_180435
+============================================================

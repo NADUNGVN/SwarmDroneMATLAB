@@ -1,0 +1,6 @@
+{
+  "status": "POSTHOC_DESCRIPTIVE_ONLY",
+  "createdAt": "2026-09-01 02:18:57",
+  "changesRegisteredDecision": false,
+  "reason": "Public DELTA has a hot-start/CR heavy tail; report central tendency, tail frequency and paired direction alongside the registered paired-relative-mean gate."
+}

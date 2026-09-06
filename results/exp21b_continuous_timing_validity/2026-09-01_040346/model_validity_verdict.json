@@ -1,0 +1,9 @@
+{
+  "status": "TIMING_MODEL_VALID_FOR_INTEGRATION",
+  "gatesPassed": 11,
+  "gatesTotal": 11,
+  "rows": 1600,
+  "policyOptimizationAllowed": false,
+  "formationPerformanceClaimPermitted": false,
+  "closedLoopIntegrationPermitted": true
+}

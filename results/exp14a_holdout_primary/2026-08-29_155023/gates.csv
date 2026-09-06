@@ -1,0 +1,12 @@
+gate,passed,detail
+matrix_completeness,1,"total=10500 frontier=9000 mechanism=1500"
+unique_cells,1,"every declared seed/cell appears once"
+finite_outputs,1,"all required control, freshness, PHY and 6-DOF outputs are finite"
+causal_conservatism,1,"0 protocol violations"
+bounded_memory,1,"max queue=3 max history=32"
+physical_accounting,1,"success+loss+terminal-in-flight closes; DATA in-flight=1312 across 674 rows; ACK in-flight=609 across 361 rows"
+paired_absolute_trace,1,"one underlying trace per seed and one state realization per seed/scenario"
+feedback_information_constraint,1,"periodic/state arms emit no ACK traffic"
+mechanism_semantics,1,"standalone, piggyback and hybrid obligations remain distinct"
+divergence_accounting,1,"0 diverged runs retained as safety failures"
+channel_cell_identity,1,"logged stationary channel marginals match the frozen registry"

@@ -1,0 +1,15 @@
+{
+  "status": "ELCS_W_CUMULATIVE_TARGET_SURVIVES",
+  "validationGatesPassed": 18,
+  "validationGatesTotal": 18,
+  "rows": 180,
+  "structuralIntegrityPassed": true,
+  "candidateSafetyAndLivenessPassed": true,
+  "mechanismReliefPassed": true,
+  "epsilonDominanceFound": false,
+  "confidenceSupportedEpsilonDominanceFound": false,
+  "next": "freeze_full_background_confirmation",
+  "fullBackgroundConfirmationPermitted": true,
+  "newMethodPromotionAllowed": false,
+  "submissionClaimPermitted": false
+}

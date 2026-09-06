@@ -1,0 +1,51 @@
+
+============================================================
+RUN  : exp21d_clock_composition
+ID   : 2026-09-01_114737
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_clock_composition\2026-09-01_114737
+WHEN : 2026-09-01 11:47:37
+============================================================
+
+  groups  1-- 4 / 60; rows  12 / 180
+  groups  5-- 8 / 60; rows  24 / 180
+  groups  9--12 / 60; rows  36 / 180
+  groups 13--16 / 60; rows  48 / 180
+  groups 17--20 / 60; rows  60 / 180
+  groups 21--24 / 60; rows  72 / 180
+  groups 25--28 / 60; rows  84 / 180
+  groups 29--32 / 60; rows  96 / 180
+  groups 33--36 / 60; rows 108 / 180
+  groups 37--40 / 60; rows 120 / 180
+  groups 41--44 / 60; rows 132 / 180
+  groups 45--48 / 60; rows 144 / 180
+  groups 49--52 / 60; rows 156 / 180
+  groups 53--56 / 60; rows 168 / 180
+  groups 57--60 / 60; rows 180 / 180
+
+EXP21D-C affine-clock composition gates
+  [PASS] registry_frozen                             hash 46425247 over 51 leaves
+  [PASS] matrix_complete_unique                      180/180 unique rows
+  [PASS] exact_seed_cell_arm_coverage                30 fresh seeds, two cells and three arms exact
+  [PASS] paired_absolute_traces                      channel, clock, estimator and D-STR hashes paired within seed/cell
+  [PASS] mission_logical_opportunities_paired        mission zero/clock arms share base schedule and logical opportunities
+  [PASS] clock_impairment_declared                   only affine-clock arm consumes bounded nonzero clock realization
+  [PASS] affine_clock_and_guard_certificate          max residual 1.78e-15 s; min gap 0.000295 s
+  [PASS] causal_information_contract                 zero future-random and receiver-truth decision reads
+  [PASS] all_dstr_opportunities_served               0 skipped opportunities
+  [PASS] exact_data_outcome_replay                   scheduled and observed success/erasure/collision counts match
+  [PASS] data_collision_witness_match                event collision frames equal completed kernel witnesses
+  [PASS] management_accounting_closes                recipient partitions and management attempt-airtime close
+  [PASS] cross_plane_nonoverlap                      0 overlap witnesses
+  [PASS] recipient_and_airtime_accounting            terminal recipient partition and fully charged utilization close
+  [PASS] protocol_invariants                         0 invariant violations
+  [PASS] all_failures_retained                       0 unsafe, 0 unresolved, 0 invalid retained
+  [PASS] clock_scope_only                            no tuning, candidate selection, promotion or submission decision
+
+EXP21D-C VERDICT: DSTR_AFFINE_CLOCK_COMPOSITION_VALID
+
+============================================================
+DONE : exp21d_clock_composition
+TIME : 9 m 12 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp21d_clock_composition\2026-09-01_114737
+============================================================

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp14i_mac_selective_validation",
+  "runId": "2026-08-31_004619",
+  "startedAt": "2026-08-31 00:46:19",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Frozen 100-seed MAC-selective feedback holdout; six-test Holm family; N20 mandatory support boundary.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp14i_mac_selective_validation.m",
+  "finishedAt": "2026-08-31 01:02:08",
+  "elapsedSec": 948.9083822,
+  "elapsedText": "15 m 49 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

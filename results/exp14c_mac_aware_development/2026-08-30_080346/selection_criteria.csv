@@ -1,0 +1,5 @@
+criterion,passed,detail
+integrity,1,all integrity gates pass
+no_n5_n10_safety_regression,1,full-v2 has no additional N5/N10 failures
+n20_collapse_removed,1,full-v2 util=1.107 failures=5 versus hybrid=8
+aloha_no_two_axis_loss,1,full-v2 RMSE/util 0.0763/0.738; hybrid 0.0740/0.758

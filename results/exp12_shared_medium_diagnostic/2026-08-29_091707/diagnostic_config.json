@@ -1,0 +1,85 @@
+{
+  "status": "development-only",
+  "claimScope": "infrastructure diagnostics; no policy superiority",
+  "developmentSeeds": [
+    1.2012001E+7,
+    1.2012002E+7,
+    1.2012003E+7
+  ],
+  "pValues": [
+    0.1,
+    0.2,
+    0.4,
+    1
+  ],
+  "scenarioNames": [
+    "Clean",
+    "Moderate",
+    "Stressed"
+  ],
+  "scenarioResidualLoss": [
+    0,
+    0.1,
+    0.3
+  ],
+  "methodIds": [
+    "periodic",
+    "state-event",
+    "causal-broadcast"
+  ],
+  "baseMac": {
+    "type": "csma",
+    "slotTime": 0.001,
+    "queueCapacity": 4,
+    "dataBytes": 48,
+    "ackBaseBytes": 12,
+    "ackEntryBytes": 8,
+    "phyRateBps": 1.0E+6,
+    "ackDeadline": 0.02,
+    "pAccess": 0.2,
+    "historySize": 32,
+    "residualLoss": 0,
+    "seedOffset": 3.1012026E+7,
+    "maxRetries": 2,
+    "txPowerW": 0.2,
+    "interferenceMatrix": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ],
+    "applyDeliveriesInline": true
+  },
+  "primaryPSource": "p=1/(c+1)=1/5 for c=4"
+}

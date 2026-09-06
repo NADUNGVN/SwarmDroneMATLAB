@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23g_background_gate_repair",
+  "runId": "2026-09-04_154603",
+  "startedAt": "2026-09-04 15:46:03",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh background-robustness rerun after repairing only the floating-point pairing gate.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23g_background_gate_repair.m",
+  "finishedAt": "2026-09-04 16:03:18",
+  "elapsedSec": 1034.8982152,
+  "elapsedText": "17 m 15 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

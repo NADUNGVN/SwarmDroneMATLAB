@@ -1,0 +1,273 @@
+\section{Results}
+\label{sec:s2-results}
+
+\subsection{The initial shared-medium design is not the final result}
+
+EXP14A/B pass all integrity gates, but the frozen default is dominated by a
+delayed-ACK belief frontier point in Clean, Moderate, and Stressed. The
+negative result is not removed by later development. Table~\ref{tab:s2-initial}
+shows the principal mechanism contrasts.
+
+\begin{table*}[t]
+\centering
+\caption{Initial EXP14 shared-medium contrasts over 100 paired seeds.
+Differences are first method minus comparator; lower RMSE, AoI, and offered
+utilization are favorable.}
+\label{tab:s2-initial}
+\scriptsize
+\begin{tabular}{llrrrr}
+\toprule
+Contrast & Outcome & First & Comparator & Relative difference & 95\% paired CI \\
+\midrule
+Clean default $-$ P10 & RMSE [m] & 0.05687 & 0.05572 & +2.05\% & [0.00086, 0.00143] \\
+ & Offered utilization & 0.26446 & 0.31335 & $-$15.60\% & [$-$0.05107, $-$0.04670] \\
+Stressed default $-$ P10 & RMSE [m] & 0.06515 & 0.08198 & $-$20.53\% & [$-$0.01759, $-$0.01607] \\
+ & Offered utilization & 0.35980 & 0.31335 & +14.83\% & [0.04397, 0.04894] \\
+Moderate hybrid $-$ unicast & RMSE [m] & 0.05797 & 0.06007 & $-$3.50\% & [$-$0.00236, $-$0.00184] \\
+ & Offered utilization & 0.28895 & 0.70554 & $-$59.05\% & [$-$0.42112, $-$0.41206] \\
+Moderate piggyback $-$ hybrid & RMSE [m] & 0.05379 & 0.05797 & $-$7.22\% & [$-$0.00439, $-$0.00398] \\
+ & Offered utilization & 0.27551 & 0.28895 & $-$4.65\% & [$-$0.01538, $-$0.01149] \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Broadcast aggregation is valuable: hybrid broadcast reduces offered load by
+59.05\% and RMSE by 3.50\% relative to causal unicast. That does not validate
+standalone feedback. Piggyback-only improves all three continuous outcomes
+over hybrid in Moderate. Clean also exposes a control/resource trade-off:
+default uses less airtime than P10 but has worse RMSE and true AoI. In
+Stressed, the signs reverse. Thus no regime-independent dominance statement is
+available.
+
+The strongest boundary is $N=20$. With fixed $p=0.2$, hybrid demand reaches
+2.849 channel-times and fails safety in 100/100 runs. Periodic P10 fails only
+5/100 at offered utilization 0.484 and lower mean RMSE. The failure is an
+access/contention collapse, not evidence that causal freshness alone scales.
+
+\subsection{Factorial repair and selected-policy validation}
+
+EXP14C/D isolate adaptive feedback, the proposed load guard, and access
+scaling. Scaling $p$ to $\min\{p_{\rm configured},1/N\}$ is the dominant N20
+repair. The fixed load guard lowers offered demand but worsens N20 RMSE by
+22.45\%, true AoI by 23.43\%, and causes 6/12 failures versus 0/12 without the
+guard. The selected arm is therefore adaptive feedback, scaled access, and no
+fixed guard.
+
+EXP14E freezes that arm against access-only hybrid feedback on 100 new seeds.
+All six Holm-adjusted primary hypotheses pass:
+
+\begin{table}[t]
+\centering
+\caption{EXP14E selected adaptive/scaled policy relative to access-only.
+All paired intervals exclude zero.}
+\label{tab:s2-exp14e}
+\scriptsize
+\begin{tabular}{lrrr}
+\toprule
+Cell & $\Delta$RMSE & $\Delta U_{\rm off}$ & Safety selected/access \\
+\midrule
+N5 CSMA & $-$6.09\% & $-$2.31\% & 0/0 \\
+N10 CSMA & $-$7.27\% & $-$13.11\% & 0/0 \\
+N20 CSMA & $-$5.40\% & $-$1.00\% & 1/5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This validates adaptation relative to the earlier hybrid implementation, not
+the necessity of standalone ACKs. Piggyback-only is better than selected on
+RMSE and offered utilization at N5/N10 CSMA; at N20, selected emits only 1.1
+standalone ACK attempts per run and the continuous differences are unresolved.
+Under the mandatory ALOHA boundary, selected instead improves RMSE and load.
+
+\subsection{Confirmation lead is not receiver value}
+
+EXP14F finds a positive generation-matched policy lead for 83.67\%, 78.53\%,
+and 96.53\% of matched N5 CSMA, N10, and ALOHA events. Yet the full-policy
+sign favors piggyback at N5/N10 and ACK assistance at ALOHA. Because the two
+policies evolve independently from mission start, this lead is not the effect
+of one focal decision.
+
+EXP14G closes that gap by state-cloned replay. Table~\ref{tab:s2-branch}
+reports supported cells; positive benefit means suppress-branch minus
+admit-branch. Intervals are descriptive over 20 independent parent decisions.
+
+\begin{table*}[t]
+\centering
+\caption{EXP14G focal standalone-ACK effects over a 0.75-s local horizon.
+Positive lead means earlier confirmation with the focal ACK. Positive outcome
+benefit favors admission.}
+\label{tab:s2-branch}
+\scriptsize
+\begin{tabular}{lrrrrr}
+\toprule
+Cell & Positive-lead entries & Mean lead [s] & Net-airtime benefit [s] &
+True-AoI integral benefit [s$^2$] & Formation-loss benefit [m$^2$s] \\
+\midrule
+N5 CSMA & 89.74\% & 0.02398 & 0.00240 &
+$-$0.001194 [$-$0.002252,$-$0.000137] & $-4.31\times10^{-6}$ \\
+N10 CSMA & 80.49\% & 0.04442 & 0.00175 &
+$-$0.000361 & $-1.28\times10^{-5}$ [$-$2.44,$-$0.124]$\times10^{-5}$ \\
+N5 ALOHA & 70.97\% & 0.14441 & 0.03925 &
+0.006916 & $4.44\times10^{-5}$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+At N5, earlier confirmation significantly worsens the local true-AoI
+integral. At N10, it significantly worsens integrated formation loss. These
+are not contradictions: the ACK advances sender belief but carries no state,
+and that belief can suppress or reshape later DATA. ALOHA has favorable mean
+signs but heterogeneous intervals containing zero. Only 1/20 N5 and 3/20 N10
+decisions are Pareto beneficial across resource, true-AoI, and control signs;
+ALOHA has 8/20.
+
+N20 fails the frozen support minimum. EXP14G supplies four eligible parent
+seeds from 60 pilots, and EXP14H supplies seven from 240. Across the disjoint
+blocks, only 11/300 trajectories contain a post-transient candidate with the
+complete local window: 3.67\%, with 95\% Wilson interval 2.06--6.45\%.
+EXP14H correctly stops before outcome replay. This is a practical event-
+support failure, not an ACK-effect estimate.
+
+\subsection{Disjoint validation of MAC-selective feedback}
+
+EXP14I freezes the selector in \eqref{eq:s2-mac-selector} before opening 100
+new seeds per cell. The complete 1,600-run matrix passes 15/15 integrity gates,
+has zero divergence and protocol violations, and matches the routed reference
+exactly on all 16 registered fields. Table~\ref{tab:s2-exp14i} gives the six
+confirmatory tests.
+
+\begin{table*}[t]
+\centering
+\caption{EXP14I candidate minus registered opposite route. All 100 pairs are
+used; $p_{\rm H}$ is Holm adjusted over the six one-sided tests.}
+\label{tab:s2-exp14i}
+\scriptsize
+\begin{tabular}{lllrrrr}
+\toprule
+Cell & Comparator & Outcome & Candidate & Comparator & Difference [95\% CI] & $p_{\rm H}$ \\
+\midrule
+N5 CSMA & adaptive & RMSE [m] & 0.053740 & 0.054267 &
+$-$0.000527 [$-$0.000690,$-$0.000365] & $4.06\times10^{-9}$ \\
+ & adaptive & $U_{\rm off}$ & 0.275350 & 0.283694 &
+$-$0.008344 [$-$0.010243,$-$0.006445] & $1.70\times10^{-13}$ \\
+N10 CSMA & adaptive & RMSE [m] & 0.089059 & 0.090160 &
+$-$0.001100 [$-$0.001455,$-$0.000746] & $7.56\times10^{-9}$ \\
+ & adaptive & $U_{\rm off}$ & 0.618860 & 0.635639 &
+$-$0.016779 [$-$0.020535,$-$0.013024] & $9.74\times10^{-14}$ \\
+N5 ALOHA & piggyback & RMSE [m] & 0.078753 & 0.089324 &
+$-$0.010572 [$-$0.013629,$-$0.007514] & $9.02\times10^{-10}$ \\
+ & piggyback & $U_{\rm off}$ & 0.768387 & 0.804670 &
+$-$0.036282 [$-$0.045696,$-$0.026869] & $2.71\times10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+All 6/6 hypotheses and 3/3 cell safety guards pass. Under CSMA, removing
+standalone service eliminates 61.92 and 81.12 ACK attempts per N5/N10 run and
+reduces collisions by 5.14\% and 7.07\%. Under ALOHA, adding 309.85 ACK
+attempts suppresses 205.86 DATA attempts and 87.33 collision frames, reducing
+RMSE by 11.84\% and offered load by 4.51\%.
+
+N20 remains descriptive. Candidate/piggyback and adaptive differ by
+$+0.000105$ m RMSE and $-0.000257$ offered utilization, with both intervals
+crossing zero; adaptive averages 0.77 standalone attempts per run. No
+equivalence or N20 per-decision value is inferred. Candidate has 0/100 observed
+safety failures in every cell, but the Wilson upper bound is 3.70\% and does
+not constitute population safety evidence.
+
+\subsection{Formal feedback-route-by-MAC interaction}
+
+EXP14I's separate directional tests validate the registered choices but do not
+alone test an interaction. EXP16 therefore freezes a matched $2\times2$ design
+over MAC (CSMA/ALOHA) and route (adaptive/piggyback) on 100 additional seeds.
+All four primary cells in a seed consume the same absolute random arrays and
+channel-state realization. A fixed-deadline hybrid route is retained as a
+secondary reference. The 600-run matrix passes 14/14 integrity gates with zero
+divergence and protocol violations.
+
+For outcome $Y$, define
+$D_m(Y)=Y_{\mathrm{adaptive},m}-Y_{\mathrm{piggyback},m}$ and
+$I(Y)=D_{\mathrm{ALOHA}}(Y)-D_{\mathrm{CSMA}}(Y)$. Table~\ref{tab:s2-exp16}
+reports the frozen six-test family; simple effects are oriented below zero in
+their registered favorable direction.
+
+\begin{table*}[t]
+\centering
+\caption{EXP16 matched simple effects and formal interactions over 100 paired
+seeds. All $p_{\rm H}$ values are Holm adjusted over the six one-sided tests.}
+\label{tab:s2-exp16}
+\scriptsize
+\begin{tabular}{lllrrr}
+\toprule
+Outcome & Test & Estimate & 95\% paired CI & Standardized effect & $p_{\rm H}$ \\
+\midrule
+RMSE [m] & CSMA: piggyback $-$ adaptive & $-$0.000532 & [$-$0.000711,$-$0.000353] & $-$0.589 & $5.33\times10^{-8}$ \\
+ & ALOHA: adaptive $-$ piggyback & $-$0.008737 & [$-$0.011766,$-$0.005708] & $-$0.572 & $5.60\times10^{-8}$ \\
+ & Interaction $I$ & $-$0.009268 & [$-$0.012319,$-$0.006218] & $-$0.603 & $4.26\times10^{-8}$ \\
+$U_{\rm off}$ & CSMA: piggyback $-$ adaptive & $-$0.007402 &
+[$-$0.009288,$-$0.005517] & $-$0.779 & $1.34\times10^{-11}$ \\
+ & ALOHA: adaptive $-$ piggyback & $-$0.045558 & [$-$0.054852,$-$0.036264] & $-$0.973 & $1.08\times10^{-15}$ \\
+ & Interaction $I$ & $-$0.052961 & [$-$0.062447,$-$0.043475] & $-$1.108 & $1.48\times10^{-18}$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+All 6/6 tests pass. Piggyback reduces RMSE/offered utilization by
+0.98\%/2.61\% relative to adaptive under CSMA; adaptive reduces them by
+9.92\%/5.60\% under ALOHA. The formal interaction therefore supports the
+registered mechanism in this matched N5 Moderate cell. It is not evidence of
+a general or named-standard MAC selector. Adaptive and fixed-deadline hybrid
+are unresolved under ALOHA, so the result identifies the value of retaining a
+standalone path relative to piggyback-only, not superiority of the adaptive
+scheduler over every ACK-aware implementation.
+
+\subsection{The operating envelope rejects a general MAC-only selector}
+
+EXP17 freezes eight core contexts spanning $N\in\{5,10\}$,
+Moderate/Stressed burst loss, and background load in $\{0,0.30\}$. Each context
+retains the same matched $2\times2$ MAC-by-route design on 100 new seeds. All
+48 simple-effect/interaction tests share one Holm family. Reverse-asymmetric
+and hidden-terminal contexts are descriptive boundaries. The complete
+4,000-run matrix passes 14/14 integrity gates with no divergence or protocol
+violation.
+
+Table~\ref{tab:s2-exp17} reports the two interaction estimates. A context is
+supported only when its two simple effects and interaction pass for both
+outcomes and both observed safety guards pass.
+
+\begin{table*}[t]
+\centering
+\caption{EXP17 operating-envelope interactions. Negative is the registered
+direction; support additionally requires all associated globally adjusted
+simple-effect tests and both observed safety guards.}
+\label{tab:s2-exp17}
+\scriptsize
+\begin{tabular}{lrrcc}
+\toprule
+Context & RMSE interaction & $U_{\rm off}$ interaction & Tests rejected & Context support \\
+\midrule
+N5 Moderate, bg0    & $-$0.008857 & $-$0.041828 & 6/6 & yes \\
+N5 Moderate, bg0.30 & $+$0.000030 & $-$0.000206 & 0/6 & no \\
+N5 Stressed, bg0    & $-$0.010330 & $-$0.008965 & 2/6 & no \\
+N5 Stressed, bg0.30 & $+$0.000696 & $-$0.001485 & 0/6 & no \\
+N10 Moderate, bg0   & $+$0.000980 & $-$0.017562 & 3/6 & no \\
+N10 Moderate, bg0.30& $+$0.005634 & $-$0.003547 & 0/6 & no \\
+N10 Stressed, bg0   & $-$0.001780 & $-$0.000512 & 0/6 & no \\
+N10 Stressed, bg0.30& $+$0.001669 & $-$0.000133 & 0/6 & no \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Only 11/48 tests reject and only the original base cell satisfies the full
+rule, far below the frozen continuation threshold of 6/8. Background 0.30
+nearly eliminates both N5 Moderate interactions. At N10 Moderate bg0, CSMA
+still favors piggyback, but ALOHA does not favor adaptive on RMSE. Several
+high-load ALOHA/N10 cells have 83--100 observed safety failures per route; the
+N10 Stressed bg0.30 ALOHA guard also fails by one event.
+
+Reverse asymmetry further separates objectives: adaptive improves ALOHA RMSE
+but worsens offered utilization, while the CSMA RMSE simple effect reverses.
+The hidden-terminal interactions remain negative, but their CSMA simple
+effects are unresolved. EXP17 therefore preserves EXP16 as a base-cell result
+and rejects its extension into a general configured-MAC selector. The frozen
+hardware-continuation gate is not met.

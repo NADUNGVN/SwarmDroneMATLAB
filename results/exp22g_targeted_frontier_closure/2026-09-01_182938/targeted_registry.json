@@ -1,0 +1,90 @@
+{
+  "version": "EXP22G-TARGETED-PERIODIC-FRONTIER-CLOSURE-v1",
+  "frozenDate": "2026-09-01",
+  "stage": "candidate-targeted-frontier-falsification",
+  "policyOptimizationAllowed": false,
+  "robustnessContinuationPermitted": false,
+  "submissionClaimPermitted": false,
+  "seeds": [
+    1.6048001E+7,
+    1.6048002E+7,
+    1.6048003E+7,
+    1.6048004E+7,
+    1.6048005E+7,
+    1.6048006E+7,
+    1.6048007E+7,
+    1.6048008E+7,
+    1.6048009E+7,
+    1.604801E+7,
+    1.6048011E+7,
+    1.6048012E+7,
+    1.6048013E+7,
+    1.6048014E+7,
+    1.6048015E+7,
+    1.6048016E+7,
+    1.6048017E+7,
+    1.6048018E+7,
+    1.6048019E+7,
+    1.604802E+7,
+    1.6048021E+7,
+    1.6048022E+7,
+    1.6048023E+7,
+    1.6048024E+7,
+    1.6048025E+7,
+    1.6048026E+7,
+    1.6048027E+7,
+    1.6048028E+7,
+    1.6048029E+7,
+    1.604803E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-6dof-zero-loss",
+      "label": "N5 6-DOF zero-loss",
+      "exp21cCell": "n5-stressed",
+      "parentElcsCost": 0.350788266666666,
+      "costMatchRateHz": 22.837777777777735,
+      "lowerCostRateHz": 22.381022222222178
+    },
+    {
+      "id": "n10-ring2-zero-loss",
+      "label": "N10 ring2 zero-loss",
+      "exp21cCell": "n10-moderate",
+      "parentElcsCost": 0.376951466666665,
+      "costMatchRateHz": 12.270555555555502,
+      "lowerCostRateHz": 12.025144444444392
+    }
+  ],
+  "maxOffsetSec": 0.00025,
+  "maxDriftPpm": 40,
+  "clockHorizonSec": 12,
+  "clockLeadTimeSec": 0.00073002920116804672,
+  "missionSafeGuardSec": 0.0014600584023360934,
+  "elcsMaxFrames": 400,
+  "strictMargin": 0.01,
+  "epsilonRmse": 0.01,
+  "requiredCostImprovement": 0.01,
+  "arms": [
+    {
+      "id": "periodic-cost-match",
+      "label": "Periodic static TDMA / ELCS cost match",
+      "family": "periodic-static",
+      "rateRule": "cost-match"
+    },
+    {
+      "id": "periodic-cost-minus2pct",
+      "label": "Periodic static TDMA / 2% below ELCS cost",
+      "family": "periodic-static",
+      "rateRule": "cost-minus2pct"
+    },
+    {
+      "id": "elcs-f-mission-affine",
+      "label": "ELCS-F / mission affine clock",
+      "family": "candidate-elcs",
+      "rateRule": "candidate"
+    }
+  ],
+  "elcsArm": "elcs-f-mission-affine",
+  "lowerCostArm": "periodic-cost-minus2pct",
+  "expectedRuns": 180
+}

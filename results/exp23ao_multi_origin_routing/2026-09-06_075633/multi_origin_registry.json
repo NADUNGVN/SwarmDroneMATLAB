@@ -1,0 +1,144 @@
+{
+  "version": "EXP23AO-MULTI-ORIGIN-ROUTED-CONTROL-v1",
+  "frozenDate": "2026-09-06",
+  "stage": "multi-origin-routing-and-cross-layer-retry-development",
+  "experimentName": "exp23ao_multi_origin_routing",
+  "planFile": "docs/EXP23AO_MULTI_ORIGIN_ROUTING_PLAN.md",
+  "registryFile": "utils/exp23aoMultiOriginRoutingRegistry.m",
+  "testFile": "tests/test_exp23ao_multi_origin_routing_contracts.m",
+  "entryFile": "experiments/exp23ao_multi_origin_routing.m",
+  "validStatus": "MULTI_ORIGIN_ROUTED_CONTROL_DIAGNOSTIC_VALID",
+  "invalidStatus": "MULTI_ORIGIN_ROUTED_CONTROL_DIAGNOSTIC_INVALID",
+  "parentRun": "2026-09-06_072949",
+  "parentStatus": "FULL_DETECTABILITY_ROUTING_PRIMITIVE_DIAGNOSTIC_VALID",
+  "parentGatesPassed": 19,
+  "parentGatesTotal": 19,
+  "diagnosticWitnessSeed": 1.6094113E+7,
+  "bundles": [
+    {
+      "id": "prepare",
+      "kinds": [
+        "prepare"
+      ]
+    },
+    {
+      "id": "quiescent",
+      "kinds": [
+        "quiescent"
+      ]
+    },
+    {
+      "id": "evidence",
+      "kinds": [
+        "claim",
+        "lock-proof"
+      ]
+    },
+    {
+      "id": "response",
+      "kinds": [
+        "response"
+      ]
+    },
+    {
+      "id": "commit",
+      "kinds": [
+        "commit"
+      ]
+    }
+  ],
+  "expectedLogicalPackets": [
+    1,
+    3,
+    10,
+    10,
+    1
+  ],
+  "expectedRoutedPackets": [
+    1,
+    3,
+    10,
+    9,
+    1
+  ],
+  "uniformRepetitionGrid": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "selectedUniformRepetitions": 4,
+  "linkErasureProbability": 0.2,
+  "maximumTransactionFailure": 0.001,
+  "postRequestTimeBudgetSec": 6.5,
+  "prepareAttemptRange": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "claimAttemptRange": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "commitAttemptRange": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "claimEligibilityDelayFrames": 2,
+  "selectedPrepareAttempts": 3,
+  "selectedClaimAttempts": 4,
+  "selectedEvidencePrefixAttempts": 2,
+  "selectedCommitAttempts": 2,
+  "selectedMaximumFrames": 11,
+  "phyRateBps": 250000,
+  "safeGuardSec": 0.0029001160046401857,
+  "dataBytes": 96,
+  "maxDataSlots": 15,
+  "maxControlPacketBytes": 96,
+  "monteCarloTrials": 5000,
+  "monteCarloSeeds": [
+    1.6094901E+7,
+    1.6094902E+7,
+    1.6094903E+7,
+    1.6094904E+7,
+    1.6094905E+7
+  ],
+  "monteCarloStandardErrorMultiplier": 5,
+  "expectedBundleRows": 5,
+  "expectedFrontierRows": 7,
+  "expectedMonteCarloRows": 5,
+  "requiredValidationContracts": 16,
+  "scheduleVersion": "MULTI-ORIGIN-ROUTED-CONTROL-SCHEDULE-v1",
+  "replayVersion": "MULTI-ORIGIN-ROUTED-CONTROL-REPLAY-v1",
+  "reliabilityVersion": "MULTI-ORIGIN-ROUTED-RELIABILITY-v1",
+  "transactionCertificateVersion": "RECEIVER-LIFTED-ROUTED-RELIABILITY-v1",
+  "developmentOnly": true,
+  "confirmatoryEvidence": false,
+  "multiOriginRoutingValidated": false,
+  "managementRelayingValidated": false,
+  "closedLoopManagementRelayingValidated": false,
+  "repeatedOnlineRenewalValidated": false,
+  "freshSeedEvidence": false,
+  "robustnessClaimPermitted": false,
+  "submissionClaimPermitted": false
+}

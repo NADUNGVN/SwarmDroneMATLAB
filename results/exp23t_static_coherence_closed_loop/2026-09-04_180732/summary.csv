@@ -1,0 +1,4 @@
+arm,methodLabel,nRuns,meanRMSE,meanOfferedUtil,meanManagementAirtime,safeFailures
+coherence-static-short,Coherence ELCS-W / static 1 s lease target,100,0.0555061322852092,0.322289653333331,0.622122880000003,0
+coherence-static-target,Coherence ELCS-W / static 6.8 s lease target,100,0.0555044674539962,0.275397013333331,0.0594112,0
+periodic-exp23d-lower,Periodic static TDMA / EXP23D lower-cost boundary,100,0.0543785828465976,0.286719999999997,0,0

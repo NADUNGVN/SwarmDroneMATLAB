@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "gatesPassed": 13,
+  "gatesTotal": 13,
+  "formationRuns": 2520,
+  "nativeRuns": 1800,
+  "developmentFalsificationOnly": true,
+  "performanceIsIntegrityGate": false,
+  "candidateOptimizationAllowed": false,
+  "negativeResultsRetained": true
+}

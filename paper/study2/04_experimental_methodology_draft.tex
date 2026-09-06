@@ -1,0 +1,105 @@
+\section{Experimental Methodology}
+\label{sec:s2-methodology}
+
+\subsection{Simulation and channel contract}
+
+The primary system uses $N=5$, ring-2 information flow, two leader pins,
+6-DOF followers, a 20-ms outer control step, a 2-ms inner step, a 12-s mission,
+and evaluation after 8 s. Larger $N=10$ and $N=20$ cells use the same
+communication/controller interface with double-integrator followers.
+
+The abstract PHY uses 1-ms slots and 250 kbit/s, with 96-byte DATA, 16-byte ACK
+base, and 8 bytes per cumulative ACK entry. Bare DATA spans four slots. Queues
+hold four frames, sender history holds 32 generations, collision retries are
+limited to two, and the ACK deadline is 20 ms. Primary CSMA has one complete
+carrier-sense/interference domain; mandatory boundaries include ALOHA,
+background occupancy, hidden terminals, reverse asymmetry, estimator noise,
+and larger/sparser graphs.
+
+DATA and standalone ACK links have independent, stationary two-state
+Gilbert--Elliott processes on an absolute slot grid. In the Moderate cell,
+good/bad loss probabilities are 0.03/0.70 with transition probabilities
+0.004/0.036, yielding mean loss 0.097. Every method in a seed/cell receives
+the same pre-drawn access, loss, background, and state traces. Silence by one
+method never shifts another method's randomness.
+
+\subsection{Baseline and development sequence}
+
+The initial frozen matrix includes five-point frontiers for periodic
+broadcast, state-event, causal AoI-only, AoCI-inspired, delayed-ACK belief, and
+Causal-Broadcast. Mechanism arms compare causal unicast, standalone-only,
+piggyback-only, and hybrid feedback. The primary EXP14A matrix contains 10,500
+runs over 100 holdout seeds; EXP14B adds 4,800 OOD runs.
+
+Unfavorable results trigger a new experiment identifier, not in-place tuning.
+EXP14C/D use disjoint development seeds to factor adaptive feedback, a fixed
+load guard, and analytical access scaling. EXP14E then freezes the selected
+adaptive/no-guard/scaled design and seven comparators over 100 new seeds in
+N5/N10/N20 CSMA and N5 ALOHA. EXP14F--H use further disjoint seeds for
+policy-shadow, focal-decision replay, and N20 support auditing. Only after
+those outcomes are closed does EXP14I freeze the MAC selector in
+\eqref{eq:s2-mac-selector} and open another 100-seed block. EXP16 then uses a
+disjoint 100-seed matched $2\times2$ design to test route-by-access interaction
+directly. EXP17 keeps that estimand fixed and opens a third disjoint 100-seed
+block over eight core load/loss/size contexts plus two descriptive network
+boundaries. No EXP17 outcome is used to alter the policy.
+
+\subsection{Outcomes and inference}
+
+The independent unit is the parent seed. Primary continuous outcomes are
+formation RMSE and offered-airtime utilization; true AoI, channel-busy union,
+DATA/ACK airtime, collisions, access/confirmation delays, goodput, queueing,
+attitude, saturation, control effort, and an energy proxy are secondary.
+Safety is a raw binary guard based on minimum separation and divergence, not a
+continuous metric.
+
+Paired contrasts use matched seeds and report mean differences with two-sided
+95\% paired-$t$ intervals. A deterministic 10,000-resample paired percentile
+bootstrap is a sensitivity interval. EXP14E controls six one-sided primary
+tests with Holm across three CSMA cells. EXP14I separately controls six
+one-sided tests: RMSE and offered utilization in N5/N10 CSMA against fixed
+adaptive feedback, and in N5 ALOHA against fixed piggyback. A cell passes only
+when both adjusted tests reject in the registered direction and its candidate
+safety count does not exceed the comparator. N20 is explicitly excluded from
+the EXP14I confirmatory family.
+
+EXP16 controls one six-test family: the registered route simple effect under
+each access mechanism and their within-seed difference-in-differences, for
+both primary outcomes. EXP17 controls all corresponding tests from its eight
+core contexts in one 48-test Holm family. A core context requires all six
+tests plus two observed safety guards. Its pre-hardware continuation rule
+requires at least 6/8 supported contexts, at least 2/4 for each swarm size,
+representation of both channel and background levels, and all core guards.
+The reverse-asymmetric and hidden-terminal cells do not enter that rule.
+
+\subsection{Focal-decision counterfactual}
+
+Policy-level comparisons do not isolate one ACK because prior actions may have
+already separated histories. EXP14G therefore records permitted adaptive
+standalone decisions without changing behavior, selects at most one event per
+seed without outcome access, and clones the complete network, plant, controller
+and future exogenous inputs immediately before the target. The branches either
+admit the target or suppress only its focal directed-link entries until
+piggyback over a 0.75-s local horizon. Pre-decision state hashes, target
+identity, intervention semantics, trace identity, censoring, and the airtime
+identity are machine gates.
+
+The registered minimum is 12 distinct parent trajectories per cell. N5,
+N10, and ALOHA each supply 20; N20 supplies four. EXP14H adds 240 disjoint N20
+pilots with the same window and minimum, and stops before replay when only
+seven eligible parents are found. Outcomes are never used to relax support.
+
+\subsection{Integrity and reproducibility}
+
+Every long run snapshots its registry, source, seed block, and opened-design
+manifest before performance is inspected. Matrix completeness, trace hashes,
+causal conservatism, finite outputs, bounded memory, recipient accounting,
+feedback semantics, divergence, and protocol invariants are machine gates.
+They authorize analysis but are not performance criteria. The final EXP14I
+run additionally requires the candidate to match its routed reference exactly
+on 16 registered outcome/accounting fields for every seed and cell. EXP16 and
+EXP17 additionally require matched absolute random arrays across all four
+route/access arms, exact analytical access scaling, exact feedback-route
+semantics, terminal physical accounting, and complete one-row-per-arm
+matrices. Their frozen source and registry snapshots remain inside each result
+directory.

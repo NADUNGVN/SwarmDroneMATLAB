@@ -1,0 +1,68 @@
+{
+  "version": "EXP14C-DEVELOPMENT-v1",
+  "seeds": [
+    1.6016001E+7,
+    1.6016002E+7,
+    1.6016003E+7,
+    1.6016004E+7,
+    1.6016005E+7,
+    1.6016006E+7,
+    1.6016007E+7,
+    1.6016008E+7
+  ],
+  "cells": [
+    {
+      "id": "n5-csma",
+      "label": "N5 CSMA"
+    },
+    {
+      "id": "n5-aloha",
+      "label": "N5 ALOHA"
+    },
+    {
+      "id": "n5-background030",
+      "label": "N5 30% background"
+    },
+    {
+      "id": "n5-hidden",
+      "label": "N5 hidden terminals"
+    },
+    {
+      "id": "n10-ring2",
+      "label": "N10 ring2"
+    },
+    {
+      "id": "n20-ring2",
+      "label": "N20 ring2"
+    }
+  ],
+  "arms": [
+    {
+      "id": "frozen-hybrid",
+      "label": "Frozen hybrid"
+    },
+    {
+      "id": "frozen-piggyback",
+      "label": "Frozen piggyback"
+    },
+    {
+      "id": "adaptive-only",
+      "label": "Adaptive ACK only"
+    },
+    {
+      "id": "access-only",
+      "label": "Access scaling only"
+    },
+    {
+      "id": "guarded-adaptive",
+      "label": "Adaptive ACK + guard"
+    },
+    {
+      "id": "full-v2",
+      "label": "Full MAC-aware v2"
+    }
+  ],
+  "expectedRuns": 288,
+  "confirmatoryClaimPermitted": false,
+  "selectedCandidate": "full-v2"
+}

@@ -1,0 +1,4 @@
+cell,comparator,continuousPass,candidateFailures,comparatorFailures,observedSafetyGuard,cellClaimSupported
+n5-csma,fixed-adaptive-scaled,1,0,0,1,1
+n10-ring2,fixed-adaptive-scaled,1,0,0,1,1
+n5-aloha,fixed-piggyback-scaled,1,0,1,1,1

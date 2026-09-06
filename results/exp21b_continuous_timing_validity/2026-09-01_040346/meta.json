@@ -1,0 +1,18 @@
+{
+  "experiment": "exp21b_continuous_timing_validity",
+  "runId": "2026-09-01_040346",
+  "startedAt": "2026-09-01 04:03:47",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Deterministic/randomized model-validity study; no policy optimization or formation-performance claim.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp21b_continuous_timing_validity.m",
+  "finishedAt": "2026-09-01 04:04:58",
+  "elapsedSec": 71.319594,
+  "elapsedText": "1 m 11 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

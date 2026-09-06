@@ -1,0 +1,49 @@
+
+============================================================
+RUN  : exp23d_local_witness_sharp_frontier
+ID   : 2026-09-03_163244
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23d_local_witness_sharp_frontier\2026-09-03_163244
+WHEN : 2026-09-03 16:32:44
+============================================================
+
+  groups  1-- 4 / 60; rows  12 / 180
+  groups  5-- 8 / 60; rows  24 / 180
+  groups  9--12 / 60; rows  36 / 180
+  groups 13--16 / 60; rows  48 / 180
+  groups 17--20 / 60; rows  60 / 180
+  groups 21--24 / 60; rows  72 / 180
+  groups 25--28 / 60; rows  84 / 180
+  groups 29--32 / 60; rows  96 / 180
+  groups 33--36 / 60; rows 108 / 180
+  groups 37--40 / 60; rows 120 / 180
+  groups 41--44 / 60; rows 132 / 180
+  groups 45--48 / 60; rows 144 / 180
+  groups 49--52 / 60; rows 156 / 180
+  groups 53--56 / 60; rows 168 / 180
+  groups 57--60 / 60; rows 180 / 180
+
+EXP23D ELCS-W frontier integrity gates
+  [PASS] registry_frozen                             hash 63727237 over 52 leaves
+  [PASS] matrix_complete_unique                      180/180 unique rows
+  [PASS] exact_matrix_coverage                       30 fresh seeds, two cells and three arms exact
+  [PASS] paired_shared_realizations                  channel, initial state, estimator and clock draws paired
+  [PASS] parent_and_pilot_rates_frozen               cost-match derives from EXP23C; lower rate uses cost-only pilot rule
+  [PASS] static_guarded_collision_free               both periodic references remain physically collision-free
+  [PASS] one_hop_witness_cover                       candidate certifies hidden conflicts under one-hop management reach
+  [PASS] elcs_w_kernel_safety                        certified frame 1; zero retry, false validity and scheduled collision
+  [PASS] exact_elcs_w_replay                         queue opportunities, receiver outcomes, clock guard and planes close
+  [PASS] variable_payload_management_accounting      attempt, recipient, byte and airtime accounting are exact
+  [PASS] measured_lower_cost_eligibility             n5-6dof-zero-loss -1.285%; n10-ring2-zero-loss -1.383%; 
+  [PASS] recipient_and_airtime_accounting            actual DATA and variable management airtime and recipients close
+  [PASS] causal_and_closed_loop_invariants           zero causal and protocol-invariant failures
+  [PASS] all_failures_retained                       0 unsafe and 0 divergent trajectories retained
+  [PASS] frontier_scope_only                         no tuning, robustness, method promotion or submission decision
+
+EXP23D DECISION: ELCS_W_SHARP_PERIODIC_FRONTIER_SURVIVES
+
+============================================================
+DONE : exp23d_local_witness_sharp_frontier
+TIME : 4 m 56 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23d_local_witness_sharp_frontier\2026-09-03_163244
+============================================================

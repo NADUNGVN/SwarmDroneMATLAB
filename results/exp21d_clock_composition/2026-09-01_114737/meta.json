@@ -1,0 +1,18 @@
+{
+  "experiment": "exp21d_clock_composition",
+  "runId": "2026-09-01_114737",
+  "startedAt": "2026-09-01 11:47:37",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "D-STR single-epoch affine-clock composition with a finite-horizon guard; prior-art boundary only.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp21d_clock_composition.m",
+  "finishedAt": "2026-09-01 11:56:50",
+  "elapsedSec": 552.3993899,
+  "elapsedText": "9 m 12 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

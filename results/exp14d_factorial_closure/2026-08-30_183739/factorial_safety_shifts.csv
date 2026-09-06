@@ -1,0 +1,13 @@
+cell,factor,failuresHigh,failuresLow,pairsImproved,pairsWorsened,pairsEqual,nMatchedPairs
+n5-csma,A,0,0,0,0,48,48
+n5-csma,G,0,0,0,0,48,48
+n5-csma,S,0,0,0,0,48,48
+n5-aloha,A,0,0,0,0,48,48
+n5-aloha,G,0,0,0,0,48,48
+n5-aloha,S,0,0,0,0,48,48
+n10-ring2,A,0,0,0,0,48,48
+n10-ring2,G,0,0,0,0,48,48
+n10-ring2,S,0,0,0,0,48,48
+n20-ring2,A,30,33,4,1,43,48
+n20-ring2,G,39,24,0,15,33,48
+n20-ring2,S,15,48,33,0,15,48

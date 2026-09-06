@@ -1,6 +1,6 @@
 # Literature search and verification log
 
-Record of how the 53 references in `paper/references.bib` were found and
+Record of how the 58 references in `paper/references.bib` were found and
 verified. Kept so that the bibliography can be re-audited, and so that the
 novelty verdict in `NOVELTY_GAP_REVIEW.md` can be re-tested against a
 known search boundary.
@@ -25,6 +25,11 @@ causal feedback + receiver freshness + multi-agent or UAV + state innovation
 | Lin et al. (2023) | `10.1109/TPWRS.2022.3186333` | AoI enters an event-triggered communication scheduler and LQR load-frequency controller | single power-system control application; no delayed cumulative-ACK confirmation, multi-agent/UAV semantics or in-flight split |
 | **Kesper et al. (2023)** | PMLR 211:1072--1085 | distributed multi-agent event-triggered communication/control; last-broadcast states carry explicit age timers | timers reset on broadcast rather than delayed cumulative ACK; no new-information/refresh split |
 | **Onozuka et al. (2024)** | `10.1109/ICIT58233.2024.10541007` | AoI-based event triggering in both forward and feedback railway-control communication | no distributed multi-agent/UAV formation, ACK-confirmed innovation or in-flight semantic split |
+| **Maatouk et al. (2020)** | `10.1109/TNET.2020.3005549` | AoII combines age with whether receiver information is correct/informative | transmitter--receiver status updating; no continuous formation state or per-neighbor ACK-confirmed dual memory |
+| **Wang et al. (2022), AoCI** | `10.1109/TCOMM.2021.3119082` | content-aware age combines elapsed time and changed information | discrete Markov status source; no formation controller, delayed ACK belief or in-flight refresh semantics |
+| **Nayak et al. (2023)** | `10.1109/ICC45041.2023.10279616` | decentralized semantic freshness under slotted-ALOHA collisions | gateway status monitoring rather than continuous-state formation; no confirmed-state memory |
+| **Pan et al. (2023)** | `10.1109/TNET.2022.3194417` | optimal threshold sampling with unreliable forward transmission and random ACK delay | single source--remote estimator; no multi-agent state innovation or new-information/refresh split |
+| **Wang et al. (2022), quadrotors** | `10.1016/j.isatra.2021.07.049` | finite-time distributed event-triggered formation, Zeno exclusion, three-Bebop2 experiment | no AoI, reverse ACK channel or receiver-state observability; prevents claiming novelty for event-triggered UAV formation/hardware |
 
 The earlier `lin2026cooperative` entry was removed. It is a real, verified
 Processes article, but the 2023 IEEE Transactions on Power Systems paper is
@@ -121,6 +126,7 @@ None of these affects DOI, title, venue, year, volume, issue or pages.
 |---|---|---|---|
 | Sun et al., "Update or Wait" | INFOCOM 2016 `10.1109/infocom.2016.7524524`; IEEE TIT 2017 `10.1109/TIT.2017.2735804` | **journal** | Rule: prefer the peer-reviewed journal version |
 | Ceran et al., "Average AoI with Hybrid ARQ" | WCNC 2018; IEEE TWC 2019 | **journal** | Same rule |
+| Pan et al., random two-way delay | IEEE INFOCOM 2022 `10.1109/INFOCOM48880.2022.9796895`; IEEE/ACM ToN 2023 `10.1109/TNET.2022.3194417` | **journal** | Same rule |
 | Gatsis et al., "Optimal Power Management" | ACC 2013; IEEE TAC 2014 | **journal** | Same rule |
 | Amodu et al., AoI in UAV data collection | SSRN preprint `10.2139/ssrn.4416386`; JNCA 2023 | **journal** | Preprint discarded |
 | Lee et al., "Geometric tracking control" | CDC 2010; IFAC 2011 (different title) | **CDC 2010** | The IFAC item is a different paper, not a version |
@@ -144,6 +150,10 @@ Search-engine discovery (results used only to identify candidates):
 7. `AoI state innovation in-flight suppression event-triggered UAV`
 8. exact-title/DOI searches for Mamduhi, WiSwarm, Ceran, Tahir, Wang, Lin,
    Kesper and Onozuka
+9. `age of incorrect information content-aware freshness event-triggered`
+10. `age of changed information ACK delayed feedback control`
+11. `optimal sampling random two-way delay acknowledgement AoI`
+12. `event-triggered quadrotor formation flight experiment`
 
 Queries 1–3 exist specifically to attack our own novelty claim: they are
 phrased to surface a paper that already does what we do. Query 5 exists to
@@ -157,21 +167,22 @@ batched multi-DOI confirmation sweeps.
 
 | Group | Required | Cited | Entries |
 |---|---|---|---|
-| G1 AoI / freshness in networked control | ≥ 6 | **10** | kaul2012, sun2017, yates2021, yang2025aoiperspective, kaswan2025, rajaraman2021, ayan2019, mamduhi2020, wang2021, lin2023 |
-| G2 event-triggered multi-agent / consensus | ≥ 6 | **17** | astrom2002, tabuada2007, heemels2012, dimarogonas2012, seyboth2013, girard2015, yi2017, nowzari2019, kesper2023, chen2020, ge2021, zhang2025, yin2023, ji2023, chen2024, lin2023 (+ li2026 counted in G3) |
-| G3 wireless / networked control and scheduling | ≥ 6 | **9** | walsh2002, hespanha2007, gatsis2014, park2018, ceran2019, tang2022, tahir2024, onozuka2024, li2026 |
+| G1 AoI / freshness in networked control | ≥ 6 | **13** | kaul2012, sun2017, yates2021, yang2025aoiperspective, kaswan2025, rajaraman2021, ayan2019, mamduhi2020, wang2021, lin2023, maatouk2020aoii, wang2022aoci, nayak2023decentralizedaoii |
+| G2 event-triggered multi-agent / consensus | ≥ 6 | **18** | astrom2002, tabuada2007, heemels2012, dimarogonas2012, seyboth2013, girard2015, yi2017, nowzari2019, kesper2023, chen2020, ge2021, zhang2025, yin2023, ji2023, chen2024, lin2023, wang2022finiteuav (+ li2026 counted in G3) |
+| G3 wireless / networked control and scheduling | ≥ 6 | **10** | walsh2002, hespanha2007, gatsis2014, park2018, ceran2019, tang2022, tahir2024, onozuka2024, pan2023twoway, li2026 |
 | G4 UAV / swarm communication constraints | ≥ 6 | **8** | gupta2016, zeng2016, mozaffari2019, zeng2019, campion2019, amodu2023, tripathi2023, yang2025fencing |
 | G5 communication-control co-design | ≥ 5 | **5** | tatikonda2004, nair2007, molin2013, ramesh2013, demirel2017 |
 | G6 UAV / swarm dynamics, formation, flight | ≥ 4 | **6** | olfatisaber2006, lee2010, mellinger2011, oh2015, vasarhelyi2018, zhou2022 |
-| **Total** | 35–55 | **53** | |
+| **Total** | 35–60 | **58** | |
 
-**2021–2026 window:** 20 references — yates2021, rajaraman2021, ge2021,
+**2021–2026 window:** 24 references — yates2021, rajaraman2021, ge2021,
 tang2022, zhou2022, tripathi2023, amodu2023, yin2023, ji2023, chen2024,
 yang2025aoiperspective, kaswan2025, zhang2025, yang2025fencing, li2026,
 wang2021freshness, tahir2024collaborative, lin2023eventtriggered,
-kesper2023toward, onozuka2024aoi.
+kesper2023toward, onozuka2024aoi, wang2022aoci,
+nayak2023decentralizedaoii, pan2023twoway, wang2022finiteuav.
 
-Group totals sum above 53 because several entries are legitimately relevant to
+Group totals sum above 58 because several entries are legitimately relevant to
 two groups; each is assigned one **primary** group in
 `REFERENCE_AUDIT.csv`, and the minimums above are met on primary
 assignment alone.

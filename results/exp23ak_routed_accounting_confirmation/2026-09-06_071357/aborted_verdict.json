@@ -1,0 +1,10 @@
+{
+  "status": "ABORTED_BEFORE_REGISTERED_RANDOM_TRACE_ACCEPTANCE",
+  "experiment": "EXP23AK-ROUTED-INTEGER-ACCOUNTING-v1",
+  "run": "2026-09-06_071357",
+  "cause": "MATLAB represents an N-by-N-by-1 random tensor as a two-dimensional array; the replay input validator incorrectly required an explicit trailing singleton dimension.",
+  "scientificOutcomeObserved": false,
+  "registeredRandomDrawAccepted": false,
+  "claimPermitted": false,
+  "next": "EXP23AL with corrected singleton-dimension contract and a disjoint random seed block"
+}

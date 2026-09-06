@@ -1,0 +1,173 @@
+{
+  "version": "EXP18A-CONTEXT-AWARE-DEVELOPMENT-v1",
+  "stage": "development",
+  "seedStatus": "development outcomes may be inspected",
+  "seeds": [
+    1.6024001E+7,
+    1.6024002E+7,
+    1.6024003E+7,
+    1.6024004E+7,
+    1.6024005E+7,
+    1.6024006E+7,
+    1.6024007E+7,
+    1.6024008E+7,
+    1.6024009E+7,
+    1.602401E+7,
+    1.6024011E+7,
+    1.6024012E+7,
+    1.6024013E+7,
+    1.6024014E+7,
+    1.6024015E+7,
+    1.6024016E+7,
+    1.6024017E+7,
+    1.6024018E+7,
+    1.6024019E+7,
+    1.602402E+7
+  ],
+  "futureHoldoutSeedsPermitted": false,
+  "futureHoldoutMinimumSeed": 1.6025001E+7,
+  "materialReductionFraction": 0.1,
+  "maxJointlyWorseCoreCells": 2,
+  "cells": [
+    {
+      "id": "n5-moderate-bg0",
+      "label": "N5 Moderate bg0",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-moderate-bg30",
+      "label": "N5 Moderate bg0.30",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-stressed-bg0",
+      "label": "N5 Stressed bg0",
+      "N": 5,
+      "channel": "stressed",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-stressed-bg30",
+      "label": "N5 Stressed bg0.30",
+      "N": 5,
+      "channel": "stressed",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-moderate-bg0",
+      "label": "N10 Moderate bg0",
+      "N": 10,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-moderate-bg30",
+      "label": "N10 Moderate bg0.30",
+      "N": 10,
+      "channel": "moderate",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-stressed-bg0",
+      "label": "N10 Stressed bg0",
+      "N": 10,
+      "channel": "stressed",
+      "background": 0,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n10-stressed-bg30",
+      "label": "N10 Stressed bg0.30",
+      "N": 10,
+      "channel": "stressed",
+      "background": 0.3,
+      "modifier": "nominal",
+      "role": "core"
+    },
+    {
+      "id": "n5-moderate-reverse",
+      "label": "N5 Moderate reverse-asymmetric",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "reverse-asymmetric",
+      "role": "boundary"
+    },
+    {
+      "id": "n5-moderate-hidden",
+      "label": "N5 Moderate hidden-terminal",
+      "N": 5,
+      "channel": "moderate",
+      "background": 0,
+      "modifier": "hidden-terminal",
+      "role": "boundary"
+    }
+  ],
+  "coreCells": [
+    "n5-moderate-bg0",
+    "n5-moderate-bg30",
+    "n5-stressed-bg0",
+    "n5-stressed-bg30",
+    "n10-moderate-bg0",
+    "n10-moderate-bg30",
+    "n10-stressed-bg0",
+    "n10-stressed-bg30"
+  ],
+  "boundaryCells": [
+    "n5-moderate-reverse",
+    "n5-moderate-hidden"
+  ],
+  "macTypes": [
+    "csma",
+    "aloha"
+  ],
+  "arms": [
+    {
+      "id": "legacy-selector",
+      "label": "Legacy MAC-only selector",
+      "accessDesign": "legacy-n",
+      "ackDesign": "mac-selector"
+    },
+    {
+      "id": "frame-piggyback",
+      "label": "Frame-aware piggyback",
+      "accessDesign": "frame-aware",
+      "ackDesign": "piggyback"
+    },
+    {
+      "id": "frame-adaptive",
+      "label": "Frame-aware legacy adaptive",
+      "accessDesign": "frame-aware",
+      "ackDesign": "legacy-adaptive"
+    },
+    {
+      "id": "context-aware",
+      "label": "Context-aware feasibility/value",
+      "accessDesign": "frame-aware",
+      "ackDesign": "feasibility-value"
+    }
+  ],
+  "expectedRuns": 1600,
+  "confirmatory": false,
+  "multiplicityAdjusted": false,
+  "hardwareClaimPermitted": false,
+  "superiorityClaimPermitted": false,
+  "namedMacClaimPermitted": false
+}

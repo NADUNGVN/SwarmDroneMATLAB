@@ -1,0 +1,11 @@
+{
+  "status": "ELIGIBLE_TO_WRITE_HOLDOUT_PREREGISTRATION",
+  "developmentOnly": true,
+  "confirmatoryClaimPermitted": false,
+  "gatesPassed": 7,
+  "gatesTotal": 7,
+  "feasibleCoreMacCells": 5,
+  "infeasibleCells": 11,
+  "futureHoldoutOpened": false,
+  "hardwareClaimPermitted": false
+}

@@ -1,0 +1,18 @@
+{
+  "experiment": "exp23ai_integer_phy_accounting",
+  "runId": "2026-09-06_003132",
+  "startedAt": "2026-09-06 00:31:32",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Fresh integer management-byte and derived-airtime confirmation.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp23ai_integer_phy_accounting.m",
+  "finishedAt": "2026-09-06 00:36:24",
+  "elapsedSec": 291.7971247,
+  "elapsedText": "4 m 52 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

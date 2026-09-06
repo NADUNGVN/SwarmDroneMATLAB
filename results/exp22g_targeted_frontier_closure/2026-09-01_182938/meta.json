@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22g_targeted_frontier_closure",
+  "runId": "2026-09-01_182938",
+  "startedAt": "2026-09-01 18:29:39",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "Analytically cost-targeted periodic frontier versus ELCS-F; strict and epsilon dominance.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22g_targeted_frontier_closure.m",
+  "finishedAt": "2026-09-01 18:35:15",
+  "elapsedSec": 336.1263095,
+  "elapsedText": "5 m 36 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

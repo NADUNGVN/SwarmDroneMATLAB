@@ -1,0 +1,12 @@
+{
+  "status": "SUPERSEDES_EXP20A_NATIVE_PANEL",
+  "parentRunDir": "D:\\Research\\Drone\\SwarmDroneMATLAB\\results\\exp20a_prior_art_baseline_closure\\2026-08-31_232833",
+  "supersededNativeFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\results\\exp20a_prior_art_baseline_closure\\2026-08-31_232833\\native_tidy.csv",
+  "correctedNativeFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\results\\exp20a_native_protocol_correction\\2026-09-01_005821\\native_tidy.csv",
+  "formationSourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\results\\exp20a_prior_art_baseline_closure\\2026-08-31_232833\\formation_tidy.csv",
+  "formationCopiedWithoutRecomputation": true,
+  "correctedVerdict": "PRIOR_ART_EXPLAINS_FRONTIER",
+  "originalVerdictMayNotBeUsedForNativeClaims": true,
+  "manuscriptClaimPermitted": false,
+  "hardwarePolicyValidationPermitted": false
+}

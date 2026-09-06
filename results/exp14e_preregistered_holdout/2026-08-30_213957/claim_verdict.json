@@ -1,0 +1,13 @@
+{
+  "status": "SUPPORTED_ALL_PREREGISTERED_CSMA_CELLS",
+  "candidate": "selected-adaptive-scaled",
+  "primaryComparator": "access-only",
+  "holmTestsRejected": 6,
+  "holmTestsTotal": 6,
+  "primaryCellsSupported": 3,
+  "primaryCellsTotal": 3,
+  "observedSafetyGuardOnly": true,
+  "populationSafetyClaimPermitted": false,
+  "universalMacClaimPermitted": false,
+  "alohaIsMandatoryBoundary": true
+}

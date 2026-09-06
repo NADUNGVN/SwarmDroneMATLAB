@@ -1,0 +1,9 @@
+{
+  "status": "CLOSED_LOOP_TIMING_INTEGRATION_VALID",
+  "gatesPassed": 15,
+  "gatesTotal": 15,
+  "rows": 240,
+  "reservationIntegrationPermitted": true,
+  "policyPromotionPermitted": false,
+  "submissionClaimPermitted": false
+}

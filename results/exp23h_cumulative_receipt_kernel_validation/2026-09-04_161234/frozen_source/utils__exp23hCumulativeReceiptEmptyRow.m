@@ -1,0 +1,14 @@
+function row=exp23hCumulativeReceiptEmptyRow()
+%EXP23HCUMULATIVERECEIPTEMPTYROW Stable kernel comparison schema.
+
+row=exp23aWitnessKernelEmptyRow();
+row.retryMode='';
+row.CUMULATIVE_RECEIPT_RETRY=NaN;
+row.CLAIM_TRANSACTION_STARTS=NaN;
+row.FINAL_OPEN_CLAIM_TRANSACTIONS=NaN;
+row.BACKGROUND_LOAD=NaN;
+row.BACKGROUND_TRACE_HASH_EXACT=NaN;
+row.BACKGROUND_OVERLAY_HASH_EXACT=NaN;
+row.BACKGROUND_POTENTIAL_HITS=NaN;
+
+end

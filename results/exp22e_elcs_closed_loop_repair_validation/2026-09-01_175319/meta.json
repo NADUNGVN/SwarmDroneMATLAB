@@ -1,0 +1,18 @@
+{
+  "experiment": "exp22e_elcs_closed_loop_repair_validation",
+  "runId": "2026-09-01_175319",
+  "startedAt": "2026-09-01 17:53:19",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "17cd865",
+  "notes": "ELCS-F common-PHY closed-loop composition with paired zero and bounded affine clocks.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\exp22e_elcs_closed_loop_repair_validation.m",
+  "finishedAt": "2026-09-01 17:56:41",
+  "elapsedSec": 202.1589152,
+  "elapsedText": "3 m 22 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

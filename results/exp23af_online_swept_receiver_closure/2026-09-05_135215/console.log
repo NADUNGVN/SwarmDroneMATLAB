@@ -1,0 +1,61 @@
+
+============================================================
+RUN  : exp23af_online_swept_receiver_closure
+ID   : 2026-09-05_135215
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_online_swept_receiver_closure\2026-09-05_135215
+WHEN : 2026-09-05 13:52:15
+============================================================
+
+  seed  5 / 20; rows  30 / 120
+  seed 10 / 20; rows  60 / 120
+  seed 15 / 20; rows  90 / 120
+  seed 20 / 20; rows 120 / 120
+
+EXP23AF online swept receiver-closure gates
+  [PASS] registry_frozen                             hash 69319843 over 87 leaves; smoke seed excluded
+  [PASS] parents_locked                              EXP23AE 22/22 and EXP23AB 24/24 retained
+  [PASS] matrix_complete_unique                      120/120 unique rows
+  [PASS] exact_matrix_coverage                       20 untouched registered seeds and six arms exact
+  [PASS] seed_trace_pairing                          one exogenous PHY trace is shared across all six arms per seed
+  [PASS] online_prefix_exact                         decision state and pre-PREPARE schedule are arm-independent
+  [PASS] causal_geometry_pairing                     one observed-state swept certificate is paired across closure arms
+  [PASS] receiver_lifted_stimulus                    minimum nonincident edges 1; minimum affected 3
+  [PASS] union_packet_and_protected_slots            union coloring, MTU, and protected-slot separation hold
+  [PASS] motion_gate_exact                           command starts exactly at authorized graph activation only
+  [PASS] prepare_blackout_blocks_motion              missing PREPARE leaves barrier open and command unapplied
+  [PASS] normal_reacquisition                        20/20 normal runs fully reactivate
+  [PASS] response_blackout_fail_silent               certified graph activates while all affected closure states stay silent
+  [PASS] commit_blackout_partial_safe                lost COMMIT leaves partial suppression without kernel collision
+  [PASS] parallel_emergency_mapping                  every suppressed sender receives one distinct protected slot per frame
+  [FAIL] protected_capsule_bound                     maximum realized/bound ratio 1.166702
+  [PASS] protected_actual_graph_subset               realized physical and sender graphs stay inside swept union
+  [PASS] no_emergency_negative_visible               paired mission-RMSE penalty 0.115750 m; minimum tube ratio 4.093
+  [PASS] supported_collision_safety                  all protected online cells are collision-free
+  [PASS] receiver_outcome_replay_exact               success/erasure outcomes replay with no queue skip or plane overlap
+  [PASS] management_accounting_exact                 management attempts and airtime equal registered schedule
+  [PASS] affine_timing_safe                          maximum equation residual 8.88e-16 s
+  [PASS] closed_loop_safety                          minimum realized separation 0.659834 m
+  [PASS] causality_and_scope                         forbidden reads are zero; routing, robustness, and submission stay false
+                       arm                           kind                fault            emergencyEnabled    nRuns    motionAuthorizationRate    reactivationRate    meanFinalSuppressed    meanMissionRmse    meanFormationRmse    minimumSeparation    safeFailures    maximumCapsuleRatio    physicalSubsetRate    senderSubsetRate    meanControlBytes    meanDataAirtime    meanManagementAirtime    meanTotalCost
+    __________________________________________    ___________    _____________________    ________________    _____    _______________________    ________________    ___________________    _______________    _________________    _________________    ____________    ___________________    __________________    ________________    ________________    _______________    _____________________    _____________
+
+    {'closure-commit-blackout-emergency'     }    {'closure'}    {'commit-blackout'  }           1             20                 1                      0                    2.8                 0.1416             0.14301               1.0129              0                1.1667                   1                    1                 3895.3             1.4746                0.12465              0.15231   
+    {'closure-iid20-emergency'               }    {'closure'}    {'none'             }           1             20                 1                      1                      0                0.14211             0.14346               1.0082              0                1.1524                   1                    1                 3781.9             1.4746                0.12102              0.15196   
+    {'closure-prepare-blackout-emergency'    }    {'closure'}    {'prepare-blackout' }           1             20                 0                      0                    2.8                0.14864             0.13974               1.0368              0                1.1531                   1                    1                    656             1.4746               0.020992              0.14243   
+    {'closure-response-blackout-emergency'   }    {'closure'}    {'response-blackout'}           1             20                 1                      0                    3.8                 0.1416             0.14301               1.0164              0                 1.157                   1                    1                 7430.1             1.4746                0.23776              0.16308   
+    {'closure-response-blackout-no-emergency'}    {'closure'}    {'response-blackout'}           0             20                 1                      0                    3.8                0.25735             0.24886              0.65983              0                4.7935                   1                    1                 7430.1             1.2431                0.23776              0.14103   
+
+                   contrast                    nPairs    meanDeltaMissionRmse    minimumDeltaMissionRmse    maximumDeltaMissionRmse    meanDeltaMinimumSeparation    meanDeltaTotalCost    meanDeltaDataAirtime
+    _______________________________________    ______    ____________________    _______________________    _______________________    __________________________    __________________    ____________________
+
+    "normal_closure_minus_periodic"              20            0.045234                 0.039727                   0.053918                    -0.028331                  -0.10539                -1.2276      
+    "response_no_emergency_minus_protected"      20             0.11575                 0.093884                    0.13096                     -0.36647                 -0.022045               -0.23148      
+
+EXP23AF DECISION: ONLINE_SWEPT_RECEIVER_CLOSURE_INVALID
+
+============================================================
+DONE : exp23af_online_swept_receiver_closure
+TIME : 2 m 09 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp23af_online_swept_receiver_closure\2026-09-05_135215
+============================================================

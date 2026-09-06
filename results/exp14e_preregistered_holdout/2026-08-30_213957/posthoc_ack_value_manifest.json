@@ -1,0 +1,32 @@
+{
+  "analysisStatus": "POST_HOC_MECHANISM_ACCOUNTING",
+  "confirmatoryClaimPermitted": false,
+  "thresholdTuningPermitted": false,
+  "comparison": "selected-adaptive-scaled minus piggyback-scaled",
+  "positiveBenefitConvention": "piggyback outcome minus ACK-assisted outcome",
+  "airtimeIdentity": "net benefit = DATA airtime saved - standalone ACK airtime",
+  "piggybackOverheadDoubleCounted": false,
+  "uniqueLeadTimeAvailable": false,
+  "predictiveCertificateStatus": "NOT_EVALUATED",
+  "registryHash": 8.7778193E+7,
+  "registryLeaves": 58,
+  "cells": [
+    {
+      "cell": "n5-csma",
+      "classification": "PIGGYBACK_DOMINATES_CONTINUOUS"
+    },
+    {
+      "cell": "n10-ring2",
+      "classification": "PIGGYBACK_DOMINATES_CONTINUOUS"
+    },
+    {
+      "cell": "n20-ring2",
+      "classification": "INCONCLUSIVE_CONTINUOUS"
+    },
+    {
+      "cell": "n5-aloha",
+      "classification": "ACK_ASSISTED_DOMINATES_CONTINUOUS"
+    }
+  ],
+  "createdAt": "2026-08-30 22:18:30"
+}
