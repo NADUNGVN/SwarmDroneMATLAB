@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gates 0--3 complete; theory-review checkpoint next
+**Status:** Gates 0--3 and theory-review checkpoint complete; Gate 4 in progress
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -17,8 +17,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 | Gate 1: exact mathematical model | **complete** | exact real-step audit and corrected analytical-leader residual |
 | Gate 2: staleness to uncertainty | **complete** | follower and analytical-leader bounds proved and validated |
 | Gate 3: uncertainty to formation | **complete** | structured ISS/UUB theorem and numerical validation |
-| Theory checkpoint | next | audit Gates 1--3 before trigger design |
-| Gate 4: control-aware trigger | not started | blocked by checkpoint |
+| Theory checkpoint | **complete** | Gate 4 authorized with explicit conditions |
+| Gate 4: control-aware trigger | in progress | theorem-derived budget; development only |
 
 ## Frozen canonical evidence
 
@@ -214,6 +214,11 @@ to decentralize.
   6-DOF, switching/directed graph, or estimator cases.
 
 Gate 3 supplies the requested staleness/state uncertainty to closed-loop
-formation connection. Gate 4 is not yet authorized until the theory checkpoint
-confirms that its distributed link-budget construction does not reintroduce an
-oracle or collapse to the existing state-event trigger.
+formation connection. The independent checkpoint in
+`paper/tcns/THEORY_REVIEW_CHECKPOINT.md` authorizes Gate 4 with conditions. It
+closes the distributed-allocation design gap using an equal offline allocation
+of a theorem-derived receiver disturbance budget. It also records that a new
+transmission does not contract the sender's possible receiver-state set until
+an ACK returns, so the policy cannot claim deterministic instantaneous bound
+enforcement under stochastic loss. Novelty relative to ACK-state event and
+VoI policies remains an explicit unresolved threat.
