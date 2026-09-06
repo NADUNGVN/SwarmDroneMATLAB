@@ -1,0 +1,25 @@
+
+============================================================
+RUN  : tcns_gate4_small_sanity
+ID   : 2026-09-07_005719
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate4_small_sanity\2026-09-07_005719
+WHEN : 2026-09-07 00:57:19
+============================================================
+
+epsilon 0.10 m: RMSE 0.1457 m, DATA 15.78, C0.25 18.17 Hz/channel, violation 99.8%
+epsilon 0.20 m: RMSE 0.1660 m, DATA 11.18, C0.25 12.89 Hz/channel, violation 99.7%
+epsilon 0.40 m: RMSE 0.1891 m, DATA 7.58, C0.25 8.71 Hz/channel, violation 73.5%
+epsilon 0.80 m: RMSE 0.2902 m, DATA 4.92, C0.25 5.67 Hz/channel, violation 48.1%
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate4_small_sanity\2026-09-07_005719\figures
+
+Gate 4 small-sanity verdict: PASS
+  coverage / budget algebra / causal       1 / 1 / 1
+  unsaturated / monotone / distinct        1 / 1 / 1
+  branches / shared forward trace          1 / 1
+
+============================================================
+DONE : tcns_gate4_small_sanity
+TIME : 12.2 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate4_small_sanity\2026-09-07_005719
+============================================================

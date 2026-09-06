@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate4_small_sanity",
+  "runId": "2026-09-07_005609",
+  "startedAt": "2026-09-07 00:56:09",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "53eac10",
+  "notes": "Development-only falsification of the first theorem-derived control-aware trigger. Fixed sweep declared in source before run.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate4_small_sanity.m",
+  "finishedAt": "2026-09-07 00:56:22",
+  "elapsedSec": 12.9584668,
+  "elapsedText": "13.0 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

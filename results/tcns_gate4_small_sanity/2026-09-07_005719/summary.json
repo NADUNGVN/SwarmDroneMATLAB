@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "gate": 4,
+  "status": "PASS",
+  "classification": "development-only mechanics/falsification",
+  "seed": 2.7020001E+7,
+  "scenario": "Stressed",
+  "epsilonSweep_m": [
+    0.1,
+    0.2,
+    0.4,
+    0.8
+  ],
+  "coveragePass": true,
+  "budgetAlgebraPass": true,
+  "causalInvariantPass": true,
+  "unsaturatedPass": true,
+  "monotoneTrafficPass": true,
+  "distinctTrafficPass": true,
+  "branchPass": true,
+  "sharedForwardTracePass": true,
+  "controlAwareTxCounts": [
+    1894,
+    1342,
+    909,
+    590
+  ],
+  "controlAwareFormationRMSE_m": [
+    0.1456864859292373,
+    0.16597422603731576,
+    0.18907126398065732,
+    0.290186091937113
+  ],
+  "controlAwareCost025PerChannel_Hz": [
+    18.170833333333334,
+    12.891666666666666,
+    8.7145833333333336,
+    5.6708333333333325
+  ],
+  "controlAwareViolationRatio": [
+    0.99816971713810321,
+    0.9965058236272879,
+    0.73544093178036607,
+    0.48069883527454244
+  ],
+  "nonControllerLeaderRowPolicy": "legacy-v3 retained on receiver row 1 to avoid a proposed-only removal of controller-irrelevant configured traffic",
+  "interpretation": "This one-seed stationary run tests mechanics and sweep ordering only. It neither selects epsilon nor establishes a Pareto advantage."
+}

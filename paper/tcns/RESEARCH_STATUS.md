@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gates 0--3 and theory-review checkpoint complete; Gate 4 in progress
+**Status:** Gates 0--4 complete; Gate 5 frontier design next
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -18,7 +18,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 | Gate 2: staleness to uncertainty | **complete** | follower and analytical-leader bounds proved and validated |
 | Gate 3: uncertainty to formation | **complete** | structured ISS/UUB theorem and numerical validation |
 | Theory checkpoint | **complete** | Gate 4 authorized with explicit conditions |
-| Gate 4: control-aware trigger | in progress | theorem-derived budget; development only |
+| Gate 4: control-aware trigger | **complete** | implementation contracts and one-seed sanity pass |
+| Gate 5: matched Pareto frontiers | next | preregister development frontier design |
 
 ## Frozen canonical evidence
 
@@ -222,3 +223,41 @@ transmission does not contract the sender's possible receiver-state set until
 an ACK returns, so the policy cannot claim deterministic instantaneous bound
 enforcement under stochastic loss. Novelty relative to ACK-state event and
 VoI policies remains an explicit unresolved threat.
+
+## Gate-4 execution record
+
+- Policy implementation commit: `10e100c`; preregistered sanity script commit:
+  `53eac10`; plot-only correction commit: `4384589`.
+- Accepted run: `results/tcns_gate4_small_sanity/2026-09-07_005719`, MATLAB
+  R2025a, source commit `4384589`.
+- Classification: one fixed development seed and stationary Stressed DI;
+  mechanics/falsification only, not evidence of superiority.
+- The requested position-degradation budget is the only policy sweep variable:
+  \(\epsilon_d=\{0.10,0.20,0.40,0.80\}\) m. The retry interval remains the
+  declared inherited 0.10 s value and is not searched.
+- Budget algebra, causal set containment, ACK/protocol invariants,
+  unsaturated evaluation, common forward trace, branch activity, distinct
+  operating points, and monotone traffic ordering all pass.
+- P10 gives RMSE 0.1484 m at 9.92 `DATA+0.25 ACK` Hz/channel. Frozen
+  Causal-v3 gives 0.1154 m at 23.56 Hz/channel.
+- The control-aware sweep goes from 0.1457 m at 18.17 Hz/channel
+  (\(\epsilon_d=0.10\) m) to 0.2902 m at 5.67 Hz/channel
+  (\(\epsilon_d=0.80\) m).
+- At the point below P10's cost, \(\epsilon_d=0.40\) m, control-aware RMSE is
+  worse (0.1891 m at 8.71 Hz/channel). Near P10's performance, the
+  control-aware point uses substantially more traffic. Thus this stationary
+  one-seed run supplies no efficiency advantage over P10.
+- The causal local budget is exceeded for 99.8%, 99.7%, 73.5%, and 48.1% of
+  controller-relevant link checks across the ordered sweep. This does not
+  contradict the conditional theorem, but it shows that the stochastic policy
+  does not enforce the premise and that tight \(\epsilon_d\) values saturate
+  into near-continuous violation exposure.
+- The earlier `005609` run is preserved. It has identical numeric data but a
+  plot legend defect; `005719` is the accepted script-generated figure.
+
+Gate 4 therefore passes as an implementation and falsification gate, not as a
+performance win. It is scientifically consistent with the hypothesis that a
+periodic schedule can be near-optimal in a stationary regime. Gate 5 must now
+replace the single P10 comparison with automated frontier and matched-cost /
+matched-performance analysis. No \(\epsilon_d\) value from this run is selected
+as the proposed operating point.

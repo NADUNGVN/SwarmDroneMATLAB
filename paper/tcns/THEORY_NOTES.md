@@ -849,3 +849,35 @@ the Gate-3 unsaturated DI, fixed-undirected-topology scope.
 possible set, the rule can reduce to a controller-weighted ACK-state event.
 Distinct value relative to that baseline and the closest literature remains
 to be established rather than asserted.
+
+## 16. Gate-4 executable evidence
+
+The accepted run is
+`results/tcns_gate4_small_sanity/2026-09-07_005719`, generated from commit
+`4384589` under MATLAB R2025a. The sweep and pass/fail rules were committed
+before execution. One fixed development seed uses the stationary Stressed
+channel, exact DI plant, 12 s horizon and post-8 s unsaturated evaluation.
+
+All implementation conditions pass: the certified allocation is below each
+declared \(\epsilon_d\), causal-set coverage is one, protocol violations are
+zero, every run consumes the same forward trace, new-information and
+in-flight-suppression branches execute, and DATA count decreases monotonically
+as \(\epsilon_d\) is relaxed. The four values create four distinct operating
+points.
+
+The result is deliberately not favorable in the stationary regime. P10 has
+formation RMSE 0.1484 m at 9.92 `DATA+0.25 ACK` Hz/channel. The control-aware
+point with similar performance has much greater cost: at
+\(\epsilon_d=0.10\) m it gives 0.1457 m at 18.17 Hz/channel. The first point
+below P10's cost, \(\epsilon_d=0.40\) m, gives worse RMSE 0.1891 m at
+8.71 Hz/channel. Frozen Causal-v3 gives 0.1154 m but costs
+23.56 Hz/channel.
+
+Moreover, the measured local-budget violation ratios are 0.998, 0.997, 0.735
+and 0.481 as \(\epsilon_d\) increases. Thus Proposition 1 remains a valid
+conditional implication, while the first lossy-channel policy frequently
+fails to maintain its premise. Gate 4 passes because the derived mechanism is
+causal, distributed, reproducible and produces a controllable frontier—not
+because it beats P10. Gate 5 must test complete frontiers and use automatic
+matched comparisons; Gate 6 must then test the separate hypothesis that
+nonstationary information value is where adaptivity matters.
