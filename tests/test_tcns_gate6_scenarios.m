@@ -98,10 +98,30 @@ assert(periodic.traceHashExact==control.traceHashExact && ...
     control.invariantViolations==0, ...
     'Gate6: S3 end-to-end trace sharing or causal delivery failed.');
 
+% Frontier runner interface has one stable row shape across discriminated
+% policy variants and preserves windowed nonstationary metrics.
+arms = tcnsFrontierArms(5,0.4,cfg3.swarm.dt,0.10,false);
+shortScenario = scenario3;
+shortScenario.evaluationStart_s = 0;
+shortScenario.eventWindows_s = [0 4];
+shortScenario.performanceWindows_s = [0 4];
+r1 = runTcnsFrontierCell(cfg3,arms(1),shortScenario);
+r2 = runTcnsFrontierCell(cfg3,arms(2),shortScenario);
+assert(isequal(fieldnames(r1),fieldnames(tcnsFrontierRow())) && ...
+    isequal(fieldnames(r1),fieldnames(r2)) && ~r1.failed && ~r2.failed && ...
+    isfinite(r1.primaryFormationRMSE_m) && ...
+    isfinite(r2.evaluationCost025PerChannel_Hz), ...
+    'Gate6: stable frontier-cell row contract failed.');
+raw = struct2table([r1;r2]);
+aggregate = aggregateTcnsFrontierRuns(raw,arms,1);
+assert(height(aggregate)==2 && all(aggregate.failedRuns==0) && ...
+    all(isfinite(aggregate.meanPrimaryFormationRMSE_m)), ...
+    'Gate6: frontier aggregation contract failed.');
+
 fprintf('  S1 stationary control / S2 formation schedule       PASS\n');
 fprintf('  S3 GE persistence %.3f, realized mask loss %.3f     PASS\n', ...
     badPersistence,dropFraction);
 fprintf('  S4 channel schedule / S5 topology outage            PASS\n');
 fprintf('  S6 DI dynamic excitation                            PASS\n');
+fprintf('  stable frontier runner/aggregate interface          PASS\n');
 fprintf('test_tcns_gate6_scenarios: PASS\n');
-

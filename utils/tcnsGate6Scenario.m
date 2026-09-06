@@ -16,6 +16,7 @@ cfg.swarm.T = 30;
 scenario.id = upper(char(scenarioId));
 scenario.evaluationStart_s = 8;
 scenario.eventWindows_s = zeros(0,2);
+scenario.performanceWindows_s = zeros(0,2);
 scenario.description = '';
 
 switch scenario.id
@@ -42,6 +43,7 @@ switch scenario.id
         cfg.tcns.formationSchedule.time_s = times;
         cfg.tcns.formationSchedule.offsets = values;
         scenario.eventWindows_s = [10 14;20 24];
+        scenario.performanceWindows_s = [10 18;20 28];
 
     case 'S3'
         scenario.name = 'Gilbert-Elliott-burst-loss';
@@ -54,6 +56,7 @@ switch scenario.id
         cfg.net.lossModel.lossBad = 0.95;
         cfg.net.packetLoss = 0.41; % descriptive fallback; trace mask is authoritative
         scenario.eventWindows_s = [8 30];
+        scenario.performanceWindows_s = [8 30];
 
     case 'S4'
         scenario.name = 'Time-varying-congestion';
@@ -69,6 +72,7 @@ switch scenario.id
         ackRegime.loss = zeros(size(regime.loss));
         cfg.ack.regime = ackRegime;
         scenario.eventWindows_s = [10 16;16 22;22 30];
+        scenario.performanceWindows_s = [10 30];
 
     case 'S5'
         scenario.name = 'Topology-perturbation';
@@ -76,6 +80,7 @@ switch scenario.id
             'Thirty percent of configured directed links unavailable for 6 s.';
         cfg.fault = generateFaultRealization(cfg,'burst',6.0);
         scenario.eventWindows_s = [cfg.fault.tStart cfg.fault.tEnd];
+        scenario.performanceWindows_s = [cfg.fault.tStart cfg.fault.tEnd+4];
 
     case 'S6'
         scenario.name = 'Dynamic-excitation';
@@ -90,6 +95,7 @@ switch scenario.id
         D.nodeMask(2,4) = 1;
         cfg.tcns.diDisturbance = D;
         scenario.eventWindows_s = [12 16;20 24];
+        scenario.performanceWindows_s = [12 18;20 26];
 
     otherwise
         error('tcnsGate6Scenario:UnknownScenario', ...
