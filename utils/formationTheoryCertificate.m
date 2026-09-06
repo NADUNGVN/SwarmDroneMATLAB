@@ -82,6 +82,12 @@ Ah = [eye(m)-h^2*Hp, eye(m)-h*Hv; ...
       -h^2*Hp,          eye(m)-h*Hv];
 Dh = [eye(m), eye(m); zeros(m), eye(m)];
 
+% Exact one-axis plant matrices for x_i=[p_i;v_i]. The h^2 coefficient is
+% implementation-faithful: integrateFollowers updates velocity first and then
+% advances position with the new velocity.
+plantA = [1 h; 0 1];
+plantB = [h^2; h];
+
 symTol = 1e-11;
 eigTol = 1e-10;
 isSymmetricHp = norm(Hp-Hp','fro') <= symTol*max(1,norm(Hp,'fro'));
@@ -165,8 +171,19 @@ cert.Hp = Hp;
 cert.Hv = Hv;
 cert.Acl = Acl;
 cert.sampleTime = h;
+cert.plantStateMatrix = plantA;
+cert.plantInputMatrix = plantB;
 cert.sampledAcl = Ah;
 cert.sampledInputMatrix = Dh;
+cert.controllerStateMatrix = [-Hp, -Hv];
+cert.leaderPinVector = pinFollower;
+cert.positionUpdateConvention = 'semi-implicit Euler: v first, then p';
+cert.maxSpeedIsEnforced = false;
+if isfield(cfg.swarm,'maxAccel')
+    cert.maxCommandedAcceleration = cfg.swarm.maxAccel;
+else
+    cert.maxCommandedAcceleration = nan;
+end
 cert.isSymmetricHp = isSymmetricHp;
 cert.isSymmetricHv = isSymmetricHv;
 cert.lambdaMinHp = lambdaMinHp;

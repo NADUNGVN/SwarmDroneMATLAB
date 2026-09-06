@@ -30,6 +30,7 @@ suite = {
     'test_rotation'
     'test_formation_error'
     'test_formation_theory_certificate'
+    'test_tcns_gate1_model_mapping'
     'test_probabilistic_safety_certificate'
     'test_standalone_ack_value_certificate'
     'test_setpoint_interface'
