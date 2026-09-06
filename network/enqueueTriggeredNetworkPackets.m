@@ -48,6 +48,17 @@ end
 N = cfg.swarm.N;
 
 
+%% ============================================================
+% Channel parameters in force at this instant
+%
+% Static cfg.net values unless a caller attached a regime schedule, so
+% the locked event-triggered path is unchanged. One lookup per outer
+% tick: the regime is constant within a step by construction.
+% ============================================================
+
+np = netParamsAt(cfg, tk);
+
+
 % Broadcast accounting (EXP07C). Passive; see initQueuedNetworkState.
 senderFired = false(N,1);
 
@@ -234,7 +245,7 @@ for i = 1:N
         % Packet loss
         % -----------------------------------------------------
 
-        if drawLoss(netTrace,k,i,j,false) < cfg.net.packetLoss
+        if drawLoss(netTrace,k,i,j,false) < np.packetLoss
 
             net.dropCount = ...
                 net.dropCount + 1;
@@ -249,14 +260,14 @@ for i = 1:N
         % -----------------------------------------------------
 
         delay = ...
-            cfg.net.delay;
+            np.delay;
 
 
-        if cfg.net.jitterStd > 0
+        if np.jitterStd > 0
 
             delay = ...
                 delay ...
-                + cfg.net.jitterStd ...
+                + np.jitterStd ...
                 * drawJitter(netTrace,k,i,j,false);
 
         end
@@ -423,7 +434,7 @@ for i = 2:N
     % Packet loss
     % ---------------------------------------------------------
 
-    if drawLoss(netTrace,k,i,1,true) < cfg.net.packetLoss
+    if drawLoss(netTrace,k,i,1,true) < np.packetLoss
 
         net.dropCount = ...
             net.dropCount + 1;
@@ -438,14 +449,14 @@ for i = 2:N
     % ---------------------------------------------------------
 
     delay = ...
-        cfg.net.delay;
+        np.delay;
 
 
-    if cfg.net.jitterStd > 0
+    if np.jitterStd > 0
 
         delay = ...
             delay ...
-            + cfg.net.jitterStd ...
+            + np.jitterStd ...
             * drawJitter(netTrace,k,i,1,true);
 
     end

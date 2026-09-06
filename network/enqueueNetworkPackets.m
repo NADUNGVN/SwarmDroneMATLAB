@@ -40,6 +40,20 @@ if nargin < 9 || isempty(fireMask)
 end
 
 
+%% ============================================================
+% Channel parameters in force at this instant
+%
+% netParamsAt returns the static cfg.net loss / delay / jitter verbatim
+% unless a caller has attached cfg.net.regime, so this is the locked
+% static channel on every pre-EXP11 path. EXP11 attaches a
+% piecewise-constant schedule; the lookup is hoisted here because the
+% regime cannot change inside one outer tick, so one lookup per step is
+% both correct and cheaper than one per link.
+% ============================================================
+
+np = netParamsAt(cfg, tk);
+
+
 % ============================================================
 % Broadcast accounting
 %
@@ -109,7 +123,7 @@ for i = 1:N
 
 
         % Packet loss
-        if drawLoss(netTrace,k,i,j,false) < cfg.net.packetLoss
+        if drawLoss(netTrace,k,i,j,false) < np.packetLoss
 
             net.dropCount = net.dropCount + 1;
             continue;
@@ -118,12 +132,12 @@ for i = 1:N
 
 
         % Network delay
-        delay = cfg.net.delay;
+        delay = np.delay;
 
-        if cfg.net.jitterStd > 0
+        if np.jitterStd > 0
 
             delay = delay + ...
-                cfg.net.jitterStd * drawJitter(netTrace,k,i,j,false);
+                np.jitterStd * drawJitter(netTrace,k,i,j,false);
 
         end
 
@@ -172,7 +186,7 @@ for i = 2:N
     end
 
 
-    if drawLoss(netTrace,k,i,1,true) < cfg.net.packetLoss
+    if drawLoss(netTrace,k,i,1,true) < np.packetLoss
 
         net.dropCount = net.dropCount + 1;
         continue;
@@ -180,12 +194,12 @@ for i = 2:N
     end
 
 
-    delay = cfg.net.delay;
+    delay = np.delay;
 
-    if cfg.net.jitterStd > 0
+    if np.jitterStd > 0
 
         delay = delay + ...
-            cfg.net.jitterStd * drawJitter(netTrace,k,i,1,true);
+            np.jitterStd * drawJitter(netTrace,k,i,1,true);
 
     end
 

@@ -1,0 +1,17 @@
+
+============================================================
+RUN  : exp11_dynamic_network
+ID   : 2026-09-06_191734
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\exp11_dynamic_network\2026-09-06_191734
+WHEN : 2026-09-06 19:17:35
+============================================================
+
+{Unrecognized function or variable 'networkRegimeSchedule'.
+
+Error in exp11_dynamic_network (line 66)
+regime = networkRegimeSchedule('exp11');
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 

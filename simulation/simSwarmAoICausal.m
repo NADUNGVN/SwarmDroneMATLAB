@@ -157,6 +157,14 @@ MeanAoILog = zeros(K,1);
 % traffic inside a fault window, which a run total cannot resolve.
 TxCountLog = zeros(K,1);
 
+% Passive cumulative broadcast log, same contract as TxCountLog: written
+% every step, never read by the simulation. Added for EXP11, which needs
+% every communication count restricted to a time window rather than the
+% whole run - the first 8 s are warm-up and must not enter any metric, and
+% a scalar total cannot be windowed after the fact.
+
+BroadcastCountLog = zeros(K,1);
+
 % 6-DOF follower state, created lazily on the first integration call.
 sixState = [];
 
@@ -402,6 +410,7 @@ for k = 1:K
 
 
     TxCountLog(k)  = net.txCount;
+    BroadcastCountLog(k) = net.broadcastCount;
     AckCountLog(k) = net.ackTxCount;
 
 
@@ -460,6 +469,7 @@ out.ackCountLog       = AckCountLog;
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.
 out.broadcastCount = net.broadcastCount;
+out.broadcastCountLog = BroadcastCountLog;
 out.rxCount           = net.rxCount;
 out.dropCount         = net.dropCount;
 out.staleDiscardCount = net.staleDiscardCount;

@@ -78,6 +78,14 @@ AoILog = zeros(K,1);
 % traffic inside a fault window, which a run total cannot resolve.
 TxCountLog = zeros(K,1);
 
+% Passive cumulative broadcast log, same contract as TxCountLog: written
+% every step, never read by the simulation. Added for EXP11, which needs
+% every communication count restricted to a time window rather than the
+% whole run - the first 8 s are warm-up and must not enter any metric, and
+% a scalar total cannot be windowed after the fact.
+
+BroadcastCountLog = zeros(K,1);
+
 % 6-DOF follower state, created lazily on the first integration call.
 sixState = [];
 
@@ -102,17 +110,38 @@ net = initQueuedNetworkState( ...
 % on.
 if cfg.net.phaseOffsetEnabled
     phaseTrace = generatePhaseTrace(cfg);
-    phaseOffsetSec = phaseTrace.u * cfg.net.commPeriod;
+    phaseU = phaseTrace.u;
 else
     phaseTrace = [];
-    phaseOffsetSec = zeros(N+1,1);
+    phaseU = zeros(N+1,1);
 end
 
-nextTx = phaseOffsetSec + cfg.net.commPeriod;
+% Period in force at t = 0. commPeriodAt returns cfg.net.commPeriod and
+% segment 0 unless a caller attached cfg.net.periodSchedule, so for every
+% locked experiment and for all five fixed periodic EXP11 methods this is
+% the constant period and periodSeg stays 0 for the whole run - no
+% re-anchoring is ever triggered and the schedule is the locked one.
+%
+% Only Oracle-periodic supplies a schedule. Its phase offset is expressed
+% as a FRACTION of the period in force, so the offset is re-scaled when the
+% period changes rather than being frozen at its t = 0 value; a phase offset
+% larger than the current period would otherwise silently skip a slot.
+[periodNow, periodSeg] = commPeriodAt(cfg, 0);
+
+phaseOffsetSec = phaseU * periodNow;
+
+nextTx = phaseOffsetSec + periodNow;
 
 % Passive: how many times each sender's clock fired. Written, never
 % read by the simulation.
 senderFireCount = zeros(N+1,1);
+
+% Passive audit trail for the EXP11 oracle gate: every instant at which the
+% transmission period actually changed, and the period it changed to. Empty
+% for every fixed-period run, which is itself the evidence that the fixed
+% periodic methods did not adapt.
+periodSwitchTimes  = [];
+periodSwitchValues = [];
 
 
 for k = 1:K
@@ -145,6 +174,30 @@ for k = 1:K
     % Packet generation
     % ========================================================
 
+    % Period schedule. segNow is 0 on every static-period path, so the
+    % re-anchoring branch below is dead code for the locked experiments
+    % and for the fixed periodic methods, and nextTx keeps accumulating on
+    % one uninterrupted grid straight through every channel switch.
+    [pNow, segNow, segStartNow] = commPeriodAt(cfg, tk);
+
+    if segNow ~= periodSeg
+
+        % A period boundary was crossed. Restart the transmission grid at
+        % the segment start, keeping each sender's phase fraction. See
+        % commPeriodAt for why the grid is re-anchored instead of carried
+        % over.
+        nextTx = segStartNow + phaseU * pNow;
+
+        if pNow ~= periodNow
+            periodSwitchTimes(end+1)  = tk;      %#ok<AGROW>
+            periodSwitchValues(end+1) = pNow;    %#ok<AGROW>
+            periodNow = pNow;
+        end
+
+        periodSeg = segNow;
+
+    end
+
     fireMask = tk >= nextTx - 1e-12;
 
     if any(fireMask)
@@ -154,7 +207,7 @@ for k = 1:K
 
         nextTx(fireMask) = ...
             nextTx(fireMask) + ...
-            cfg.net.commPeriod;
+            pNow;
 
         senderFireCount(fireMask) = senderFireCount(fireMask) + 1;
 
@@ -229,6 +282,7 @@ for k = 1:K
 
 
     TxCountLog(k) = net.txCount;
+    BroadcastCountLog(k) = net.broadcastCount;
 
 
     if k == K
@@ -304,9 +358,13 @@ end
 
 out.senderFireCount = senderFireCount;
 
+out.periodSwitchTimes  = periodSwitchTimes;
+out.periodSwitchValues = periodSwitchValues;
+
 % Broadcast accounting (EXP07C): unique (timestep, sender, payload
 % class) DATA transmissions. Passive counter, never read by the sim.
 out.broadcastCount = net.broadcastCount;
+out.broadcastCountLog = BroadcastCountLog;
 out.rxCount = net.rxCount;
 out.dropCount = net.dropCount;
 
