@@ -1,0 +1,6 @@
+index,name,regime,tStart,tEnd
+1,Clean_1,Clean,8,23
+2,Moderate_1,Moderate,23,38
+3,Stressed,Stressed,38,53
+4,Moderate_2,Moderate,53,68
+5,Clean_2,Clean,68,83

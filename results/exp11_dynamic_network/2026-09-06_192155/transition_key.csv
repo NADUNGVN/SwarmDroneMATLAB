@@ -1,0 +1,17 @@
+index,window
+1,t23:Clean->Moderate:0-1s
+2,t23:Clean->Moderate:1-3s
+3,t23:Clean->Moderate:3-5s
+4,t23:Clean->Moderate:remainder
+5,t38:Moderate->Stressed:0-1s
+6,t38:Moderate->Stressed:1-3s
+7,t38:Moderate->Stressed:3-5s
+8,t38:Moderate->Stressed:remainder
+9,t53:Stressed->Moderate:0-1s
+10,t53:Stressed->Moderate:1-3s
+11,t53:Stressed->Moderate:3-5s
+12,t53:Stressed->Moderate:remainder
+13,t68:Moderate->Clean:0-1s
+14,t68:Moderate->Clean:1-3s
+15,t68:Moderate->Clean:3-5s
+16,t68:Moderate->Clean:remainder

@@ -276,3 +276,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-06_141912 | exp10a_final_validation | 31 m 22 s | 3 | yes | yes | (R2025a) | ddfd669 |
 | 2026-09-06_145037 | exp10b_unified_matrix | 8.6 s | 4 | yes | yes | (R2025a) | ddfd669 |
 | 2026-09-06_140912 | simulation_v1_validation | 42 m 20 s | 0 | yes | - | (R2025a) | ddfd669 |
+| 2026-09-06_192155 | exp11_dynamic_network | 5 m 44 s | 3 | yes | yes | (R2025a) | 8e40d46 |
