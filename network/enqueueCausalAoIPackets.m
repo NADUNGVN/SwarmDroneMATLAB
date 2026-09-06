@@ -408,7 +408,7 @@ if linkIsDown(cfg, i, j, tk)
 end
 
 
-if drawLoss(netTrace,k,i,j,isLeaderLink) < np.packetLoss
+if packetDropped(netTrace,k,i,j,isLeaderLink,np.packetLoss)
 
     net.dropCount = net.dropCount + 1;
 
@@ -651,14 +651,20 @@ end
 % back to the inline draw the locked experiments used.
 % ============================================================
 
-function u = drawLoss(netTrace,k,i,j,isLeader)
+function dropped = packetDropped(netTrace,k,i,j,isLeader,packetLoss)
 
 if isempty(netTrace)
-    u = rand;
+    dropped = rand<packetLoss;
+elseif isfield(netTrace,'dropMask')
+    if isLeader
+        dropped = netTrace.leaderDropMask(k,i);
+    else
+        dropped = netTrace.dropMask(k,i,j);
+    end
 elseif isLeader
-    u = netTrace.leaderLossU(k,i);
+    dropped = netTrace.leaderLossU(k,i)<packetLoss;
 else
-    u = netTrace.lossU(k,i,j);
+    dropped = netTrace.lossU(k,i,j)<packetLoss;
 end
 
 end

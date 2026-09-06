@@ -62,6 +62,37 @@ trace.leaderJitterZ = randn(stream, K, N);
 
 
 %% ============================================================
+% Optional Gate-6 burst-loss trace
+%
+% Default/explicit IID leaves every historical field and draw untouched.
+% Gilbert-Elliott uses a second dedicated stream, so adding it cannot shift
+% delay jitter or the frozen IID realization. Channel state evolves on the
+% physical outer-tick trace independently of whether a policy transmits.
+% ============================================================
+
+trace.lossModel = 'iid';
+if isfield(cfg.net,'lossModel') && ~isempty(cfg.net.lossModel)
+    model = cfg.net.lossModel;
+    if ~isfield(model,'type')
+        error('generateNetworkTrace:MissingLossModelType', ...
+            'cfg.net.lossModel.type is required.');
+    end
+    switch lower(char(model.type))
+        case 'iid'
+            % Explicit IID is exactly the historical trace.
+        case 'gilbert-elliott'
+            [trace.dropMask,trace.badState, ...
+                trace.leaderDropMask,trace.leaderBadState] = ...
+                localGilbertElliott(K,N,cfg.net.seed,model);
+            trace.lossModel = 'gilbert-elliott';
+        otherwise
+            error('generateNetworkTrace:UnknownLossModel', ...
+                'Unknown loss model "%s".',model.type);
+    end
+end
+
+
+%% ============================================================
 % Provenance
 %
 % The hash lets an experiment prove every method ran on the same
@@ -78,6 +109,11 @@ flat = [ ...
     trace.jitterZ(:); ...
     trace.leaderLossU(:); ...
     trace.leaderJitterZ(:)];
+
+if strcmp(trace.lossModel,'gilbert-elliott')
+    flat = [flat; double(trace.dropMask(:)); double(trace.badState(:)); ...
+        double(trace.leaderDropMask(:)); double(trace.leaderBadState(:))]; %#ok<AGROW>
+end
 
 % LOCKED hash. Its values appear in EXP07-EXP09 result tables, so the
 % formula must not change. It is NOT thread-stable: it sums millions of
@@ -112,5 +148,56 @@ n = numel(v);
 idx = (1:n)';
 
 h = mod(sum(mod(floor(abs(v)*1e12), 1e9) .* mod(idx,9973)), 2^53 - 1);
+
+end
+
+
+function [drop,bad,leaderDrop,leaderBad] = ...
+    localGilbertElliott(K,N,seedValue,model)
+
+required = {'pGoodToBad','pBadToGood','lossGood','lossBad'};
+for q = 1:numel(required)
+    if ~isfield(model,required{q})
+        error('generateNetworkTrace:MissingGilbertElliottParameter', ...
+            'lossModel.%s is required.',required{q});
+    end
+    validateattributes(model.(required{q}),{'numeric'}, ...
+        {'real','finite','scalar','>=',0,'<=',1}, ...
+        mfilename,['lossModel.' required{q}]);
+end
+
+burstStream = RandStream('mt19937ar', ...
+    'Seed',mod(seedValue+30340001,2^32));
+transitionU = rand(burstStream,K,N,N);
+dropU = rand(burstStream,K,N,N);
+leaderTransitionU = rand(burstStream,K,N);
+leaderDropU = rand(burstStream,K,N);
+
+bad = false(K,N,N);
+leaderBad = false(K,N);
+for k = 2:K
+    previous = reshape(bad(k-1,:,:),N,N);
+    u = reshape(transitionU(k,:,:),N,N);
+    next = previous;
+    next(~previous) = u(~previous)<model.pGoodToBad;
+    next(previous) = ~(u(previous)<model.pBadToGood);
+    bad(k,:,:) = reshape(next,1,N,N);
+
+    previousLeader = leaderBad(k-1,:);
+    uLeader = leaderTransitionU(k,:);
+    nextLeader = previousLeader;
+    nextLeader(~previousLeader) = ...
+        uLeader(~previousLeader)<model.pGoodToBad;
+    nextLeader(previousLeader) = ...
+        ~(uLeader(previousLeader)<model.pBadToGood);
+    leaderBad(k,:) = nextLeader;
+end
+
+lossProbability = model.lossGood*ones(K,N,N);
+lossProbability(bad) = model.lossBad;
+drop = dropU<lossProbability;
+leaderLossProbability = model.lossGood*ones(K,N);
+leaderLossProbability(leaderBad) = model.lossBad;
+leaderDrop = leaderDropU<leaderLossProbability;
 
 end

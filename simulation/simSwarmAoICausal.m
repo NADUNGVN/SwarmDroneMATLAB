@@ -191,6 +191,8 @@ V = cfg.swarm.initialVelocities;
 Plog = zeros(K,N,3);
 Vlog = zeros(K,N,3);
 Alog = zeros(K,N,3);
+DesiredOffsetsLog = zeros(K,N,3);
+DisturbanceAccelerationLog = zeros(K,N,3);
 
 LeaderPos = zeros(K,3);
 LeaderVel = zeros(K,3);
@@ -375,6 +377,10 @@ for k = 1:K
 
     leader = leaderReference(tk);
 
+    currentOffsets = tcnsFormationOffsetsAt(cfg,tk);
+    controlCfg = cfg;
+    controlCfg.swarm.offsets = currentOffsets;
+
     P(1,:) = leader.pos';
     V(1,:) = leader.vel';
 
@@ -443,7 +449,7 @@ for k = 1:K
     % Formation control
     % ---------------------------------------------------------
 
-    accCmd = distributedFormationPolicy(PHat, VHat, leader, cfg, net);
+    accCmd = distributedFormationPolicy(PHat, VHat, leader, controlCfg, net);
 
 
     %% --------------------------------------------------------
@@ -453,6 +459,9 @@ for k = 1:K
     Plog(k,:,:) = P;
     Vlog(k,:,:) = V;
     Alog(k,:,:) = accCmd;
+    DesiredOffsetsLog(k,:,:) = reshape(currentOffsets,1,N,3);
+    DisturbanceAccelerationLog(k,:,:) = reshape( ...
+        tcnsFollowerDisturbanceAt(cfg,tk),1,N,3);
 
     LeaderPos(k,:) = leader.pos';
     LeaderVel(k,:) = leader.vel';
@@ -608,6 +617,8 @@ out.t = t;
 out.P = Plog;
 out.V = Vlog;
 out.A = Alog;
+out.desiredOffsets = DesiredOffsetsLog;
+out.appliedFollowerDisturbance = DisturbanceAccelerationLog;
 
 out.LeaderPos = LeaderPos;
 out.LeaderVel = LeaderVel;

@@ -48,9 +48,26 @@ end
 
 if ~isfield(cfg,'sixdof') || ~isfield(cfg.sixdof,'enable') || ~cfg.sixdof.enable
 
+    hasDiDisturbance = isfield(cfg,'tcns') && ...
+        isfield(cfg.tcns,'diDisturbance') && ...
+        ~isempty(cfg.tcns.diDisturbance);
+
+    if hasDiDisturbance
+        disturbanceAcceleration = tcnsFollowerDisturbanceAt(cfg,tk);
+    end
+
     for i = 2:N
 
-        V(i,:) = V(i,:) + dt*accCmd(i,:);
+        if hasDiDisturbance
+            appliedAcceleration = ...
+                accCmd(i,:)+disturbanceAcceleration(i,:);
+        else
+            % Preserve the locked arithmetic expression exactly when the
+            % Gate-6 excitation hook is absent.
+            appliedAcceleration = accCmd(i,:);
+        end
+
+        V(i,:) = V(i,:) + dt*appliedAcceleration;
 
         P(i,:) = P(i,:) + dt*V(i,:);
 
