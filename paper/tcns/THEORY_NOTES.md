@@ -453,6 +453,51 @@ q=\operatorname{round}\left(
 
 only after the grid-alignment residual has been checked.
 
+### Proven Lemma 3 — implemented analytical-leader envelope
+
+The current `leaderReference.m` is a cubic vertical takeoff for $t<3$ s and a
+radius-1 circular trajectory with angular rate 0.2 rad/s for $t\ge3$ s.
+Position is continuous at the switch, while velocity and acceleration have
+jump magnitudes
+
+\[
+J_v=0.2,\qquad J_a=\sqrt{0.8^2+0.04^2}.
+\]
+
+Direct differentiation on the two smooth segments gives
+
+\[
+\|v_L\|\le0.6,\qquad \|a_L\|\le0.8,\qquad
+\|\dot a_L\|\le8/15.
+\]
+
+For a stale interval from generation time $g$ to current time $t$, let
+$I_3(g,t)$ equal one when $g<3\le t$ and zero otherwise. The ordinary leader
+position/velocity payload and pinned position/velocity/acceleration payload
+then satisfy
+
+\[
+E^L_p(g,t)=0.6(t-g),
+\]
+
+\[
+E^L_v(g,t)=0.8(t-g)+J_vI_3(g,t),
+\]
+
+\[
+E^L_a(g,t)=\frac{8}{15}(t-g)+J_aI_3(g,t).
+\]
+
+**Proof.** Integrate the respective derivative norm on each smooth segment
+and apply the triangle inequality. Position has no jump. Velocity and
+acceleration each add their single switch jump exactly when the stale interval
+crosses 3 s. The constants above are maxima obtained directly from the two
+closed-form branches. \(\square\)
+
+`utils/tcnsLeaderStalenessBound.m` implements Lemma 3. Keeping the jump terms
+is necessary: applying the follower double-integrator envelope across the
+leader switch would be mathematically false.
+
 **PROOF GAP G2.1 — numerical coverage/tightness.** The algebra is complete,
 but a committed run must still measure coverage and conservatism over actual
 receiver trajectories and fixed development seeds. This gap closes only when
@@ -464,11 +509,6 @@ age conservative, but the sender does not automatically know the velocity in
 the receiver's latest accepted payload. A sender-implementable bound must use
 confirmed payload history or a pre-frozen global envelope. This decomposition
 belongs to Gate 3--4 and must not read receiver truth.
-
-**PROOF GAP G2.3 — analytical leader streams.** Lemma 2 applies to follower
-states advanced by the semi-implicit plant. Ordinary links whose sender is the
-analytical leader and separate pin streams need bounds derived from
-`leaderReference`, not a false application of follower acceleration dynamics.
 
 ## 11. Gate-3 candidate result and exact gap
 

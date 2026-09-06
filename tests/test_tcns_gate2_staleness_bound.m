@@ -27,6 +27,24 @@ catch err
 end
 assert(offGridRefused,'Gate2: an off-grid age was silently rounded.');
 
+leaderCases = [1.0 2.0; 2.98 3.0; 3.0 4.0];
+for c = 1:size(leaderCases,1)
+    generationTime = leaderCases(c,1);
+    currentTime = leaderCases(c,2);
+    generated = leaderReference(generationTime);
+    current = leaderReference(currentTime);
+    leaderBound = tcnsLeaderStalenessBound(generationTime,currentTime);
+    assert(norm(current.pos-generated.pos)<=leaderBound.position+1e-12, ...
+        'Gate2: analytical leader position violated its envelope.');
+    assert(norm(current.vel-generated.vel)<=leaderBound.velocity+1e-12, ...
+        'Gate2: analytical leader velocity violated its envelope.');
+    assert(norm(current.acc-generated.acc)<=leaderBound.acceleration+1e-12, ...
+        'Gate2: analytical leader acceleration violated its envelope.');
+end
+crossingBound = tcnsLeaderStalenessBound(2.98,3.0);
+assert(crossingBound.crossesSwitch && crossingBound.velocity>=0.2, ...
+    'Gate2: leader switch jump was omitted from the bound.');
+
 cfg = defaultConfig();
 cfg.swarm.T = 0.60;
 cfg.sixdof.enable = false;
@@ -69,6 +87,7 @@ tol = 2e-12;
 maxPayloadResidual = 0;
 maxAgeResidual = 0;
 maxBoundViolation = -inf;
+maxLeaderBoundViolation = -inf;
 
 for k = 1:K
     for i = 2:N
@@ -101,16 +120,50 @@ for k = 1:K
     end
 end
 
+for k = 1:K
+    for i = 2:N
+        if cfg.swarm.A(i,1)~=0
+            genTime = out.receiverNeighborGenTime(k,i,1);
+            heldP = reshape(out.receiverNeighborPosition(k,i,1,:),1,3);
+            heldV = reshape(out.receiverNeighborVelocity(k,i,1,:),1,3);
+            leaderBound = tcnsLeaderStalenessBound(genTime,out.t(k));
+            actualP = norm(out.LeaderPos(k,:)-heldP);
+            actualV = norm(out.LeaderVel(k,:)-heldV);
+            maxLeaderBoundViolation = max(maxLeaderBoundViolation, ...
+                max([actualP-leaderBound.position, ...
+                actualV-leaderBound.velocity]));
+        end
+
+        if cfg.swarm.pin(i)
+            genTime = out.receiverLeaderGenTime(k,i);
+            heldP = reshape(out.receiverLeaderPosition(k,i,:),1,3);
+            heldV = reshape(out.receiverLeaderVelocity(k,i,:),1,3);
+            heldA = reshape(out.receiverLeaderAcceleration(k,i,:),1,3);
+            leaderBound = tcnsLeaderStalenessBound(genTime,out.t(k));
+            actualP = norm(out.LeaderPos(k,:)-heldP);
+            actualV = norm(out.LeaderVel(k,:)-heldV);
+            actualA = norm(reshape(out.A(k,1,:),1,3)-heldA);
+            maxLeaderBoundViolation = max(maxLeaderBoundViolation, ...
+                max([actualP-leaderBound.position, ...
+                actualV-leaderBound.velocity, ...
+                actualA-leaderBound.acceleration]));
+        end
+    end
+end
+
 assert(maxPayloadResidual<tol, ...
     'Gate2: held payload does not equal the state at its generation tick.');
 assert(maxAgeResidual<tol, ...
     'Gate2: logged AoI is inconsistent with physical sample age + h/2.');
 assert(maxBoundViolation<tol, ...
     'Gate2: an exact-state double-integrator trajectory violated the bound.');
+assert(maxLeaderBoundViolation<tol, ...
+    'Gate2: an analytical leader stream violated its dedicated bound.');
 
 fprintf('  formula and off-grid refusal             PASS\n');
 fprintf('  logging default-off / trajectory-inert    PASS\n');
 fprintf('  payload-generation residual               %.3e\n',maxPayloadResidual);
 fprintf('  AoI convention residual                   %.3e\n',maxAgeResidual);
 fprintf('  maximum bound violation                   %.3e\n',maxBoundViolation);
-
+fprintf('  maximum leader-bound violation            %.3e\n', ...
+    maxLeaderBoundViolation);

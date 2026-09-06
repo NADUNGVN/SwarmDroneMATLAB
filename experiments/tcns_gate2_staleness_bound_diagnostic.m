@@ -30,6 +30,12 @@ receiverList = receiverList(keep);
 senderList = senderList(keep);
 nLink = numel(receiverList);
 
+leaderNeighborReceivers = find(cfg0.swarm.A(:,1)~=0 & ...
+    (1:cfg0.swarm.N)'>=2);
+leaderPinReceivers = find(cfg0.swarm.pin(:)~=0 & ...
+    (1:cfg0.swarm.N)'>=2);
+nLeaderChannel = numel(leaderNeighborReceivers)+numel(leaderPinReceivers);
+
 assert(nLink>0,'Gate2: no follower-to-follower directed link exists.');
 
 % This is the only deterministic global velocity envelope available from
@@ -41,8 +47,11 @@ missionVelocityEnvelope = max(initialSpeed) + ...
     cfg0.swarm.maxAccel*cfg0.swarm.T;
 
 linkRows = repmat(localEmptyLinkRow(),numel(seeds)*nLink,1);
+leaderRows = repmat(localEmptyLeaderRow(), ...
+    numel(seeds)*nLeaderChannel,1);
 seedRows = repmat(localEmptySeedRow(),numel(seeds),1);
 row = 0;
+leaderRow = 0;
 representativeTrace = table();
 
 tol = 1e-10;
@@ -64,6 +73,12 @@ for s = 1:numel(seeds)
     seedAge = [];
     seedAgeResidual = [];
     seedPayloadResidual = [];
+    seedLeaderActualP = [];
+    seedLeaderActualV = [];
+    seedLeaderActualA = [];
+    seedLeaderBoundP = [];
+    seedLeaderBoundV = [];
+    seedLeaderBoundA = [];
 
     for ell = 1:nLink
         i = receiverList(ell);
@@ -153,6 +168,38 @@ for s = 1:numel(seeds)
         end
     end
 
+    for ell = 1:numel(leaderNeighborReceivers)
+        i = leaderNeighborReceivers(ell);
+        [leaderData,actualP,actualV,actualA,boundP,boundV,boundA] = ...
+            localLeaderChannel(out,cfg,i,"ordinary-neighbor",tol);
+        leaderRow = leaderRow+1;
+        leaderData.seed = seeds(s);
+        leaderData.scenario = scenarioName;
+        leaderRows(leaderRow) = leaderData;
+        seedLeaderActualP = [seedLeaderActualP; actualP]; %#ok<AGROW>
+        seedLeaderActualV = [seedLeaderActualV; actualV]; %#ok<AGROW>
+        seedLeaderActualA = [seedLeaderActualA; actualA]; %#ok<AGROW>
+        seedLeaderBoundP = [seedLeaderBoundP; boundP]; %#ok<AGROW>
+        seedLeaderBoundV = [seedLeaderBoundV; boundV]; %#ok<AGROW>
+        seedLeaderBoundA = [seedLeaderBoundA; boundA]; %#ok<AGROW>
+    end
+
+    for ell = 1:numel(leaderPinReceivers)
+        i = leaderPinReceivers(ell);
+        [leaderData,actualP,actualV,actualA,boundP,boundV,boundA] = ...
+            localLeaderChannel(out,cfg,i,"pin",tol);
+        leaderRow = leaderRow+1;
+        leaderData.seed = seeds(s);
+        leaderData.scenario = scenarioName;
+        leaderRows(leaderRow) = leaderData;
+        seedLeaderActualP = [seedLeaderActualP; actualP]; %#ok<AGROW>
+        seedLeaderActualV = [seedLeaderActualV; actualV]; %#ok<AGROW>
+        seedLeaderActualA = [seedLeaderActualA; actualA]; %#ok<AGROW>
+        seedLeaderBoundP = [seedLeaderBoundP; boundP]; %#ok<AGROW>
+        seedLeaderBoundV = [seedLeaderBoundV; boundV]; %#ok<AGROW>
+        seedLeaderBoundA = [seedLeaderBoundA; boundA]; %#ok<AGROW>
+    end
+
     seedData = localEmptySeedRow();
     seedData.seed = seeds(s);
     seedData.scenario = scenarioName;
@@ -178,6 +225,18 @@ for s = 1:numel(seeds)
     seedData.maxPayloadGenerationResidual = max(seedPayloadResidual);
     seedData.maxAppliedAcceleration_mps2 = max(vecnorm( ...
         reshape(out.A(:,2:end,:),[],3),2,2));
+    seedData.leaderPositionCoverage = ...
+        mean(seedLeaderActualP<=seedLeaderBoundP+tol);
+    seedData.leaderVelocityCoverage = ...
+        mean(seedLeaderActualV<=seedLeaderBoundV+tol);
+    seedData.leaderAccelerationCoverage = ...
+        mean(seedLeaderActualA<=seedLeaderBoundA+tol);
+    seedData.maxLeaderPositionViolation_m = ...
+        max(seedLeaderActualP-seedLeaderBoundP);
+    seedData.maxLeaderVelocityViolation_mps = ...
+        max(seedLeaderActualV-seedLeaderBoundV);
+    seedData.maxLeaderAccelerationViolation_mps2 = ...
+        max(seedLeaderActualA-seedLeaderBoundA);
     seedRows(s) = seedData;
 
     fprintf('seed %d: pos cov %.6f, vel cov %.6f, p95 tight %.3f\n', ...
@@ -186,6 +245,7 @@ for s = 1:numel(seeds)
 end
 
 tidy = struct2table(linkRows);
+leaderTidy = struct2table(leaderRows);
 perSeed = struct2table(seedRows);
 
 assert(all(tidy.positionCoverage==1) && all(tidy.velocityCoverage==1), ...
@@ -196,8 +256,16 @@ assert(max(tidy.maxPayloadGenerationResidual)<tol, ...
     'Gate2: held payload is inconsistent with its generation state.');
 assert(max(perSeed.maxAppliedAcceleration_mps2)<=cfg0.swarm.maxAccel+tol, ...
     'Gate2: implemented hard acceleration envelope was violated.');
+assert(all(perSeed.leaderPositionCoverage==1) && ...
+    all(perSeed.leaderVelocityCoverage==1) && ...
+    all(perSeed.leaderAccelerationCoverage==1), ...
+    'Gate2: analytical leader envelope coverage is below one.');
+assert(max(leaderTidy.maxAgeConventionResidual_s)<tol && ...
+    max(leaderTidy.maxPayloadGenerationResidual)<tol, ...
+    'Gate2: analytical leader log timestamp/payload mismatch.');
 
 writetable(tidy,fullfile(R.dir,'tidy.csv'));
+writetable(leaderTidy,fullfile(R.dir,'leader_tidy.csv'));
 writetable(perSeed,fullfile(R.dir,'per_seed.csv'));
 writetable(representativeTrace,fullfile(R.dir,'representative_trace.csv'));
 
@@ -234,6 +302,20 @@ summary.maxAgeConventionResidual_s = ...
     max(perSeed.maxAgeConventionResidual_s);
 summary.maxPayloadGenerationResidual = ...
     max(perSeed.maxPayloadGenerationResidual);
+summary.minLeaderPositionCoverage = min(perSeed.leaderPositionCoverage);
+summary.minLeaderVelocityCoverage = min(perSeed.leaderVelocityCoverage);
+summary.minLeaderAccelerationCoverage = ...
+    min(perSeed.leaderAccelerationCoverage);
+summary.maxLeaderPositionViolation_m = ...
+    max(perSeed.maxLeaderPositionViolation_m);
+summary.maxLeaderVelocityViolation_mps = ...
+    max(perSeed.maxLeaderVelocityViolation_mps);
+summary.maxLeaderAccelerationViolation_mps2 = ...
+    max(perSeed.maxLeaderAccelerationViolation_mps2);
+summary.leaderReferenceCaveat = [ ...
+    'leaderReference is continuous in position but has explicit velocity ' ...
+    'and acceleration jumps at t=3 s; the dedicated envelope includes ' ...
+    'both jump magnitudes.'];
 summary.interpretation = [ ...
     'The accepted-payload-speed envelope is deterministic and causal at ' ...
     'the receiver. The age-only mission envelope is also valid but its ' ...
@@ -291,9 +373,12 @@ fprintf('  mean p95 age-only tightness: %.4f\n', ...
     summary.meanP95GlobalPositionTightness);
 fprintf('  max position violation [m]: %.3e\n', ...
     summary.maxPositionViolation_m);
+fprintf('  minimum leader P/V/A coverage: %.6f / %.6f / %.6f\n', ...
+    summary.minLeaderPositionCoverage,summary.minLeaderVelocityCoverage, ...
+    summary.minLeaderAccelerationCoverage);
 
-save(fullfile(R.dir,'workspace.mat'),'cfg0','seeds','tidy','perSeed', ...
-    'representativeTrace','summary');
+save(fullfile(R.dir,'workspace.mat'),'cfg0','seeds','tidy','leaderTidy', ...
+    'perSeed','representativeTrace','summary');
 finishExperiment(R);
 
 
@@ -326,7 +411,104 @@ row = struct('seed',NaN,'scenario',"",'method',"",'nLinks',NaN, ...
     'p95GlobalPositionTightness',NaN,'p95VelocityTightness',NaN, ...
     'maxAgeConventionResidual_s',NaN, ...
     'maxPayloadGenerationResidual',NaN, ...
-    'maxAppliedAcceleration_mps2',NaN);
+    'maxAppliedAcceleration_mps2',NaN, ...
+    'leaderPositionCoverage',NaN,'leaderVelocityCoverage',NaN, ...
+    'leaderAccelerationCoverage',NaN, ...
+    'maxLeaderPositionViolation_m',NaN, ...
+    'maxLeaderVelocityViolation_mps',NaN, ...
+    'maxLeaderAccelerationViolation_mps2',NaN);
+
+end
+
+
+function row = localEmptyLeaderRow()
+
+row = struct('seed',NaN,'scenario',"",'channelClass',"", ...
+    'receiver',NaN,'sender',1,'sampleCount',NaN, ...
+    'meanPhysicalAge_s',NaN,'maxPhysicalAge_s',NaN, ...
+    'positionCoverage',NaN,'velocityCoverage',NaN, ...
+    'accelerationCoverage',NaN,'maxPositionViolation_m',NaN, ...
+    'maxVelocityViolation_mps',NaN, ...
+    'maxAccelerationViolation_mps2',NaN, ...
+    'p95PositionTightness',NaN,'p95VelocityTightness',NaN, ...
+    'p95AccelerationTightness',NaN, ...
+    'maxAgeConventionResidual_s',NaN, ...
+    'maxPayloadGenerationResidual',NaN, ...
+    'crossingSampleCount',NaN);
+
+end
+
+
+function [row,actualP,actualV,actualA,boundP,boundV,boundA] = ...
+    localLeaderChannel(out,cfg,receiver,channelClass,tol)
+
+K = numel(out.t);
+if channelClass=="pin"
+    heldP = reshape(out.receiverLeaderPosition(:,receiver,:),K,3);
+    heldV = reshape(out.receiverLeaderVelocity(:,receiver,:),K,3);
+    heldA = reshape(out.receiverLeaderAcceleration(:,receiver,:),K,3);
+    genTime = reshape(out.receiverLeaderGenTime(:,receiver),K,1);
+    loggedAge = reshape(out.leaderAoI(:,receiver),K,1);
+else
+    heldP = reshape(out.receiverNeighborPosition(:,receiver,1,:),K,3);
+    heldV = reshape(out.receiverNeighborVelocity(:,receiver,1,:),K,3);
+    heldA = [];
+    genTime = reshape(out.receiverNeighborGenTime(:,receiver,1),K,1);
+    loggedAge = reshape(out.neighborAoI(:,receiver,1),K,1);
+end
+
+bound = tcnsLeaderStalenessBound(genTime,out.t);
+boundP = bound.position;
+boundV = bound.velocity;
+actualP = vecnorm(out.LeaderPos-heldP,2,2);
+actualV = vecnorm(out.LeaderVel-heldV,2,2);
+
+generatedIndex = round(genTime/cfg.swarm.dt)+1;
+generatedP = zeros(K,3);
+generatedV = zeros(K,3);
+generatedA = zeros(K,3);
+for k = 1:K
+    generatedP(k,:) = out.LeaderPos(generatedIndex(k),:);
+    generatedV(k,:) = out.LeaderVel(generatedIndex(k),:);
+    generatedA(k,:) = reshape(out.A(generatedIndex(k),1,:),1,3);
+end
+
+if channelClass=="pin"
+    currentA = reshape(out.A(:,1,:),K,3);
+    actualA = vecnorm(currentA-heldA,2,2);
+    boundA = bound.acceleration;
+    payloadResidual = max(abs( ...
+        [heldP-generatedP heldV-generatedV heldA-generatedA]),[],2);
+else
+    actualA = zeros(0,1);
+    boundA = zeros(0,1);
+    payloadResidual = max(abs( ...
+        [heldP-generatedP heldV-generatedV]),[],2);
+end
+
+ageResidual = abs(loggedAge-(bound.age+cfg.swarm.dt/2));
+row = localEmptyLeaderRow();
+row.channelClass = channelClass;
+row.receiver = receiver;
+row.sampleCount = K;
+row.meanPhysicalAge_s = mean(bound.age);
+row.maxPhysicalAge_s = max(bound.age);
+row.positionCoverage = mean(actualP<=boundP+tol);
+row.velocityCoverage = mean(actualV<=boundV+tol);
+row.maxPositionViolation_m = max(actualP-boundP);
+row.maxVelocityViolation_mps = max(actualV-boundV);
+row.p95PositionTightness = localPercentile(localRatio(actualP,boundP),95);
+row.p95VelocityTightness = localPercentile(localRatio(actualV,boundV),95);
+row.maxAgeConventionResidual_s = max(ageResidual);
+row.maxPayloadGenerationResidual = max(payloadResidual);
+row.crossingSampleCount = nnz(bound.crossesSwitch);
+
+if channelClass=="pin"
+    row.accelerationCoverage = mean(actualA<=boundA+tol);
+    row.maxAccelerationViolation_mps2 = max(actualA-boundA);
+    row.p95AccelerationTightness = ...
+        localPercentile(localRatio(actualA,boundA),95);
+end
 
 end
 
