@@ -1,0 +1,21 @@
+
+============================================================
+RUN  : tcns_gate1_model_audit
+ID   : 2026-09-06_194134
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate1_model_audit\2026-09-06_194134
+WHEN : 2026-09-06 19:41:34
+============================================================
+
+Gate 1 exact sampled model: PASS
+  rho(Ah)                    : 0.983581750611
+  max controller residual    : 2.776e-16
+  max exact state residual   : 9.237e-17
+  legacy leader residual seen: 2.133e-06
+  maxSpeed enforced          : no
+
+============================================================
+DONE : tcns_gate1_model_audit
+TIME : 0.7 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate1_model_audit\2026-09-06_194134
+============================================================

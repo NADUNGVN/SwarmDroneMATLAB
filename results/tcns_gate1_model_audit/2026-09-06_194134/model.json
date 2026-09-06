@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "gate": 1,
+  "status": "PASS",
+  "scope": "unsaturated exact-state double-integrator subsystem",
+  "seed": 1,
+  "networkSeed": 1001,
+  "sampleTime_s": 0.02,
+  "swarmSize": 5,
+  "controller": {
+    "Kp": 1.8,
+    "Kv": 2.2,
+    "KpLeader": 1.5,
+    "KvLeader": 1.8,
+    "maxCommandedAcceleration_mps2": 2,
+    "degreeNormalization": false
+  },
+  "adjacency": [
+    [
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0,
+      1,
+      0
+    ]
+  ],
+  "pin": [
+    0,
+    1,
+    0,
+    1,
+    0
+  ],
+  "offsets": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0.6,
+      0,
+      0
+    ],
+    [
+      0,
+      0.6,
+      0
+    ],
+    [
+      -0.6,
+      0,
+      0
+    ],
+    [
+      0,
+      -0.6,
+      0
+    ]
+  ],
+  "plantStateMatrix": [
+    [
+      1,
+      0.02
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "plantInputMatrix": [
+    0.0004,
+    0.02
+  ],
+  "Hp": [
+    [
+      5.1,
+      -1.8,
+      0,
+      0
+    ],
+    [
+      -1.8,
+      3.6,
+      -1.8,
+      0
+    ],
+    [
+      0,
+      -1.8,
+      5.1,
+      -1.8
+    ],
+    [
+      0,
+      0,
+      -1.8,
+      3.6
+    ]
+  ],
+  "Hv": [
+    [
+      6.2,
+      -2.2,
+      0,
+      0
+    ],
+    [
+      -2.2,
+      4.4,
+      -2.2,
+      0
+    ],
+    [
+      0,
+      -2.2,
+      6.2,
+      -2.2
+    ],
+    [
+      0,
+      0,
+      -2.2,
+      4.4
+    ]
+  ],
+  "Ah": [
+    [
+      0.99796,
+      0.00072,
+      0,
+      0,
+      0.876,
+      0.044000000000000004,
+      0,
+      0
+    ],
+    [
+      0.00072,
+      0.99856,
+      0.00072,
+      0,
+      0.044000000000000004,
+      0.912,
+      0.044000000000000004,
+      0
+    ],
+    [
+      0,
+      0.00072,
+      0.99796,
+      0.00072,
+      0,
+      0.044000000000000004,
+      0.876,
+      0.044000000000000004
+    ],
+    [
+      0,
+      0,
+      0.00072,
+      0.99856,
+      0,
+      0,
+      0.044000000000000004,
+      0.912
+    ],
+    [
+      -0.00204,
+      0.00072,
+      -0,
+      -0,
+      0.876,
+      0.044000000000000004,
+      0,
+      0
+    ],
+    [
+      0.00072,
+      -0.00144,
+      0.00072,
+      -0,
+      0.044000000000000004,
+      0.912,
+      0.044000000000000004,
+      0
+    ],
+    [
+      -0,
+      0.00072,
+      -0.00204,
+      0.00072,
+      0,
+      0.044000000000000004,
+      0.876,
+      0.044000000000000004
+    ],
+    [
+      -0,
+      -0,
+      0.00072,
+      -0.00144,
+      0,
+      0,
+      0.044000000000000004,
+      0.912
+    ]
+  ],
+  "Dh": [
+    [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "sampledSpectralRadius": 0.98358175061056774,
+  "sampledSchur": true,
+  "primarySymmetricTheoremApplicable": true,
+  "maxSpeedConfigured_mps": 2,
+  "maxSpeedEnforced": false,
+  "oneStepAudit": [
+    {
+      "time_s": 1,
+      "sampleTime_s": 0.02,
+      "maxControllerResidual": 2.7755575615628914E-16,
+      "maxStateResidual": 4.5102810375396984E-17,
+      "maxLegacyLeaderApproxResidual": 2.13333333336967E-6,
+      "maxFollowerAcceleration_mps2": 0.26859184036584388,
+      "saturationMargin_mps2": 1.7314081596341562
+    },
+    {
+      "time_s": 4.2,
+      "sampleTime_s": 0.02,
+      "maxControllerResidual": 1.9949319973733282E-16,
+      "maxStateResidual": 9.2374025095764978E-17,
+      "maxLegacyLeaderApproxResidual": 3.1072631796573436E-8,
+      "maxFollowerAcceleration_mps2": 0.047847069522511707,
+      "saturationMargin_mps2": 1.9521529304774883
+    }
+  ],
+  "proofGaps": [
+    "6-DOF cascade is outside the sampled LTI identity",
+    "acceleration saturation is outside the linear closed-loop matrix",
+    "directed and switching graphs lack the symmetric proof",
+    "existing generic sampled ISS constants are numerically too loose"
+  ]
+}

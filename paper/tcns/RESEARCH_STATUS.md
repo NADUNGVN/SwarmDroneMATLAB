@@ -1,6 +1,6 @@
 # TCNS research status
 
-**Status:** Gate 0 complete; Gate 1 authorized
+**Status:** Gates 0--1 complete; Gate 2 authorized
 **Scientific direction:** control-aware information freshness for distributed
 multi-UAV formation control under unreliable communication
 
@@ -14,8 +14,8 @@ are recorded in `INITIAL_TECHNICAL_AUDIT.md`.
 |---|---|---|
 | Initial audit | complete | commit `a4a49f3`; requested tree identified exactly |
 | Gate 0: baseline reproduction | **complete** | full EXP10 and EXP11 reproductions plus post-repair regression |
-| Gate 1: exact mathematical model | next | Gate 0 no longer blocks work |
-| Gate 2: staleness to uncertainty | not started | blocked by Gate 1 |
+| Gate 1: exact mathematical model | **complete** | exact real-step audit and corrected analytical-leader residual |
+| Gate 2: staleness to uncertainty | next | Gate 1 no longer blocks work |
 | Gate 3: uncertainty to formation | not started | blocked by Gate 2 |
 | Theory checkpoint | not started | blocked by Gate 3 |
 | Gate 4: control-aware trigger | not started | blocked by checkpoint |
@@ -130,3 +130,27 @@ trigger parameter or scenario. After restoration:
 
 Gate 0 is therefore complete. No scientific result was selected or tuned in
 this process, and every failed attempt remains preserved.
+
+## Gate-1 execution record
+
+- Theory/model ledger: `paper/tcns/THEORY_NOTES.md`.
+- Executable audit: `experiments/tcns_gate1_model_audit.m`.
+- Result: `results/tcns_gate1_model_audit/2026-09-06_194134`.
+- Source commit: `31ff907`.
+- MATLAB R2025a; no stochastic input is used in the one-step fixtures.
+- Exact exported plant matrices use semi-implicit Euler with input coefficient
+  `h^2`, not `h^2/2`.
+- `rho(Ah) = 0.983581750611` for the default fixed undirected grounded cell.
+- Maximum real-controller versus matrix-controller residual:
+  `2.776e-16`.
+- Maximum real-integrator versus exact sampled-state residual: `9.237e-17`.
+- The older `(Pi-I)*aL` sampled shorthand produces a nonzero residual
+  `2.133e-06` under changing takeoff acceleration. The exact model now retains
+  both analytical leader position-step and velocity-step residuals.
+- Both fixtures are strictly below acceleration saturation; `maxSpeed` remains
+  explicitly marked unenforced.
+- `test_tcns_gate1_model_mapping` and the pre-existing formation certificate
+  test pass. A directed fixture is correctly refused the symmetric theorem.
+
+Gate 1 establishes the exact analytical subsystem and its limitations. It does
+not claim the Gate-2 staleness envelope or Gate-3 ISS/UUB result.

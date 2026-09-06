@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_gate1_model_audit",
+  "runId": "2026-09-06_194134",
+  "startedAt": "2026-09-06 19:41:34",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "31ff907",
+  "notes": "Exact double-integrator/controller/leader sampled-model audit.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_gate1_model_audit.m",
+  "finishedAt": "2026-09-06 19:41:35",
+  "elapsedSec": 0.6699838,
+  "elapsedText": "0.7 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}
