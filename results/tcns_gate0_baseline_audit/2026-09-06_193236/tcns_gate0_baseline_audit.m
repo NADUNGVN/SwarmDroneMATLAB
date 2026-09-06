@@ -1,9 +1,8 @@
 %% TCNS GATE 0 - Frozen baseline audit and selected deterministic replay
 %
 % This audit deliberately names the canonical EXP10 and EXP11 directories.
-% It never uses EXP11/LATEST.txt to select canonical evidence. At the requested
-% starting snapshot that pointer identified a three-seed debug run; after a
-% successful reproduction it legitimately identifies the new 50-seed run.
+% It never follows EXP11/LATEST.txt, which currently identifies a later
+% three-seed debug run rather than the 50-seed evidence set.
 %
 % The selected replay is not a substitute for the full EXP10 reproduction.
 % It is a fail-fast check over the nominal N=5 6-DOF point, all three network
@@ -66,15 +65,8 @@ latest11File = fullfile(root,'results','exp11_dynamic_network','LATEST.txt');
 mustExist(latest11File);
 latest11 = strtrim(fileread(latest11File));
 latestPointsToDebug = strcmp(latest11,'2026-08-27_175335');
-latest11Data = fullfile(root,'results','exp11_dynamic_network',latest11, ...
-    'tidy.csv');
-mustExist(latest11Data);
-E11latest = readtable(latest11Data,'TextType','string');
-latestIsFull = height(E11latest) == 400 && ...
-    numel(unique(E11latest.seed)) == 50;
-assert(latestPointsToDebug || latestIsFull, ...
-    ['Gate0: EXP11 LATEST is neither the recorded historical debug run ' ...
-     'nor a complete 400-row/50-seed run.']);
+assert(latestPointsToDebug, ...
+    'Gate0: EXP11 LATEST changed; audit rule must be reviewed explicitly.');
 
 fprintf('EXP10 canonical : %d rows, %d seeds\n', ...
     height(E10),numel(unique(E10.seed)));
@@ -82,12 +74,7 @@ fprintf('EXP11 canonical : %d rows, %d seeds\n', ...
     height(E11),numel(unique(E11.seed)));
 fprintf('EXP11 debug     : %d rows, %d seeds\n', ...
     height(E11debug),numel(unique(E11debug.seed)));
-if latestPointsToDebug
-    latestClass = 'historical debug, never used as canonical';
-else
-    latestClass = 'complete reproduction, canonical source still explicit';
-end
-fprintf('EXP11 LATEST    : %s (%s)\n\n',latest11,latestClass);
+fprintf('EXP11 LATEST    : %s (debug; never used as canonical)\n\n',latest11);
 
 % -------------------------------------------------------------------------
 % Canonical numerical summary, written without recomputing any simulation.
@@ -257,7 +244,6 @@ audit.exp11Rows = height(E11);
 audit.exp11Seeds = numel(unique(E11.seed));
 audit.exp11Latest = latest11;
 audit.exp11LatestIsDebug = latestPointsToDebug;
-audit.exp11LatestIsFull = latestIsFull;
 writeJson(fullfile(R.dir,'audit.json'),audit);
 
 fprintf('\nGate-0 selected replay: PASS (%d/%d rows).\n', ...

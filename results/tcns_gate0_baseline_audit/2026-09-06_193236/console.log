@@ -1,0 +1,23 @@
+
+============================================================
+RUN  : tcns_gate0_baseline_audit
+ID   : 2026-09-06_193236
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_gate0_baseline_audit\2026-09-06_193236
+WHEN : 2026-09-06 19:32:36
+============================================================
+
+Requested tree : 954fbf22ee37039619b3dd4b04d4dc4b22f85f86
+Starting commit: dbbb4197849694154cfec769d18fc4b38b05f0ad
+Audited commit : 38436868b778da1ff86dcacae002726eeddc121c
+Tree identity  : PASS
+
+{Error using assert
+Gate0: EXP11 LATEST changed; audit rule must be reviewed explicitly.
+
+Error in tcns_gate0_baseline_audit (line 68)
+assert(latestPointsToDebug, ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 
