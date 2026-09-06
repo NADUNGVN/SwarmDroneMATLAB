@@ -247,6 +247,7 @@ title(sprintf('Fixed development trace: seed %d', ...
     representativeTrace.seed(1)));
 legend({'actual stale-vs-perfect degradation', ...
     'Gate-3 finite-horizon bound'},'Location','northwest');
+xlim([representativeTrace.time_s(1) representativeTrace.time_s(end)]);
 grid on;
 
 nexttile;
@@ -263,6 +264,7 @@ ylabel('formation RMS / bound [m]');
 legend({'actual stale-information formation', ...
     'perfect-information continuation','robust formation bound'}, ...
     'Location','northwest');
+xlim([representativeTrace.time_s(1) representativeTrace.time_s(end)]);
 grid on;
 
 saveAllFigures(R);
