@@ -33,6 +33,7 @@ suite = {
     'test_tcns_gate1_model_mapping'
     'test_tcns_gate2_staleness_bound'
     'test_tcns_gate3_robustness_bound'
+    'test_tcns_gate4_control_aware_policy'
     'test_probabilistic_safety_certificate'
     'test_standalone_ack_value_certificate'
     'test_setpoint_interface'

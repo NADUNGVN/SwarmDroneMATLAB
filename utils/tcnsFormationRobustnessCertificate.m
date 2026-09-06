@@ -74,6 +74,7 @@ R.scope = 'fixed symmetric grounded, exact-state, unsaturated DI subsystem';
 R.Ah = A;
 R.Bc = Bc;
 R.followers = cert.followers;
+R.degreeScale = cert.degreeScale;
 R.sampleTime = h;
 R.blockLength = q;
 R.blockTarget = blockTarget;

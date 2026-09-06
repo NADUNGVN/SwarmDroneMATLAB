@@ -3,9 +3,9 @@ function out = simSwarmAoICausal(cfg)
 %
 %   out = simSwarmAoICausal(cfg)
 %
-% Same formation controller, same network model and the same trigger policy
-% as simSwarmAoIAware. The difference is confined to how the transmitter
-% learns what the receiver holds:
+% In its default legacy mode this uses the same formation controller,
+% network model and trigger policy as simSwarmAoIAware. The difference is
+% confined to how the transmitter learns what the receiver holds:
 %
 %   simSwarmAoIAware   reads net.genTime directly, inside the same timestep,
 %                      with no reverse packet, no delay and no loss
@@ -55,6 +55,8 @@ function out = simSwarmAoICausal(cfg)
 %   v3  cfg.causal.innovationPriority. Separates new information from
 %       refresh, so aoiMinInterTx governs repetition only. No parameter
 %       value changed.
+%   Gate 4 cfg.causal.policyMode='control-aware'. Uses the same causal ACK
+%       protocol but derives link events from a formation-degradation budget.
 
 rng(cfg.net.seed, 'twister');
 
@@ -103,6 +105,19 @@ if ~isfield(cfg.causal,'innovationPriority')
     cfg.causal.innovationPriority = false;
 end
 
+% Gate 4 adds an isolated theorem-derived policy mode. Keeping the default
+% on the historical path is a reproducibility contract: merely updating the
+% repository must not change any Causal-v1/v2/v3 result.
+if ~isfield(cfg.causal,'policyMode')
+    cfg.causal.policyMode = 'legacy-v3';
+end
+
+policyMode = lower(char(cfg.causal.policyMode));
+if ~ismember(policyMode,{'legacy-v3','control-aware'})
+    error('simSwarmAoICausal:UnknownPolicyMode', ...
+        'Unknown cfg.causal.policyMode "%s".',cfg.causal.policyMode);
+end
+
 
 %% ============================================================
 % Defaults for the AoI trigger
@@ -125,6 +140,36 @@ if ~isfield(cfg.aoiEvent,'aoiMinInterTx'),     cfg.aoiEvent.aoiMinInterTx = 0.10
 if ~isfield(cfg.aoiEvent,'aoiStateScaleBase'), cfg.aoiEvent.aoiStateScaleBase = 0.50; end
 if ~isfield(cfg.aoiEvent,'aoiStateScaleMin'),  cfg.aoiEvent.aoiStateScaleMin = 0.20;  end
 if ~isfield(cfg.aoiEvent,'aoiAdaptRange'),     cfg.aoiEvent.aoiAdaptRange = 1.00;     end
+
+
+%% ============================================================
+% Gate-4 control-aware policy configuration
+% ============================================================
+
+if strcmp(policyMode,'control-aware')
+    if ~cfg.causal.useAckFeedback
+        error('simSwarmAoICausal:ControlAwareNeedsAck', ...
+            ['Control-aware possible-receiver-set mode requires cumulative ' ...
+             'ACK feedback. The no-ACK arm is a separate ablation.']);
+    end
+    if ~isfield(cfg,'controlAware') || ...
+            ~isfield(cfg.controlAware,'epsilonPosition')
+        error('simSwarmAoICausal:MissingControlBudget', ...
+            ['Control-aware mode requires the declared sweep parameter ' ...
+             'cfg.controlAware.epsilonPosition [m].']);
+    end
+    if ~isfield(cfg.controlAware,'minInterTx')
+        cfg.controlAware.minInterTx = cfg.aoiEvent.minInterTx;
+    end
+    if ~isfield(cfg.controlAware,'retryInterval')
+        % Inherit the already documented 0.10 s refresh interval for the
+        % first Gate-4 implementation. It is a declared liveness parameter,
+        % not a value selected against a baseline.
+        cfg.controlAware.retryInterval = cfg.aoiEvent.aoiMinInterTx;
+    end
+    cfg.controlAware.budget = tcnsControlAwareBudget( ...
+        cfg,cfg.controlAware.epsilonPosition);
+end
 
 
 %% ============================================================
@@ -277,7 +322,31 @@ net.refreshInFlightBlockedCount = 0;
 net.newInfoBypassWithoutInnovationCount   = 0;
 net.refreshWhileUsefulPacketInFlightCount = 0;
 
-% Largest observed silence on any link. Must not exceed maxSilence.
+% Gate-4 counters are separate from the historical trigger composition.
+% They remain zero in legacy mode and are never read by the simulator.
+net.controlAwareCheckCount = 0;
+net.controlAwareViolationCount = 0;
+net.controlAwareNewInformationCount = 0;
+net.controlAwareRecoveryCount = 0;
+net.controlAwareRetryCount = 0;
+net.controlAwareUsefulInFlightSuppressedCount = 0;
+net.controlAwareRefractoryBlockedCount = 0;
+net.controlAwareRiskSum = 0;
+net.controlAwareRiskMax = 0;
+net.controlAwareStepRiskMax = 0;
+net.controlAwareStepViolationCount = 0;
+
+ControlAwareViolationCountLog = zeros(K,1);
+ControlAwareNewInformationCountLog = zeros(K,1);
+ControlAwareRecoveryCountLog = zeros(K,1);
+ControlAwareRetryCountLog = zeros(K,1);
+ControlAwareUsefulInFlightSuppressedCountLog = zeros(K,1);
+ControlAwareStepRiskMaxLog = zeros(K,1);
+ControlAwareStepViolationCountLog = zeros(K,1);
+
+% Largest observed gap ending in a transmission. In legacy mode maxSilence
+% supplies a hard backstop; control-aware links may remain quiet indefinitely
+% while their controller contribution stays within budget.
 net.maxInterTxGap = 0;
 
 
@@ -500,6 +569,16 @@ for k = 1:K
     TxCountLog(k)  = net.txCount;
     BroadcastCountLog(k) = net.broadcastCount;
     AckCountLog(k) = net.ackTxCount;
+    ControlAwareViolationCountLog(k) = net.controlAwareViolationCount;
+    ControlAwareNewInformationCountLog(k) = ...
+        net.controlAwareNewInformationCount;
+    ControlAwareRecoveryCountLog(k) = net.controlAwareRecoveryCount;
+    ControlAwareRetryCountLog(k) = net.controlAwareRetryCount;
+    ControlAwareUsefulInFlightSuppressedCountLog(k) = ...
+        net.controlAwareUsefulInFlightSuppressedCount;
+    ControlAwareStepRiskMaxLog(k) = net.controlAwareStepRiskMax;
+    ControlAwareStepViolationCountLog(k) = ...
+        net.controlAwareStepViolationCount;
 
 
     if k == K
@@ -656,6 +735,44 @@ out.newInfoBypassWithoutInnovationCount = ...
 
 out.refreshWhileUsefulPacketInFlightCount = ...
     net.refreshWhileUsefulPacketInFlightCount;
+
+
+%% ============================================================
+% Gate-4 control-aware policy diagnostics
+% ============================================================
+
+out.controlAwareActive = strcmp(policyMode,'control-aware');
+out.controlAwareCheckCount = net.controlAwareCheckCount;
+out.controlAwareViolationCount = net.controlAwareViolationCount;
+out.controlAwareNewInformationCount = net.controlAwareNewInformationCount;
+out.controlAwareRecoveryCount = net.controlAwareRecoveryCount;
+out.controlAwareRetryCount = net.controlAwareRetryCount;
+out.controlAwareUsefulInFlightSuppressedCount = ...
+    net.controlAwareUsefulInFlightSuppressedCount;
+out.controlAwareRefractoryBlockedCount = ...
+    net.controlAwareRefractoryBlockedCount;
+out.controlAwareViolationCountLog = ControlAwareViolationCountLog;
+out.controlAwareNewInformationCountLog = ...
+    ControlAwareNewInformationCountLog;
+out.controlAwareRecoveryCountLog = ControlAwareRecoveryCountLog;
+out.controlAwareRetryCountLog = ControlAwareRetryCountLog;
+out.controlAwareUsefulInFlightSuppressedCountLog = ...
+    ControlAwareUsefulInFlightSuppressedCountLog;
+out.controlAwareStepRiskMax = ControlAwareStepRiskMaxLog;
+out.controlAwareStepViolationCount = ControlAwareStepViolationCountLog;
+out.controlAwareViolationRatio = net.controlAwareViolationCount / ...
+    max(net.controlAwareCheckCount,1);
+out.controlAwareMeanNormalizedRisk = net.controlAwareRiskSum / ...
+    max(net.controlAwareCheckCount,1);
+out.controlAwareMaxNormalizedRisk = net.controlAwareRiskMax;
+
+if out.controlAwareActive
+    out.controlAwareConfig = rmfield(cfg.controlAware,'budget');
+    out.controlAwareBudget = cfg.controlAware.budget;
+else
+    out.controlAwareConfig = struct();
+    out.controlAwareBudget = struct();
+end
 
 
 %% ============================================================

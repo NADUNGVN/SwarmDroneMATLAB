@@ -763,3 +763,89 @@ triangle inequality across plausible payloads/links, not unstable or
 pathologically conservative formation propagation. Runs `201053`, `002803`,
 and `003415` are retained as development history; `003518` is the accepted
 committed-source run with the final evaluation-window figure.
+
+## 15. Gate-4 control-aware freshness construction
+
+The post-Gate-3 review is frozen in
+`paper/tcns/THEORY_REVIEW_CHECKPOINT.md`. It authorizes a first distributed
+policy without adding fitted weights.
+
+### Proposition 1 — offline distributed budget allocation
+
+For a requested uniform position-degradation budget \(\epsilon_d>0\), take a
+uniform follower command-disturbance envelope \(b=\bar b\mathbf 1\). Define
+
+\[
+c_\ell=\sum_i[G_q]_{\ell i}+\tau_\ell\sqrt m,
+\qquad
+\bar b=\epsilon_d/\max_{\ell\in\{1,\ldots,m\}}c_\ell.
+\]
+
+At follower receiver \(i\), let \(q_i\) be the number of ordinary incoming
+payload links appearing in its implemented controller plus one if the leader
+pin is active. Assign every such channel the local contribution budget
+\(b_{ij}=\bar b/q_i\). If all local contributions satisfy their allocation,
+then \(\beta_i\le\bar b\) for every follower, and Corollary 1 gives
+
+\[
+\limsup_k\|\delta e_i(k)\|\le\epsilon_d.
+\]
+
+**Proof.** The local allocations sum to \(\bar b\) at each receiver. The
+definition of \(\beta_i\) is the sum of those nonnegative controller-weighted
+link contributions, so their local inequalities imply
+\(\beta\preceq\bar b\mathbf 1\). Substitution into the Gate-3 UUB and the
+definition of \(\bar b\) prove the result. \(\square\)
+
+This resolves the allocation part of `PROOF GAP G3.2`: each transmitter needs
+only its own preallocated scalar. It remains a conditional certificate, not a
+claim that stochastic packet delivery always enforces the local inequalities.
+
+### Link-local signal and event semantics
+
+The ordinary-link signal at transmitter \(j\) for receiver \(i\) is
+
+\[
+r_{ij}(k)=K_ps_i\zeta^p_{ij}(k)+K_vs_i\zeta^v_{ij}(k),
+\]
+
+and the pinned-leader signal is
+
+\[
+r_{iL}(k)=K_{pL}\zeta^p_{iL}(k)+K_{vL}\zeta^v_{iL}(k)
+          +\zeta^a_{iL}(k).
+\]
+
+The primary event is exactly \(r>b_{link}\). The sender also computes the
+same controller-weighted mismatch to its latest sent payload,
+\(r^{sent}\). The first implementation applies the following ordered rule:
+
+1. if \(r\le b_{link}\), stay silent;
+2. if the minimum inter-transmission interval has not elapsed, stay silent;
+3. if \(r^{sent}>b_{link}\), send new information;
+4. if no payload is outstanding, send a recovery payload;
+5. if a useful payload is outstanding, suppress until the declared retry
+   interval, then retry conditionally.
+
+A transmission adds a possible receiver payload and therefore cannot by
+itself contract the information set. Only an ACK can do so. Consequently the
+event is a causal effort allocation mechanism whose achieved budget exposure
+must be measured; it is not deterministic enforcement under nonzero loss.
+
+`utils/tcnsControlAwareBudget.m` implements Proposition 1,
+`utils/tcnsControlAwareLinkState.m` implements the two link signals, and
+`network/controlAwareFreshnessPolicy.m` implements the ordered decision.
+The existing Causal-v3 mode remains the default and was revalidated by the
+complete locked-experiment regression test.
+
+**PROOF GAP G4.1 — stochastic enforcement.** No current result bounds the
+probability or duration of \(r>b_{link}\) under the loss/delay process and
+conditional retry.
+
+**PROOF GAP G4.2 — saturation and extended plants.** Proposition 1 inherits
+the Gate-3 unsaturated DI, fixed-undirected-topology scope.
+
+**PROOF GAP G4.3 — novelty.** When the ACK-confirmed payload dominates the
+possible set, the rule can reduce to a controller-weighted ACK-state event.
+Distinct value relative to that baseline and the closest literature remains
+to be established rather than asserted.

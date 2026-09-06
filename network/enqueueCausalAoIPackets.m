@@ -1,12 +1,13 @@
 function [net, txState] = enqueueCausalAoIPackets( ...
     net, txState, P, V, leader, tk, cfg, netTrace, k)
-%ENQUEUECAUSALAOIPACKETS Causal AoI-aware transmission decision (v2).
+%ENQUEUECAUSALAOIPACKETS Causal ACK transmission-policy dispatcher.
 %
 %   [net, txState] = enqueueCausalAoIPackets(net, txState, P, V, leader, tk, cfg)
 %
-% The trigger policy itself (aoiAwareTriggerPolicy) is reused unchanged, so
-% the only variables that differ from the ideal method are what the sender
-% knows and which memory each decision consults.
+% The default legacy-v3 mode preserves the historical AoI-aware path. Gate-4
+% control-aware mode replaces the decision on controller-relevant follower
+% links with controlAwareFreshnessPolicy while retaining the same packet,
+% forward-channel, ACK and outstanding-record protocol.
 %
 % DUAL MEMORY, the defining change in v2:
 %
@@ -26,17 +27,24 @@ function [net, txState] = enqueueCausalAoIPackets( ...
 % therefore never appeared to shrink, so the transmitter kept re-sending
 % state the receiver was already about to have.
 %
-% Loss recovery needs no timer: a dropped packet leaves ackGenTime frozen,
-% the estimated AoI grows past the threshold, the adaptive scale sharpens
-% and the AoI branch fires. maxSilence remains the final backstop.
+% In legacy mode loss recovery needs no separate timer: a dropped packet
+% leaves ackGenTime frozen, the estimated AoI grows past the threshold, the
+% adaptive scale sharpens and the AoI branch fires. maxSilence remains its
+% final backstop. Control-aware mode instead uses its declared conditional
+% retry interval only while its local control budget is violated.
 %
-% Optional ablation switches:
+% Legacy optional ablation switches:
 %
 %   cfg.causal.useAckFeedback   false -> freshness estimated OPEN LOOP from
 %                                        sentGenTime, i.e. the transmitter
 %                                        assumes every packet landed
 %   cfg.causal.useAdaptiveScale false -> adaptive threshold pinned to
 %                                        scaleBase
+%
+% Policy selection:
+%
+%   cfg.causal.policyMode 'legacy-v3'    historical path (default)
+%                         'control-aware' theorem-derived Gate-4 path
 %
 % This function must never read net.genTime, net.leaderGenTime, net.Pij,
 % net.Vij, net.leaderPos, net.leaderVel or net.valid.
@@ -63,6 +71,13 @@ leaderFired = false;
 useAck      = cfg.causal.useAckFeedback;
 useV3       = cfg.causal.innovationPriority;
 triggerCfg  = cfg;
+useControlAware = isfield(cfg.causal,'policyMode') && ...
+    strcmpi(cfg.causal.policyMode,'control-aware');
+
+% Per-step fields are passive timeline diagnostics. They are reset once per
+% enqueue call and never influence a decision.
+net.controlAwareStepRiskMax = 0;
+net.controlAwareStepViolationCount = 0;
 
 if ~cfg.causal.useAdaptiveScale
     % Pinning the floor to the base value makes adaptiveScale constant
@@ -105,46 +120,72 @@ for i = 1:N
 
         nOutstanding = numel(txState.outstanding{i,j});
 
-        if useV3
-            [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
-                currentPos, currentVel, sentPos, sentVel, ...
-                estimatedAoI, timeSinceLastTx, nOutstanding, triggerCfg);
-            net = accountV3Branch(net, triggerInfo, ...
-                cfg, currentPos, currentVel, sentPos, sentVel, nOutstanding);
-        else
-            [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
-                currentPos, ...
-                currentVel, ...
-                sentPos, ...
-                sentVel, ...
-                estimatedAoI, ...
-                timeSinceLastTx, ...
-                triggerCfg);
-        end
+        isControlAwareLink = useControlAware && i>=2;
 
-        net = accumulateAdaptiveStats(net, triggerInfo);
+        if isControlAwareLink
+            ackPos = squeeze(txState.ackPos(i,j,:))';
+            ackVel = squeeze(txState.ackVel(i,j,:))';
+            budget = cfg.controlAware.budget;
+            linkState = tcnsControlAwareLinkState( ...
+                currentPos,currentVel,ackPos,ackVel, ...
+                txState.outstanding{i,j},sentPos,sentVel, ...
+                budget.ordinaryPositionGain(i,j), ...
+                budget.ordinaryVelocityGain(i,j), ...
+                budget.linkBudget(i,j));
+            [sendPacket, reason, triggerInfo] = ...
+                controlAwareFreshnessPolicy( ...
+                linkState.setContribution, ...
+                linkState.latestSentContribution, ...
+                linkState.localBudget,timeSinceLastTx,nOutstanding, ...
+                cfg.controlAware);
+            net = accountControlAwareDecision( ...
+                net,triggerInfo,sendPacket,reason);
+        else
+            if useV3
+                [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
+                    currentPos, currentVel, sentPos, sentVel, ...
+                    estimatedAoI, timeSinceLastTx, nOutstanding, triggerCfg);
+                net = accountV3Branch(net, triggerInfo, ...
+                    cfg, currentPos, currentVel, sentPos, sentVel, nOutstanding);
+            else
+                [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
+                    currentPos, ...
+                    currentVel, ...
+                    sentPos, ...
+                    sentVel, ...
+                    estimatedAoI, ...
+                    timeSinceLastTx, ...
+                    triggerCfg);
+            end
+            net = accumulateAdaptiveStats(net, triggerInfo);
+        end
 
         net = accountOutstanding(net, nOutstanding);
 
         if ~sendPacket
 
-            net = accountSuppression(net, triggerInfo);
+            if ~isControlAwareLink
+                net = accountSuppression(net, triggerInfo);
 
-            % Measure what the dual memory bought: would v1 have fired
-            % here, comparing against the ACKED state instead?
-            ackPos = squeeze(txState.ackPos(i,j,:))';
-            ackVel = squeeze(txState.ackVel(i,j,:))';
+                % Measure what the dual memory bought: would v1 have fired
+                % here, comparing against the ACKED state instead?
+                ackPos = squeeze(txState.ackPos(i,j,:))';
+                ackVel = squeeze(txState.ackVel(i,j,:))';
 
-            if norm(currentPos - ackPos) >= cfg.aoiEvent.posThreshold ...
-                    || norm(currentVel - ackVel) >= cfg.aoiEvent.velThreshold
-                net.suppressedInFlightCount = net.suppressedInFlightCount + 1;
+                if norm(currentPos - ackPos) >= cfg.aoiEvent.posThreshold ...
+                        || norm(currentVel - ackVel) >= cfg.aoiEvent.velThreshold
+                    net.suppressedInFlightCount = ...
+                        net.suppressedInFlightCount + 1;
+                end
             end
 
             continue;
 
         end
 
-        net = incrementTriggerReason(net, reason, useV3);
+        if ~isControlAwareLink
+            net = incrementTriggerReason(net, reason, useV3);
+        end
 
         senderFired(j) = true;
 
@@ -187,44 +228,66 @@ for i = 2:N
 
     nOutstanding = numel(txState.leaderOutstanding{i});
 
-    if useV3
-        [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
-            currentPos, currentVel, sentPos, sentVel, ...
-            estimatedAoI, timeSinceLastTx, nOutstanding, triggerCfg);
-        net = accountV3Branch(net, triggerInfo, ...
-            cfg, currentPos, currentVel, sentPos, sentVel, nOutstanding);
+    if useControlAware
+        budget = cfg.controlAware.budget;
+        linkState = tcnsControlAwareLinkState( ...
+            currentPos,currentVel,txState.leaderAckPos(i,:), ...
+            txState.leaderAckVel(i,:),txState.leaderOutstanding{i}, ...
+            sentPos,sentVel,budget.leaderPositionGain(i), ...
+            budget.leaderVelocityGain(i),budget.leaderBudget(i), ...
+            leader.acc',txState.leaderAckAcc(i,:), ...
+            txState.leaderSentAcc(i,:),budget.leaderAccelerationGain(i));
+        [sendPacket, reason, triggerInfo] = ...
+            controlAwareFreshnessPolicy( ...
+            linkState.setContribution,linkState.latestSentContribution, ...
+            linkState.localBudget,timeSinceLastTx,nOutstanding, ...
+            cfg.controlAware);
+        net = accountControlAwareDecision( ...
+            net,triggerInfo,sendPacket,reason);
     else
-        [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
-            currentPos, ...
-            currentVel, ...
-            sentPos, ...
-            sentVel, ...
-            estimatedAoI, ...
-            timeSinceLastTx, ...
-            triggerCfg);
+        if useV3
+            [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
+                currentPos, currentVel, sentPos, sentVel, ...
+                estimatedAoI, timeSinceLastTx, nOutstanding, triggerCfg);
+            net = accountV3Branch(net, triggerInfo, ...
+                cfg, currentPos, currentVel, sentPos, sentVel, nOutstanding);
+        else
+            [sendPacket, reason, triggerInfo] = aoiAwareTriggerPolicy( ...
+                currentPos, ...
+                currentVel, ...
+                sentPos, ...
+                sentVel, ...
+                estimatedAoI, ...
+                timeSinceLastTx, ...
+                triggerCfg);
+        end
+        net = accumulateAdaptiveStats(net, triggerInfo);
     end
-
-    net = accumulateAdaptiveStats(net, triggerInfo);
 
     net = accountOutstanding(net, nOutstanding);
 
     if ~sendPacket
 
-        net = accountSuppression(net, triggerInfo);
+        if ~useControlAware
+            net = accountSuppression(net, triggerInfo);
 
-        ackPos = txState.leaderAckPos(i,:);
-        ackVel = txState.leaderAckVel(i,:);
+            ackPos = txState.leaderAckPos(i,:);
+            ackVel = txState.leaderAckVel(i,:);
 
-        if norm(currentPos - ackPos) >= cfg.aoiEvent.posThreshold ...
-                || norm(currentVel - ackVel) >= cfg.aoiEvent.velThreshold
-            net.suppressedInFlightCount = net.suppressedInFlightCount + 1;
+            if norm(currentPos - ackPos) >= cfg.aoiEvent.posThreshold ...
+                    || norm(currentVel - ackVel) >= cfg.aoiEvent.velThreshold
+                net.suppressedInFlightCount = ...
+                    net.suppressedInFlightCount + 1;
+            end
         end
 
         continue;
 
     end
 
-    net = incrementTriggerReason(net, reason, useV3);
+    if ~useControlAware
+        net = incrementTriggerReason(net, reason, useV3);
+    end
 
     leaderFired = true;
 
@@ -426,6 +489,56 @@ function net = accountOutstanding(net, n)
 net.outstandingSum   = net.outstandingSum + n;
 net.outstandingCount = net.outstandingCount + 1;
 net.outstandingMax   = max(net.outstandingMax, n);
+
+end
+
+
+function net = accountControlAwareDecision(net,info,sendPacket,branch)
+%ACCOUNTCONTROLAWAREDECISION Passive Gate-4 decision diagnostics.
+
+net.controlAwareCheckCount = net.controlAwareCheckCount + 1;
+net.controlAwareRiskSum = ...
+    net.controlAwareRiskSum + info.normalizedContribution;
+net.controlAwareRiskMax = ...
+    max(net.controlAwareRiskMax,info.normalizedContribution);
+net.controlAwareStepRiskMax = ...
+    max(net.controlAwareStepRiskMax,info.normalizedContribution);
+
+if info.budgetViolated
+    net.controlAwareViolationCount = net.controlAwareViolationCount + 1;
+    net.controlAwareStepViolationCount = ...
+        net.controlAwareStepViolationCount + 1;
+end
+
+if sendPacket
+    switch branch
+        case 1
+            net.controlAwareNewInformationCount = ...
+                net.controlAwareNewInformationCount + 1;
+        case 2
+            net.controlAwareRecoveryCount = ...
+                net.controlAwareRecoveryCount + 1;
+        case 3
+            net.controlAwareRetryCount = net.controlAwareRetryCount + 1;
+        otherwise
+            error('enqueueCausalAoIPackets:UnknownControlAwareBranch', ...
+                'Unknown control-aware branch %d.',branch);
+    end
+    return;
+end
+
+net.suppressedCount = net.suppressedCount + 1;
+
+if info.refractoryBlocked
+    net.controlAwareRefractoryBlockedCount = ...
+        net.controlAwareRefractoryBlockedCount + 1;
+    net.refractoryBlockedCount = net.refractoryBlockedCount + 1;
+end
+
+if info.usefulInFlightSuppressed
+    net.controlAwareUsefulInFlightSuppressedCount = ...
+        net.controlAwareUsefulInFlightSuppressedCount + 1;
+end
 
 end
 
