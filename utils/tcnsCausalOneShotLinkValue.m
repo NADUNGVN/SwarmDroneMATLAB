@@ -35,14 +35,20 @@ arrivalTime = currentTime+dataDelaySteps*h;
 belief = tcnsCausalReceiverBelief( ...
     ackPayload,outstanding,currentTime,arrivalTime,cfg);
 
-certificate = formationTheoryCertificate(cfg);
-fi = find(certificate.followers==receiverId,1);
+if isfield(cfg,'predictiveVoi') && ...
+        isfield(cfg.predictiveVoi,'model') && ...
+        cfg.predictiveVoi.model.horizonSamples==horizonSamples && ...
+        cfg.predictiveVoi.model.delaySamples==dataDelaySteps
+    kernel = cfg.predictiveVoi.model.kernel;
+else
+    kernel = tcnsFiniteHorizonLinkValueKernel( ...
+        cfg,horizonSamples,dataDelaySteps);
+end
+fi = find(kernel.followers==receiverId,1);
 if isempty(fi)
     error('tcnsCausalOneShotLinkValue:Receiver', ...
         'receiverId must identify a follower in the theorem model.');
 end
-kernel = tcnsFiniteHorizonLinkValueKernel( ...
-    cfg,horizonSamples,dataDelaySteps);
 
 candidateAcc = belief.candidateAcc;
 if accelerationGain==0

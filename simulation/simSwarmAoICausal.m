@@ -113,9 +113,28 @@ if ~isfield(cfg.causal,'policyMode')
 end
 
 policyMode = lower(char(cfg.causal.policyMode));
-if ~ismember(policyMode,{'legacy-v3','control-aware'})
+if ~ismember(policyMode,{'legacy-v3','control-aware','predictive-voi'})
     error('simSwarmAoICausal:UnknownPolicyMode', ...
         'Unknown cfg.causal.policyMode "%s".',cfg.causal.policyMode);
+end
+
+if strcmp(policyMode,'predictive-voi')
+    if ~cfg.causal.useAckFeedback
+        error('simSwarmAoICausal:PredictiveVoiNeedsAck', ...
+            'Predictive-VoI mode requires cumulative ACK feedback.');
+    end
+    if ~isfield(cfg,'predictiveVoi') || ...
+            ~isfield(cfg.predictiveVoi,'price') || ...
+            ~isfield(cfg.predictiveVoi,'horizonSamples')
+        error('simSwarmAoICausal:MissingPredictiveVoiConfig', ...
+            ['Predictive-VoI mode requires cfg.predictiveVoi.price and ' ...
+             'cfg.predictiveVoi.horizonSamples.']);
+    end
+    if ~isfield(cfg.predictiveVoi,'minInterTx')
+        cfg.predictiveVoi.minInterTx = cfg.swarm.dt;
+    end
+    cfg.predictiveVoi.model = tcnsPredictiveVoiModel( ...
+        cfg,cfg.predictiveVoi.horizonSamples);
 end
 
 
@@ -345,6 +364,24 @@ ControlAwareRetryCountLog = zeros(K,1);
 ControlAwareUsefulInFlightSuppressedCountLog = zeros(K,1);
 ControlAwareStepRiskMaxLog = zeros(K,1);
 ControlAwareStepViolationCountLog = zeros(K,1);
+
+% Post-Gate-6 predictive one-shot value diagnostics. They are disjoint from
+% both the historical v3 and stopped Gate-4 policy counters.
+net.predictiveVoiCheckCount = 0;
+net.predictiveVoiSendCount = 0;
+net.predictiveVoiAbovePriceCount = 0;
+net.predictiveVoiRefractoryBlockedCount = 0;
+net.predictiveVoiScoreSum = 0;
+net.predictiveVoiScoreMax = 0;
+net.predictiveVoiStepScoreMax = 0;
+net.predictiveVoiCandidateCountSum = 0;
+net.predictiveVoiCandidateCountMax = 0;
+net.predictiveVoiKnownFailureCount = 0;
+net.predictiveVoiDiscountSum = 0;
+net.predictiveVoiDiscountCount = 0;
+
+PredictiveVoiSendCountLog = zeros(K,1);
+PredictiveVoiStepScoreMaxLog = zeros(K,1);
 
 % Largest observed gap ending in a transmission. In legacy mode maxSilence
 % supplies a hard backstop; control-aware links may remain quiet indefinitely
@@ -588,6 +625,8 @@ for k = 1:K
     ControlAwareStepRiskMaxLog(k) = net.controlAwareStepRiskMax;
     ControlAwareStepViolationCountLog(k) = ...
         net.controlAwareStepViolationCount;
+    PredictiveVoiSendCountLog(k) = net.predictiveVoiSendCount;
+    PredictiveVoiStepScoreMaxLog(k) = net.predictiveVoiStepScoreMax;
 
 
     if k == K
@@ -605,6 +644,36 @@ for k = 1:K
     [P, V, sixState] = integrateFollowers(P, V, accCmd, sixState, cfg, tk);
 
 
+end
+
+
+%% ============================================================
+% Post-Gate-6 predictive one-shot value diagnostics
+% ============================================================
+
+out.predictiveVoiActive = strcmp(policyMode,'predictive-voi');
+out.predictiveVoiCheckCount = net.predictiveVoiCheckCount;
+out.predictiveVoiSendCount = net.predictiveVoiSendCount;
+out.predictiveVoiAbovePriceCount = net.predictiveVoiAbovePriceCount;
+out.predictiveVoiRefractoryBlockedCount = ...
+    net.predictiveVoiRefractoryBlockedCount;
+out.predictiveVoiSendCountLog = PredictiveVoiSendCountLog;
+out.predictiveVoiStepScoreMax = PredictiveVoiStepScoreMaxLog;
+out.predictiveVoiMeanScore = net.predictiveVoiScoreSum / ...
+    max(net.predictiveVoiCheckCount,1);
+out.predictiveVoiMaxScore = net.predictiveVoiScoreMax;
+out.predictiveVoiMeanCandidateCount = ...
+    net.predictiveVoiCandidateCountSum/max(net.predictiveVoiCheckCount,1);
+out.predictiveVoiMaxCandidateCount = net.predictiveVoiCandidateCountMax;
+out.predictiveVoiKnownFailureCount = net.predictiveVoiKnownFailureCount;
+out.predictiveVoiMeanInFlightDiscount = net.predictiveVoiDiscountSum / ...
+    max(net.predictiveVoiDiscountCount,1);
+if out.predictiveVoiActive
+    out.predictiveVoiConfig = rmfield(cfg.predictiveVoi,'model');
+    out.predictiveVoiModel = cfg.predictiveVoi.model;
+else
+    out.predictiveVoiConfig = struct();
+    out.predictiveVoiModel = struct();
 end
 
 

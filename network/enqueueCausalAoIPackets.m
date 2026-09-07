@@ -45,6 +45,7 @@ function [net, txState] = enqueueCausalAoIPackets( ...
 %
 %   cfg.causal.policyMode 'legacy-v3'    historical path (default)
 %                         'control-aware' theorem-derived Gate-4 path
+%                         'predictive-voi' post-Gate-6 causal one-shot value
 %
 % This function must never read net.genTime, net.leaderGenTime, net.Pij,
 % net.Vij, net.leaderPos, net.leaderVel or net.valid.
@@ -73,11 +74,14 @@ useV3       = cfg.causal.innovationPriority;
 triggerCfg  = cfg;
 useControlAware = isfield(cfg.causal,'policyMode') && ...
     strcmpi(cfg.causal.policyMode,'control-aware');
+usePredictiveVoi = isfield(cfg.causal,'policyMode') && ...
+    strcmpi(cfg.causal.policyMode,'predictive-voi');
 
 % Per-step fields are passive timeline diagnostics. They are reset once per
 % enqueue call and never influence a decision.
 net.controlAwareStepRiskMax = 0;
 net.controlAwareStepViolationCount = 0;
+net.predictiveVoiStepScoreMax = 0;
 
 if ~cfg.causal.useAdaptiveScale
     % Pinning the floor to the base value makes adaptiveScale constant
@@ -121,6 +125,7 @@ for i = 1:N
         nOutstanding = numel(txState.outstanding{i,j});
 
         isControlAwareLink = useControlAware && i>=2;
+        isPredictiveVoiLink = usePredictiveVoi && i>=2;
 
         if isControlAwareLink
             ackPos = squeeze(txState.ackPos(i,j,:))';
@@ -140,6 +145,26 @@ for i = 1:N
                 cfg.controlAware);
             net = accountControlAwareDecision( ...
                 net,triggerInfo,sendPacket,reason);
+        elseif isPredictiveVoiLink
+            ackPayload = struct( ...
+                'seq',txState.ackSeq(i,j), ...
+                'genTime',txState.ackGenTime(i,j), ...
+                'pos',squeeze(txState.ackPos(i,j,:))', ...
+                'vel',squeeze(txState.ackVel(i,j,:))', ...
+                'acc',[NaN NaN NaN]);
+            model = cfg.predictiveVoi.model;
+            valueInfo = tcnsCausalOneShotLinkValue( ...
+                currentPos,currentVel,[],ackPayload, ...
+                txState.outstanding{i,j},tk, ...
+                model.ordinaryPositionGain(i,j), ...
+                model.ordinaryVelocityGain(i,j),0,i,cfg, ...
+                cfg.predictiveVoi.horizonSamples);
+            [sendPacket,triggerInfo] = predictiveVoiPolicy( ...
+                valueInfo.score,cfg.predictiveVoi.price, ...
+                timeSinceLastTx,cfg.predictiveVoi.minInterTx);
+            reason = 6;
+            net = accountPredictiveVoiDecision( ...
+                net,valueInfo,triggerInfo,sendPacket);
         else
             if useV3
                 [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
@@ -164,7 +189,7 @@ for i = 1:N
 
         if ~sendPacket
 
-            if ~isControlAwareLink
+            if ~(isControlAwareLink || isPredictiveVoiLink)
                 net = accountSuppression(net, triggerInfo);
 
                 % Measure what the dual memory bought: would v1 have fired
@@ -183,7 +208,7 @@ for i = 1:N
 
         end
 
-        if ~isControlAwareLink
+        if ~(isControlAwareLink || isPredictiveVoiLink)
             net = incrementTriggerReason(net, reason, useV3);
         end
 
@@ -244,6 +269,26 @@ for i = 2:N
             cfg.controlAware);
         net = accountControlAwareDecision( ...
             net,triggerInfo,sendPacket,reason);
+    elseif usePredictiveVoi
+        ackPayload = struct( ...
+            'seq',txState.leaderAckSeq(i), ...
+            'genTime',txState.leaderAckGenTime(i), ...
+            'pos',txState.leaderAckPos(i,:), ...
+            'vel',txState.leaderAckVel(i,:), ...
+            'acc',txState.leaderAckAcc(i,:));
+        model = cfg.predictiveVoi.model;
+        valueInfo = tcnsCausalOneShotLinkValue( ...
+            currentPos,currentVel,leader.acc',ackPayload, ...
+            txState.leaderOutstanding{i},tk, ...
+            model.leaderPositionGain(i),model.leaderVelocityGain(i), ...
+            model.leaderAccelerationGain(i),i,cfg, ...
+            cfg.predictiveVoi.horizonSamples);
+        [sendPacket,triggerInfo] = predictiveVoiPolicy( ...
+            valueInfo.score,cfg.predictiveVoi.price, ...
+            timeSinceLastTx,cfg.predictiveVoi.minInterTx);
+        reason = 6;
+        net = accountPredictiveVoiDecision( ...
+            net,valueInfo,triggerInfo,sendPacket);
     else
         if useV3
             [sendPacket, reason, triggerInfo] = causalInnovationTriggerPolicy( ...
@@ -268,7 +313,7 @@ for i = 2:N
 
     if ~sendPacket
 
-        if ~useControlAware
+        if ~(useControlAware || usePredictiveVoi)
             net = accountSuppression(net, triggerInfo);
 
             ackPos = txState.leaderAckPos(i,:);
@@ -285,7 +330,7 @@ for i = 2:N
 
     end
 
-    if ~useControlAware
+    if ~(useControlAware || usePredictiveVoi)
         net = incrementTriggerReason(net, reason, useV3);
     end
 
@@ -299,6 +344,46 @@ end
 
 
 net.broadcastCount = net.broadcastCount + nnz(senderFired) + leaderFired;
+
+end
+
+
+function net = accountPredictiveVoiDecision(net,valueInfo,info,sendPacket)
+%ACCOUNTPREDICTIVEVOIDECISION Passive causal one-shot value diagnostics.
+
+net.predictiveVoiCheckCount = net.predictiveVoiCheckCount+1;
+net.predictiveVoiScoreSum = net.predictiveVoiScoreSum+valueInfo.score;
+net.predictiveVoiScoreMax = max(net.predictiveVoiScoreMax,valueInfo.score);
+net.predictiveVoiStepScoreMax = ...
+    max(net.predictiveVoiStepScoreMax,valueInfo.score);
+nCandidates = numel(valueInfo.belief.probability);
+net.predictiveVoiCandidateCountSum = ...
+    net.predictiveVoiCandidateCountSum+nCandidates;
+net.predictiveVoiCandidateCountMax = ...
+    max(net.predictiveVoiCandidateCountMax,nCandidates);
+net.predictiveVoiKnownFailureCount = ...
+    net.predictiveVoiKnownFailureCount+ ...
+    numel(valueInfo.belief.knownFailedSeq);
+if isfinite(valueInfo.inFlightDiscount)
+    net.predictiveVoiDiscountSum = ...
+        net.predictiveVoiDiscountSum+valueInfo.inFlightDiscount;
+    net.predictiveVoiDiscountCount = ...
+        net.predictiveVoiDiscountCount+1;
+end
+if info.abovePrice
+    net.predictiveVoiAbovePriceCount = ...
+        net.predictiveVoiAbovePriceCount+1;
+end
+if sendPacket
+    net.predictiveVoiSendCount = net.predictiveVoiSendCount+1;
+else
+    net.suppressedCount = net.suppressedCount+1;
+end
+if info.refractoryBlocked
+    net.predictiveVoiRefractoryBlockedCount = ...
+        net.predictiveVoiRefractoryBlockedCount+1;
+    net.refractoryBlockedCount = net.refractoryBlockedCount+1;
+end
 
 end
 

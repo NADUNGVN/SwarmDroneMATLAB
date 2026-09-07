@@ -1,0 +1,63 @@
+%% TEST_TCNS_PREDICTIVE_VOI_POLICY Decision and simulator integration checks.
+
+startup;
+
+fprintf('\n=== TCNS predictive-VoI policy checks ===\n\n');
+
+[send,info] = predictiveVoiPolicy(2,1,0.1,0.02);
+assert(send && info.abovePrice && ~info.refractoryBlocked, ...
+    'PredictiveVoI: above-price action did not transmit.');
+[send,info] = predictiveVoiPolicy(1,1,0.1,0.02);
+assert(~send && ~info.abovePrice, ...
+    'PredictiveVoI: the strict price boundary is incorrect.');
+[send,info] = predictiveVoiPolicy(2,1,0.01,0.02);
+assert(~send && info.refractoryBlocked, ...
+    'PredictiveVoI: refractory interval is not enforced.');
+
+[cfg,~] = tcnsGate6Scenario(27020001,'S1');
+cfg.swarm.T = 4;
+cfg.causal.policyMode = 'predictive-voi';
+cfg.predictiveVoi.price = 1e-6;
+cfg.predictiveVoi.horizonSamples = 25;
+cfg.predictiveVoi.minInterTx = cfg.swarm.dt;
+out1 = simSwarmAoICausal(cfg);
+out2 = simSwarmAoICausal(cfg);
+
+checksPerStep = nnz(cfg.swarm.A(2:end,:))+nnz(cfg.swarm.pin(2:end));
+assert(out1.predictiveVoiActive && ...
+    out1.predictiveVoiCheckCount==numel(out1.t)*checksPerStep, ...
+    'PredictiveVoI: simulator did not evaluate every relevant link.');
+assert(out1.predictiveVoiSendCount>0 && ...
+    out1.predictiveVoiSendCount<=out1.predictiveVoiAbovePriceCount, ...
+    'PredictiveVoI: send/threshold counters are inconsistent.');
+assert(out1.predictiveVoiMaxScore>cfg.predictiveVoi.price && ...
+    out1.predictiveVoiMaxCandidateCount>=2 && ...
+    out1.predictiveVoiKnownFailureCount>0, ...
+    'PredictiveVoI: score, posterior support, or loss recovery is inactive.');
+assert(out1.invariantViolations==0 && all(isfinite(out1.P),'all'), ...
+    'PredictiveVoI: causal invariants or finite-state checks failed.');
+
+deterministicFields = {'P','V','A','txCountLog','ackCountLog', ...
+    'predictiveVoiSendCountLog','predictiveVoiStepScoreMax', ...
+    'predictiveVoiSendCount','predictiveVoiKnownFailureCount'};
+for f = 1:numel(deterministicFields)
+    name = deterministicFields{f};
+    assert(isequaln(out1.(name),out2.(name)), ...
+        'PredictiveVoI: repeated seed changed out.%s.',name);
+end
+
+cfgHigh = cfg;
+cfgHigh.predictiveVoi.price = 1;
+outHigh = simSwarmAoICausal(cfgHigh);
+assert(outHigh.predictiveVoiSendCount==0 && ...
+    outHigh.txCount<out1.txCount, ...
+    'PredictiveVoI: a prohibitive price did not suppress value actions.');
+
+fprintf('  checks / predictive sends                    %d / %d\n', ...
+    out1.predictiveVoiCheckCount,out1.predictiveVoiSendCount);
+fprintf('  max candidates / known-failure observations  %d / %d\n', ...
+    out1.predictiveVoiMaxCandidateCount, ...
+    out1.predictiveVoiKnownFailureCount);
+fprintf('  deterministic seed and high-price shutdown   PASS\n');
+fprintf('test_tcns_predictive_voi_policy: PASS\n');
+
