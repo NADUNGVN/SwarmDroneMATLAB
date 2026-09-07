@@ -137,6 +137,8 @@ fprintf('Technical status: %s\n',summary.technicalStatus);
 fprintf('Scientific decision: %s\n',scientificDecision);
 fprintf('Results: %s\n',R.dir);
 
+finishExperiment(R);
+
 
 function row = localRow()
 
@@ -241,4 +243,3 @@ cleanup = onCleanup(@() fclose(fid));
 fprintf(fid,'%s',jsonencode(value,'PrettyPrint',true));
 
 end
-
