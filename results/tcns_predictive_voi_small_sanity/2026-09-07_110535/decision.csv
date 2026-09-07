@@ -1,0 +1,3 @@
+scenarioId,scenario,predictiveDistinctCosts,unsaturatedPredictivePoints,periodicFrontierPoints,predictiveFrontierPoints,meanBudgetMatchedErrorDifference,fractionBudgetFavoringPredictive,meanPerformanceMatchedCostDifference,fractionPerformanceFavoringPredictive,frontierHeadroom,meanInteriorEventAllocationRatio,eventConcentrationPass,maxBeliefCandidates,totalKnownFailureObservations,meanInFlightDiscount
+S2,Formation-switching,15,13,11,11,0.00130935506026613,0.0792079207920792,0.166311760973834,0.663366336633663,1,1.06537289734453,0,8,34063,0.462428946289126
+S6,Dynamic-excitation,13,14,11,12,0.00322355214587888,0.0594059405940594,0.332142476765713,0.376237623762376,1,1.05896518237245,0,8,34479,0.457977258167618

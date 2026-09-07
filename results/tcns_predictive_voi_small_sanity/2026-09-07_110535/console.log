@@ -1,0 +1,26 @@
+
+============================================================
+RUN  : tcns_predictive_voi_small_sanity
+ID   : 2026-09-07_110535
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_predictive_voi_small_sanity\2026-09-07_110535
+WHEN : 2026-09-07 11:05:35
+============================================================
+
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_predictive_voi_small_sanity\2026-09-07_110535\figures
+
+Predictive-VoI online sanity
+    scenarioId    predictiveDistinctCosts    meanBudgetMatchedErrorDifference    fractionBudgetFavoringPredictive    meanPerformanceMatchedCostDifference    fractionPerformanceFavoringPredictive    meanInteriorEventAllocationRatio    frontierHeadroom    eventConcentrationPass
+    __________    _______________________    ________________________________    ________________________________    ____________________________________    _____________________________________    ________________________________    ________________    ______________________
+
+       "S2"                 15                          0.0013094                            0.079208                              0.16631                                  0.66337                                1.0654                      true                   false         
+       "S6"                 13                          0.0032236                            0.059406                              0.33214                                  0.37624                                 1.059                      true                   false         
+
+Technical status: PASS
+Scientific decision: STOP_PREDICTIVE_MECHANISM
+
+============================================================
+DONE : tcns_predictive_voi_small_sanity
+TIME : 1 m 52 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_predictive_voi_small_sanity\2026-09-07_110535
+============================================================

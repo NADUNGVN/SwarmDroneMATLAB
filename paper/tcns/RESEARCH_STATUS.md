@@ -347,3 +347,39 @@ in-flight marginal-value derivation. Until that derivation passes algebraic
 and causality tests, no new online policy, large grid, scalability campaign or
 held-out evaluation is authorized. Full interpretation and proof gaps are in
 `paper/tcns/POST_GATE6_VOI_DIAGNOSTIC_RESULT.md`.
+
+## Causal one-shot VoI checkpoint and online sanity
+
+- `paper/tcns/CAUSAL_VOI_BELIEF_CHECKPOINT.md` proves an exact
+  sender-side receiver-payload posterior under static IID DATA loss,
+  deterministic sampled DATA/ACK delays, reliable ACKs and complete
+  outstanding history.
+- The corresponding isolated expected action value credits useful in-flight
+  packets and maps their directional controller correction through the exact
+  Gate-3 finite-horizon kernel. Unit tests verify posterior probabilities
+  `[0.04, 0.16, 0.80]`, an exact 0.2 residual value when a current-state
+  packet has 0.8 success probability, and invariance to hidden simulator drop
+  flags.
+- Online policy implementation commit: `0b81877`; preregistered sanity
+  protocol/script commit: `7c876ec`.
+- Accepted run:
+  `results/tcns_predictive_voi_small_sanity/2026-09-07_110535`, MATLAB
+  R2025a; 56 complete one-seed development runs in S2 and S6.
+- Technical status is PASS: finite complete matrix, exact trace pairing, zero
+  divergence/protocol violations, 15/13 distinct predictive cost points and
+  valid automatic frontiers/matching. Three saturated sparse points remain
+  retained and flagged.
+- Causal belief support reaches eight candidates; mean in-flight discount is
+  0.462 in S2 and 0.458 in S6, so the mechanism is distinct from its ACK-only
+  state-error boundary.
+- Mean matched results remain unfavorable: predictive-minus-periodic RMSE is
+  +0.00131 m (S2) and +0.00322 m (S6); matched cost is +0.166 and +0.332
+  Hz/channel.
+- Predictive-action event allocation is only 1.065 and 1.059, failing the
+  frozen 1.15 threshold in both scenarios.
+
+The scientific decision is `STOP_PREDICTIVE_MECHANISM`. No five-seed expansion
+or price selection is permitted. The next authorized work is an
+information-identifiability analysis of the missing global quadratic cross
+term, not another local trigger variation. Full evidence and interpretation
+are in `paper/tcns/PREDICTIVE_VOI_SANITY_RESULT.md`.
