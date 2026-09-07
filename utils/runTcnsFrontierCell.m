@@ -30,6 +30,10 @@ row.parameterValue = arm.parameterValue;
 row.period_s = arm.period_s;
 row.epsilonPosition_m = arm.epsilon_m;
 row.retryInterval_s = arm.retry_s;
+if isfield(arm,'voiPrice'), row.voiPrice = arm.voiPrice; end
+if isfield(arm,'voiHorizonSamples')
+    row.voiHorizonSamples = arm.voiHorizonSamples;
+end
 row.seed = cfg.net.seed;
 row.scenarioId = string(scenario.id);
 row.scenario = string(scenario.name);
@@ -44,6 +48,12 @@ try
             cfg.causal.policyMode = 'control-aware';
             cfg.controlAware.epsilonPosition = arm.epsilon_m;
             cfg.controlAware.retryInterval = arm.retry_s;
+            out = simSwarmAoICausal(cfg);
+        case "predictive-voi"
+            cfg.causal.policyMode = 'predictive-voi';
+            cfg.predictiveVoi.price = arm.voiPrice;
+            cfg.predictiveVoi.horizonSamples = arm.voiHorizonSamples;
+            cfg.predictiveVoi.minInterTx = cfg.swarm.dt;
             out = simSwarmAoICausal(cfg);
         case "legacy"
             cfg.causal.policyMode = 'legacy-v3';
@@ -125,6 +135,28 @@ try
     if isfield(out,'controlAwareActive') && out.controlAwareActive
         row.controlViolationRatio = out.controlAwareViolationRatio;
         row.controlMaxNormalizedRisk = out.controlAwareMaxNormalizedRisk;
+    end
+    if isfield(out,'predictiveVoiActive') && out.predictiveVoiActive
+        row.voiMeanScore = out.predictiveVoiMeanScore;
+        row.voiMaxScore = out.predictiveVoiMaxScore;
+        row.voiSendCount = out.predictiveVoiSendCount;
+        row.voiMeanCandidateCount = out.predictiveVoiMeanCandidateCount;
+        row.voiMaxCandidateCount = out.predictiveVoiMaxCandidateCount;
+        row.voiKnownFailureCount = out.predictiveVoiKnownFailureCount;
+        row.voiMeanInFlightDiscount = ...
+            out.predictiveVoiMeanInFlightDiscount;
+        if any(eventMask)
+            voiEvents = localEvents(out.predictiveVoiSendCountLog);
+            evaluationActions = sum(voiEvents(evalMask));
+            if evaluationActions>0
+                eventDuration = localWindowDuration( ...
+                    scenario.eventWindows_s,scenario.evaluationStart_s,t(end));
+                eventFraction = eventDuration/evalDuration;
+                row.voiEventAllocationRatio = ...
+                    (sum(voiEvents(eventMask))/evaluationActions) / ...
+                    max(eventFraction,eps);
+            end
+        end
     end
 catch err
     row.failed = true;
