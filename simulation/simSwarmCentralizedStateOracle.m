@@ -52,14 +52,13 @@ leader = leaderReference(0);
 net = initQueuedNetworkState(P,V,leader,cfg);
 np0 = netParamsAt(cfg,0);
 delaySamples = max(0,ceil((np0.delay-1e-12)/dt));
-observationInterval = max(dt,delaySamples*dt);
 oracleModel = struct( ...
     'certificate',tcnsFormationRobustnessCertificate(cfg), ...
     'formationCertificate',formationTheoryCertificate(cfg), ...
     'kernel',tcnsFiniteHorizonLinkValueKernel( ...
         cfg,cfg.centralizedStateOracle.horizonSamples,delaySamples));
-lastOrdinaryAttempt = -inf(N,N);
-lastLeaderAttempt = -inf(N,1);
+nextOrdinaryObservation = -inf(N,N);
+nextLeaderObservation = -inf(N,1);
 
 Plog = zeros(K,N,3);
 Vlog = zeros(K,N,3);
@@ -107,6 +106,15 @@ for k = 1:K
     actions = localResolveActions( ...
         actions,actionCount,netBeforeDelivery,net,P,V,tk);
 
+    npCurrent = netParamsAt(cfg,tk);
+    currentDelaySamples = max(0,ceil((npCurrent.delay-1e-12)/dt));
+    if oracleModel.kernel.delaySamples~=currentDelaySamples
+        % Lazy construction reads only the regime currently in force. The
+        % realized jitter draw remains hidden until after scheduling.
+        oracleModel.kernel = tcnsFiniteHorizonLinkValueKernel( ...
+            cfg,cfg.centralizedStateOracle.horizonSamples, ...
+            currentDelaySamples);
+    end
     value = tcnsCentralizedStateOracleValue( ...
         P,V,leader,net,tk,cfg, ...
         cfg.centralizedStateOracle.horizonSamples,oracleModel);
@@ -135,7 +143,7 @@ for k = 1:K
                 thresholdSuppressedCount = thresholdSuppressedCount+1;
                 continue;
             end
-            if tk-lastOrdinaryAttempt(i,j)<observationInterval-1e-12
+            if tk<nextOrdinaryObservation(i,j)-1e-12
                 observationBlockedCount = observationBlockedCount+1;
                 continue;
             end
@@ -148,8 +156,9 @@ for k = 1:K
             net = localTransmitLink( ...
                 net,P,V,leader,tk,cfg,netTrace,kTrace,i,j,'ordinary');
             actions(actionCount) = localFinishAttempt( ...
-                actions(actionCount),net,txBefore,dropBefore,tk,np0.delay);
-            lastOrdinaryAttempt(i,j) = tk;
+                actions(actionCount),net,txBefore,dropBefore,tk);
+            nextOrdinaryObservation(i,j) = ...
+                tk+max(dt,npCurrent.delay);
             ordinaryScheduleCount(i,j) = ordinaryScheduleCount(i,j)+1;
             ordinarySenderFired(j) = true;
             sendCount = sendCount+1;
@@ -168,7 +177,7 @@ for k = 1:K
             thresholdSuppressedCount = thresholdSuppressedCount+1;
             continue;
         end
-        if tk-lastLeaderAttempt(i)<observationInterval-1e-12
+        if tk<nextLeaderObservation(i)-1e-12
             observationBlockedCount = observationBlockedCount+1;
             continue;
         end
@@ -181,8 +190,8 @@ for k = 1:K
         net = localTransmitLink( ...
             net,P,V,leader,tk,cfg,netTrace,kTrace,i,1,'pinned-leader');
         actions(actionCount) = localFinishAttempt( ...
-            actions(actionCount),net,txBefore,dropBefore,tk,np0.delay);
-        lastLeaderAttempt(i) = tk;
+            actions(actionCount),net,txBefore,dropBefore,tk);
+        nextLeaderObservation(i) = tk+max(dt,npCurrent.delay);
         leaderScheduleCount(i) = leaderScheduleCount(i)+1;
         leaderPayloadFired = true;
         sendCount = sendCount+1;
@@ -365,7 +374,7 @@ end
 end
 
 
-function row = localFinishAttempt(row,net,txBefore,dropBefore,tk,delay)
+function row = localFinishAttempt(row,net,txBefore,dropBefore,tk)
 
 row.attempted = net.txCount-txBefore==1;
 row.dropped = net.dropCount-dropBefore==1;
@@ -373,10 +382,23 @@ if ~row.attempted || ~ismember(net.dropCount-dropBefore,[0 1])
     error('simSwarmCentralizedStateOracle:AttemptAccounting', ...
         'Each O1 action must create exactly one DATA attempt.');
 end
-row.arrivalTime_s = tk+max(delay,0);
 if row.dropped
+    row.arrivalTime_s = tk;
     row.resolved = true;
+    return;
 end
+if row.linkClass=="ordinary"
+    queue = net.queue{row.receiver,row.sender};
+else
+    queue = net.leaderQueue{row.receiver};
+end
+generationTime = cellfun(@(packet) packet.genTime,queue);
+match = find(abs(generationTime-tk)<=1e-12,1,'last');
+if isempty(match)
+    error('simSwarmCentralizedStateOracle:AttemptQueue', ...
+        'A successful O1 DATA attempt was not found in its delivery queue.');
+end
+row.arrivalTime_s = queue{match}.arrivalTime;
 
 end
 
