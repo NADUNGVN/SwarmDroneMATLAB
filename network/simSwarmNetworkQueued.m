@@ -88,6 +88,22 @@ TxCountLog = zeros(K,1);
 
 BroadcastCountLog = zeros(K,1);
 
+% Optional passive receiver-memory log for theory/mechanism diagnostics.
+% The flag defaults off, preserving the historical output footprint.  None
+% of these arrays is read by the simulator or by a transmission decision.
+logReceiverState = isfield(cfg,'tcns') && ...
+    isfield(cfg.tcns,'logReceiverState') && ...
+    logical(cfg.tcns.logReceiverState);
+if logReceiverState
+    ReceiverNeighborPositionLog = nan(K,N,N,3);
+    ReceiverNeighborVelocityLog = nan(K,N,N,3);
+    ReceiverNeighborGenTimeLog = nan(K,N,N);
+    ReceiverLeaderPositionLog = nan(K,N,3);
+    ReceiverLeaderVelocityLog = nan(K,N,3);
+    ReceiverLeaderAccelerationLog = nan(K,N,3);
+    ReceiverLeaderGenTimeLog = nan(K,N);
+end
+
 % 6-DOF follower state, created lazily on the first integration call.
 sixState = [];
 
@@ -249,6 +265,17 @@ for k = 1:K
 
     LeaderPos(k,:) = leader.pos';
 
+    if logReceiverState
+        ReceiverNeighborPositionLog(k,:,:,:) = reshape(net.Pij,[1 N N 3]);
+        ReceiverNeighborVelocityLog(k,:,:,:) = reshape(net.Vij,[1 N N 3]);
+        ReceiverNeighborGenTimeLog(k,:,:) = reshape(net.genTime,[1 N N]);
+        ReceiverLeaderPositionLog(k,:,:) = reshape(net.leaderPos,[1 N 3]);
+        ReceiverLeaderVelocityLog(k,:,:) = reshape(net.leaderVel,[1 N 3]);
+        ReceiverLeaderAccelerationLog(k,:,:) = ...
+            reshape(net.leaderAcc,[1 N 3]);
+        ReceiverLeaderGenTimeLog(k,:) = reshape(net.leaderGenTime,[1 N]);
+    end
+
 
     % ========================================================
     % AoI
@@ -321,6 +348,16 @@ out.desiredOffsets = DesiredOffsetsLog;
 out.appliedFollowerDisturbance = DisturbanceAccelerationLog;
 
 out.LeaderPos = LeaderPos;
+
+if logReceiverState
+    out.receiverNeighborPosition = ReceiverNeighborPositionLog;
+    out.receiverNeighborVelocity = ReceiverNeighborVelocityLog;
+    out.receiverNeighborGenTime = ReceiverNeighborGenTimeLog;
+    out.receiverLeaderPosition = ReceiverLeaderPositionLog;
+    out.receiverLeaderVelocity = ReceiverLeaderVelocityLog;
+    out.receiverLeaderAcceleration = ReceiverLeaderAccelerationLog;
+    out.receiverLeaderGenTime = ReceiverLeaderGenTimeLog;
+end
 
 out.meanAoI = AoILog;
 out.dropCount = net.dropCount;

@@ -36,6 +36,7 @@ suite = {
     'test_tcns_gate4_control_aware_policy'
     'test_tcns_gate5_frontier_matching'
     'test_tcns_gate6_scenarios'
+    'test_tcns_post_gate6_voi_kernel'
     'test_probabilistic_safety_certificate'
     'test_standalone_ack_value_certificate'
     'test_setpoint_interface'
