@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_o1_oracle_frontier_stage_b",
+  "runId": "2026-09-07_162102",
+  "startedAt": "2026-09-07 16:21:03",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "58e9aa9",
+  "notes": "Frozen centralized current-state oracle expansion to S3/S4/S5 after O1_STRONG_HEADROOM on S2/S6.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_o1_oracle_frontier_stage_b.m",
+  "finishedAt": "2026-09-07 16:25:40",
+  "elapsedSec": 276.6783518,
+  "elapsedText": "4 m 37 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

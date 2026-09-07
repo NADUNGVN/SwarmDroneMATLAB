@@ -1,0 +1,6 @@
+metric,maxAbsoluteDifference,tolerance,pass
+formationRMSE_m,4.9960036108132e-16,5e-12,1
+primaryFormationRMSE_m,4.9960036108132e-16,5e-12,1
+evaluationCost025PerChannel_Hz,3.5527136788005e-14,5e-12,1
+txCount,0,0,1
+traceHashExact,0,0,1

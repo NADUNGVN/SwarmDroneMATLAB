@@ -1,0 +1,27 @@
+
+============================================================
+RUN  : tcns_o1_oracle_frontier_stage_b
+ID   : 2026-09-07_162102
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_o1_oracle_frontier_stage_b\2026-09-07_162102
+WHEN : 2026-09-07 16:21:03
+============================================================
+
+Running 3 scenarios x (11 periodic + 14 O1) x 5 seeds = 375 simulations.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_o1_oracle_frontier_stage_b\2026-09-07_162102\figures
+
+O1 Stage-B technical verdict: PASS
+  S3 Gilbert-Elliott-burst-loss  dRMSE mean/median  +0.00166/ -0.00800 ( 79.2% favor, run 63); dCost   -0.0014/  +0.2112 ( 31.7% favor, run 13) => MARGINAL_OR_NARROW
+  S4 Time-varying-congestion     dRMSE mean/median  +0.02595/ +0.02669 (  0.0% favor, run 0); dCost   +0.7135/  +0.3442 (  0.0% favor, run 0) => NO_HEADROOM
+  S5 Topology-perturbation       dRMSE mean/median  -0.00431/ -0.00859 ( 82.2% favor, run 62); dCost   -0.2468/  -0.0768 ( 52.5% favor, run 46) => CONVINCING
+Final convincing support: 3/5 (required >=2)
+Final O1 decision: O1_FINAL_SUPPORT
+Research recommendation: GO_ACK_BELIEF_POLICY
+
+============================================================
+DONE : tcns_o1_oracle_frontier_stage_b
+TIME : 4 m 37 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_o1_oracle_frontier_stage_b\2026-09-07_162102
+============================================================
