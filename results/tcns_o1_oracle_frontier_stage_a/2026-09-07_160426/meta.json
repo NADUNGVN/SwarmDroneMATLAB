@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_o1_oracle_frontier_stage_a",
+  "runId": "2026-09-07_160426",
+  "startedAt": "2026-09-07 16:04:27",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "16537d1",
+  "notes": "Development-only centralized current-state oracle frontier on S2/S6; privileged online diagnostic, never an implementable policy.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_o1_oracle_frontier_stage_a.m",
+  "finishedAt": "2026-09-07 16:06:37",
+  "elapsedSec": 130.1052517,
+  "elapsedText": "2 m 10 s",
+  "figureCount": 3,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

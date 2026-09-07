@@ -1,0 +1,25 @@
+
+============================================================
+RUN  : tcns_o1_oracle_frontier_stage_a
+ID   : 2026-09-07_160426
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_o1_oracle_frontier_stage_a\2026-09-07_160426
+WHEN : 2026-09-07 16:04:27
+============================================================
+
+Running 2 scenarios x (11 periodic + 14 O1) x 5 seeds = 250 simulations.
+Starting parallel pool (parpool) using the 'Processes' profile ...
+Connected to parallel pool with 16 workers.
+saveAllFigures: 3 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_o1_oracle_frontier_stage_a\2026-09-07_160426\figures
+
+O1 Stage-A technical verdict: PASS
+  S2 Formation-switching    budget mean/median  -0.02381/ -0.01937, favor 100.0%, run 101; cost mean/median   -1.7088/  -0.5030, favor 100.0%, run 101 => CONVINCING
+  S6 Dynamic-excitation     budget mean/median  -0.01460/ -0.01087, favor 100.0%, run 98; cost mean/median   -0.5696/  -0.4015, favor 100.0%, run 101 => CONVINCING
+O1 Stage-A classification: O1_STRONG_HEADROOM
+Frozen next action: PROCEED_O1_STAGE_B
+
+============================================================
+DONE : tcns_o1_oracle_frontier_stage_a
+TIME : 2 m 10 s
+FIGS : 3
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_o1_oracle_frontier_stage_a\2026-09-07_160426
+============================================================
