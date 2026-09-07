@@ -59,7 +59,7 @@ for a = 1:model.nOrdinaryLinks
         model,'ordinary',i,j,correction,payload);
     affineRows(rowIndex) = localCheckAffine( ...
         "ordinary",i,j,map,state.xi,oracle.ordinaryValue(i,j), ...
-        oracle.ordinaryActionResponse{i,j},baselineResidual);
+        oracle.ordinaryActionResponse{i,j},baseline,baselineResidual);
 end
 for a = 1:model.nPinnedLinks
     rowIndex = rowIndex+1;
@@ -73,7 +73,7 @@ for a = 1:model.nPinnedLinks
         model,'pinned-leader',i,j,correction,payload);
     affineRows(rowIndex) = localCheckAffine( ...
         "pinned-leader",i,j,map,state.xi,oracle.leaderValue(i), ...
-        oracle.leaderActionResponse{i},baselineResidual);
+        oracle.leaderActionResponse{i},baseline,baselineResidual);
 end
 affineTable = struct2table(affineRows);
 
@@ -140,7 +140,8 @@ dynamicTable = struct2table([ ...
 
 %% Gate decision
 maxAffineResidual = max([affineTable.baselineResidual; ...
-    affineTable.actionResponseResidual;affineTable.valueResidual]);
+    affineTable.actionResponseResidual;affineTable.crossTermResidual; ...
+    affineTable.valueResidual]);
 allLinksNonidentifiable = all(~rankTable.historyIdentifiable);
 allScalarClosuresPass = all(rankTable.oneScalarCloses);
 dynamicPass = all(dynamicTable.dynamicallyReachable);
@@ -217,11 +218,11 @@ end
 
 
 function row = localCheckAffine( ...
-    linkClass,receiver,sender,map,xi,oracleValue,oracleResponse,baseResidual)
+    linkClass,receiver,sender,map,xi,oracleValue,oracleResponse, ...
+    baselineResponse,baseResidual)
 x = xi(map.keepIndex);
 baseline = map.fullCrossTermCoefficient'*xi+map.fullCrossTermConstant;
-directCross = sum(localVectorizeResponse(oracleResponse).* ...
-    map.actionResponse);
+directCross = baselineResponse'*map.actionResponse;
 row = localAffineRow();
 row.linkClass = linkClass;
 row.receiver = receiver;
