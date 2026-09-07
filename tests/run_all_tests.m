@@ -39,6 +39,7 @@ suite = {
     'test_tcns_post_gate6_voi_kernel'
     'test_tcns_causal_voi_belief'
     'test_tcns_predictive_voi_policy'
+    'test_tcns_local_voi_identifiability'
     'test_probabilistic_safety_certificate'
     'test_standalone_ack_value_certificate'
     'test_setpoint_interface'

@@ -383,3 +383,25 @@ or price selection is permitted. The next authorized work is an
 information-identifiability analysis of the missing global quadratic cross
 term, not another local trigger variation. Full evidence and interpretation
 are in `paper/tcns/PREDICTIVE_VOI_SANITY_RESULT.md`.
+
+## Sender-local value-identifiability checkpoint
+
+`paper/tcns/LOCAL_VOI_IDENTIFIABILITY_CHECKPOINT.md` gives an exact
+finite-horizon quadratic decomposition and proves the conditional criterion
+for deciding an action's marginal-benefit sign from a sender information set.
+The benefit depends on
+\(-2\langle Z,G\rangle-\|G\|^2\): the stopped predictive policy computes the
+isolated response energy but does not observe the global baseline-response
+cross term.
+
+An executable witness constructs \(G\) from the exact Gate-3 sampled matrices.
+The hidden baselines \(Z=-G\) and \(Z=+G\) produce respectively
+\(+\|G\|^2\) and \(-3\|G\|^2\) benefit with the same action response. This
+establishes the algebraic information barrier, while full reachability of two
+dynamically consistent indistinguishable swarm histories remains explicitly
+marked `PROOF GAP IV.1`.
+
+Decision: `LOCAL_VALUE_SIGN_NOT_IDENTIFIED`. The next authorized work is a
+small offline centralized cross-term oracle audit. No new sender-local scalar
+threshold is authorized before that audit establishes whether total
+marginal-value headroom exists.
