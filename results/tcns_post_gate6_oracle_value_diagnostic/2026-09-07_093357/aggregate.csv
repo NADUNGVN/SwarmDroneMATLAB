@@ -1,0 +1,4 @@
+scenarioId,scenario,runCount,meanValue,meanTemporalCv,meanEventAllocationRatio,minEventAllocationRatio,meanTopDecileEventAllocationRatio
+S1,Stationary-Moderate,5,0.000292228146112157,0.456581852561352,NaN,NaN,NaN
+S2,Formation-switching,5,0.000344305255183184,0.615178882940753,1.30330110168396,1.1762726665162,2.27
+S6,Dynamic-excitation,5,0.000329260130863797,0.687321849300151,1.32935482457152,1.16879691964907,2.275

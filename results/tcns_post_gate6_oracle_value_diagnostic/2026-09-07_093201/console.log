@@ -1,0 +1,20 @@
+
+============================================================
+RUN  : tcns_post_gate6_oracle_value_diagnostic
+ID   : 2026-09-07_093201
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_post_gate6_oracle_value_diagnostic\2026-09-07_093201
+WHEN : 2026-09-07 09:32:01
+============================================================
+
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_post_gate6_oracle_value_diagnostic\2026-09-07_093201\figures
+
+Post-Gate-6 oracle value diagnostic
+    scenarioId    meanEventAllocationRatio    meanPairedCvRatioToS1    eventConcentrationPass    temporalVariationPass    scenarioPass
+    __________    ________________________    _____________________    ______________________    _____________________    ____________
+
+       "S2"                1.3033                    1.3196                    true                      true                true     
+       "S6"                1.3294                      1.52                    true                      true                true     
+
+Technical status: PASS
+Scientific decision: SIGNAL_PRESENT
+Results: D:\Research\Drone\SwarmDroneMATLAB\results\tcns_post_gate6_oracle_value_diagnostic\2026-09-07_093201

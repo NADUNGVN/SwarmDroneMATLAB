@@ -1,0 +1,3 @@
+scenarioId,meanEventAllocationRatio,meanPairedCvRatioToS1,eventConcentrationPass,temporalVariationPass,scenarioPass
+S2,1.30330110168396,1.31957405517156,1,1,1
+S6,1.32935482457152,1.51997953808319,1,1,1

@@ -291,3 +291,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-07_005719 | tcns_gate4_small_sanity | 12.2 s | 1 | yes | yes | (R2025a) | 4384589 |
 | 2026-09-07_010403 | tcns_gate5_stationary_frontiers | 1 m 28 s | 1 | yes | yes | (R2025a) | 88b6705 |
 | 2026-09-07_012209 | tcns_gate6_nonstationary_frontiers | 2 m 53 s | 2 | yes | yes | (R2025a) | 9d5d8c0 |
+| 2026-09-07_093357 | tcns_post_gate6_oracle_value_diagnostic | 10.0 s | 1 | - | yes | (R2025a) | f5fc880 |

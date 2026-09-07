@@ -318,3 +318,32 @@ scalability and held-out evaluation must not run until an explicit scientific
 redirection is chosen. Gates 1--3 remain valid theory results; the trigger's
 performance hypothesis does not. Full evidence and permitted next directions
 are documented in `paper/tcns/GATE6_RESULT.md`.
+
+## Post-Gate-6 mechanism-reset record
+
+- Frozen protocol:
+  `paper/tcns/POST_GATE6_VOI_DIAGNOSTIC_PROTOCOL.md` at commit `74487c8`.
+- Accepted run:
+  `results/tcns_post_gate6_oracle_value_diagnostic/2026-09-07_093357`.
+- Source commit: `f5fc880`; MATLAB R2025a; 15 Periodic-10 development runs
+  over S1/S2/S6 and seeds 27020001--27020005.
+- The exact isolated persistent-update kernel follows directly from the
+  Gate-3 sampled recurrence. Its independent three-axis reconstruction has
+  maximum numerical residual `1.735e-17`.
+- All evaluated trajectories are unsaturated, and optional periodic
+  receiver-memory logging is behaviorally inert.
+- S2 formation switching has mean event-value allocation ratio 1.3033 and
+  mean paired temporal-CV ratio to S1 1.3196.
+- S6 dynamic excitation has corresponding ratios 1.3294 and 1.5200.
+- Both exceed both thresholds frozen at 1.25, giving the preregistered
+  decision `SIGNAL_PRESENT`.
+- The lowest per-seed event allocation ratios are 1.1763 and 1.1688, so the
+  evidence is mean-level headroom rather than a universal per-run result.
+
+This does not reverse the Gate-6 falsification. It shows only that an oracle
+receiver-content signal contains time concentration that the stopped policy
+failed to exploit. The authorized next step is a causal receiver-belief and
+in-flight marginal-value derivation. Until that derivation passes algebraic
+and causality tests, no new online policy, large grid, scalability campaign or
+held-out evaluation is authorized. Full interpretation and proof gaps are in
+`paper/tcns/POST_GATE6_VOI_DIAGNOSTIC_RESULT.md`.

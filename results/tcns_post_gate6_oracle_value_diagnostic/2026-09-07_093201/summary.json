@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "classification": "post-Gate-6 necessary-headroom diagnostic",
+  "technicalStatus": "PASS",
+  "scientificDecision": "SIGNAL_PRESENT",
+  "runCount": 15,
+  "scenarios": [
+    "S1",
+    "S2",
+    "S6"
+  ],
+  "seeds": [
+    2.7020001E+7,
+    2.7020002E+7,
+    2.7020003E+7,
+    2.7020004E+7,
+    2.7020005E+7
+  ],
+  "periodSamples": 10,
+  "period_s": 0.2,
+  "horizonSamples": 25,
+  "horizon_s": 0.5,
+  "noSaturation": true,
+  "decision": [
+    {
+      "scenarioId": "S2",
+      "meanEventAllocationRatio": 1.3033011016839626,
+      "meanPairedCvRatioToS1": 1.3195740551715605,
+      "eventConcentrationPass": true,
+      "temporalVariationPass": true,
+      "scenarioPass": true
+    },
+    {
+      "scenarioId": "S6",
+      "meanEventAllocationRatio": 1.3293548245715239,
+      "meanPairedCvRatioToS1": 1.5199795380831864,
+      "eventConcentrationPass": true,
+      "temporalVariationPass": true,
+      "scenarioPass": true
+    }
+  ],
+  "warning": "Receiver-truth isolated value is not an online policy and does not include in-flight competition or multi-link cross terms."
+}

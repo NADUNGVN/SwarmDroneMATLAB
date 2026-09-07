@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_post_gate6_oracle_value_diagnostic",
+  "runId": "2026-09-07_093357",
+  "startedAt": "2026-09-07 09:33:57",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "f5fc880",
+  "notes": "Necessary-headroom test for a finite-horizon predictive VoI mechanism after the Gate-6 policy falsification.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_post_gate6_oracle_value_diagnostic.m",
+  "finishedAt": "2026-09-07 09:34:08",
+  "elapsedSec": 9.9742861,
+  "elapsedText": "10.0 s",
+  "figureCount": 1,
+  "hasWorkspace": false,
+  "hasTidy": true
+}
