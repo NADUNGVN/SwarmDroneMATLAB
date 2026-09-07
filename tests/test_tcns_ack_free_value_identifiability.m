@@ -1,0 +1,53 @@
+%% TEST_TCNS_ACK_FREE_VALUE_IDENTIFIABILITY Exact AF3 stop witness.
+
+startup;
+
+[cfg,~] = tcnsGate6Scenario(27020001,'S2');
+initial = localPacket(0,0,[0 0 0],[0 0 0]);
+records = repmat(localPacket(0,0,[0 0 0],[0 0 0]),3,1);
+times = [0.02 0.10 0.20];
+positions = [0.2 0 0;0.7 0.1 0;1.1 0.2 -0.1];
+velocities = [0 0 0;0.1 0 0;0.2 -0.1 0];
+for q = 1:3
+    records(q) = localPacket(q,times(q),positions(q,:),velocities(q,:));
+end
+B = tcnsAckFreeReceiverBelief(initial,records,0.22,0.22,cfg);
+M = tcnsAckFreeResidualMoments( ...
+    [1.4 0.3 0],[0.3 -0.1 0],[],B,cfg.swarm.Kp,cfg.swarm.Kv,0);
+W = tcnsAckFreeValueIdentifiabilityWitness( ...
+    cfg,25,4,3,B.probability,M.candidateCorrection);
+
+scale = max(1,W.knownExpectedIsolatedTerm);
+assert(abs(W.helpfulExpectedValue-W.knownExpectedIsolatedTerm)<1e-13*scale, ...
+    'AF3Identifiability: helpful expected value identity failed.');
+assert(abs(W.harmfulExpectedValue+3*W.knownExpectedIsolatedTerm) ...
+    <1e-13*scale, ...
+    'AF3Identifiability: harmful expected value identity failed.');
+assert(W.expectedValueSignChanges && ...
+    W.sameBeliefAndActionResponseFamily && ...
+    W.requiresHiddenBaselineProjection && ...
+    ~W.actualTrajectoryReachabilityProved, ...
+    'AF3Identifiability: stop-witness metadata is invalid.');
+assert(W.maxDirectIdentityResidual<1e-13*scale && ...
+    ~W.usesReceiverTruth && ~W.usesFutureChannelOutcome, ...
+    'AF3Identifiability: identity or information contract failed.');
+
+fprintf('  support probabilities                   [%s]\n', ...
+    strtrim(sprintf(' %.4g',B.probability)));
+fprintf('  known expected isolated term             %.9g\n', ...
+    W.knownExpectedIsolatedTerm);
+fprintf('  expected value, hidden Z_s=-G_s           %+.9g\n', ...
+    W.helpfulExpectedValue);
+fprintf('  expected value, hidden Z_s=+G_s           %+.9g\n', ...
+    W.harmfulExpectedValue);
+fprintf('  full-trajectory reachability              PROOF GAP\n');
+fprintf('test_tcns_ack_free_value_identifiability: PASS\n');
+
+
+function packet = localPacket(seq,time,pos,vel)
+
+packet = struct('seq',seq,'sendTime',time,'genTime',time, ...
+    'pos',pos,'vel',vel,'acc',[NaN NaN NaN]);
+
+end
+
