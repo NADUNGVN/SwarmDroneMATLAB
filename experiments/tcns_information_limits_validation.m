@@ -109,29 +109,23 @@ for linkType = 1:2
             senderMap.currentMap,ellCurrent);
         history = tcnsLinearIdentifiability( ...
             senderMap.historyMap,ellStart);
-        theta = history.missingCoefficient;
+        thetaCurrent = current.missingCoefficient;
+        thetaHistory = history.missingCoefficient;
 
-        individual = false(model.N,1);
         maps = cell(model.N,1);
         for agent = 1:model.N
             maps{agent} = tcnsInformationLimitsSenderMap( ...
                 model,agent,action,L);
-            individual(agent) = tcnsLinearIdentifiability( ...
-                maps{agent}.historyMap,theta).identifiable;
         end
-        receiverCan = individual(i);
-        pairMap = [maps{j}.historyMap;maps{i}.historyMap];
-        pairCan = tcnsLinearIdentifiability(pairMap,theta).identifiable;
-        allMap = zeros(0,numel(action.keepIndex));
-        for agent = 1:model.N
-            allMap = [allMap;maps{agent}.historyMap]; %#ok<AGROW>
-        end
-        allCan = tcnsLinearIdentifiability(allMap,theta).identifiable;
+        currentLocation = localLocateStatistic( ...
+            maps,j,i,thetaCurrent,false);
+        historyLocation = localLocateStatistic( ...
+            maps,j,i,thetaHistory,true);
         augmented = tcnsLinearIdentifiability( ...
-            [senderMap.historyMap;theta'],ellStart);
+            [senderMap.historyMap;thetaHistory'],ellStart);
         rankRows(rowIndex) = localMakeRankRow( ...
             linkClass,i,j,L,current,history,augmented, ...
-            receiverCan,pairCan,allCan,find(individual)');
+            currentLocation,historyLocation);
     end
 end
 rankTable = struct2table(rankRows);
@@ -246,17 +240,24 @@ row = struct('linkClass',"",'receiver',NaN,'sender',NaN, ...
     'reducedDimension',NaN,'historyLength',NaN, ...
     'currentRank',NaN,'currentNullity',NaN, ...
     'currentNormalizedResidual',NaN,'currentIdentifiable',false, ...
+    'currentMissingScalarNorm',NaN, ...
+    'currentReceiverCanComputeMissing',false, ...
+    'currentSenderReceiverCanComputeMissing',false, ...
+    'currentAllAgentsCanComputeMissing',false, ...
+    'currentMinimumAdditionalAgents',NaN, ...
+    'currentMinimumCoalitions',"", ...
     'historyRank',NaN,'historyNullity',NaN, ...
     'historyNormalizedResidual',NaN,'historyIdentifiable',false, ...
     'missingScalarNorm',NaN,'receiverCanComputeMissing',false, ...
     'senderReceiverCanComputeMissing',false, ...
     'allAgentsCanComputeMissing',false,'individualComputers',"", ...
+    'minimumAdditionalAgents',NaN,'minimumCoalitions',"", ...
     'oneScalarCloses',false);
 end
 
 
 function row = localMakeRankRow( ...
-    linkClass,i,j,L,current,history,augmented,receiverCan,pairCan,allCan,ids)
+    linkClass,i,j,L,current,history,augmented,currentLocation,historyLocation)
 row = localRankRow();
 row.linkClass = linkClass;
 row.receiver = i;
@@ -267,16 +268,85 @@ row.currentRank = current.rank;
 row.currentNullity = current.nullity;
 row.currentNormalizedResidual = current.normalizedRowSpaceResidual;
 row.currentIdentifiable = current.identifiable;
+row.currentMissingScalarNorm = norm(current.missingCoefficient,2);
+row.currentReceiverCanComputeMissing = currentLocation.receiverCan;
+row.currentSenderReceiverCanComputeMissing = currentLocation.pairCan;
+row.currentAllAgentsCanComputeMissing = currentLocation.allCan;
+row.currentMinimumAdditionalAgents = currentLocation.minimumAdditional;
+row.currentMinimumCoalitions = currentLocation.minimumCoalitions;
 row.historyRank = history.rank;
 row.historyNullity = history.nullity;
 row.historyNormalizedResidual = history.normalizedRowSpaceResidual;
 row.historyIdentifiable = history.identifiable;
 row.missingScalarNorm = norm(history.missingCoefficient,2);
-row.receiverCanComputeMissing = receiverCan;
-row.senderReceiverCanComputeMissing = pairCan;
-row.allAgentsCanComputeMissing = allCan;
-row.individualComputers = strjoin(string(ids),',');
+row.receiverCanComputeMissing = historyLocation.receiverCan;
+row.senderReceiverCanComputeMissing = historyLocation.pairCan;
+row.allAgentsCanComputeMissing = historyLocation.allCan;
+row.individualComputers = historyLocation.individualComputers;
+row.minimumAdditionalAgents = historyLocation.minimumAdditional;
+row.minimumCoalitions = historyLocation.minimumCoalitions;
 row.oneScalarCloses = augmented.identifiable;
+end
+
+
+function location = localLocateStatistic(maps,sender,receiver,theta,useHistory)
+
+N = numel(maps);
+individual = false(N,1);
+for agent = 1:N
+    individual(agent) = tcnsLinearIdentifiability( ...
+        localSelectMap(maps{agent},useHistory),theta).identifiable;
+end
+senderMap = localSelectMap(maps{sender},useHistory);
+receiverMap = localSelectMap(maps{receiver},useHistory);
+pairCan = tcnsLinearIdentifiability( ...
+    [senderMap;receiverMap],theta).identifiable;
+allMap = zeros(0,numel(theta));
+for agent = 1:N
+    allMap = [allMap;localSelectMap(maps{agent},useHistory)]; %#ok<AGROW>
+end
+allCan = tcnsLinearIdentifiability(allMap,theta).identifiable;
+
+other = setdiff(1:N,sender,'stable');
+minimumAdditional = NaN;
+coalitions = strings(0,1);
+for count = 0:numel(other)
+    if count==0
+        choices = zeros(1,0);
+    else
+        choices = nchoosek(other,count);
+    end
+    if count==0, choices = reshape(choices,1,0); end
+    for q = 1:size(choices,1)
+        ids = [sender choices(q,:)];
+        C = zeros(0,numel(theta));
+        for agent = ids
+            C = [C;localSelectMap(maps{agent},useHistory)]; %#ok<AGROW>
+        end
+        if tcnsLinearIdentifiability(C,theta).identifiable
+            minimumAdditional = count;
+            coalitions(end+1,1) = strjoin(string(ids),'+'); %#ok<AGROW>
+        end
+    end
+    if ~isnan(minimumAdditional), break; end
+end
+
+location.receiverCan = individual(receiver);
+location.pairCan = pairCan;
+location.allCan = allCan;
+location.individualComputers = strjoin(string(find(individual)'),',');
+location.minimumAdditional = minimumAdditional;
+location.minimumCoalitions = strjoin(coalitions,';');
+
+end
+
+
+function C = localSelectMap(map,useHistory)
+if useHistory
+    C = map.historyMap;
+else
+    C = map.currentMap;
+end
 end
 
 
@@ -288,6 +358,10 @@ row = struct('linkClass',W.linkClass,'receiver',W.receiver, ...
     'qMinus',W.minus.expectedValue,'qPlus',W.plus.expectedValue, ...
     'senderObservationDifference',W.senderObservationDifference, ...
     'actionResponseDifference',W.actionResponseDifference, ...
+    'expectedValueAffineResidual',max( ...
+        W.minus.expectedValueAffineResidual, ...
+        W.plus.expectedValueAffineResidual), ...
+    'expectedValueSeparationResidual',W.expectedValueSeparationResidual, ...
     'affineTrajectoryResidual',W.affineTrajectoryResidual, ...
     'maximumCommand_mps2',max(W.minus.maxUnsaturatedCommand, ...
         W.plus.maxUnsaturatedCommand), ...
