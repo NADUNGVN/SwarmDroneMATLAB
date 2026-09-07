@@ -1,4 +1,4 @@
-function row = runTcnsFrontierCell(cfg,arm,scenario)
+function [row,out] = runTcnsFrontierCell(cfg,arm,scenario)
 %RUNTCNSFRONTIERCELL Run one method/seed/scenario with a stable output row.
 %
 % Errors are returned as structured failed rows so a campaign preserves its
@@ -34,10 +34,15 @@ if isfield(arm,'voiPrice'), row.voiPrice = arm.voiPrice; end
 if isfield(arm,'voiHorizonSamples')
     row.voiHorizonSamples = arm.voiHorizonSamples;
 end
+if isfield(arm,'oracleLambda'), row.oracleLambda = arm.oracleLambda; end
+if isfield(arm,'oracleHorizonSamples')
+    row.oracleHorizonSamples = arm.oracleHorizonSamples;
+end
 row.seed = cfg.net.seed;
 row.scenarioId = string(scenario.id);
 row.scenario = string(scenario.name);
 t0 = tic;
+out = struct();
 
 try
     switch arm.kind
@@ -58,6 +63,17 @@ try
         case "legacy"
             cfg.causal.policyMode = 'legacy-v3';
             out = simSwarmAoICausal(cfg);
+        case "centralized-state-oracle"
+            if ~isfield(arm,'oracleLambda') || ...
+                    ~isfield(arm,'oracleHorizonSamples')
+                error('runTcnsFrontierCell:OracleArm', ...
+                    ['A centralized-state-oracle arm requires ' ...
+                     'oracleLambda and oracleHorizonSamples.']);
+            end
+            cfg.centralizedStateOracle = struct( ...
+                'lambda',arm.oracleLambda, ...
+                'horizonSamples',arm.oracleHorizonSamples);
+            out = simSwarmCentralizedStateOracle(cfg);
         otherwise
             error('runTcnsFrontierCell:UnknownArmKind', ...
                 'Unknown arm kind "%s".',arm.kind);
@@ -158,6 +174,54 @@ try
             end
         end
     end
+    if isfield(out,'centralizedStateOracleActive') && ...
+            out.centralizedStateOracleActive
+        row.oracleValueCheckCount = out.oracleValueCheckCount;
+        row.oraclePositiveValueCount = out.oraclePositiveValueCount;
+        row.oracleSendCount = out.oracleSendCount;
+        row.oracleUsefulDeliveryCount = out.oracleUsefulDeliveryCount;
+        row.oracleFailedTransmissionCount = ...
+            out.oracleFailedTransmissionCount;
+        row.oracleNoInformationAttemptCount = ...
+            out.oracleNoInformationAttemptCount;
+        row.oracleObservationBlockedCount = ...
+            out.oracleObservationBlockedCount;
+        row.oracleMeanValue = out.oracleMeanValue;
+        row.oracleMaxValue = out.oracleMaxValue;
+        row.oracleMaxPredictedSaturationFraction = ...
+            out.oracleMaxPredictedSaturationFraction;
+        row.oracleEvaluationPredictedSaturationFraction = mean( ...
+            out.oraclePredictedSaturationFractionLog(evalMask));
+        actions = out.oracleActions;
+        if ~isempty(actions)
+            actionEval = actions.time_s>=scenario.evaluationStart_s & ...
+                actions.time_s<t(end)-1e-12;
+            actionEvent = actionEval & localWindowMask( ...
+                actions.time_s,scenario.eventWindows_s);
+            actionQuiet = actionEval & ~actionEvent;
+            [row.oracleEventValueMean,row.oracleEventValueMedian, ...
+                row.oracleEventValueP90] = localDistribution( ...
+                actions.predictedValue(actionEvent));
+            [row.oracleQuietValueMean,row.oracleQuietValueMedian, ...
+                row.oracleQuietValueP90] = localDistribution( ...
+                actions.predictedValue(actionQuiet));
+            useful = actions.accepted & actionEval;
+            if any(useful)
+                row.oracleMeanUsefulResidualBefore_m = mean( ...
+                    actions.positionResidualBefore_m(useful));
+                row.oracleMeanUsefulResidualAfter_m = mean( ...
+                    actions.positionResidualAfter_m(useful));
+            end
+            if any(eventMask) && any(actionEval)
+                eventDuration = localWindowDuration( ...
+                    scenario.eventWindows_s, ...
+                    scenario.evaluationStart_s,t(end));
+                eventFraction = eventDuration/evalDuration;
+                row.oracleEventAllocationRatio = ...
+                    (nnz(actionEvent)/nnz(actionEval))/eventFraction;
+            end
+        end
+    end
 catch err
     row.failed = true;
     row.errorIdentifier = string(err.identifier);
@@ -165,6 +229,23 @@ catch err
 end
 
 row.runtime_s = toc(t0);
+
+end
+
+
+function [xMean,xMedian,xP90] = localDistribution(x)
+
+x = double(x(:));
+x = x(isfinite(x));
+if isempty(x)
+    xMean = NaN;
+    xMedian = NaN;
+    xP90 = NaN;
+    return;
+end
+xMean = mean(x);
+xMedian = median(x);
+xP90 = prctile(x,90);
 
 end
 
