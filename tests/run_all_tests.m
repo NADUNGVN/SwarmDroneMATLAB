@@ -43,6 +43,7 @@ suite = {
     'test_tcns_cross_term_oracle'
     'test_tcns_forced_periodic_branch'
     'test_tcns_centralized_state_oracle'
+    'test_tcns_ab0_ack_cost'
     'test_probabilistic_safety_certificate'
     'test_standalone_ack_value_certificate'
     'test_setpoint_interface'

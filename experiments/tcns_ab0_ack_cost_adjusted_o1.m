@@ -54,22 +54,10 @@ for q = 1:height(raw)
     a = actions(select,:);
     actionGroupPass = actionGroupPass && ...
         height(a)==raw.oracleSendCount(q);
-    deliveryTick = ceil((a.arrivalTime_s-1e-12)/cfg.swarm.dt);
-    deliveryTime = deliveryTick*cfg.swarm.dt;
-    acceptedEval = a.accepted & ...
-        deliveryTime>=scenario.evaluationStart_s-1e-12 & ...
-        deliveryTime<scenario.horizon_s-1e-12;
-    c1 = nnz(acceptedEval);
-    if c1==0
-        c2 = 0;
-    else
-        tuples = table(deliveryTick(acceptedEval), ...
-            a.receiver(acceptedEval),a.sender(acceptedEval), ...
-            a.linkClass(acceptedEval),'VariableNames', ...
-            {'deliveryTick','receiver','sender','linkClass'});
-        c2 = height(unique(tuples,'rows'));
-        c2TuplePass = c2TuplePass && c2<=c1;
-    end
+    ackAccounting = tcnsO1OfflineAckCounts(a,cfg,scenario);
+    c1 = ackAccounting.c1Count;
+    c2 = ackAccounting.c2Count;
+    c2TuplePass = c2TuplePass && ackAccounting.c2AtMostC1;
     duration = scenario.horizon_s-scenario.evaluationStart_s;
     nChannels = nnz(cfg.swarm.A)+nnz(cfg.swarm.pin);
     raw.adjustedAckC1Count(q) = c1;

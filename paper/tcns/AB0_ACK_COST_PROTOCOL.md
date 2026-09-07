@@ -24,13 +24,15 @@ frontier and performance metric.
   tick, not the original DATA-generation tick:
   (C_1=(N_{DATA}+0.25N_{accepted})/(T_en_{ch})).
 - **C2:** exact queued causal-protocol ACK-generation semantics from
-  `deliverDataWithAck`: at a delivery tick, emit at most one cumulative ACK
-  per directed payload link if and only if its receiver `acceptedGenTime`
-  advances. Thus (N_{C2}) is the count of unique
-  `(delivery tick, receiver, sender, payload class)` tuples among accepted O1
-  actions. ACK loss/delay does not change ACK transmissions charged at
-  generation. There are no node blackouts in S2--S6; S5 link failure is
-  already reflected in DATA acceptance.
+  `simSwarmAoICausal` and `deliverDataWithAck`. The causal simulator invokes
+  DATA delivery twice per outer tick: once before scheduling and once after
+  scheduling for same-tick zero-delay packets. Within each invocation, emit
+  at most one cumulative ACK per directed payload link if and only if its
+  receiver `acceptedGenTime` advances. Thus (N_{C2}) is the count of unique
+  `(delivery tick, delivery phase, receiver, sender, payload class)` tuples
+  among accepted O1 actions. ACK loss/delay does not change ACK transmissions
+  charged at generation. There are no node blackouts in S2--S6; S5 link
+  failure is already reflected in DATA acceptance.
 
 Periodic baselines remain ACK-free because their schedule requires no
 receiver feedback. Only O1 is sensitivity-charged. DATA and ACK events are
@@ -71,5 +73,18 @@ The audit is valid only if:
 - C0 exactly reproduces the frozen scenario classifications and matched means
   to numerical tolerance;
 - (C_0\le C_2\le C_1) for every O1 run;
-- C2 tuple counts implement at-most-one ACK per link/tick;
+- C2 tuple counts implement at-most-one ACK per link/delivery phase. The
+  two-phase simulator can therefore generate two ACKs for one link in one
+  outer tick if one older packet is accepted before scheduling and a new
+  zero-delay packet is accepted after scheduling;
 - no held-out seed or new policy behavior is used.
+
+## Recorded protocol clarification
+
+The first post-freeze audit run exposed that the function-level comment
+“at most one ACK per link per sampling tick” is narrower than actual simulator
+behavior because `simSwarmAoICausal` calls the delivery function twice. The
+initial C2 implementation grouped without delivery phase and is therefore
+retained only as a superseded technical run. Adding the phase is an
+implementation-faithfulness correction, not a scientific threshold or model
+change; it weakly increases ACK cost and cannot improve O1 support.
