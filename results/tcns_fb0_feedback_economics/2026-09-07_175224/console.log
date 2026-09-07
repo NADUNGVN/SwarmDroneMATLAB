@@ -1,0 +1,27 @@
+
+============================================================
+RUN  : tcns_fb0_feedback_economics
+ID   : 2026-09-07_175224
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_fb0_feedback_economics\2026-09-07_175224
+WHEN : 2026-09-07 17:52:24
+============================================================
+
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_fb0_feedback_economics\2026-09-07_175224\figures
+
+FB0 technical verdict: PASS
+    scenarioId    pointCount    eligiblePointCount    outsideDomainCount    etaMedian     etaQ25      etaQ75     etaMinimum    etaMaximum    rawFractionMedianAt025    rawFractionQ25At025    rawFractionQ75At025    fractionPositiveHeadroom    fractionFullFeedbackAffordable    etaFrozen
+    __________    __________    __________________    __________________    _________    _________    _______    __________    __________    ______________________    ___________________    ___________________    ________________________    ______________________________    _________
+
+       "S2"           14                 4                    10              0.72604      0.55627     2.1861       0.5291        3.5037              2.9042                  2.2251                 8.7446                        1                               1                 0.25   
+       "S3"           14                11                     3              0.21977       0.1858    0.24862     -0.27593       0.44732             0.87907                  0.7432                0.99449                  0.90909                         0.27273                 0.25   
+       "S4"           14                11                     3             -0.74139     -0.81368    -0.1733     -0.81401     -0.073077             -2.9656                 -3.2547               -0.69321                        0                               0                 0.25   
+       "S5"           14                11                     3            -0.047413    -0.070422     0.1727    -0.074895       0.38706            -0.18965                -0.28169                0.69081                  0.27273                        0.090909                 0.25   
+       "S6"           14                11                     3              0.09461     0.031725    0.36658     0.028555       0.40341             0.37844                  0.1269                 1.4663                        1                         0.36364                 0.25   
+
+
+============================================================
+DONE : tcns_fb0_feedback_economics
+TIME : 10.7 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_fb0_feedback_economics\2026-09-07_175224
+============================================================

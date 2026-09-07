@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_fb0_feedback_economics",
+  "runId": "2026-09-07_175224",
+  "startedAt": "2026-09-07 17:52:24",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "91a95bb",
+  "notes": "Offline feedback-price break-even analysis on immutable O1 and periodic development runs; no trajectory is rerun.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_fb0_feedback_economics.m",
+  "finishedAt": "2026-09-07 17:52:35",
+  "elapsedSec": 10.743151,
+  "elapsedText": "10.7 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": false
+}
