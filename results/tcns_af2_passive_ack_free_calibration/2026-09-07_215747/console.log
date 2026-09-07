@@ -1,0 +1,35 @@
+
+============================================================
+RUN  : tcns_af2_passive_ack_free_calibration
+ID   : 2026-09-07_215747
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_af2_passive_ack_free_calibration\2026-09-07_215747
+WHEN : 2026-09-07 21:57:47
+============================================================
+
+Running 10 passive P10 simulations.
+  S2 seed 27020001 complete (11000 observations total).
+  S2 seed 27020002 complete (22000 observations total).
+  S2 seed 27020003 complete (33000 observations total).
+  S2 seed 27020004 complete (44000 observations total).
+  S2 seed 27020005 complete (55000 observations total).
+  S6 seed 27020001 complete (66000 observations total).
+  S6 seed 27020002 complete (77000 observations total).
+  S6 seed 27020003 complete (88000 observations total).
+  S6 seed 27020004 complete (99000 observations total).
+  S6 seed 27020005 complete (110000 observations total).
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_af2_passive_ack_free_calibration\2026-09-07_215747\figures
+    scenarioId    observationCount    candidateForecastCount    supportViolationCount    maxNormalizationResidual    meanNLL    meanEntropy    nllMinusEntropy    meanBrier    meanBayesBrier    brierMinusBayes       ECE           MCE       mapAccuracy    meanTrueProbability    medianTrueProbability    meanSupportSize    maxSupportSize    vectorComponentCorrelation    vectorRMSE    vectorBiasNorm    normCorrelation    normRMSE     normBias      secondMomentCorrelation    secondMomentRMSE    secondMomentBias    maxMomentIdentityResidual    supportPass    probabilityPass    nllPass    brierPass    ecePass    mcePass    informationContractPass    pass            verdict        
+    __________    ________________    ______________________    _____________________    ________________________    _______    ___________    _______________    _________    ______________    _______________    __________    _________    ___________    ___________________    _____________________    _______________    ______________    __________________________    __________    ______________    _______________    ________    ___________    _______________________    ________________    ________________    _________________________    ___________    _______________    _______    _________    _______    _______    _______________________    _____    ______________________
+
+       "S2"            55000                1.0397e+07                    0                     2.2204e-16           0.64051      0.6255          0.015012         0.33887        0.33333           0.0055338       3.8665e-05    0.0036545      0.79635            0.6639                    0.8                 189.04              299                   0.92703               0.022863       0.00029313           0.6792        0.022827    -0.00045889            0.53334               0.0050422           -9.967e-05              6.9389e-18               true             true           true        true        true       true               true              true     "AF2_CALIBRATION_PASS"
+       "S6"            55000                1.0397e+07                    0                     2.2204e-16           0.64051      0.6255          0.015012         0.33887        0.33333           0.0055338       3.8665e-05    0.0036545      0.79635            0.6639                    0.8                 189.04              299                     0.929               0.022457       0.00018666          0.67647        0.022425    -0.00028247            0.58631               0.0052786          -5.3981e-05              1.3878e-17               true             true           true        true        true       true               true              true     "AF2_CALIBRATION_PASS"
+
+
+AF2 verdict: AF2_CALIBRATION_PASS
+
+============================================================
+DONE : tcns_af2_passive_ack_free_calibration
+TIME : 4 m 22 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_af2_passive_ack_free_calibration\2026-09-07_215747
+============================================================

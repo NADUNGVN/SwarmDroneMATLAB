@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_af2_passive_ack_free_calibration",
+  "runId": "2026-09-07_215747",
+  "startedAt": "2026-09-07 21:57:47",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "f688525",
+  "notes": "Passive P10 S2/S6 calibration of the AF0 communication-filtration receiver-memory PMF; no active policy and no held-out seeds.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_af2_passive_ack_free_calibration.m",
+  "finishedAt": "2026-09-07 22:02:09",
+  "elapsedSec": 262.2943851,
+  "elapsedText": "4 m 22 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": true
+}

@@ -301,3 +301,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-07_170557 | tcns_ab0_ack_cost_adjusted_o1 | 19.4 s | 1 | yes | - | (R2025a) | 1fd9d39 |
 | 2026-09-07_170715 | tcns_ab0_ack_cost_adjusted_o1 | 20.2 s | 1 | yes | - | (R2025a) | 6e99816 |
 | 2026-09-07_175224 | tcns_fb0_feedback_economics | 10.7 s | 1 | yes | - | (R2025a) | 91a95bb |
+| 2026-09-07_215747 | tcns_af2_passive_ack_free_calibration | 4 m 22 s | 1 | yes | yes | (R2025a) | f688525 |
