@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_ab0_ack_cost_adjusted_o1",
+  "runId": "2026-09-07_170123",
+  "startedAt": "2026-09-07 17:01:23",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "55c0dcb",
+  "notes": "Offline C0/C1/C2 cost sensitivity on immutable O1 actions; no trajectory or scheduling behavior is rerun.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_ab0_ack_cost_adjusted_o1.m",
+  "finishedAt": "2026-09-07 17:01:43",
+  "elapsedSec": 19.3993594,
+  "elapsedText": "19.4 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

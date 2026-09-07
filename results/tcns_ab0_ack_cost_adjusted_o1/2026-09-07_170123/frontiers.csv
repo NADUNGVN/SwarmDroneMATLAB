@@ -1,0 +1,312 @@
+armId,methodFamily,method,parameterName,parameterValue,period_s,epsilonPosition_m,seedCount,failedRuns,meanPrimaryFormationRMSE_m,meanEvaluationCost025PerChannel_Hz,scenarioId,costModel,frontierFamily
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.399029181409083,1.24818181818182,S2,C0,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.293723541995433,2,S2,C0,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.263970237372604,2.5,S2,C0,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.230733271395,3.33545454545455,S2,C0,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.203649521381208,5,S2,C0,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.192599351224985,6.24545454545455,S2,C0,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.178836478882745,10,S2,C0,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.174595826377148,12.5,S2,C0,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.171162638713115,16.6663636363637,S2,C0,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.168100765428591,25,S2,C0,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.165470790312474,50,S2,C0,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.47894293204659,0.05,S2,C0,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,0.932394967288305,0.169090909090909,S2,C0,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.609805185090449,0.427272727272727,S2,C0,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.368759693796022,1.03090909090909,S2,C0,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.250710871329068,1.93,S2,C0,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.191126502289233,3.93,S2,C0,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.167764193516855,7.42272727272727,S2,C0,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.162225470442772,10.9045454545455,S2,C0,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.584599805122672,1.24818181818182,S3,C0,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.401503219344537,2,S3,C0,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.358354558611536,2.5,S3,C0,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.297563035350411,3.33545454545455,S3,C0,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.242821035024192,5,S3,C0,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.211298746718255,6.24545454545455,S3,C0,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.175566669228147,10,S3,C0,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.163921260437046,12.5,S3,C0,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.146091631214476,16.6663636363637,S3,C0,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.126971651094584,25,S3,C0,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.103271621583481,50,S3,C0,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.73353467325831,0.0454545454545455,S3,C0,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.1519868886214,0.258181818181818,S3,C0,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.739528747483276,0.889090909090909,S3,C0,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.445679956578326,2.01727272727273,S3,C0,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.289079953788977,3.53181818181818,S3,C0,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.204761303397339,6.14363636363636,S3,C0,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.166592884377767,9.68090909090909,S3,C0,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.157232039750373,12.2790909090909,S3,C0,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.156887619564306,12.4581818181818,S3,C0,Centralized state oracle
+O1L03,Centralized state oracle,centralized_state_oracle,lambda,3e-06,NaN,NaN,5,0,0.156813802918528,12.4609090909091,S3,C0,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.432274651162221,1.24818181818182,S4,C0,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.303594902393725,2,S4,C0,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.259731535485119,2.5,S4,C0,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.21673896922086,3.33545454545455,S4,C0,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.170573805856513,5,S4,C0,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.147205753865599,6.24545454545455,S4,C0,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.119339694361658,10,S4,C0,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.107622822087049,12.5,S4,C0,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.097411970253995,16.6663636363637,S4,C0,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.0867037963209331,25,S4,C0,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.0749799248894006,50,S4,C0,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.4486388321783,0.0890909090909091,S4,C0,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.09517428777588,0.285454545454545,S4,C0,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.711750148336771,0.698181818181818,S4,C0,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.421872094631094,1.45909090909091,S4,C0,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.269807773014381,2.63454545454545,S4,C0,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.178539481019976,4.98363636363636,S4,C0,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.14007522135218,9.00818181818182,S4,C0,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.132158485655335,14.4181818181818,S4,C0,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.130853149855729,18.0490909090909,S4,C0,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.129350660176882,20.6245454545454,S4,C0,Centralized state oracle
+O1L01,Centralized state oracle,centralized_state_oracle,lambda,0,NaN,NaN,5,0,0.129266726326101,20.6309090909091,S4,C0,Centralized state oracle
+O1L05,Centralized state oracle,centralized_state_oracle,lambda,3e-05,NaN,NaN,5,0,0.128935621875214,20.6345454545455,S4,C0,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.572435081701726,1.24818181818182,S5,C0,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.458070957298232,2,S5,C0,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.434460849986838,2.5,S5,C0,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.383173345426432,3.33545454545455,S5,C0,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.346485364514692,5,S5,C0,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.324271106077022,6.24545454545455,S5,C0,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.298683200799995,10,S5,C0,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.290866907462571,12.5,S5,C0,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.283409840534781,16.6663636363637,S5,C0,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.27413499337616,25,S5,C0,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.26684350693571,50,S5,C0,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.65320054285544,0.0409090909090909,S5,C0,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.10938953279635,0.53,S5,C0,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.73368891245465,1.05636363636363,S5,C0,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.49436824446438,1.81,S5,C0,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.382039662738185,2.95454545454545,S5,C0,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.320647404376365,5.33272727272727,S5,C0,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.296455470559737,9.12818181818182,S5,C0,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.292800966849517,12.4181818181818,S5,C0,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.291364029225731,12.4363636363636,S5,C0,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.393889023503573,1.24818181818182,S6,C0,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.270202159997043,2,S6,C0,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.235526593979293,2.5,S6,C0,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.191692328326009,3.33545454545455,S6,C0,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.153305182811752,5,S6,C0,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.133422041098869,6.24545454545455,S6,C0,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.110027380267869,10,S6,C0,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.10292607551312,12.5,S6,C0,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.0963522197436653,16.6663636363637,S6,C0,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.0899306469997642,25,S6,C0,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.0845276113750081,50,S6,C0,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.59352391526709,0.0381818181818182,S6,C0,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.04363001186386,0.189090909090909,S6,C0,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.619520786371142,0.518181818181818,S6,C0,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.353854989290926,1.14090909090909,S6,C0,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.222330294997625,2.10818181818182,S6,C0,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.144593256262382,4.18181818181818,S6,C0,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.112154216744569,7.67090909090909,S6,C0,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.102979700619946,11.5572727272728,S6,C0,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.101890604137895,12.2272727272727,S6,C0,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.399029181409083,1.24818181818182,S2,C1,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.293723541995433,2,S2,C1,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.263970237372604,2.5,S2,C1,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.230733271395,3.33545454545455,S2,C1,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.203649521381208,5,S2,C1,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.192599351224985,6.24545454545455,S2,C1,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.178836478882745,10,S2,C1,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.174595826377148,12.5,S2,C1,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.171162638713115,16.6663636363637,S2,C1,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.168100765428591,25,S2,C1,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.165470790312474,50,S2,C1,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.47894293204659,0.0602272727272727,S2,C1,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,0.932394967288305,0.205227272727273,S2,C1,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.609805185090449,0.513409090909091,S2,C1,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.368759693796022,1.23568181818182,S2,C1,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.250710871329068,2.31704545454545,S2,C1,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.191126502289233,4.71204545454546,S2,C1,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.167764193516855,8.90522727272727,S2,C1,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.162225470442772,13.0752272727273,S2,C1,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.584599805122672,1.24818181818182,S3,C1,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.401503219344537,2,S3,C1,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.358354558611536,2.5,S3,C1,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.297563035350411,3.33545454545455,S3,C1,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.242821035024192,5,S3,C1,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.211298746718255,6.24545454545455,S3,C1,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.175566669228147,10,S3,C1,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.163921260437046,12.5,S3,C1,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.146091631214476,16.6663636363637,S3,C1,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.126971651094584,25,S3,C1,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.103271621583481,50,S3,C1,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.73353467325831,0.05,S3,C1,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.1519868886214,0.283636363636363,S3,C1,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.739528747483276,0.971590909090909,S3,C1,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.445679956578326,2.19727272727273,S3,C1,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.289079953788977,3.86454545454545,S3,C1,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.204761303397339,6.80522727272727,S3,C1,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.166592884377767,10.9359090909091,S3,C1,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.157232039750373,14.0431818181818,S3,C1,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.156887619564306,14.2595454545455,S3,C1,Centralized state oracle
+O1L03,Centralized state oracle,centralized_state_oracle,lambda,3e-06,NaN,NaN,5,0,0.156813802918528,14.2615909090909,S3,C1,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.432274651162221,1.24818181818182,S4,C1,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.303594902393725,2,S4,C1,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.259731535485119,2.5,S4,C1,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.21673896922086,3.33545454545455,S4,C1,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.170573805856513,5,S4,C1,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.147205753865599,6.24545454545455,S4,C1,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.119339694361658,10,S4,C1,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.107622822087049,12.5,S4,C1,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.097411970253995,16.6663636363637,S4,C1,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.0867037963209331,25,S4,C1,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.0749799248894006,50,S4,C1,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.4486388321783,0.105681818181818,S4,C1,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.09517428777588,0.339772727272727,S4,C1,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.711750148336771,0.825,S4,C1,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.421872094631094,1.72522727272727,S4,C1,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.269807773014381,3.11727272727273,S4,C1,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.178539481019976,5.91022727272727,S4,C1,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.14007522135218,10.6759090909091,S4,C1,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.132158485655335,17.0709090909091,S4,C1,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.130853149855729,21.2863636363636,S4,C1,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.129350660176882,24.3018181818182,S4,C1,Centralized state oracle
+O1L01,Centralized state oracle,centralized_state_oracle,lambda,0,NaN,NaN,5,0,0.129266726326101,24.3081818181818,S4,C1,Centralized state oracle
+O1L05,Centralized state oracle,centralized_state_oracle,lambda,3e-05,NaN,NaN,5,0,0.128935621875214,24.3154545454545,S4,C1,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.572435081701726,1.24818181818182,S5,C1,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.458070957298232,2,S5,C1,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.434460849986838,2.5,S5,C1,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.383173345426432,3.33545454545455,S5,C1,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.346485364514692,5,S5,C1,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.324271106077022,6.24545454545455,S5,C1,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.298683200799995,10,S5,C1,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.290866907462571,12.5,S5,C1,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.283409840534781,16.6663636363637,S5,C1,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.27413499337616,25,S5,C1,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.26684350693571,50,S5,C1,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.65320054285544,0.05,S5,C1,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.10938953279635,0.566136363636364,S5,C1,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.73368891245465,1.15909090909091,S5,C1,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.49436824446438,2.04386363636364,S5,C1,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.382039662738185,3.41181818181818,S5,C1,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.320647404376365,6.26568181818182,S5,C1,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.296455470559737,10.8234090909091,S5,C1,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.292800966849517,14.7722727272727,S5,C1,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.292450924690051,14.7836363636364,S5,C1,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.291364029225731,14.7897727272727,S5,C1,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.393889023503573,1.24818181818182,S6,C1,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.270202159997043,2,S6,C1,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.235526593979293,2.5,S6,C1,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.191692328326009,3.33545454545455,S6,C1,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.153305182811752,5,S6,C1,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.133422041098869,6.24545454545455,S6,C1,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.110027380267869,10,S6,C1,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.10292607551312,12.5,S6,C1,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.0963522197436653,16.6663636363637,S6,C1,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.0899306469997642,25,S6,C1,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.0845276113750081,50,S6,C1,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.59352391526709,0.0472727272727273,S6,C1,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.04363001186386,0.2275,S6,C1,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.619520786371142,0.622954545454546,S6,C1,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.353854989290926,1.36772727272727,S6,C1,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.222330294997625,2.52977272727273,S6,C1,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.144593256262382,5.02704545454546,S6,C1,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.112154216744569,9.215,S6,C1,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.102979700619946,13.8490909090909,S6,C1,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.101890604137895,14.6820454545454,S6,C1,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.399029181409083,1.24818181818182,S2,C2,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.293723541995433,2,S2,C2,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.263970237372604,2.5,S2,C2,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.230733271395,3.33545454545455,S2,C2,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.203649521381208,5,S2,C2,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.192599351224985,6.24545454545455,S2,C2,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.178836478882745,10,S2,C2,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.174595826377148,12.5,S2,C2,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.171162638713115,16.6663636363637,S2,C2,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.168100765428591,25,S2,C2,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.165470790312474,50,S2,C2,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.47894293204659,0.0602272727272727,S2,C2,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,0.932394967288305,0.205227272727273,S2,C2,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.609805185090449,0.513409090909091,S2,C2,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.368759693796022,1.23568181818182,S2,C2,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.250710871329068,2.31704545454545,S2,C2,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.191126502289233,4.71204545454546,S2,C2,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.167764193516855,8.90522727272727,S2,C2,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.162225470442772,13.0752272727273,S2,C2,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.584599805122672,1.24818181818182,S3,C2,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.401503219344537,2,S3,C2,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.358354558611536,2.5,S3,C2,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.297563035350411,3.33545454545455,S3,C2,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.242821035024192,5,S3,C2,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.211298746718255,6.24545454545455,S3,C2,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.175566669228147,10,S3,C2,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.163921260437046,12.5,S3,C2,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.146091631214476,16.6663636363637,S3,C2,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.126971651094584,25,S3,C2,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.103271621583481,50,S3,C2,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.73353467325831,0.05,S3,C2,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.1519868886214,0.283636363636363,S3,C2,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.739528747483276,0.971590909090909,S3,C2,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.445679956578326,2.19727272727273,S3,C2,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.289079953788977,3.86454545454545,S3,C2,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.204761303397339,6.80522727272727,S3,C2,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.166592884377767,10.9359090909091,S3,C2,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.157232039750373,14.0431818181818,S3,C2,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.156887619564306,14.2595454545455,S3,C2,Centralized state oracle
+O1L03,Centralized state oracle,centralized_state_oracle,lambda,3e-06,NaN,NaN,5,0,0.156813802918528,14.2615909090909,S3,C2,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.432274651162221,1.24818181818182,S4,C2,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.303594902393725,2,S4,C2,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.259731535485119,2.5,S4,C2,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.21673896922086,3.33545454545455,S4,C2,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.170573805856513,5,S4,C2,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.147205753865599,6.24545454545455,S4,C2,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.119339694361658,10,S4,C2,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.107622822087049,12.5,S4,C2,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.097411970253995,16.6663636363637,S4,C2,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.0867037963209331,25,S4,C2,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.0749799248894006,50,S4,C2,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.4486388321783,0.105681818181818,S4,C2,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.09517428777588,0.339772727272727,S4,C2,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.711750148336771,0.825,S4,C2,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.421872094631094,1.72522727272727,S4,C2,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.269807773014381,3.11727272727273,S4,C2,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.178539481019976,5.90954545454546,S4,C2,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.14007522135218,10.6736363636364,S4,C2,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.132158485655335,17.0595454545454,S4,C2,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.130853149855729,21.2615909090909,S4,C2,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.129350660176882,24.2515909090909,S4,C2,Centralized state oracle
+O1L01,Centralized state oracle,centralized_state_oracle,lambda,0,NaN,NaN,5,0,0.129266726326101,24.2579545454545,S4,C2,Centralized state oracle
+O1L05,Centralized state oracle,centralized_state_oracle,lambda,3e-05,NaN,NaN,5,0,0.128935621875214,24.2652272727273,S4,C2,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.572435081701726,1.24818181818182,S5,C2,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.458070957298232,2,S5,C2,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.434460849986838,2.5,S5,C2,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.383173345426432,3.33545454545455,S5,C2,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.346485364514692,5,S5,C2,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.324271106077022,6.24545454545455,S5,C2,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.298683200799995,10,S5,C2,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.290866907462571,12.5,S5,C2,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.283409840534781,16.6663636363637,S5,C2,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.27413499337616,25,S5,C2,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.26684350693571,50,S5,C2,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.65320054285544,0.05,S5,C2,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.10938953279635,0.566136363636364,S5,C2,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.73368891245465,1.15909090909091,S5,C2,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.49436824446438,2.04386363636364,S5,C2,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.382039662738185,3.41181818181818,S5,C2,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.320647404376365,6.26568181818182,S5,C2,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.296455470559737,10.8234090909091,S5,C2,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.292800966849517,14.7722727272727,S5,C2,Centralized state oracle
+O1L04,Centralized state oracle,centralized_state_oracle,lambda,1e-05,NaN,NaN,5,0,0.292450924690051,14.7836363636364,S5,C2,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.291364029225731,14.7897727272727,S5,C2,Centralized state oracle
+PS040,Periodic,Periodic-40step,periodSamples,40,0.8,NaN,5,0,0.393889023503573,1.24818181818182,S6,C2,Periodic
+PS025,Periodic,Periodic-25step,periodSamples,25,0.5,NaN,5,0,0.270202159997043,2,S6,C2,Periodic
+PS020,Periodic,Periodic-20step,periodSamples,20,0.4,NaN,5,0,0.235526593979293,2.5,S6,C2,Periodic
+PS015,Periodic,Periodic-15step,periodSamples,15,0.3,NaN,5,0,0.191692328326009,3.33545454545455,S6,C2,Periodic
+PS010,Periodic,Periodic-10step,periodSamples,10,0.2,NaN,5,0,0.153305182811752,5,S6,C2,Periodic
+PS008,Periodic,Periodic-8step,periodSamples,8,0.16,NaN,5,0,0.133422041098869,6.24545454545455,S6,C2,Periodic
+PS005,Periodic,Periodic-5step,periodSamples,5,0.1,NaN,5,0,0.110027380267869,10,S6,C2,Periodic
+PS004,Periodic,Periodic-4step,periodSamples,4,0.08,NaN,5,0,0.10292607551312,12.5,S6,C2,Periodic
+PS003,Periodic,Periodic-3step,periodSamples,3,0.06,NaN,5,0,0.0963522197436653,16.6663636363637,S6,C2,Periodic
+PS002,Periodic,Periodic-2step,periodSamples,2,0.04,NaN,5,0,0.0899306469997642,25,S6,C2,Periodic
+PS001,Periodic,Periodic-1step,periodSamples,1,0.02,NaN,5,0,0.0845276113750081,50,S6,C2,Periodic
+O1L14,Centralized state oracle,centralized_state_oracle,lambda,1,NaN,NaN,5,0,1.59352391526709,0.0472727272727273,S6,C2,Centralized state oracle
+O1L13,Centralized state oracle,centralized_state_oracle,lambda,0.3,NaN,NaN,5,0,1.04363001186386,0.2275,S6,C2,Centralized state oracle
+O1L12,Centralized state oracle,centralized_state_oracle,lambda,0.1,NaN,NaN,5,0,0.619520786371142,0.622954545454546,S6,C2,Centralized state oracle
+O1L11,Centralized state oracle,centralized_state_oracle,lambda,0.03,NaN,NaN,5,0,0.353854989290926,1.36772727272727,S6,C2,Centralized state oracle
+O1L10,Centralized state oracle,centralized_state_oracle,lambda,0.01,NaN,NaN,5,0,0.222330294997625,2.52977272727273,S6,C2,Centralized state oracle
+O1L09,Centralized state oracle,centralized_state_oracle,lambda,0.003,NaN,NaN,5,0,0.144593256262382,5.02704545454546,S6,C2,Centralized state oracle
+O1L08,Centralized state oracle,centralized_state_oracle,lambda,0.001,NaN,NaN,5,0,0.112154216744569,9.215,S6,C2,Centralized state oracle
+O1L07,Centralized state oracle,centralized_state_oracle,lambda,0.0003,NaN,NaN,5,0,0.102979700619946,13.8490909090909,S6,C2,Centralized state oracle
+O1L06,Centralized state oracle,centralized_state_oracle,lambda,0.0001,NaN,NaN,5,0,0.101890604137895,14.6820454545454,S6,C2,Centralized state oracle

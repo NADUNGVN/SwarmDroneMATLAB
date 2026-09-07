@@ -297,3 +297,6 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-07_121250 | tcns_true_branch_value_diagnostic | 54.7 s | 1 | - | - | (R2025a) | 84849c3 |
 | 2026-09-07_160426 | tcns_o1_oracle_frontier_stage_a | 2 m 10 s | 3 | yes | yes | (R2025a) | 16537d1 |
 | 2026-09-07_162102 | tcns_o1_oracle_frontier_stage_b | 4 m 37 s | 3 | yes | yes | (R2025a) | 58e9aa9 |
+| 2026-09-07_170123 | tcns_ab0_ack_cost_adjusted_o1 | 19.4 s | 1 | yes | - | (R2025a) | 55c0dcb |
+| 2026-09-07_170557 | tcns_ab0_ack_cost_adjusted_o1 | 19.4 s | 1 | yes | - | (R2025a) | 1fd9d39 |
+| 2026-09-07_170715 | tcns_ab0_ack_cost_adjusted_o1 | 20.2 s | 1 | yes | - | (R2025a) | 6e99816 |

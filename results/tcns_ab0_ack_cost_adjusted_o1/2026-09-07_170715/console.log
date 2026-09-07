@@ -1,0 +1,46 @@
+
+============================================================
+RUN  : tcns_ab0_ack_cost_adjusted_o1
+ID   : 2026-09-07_170715
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_ab0_ack_cost_adjusted_o1\2026-09-07_170715
+WHEN : 2026-09-07 17:07:15
+============================================================
+
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_ab0_ack_cost_adjusted_o1\2026-09-07_170715\figures
+
+AB0 ACK-cost technical verdict: PASS
+    costModel    scenarioId    budgetMeanDifference    budgetFractionFavoringO1    performanceMeanDifference    performanceFractionFavoringO1       classification   
+    _________    __________    ____________________    ________________________    _________________________    _____________________________    ____________________
+
+      "C0"          "S2"              -0.02381                       1                       -1.7088                             1               "CONVINCING"        
+      "C0"          "S3"             0.0016552                 0.79208                    -0.0014496                       0.31683               "MARGINAL_OR_NARROW"
+      "C0"          "S4"              0.025949                       0                       0.71346                             0               "NO_HEADROOM"       
+      "C0"          "S5"            -0.0043094                 0.82178                      -0.24684                       0.52475               "CONVINCING"        
+      "C0"          "S6"             -0.014595                       1                      -0.56959                             1               "CONVINCING"        
+      "C1"          "S2"              -0.01314                       1                         -1.25                             1               "CONVINCING"        
+      "C1"          "S3"              0.013687                 0.55446                        0.3679                       0.10891               "NO_HEADROOM"       
+      "C1"          "S4"              0.038165                       0                        1.3905                             0               "NO_HEADROOM"       
+      "C1"          "S5"             0.0088189                 0.23762                         0.261                       0.10891               "NO_HEADROOM"       
+      "C1"          "S6"           -0.00034022                 0.42574                     -0.014972                       0.63366               "NO_HEADROOM"       
+      "C2"          "S2"              -0.01314                       1                         -1.25                             1               "CONVINCING"        
+      "C2"          "S3"              0.013687                 0.55446                        0.3679                       0.10891               "NO_HEADROOM"       
+      "C2"          "S4"              0.038165                       0                        1.3905                             0               "NO_HEADROOM"       
+      "C2"          "S5"             0.0088189                 0.23762                         0.261                       0.10891               "NO_HEADROOM"       
+      "C2"          "S6"           -0.00034022                 0.42574                     -0.014972                       0.63366               "NO_HEADROOM"       
+
+    costModel    GroupCount    convincingSupportCount    requiredSupportCount    supportPass
+    _________    __________    ______________________    ____________________    ___________
+
+      "C0"           5                   3                        2                 true    
+      "C1"           5                   1                        2                 false   
+      "C2"           5                   1                        2                 false   
+
+AB0 ACK-cost decision: STOP_ACK_BELIEF_IMPLEMENTATION
+Frozen next action: RETURN_TO_RESEARCH_LEAD
+
+============================================================
+DONE : tcns_ab0_ack_cost_adjusted_o1
+TIME : 20.2 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_ab0_ack_cost_adjusted_o1\2026-09-07_170715
+============================================================

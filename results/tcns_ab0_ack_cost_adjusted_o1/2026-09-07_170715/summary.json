@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "phase": "AB0.2",
+  "technicalStatus": "PASS",
+  "trajectoryRerunCount": 0,
+  "savedRunCount": 625,
+  "o1RunCount": 350,
+  "actionCount": 827995,
+  "actionGroupPass": true,
+  "c2TuplePass": true,
+  "c0ReproductionPass": true,
+  "monotoneCostPass": true,
+  "c1EqualsC2ForAllRuns": true,
+  "costModels": [
+    "C0",
+    "C1",
+    "C2"
+  ],
+  "support": [
+    {
+      "costModel": "C0",
+      "GroupCount": 5,
+      "convincingSupportCount": 3,
+      "requiredSupportCount": 2,
+      "supportPass": true
+    },
+    {
+      "costModel": "C1",
+      "GroupCount": 5,
+      "convincingSupportCount": 1,
+      "requiredSupportCount": 2,
+      "supportPass": false
+    },
+    {
+      "costModel": "C2",
+      "GroupCount": 5,
+      "convincingSupportCount": 1,
+      "requiredSupportCount": 2,
+      "supportPass": false
+    }
+  ],
+  "decision": "STOP_ACK_BELIEF_IMPLEMENTATION",
+  "recommendation": "RETURN_TO_RESEARCH_LEAD",
+  "interpretation": "Costs only; frozen O1 actions and plant trajectories are unchanged. C2 implements cumulative at-most-one ACK per link/delivery phase; the causal simulator has pre- and post-scheduling delivery phases."
+}
