@@ -12,6 +12,13 @@ K = numel(t);
 
 N = cfg.swarm.N;
 
+% Development-only TCNS branch-at-decision instrumentation. Both features
+% default off and are isolated from every historical periodic path.
+logPeriodicSenderFire = isfield(cfg,'tcns') && ...
+    isfield(cfg.tcns,'logPeriodicSenderFire') && ...
+    logical(cfg.tcns.logPeriodicSenderFire);
+forcedTransmission = localForcedTransmissionConfig(cfg,t,N);
+
 %% ============================================================
 % Common random numbers (legacy default OFF)
 %
@@ -154,6 +161,10 @@ nextTx = phaseOffsetSec + periodNow;
 % read by the simulation.
 senderFireCount = zeros(N+1,1);
 
+if logPeriodicSenderFire
+    PeriodicSenderFireLog = false(K,N+1);
+end
+
 % Passive audit trail for the EXP11 oracle gate: every instant at which the
 % transmission period actually changed, and the period it changed to. Empty
 % for every fixed-period run, which is itself the evidence that the fixed
@@ -222,6 +233,10 @@ for k = 1:K
 
     fireMask = tk >= nextTx - 1e-12;
 
+    if logPeriodicSenderFire
+        PeriodicSenderFireLog(k,:) = reshape(fireMask,1,N+1);
+    end
+
     if any(fireMask)
 
         net = enqueueNetworkPackets( ...
@@ -235,6 +250,16 @@ for k = 1:K
 
     end
 
+    % Optional one-action branch injection. It is deliberately applied
+    % after the baseline periodic scheduler and must not coincide with that
+    % payload class's normal fire. The injected action uses the same
+    % pre-drawn link/time channel outcome as every paired baseline.
+    if forcedTransmission.enabled && k==forcedTransmission.sampleIndex
+        [net,forcedTransmission] = localInjectForcedTransmission( ...
+            net,forcedTransmission,fireMask,PHat,VHat,leader,tk,cfg, ...
+            netTrace,kTrace);
+    end
+
 
     % ========================================================
     % Deliver packets whose arrival time has passed
@@ -242,6 +267,9 @@ for k = 1:K
 
     net = deliverNetworkPackets( ...
         net,tk,cfg);
+
+    forcedTransmission = localObserveForcedDelivery( ...
+        forcedTransmission,net,tk);
 
 
     % ========================================================
@@ -406,6 +434,11 @@ end
 
 out.senderFireCount = senderFireCount;
 
+if logPeriodicSenderFire
+    out.periodicSenderFireLog = PeriodicSenderFireLog;
+end
+out.forcedPeriodicTransmission = forcedTransmission;
+
 out.periodSwitchTimes  = periodSwitchTimes;
 out.periodSwitchValues = periodSwitchValues;
 
@@ -442,5 +475,161 @@ out.staleDiscardRatio = ...
 out.effectiveUpdateRatio = ...
     (net.rxCount - net.staleDiscardCount) / ...
     max(net.txCount,1);
+
+end
+
+
+function F = localForcedTransmissionConfig(cfg,t,N)
+%LOCALFORCEDTRANSMISSIONCONFIG Validate the default-off diagnostic hook.
+
+F = struct('enabled',false,'time_s',NaN,'sampleIndex',NaN, ...
+    'receiver',NaN,'sender',NaN,'linkClass','off', ...
+    'attempted',false,'enqueued',false,'dropped',false, ...
+    'resolved',false,'accepted',false,'arrivalTime_s',NaN, ...
+    'txDelta',0,'dropDelta',0);
+if ~isfield(cfg,'tcns') || ...
+        ~isfield(cfg.tcns,'forcedPeriodicTransmission') || ...
+        isempty(cfg.tcns.forcedPeriodicTransmission)
+    return;
+end
+
+supplied = cfg.tcns.forcedPeriodicTransmission;
+if ~isfield(supplied,'enabled')
+    error('simSwarmNetworkQueued:ForcedTransmissionConfig', ...
+        'forcedPeriodicTransmission.enabled is required.');
+end
+if ~isscalar(supplied.enabled) || ...
+        ~(islogical(supplied.enabled) || isnumeric(supplied.enabled))
+    error('simSwarmNetworkQueued:ForcedTransmissionConfig', ...
+        'forcedPeriodicTransmission.enabled must be scalar logical.');
+end
+F.enabled = logical(supplied.enabled);
+if ~F.enabled
+    return;
+end
+
+required = {'time_s','receiver','sender','linkClass'};
+for q = 1:numel(required)
+    if ~isfield(supplied,required{q})
+        error('simSwarmNetworkQueued:ForcedTransmissionConfig', ...
+            'forcedPeriodicTransmission.%s is required.',required{q});
+    end
+end
+
+validateattributes(supplied.time_s,{'numeric'}, ...
+    {'real','finite','scalar','>=',0,'<=',t(end)}, ...
+    mfilename,'forcedPeriodicTransmission.time_s');
+validateattributes(supplied.receiver,{'numeric'}, ...
+    {'real','finite','integer','scalar','>=',2,'<=',N}, ...
+    mfilename,'forcedPeriodicTransmission.receiver');
+validateattributes(supplied.sender,{'numeric'}, ...
+    {'real','finite','integer','scalar','>=',1,'<=',N}, ...
+    mfilename,'forcedPeriodicTransmission.sender');
+[distance,sampleIndex] = min(abs(t-supplied.time_s));
+if distance>1e-12
+    error('simSwarmNetworkQueued:ForcedTransmissionGrid', ...
+        'The forced transmission time must lie on the outer sample grid.');
+end
+if (isfield(cfg.net,'regime') && ~isempty(cfg.net.regime)) || ...
+        (isfield(cfg.net,'jitterStd') && cfg.net.jitterStd~=0)
+    error('simSwarmNetworkQueued:ForcedTransmissionChannelScope', ...
+        'The first forced-action diagnostic requires static zero-jitter delay.');
+end
+
+linkClass = lower(char(supplied.linkClass));
+i = supplied.receiver;
+j = supplied.sender;
+switch linkClass
+    case 'ordinary'
+        if cfg.swarm.A(i,j)==0
+            error('simSwarmNetworkQueued:ForcedTransmissionLink', ...
+                'The requested ordinary link is not in cfg.swarm.A.');
+        end
+    case 'pinned-leader'
+        if j~=1 || cfg.swarm.pin(i)<=0
+            error('simSwarmNetworkQueued:ForcedTransmissionLink', ...
+                'A pinned-leader action requires sender 1 and a pinned receiver.');
+        end
+    otherwise
+        error('simSwarmNetworkQueued:ForcedTransmissionClass', ...
+            'linkClass must be ordinary or pinned-leader.');
+end
+
+F.time_s = double(t(sampleIndex));
+F.sampleIndex = sampleIndex;
+F.receiver = double(i);
+F.sender = double(j);
+F.linkClass = linkClass;
+
+end
+
+
+function [net,F] = localInjectForcedTransmission( ...
+    net,F,fireMask,P,V,leader,tk,cfg,netTrace,kTrace)
+%LOCALINJECTFORCEDTRANSMISSION Add exactly one directed payload action.
+
+N = cfg.swarm.N;
+singleCfg = cfg;
+singleCfg.swarm.A = zeros(N);
+singleCfg.swarm.pin = zeros(N,1);
+singleFire = false(N+1,1);
+
+switch F.linkClass
+    case 'ordinary'
+        if fireMask(F.sender)
+            error('simSwarmNetworkQueued:ForcedTransmissionCollision', ...
+                ['Forced ordinary action coincides with the baseline ' ...
+                 'sender-payload clock.']);
+        end
+        singleCfg.swarm.A(F.receiver,F.sender) = 1;
+        singleFire(F.sender) = true;
+    case 'pinned-leader'
+        if fireMask(N+1)
+            error('simSwarmNetworkQueued:ForcedTransmissionCollision', ...
+                ['Forced pinned-leader action coincides with the baseline ' ...
+                 'leader-payload clock.']);
+        end
+        singleCfg.swarm.pin(F.receiver) = 1;
+        singleFire(N+1) = true;
+end
+
+txBefore = net.txCount;
+dropBefore = net.dropCount;
+net = enqueueNetworkPackets( ...
+    net,P,V,leader,tk,singleCfg,netTrace,kTrace,singleFire);
+F.txDelta = net.txCount-txBefore;
+F.dropDelta = net.dropCount-dropBefore;
+F.attempted = F.txDelta==1;
+F.dropped = F.dropDelta==1;
+F.enqueued = F.attempted && ~F.dropped;
+if ~F.attempted || F.txDelta~=1 || ~ismember(F.dropDelta,[0 1])
+    error('simSwarmNetworkQueued:ForcedTransmissionAttempt', ...
+        'The forced action did not create exactly one DATA attempt.');
+end
+
+np = netParamsAt(cfg,tk);
+F.arrivalTime_s = tk+max(np.delay,0);
+if F.dropped
+    F.resolved = true;
+end
+
+end
+
+
+function F = localObserveForcedDelivery(F,net,tk)
+%LOCALOBSERVEFORCEDDELIVERY Record acceptance at the first due sample.
+
+if ~F.enabled || ~F.enqueued || F.resolved || ...
+        tk<F.arrivalTime_s-1e-12
+    return;
+end
+
+if strcmp(F.linkClass,'ordinary')
+    acceptedGenTime = net.genTime(F.receiver,F.sender);
+else
+    acceptedGenTime = net.leaderGenTime(F.receiver);
+end
+F.accepted = abs(acceptedGenTime-F.time_s)<=1e-12;
+F.resolved = true;
 
 end
