@@ -1,0 +1,3 @@
+linkClass,receiver,sender,historyLength,duration_s,beliefSupport,erasureHistoryProbability,qMinus,qPlus,senderObservationDifference,actionResponseDifference,affineTrajectoryResidual,maximumCommand_mps2,minimumSaturationMargin_mps2,dynamicallyReachable
+ordinary,5,1,92,1.84,2,0.2,-5.29704377499002e-06,5.29704377499011e-06,0,0,2.51101223147643e-16,0.0647011290219845,1.93529887097802,1
+pinned-leader,4,1,89,1.78,2,0.2,-4.9574002106161e-06,4.95740021061578e-06,0,0,2.85253591580936e-16,0.0282933782618819,1.97170662173812,1

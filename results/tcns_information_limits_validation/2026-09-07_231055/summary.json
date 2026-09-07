@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "seed": 2.7020001E+7,
+  "horizonSamples": 25,
+  "delaySamples": 4,
+  "augmentedStatePerAxis": 33,
+  "augmentedState3D": 99,
+  "ordinaryLinkCount": 8,
+  "pinnedPayloadCount": 2,
+  "maxAffineIdentityResidual": 4.3368086899420177E-16,
+  "allLinksHistoryNonidentifiable": true,
+  "allOneScalarClosuresPass": true,
+  "dynamicOrdinaryPass": true,
+  "dynamicPinPass": true,
+  "classification": "LIMITS_THEORY_STRONG",
+  "noSchedulerImplemented": true,
+  "noHeldOutSeedsUsed": true
+}

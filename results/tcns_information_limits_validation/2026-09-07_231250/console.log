@@ -1,0 +1,22 @@
+
+============================================================
+RUN  : tcns_information_limits_validation
+ID   : 2026-09-07_231250
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_information_limits_validation\2026-09-07_231250
+WHEN : 2026-09-07 23:12:51
+============================================================
+
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_information_limits_validation\2026-09-07_231250\figures
+IL affine maximum residual        : 4.337e-16
+history-nonidentifiable links     : 10 / 10
+one-scalar exact closures         : 10 / 10
+ordinary/pin dynamic witnesses   : 1 / 1
+classification                    : LIMITS_THEORY_STRONG
+
+============================================================
+DONE : tcns_information_limits_validation
+TIME : 14.4 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_information_limits_validation\2026-09-07_231250
+============================================================
