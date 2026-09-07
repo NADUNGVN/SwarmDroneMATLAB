@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "classification": "development-only centralized fixed-future-input cross-term diagnostic",
+  "technicalStatus": "PASS",
+  "scientificDecision": "CROSS_TERM_MATERIAL",
+  "runCount": 15,
+  "candidateCount": 161400,
+  "scenarios": [
+    "S1",
+    "S2",
+    "S6"
+  ],
+  "seeds": [
+    2.7020001E+7,
+    2.7020002E+7,
+    2.7020003E+7,
+    2.7020004E+7,
+    2.7020005E+7
+  ],
+  "periodSamples": 10,
+  "horizonSamples": 25,
+  "decision": [
+    {
+      "scenarioId": "S2",
+      "meanNonBeneficialFraction": 0.089721189591078068,
+      "meanTopDecileOverlap": 0.6446096654275093,
+      "signGate": false,
+      "rankingGate": true,
+      "material": true
+    },
+    {
+      "scenarioId": "S6",
+      "meanNonBeneficialFraction": 0.0017472118959107805,
+      "meanTopDecileOverlap": 0.73420074349442377,
+      "signGate": false,
+      "rankingGate": true,
+      "material": true
+    }
+  ],
+  "warning": "This is not a policy or a true closed-loop branch replay. Future network inputs are frozen and the candidate correction persists."
+}

@@ -1,0 +1,42 @@
+
+============================================================
+RUN  : tcns_cross_term_oracle_diagnostic
+ID   : 2026-09-07_113834
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_cross_term_oracle_diagnostic\2026-09-07_113834
+WHEN : 2026-09-07 11:38:34
+============================================================
+
+  S1 seed 27020001: 0.0% non-beneficial, top overlap 0.784
+  S1 seed 27020002: 0.0% non-beneficial, top overlap 0.743
+  S1 seed 27020003: 0.0% non-beneficial, top overlap 0.778
+  S1 seed 27020004: 0.0% non-beneficial, top overlap 0.764
+  S1 seed 27020005: 0.0% non-beneficial, top overlap 0.795
+  S2 seed 27020001: 8.6% non-beneficial, top overlap 0.647
+  S2 seed 27020002: 9.0% non-beneficial, top overlap 0.643
+  S2 seed 27020003: 9.1% non-beneficial, top overlap 0.649
+  S2 seed 27020004: 9.0% non-beneficial, top overlap 0.620
+  S2 seed 27020005: 9.2% non-beneficial, top overlap 0.664
+  S6 seed 27020001: 0.1% non-beneficial, top overlap 0.752
+  S6 seed 27020002: 0.1% non-beneficial, top overlap 0.713
+  S6 seed 27020003: 0.0% non-beneficial, top overlap 0.743
+  S6 seed 27020004: 0.3% non-beneficial, top overlap 0.710
+  S6 seed 27020005: 0.4% non-beneficial, top overlap 0.754
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_cross_term_oracle_diagnostic\2026-09-07_113834\figures
+
+Centralized quadratic cross-term diagnostic
+    scenarioId    meanNonBeneficialFraction    meanTopDecileOverlap    signGate    rankingGate    material
+    __________    _________________________    ____________________    ________    ___________    ________
+
+       "S2"                0.089721                  0.64461            false         true         true   
+       "S6"               0.0017472                   0.7342            false         true         true   
+
+Technical status: PASS
+Scientific decision: CROSS_TERM_MATERIAL
+Results: D:\Research\Drone\SwarmDroneMATLAB\results\tcns_cross_term_oracle_diagnostic\2026-09-07_113834
+
+============================================================
+DONE : tcns_cross_term_oracle_diagnostic
+TIME : 12.9 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_cross_term_oracle_diagnostic\2026-09-07_113834
+============================================================

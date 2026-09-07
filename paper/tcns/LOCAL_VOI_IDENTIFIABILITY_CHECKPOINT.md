@@ -177,17 +177,17 @@ The failed sender-local predictive mechanism remains stopped. No third scalar
 threshold using only AoI, sender state error, or isolated response energy is
 scientifically authorized.
 
-The next smallest defensible experiment is an **offline centralized
-cross-term oracle audit** on already defined development scenarios. It must
-measure the true branch-wise quadratic marginal benefit and answer two
-questions before any new online design:
+The next smallest defensible experiment is a two-stage centralized audit on
+already defined development scenarios:
 
-1. Does the cross term materially change action ranking/sign relative to the
-   isolated score?
-2. Does an oracle using the total marginal benefit exhibit Pareto headroom
-   over periodic communication before charging the extra information needed
-   to approximate it?
+1. an offline fixed-future-input cross-term diagnostic asks whether the cross
+   term materially changes action ranking/sign relative to the isolated
+   score;
+2. only if Stage 1 passes, a true branch-at-decision diagnostic asks whether
+   that score predicts realized counterfactual value and whether the
+   centralized action space has headroom before charging the extra
+   information needed to approximate it.
 
-If the answer is no, the mechanism family should stop. If yes, only then is a
-receiver-residual/adjoint information architecture worth designing and its
-reverse-channel overhead must be included in every comparison.
+If either answer is no, the mechanism family should stop. Only if both are
+yes is a receiver-residual/adjoint information architecture worth designing,
+and its reverse-channel overhead must be included in every comparison.

@@ -403,5 +403,33 @@ marked `PROOF GAP IV.1`.
 
 Decision: `LOCAL_VALUE_SIGN_NOT_IDENTIFIED`. The next authorized work is a
 small offline centralized cross-term oracle audit. No new sender-local scalar
-threshold is authorized before that audit establishes whether total
-marginal-value headroom exists.
+threshold is authorized before that audit establishes whether the omitted
+term is material.
+
+## Centralized cross-term diagnostic
+
+- Protocol/source commit: `403b9e6`.
+- Accepted run:
+  `results/tcns_cross_term_oracle_diagnostic/2026-09-07_113834`, MATLAB
+  R2025a; 15 Periodic-10 development reruns and 161,400 link/time
+  candidates.
+- Technical status is PASS: every evaluation interval is unsaturated and
+  the maximum exact quadratic-decomposition residual is
+  \(3.16\times10^{-15}\).
+- The sign gate does not pass: total fixed-input benefit is non-positive for
+  8.97% of S2 candidates and 0.175% of S6 candidates, below the frozen 10%
+  threshold.
+- The independent ranking gate passes in both dynamic scenarios: isolated-
+  versus-total top-decile overlap is 0.645 in S2 and 0.734 in S6, below the
+  frozen maximum 0.80.
+- The cross contribution dominates isolated response energy for more than
+  99.7% of candidates; median magnitude ratio is approximately 141 in S2 and
+  139 in S6.
+
+Scientific decision: `CROSS_TERM_MATERIAL`. This establishes that the missing
+global formation-error alignment materially reorders high-value actions. It
+does not establish an online or Pareto advantage because future inputs are
+frozen in this centralized diagnostic. The only authorized next work is a
+preregistered true branch-at-decision audit; Gate 7 and any new proposed
+policy remain closed. Full interpretation is in
+`paper/tcns/CROSS_TERM_ORACLE_RESULT.md`.

@@ -1,0 +1,4 @@
+scenarioId,scenario,runCount,meanCandidateCount,meanNonBeneficialFraction,meanTopDecileOverlap,meanPearsonCorrelation,meanCrossDominantFraction,meanMedianCrossToIsolatedRatio,meanEventPositiveBenefitAllocation
+S1,Stationary-Moderate,5,10760,0,0.772676579925651,0.908117763985117,1,151.401828689028,NaN
+S2,Formation-switching,5,10760,0.0897211895910781,0.644609665427509,0.547854355894624,0.997881040892193,140.963777259492,0.959807531587182
+S6,Dynamic-excitation,5,10760,0.00174721189591078,0.734200743494424,0.873679901294317,0.999795539033457,138.801856181445,1.2378447509221

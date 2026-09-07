@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_cross_term_oracle_diagnostic",
+  "runId": "2026-09-07_113834",
+  "startedAt": "2026-09-07 11:38:34",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "403b9e6",
+  "notes": "Development-only centralized fixed-future-input audit of the quadratic cross term omitted by the stopped predictive policy.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_cross_term_oracle_diagnostic.m",
+  "finishedAt": "2026-09-07 11:38:47",
+  "elapsedSec": 12.9302766,
+  "elapsedText": "12.9 s",
+  "figureCount": 1,
+  "hasWorkspace": false,
+  "hasTidy": false
+}
