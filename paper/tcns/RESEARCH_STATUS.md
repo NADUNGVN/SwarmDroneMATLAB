@@ -433,3 +433,30 @@ frozen in this centralized diagnostic. The only authorized next work is a
 preregistered true branch-at-decision audit; Gate 7 and any new proposed
 policy remain closed. Full interpretation is in
 `paper/tcns/CROSS_TERM_ORACLE_RESULT.md`.
+
+## True branch-at-decision diagnostic
+
+- Paired forced-action hook and tests: commit `0c634b9`; the complete locked
+  regression passes after the default-off instrumentation.
+- Frozen protocol/source: commit `84849c3`.
+- Accepted run:
+  `results/tcns_true_branch_value_diagnostic/2026-09-07_121250`, MATLAB
+  R2025a; 200 action branches, 170 accepted actions, success fraction 0.85.
+- All trace/phase/schedule pairs match exactly; all dropped branches retain
+  bit-identical \(P,V,A\); all successful injections are accepted; no branch
+  saturates.
+- Cross-term predictor correlation with realized benefit is 0.668 in S2 and
+  0.565 in S6, compared with 0.377 and 0.285 for isolated response energy.
+  The incremental correlations +0.291 and +0.280 exceed the frozen +0.10
+  requirement.
+- The top predicted quartile is 100% beneficial in both scenarios and its
+  mean realized return exceeds the bottom quartile. All frozen scientific
+  gates pass.
+
+Scientific decision: `BRANCH_SIGNAL_VALID`. The cross term survives a true
+closed-loop one-action counterfactual, but this is still centralized oracle
+evidence on a P10 baseline rather than a frontier. The next and only
+authorized mechanism step is a small centralized online-oracle sanity
+frontier with all DATA traffic charged. No receiver-residual policy, Gate 7,
+scalability campaign, or held-out evaluation is yet authorized. Full result:
+`paper/tcns/TRUE_BRANCH_VALUE_RESULT.md`.

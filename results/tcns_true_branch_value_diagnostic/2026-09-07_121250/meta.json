@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_true_branch_value_diagnostic",
+  "runId": "2026-09-07_121250",
+  "startedAt": "2026-09-07 12:12:50",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "84849c3",
+  "notes": "Development-only paired full-simulation test of whether the fixed-input cross-term score predicts true one-action value.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_true_branch_value_diagnostic.m",
+  "finishedAt": "2026-09-07 12:13:45",
+  "elapsedSec": 54.716224,
+  "elapsedText": "54.7 s",
+  "figureCount": 1,
+  "hasWorkspace": false,
+  "hasTidy": false
+}

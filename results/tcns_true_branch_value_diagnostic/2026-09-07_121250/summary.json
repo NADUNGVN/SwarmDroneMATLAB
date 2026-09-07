@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "classification": "development-only paired true branch-at-decision diagnostic",
+  "technicalStatus": "PASS",
+  "scientificDecision": "BRANCH_SIGNAL_VALID",
+  "actionCount": 200,
+  "successCount": 170,
+  "successFraction": 0.85,
+  "scenarios": [
+    "S2",
+    "S6"
+  ],
+  "seeds": [
+    2.7020001E+7,
+    2.7020002E+7,
+    2.7020003E+7,
+    2.7020004E+7,
+    2.7020005E+7
+  ],
+  "anchorTimes_s": [
+    8.5,
+    9.5,
+    10.5,
+    11.5,
+    12.5,
+    13.5,
+    14.5,
+    15.5,
+    16.5,
+    17.5,
+    18.5,
+    19.5,
+    20.5,
+    21.5,
+    22.5,
+    23.5,
+    24.5,
+    25.5,
+    26.5,
+    27.5
+  ],
+  "horizonSamples": 25,
+  "periodSamples": 10,
+  "decision": [
+    {
+      "scenarioId": "S2",
+      "correlationTotal": 0.667728281284177,
+      "correlationIsolated": 0.37708274040296758,
+      "correlationGain": 0.29064554088120947,
+      "topQuartileMeanRealizedBenefit": 0.00139864768883778,
+      "bottomQuartileMeanRealizedBenefit": -0.000442523061448768,
+      "topQuartilePositiveFraction": 1,
+      "predictionGate": true,
+      "incrementalInformationGate": true,
+      "positiveHeadroomGate": true,
+      "rankingHeadroomGate": true,
+      "scenarioPass": true
+    },
+    {
+      "scenarioId": "S6",
+      "correlationTotal": 0.56450896912471737,
+      "correlationIsolated": 0.28495303006966649,
+      "correlationGain": 0.27955593905505088,
+      "topQuartileMeanRealizedBenefit": 0.0016904741805275222,
+      "bottomQuartileMeanRealizedBenefit": 0.00037909454264189888,
+      "topQuartilePositiveFraction": 1,
+      "predictionGate": true,
+      "incrementalInformationGate": true,
+      "positiveHeadroomGate": true,
+      "rankingHeadroomGate": true,
+      "scenarioPass": true
+    }
+  ],
+  "warning": "A single forced action on a periodic baseline is not an online adaptive policy or a Pareto-frontier result."
+}

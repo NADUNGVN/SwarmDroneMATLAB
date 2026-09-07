@@ -294,3 +294,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-07_093357 | tcns_post_gate6_oracle_value_diagnostic | 10.0 s | 1 | - | yes | (R2025a) | f5fc880 |
 | 2026-09-07_110535 | tcns_predictive_voi_small_sanity | 1 m 52 s | 1 | - | yes | (R2025a) | 7c876ec |
 | 2026-09-07_113834 | tcns_cross_term_oracle_diagnostic | 12.9 s | 1 | - | - | (R2025a) | 403b9e6 |
+| 2026-09-07_121250 | tcns_true_branch_value_diagnostic | 54.7 s | 1 | - | - | (R2025a) | 84849c3 |
