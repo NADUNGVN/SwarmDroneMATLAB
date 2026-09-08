@@ -1,9 +1,12 @@
 # R2.5 adversarial hardening report
 
-Date: 2026-09-08  
-Branch: `paper-v3-tcns`  
-Pushed R2 snapshot: `c1538ae8045cfdc8053ef7196e02c2a0eabc23be`  
-R2.5 implementation commit: `edad129`  
+Date: 2026-09-08
+
+Branch: `paper-v3-tcns`
+
+Pushed R2 snapshot: `c1538ae8045cfdc8053ef7196e02c2a0eabc23be`
+
+R2.5 implementation commit: `edad129`
 Authoritative R2.5 artifact commit: `4ef8a477cdeb839ad814be2d01f0b77083b474f4`
 
 No R3 study, scheduler, acquisition protocol, held-out evaluation, or registry
