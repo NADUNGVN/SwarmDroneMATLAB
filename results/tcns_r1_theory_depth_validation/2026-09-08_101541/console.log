@@ -1,0 +1,28 @@
+
+============================================================
+RUN  : tcns_r1_theory_depth_validation
+ID   : 2026-09-08_101541
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r1_theory_depth_validation\2026-09-08_101541
+WHEN : 2026-09-08 10:15:41
+============================================================
+
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+saveAllFigures: 1 figure(s) written to D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r1_theory_depth_validation\2026-09-08_101541\figures
+R1 multi-action sender count       : 5
+  sender 1: p=4, r*=3, coalition=5
+  sender 2: p=1, r*=1, coalition=5
+  sender 3: p=2, r*=2, coalition=5
+  sender 4: p=2, r*=2, coalition=5
+  sender 5: p=1, r*=1, coalition=5
+rank conclusions stable           : 10 / 10
+numeric ranks stable              : 7 / 10
+ordinary randomized/deterministic : 2.648522e-06 / 5.297044e-06
+pin randomized/deterministic      : 2.478700e-06 / 4.957400e-06
+classification                    : R1_THEORY_DEPTH_PASS
+
+============================================================
+DONE : tcns_r1_theory_depth_validation
+TIME : 8.1 s
+FIGS : 1
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r1_theory_depth_validation\2026-09-08_101541
+============================================================
