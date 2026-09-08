@@ -5,7 +5,8 @@
 **Policy engineering:** permanently closed  
 **Held-out / scalability / full grid:** not run  
 **Authoritative theorem-validation run:**
-`results/tcns_information_limits_validation/2026-09-08_060901`
+`results/tcns_information_limits_validation/2026-09-08_095209`
+**Exact source commit:** `15177a8`
 
 ## 1. Generic result
 
@@ -109,4 +110,3 @@ reproducible.  It does not mean ready to submit.  The leading internal-review
 question is whether TCNS considers the action-value specialization and
 formation/economic closure sufficiently nontrivial beyond established
 functional observability.  That risk is disclosed rather than hidden.
-
