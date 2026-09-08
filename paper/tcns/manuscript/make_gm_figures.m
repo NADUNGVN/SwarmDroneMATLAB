@@ -75,7 +75,8 @@ yline(0.25,'--','Frozen ACK price = 0.25','Color',red,'LineWidth',1.6,'LabelHori
 yline(0,'-','Color',[0.2 0.2 0.2]);
 xticks(x); xticklabels(e.scenarioId); ylabel('Break-even feedback price \eta^*');
 xlabel('Development scenario'); grid on; box on;
-title({'Cost of learning the information needed for value decisions';'median and interquartile range over matchable O1 points'});
+title({'ACK-like price sensitivity of centralized headroom'; ...
+    'median and interquartile range over matchable O1 development points'});
 localSave(f,outDir,'fig4_feedback_economics');
 
 %% Figure 5: information-space geometry
@@ -95,7 +96,7 @@ text(ax,1.03,-0.38,'locally reconstructable component l-parallel','Color',blue);
 text(ax,0.15,3.48,{'Motion along ker(C) is invisible to the sender'; ...
     'but changes value when l-perp is nonzero'}, ...
     'FontSize',9,'FontWeight','bold','VerticalAlignment','top');
-title(ax,'Geometry of exact action-value identifiability');
+title(ax,'Geometry of fixed-response action-value identifiability');
 localSave(f,outDir,'fig5_information_geometry');
 
 %% Figure 6: full reachable indistinguishable histories
@@ -109,7 +110,7 @@ localWitnessTrace(nexttile,S.ordinaryWitness,'Ordinary payload 1 -> 5',blue,oran
 localWitnessValue(nexttile,S.ordinaryWitness,'Ordinary value sign',blue,orange);
 localWitnessTrace(nexttile,S.pinWitness,'Pinned-leader payload 1 -> 4',blue,orange);
 localWitnessValue(nexttile,S.pinWitness,'Pinned-leader value sign',blue,orange);
-sgtitle('Reachable histories: identical sender observations, opposite action-value signs');
+sgtitle('Reachable histories: identical sender observations, opposite fixed-response value signs');
 localSave(f,outDir,'fig6_reachable_sign_witnesses');
 
 fprintf('GM figures written to %s\n',outDir);

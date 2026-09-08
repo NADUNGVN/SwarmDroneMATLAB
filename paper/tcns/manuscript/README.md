@@ -1,4 +1,4 @@
-# TCNS GM manuscript source
+# TCNS submission-candidate manuscript source
 
 Main source:
 
@@ -26,7 +26,11 @@ pdflatex tcns_information_limits.tex
 pdflatex tcns_information_limits.tex
 ```
 
-The manuscript is intentionally anonymized for internal review.  It is not a
-submission artifact.  Empirical figures use frozen development evidence and
-must not be described as held-out population validation.
+The source now loads the separate submission metadata file. That file contains
+explicit human-input placeholders because no verified
+author/affiliation/contact metadata exists in the repository. Replace those
+fields before portal upload; do not infer them.
 
+Empirical figures use frozen development evidence and must not be described as
+held-out population validation. See REPRODUCIBILITY.md for the minimal public
+workflow and the submission README for the package manifest.

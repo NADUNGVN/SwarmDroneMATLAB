@@ -52,6 +52,26 @@
     into follower 2 share the same structural output-response direction.  No
     universal compression claim is made.
 15. **Dimension versus transport.** $r_\star$ counts independent real-valued
-    instantaneous linear statistics.  It is neither packet count, bit rate,
-    data rate, nor functional-observer order; coalition ownership still leaves
-    causal aggregation unsolved.
+   instantaneous linear statistics.  It is neither packet count, bit rate,
+   data rate, nor functional-observer order; coalition ownership still leaves
+   causal aggregation unsolved.
+16. **Structural unit responses versus physical actions.** The all-ten
+    row-space audit fixes a nonzero x-axis unit command correction; it
+    establishes hidden structural value directions, not nonidentifiability for
+    every possible physical correction. The two full trajectory witnesses use
+    actual nonzero responses. Zero and specially cancelling responses are
+    excluded from any all-ten physical claim.
+17. **Global objective drives ownership.** The five-agent coalition is
+    conditional on the global stacked formation-error output, identity
+    weighting, H=25, graph, and current maps. A localized objective can reduce
+    ownership.
+18. **ACK-like economics.** FB0 charges feedback at the frozen ACK
+    packet-frequency price. It does not implement or price a protocol that
+    constructs the all-agent missing statistic. The figure is a necessary
+    cost-sensitivity screen only.
+19. **Recent adjacent work.** RGMComm (AAAI 2024) analyzes a full- versus
+    partial-observability return gap and discrete learned messages, while a
+    public unarchived 2026 Observation Theory manuscript combines functional
+    observability with consumer-relative value. Neither is a direct theorem
+    collision, but both require the manuscript to retain its deterministic
+    fixed-response, local set-membership, and linear-statistic scope.
