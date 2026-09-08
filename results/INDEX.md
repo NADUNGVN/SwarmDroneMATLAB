@@ -312,3 +312,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-08_101541 | tcns_r1_theory_depth_validation | 8.1 s | 1 | yes | - | (R2025a) | 2250d64 |
 | 2026-09-08_103325 | tcns_r1_theory_depth_validation | 7.3 s | 1 | yes | - | (R2025a) | 05fa200 |
 | 2026-09-08_155705 | tcns_r2_generalization_validation | 4 m 02 s | 0 | yes | - | (R2025a) | 253b99b |
+| 2026-09-08_161130 | tcns_r2_generalization_validation | 5 m 42 s | 0 | yes | - | (R2025a) | a2cec3b |

@@ -1,0 +1,11 @@
+actionId,linkClass,sender,receiver,targetDimension
+ordinary_1_to_2,ordinary,1,2,6
+ordinary_1_to_5,ordinary,1,5,6
+ordinary_2_to_3,ordinary,2,3,6
+ordinary_3_to_2,ordinary,3,2,6
+ordinary_3_to_4,ordinary,3,4,6
+ordinary_4_to_3,ordinary,4,3,6
+ordinary_4_to_5,ordinary,4,5,6
+ordinary_5_to_4,ordinary,5,4,6
+pinned_leader_1_to_2,pinned-leader,1,2,9
+pinned_leader_1_to_4,pinned-leader,1,4,9

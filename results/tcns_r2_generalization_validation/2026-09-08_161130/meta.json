@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_r2_generalization_validation",
+  "runId": "2026-09-08_161130",
+  "startedAt": "2026-09-08 16:11:31",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "a2cec3b",
+  "notes": "New TCNS R2 theory/generalization study: deterministic cross-instance information audit and all-action reachable-witness audit. No scheduler, held-out evaluation, or simulation-v1 modification.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_r2_generalization_validation.m",
+  "finishedAt": "2026-09-08 16:17:13",
+  "elapsedSec": 341.979158,
+  "elapsedText": "5 m 42 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}
