@@ -26,40 +26,34 @@ Information-Structure Limits in Distributed Formation Control}
 \maketitle
 
 \begin{abstract}
-Control-aware communication assigns network resources according to the
-closed-loop consequence of an update.  This premise hides an information
-question: does the transmitting agent possess enough information to determine
-that consequence?  We study finite-dimensional sampled linear systems for
-which a communication action adds a fixed response to a finite-horizon
-performance output.  The conditional fixed-response quadratic action benefit
-is an affine
-functional of an augmented closed-loop state.  Building on functional
-observability, we characterize exact value identifiability from current and
-finite-history agent information by row-space conditions.  We then quantify
-the irreducible value-estimation radius and the strictly positive local minimax
-communication-decision regret when compatible values straddle zero.  The
-minimum number of instantaneous noiseless linear scalar statistics needed for
-several action values equals the rank of their unobservable coefficient
-projection.
-Coalition ownership of those statistics and their communication acquisition
-cost are treated separately.
+Control-aware communication assigns resources according to an update's
+closed-loop consequence, but a distributed sender may lack the information
+needed to determine it.  We study
+finite-dimensional sampled linear systems in which a communication action adds
+a fixed response to a finite-horizon performance output.  For quadratic cost,
+this benefit is an affine functional of an augmented closed-loop state.
+Building on functional observability, we characterize exact value
+identifiability from current and finite-history agent information by row-space
+conditions.  When compatible values straddle zero, we quantify the
+irreducible estimation radius and strictly positive local minimax decision
+regret for deterministic and randomized sender rules.  For multiple actions,
+the minimum instantaneous noiseless linear-statistic dimension is the rank
+of the unobservable coefficient projection; algebraic dimension, coalition
+ownership, and acquisition cost remain distinct.
 
-The framework is instantiated on implementation-derived sampled formation
-controllers with delayed and lossy communication.  A preregistered registry
-spanning 72 combinations of 5, 7, and 9 agents, three connected graphs, two
-pinning patterns, two horizons, and two delays yields 1320/1320 structurally
-nonidentifiable action functionals.  In the frozen five-UAV instance, all ten
-actual controller actions additionally admit full, unsaturated, dynamically
-reachable history pairs with identical allowed sender observations and action
-responses but opposite exact action-value signs.  Missing-information
-compression occurs across leader actions, whereas tested follower action sets
-show no compression; coalition size varies with topology.  Frozen development
-experiments further show why acquisition matters: centralized exact value has
-scheduling headroom in a formation-switching regime, whereas charging an
-ACK-like receiver-information stream can remove that headroom under the
-packet-frequency metric.  The results delimit exact local value-based
-communication; they do not rule out prior-specific Bayesian decisions or
-nonlinear policies.
+We instantiate the framework on sampled formation controllers with delayed and
+lossy communication.  A predeclared deterministic registry, frozen before
+outcome inspection, spans 72 combinations of 5, 7, and 9 agents, three
+connected graphs, two pinning patterns, two horizons, and two delays; its 1320
+action functionals are structurally nonidentifiable.  In the frozen five-UAV
+instance, for each of ten controller-relevant action types we construct a
+nonzero state-generated response admitting an unsaturated, dynamically
+reachable history pair with identical allowed sender observations and fixed
+responses but opposite exact action-value signs, with independent replay.
+Leader action sets share missing-information directions, whereas
+tested follower sets do not, and minimum owning coalitions vary with topology.
+The results delimit exact local value-based communication without ruling out
+prior-specific Bayesian decisions or nonlinear policies.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -136,10 +130,10 @@ not packet count or distributed acquisition cost.
 \item For the sampled formation architecture, a new 72-cell registry across
 \(N=5,7,9\), topology, pinning, horizon, and delay yields 1320/1320 structural
 nonidentifiability results stable over the declared tolerance grid.  In the
-frozen N=5 instance, we construct and independently replay actual-action
-opposite-sign witnesses for all ten controller-relevant actions, quantify
-their heterogeneous practical scale, and retain the ACK-like break-even
-diagnostic as acquisition-cost sensitivity only.
+frozen N=5 instance, for each of ten controller-relevant action types we
+construct and independently replay an actual state-generated nonzero response
+with an opposite-sign witness, quantify heterogeneous practical scale, and
+retain the ACK-like break-even diagnostic as acquisition-cost sensitivity only.
 \end{enumerate}
 
 The results are scoped to exact affine action-value identifiability in the
@@ -679,10 +673,11 @@ A minimum owning coalition solves
 \end{corollary}
 
 Corollary~\ref{cor:coalition} is closely related to functional sensor
-selection.  We use exhaustive enumeration only for the N=5 case and do not
-claim a new generic combinatorial algorithm.  Even when a coalition owns the
-required rows, a causal aggregation protocol must still communicate them at a
-nonzero frequency, delay, and reliability cost.
+selection.  We exhaustively enumerate only the finite evaluated registry
+through N=9 and claim no new generic combinatorial algorithm.
+Even when a coalition owns the required rows, a causal aggregation protocol
+must still communicate them at a nonzero frequency, delay, and reliability
+cost.
 
 \section{Communication Cost of Acquiring Value Information}
 
@@ -771,8 +766,11 @@ instance, we froze a new Cartesian registry before viewing its results:
 \(N\in\{5,7,9\}\), three deterministic connected graphs, even/odd follower
 pinning, \(H\in\{15,25\}\), and \(D\in\{2,4\}\).  All 72 configurations
 satisfy the same symmetric grounded Schur scope.  Fixed-payload histories use
-the complete finite-dimensional horizon \(n_{\rm free}-1\).  Table~\ref{tab:links}
-summarizes all 1320 action rows.
+the complete finite-dimensional horizon \(n_{\rm free}-1\).  Before grounding,
+ring2 is a cycle, sparse4 adds cyclic distance-two edges, and geometric is the
+first connected radius graph on the deterministic lattice in the sequence
+0.60, 0.75, \(\ldots\) m.
+Table~\ref{tab:links} summarizes all 1320 action rows.
 
 \begin{table*}[t]
 \caption{Cross-instance structural audit. ``Rows'' aggregates two pinning
@@ -820,9 +818,9 @@ therefore audits actual state-generated corrections separately.
 \subsection{Reachable value-sign witnesses}
 
 Affine nonidentifiability alone could be dismissed as an inadmissible state
-perturbation.  We therefore audit every controller-relevant action in the
-frozen N=5 catalog.  Receiver memories are initialized consistently and held
-without a DATA update until the decision.  A deterministic source excitation
+perturbation.  We therefore audit each of the ten controller-relevant action
+types in the frozen N=5 catalog.  Receiver memories are initialized
+consistently and held without a DATA update until the decision.  A deterministic source excitation
 creates an actual 0.01 m/s$^2$ x-axis controller correction.  For follower
 senders, the larger of the source's position and scaled-velocity transfers is
 used; leader actions use constant velocity.  We then project the exact
@@ -831,8 +829,9 @@ simultaneously preserves the complete sender history, target receiver memory,
 and actual action response.  Symmetric perturbations about the exact affine
 zero crossing are replayed through the implemented controller and integrator.
 
-All ten actions yield admissible opposite-sign pairs, including six follower-
-sender actions not covered by the earlier representative construction.
+For each of the ten catalog action types, an actual state-generated nonzero
+response yields an admissible opposite-sign pair; six have follower senders
+not covered by the earlier representative construction.
 Independent replay from persisted coordinates recomputes the physical
 controller and centralized trajectories rather than reusing the affine sign
 expression.  Correction, payload, branch, and response match within every
@@ -878,19 +877,19 @@ minimax regret \(\Delta_q\) for every row.  These are local one-decision losses,
 not expected mission-level bounds.  Practical scale is heterogeneous: the
 normalized radius exceeds 0.15 for both pin and both leader ordinary actions,
 but is below \(3.5\times10^{-4}\) for two follower actions.  Seven of ten
-actions cross zero somewhere on the selected 32-state grid; the formal
-reachable witness exists for all ten.  The maximum is 0.232, or 0.145 and
-0.175 under RMS and IQR/1.349 scaling; the two smallest remain order
-\(10^{-4}\).  Figure~\ref{fig:witness} shows this heterogeneity.
+actions cross zero somewhere on the selected 32-state grid; a constructed
+reachable witness exists for each catalog type.  The maximum is 0.232, or
+0.145 and 0.175 under RMS and IQR/1.349 scaling; the two smallest remain
+order \(10^{-4}\).  Figure~\ref{fig:witness} shows this heterogeneity.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.84\textwidth]{figures/fig6_reachable_sign_witnesses.pdf}
-\caption{Implementation-replayed N=5 actual-action witnesses.  Left: exact
-opposite-sign endpoints for all ten controller actions.  Right: local
-information radius normalized by typical exact action-value scale; labels give
-the deterministic-grid zero-crossing fraction.  Small normalized radius for
-some actions is retained rather than interpreted as uniform practical impact.}
+\caption{Implementation-replayed N=5 actual-action witnesses.  Left: one
+constructed actual-response pair for each of ten catalog action types.  Right:
+local information radius normalized by typical exact action-value scale; labels
+give the deterministic-grid zero-crossing fraction.  Small normalized radius
+for some actions is retained rather than interpreted as uniform practical impact.}
 \label{fig:witness}
 \end{figure*}
 
@@ -1082,9 +1081,10 @@ headroom it is meant to exploit.
 
 Across the 72-cell formation registry, all 1320 structural fixed-response
 functionals violate sender-history identifiability under the declared maps.
-In the evaluated five-UAV topology, all ten actual controller actions also
-admit reachable, unsaturated history pairs requiring opposite exact decisions
-while remaining sender-indistinguishable with identical responses.  Their
+In the evaluated five-UAV topology, for each of ten controller-relevant action
+types we construct an actual state-generated nonzero response admitting a
+reachable, unsaturated history pair requiring opposite exact decisions while
+remaining sender-indistinguishable with identical responses.  Their
 normalized information radii range from \(2.67\times10^{-4}\) to 0.232, so the
 existence result is not asserted to have uniform mission-level impact.  Four
 leader actions share three missing directions in N=5; leader compression
