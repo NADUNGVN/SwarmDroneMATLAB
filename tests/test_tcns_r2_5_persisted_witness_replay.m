@@ -3,7 +3,9 @@
 startup;
 fprintf('\n=== TCNS R2.5 persisted witness replay checks ===\n\n');
 
-root = fullfile('results','tcns_r2_generalization_validation');
+testPath = mfilename('fullpath');
+repoRoot = fileparts(fileparts(testPath));
+root = fullfile(repoRoot,'results','tcns_r2_generalization_validation');
 r2Id = strtrim(fileread(fullfile(root,'LATEST.txt')));
 S = load(fullfile(root,r2Id,'workspace.mat'),'cfg','witness');
 W = S.witness;

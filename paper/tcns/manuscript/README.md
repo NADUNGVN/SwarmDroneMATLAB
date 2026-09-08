@@ -18,6 +18,9 @@ run('experiments/tcns_information_limits_validation.m')
 run('tests/test_tcns_r2_generalization.m')
 run('tests/test_tcns_actual_witness_audit.m')
 run('experiments/tcns_r2_generalization_validation.m')
+run('tests/test_tcns_r2_5_persisted_witness_replay.m')
+run('tests/test_tcns_r2_5_adversarial_artifact.m')
+run('experiments/tcns_r2_5_adversarial_validation.m')
 ```
 
 Compile from this directory in an IEEEtran-capable TeX installation:

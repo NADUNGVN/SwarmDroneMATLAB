@@ -45,7 +45,29 @@ source commit, and console log. The earlier `2026-09-08_155705` directory is
 retained only to document an invalid mixed-unit practical-scale grid; its
 `INVALID_PRACTICAL_DIAGNOSTIC.md` explains which columns must not be used.
 
-### 4. Principal paper figures
+The registry cells use seed `27022001`. The N=5 witness scenario in the
+frozen driver was instantiated with `27020001`; its independent practical
+reference directions use `27022001 + actionIndex`. The scenario seed does not
+enter the deterministic held-memory witness dynamics, but the distinction is
+recorded here because the historical R2 `summary.seed` field alone is
+incomplete metadata.
+
+### 4. R2.5 adversarial replay and rank audit
+
+    matlab -batch "run('tests/test_tcns_r2_5_persisted_witness_replay.m'); run('tests/test_tcns_r2_5_adversarial_artifact.m'); run('experiments/tcns_r2_5_adversarial_validation.m')"
+
+The authoritative run is:
+
+**results/tcns_r2_5_adversarial_validation/2026-09-08_175427/**
+
+It independently rebuilds the same 72 cells without expanding the registry,
+records 6600 tolerance/action rank diagnostics, replays all ten witnesses from
+persisted initial coordinates, checks fixed-response semantics, compares three
+practical normalizations, and independently enumerates all 448 sender-cell
+coalition results. Two earlier directories are explicitly marked invalid and
+one complete earlier run is labeled development-only.
+
+### 5. Principal paper figures
 
     matlab -batch "run('paper/tcns/manuscript/make_gm_figures.m')"
 
@@ -53,7 +75,7 @@ The script reads only frozen machine-readable evidence and writes all six
 main figures to **paper/tcns/manuscript/figures/**. Scientific data are not
 edited manually.
 
-### 5. Build the paper
+### 6. Build the paper
 
 From **paper/tcns/manuscript/**:
 

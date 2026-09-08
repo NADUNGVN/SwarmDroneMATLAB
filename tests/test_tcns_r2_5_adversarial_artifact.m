@@ -3,7 +3,9 @@
 startup;
 fprintf('\n=== TCNS R2.5 adversarial artifact checks ===\n\n');
 
-root = fullfile('results','tcns_r2_5_adversarial_validation');
+testPath = mfilename('fullpath');
+repoRoot = fileparts(fileparts(testPath));
+root = fullfile(repoRoot,'results','tcns_r2_5_adversarial_validation');
 runId = strtrim(fileread(fullfile(root,'LATEST.txt')));
 runDir = fullfile(root,runId);
 registry = localRead(fullfile(runDir,'registry_adversarial_audit.csv'));

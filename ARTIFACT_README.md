@@ -20,7 +20,12 @@ counterexample diagnostics, and a separately labeled R2 generalization study.
 The authoritative R2 entry point is
 `experiments/tcns_r2_generalization_validation.m`; its accepted artifact is
 `results/tcns_r2_generalization_validation/2026-09-08_161130/`, generated from
-implementation commit `a2cec3b`. See
+implementation commit `a2cec3b`.  The separate adversarial R2.5 audit does not
+expand that registry; it reconstructs its 72 cells, audits 6600
+action/tolerance rows, independently replays the ten frozen N=5 witnesses,
+and checks normalization and coalition bookkeeping.  Its authoritative
+artifact is
+`results/tcns_r2_5_adversarial_validation/2026-09-08_175427/`. See
 `paper/tcns/manuscript/REPRODUCIBILITY.md` for the minimal TCNS workflow.
 
 ---

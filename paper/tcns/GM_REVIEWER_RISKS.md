@@ -83,3 +83,17 @@
 21. **Coalition heterogeneity.** The full coalition is required for ring2 and
     sparse4, but geometric follower-sender sets need only 5/7 or 8/9 agents.
     Any “all agents required” wording must remain N=5/ring-specific.
+22. **Augmented raw-rank wording.** R2.5 confirms projection nonmembership for
+    all 6600 action/tolerance rows, but raw `rank([C;ell'])` adds one dimension
+    in only 1222/1320 rows at tolerance `1e-6` and 614/1320 at `1e-14` because
+    row scale and tiny singular modes alter the threshold. The 1320/1320
+    augmented statement is valid only after using an orthonormal retained row
+    basis and a normalized value row.
+23. **R2 seed metadata.** The registry uses 27022001, the N=5 witness scenario
+    was instantiated with 27020001, and practical directions use 27022001 plus
+    action index. The held-memory witness is deterministic and unchanged, but
+    the frozen R2 summary's single seed field is incomplete provenance.
+24. **Normalization sensitivity.** The maximum median-absolute normalized
+    radius 0.232 drops to 0.145 with RMS and 0.175 with IQR/1.349. The maximum
+    is partly denominator-sensitive; two follower actions remain order 1e-4
+    under every audited scaling.

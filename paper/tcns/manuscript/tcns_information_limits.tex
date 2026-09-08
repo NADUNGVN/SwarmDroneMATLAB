@@ -777,9 +777,10 @@ summarizes all 1320 action rows.
 \begin{table*}[t]
 \caption{Cross-instance structural audit. ``Rows'' aggregates two pinning
 patterns, two H values, and two D values; every row is nonidentifiable, stable
-in membership over relative tolerances \(10^{-6}\)--\(10^{-14}\), and gains
-one rank when its value row is appended. ``Raw stable'' counts rows whose
-numerical information-map rank itself does not change over that grid.}
+in membership over relative tolerances \(10^{-6}\)--\(10^{-14}\).  After the
+retained row space is orthonormalized and the value row is normalized, every
+value row adds one dimension. ``Raw stable'' counts rows whose unnormalized
+information-map rank itself does not change over that grid.}
 \label{tab:links}
 \centering
 \scriptsize
@@ -800,15 +801,16 @@ sparse4 & 9 & 288/288 & 64 & (8,6) & 0.750 & every sender: 9 \\
 \end{tabular}
 \end{table*}
 
-The compressed-null and independent direct-row-space calculations agree for
-1320/1320 rows, and the normalized hidden residual spans
-\(3.03\times10^{-6}\) to 0.99999.  An 80-digit projection was run for the
-minimum-residual action in every cell; all 72 checks are positive and the
-smallest is \(3.03\times10^{-6}\).  Raw numerical rank is stable for only
-608/1320 rows because small singular modes cross the extreme cutoffs.  This
-instability is retained; importantly, value-row membership is stable for all
-1320 rows.  The audit is numerical evidence across a declared registry, not a
-symbolic arbitrary-graph or arbitrary-gain theorem.
+At \(10^{-10}\), compressed-null and independent direct-row-space calculations
+agree for 1320/1320 rows; the normalized hidden residual spans
+\(3.03\times10^{-6}\)--0.99999.  Across the tolerance grid, raw rank is stable
+for only 608/1320 rows and raw \(\rank([C;\ell^\top])\) adds one in 1222 rows at
+\(10^{-6}\) and 614 at \(10^{-14}\).  An independent reconstruction matches all
+6600 stored decisions, while normalized-basis augmentation gives 1320/1320 at
+every cutoff.  Selected 80-digit checks, including each cell's minimum,
+remain positive.  The claim is therefore scale-controlled functional
+membership in a finite registry, not invariant raw-rank bookkeeping or an
+arbitrary-graph/gain theorem.
 
 The structural correction fixes \(g\) and must not be confused with a
 trajectory-realized scheduling action.  Zero response has zero value, and
@@ -831,10 +833,15 @@ zero crossing are replayed through the implemented controller and integrator.
 
 All ten actions yield admissible opposite-sign pairs, including six follower-
 sender actions not covered by the earlier representative construction.
-The maximum sender-history mismatch is \(7.98\times10^{-20}\), affine dynamic
-residual is \(4.17\times10^{-16}\), and affine-versus-independent centralized
-value mismatch is \(4.07\times10^{-20}\); actual response mismatch is zero.
-The minimum acceleration-saturation margin is 0.952 m/s$^2$.  Values in
+Independent replay from persisted coordinates recomputes the physical
+controller and centralized trajectories rather than reusing the affine sign
+expression.  Correction, payload, branch, and response match within every
+pair.  Maximum history, dynamic, and affine-versus-oracle residuals are
+\(7.98\times10^{-20}\), \(4.17\times10^{-16}\), and
+\(4.07\times10^{-20}\); response mismatch is zero.  The \(10^{-4}\)
+coordinate half-separation yields a smallest endpoint \(8.52\times10^{-8}\),
+over \(8.5\times10^4\) sign tolerances, and minimum saturation margin 0.952
+m/s$^2$.  Values in
 Table~\ref{tab:regret} are in \(\mathrm{m}^2\) under the sampled per-follower
 normalization following \eqref{eq:formation-value}.
 
@@ -872,8 +879,9 @@ not expected mission-level bounds.  Practical scale is heterogeneous: the
 normalized radius exceeds 0.15 for both pin and both leader ordinary actions,
 but is below \(3.5\times10^{-4}\) for two follower actions.  Seven of ten
 actions cross zero somewhere on the selected 32-state grid; the formal
-reachable witness exists for all ten.  Figure~\ref{fig:witness} makes this
-distinction visible.
+reachable witness exists for all ten.  The maximum is 0.232, or 0.145 and
+0.175 under RMS and IQR/1.349 scaling; the two smallest remain order
+\(10^{-4}\).  Figure~\ref{fig:witness} shows this heterogeneity.
 
 \begin{figure*}[t]
 \centering
@@ -942,7 +950,9 @@ N-agent coalition for every sender.  On the geometric graph, however,
 follower-sender value sets require five of seven agents and eight of nine
 agents, while the leader still requires all agents.  Coalition ownership is
 therefore topology and action-set dependent; the general claim is the
-row-space condition, not an all-agent rule.
+row-space condition, not an all-agent rule.  Across 448 sender--cell rows,
+unique minima 5, 7, 8, and 9 occur 120, 120, 56, and 152 times; these counts do
+not imply packet or acquisition cost.
 
 \begin{table*}[t]
 \caption{Frozen ACK-like packet-frequency economics.  Statistics cover only
@@ -1026,7 +1036,10 @@ history, or an interference-limited MAC.  The 72-cell audit establishes
 recurrence over a deterministic finite registry, not arbitrary N, gains, or
 graphs.  Its coalition results are explicitly heterogeneous.  Tolerance sweeps
 and selected 80-digit projections harden the numerical membership conclusions
-but do not replace a symbolic arbitrary-parameter proof.
+but do not replace a symbolic arbitrary-parameter proof.  The minimum residual
+is only 3.03 times the loosest declared tolerance, although its 80-digit
+conditional-basis check agrees to \(10^{-16}\); this is a numerical margin,
+not a structural lower bound.
 
 The value-radius and regret results are local to an information-compatible
 operating set.  A fully specified stochastic prior and nonlinear Bayesian
@@ -1123,6 +1136,10 @@ commit \texttt{05fa200}, is
 The authoritative R2 cross-instance and all-action witness audit, generated
 from implementation commit \texttt{a2cec3b}, is
 \path{results/tcns_r2_generalization_validation/2026-09-08_161130}.
+The independent R2.5 audit is
+\path{results/tcns_r2_5_adversarial_validation/2026-09-08_175427}.  Registry,
+witness-scenario, and reference-direction seeds are 27022001, 27020001, and
+27022001 plus action index; no stochastic draw enters the witness construction.
 Frozen negative-trigger, centralized-oracle, feedback-accounting, and
 feedback-economic result directories are named in the repository's
 claim--evidence ledger.  Each result records configuration, seed, source
