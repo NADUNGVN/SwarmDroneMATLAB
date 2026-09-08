@@ -55,6 +55,14 @@ LrelativeHidden = Lrelative*P_perp;
 [rRelative,relativeSingularValues] = localMatrixRank( ...
     LrelativeHidden,relativeTolerance);
 
+% Restrict B to im(M), where M=L*P_perp.  Its nullity is the dimension of
+% im(M) intersect span(one), and is therefore either zero or one.
+[Um,~,~] = svd(LvalueHidden,'econ');
+Qm = Um(:,1:rValue);
+one = ones(p,1);
+commonHiddenOffsetResidual = norm(one-Qm*(Qm'*one),2)/norm(one,2);
+rankGap = rValue-rRelative;
+
 individualResiduals = localRowResiduals(L,LvalueHidden);
 relativeBasisResiduals = localRowResiduals(Lrelative,LrelativeHidden);
 [pairwiseResiduals,pairwiseHiddenNorms] = ...
@@ -76,6 +84,9 @@ R.LRelative = Lrelative;
 R.LRelativeHidden = LrelativeHidden;
 R.rValue = rValue;
 R.rRelative = rRelative;
+R.rankGap = rankGap;
+R.commonHiddenOffsetResidual = commonHiddenOffsetResidual;
+R.hasCommonHiddenOffset = commonHiddenOffsetResidual<=relativeTolerance;
 R.valueHiddenSingularValues = valueSingularValues;
 R.relativeHiddenSingularValues = relativeSingularValues;
 R.individualNormalizedResiduals = individualResiduals;

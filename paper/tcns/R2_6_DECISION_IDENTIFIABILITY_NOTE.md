@@ -173,6 +173,74 @@ action values**. It is sufficient for exact ranking and argmax, but it is not
 the universally minimum information needed for a particular constrained or
 fiber-specific decision.
 
+### Proposition B.1 (exact rank gap and common hidden offset)
+
+Let
+
+\[
+M=L(I-C^\dagger C)
+\]
+
+and let \(B\) have full row rank with
+\(\ker(B)=\operatorname{span}\{\mathbf1_p\}\). Then
+
+\[
+r_{\rm value}^\star-r_{\rm rel}^\star
+=\dim\!\left(\operatorname{im}(M)\cap
+\operatorname{span}\{\mathbf1_p\}\right).
+\]
+
+Consequently,
+
+\[
+r_{\rm value}^\star-1\le r_{\rm rel}^\star
+\le r_{\rm value}^\star.
+\]
+
+Strict reduction occurs if and only if
+\(\mathbf1_p\in\operatorname{im}(M)\), equivalently if and only if there is
+a sender-hidden perturbation \(v\in\ker C\) and a nonzero scalar \(\alpha\)
+such that
+
+\[
+Lv=\alpha\mathbf1_p.
+\]
+
+Thus recovering all relative values can save at most one hidden
+linear-statistic dimension. The saved direction is precisely a nonzero common
+hidden offset added equally to every action value.
+
+**Proof.** Regard \(B\) as a linear map restricted to
+\(\operatorname{im}(M)\). Its image is
+\(B\operatorname{im}(M)=\operatorname{im}(BM)\), while its restricted kernel
+is
+
+\[
+\operatorname{im}(M)\cap\ker(B)
+=\operatorname{im}(M)\cap\operatorname{span}\{\mathbf1_p\}.
+\]
+
+Rank--nullity for this restriction gives
+
+\[
+\rank(M)-\rank(BM)
+=\dim\!\left(\operatorname{im}(M)\cap
+\operatorname{span}\{\mathbf1_p\}\right),
+\]
+
+which is the claimed identity. The intersected space is a subspace of the
+one-dimensional \(\operatorname{span}\{\mathbf1_p\}\), so its dimension is
+zero or one and the bounds follow. It is one exactly when the nonzero vector
+\(\mathbf1_p\), up to scaling, lies in \(\operatorname{im}(M)\). If
+\(Mz=\alpha\mathbf1_p\) with \(\alpha\ne0\), take
+\(v=P_\perp z\). Then \(v\in\ker C\) and
+\(Lv=LP_\perp z=Mz=\alpha\mathbf1_p\). Conversely, any such hidden \(v\)
+satisfies \(Mv=LP_\perp v=Lv=\alpha\mathbf1_p\), proving equivalence.
+\(\square\)
+
+This is an elementary rank--nullity statement for the action-difference map,
+not a new observability primitive.
+
 ## 4. Exact fiberwise argmax decidability
 
 For a nonempty compatible fiber \(\mathcal X(o)\), define the set-valued
@@ -323,13 +391,35 @@ value.
 
 Include no transmission as action 0 with \(q_0=0\), or subtract a fixed
 opportunity cost \(\tau\) from each communication action. Differences against
-action 0 retain every coefficient row of \(L\). Therefore, for this fixed
-no-transmission baseline,
+action 0 retain every coefficient row of \(L\). Define
+
+\[
+\widetilde M=\begin{bmatrix}0\\M\end{bmatrix}.
+\]
+
+### Corollary E (no rank saving against a true no-transmission action)
+
+For the augmented action family \(q_0=0,q_1,\ldots,q_p\),
+
+\[
+\operatorname{im}(\widetilde M)\cap
+\operatorname{span}\{\mathbf1_{p+1}\}=\{0\}.
+\]
+
+Hence its relative-value hidden rank is
 
 \[
 \rank(L_{\rm augmented,rel}P_\perp)
 =\rank(LP_\perp)=r_{\rm value}^\star.
 \]
+
+**Proof.** Every vector in \(\operatorname{im}(\widetilde M)\) has first
+coordinate zero. A vector \(\alpha\mathbf1_{p+1}\) has first coordinate
+\(\alpha\), so it belongs to that image only when \(\alpha=0\). The
+intersection is therefore trivial. Applying Proposition B.1 to the augmented
+action family gives no rank loss under its action-difference map. Finally,
+prepending a zero row does not change rank, so
+\(\rank(\widetilde M)=\rank(M)=r_{\rm value}^\star\). \(\square\)
 
 Thus a common hidden offset across all communication actions is irrelevant to
 exactly-one ranking but remains relevant to transmit versus no transmit. The
@@ -354,6 +444,9 @@ Across all 448 sender-cells:
 
 - all 1320 individual action rows remain nonidentifiable;
 - \(r_{\rm rel}^\star=r_{\rm value}^\star-1\) in every sender-cell;
+- the direct numerical membership test finds
+  \(\mathbf1_p\in\operatorname{im}(M)\) in all 448 cells, with maximum
+  normalized projection residual `2.217668754793476e-15`;
 - strict reduction occurs in all 448 cells, including 360 nontrivial sets with
   \(p\ge2\);
 - 88 cells have \(p=1\), for which \(r_{\rm rel}^\star=0\) and relative
@@ -392,6 +485,13 @@ identifiability despite hidden individual values) does not occur for any
 nontrivial actual sender set. The only \(r_{\rm rel}^\star=0\) rows have
 \(p=1\) and must not be marketed as an ordering result.
 
+By Proposition B.1, the observed one-dimensional gap is algebraically
+equivalent to the common-hidden-offset condition. The independent numerical
+membership calculation confirms the corresponding retained-subspace
+condition in 448/448 cells; all 448 gap/membership Booleans agree. This is an
+equivalence for each reconstructed affine matrix at the frozen rank tolerance,
+not an arbitrary-graph or arbitrary-parameter claim.
+
 The ten persisted N=5 binary witnesses all have \(q_-<0<q_+\). Hence the two
 compatible states already prove that neither transmit nor no-transmit is
 common-optimal on each witness pair. This is consistent with the at-most-one
@@ -418,9 +518,19 @@ independently establish that a common maximizer can exist even when
 5. binary threshold reduction, including a boundary tie;
 6. invariance under two full-rank bases of \(\mathbf1^\perp\).
 
+Four additional refinement checks verify:
+
+1. rank gap one with a common hidden offset;
+2. rank gap zero without one;
+3. the gap bound on all 729 three-action, two-state matrices with entries in
+   \(\{-1,0,1\}\);
+4. loss of the rank saving after augmenting the common-offset example with
+   \(q_0=0\).
+
 It also verifies the generated 448-row registry artifact, all frozen
 \(r_{\rm value}^\star\) matches, the five N=5 senders, and all ten persisted
-binary witness ambiguities. Result: `PASS`.
+binary witness ambiguities. Existing tests: `6/6 PASS`; refinement tests:
+`4/4 PASS`.
 
 ## 10. Counterexamples and wording constraints
 
