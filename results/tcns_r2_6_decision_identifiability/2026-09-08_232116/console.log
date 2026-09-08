@@ -1,0 +1,19 @@
+
+============================================================
+RUN  : tcns_r2_6_decision_identifiability
+ID   : 2026-09-08_232116
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_6_decision_identifiability\2026-09-08_232116
+WHEN : 2026-09-08 23:21:16
+============================================================
+
+R2.6 sender cells                         : 448
+R2.6 strict rRelative reductions          : 448
+R2.6 nontrivial exact-relative cases      : 0
+R2.6 frozen binary ambiguous witnesses    : 10 / 10
+
+============================================================
+DONE : tcns_r2_6_decision_identifiability
+TIME : 4.5 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_6_decision_identifiability\2026-09-08_232116
+============================================================

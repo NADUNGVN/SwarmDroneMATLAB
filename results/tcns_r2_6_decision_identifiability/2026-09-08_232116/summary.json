@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "studyClass": "FROZEN_R2_DECISION_IDENTIFIABILITY_POSTPROCESS",
+  "gitCommit": "2fd1359",
+  "sourceR2Directory": "D:\\Research\\Drone\\SwarmDroneMATLAB\\results\\tcns_r2_generalization_validation\\2026-09-08_161130",
+  "referenceTolerance": 1E-10,
+  "senderCellCount": 448,
+  "n5FrozenSenderCount": 5,
+  "strictReductionCount": 448,
+  "nontrivialStrictReductionCount": 360,
+  "fullRelativeIdentifiableCount": 88,
+  "nontrivialFullRelativeIdentifiableCount": 0,
+  "orderingIdentifiableDespiteHiddenValuesCount": 0,
+  "binaryWitnessAmbiguityCount": 10,
+  "binaryWitnessCount": 10,
+  "sharedMultiactionFiberEvaluated": false,
+  "sharedMultiactionFiberReason": "Persisted witnesses use action-specific conditioned fibers; they cannot be combined into one sender-wise argmax fiber.",
+  "noTrajectoriesGenerated": true,
+  "noRegistryExpansion": true,
+  "noSchedulerImplemented": true
+}

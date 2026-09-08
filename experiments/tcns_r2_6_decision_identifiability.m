@@ -1,0 +1,63 @@
+%% TCNS R2.6 DECISION-IDENTIFIABILITY POST-PROCESSING
+
+startup;
+R = startExperiment('tcns_r2_6_decision_identifiability', ...
+    ['Deterministic post-processing of the frozen R2 affine matrices and ' ...
+     'persisted witnesses only. No trajectory, Monte Carlo, topology, seed, ' ...
+     'scheduler, or noisy-channel experiment is generated.']);
+
+r2Directory = fullfile(projectRoot(),'results', ...
+    'tcns_r2_generalization_validation', ...
+    '2026-09-08_161130');
+audit = tcnsR26DecisionIdentifiabilityAudit(r2Directory);
+
+writetable(audit.senderTable, ...
+    fullfile(R.dir,'decision_identifiability_sender.csv'));
+writetable(audit.n5FrozenTable, ...
+    fullfile(R.dir,'decision_identifiability_n5_frozen.csv'));
+writetable(audit.binaryWitnessTable, ...
+    fullfile(R.dir,'decision_identifiability_n5_binary_witness.csv'));
+
+nontrivial = audit.senderTable.nontrivialActionSet;
+summary.schemaVersion = 1;
+summary.studyClass = char(audit.studyClass);
+summary.gitCommit = R.meta.gitCommit;
+summary.sourceR2Directory = char(audit.sourceR2Directory);
+summary.referenceTolerance = audit.referenceTolerance;
+summary.senderCellCount = height(audit.senderTable);
+summary.n5FrozenSenderCount = height(audit.n5FrozenTable);
+summary.strictReductionCount = nnz(audit.senderTable.strictReduction);
+summary.nontrivialStrictReductionCount = nnz( ...
+    audit.senderTable.strictReduction & nontrivial);
+summary.fullRelativeIdentifiableCount = nnz( ...
+    audit.senderTable.fullRelativeIdentifiable);
+summary.nontrivialFullRelativeIdentifiableCount = nnz( ...
+    audit.senderTable.fullRelativeIdentifiable & nontrivial);
+summary.orderingIdentifiableDespiteHiddenValuesCount = nnz( ...
+    audit.senderTable.orderingIdentifiableDespiteHiddenValues);
+summary.binaryWitnessAmbiguityCount = nnz( ...
+    audit.binaryWitnessTable.strictlyAmbiguousOnWitnessPair);
+summary.binaryWitnessCount = height(audit.binaryWitnessTable);
+summary.sharedMultiactionFiberEvaluated = ...
+    audit.sharedMultiactionFiberEvaluated;
+summary.sharedMultiactionFiberReason = char( ...
+    audit.sharedMultiactionFiberReason);
+summary.noTrajectoriesGenerated = true;
+summary.noRegistryExpansion = true;
+summary.noSchedulerImplemented = true;
+
+fid = fopen(fullfile(R.dir,'summary.json'),'w');
+assert(fid>0,'TCNSR26: cannot create summary.json.');
+fprintf(fid,'%s\n',jsonencode(summary,'PrettyPrint',true));
+fclose(fid);
+save(fullfile(R.dir,'workspace.mat'),'audit','summary');
+
+fprintf('R2.6 sender cells                         : %d\n', ...
+    summary.senderCellCount);
+fprintf('R2.6 strict rRelative reductions          : %d\n', ...
+    summary.strictReductionCount);
+fprintf('R2.6 nontrivial exact-relative cases      : %d\n', ...
+    summary.nontrivialFullRelativeIdentifiableCount);
+fprintf('R2.6 frozen binary ambiguous witnesses    : %d / %d\n', ...
+    summary.binaryWitnessAmbiguityCount,summary.binaryWitnessCount);
+finishExperiment(R);

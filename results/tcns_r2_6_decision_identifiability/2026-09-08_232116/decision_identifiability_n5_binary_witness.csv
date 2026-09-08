@@ -1,0 +1,11 @@
+actionId,sender,receiver,qMinus,qPlus,transmitCommonOptimal,noTransmitCommonOptimal,commonOptimalActionExistsOnWitnessPair,strictlyAmbiguousOnWitnessPair,boundaryTieOnly,sourceWitnessRows
+ordinary_1_to_2,1,2,-3.47487191772605e-06,3.4748719177253e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_1_to_5,1,5,-5.34350907126197e-06,5.34350907126176e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_2_to_3,2,3,-5.3915141027045e-06,5.39151410270454e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_3_to_2,3,2,-8.51941332063417e-08,8.51941332063517e-08,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_3_to_4,3,4,-3.19842551763687e-06,3.19842551763605e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_4_to_3,4,3,-5.22327345520126e-06,5.22327345520126e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_4_to_5,4,5,-1.33266057639229e-07,1.33266057639237e-07,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+ordinary_5_to_4,5,4,-3.39640391067678e-06,3.39640391067666e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+pinned_leader_1_to_2,1,2,-3.4489560159175e-06,3.44895601591725e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
+pinned_leader_1_to_4,1,4,-5.00236529189142e-06,5.00236529189131e-06,0,0,0,1,0,frozen R2 actual_witness_audit.csv
