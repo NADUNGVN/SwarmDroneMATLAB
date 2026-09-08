@@ -99,18 +99,42 @@ text(ax,0.15,3.48,{'Motion along ker(C) is invisible to the sender'; ...
 title(ax,'Geometry of fixed-response action-value identifiability');
 localSave(f,outDir,'fig5_information_geometry');
 
-%% Figure 6: full reachable indistinguishable histories
-root = fullfile(repoRoot,'results','tcns_information_limits_validation');
-d = dir(fullfile(root,'*','workspace.mat'));
-[~,ix] = max([d.datenum]);
-S = load(fullfile(d(ix).folder,d(ix).name),'ordinaryWitness','pinWitness');
-f = figure('Color','w','Position',[100 100 1040 690]);
-tiledlayout(2,2,'Padding','compact','TileSpacing','compact');
-localWitnessTrace(nexttile,S.ordinaryWitness,'Ordinary payload 1 -> 5',blue,orange);
-localWitnessValue(nexttile,S.ordinaryWitness,'Ordinary value sign',blue,orange);
-localWitnessTrace(nexttile,S.pinWitness,'Pinned-leader payload 1 -> 4',blue,orange);
-localWitnessValue(nexttile,S.pinWitness,'Pinned-leader value sign',blue,orange);
-sgtitle('Reachable histories: identical sender observations, opposite fixed-response value signs');
+%% Figure 6: all N=5 actual-action reachable witnesses
+witnessFile = fullfile(repoRoot,'results','tcns_r2_generalization_validation', ...
+    '2026-09-08_161130','actual_witness_audit.csv');
+W = readtable(witnessFile,'TextType','string');
+labels = replace(W.actionId,"ordinary_","O ");
+labels = replace(labels,"pinned_leader_","P ");
+labels = replace(labels,"_to_","->");
+y = (1:height(W))';
+f = figure('Color','w','Position',[100 100 1060 520]);
+tiledlayout(1,2,'Padding','compact','TileSpacing','compact');
+ax = nexttile; hold(ax,'on');
+for k = 1:height(W)
+    plot(ax,1e6*[W.qMinus(k) W.qPlus(k)],[y(k) y(k)],'-', ...
+        'Color',[0.55 0.58 0.62],'LineWidth',1.5);
+end
+hMinus = plot(ax,1e6*W.qMinus,y,'o','Color',blue,'MarkerFaceColor',blue);
+hPlus = plot(ax,1e6*W.qPlus,y,'s','Color',orange,'MarkerFaceColor',orange);
+xline(ax,0,'k-'); yticks(ax,y); yticklabels(ax,labels); set(ax,'YDir','reverse');
+xlabel(ax,'Exact action value q [10^{-6} m^2]');
+title(ax,'Opposite-sign endpoints'); grid(ax,'on'); box(ax,'on');
+legend(ax,[hMinus hPlus],{'q_-','q_+'},'Location','southeast');
+
+ax = nexttile; hold(ax,'on');
+semilogx(ax,W.normalizedAmbiguity,y,'d','Color',red, ...
+    'MarkerFaceColor',red,'MarkerSize',6);
+set(ax,'XScale','log');
+yticks(ax,y); yticklabels(ax,labels); set(ax,'YDir','reverse');
+xlabel(ax,'Information radius / median |q|');
+title(ax,'Practical-scale heterogeneity'); grid(ax,'on'); box(ax,'on');
+for k = 1:height(W)
+    text(ax,1.18*W.normalizedAmbiguity(k),y(k), ...
+        sprintf('cross %.3g',W.compatibleIntervalCrossingFraction(k)), ...
+        'FontSize',7,'VerticalAlignment','middle');
+end
+xlim(ax,[1e-4 1]);
+sgtitle('Actual-action reachable witnesses in the frozen N=5 instance');
 localSave(f,outDir,'fig6_reachable_sign_witnesses');
 
 fprintf('GM figures written to %s\n',outDir);
@@ -129,24 +153,6 @@ h1 = plot(ax,P.meanEvaluationCost025PerChannel_Hz,P.meanFormationRMSE_m,'-o','Co
 h2 = plot(ax,O.meanEvaluationCost025PerChannel_Hz,O.meanFormationRMSE_m,'-s','Color',red,'LineWidth',2,'MarkerFaceColor',red);
 xlabel(ax,'DATA + 0.25 ACK [Hz/channel]'); ylabel(ax,'Formation RMSE [m]');
 title(ax,titleText); grid(ax,'on'); box(ax,'on'); legend(ax,[h1 h2],{'Periodic','centralized oracle'},'Location','best');
-end
-
-function localWitnessTrace(ax,W,titleText,blue,orange)
-plot(ax,W.minus.time_s,W.minus.formationErrorNorm,'-','Color',blue,'LineWidth',2); hold(ax,'on');
-plot(ax,W.plus.time_s,W.plus.formationErrorNorm,'--','Color',orange,'LineWidth',2);
-xlabel(ax,'Time [s]'); ylabel(ax,'||e_f||_F [m]'); title(ax,titleText); grid(ax,'on'); box(ax,'on');
-legend(ax,'history -','history +','Location','best');
-text(ax,0.03,0.95,sprintf('max sender-observation difference = %.1e',W.senderObservationDifference), ...
-    'Units','normalized','VerticalAlignment','top');
-end
-
-function localWitnessValue(ax,W,titleText,blue,orange)
-bar(ax,1,W.minus.expectedValue,0.55,'FaceColor',blue); hold(ax,'on');
-bar(ax,2,W.plus.expectedValue,0.55,'FaceColor',orange); yline(ax,0,'k-');
-xticks(ax,[1 2]); xticklabels(ax,{'history -','history +'}); ylabel(ax,'Expected exact action value');
-title(ax,titleText); grid(ax,'on'); box(ax,'on');
-text(ax,0.03,0.95,sprintf('action-response difference = %.1e',W.actionResponseDifference), ...
-    'Units','normalized','VerticalAlignment','top');
 end
 
 function localSave(f,outDir,name)

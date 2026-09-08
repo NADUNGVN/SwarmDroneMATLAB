@@ -13,13 +13,12 @@
    language is restricted accordingly.
 3. **Linear sampled scope.** The proof does not cover saturation, 6-DOF
    aerodynamics, nonlinear sensing, or topology switching inside the theorem.
-4. **Numerical rank.** The ten nonidentifiability decisions are stable from
-   relative tolerance $10^{-6}$ to $10^{-14}$, with retained/discarded gaps
-   above $3.08\times10^{11}$; an 80-digit projection reproduces the residuals.
-   Three follower-map raw ranks change at $10^{-14}$ because roundoff modes are
-   retained, but the value-membership conclusion does not.  The VPA audit
-   starts from implementation-generated double matrices and is not a symbolic
-   arbitrary-parameter proof.
+4. **Numerical rank.** All 1320 R2 value-membership decisions are stable from
+   relative tolerance $10^{-6}$ to $10^{-14}$, but the raw information-map rank
+   is stable for only 608 rows. Selected 80-digit projections are positive in
+   all 72 cells, with minimum normalized residual $3.03\times10^{-6}$. The VPA
+   audit starts from implementation-generated double matrices and is not a
+   symbolic arbitrary-parameter proof.
 5. **Development evidence only.** Frontier and economics plots use five
    development seeds and support mechanism/counterexample statements, not
    population superiority.
@@ -28,9 +27,12 @@
 7. **Cost abstraction.** DATA+0.25 ACK counts packet frequency rather than
    bytes, airtime, collision, or joules.  Economic statements are conditional
    on that metric.
-8. **Two dynamic witnesses.** Reachable opposite-sign histories cover one
-   ordinary and one pinned-leader payload.  All-ten coverage is only affine
-   nonidentifiability.
+8. **Actual-witness generality.** The R2 routine now constructs reachable
+   opposite-sign actual-action histories for all ten N=5 actions, including
+   follower senders. This closes the within-instance coverage gap but does not
+   establish dynamic witnesses for every R2 topology/N or operating point.
+   Normalized ambiguity ranges from $2.67\times10^{-4}$ to 0.232, and three
+   actions have no crossing on the 32-state descriptive grid.
 9. **Bayesian estimators.** The theorem concerns exact value/sign under the
    declared deterministic information map.  A prior-specific posterior
    expected value is outside scope and is not ruled out.
@@ -55,12 +57,12 @@
    instantaneous linear statistics.  It is neither packet count, bit rate,
    data rate, nor functional-observer order; coalition ownership still leaves
    causal aggregation unsolved.
-16. **Structural unit responses versus physical actions.** The all-ten
-    row-space audit fixes a nonzero x-axis unit command correction; it
+16. **Structural unit responses versus physical actions.** The 1320-row
+    generalization audit fixes a nonzero x-axis unit command correction; it
     establishes hidden structural value directions, not nonidentifiability for
-    every possible physical correction. The two full trajectory witnesses use
-    actual nonzero responses. Zero and specially cancelling responses are
-    excluded from any all-ten physical claim.
+    every possible physical correction. All ten N=5 trajectory witnesses use
+    actual state-generated responses. Zero and specially cancelling responses
+    remain excluded from any universal physical claim.
 17. **Global objective drives ownership.** The five-agent coalition is
     conditional on the global stacked formation-error output, identity
     weighting, H=25, graph, and current maps. A localized objective can reduce
@@ -75,3 +77,9 @@
     observability with consumer-relative value. Neither is a direct theorem
     collision, but both require the manuscript to retain its deterministic
     fixed-response, local set-membership, and linear-statistic scope.
+20. **Finite registry, not general proof.** R2 spans 72 deterministic cells and
+    strengthens recurrence beyond N=5, but its 1320/1320 result cannot be
+    promoted to arbitrary connected graphs, gains, pinning, horizons, or N.
+21. **Coalition heterogeneity.** The full coalition is required for ring2 and
+    sparse4, but geometric follower-sender sets need only 5/7 or 8/9 agents.
+    Any “all agents required” wording must remain N=5/ring-specific.

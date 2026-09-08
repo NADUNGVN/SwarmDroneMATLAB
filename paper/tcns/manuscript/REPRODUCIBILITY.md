@@ -30,7 +30,22 @@ The accepted run is:
 It contains witness regret, sender-wise missing ranks, singular values,
 coalition enumeration, tolerance sweeps, and the 80-digit comparison.
 
-### 3. Principal paper figures
+### 3. R2 cross-instance and all-action witness audit
+
+    matlab -batch "run('tests/test_tcns_r2_generalization.m'); run('tests/test_tcns_actual_witness_audit.m'); run('experiments/tcns_r2_generalization_validation.m')"
+
+The authoritative run is:
+
+**results/tcns_r2_generalization_validation/2026-09-08_161130/**
+
+It contains the 72-cell configuration registry, 1320 action rows, tolerance
+grid, sender-wise missing ranks, exhaustive coalitions, selected 80-digit
+checks, all ten actual-action witness rows, JSON exports, MATLAB workspace,
+source commit, and console log. The earlier `2026-09-08_155705` directory is
+retained only to document an invalid mixed-unit practical-scale grid; its
+`INVALID_PRACTICAL_DIAGNOSTIC.md` explains which columns must not be used.
+
+### 4. Principal paper figures
 
     matlab -batch "run('paper/tcns/manuscript/make_gm_figures.m')"
 
@@ -38,7 +53,7 @@ The script reads only frozen machine-readable evidence and writes all six
 main figures to **paper/tcns/manuscript/figures/**. Scientific data are not
 edited manually.
 
-### 4. Build the paper
+### 5. Build the paper
 
 From **paper/tcns/manuscript/**:
 

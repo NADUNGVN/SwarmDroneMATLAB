@@ -6,12 +6,22 @@ built on it.
 | | |
 |---|---|
 | **Frozen simulation release** | tag `simulation-v1.0`, commit `32858b1` |
-| **Paper package** | branch `paper-v1` (accepted at `8c79ee0`), `paper-v2` candidate on top |
+| **Historical paper package** | branch `paper-v1` (accepted at `8c79ee0`), `paper-v2` candidate on top |
+| **Current TCNS package** | branch `paper-v3-tcns`; analytical manuscript under `paper/tcns/` |
 | **Machine-readable identity** | `paper/FROZEN_BASE.json` |
 | **Language / runtime** | MATLAB R2025a on Windows |
 
 The SHA is the authority, not the tag. A tag is a movable label; the commit
 is not. Every verification in this artifact is anchored to `32858b1`.
+
+The frozen identity above applies to the historical simulation-v1 campaign.
+The TCNS paper does not rewrite it: it adds information-structure theory,
+counterexample diagnostics, and a separately labeled R2 generalization study.
+The authoritative R2 entry point is
+`experiments/tcns_r2_generalization_validation.m`; its accepted artifact is
+`results/tcns_r2_generalization_validation/2026-09-08_161130/`, generated from
+implementation commit `a2cec3b`. See
+`paper/tcns/manuscript/REPRODUCIBILITY.md` for the minimal TCNS workflow.
 
 ---
 
@@ -84,7 +94,8 @@ results/       persisted runs: console.log, tidy.csv, meta.json, figures
 docs/          pre-registration, final claims, hardware roadmap
 ```
 
-**These paths are read-only on the paper branch.** `paper/scripts/paper_guard.m`
+**These paths are read-only for the frozen simulation-v1 artifact.**
+`paper/scripts/paper_guard.m`
 verifies that against `git diff` from the frozen commit and fails if any of
 them was touched.
 

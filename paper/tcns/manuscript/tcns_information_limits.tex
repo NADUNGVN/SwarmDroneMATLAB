@@ -44,24 +44,22 @@ projection.
 Coalition ownership of those statistics and their communication acquisition
 cost are treated separately.
 
-The framework is instantiated on an implementation-derived, sampled
-five-UAV formation controller with delayed and lossy communication.  All ten
-controller-relevant structural unit-response value functionals violate
-sender-history identifiability in the evaluated information topology.  Two
-full, unsaturated, dynamically
-reachable histories---one ordinary payload and one pinned-leader
-payload---produce identical allowed sender observations and identical action
-responses but opposite exact action-value signs.  Although one scalar closes
-each fixed-action algebraic deficit, exhaustive coalition analysis requires
-all five agents to synthesize it in this topology.  Across each sender's
-candidate set, four leader actions share three hidden directions, whereas the
-other multi-action senders show no compression.  Frozen development
-experiments further show why this distinction matters: centralized exact
-value has scheduling headroom in a formation-switching regime, whereas
-charging an ACK-like receiver-information stream can remove that headroom
-under the frozen packet-frequency metric.  The results delimit exact local
-value-based communication; they do
-not rule out prior-specific Bayesian decisions or nonlinear policies.
+The framework is instantiated on implementation-derived sampled formation
+controllers with delayed and lossy communication.  A preregistered registry
+spanning 72 combinations of 5, 7, and 9 agents, three connected graphs, two
+pinning patterns, two horizons, and two delays yields 1320/1320 structurally
+nonidentifiable action functionals.  In the frozen five-UAV instance, all ten
+actual controller actions additionally admit full, unsaturated, dynamically
+reachable history pairs with identical allowed sender observations and action
+responses but opposite exact action-value signs.  Missing-information
+compression occurs across leader actions, whereas tested follower action sets
+show no compression; coalition size varies with topology.  Frozen development
+experiments further show why acquisition matters: centralized exact value has
+scheduling headroom in a formation-switching regime, whereas charging an
+ACK-like receiver-information stream can remove that headroom under the
+packet-frequency metric.  The results delimit exact local value-based
+communication; they do not rule out prior-specific Bayesian decisions or
+nonlinear policies.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -135,12 +133,13 @@ information for a family of actions is the rank of its hidden projection, and
 apply it sender-wise to expose shared versus independent missing directions.
 We separately characterize coalition ownership because statistic dimension is
 not packet count or distributed acquisition cost.
-\item For the sampled N=5 formation architecture, we validate the affine map
-and rank conclusions using tolerance sweeps and 80-digit arithmetic, show
-sender-history nonidentifiability for ten structural unit-response payload
-functionals, construct two reachable
-opposite-sign histories with positive unavoidable regret, and connect the
-value of receiver information to a frozen ACK-like break-even diagnostic.
+\item For the sampled formation architecture, a new 72-cell registry across
+\(N=5,7,9\), topology, pinning, horizon, and delay yields 1320/1320 structural
+nonidentifiability results stable over the declared tolerance grid.  In the
+frozen N=5 instance, we construct and independently replay actual-action
+opposite-sign witnesses for all ten controller-relevant actions, quantify
+their heterogeneous practical scale, and retain the ACK-like break-even
+diagnostic as acquisition-cost sensitivity only.
 \end{enumerate}
 
 The results are scoped to exact affine action-value identifiability in the
@@ -293,7 +292,7 @@ by j.  The evaluated graph is fixed and its follower-grounded dynamics are
 Schur under the declared gains.  To make the implementation instance explicit,
 \begin{equation}
 A=\begin{bmatrix}
-0&1&0&0&1\\1&0&1&0&0\\0&1&0&1&0\\
+0&0&0&0&0\\1&0&1&0&0\\0&1&0&1&0\\
 0&0&1&0&1\\1&0&0&1&0
 \end{bmatrix},\quad
 \pi=\begin{bmatrix}0&1&0&1&0\end{bmatrix}^{\!\top},
@@ -731,8 +730,8 @@ population claim.}
 \includegraphics[width=0.96\textwidth]{figures/fig3_oracle_headroom_boundary.pdf}
 \caption{Frozen five-seed development diagnostic with centralized current
 plant and receiver information.  The conditional fixed-response value creates
-Pareto headroom in S2 but not in the S4 congestion boundary.  O1 is privileged,
-nondeployable, and the comparison is non-inferential.}
+Pareto headroom in S2 but not in the S4 congestion boundary.  The oracle is
+privileged and nondeployable, and the comparison is non-inferential.}
 \label{fig:oracle}
 \end{figure*}
 
@@ -740,7 +739,7 @@ nondeployable, and the comparison is non-inferential.}
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4_feedback_economics.pdf}
 \caption{ACK-like packet-frequency cost sensitivity over frozen,
-performance-matchable O1 development points (median and IQR).  The dashed
+performance-matchable centralized-oracle development points (median and IQR).  The dashed
 line is the preregistered price 0.25.  This does not measure the cost of
 acquiring the all-agent missing statistic.}
 \label{fig:economics}
@@ -755,142 +754,135 @@ to the sender but changes value when the missing projection is nonzero.}
 \label{fig:geometry}
 \end{figure}
 
-\subsection{Implementation-derived matrices and validation}
+\subsection{Implementation-derived matrices and cross-instance validation}
 
-The case study uses N=5, \(h=0.02\) s, four followers, eight ordinary
-controller links, two pinned-leader streams, horizon H=25, and DATA delay
-D=4 samples.  The augmented state has 33 entries per axis and 99 in 3-D.
-The matrices \(F_H\), action responses, sender maps, and held-memory dynamics
-are assembled from the implemented graph, gains, controller, and integrator.
-For each controller-relevant payload we evaluate the structural nonzero
-unit command correction \([1,0,0]^\top\), with zero substituted receiver
-payload, which fixes \(g\) on the compatible information fiber.  Across all
-ten such structural unit-response functionals, the maximum discrepancy between
-the affine representation and the centralized O1 computation is
-\(4.34\times10^{-16}\).
+The frozen case uses N=5, \(h=0.02\) s, four followers, eight ordinary
+controller links, two pinned-leader streams, H=25, and D=4 samples.  Its
+augmented state has 33 entries per axis and 99 in 3-D.  The matrices \(F_H\),
+action responses, sender maps, and held-memory dynamics are assembled directly
+from the implemented graph, gains, controller, and integrator.  For each
+controller-relevant payload, a structural command correction
+\([1,0,0]^\top\) and fixed receiver-memory hypothesis define \(g\).  The
+maximum discrepancy between the affine representation and the centralized
+calculation is \(4.34\times10^{-16}\).
 
-For a fixed receiver-memory hypothesis, its coordinates are substituted from
-the free state.  Reduced dimensions are 93 for ordinary actions and 90 for
-pinned-leader actions.  The history analysis uses L=92 and L=89 respectively,
-which reaches the complete finite-dimensional held-memory observability
-horizon.  Thus Table~\ref{tab:links} uses these reduced finite-history maps.
-The later sender-wise simultaneous-action audit instead uses each sender's
-current observation map on the common full 99-dimensional state.
+To test whether the information-structure observation is peculiar to that
+instance, we froze a new Cartesian registry before viewing its results:
+\(N\in\{5,7,9\}\), three deterministic connected graphs, even/odd follower
+pinning, \(H\in\{15,25\}\), and \(D\in\{2,4\}\).  All 72 configurations
+satisfy the same symmetric grounded Schur scope.  Fixed-payload histories use
+the complete finite-dimensional horizon \(n_{\rm free}-1\).  Table~\ref{tab:links}
+summarizes all 1320 action rows.
 
 \begin{table*}[t]
-\caption{N=5 finite-history structural unit-response functional and rank
-audit.  Ordinary/pinned
-histories use L=92/89.  Here r is the reference information rank, and
-\(\sigma_r,\sigma_{r+1}\) bracket the retained/discarded singular-value gap.
-The last columns compare double and 80-digit normalized projection residuals.}
+\caption{Cross-instance structural audit. ``Rows'' aggregates two pinning
+patterns, two H values, and two D values; every row is nonidentifiable, stable
+in membership over relative tolerances \(10^{-6}\)--\(10^{-14}\), and gains
+one rank when its value row is appended. ``Raw stable'' counts rows whose
+numerical information-map rank itself does not change over that grid.}
 \label{tab:links}
 \centering
 \scriptsize
-\begin{tabular}{llrrrrrr}
+\begin{tabular}{llrrrrl}
 \toprule
-Payload & Link & n & r & $\sigma_r$ & $\sigma_{r+1}$ & $\delta_{\rm dbl}$ & $\delta_{80}$ \\
+Graph & N & Rows/non-ID & Raw stable & Leader $(p_1,r_1^*)$ & $r_1^*/p_1$ & Minimum coalition pattern \\
 \midrule
-ordinary & $1\to2$ & 93 & 9  & 3.288 & $6.86\times10^{-12}$ & 0.056035 & 0.056035 \\
-ordinary & $1\to5$ & 93 & 9  & 3.288 & $6.86\times10^{-12}$ & 0.010226 & 0.010226 \\
-ordinary & $2\to3$ & 93 & 27 & 2.776 & $8.99\times10^{-12}$ & 0.999890 & 0.999890 \\
-ordinary & $3\to2$ & 93 & 18 & 3.150 & $2.38\times10^{-12}$ & 0.999921 & 0.999921 \\
-ordinary & $3\to4$ & 93 & 18 & 3.150 & $2.38\times10^{-12}$ & 0.999922 & 0.999922 \\
-ordinary & $4\to3$ & 93 & 27 & 2.776 & $9.01\times10^{-12}$ & 0.999889 & 0.999889 \\
-ordinary & $4\to5$ & 93 & 27 & 2.776 & $9.01\times10^{-12}$ & 0.999876 & 0.999876 \\
-ordinary & $5\to4$ & 93 & 18 & 3.150 & $2.38\times10^{-12}$ & 0.999922 & 0.999922 \\
-pinned leader & $1\to2$ & 90 & 9 & 3.237 & $7.02\times10^{-12}$ & 0.004119 & 0.004119 \\
-pinned leader & $1\to4$ & 90 & 9 & 3.237 & $7.02\times10^{-12}$ & 0.003626 & 0.003626 \\
+geometric & 5 & 48/48 & 48 & (6,4) & 0.667 & leader: 5 \\
+ring2 & 5 & 80/80 & 56 & (4,3) & 0.750 & every sender: 5 \\
+sparse4 & 5 & 144/144 & 96 & (6,4) & 0.667 & every sender: 5 \\
+geometric & 7 & 104/104 & 80 & (7,5) & 0.714 & leader: 7; followers: 5 \\
+ring2 & 7 & 120/120 & 80 & (5,4) & 0.800 & every sender: 7 \\
+sparse4 & 7 & 216/216 & 56 & (7,5) & 0.714 & every sender: 7 \\
+geometric & 9 & 160/160 & 80 & (8,6) & 0.750 & leader: 9; followers: 8 \\
+ring2 & 9 & 160/160 & 48 & (6,5) & 0.833 & every sender: 9 \\
+sparse4 & 9 & 288/288 & 64 & (8,6) & 0.750 & every sender: 9 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:links} shows that all ten structural unit-response value
-coefficients lie outside the
-strongest sender-history row spaces.  The small residuals for leader payloads
-are not treated as negligible: their missing projections are nonzero, and the
-dynamic witness below makes their decision consequence explicit.  Adding the
-single missing scalar closes the row-space test for every action.
-This audit does not assert nonidentifiability for every possible physical
-correction: a zero response has zero value, and special nonzero response
-combinations can cancel a hidden projection.  The two trajectory witnesses
-below use actual nonzero response corrections rather than the structural unit
-surrogate.
+The compressed-null and independent direct-row-space calculations agree for
+1320/1320 rows, and the normalized hidden residual spans
+\(3.03\times10^{-6}\) to 0.99999.  An 80-digit projection was run for the
+minimum-residual action in every cell; all 72 checks are positive and the
+smallest is \(3.03\times10^{-6}\).  Raw numerical rank is stable for only
+608/1320 rows because small singular modes cross the extreme cutoffs.  This
+instability is retained; importantly, value-row membership is stable for all
+1320 rows.  The audit is numerical evidence across a declared registry, not a
+symbolic arbitrary-graph or arbitrary-gain theorem.
 
-The nonidentifiability decision is unchanged for relative tolerances
-\(10^{-6}\) through \(10^{-14}\).  Retained/discarded gaps span
-\(3.08\times10^{11}\) to \(1.32\times10^{12}\), and appending the value row
-increases rank by one for all ten unit-response functionals.  At
-\(10^{-14}\), three follower
-maps retain two roundoff-level modes and their raw rank changes; even then
-their normalized value residuals remain 0.071--0.080 and the conclusion does
-not change.  Leader and pinned-payload ranks are stable across the full grid.
-An independent 80-digit row-basis projection reproduces every double residual
-within relative difference \(2.4\times10^{-15}\), including the smallest
-0.003626 value.  The high-precision audit is conditional on the
-implementation-generated matrices; it is not a symbolic arbitrary-gain proof.
+The structural correction fixes \(g\) and must not be confused with a
+trajectory-realized scheduling action.  Zero response has zero value, and
+special nonzero responses can cancel a hidden projection.  The next subsection
+therefore audits actual state-generated corrections separately.
 
 \subsection{Reachable value-sign witnesses}
 
 Affine nonidentifiability alone could be dismissed as an inadmissible state
-perturbation.  We therefore preselected one ordinary leader payload
-\(1\to5\) and one pinned-leader payload \(1\to4\).  The same small
-constant-velocity leader trajectory, sent packet, positive-probability
-no-delivery history, receiver-memory belief, and action response are imposed
-in each pair.  Follower initial conditions differ only along a null-space
-direction of the complete leader information history.  The existing
-formation controller and integrator then generate both full trajectories.
-Both witnesses therefore exercise sender 1; they distinguish ordinary from
-pinned-leader receiver-memory semantics, not sender diversity or prevalence
-across the graph.
+perturbation.  We therefore audit every controller-relevant action in the
+frozen N=5 catalog.  Receiver memories are initialized consistently and held
+without a DATA update until the decision.  A deterministic source excitation
+creates an actual 0.01 m/s$^2$ x-axis controller correction.  For follower
+senders, the larger of the source's position and scaled-velocity transfers is
+used; leader actions use constant velocity.  We then project the exact
+fixed-response value gradient into the consistent-initialization subspace that
+simultaneously preserves the complete sender history, target receiver memory,
+and actual action response.  Symmetric perturbations about the exact affine
+zero crossing are replayed through the implemented controller and integrator.
 
-For the ordinary payload, the belief-weighted exact values are
-\(-5.29704\times10^{-6}\) and \(+5.29704\times10^{-6}\); the values using
-the realized receiver memory are \(-5.33798\times10^{-6}\) and
-\(+5.34903\times10^{-6}\).  For the pinned payload, the corresponding
-belief-weighted values are \(\mp4.95740\times10^{-6}\).  All values and
-regrets in this subsection are in \(\mathrm{m}^2\) under the sampled
-per-follower normalization following \eqref{eq:formation-value}.  The maximum sender
-observation and action-response differences are zero to stored precision.
-The affine trajectory residual is below \(3\times10^{-16}\), and the maximum
-unsaturated command is below 0.065 m/s$^2$ against a 2 m/s$^2$ limit.
-
-Applying Theorem~\ref{thm:sign} to the compatible expected-value endpoints
-gives the quantitative limits in Table~\ref{tab:regret}.  Both intervals are
-nearly symmetric, so \(p^*\) is one half, randomized minimax regret is half
-the value-information radius, and the best deterministic rule incurs the full
-radius.  These are local losses at the constructed information states, not
-expected mission-level or universal stochastic-control bounds.
+All ten actions yield admissible opposite-sign pairs, including six follower-
+sender actions not covered by the earlier representative construction.
+The maximum sender-history mismatch is \(7.98\times10^{-20}\), affine dynamic
+residual is \(4.17\times10^{-16}\), and affine-versus-independent centralized
+value mismatch is \(4.07\times10^{-20}\); actual response mismatch is zero.
+The minimum acceleration-saturation margin is 0.952 m/s$^2$.  Values in
+Table~\ref{tab:regret} are in \(\mathrm{m}^2\) under the sampled per-follower
+normalization following \eqref{eq:formation-value}.
 
 \begin{table*}[t]
-\caption{Reachable local value uncertainty and one-decision regret
-(\(\mathrm{m}^2\), threshold \(\tau=0\)).}
+\caption{N=5 actual-action reachable value-sign witnesses.  The normalized
+radius divides \(\Delta_q\) by the median absolute exact value on a deterministic
+32-state local grid. ``Cross'' is the fraction of those states whose radius-
+\(10^{-4}\) compatible interval crosses zero; it is descriptive, not a
+population probability.}
 \label{tab:regret}
 \centering
 \scriptsize
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Payload & $\Delta_q$ & $p^*$ & $R_{\rm rand}^*$ & $R_{\rm det}^*$ \\
+Action & $q_-$ & $q_+$ & $\Delta_q$ & Normalized radius & Cross \\
 \midrule
-ordinary $1\to5$ & $5.2970\times10^{-6}$ & 0.5000 & $2.6485\times10^{-6}$ & $5.2970\times10^{-6}$ \\
-pin $1\to4$ & $4.9574\times10^{-6}$ & 0.5000 & $2.4787\times10^{-6}$ & $4.9574\times10^{-6}$ \\
+ordinary $1\to2$ & $-3.475\times10^{-6}$ & $3.475\times10^{-6}$ & $3.475\times10^{-6}$ & 0.1590 & 0.1875 \\
+ordinary $1\to5$ & $-5.344\times10^{-6}$ & $5.344\times10^{-6}$ & $5.344\times10^{-6}$ & 0.1953 & 0.0625 \\
+ordinary $2\to3$ & $-5.392\times10^{-6}$ & $5.392\times10^{-6}$ & $5.392\times10^{-6}$ & 0.01010 & 0.09375 \\
+ordinary $3\to2$ & $-8.519\times10^{-8}$ & $8.519\times10^{-8}$ & $8.519\times10^{-8}$ & 0.0002666 & 0 \\
+ordinary $3\to4$ & $-3.198\times10^{-6}$ & $3.198\times10^{-6}$ & $3.198\times10^{-6}$ & 0.009173 & 0.0625 \\
+ordinary $4\to3$ & $-5.223\times10^{-6}$ & $5.223\times10^{-6}$ & $5.223\times10^{-6}$ & 0.01080 & 0 \\
+ordinary $4\to5$ & $-1.333\times10^{-7}$ & $1.333\times10^{-7}$ & $1.333\times10^{-7}$ & 0.0003459 & 0 \\
+ordinary $5\to4$ & $-3.396\times10^{-6}$ & $3.396\times10^{-6}$ & $3.396\times10^{-6}$ & 0.01099 & 0.0625 \\
+pin $1\to2$ & $-3.449\times10^{-6}$ & $3.449\times10^{-6}$ & $3.449\times10^{-6}$ & 0.2315 & 0.2500 \\
+pin $1\to4$ & $-5.002\times10^{-6}$ & $5.002\times10^{-6}$ & $5.002\times10^{-6}$ & 0.2106 & 0.03125 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Figure~\ref{fig:witness} shows the two dynamically distinct but
-sender-indistinguishable histories.  Theorem~\ref{thm:sign} therefore applies
-at these two reachable information states.  We claim reachable sign ambiguity
-for these two payload classes; Table~\ref{tab:links} supplies affine
-nonidentifiability, not dynamic sign witnesses, for the remaining eight.
+Because the endpoints are centered symmetrically, Theorem~\ref{thm:sign} gives
+\(p^*=1/2\), randomized minimax regret \(\Delta_q/2\), and deterministic
+minimax regret \(\Delta_q\) for every row.  These are local one-decision losses,
+not expected mission-level bounds.  Practical scale is heterogeneous: the
+normalized radius exceeds 0.15 for both pin and both leader ordinary actions,
+but is below \(3.5\times10^{-4}\) for two follower actions.  Seven of ten
+actions cross zero somewhere on the selected 32-state grid; the formal
+reachable witness exists for all ten.  Figure~\ref{fig:witness} makes this
+distinction visible.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.84\textwidth]{figures/fig6_reachable_sign_witnesses.pdf}
-\caption{Full unsaturated formation histories for the two preregistered
-leader-sender witnesses, covering ordinary and pinned-leader memories.  The
-sender's complete allowed observation history and each actual candidate
-response are identical, although hidden follower evolution and the conditional
-fixed-response value sign differ.}
+\caption{Implementation-replayed N=5 actual-action witnesses.  Left: exact
+opposite-sign endpoints for all ten controller actions.  Right: local
+information radius normalized by typical exact action-value scale; labels give
+the deterministic-grid zero-crossing fraction.  Small normalized radius for
+some actions is retained rather than interpreted as uniform practical impact.}
 \label{fig:witness}
 \end{figure*}
 
@@ -943,9 +935,18 @@ does not imply local ownership or three packets: Corollary~\ref{cor:message-dime
 counts independent real-valued statistics only if their operands can be
 assembled before the decision.
 
+The cross-instance audit qualifies the ownership result.  Leader compression
+recurs in every registry cell: \(r_1^*/p_1\) ranges from 2/3 to 5/6, while every
+tested follower has \(r_j^*=p_j\).  Ring2 and sparse4 require the complete
+N-agent coalition for every sender.  On the geometric graph, however,
+follower-sender value sets require five of seven agents and eight of nine
+agents, while the leader still requires all agents.  Coalition ownership is
+therefore topology and action-set dependent; the general claim is the
+row-space condition, not an all-agent rule.
+
 \begin{table*}[t]
 \caption{Frozen ACK-like packet-frequency economics.  Statistics cover only
-O1 development points within the measured periodic performance domain and do
+centralized-oracle development points within the measured periodic performance domain and do
 not price a protocol for acquiring the all-agent missing value statistic.}
 \label{tab:economics}
 \centering
@@ -1019,20 +1020,22 @@ components.
 \subsection{Boundaries}
 
 The analytical formation case is the unsaturated sampled double-integrator
-subsystem with a fixed grounded graph.  It is not a theorem for nonlinear
-6-DOF UAV dynamics, saturation, arbitrary switching topology, or an
-interference-limited MAC.  The N=5 rank and coalition results depend on the
-implemented graph, gains, and observation maps.  Tolerance sweeps and an
-80-digit projection audit harden this fixed-configuration conclusion but do
-not replace a symbolic proof for arbitrary gains or graphs.
+subsystem with a fixed graph during each decision history.  It is not a theorem
+for nonlinear 6-DOF UAV dynamics, saturation, switching topology within a
+history, or an interference-limited MAC.  The 72-cell audit establishes
+recurrence over a deterministic finite registry, not arbitrary N, gains, or
+graphs.  Its coalition results are explicitly heterogeneous.  Tolerance sweeps
+and selected 80-digit projections harden the numerical membership conclusions
+but do not replace a symbolic arbitrary-parameter proof.
 
 The value-radius and regret results are local to an information-compatible
 operating set.  A fully specified stochastic prior and nonlinear Bayesian
 estimator may produce a useful conditional expected value; that is a different
 information model and is not ruled out, and this paper does not compare against
 the best policy in that class.  Randomization reduces worst-case
-binary regret for the two nearly symmetric witnesses but cannot remove it or
-make the hidden exact sign observable.
+binary regret for the ten centered N=5 witnesses but cannot remove it or make
+the hidden exact sign observable.  Their normalized ambiguity varies by nearly
+three orders of magnitude, so existence is not uniform engineering impact.
 
 The frontier evidence uses five paired development seeds and is presented as
 mechanism falsification and counterexample evidence.  No held-out population
@@ -1064,20 +1067,20 @@ dimension.  The acquisition problem is separate: even a compressed deficit
 may be distributed across a large coalition and may consume the Pareto
 headroom it is meant to exploit.
 
-In the evaluated five-UAV formation topology, all ten structural unit-response
-value functionals violate sender-history identifiability, and two reachable
-history pairs require opposite exact decisions while remaining
-indistinguishable to the leader sender.
-The corresponding local randomized minimax regrets are
-\(2.65\times10^{-6}\) and \(2.48\times10^{-6}\); deterministic regrets are
-twice as large.  Their scale certifies strict decision divergence in the
-constructed information fibers; it is not asserted to be a mission-level
-engineering loss.  Four leader actions share three missing directions, while
-the other multi-action senders have no such compression.  The result motivates
-information-structure and communication-cost audits before a value-based
-scheduler is engineered.  Future work may study structured priors, nonlinear
-functional observability, and sparse protocols for acquiring the missing
-statistic, but none is claimed here.
+Across the 72-cell formation registry, all 1320 structural fixed-response
+functionals violate sender-history identifiability under the declared maps.
+In the evaluated five-UAV topology, all ten actual controller actions also
+admit reachable, unsaturated history pairs requiring opposite exact decisions
+while remaining sender-indistinguishable with identical responses.  Their
+normalized information radii range from \(2.67\times10^{-4}\) to 0.232, so the
+existence result is not asserted to have uniform mission-level impact.  Four
+leader actions share three missing directions in N=5; leader compression
+recurs in the finite registry, whereas tested follower action sets have none.
+Coalition size varies with topology.  These results motivate information-
+structure and acquisition-cost audits before a value-based scheduler is
+engineered.  Future work may study structured priors, nonlinear functional
+observability, and causal protocols for acquiring the missing statistic, but
+none is claimed here.
 
 \appendices
 \section{Detailed Formation Affine Map}
@@ -1111,16 +1114,20 @@ The base theorem validation entry point is
 \path{experiments/tcns_information_limits_validation.m}; the R1 depth
 audit is \path{experiments/tcns_r1_theory_depth_validation.m}, with
 unit test \path{tests/test_tcns_r1_theory_depth.m}.  Figure generation is
-\path{paper/tcns/manuscript/make_gm_figures.m}.  The authoritative GM
+\path{paper/tcns/manuscript/make_gm_figures.m}.  The authoritative base
 theorem-validation run, generated from source commit \texttt{15177a8}, is
 \path{results/tcns_information_limits_validation/2026-09-08_095209}.
 The authoritative R1 rank/regret/multi-action audit, generated from source
 commit \texttt{05fa200}, is
 \path{results/tcns_r1_theory_depth_validation/2026-09-08_103325}.
-Frozen Gate-5, O1, AB0, and FB0 result directories are named in the
-repository's GM claim--evidence ledger.  Each result records configuration,
-seed, source commit, MATLAB release, machine-readable tables, and a console
-log.  No held-out seed or new policy experiment is used in this manuscript.
+The authoritative R2 cross-instance and all-action witness audit, generated
+from implementation commit \texttt{a2cec3b}, is
+\path{results/tcns_r2_generalization_validation/2026-09-08_161130}.
+Frozen negative-trigger, centralized-oracle, feedback-accounting, and
+feedback-economic result directories are named in the repository's
+claim--evidence ledger.  Each result records configuration, seed, source
+commit, MATLAB release, machine-readable tables, and a console log.  No
+held-out seed or new policy experiment is used in this manuscript.
 
 \bibliographystyle{IEEEtran}
 \bibliography{../../references}
