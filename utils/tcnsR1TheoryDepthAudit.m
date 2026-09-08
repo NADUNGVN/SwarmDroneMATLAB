@@ -179,7 +179,9 @@ rankRows = repmat(struct('actionId',"",'linkClass',"", ...
     'augmentedRank',NaN,'augmentedAddedSingularValue',NaN, ...
     'doubleNormalizedResidual',NaN, ...
     'vpaDigits',80,'vpaNormalizedResidual',NaN, ...
-    'relativeVpaDoubleDifference',NaN,'stableAcrossToleranceGrid',false), ...
+    'relativeVpaDoubleDifference',NaN, ...
+    'identifiabilityStableAcrossToleranceGrid',false, ...
+    'numericRankStableAcrossToleranceGrid',false), ...
     height(catalog),1);
 tolRows = repmat(struct('actionId',"",'relativeTolerance',NaN, ...
     'numericRank',NaN,'normalizedResidual',NaN, ...
@@ -218,6 +220,7 @@ for a = 1:height(catalog)
     end
     vpaResidual = localVpaProjectionResidual(C,ell,base.rank,80);
     stable = true;
+    ranksAcrossGrid = zeros(numel(relativeTolerance),1);
     for t = 1:numel(relativeTolerance)
         tq = tq+1;
         factor = relativeTolerance(t);
@@ -226,7 +229,12 @@ for a = 1:height(catalog)
         projector = pinv(C,absoluteTolerance)*C;
         residual = norm((eye(numel(ell))-projector)*ell,2)/ ...
             max(norm(ell,2),eps);
-        identifiable = residual<=absoluteTolerance;
+        % The SVD cutoff has the units/scaling of C and determines the
+        % numerical row space.  Membership residual is dimensionless after
+        % normalization by ||ell||, so compare it with the declared relative
+        % tolerance rather than the absolute singular-value cutoff.
+        identifiable = residual<=factor;
+        ranksAcrossGrid(t) = numericRank;
         tolRows(tq).actionId = catalog.actionId(a);
         tolRows(tq).relativeTolerance = factor;
         tolRows(tq).numericRank = numericRank;
@@ -266,7 +274,9 @@ for a = 1:height(catalog)
     rankRows(a).relativeVpaDoubleDifference = abs( ...
         vpaResidual-base.normalizedRowSpaceResidual)/ ...
         max(vpaResidual,eps);
-    rankRows(a).stableAcrossToleranceGrid = stable;
+    rankRows(a).identifiabilityStableAcrossToleranceGrid = stable;
+    rankRows(a).numericRankStableAcrossToleranceGrid = ...
+        all(ranksAcrossGrid==ranksAcrossGrid(1));
 end
 rankTable = struct2table(rankRows);
 toleranceTable = struct2table(tolRows(1:tq));
@@ -307,4 +317,3 @@ else
     value = strjoin(compose('%.17g',x(:)'),';');
 end
 end
-

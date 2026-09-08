@@ -90,7 +90,7 @@ A hidden mode annihilated by the dynamics can cease to affect a later value;
 that is loss of dependence, not information recovery.  New measurements,
 packets, or side information instead change the map.
 
-## 4. Sign decidability
+## 4. Irreducible value and communication-decision uncertainty
 
 Let \(q(x)=a^\top x+b\), and let
 
@@ -98,11 +98,44 @@ Let \(q(x)=a^\top x+b\), and let
 \mathcal X(o)=\{x\in\mathcal X:Cx+d=o\}.
 \]
 
-Define \(q_{\min}(o)=\inf_{x\in\mathcal X(o)}q(x)\) and
-\(q_{\max}(o)=\sup_{x\in\mathcal X(o)}q(x)\).
+Assume the compatible value image is the finite interval
 
-**Theorem 2 (sign ambiguity).** If
-\(q_{\min}(o)<0<q_{\max}(o)\), no deterministic map of \(o\) can equal the
+\[
+\mathcal Q(o)=[q_-(o),q_+(o)],
+\quad
+q_- = \inf_{x\in\mathcal X(o)}q(x),
+\quad
+q_+ = \sup_{x\in\mathcal X(o)}q(x).
+\]
+
+Define its midpoint and value-information radius as
+
+\[
+q_c(o)=\frac{q_+(o)+q_-(o)}2,
+\qquad
+\Delta_q(o)=\frac{q_+(o)-q_-(o)}2.
+\]
+
+**Theorem 2 (minimax value uncertainty).** Among all sender-local point
+estimates, the midpoint is minimax and
+
+\[
+\inf_{\widehat q(o)}\sup_{x\in\mathcal X(o)}
+|\widehat q(o)-q(x)|=\Delta_q(o).
+\]
+
+**Proof.** For any estimate y, the triangle inequality gives
+
+\[
+q_+-q_-\le |q_+-y|+|y-q_-|
+\le2\max\{|q_+-y|,|y-q_-|\}.
+\]
+
+Thus the worst error is at least \((q_+-q_-)/2\).  The midpoint attains this
+bound for every value in the interval.  QED.
+
+**Corollary 1 (sign ambiguity).** If
+\(q_-(o)<0<q_+(o)\), no deterministic map of \(o\) can equal the
 sign of the exact value for every state in \(\mathcal X(o)\).
 
 **Proof.** The same observation is compatible with one negative-value and one
@@ -117,8 +150,48 @@ value interval is
 [q(x_0)-\rho\|a_\perp\|_2,\ q(x_0)+\rho\|a_\perp\|_2].
 \]
 
-The result is local to the declared operating set.  It proves neither that a
-Bayesian policy cannot be useful nor that every information state is
+Therefore
+
+\[
+\Delta_q(o)=\rho\|a_\perp\|_2.
+\]
+
+**Theorem 3 (unavoidable binary communication regret).** Let exact
+information choose transmit for \(q>0\) and no transmit for \(q<0\).  At an
+information state with \(q_-<0<q_+\), let a sender-local randomized rule
+transmit with probability \(p\).  Its endpoint regrets are
+
+\[
+R_+(p)=(1-p)q_+,
+\qquad
+R_-(p)=p(-q_-).
+\]
+
+The local minimax regret and its minimizing probability are
+
+\[
+p^*=\frac{q_+}{q_++(-q_-)},
+\qquad
+R_{\mathrm{rand}}^*
+=\frac{q_+(-q_-)}{q_++(-q_-)} >0.
+\]
+
+Restricting to deterministic rules gives
+
+\[
+R_{\mathrm{det}}^*=\min\{q_+,-q_-\}>0.
+\]
+
+**Proof.** Over the compatible interval, positive-state regret is maximized
+at \(q_+\) and negative-state regret at \(q_-\).  The first endpoint regret
+decreases in p and the second increases; their maximum is minimized where
+they are equal.  Solving \((1-p)q_+=p(-q_-)\) gives \(p^*\) and the displayed
+value.  A deterministic rule has p=0 or p=1, with worst regrets q+ and -q-,
+respectively; choosing the smaller proves the last formula.  QED.
+
+The results are local minimax statements over the declared compatible set.
+They are not universal stochastic-control lower bounds and prove neither that
+a Bayesian policy cannot be useful nor that every information state is
 ambiguous.
 
 ## 5. Minimum supplementary linear information
@@ -130,7 +203,7 @@ and define
 L_\perp=L(I-C^\dagger C).
 \]
 
-**Theorem 3 (minimum statistic dimension).** The minimum number of additional
+**Theorem 4 (minimum statistic dimension).** The minimum number of additional
 linear scalar statistics \(Hx\) required to identify all p values is
 
 \[
@@ -148,6 +221,15 @@ For one nonidentifiable action, one scalar is mathematically sufficient.  It
 does not follow that one agent owns that scalar or that one packet can acquire
 it.
 
+**Corollary 2 (instantaneous linear messages).** If the decision maker may
+receive r independent real-valued linear scalar statistics before the
+decision, identifying all p action values requires \(r\ge r_\star\).  Equality
+is algebraically achievable when those statistics span
+\(\operatorname{row}(L_\perp)\).  This counts message dimension, not packets,
+bits, rate, latency, or the distributed operations needed to synthesize the
+statistics.  It is not a data-rate theorem and is unrelated to minimum
+functional-observer order.
+
 ## 6. Coalition ownership
 
 For agent maps \(C_i\), let
@@ -156,7 +238,7 @@ For agent maps \(C_i\), let
 C_{\mathcal S}=\operatorname{col}_{i\in\mathcal S}C_i.
 \]
 
-**Corollary 1.** A fixed value is identifiable by coalition \(\mathcal S\) if
+**Corollary 3.** A fixed value is identifiable by coalition \(\mathcal S\) if
 and only if \(\ell\in\operatorname{row}(C_{\mathcal S})\).  A minimum owning
 coalition solves
 
@@ -220,6 +302,32 @@ identical complete leader observations, sent-packet record, ACK-free belief,
 and action responses but opposite expected and actual-receiver value signs.
 Commands remain below 0.065 m/s^2 versus the 2 m/s^2 limit.
 
+Their compatible expected-value endpoints give the following local minimax
+limits:
+
+| Payload | \(\Delta_q\) | \(p^*\) | Randomized regret | Deterministic regret |
+|---|---:|---:|---:|---:|
+| ordinary 1->5 | \(5.297044\times10^{-6}\) | 0.500000 | \(2.648522\times10^{-6}\) | \(5.297044\times10^{-6}\) |
+| pinned leader 1->4 | \(4.957400\times10^{-6}\) | 0.500000 | \(2.478700\times10^{-6}\) | \(4.957400\times10^{-6}\) |
+
+For simultaneous current actions, sender 1 has p1=4 and r1*=3: its ordinary
+and pinned payloads into follower 2 share one missing direction under the
+unit-response audit.  Senders 2--5 have (p,r*) equal to (1,1), (2,2), (2,2),
+and (1,1); their candidate actions introduce independent missing directions.
+Every sender's complete missing subspace requires the five-agent coalition in
+the evaluated topology.
+
+Across the complete-history ten-link tests, the nonidentifiability conclusion
+is unchanged for relative tolerances \(10^{-6}\) through \(10^{-14}\).  The
+retained/discarded singular gaps are \(3.08\times10^{11}\) to
+\(1.32\times10^{12}\).  Three follower information maps admit roundoff-level
+extra singular values at \(10^{-14}\), so their raw numeric rank changes, but
+their value residuals remain 0.071--0.080 even with those modes retained.
+The leader/pin ranks are stable over the entire grid.  Independent 80-digit
+projection calculations reproduce all normalized residuals with relative
+difference below \(2.4\times10^{-15}\), including the smallest pin residual
+0.00362645.
+
 ## 9. Proof audit
 
 | Item | Status | Audit boundary |
@@ -227,10 +335,13 @@ Commands remain below 0.065 m/s^2 versus the 2 m/s^2 limit.
 | Fixed-response affine value | proved and numerically exact | state-dependent unknown action response must be augmented/conditioned |
 | Current information iff | proved | classical functional observability specialization |
 | Finite history iff | proved | fixed affine dynamics and observation map |
-| Sign ambiguity | proved | local/operating-set statement |
+| Minimax value radius | proved | finite compatible interval; local information state |
+| Randomized/deterministic regret | proved | binary action and endpoint minimax loss, not stochastic-control lower bound |
 | Euclidean-fiber interval | proved by Cauchy--Schwarz with attainable endpoints | Euclidean fiber only |
 | Minimum statistic dimension | proved | linear scalar statistics only |
+| Sender-wise multi-action dimension | validated for all five N=5 senders | current full-state action coefficients; structural unit response |
 | Coalition criterion | proved | acquisition protocol/cost not implied |
+| Rank robustness | tolerance sweep plus 80-digit projection | high precision operates on implementation-generated matrices, not symbolic arbitrary gains |
 | N=5 ten-payload application | validated numerically from implementation matrices | numerical rank applies only to frozen model/topology |
 | Dynamic sign relevance | full reachable simulation for two preregistered payload classes | no all-ten dynamic claim |
 | Bayesian conditional expected value | outside scope | no impossibility claim against a specified prior/filter |

@@ -21,7 +21,8 @@ pinWitness = tcnsInformationLimitsDynamicWitness( ...
 regretTable = struct2table([ ...
     localRegretRow(ordinaryWitness);localRegretRow(pinWitness)]);
 
-allRankStable = all(audit.rankTable.stableAcrossToleranceGrid);
+allRankStable = all( ...
+    audit.rankTable.identifiabilityStableAcrossToleranceGrid);
 allVpaPositive = all(audit.rankTable.vpaNormalizedResidual>1e-12);
 allAugmentRanksIncrease = all( ...
     audit.rankTable.augmentedRank==audit.rankTable.referenceRank+1);
@@ -44,6 +45,8 @@ summary.delaySamples = D;
 summary.senderCount = height(audit.senderTable);
 summary.actionCount = height(audit.actionCatalog);
 summary.allRankConclusionsStable = allRankStable;
+summary.numericRankStableLinkCount = nnz( ...
+    audit.rankTable.numericRankStableAcrossToleranceGrid);
 summary.allVpaResidualsPositive = allVpaPositive;
 summary.allAugmentedRanksIncreaseByOne = allAugmentRanksIncrease;
 summary.allMultiActionCoalitionsExist = allCoalitionsExist;
@@ -93,7 +96,11 @@ for k = 1:height(audit.senderTable)
         audit.senderTable.minimumCoalitionSize(k));
 end
 fprintf('rank conclusions stable           : %d / %d\n', ...
-    nnz(audit.rankTable.stableAcrossToleranceGrid),height(audit.rankTable));
+    nnz(audit.rankTable.identifiabilityStableAcrossToleranceGrid), ...
+    height(audit.rankTable));
+fprintf('numeric ranks stable              : %d / %d\n', ...
+    nnz(audit.rankTable.numericRankStableAcrossToleranceGrid), ...
+    height(audit.rankTable));
 fprintf('ordinary randomized/deterministic : %.6e / %.6e\n', ...
     regretTable.randomizedMinimaxRegret(1), ...
     regretTable.deterministicMinimaxRegret(1));
@@ -119,4 +126,3 @@ row.optimalTransmitProbability = probability;
 row.randomizedMinimaxRegret = qPlus*a/denominator;
 row.deterministicMinimaxRegret = min(qPlus,a);
 end
-
