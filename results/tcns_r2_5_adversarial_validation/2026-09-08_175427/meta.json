@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_r2_5_adversarial_validation",
+  "runId": "2026-09-08_175427",
+  "startedAt": "2026-09-08 17:54:27",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "edad129",
+  "notes": "Adversarial audit of the already frozen R2 registry, numerical-rank bookkeeping, persisted actual-action witnesses, normalization, and coalitions. No registry expansion, scheduler, or held-out experiment.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_r2_5_adversarial_validation.m",
+  "finishedAt": "2026-09-08 18:00:53",
+  "elapsedSec": 386.4743742,
+  "elapsedText": "6 m 26 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}
