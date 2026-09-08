@@ -1,0 +1,871 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage{xcolor}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\DeclareMathOperator{row}{row}
+\DeclareMathOperator{rank}{rank}
+\DeclareMathOperator{col}{col}
+\DeclareMathOperator{nullsp}{null}
+
+\title{When Is Control-Aware Communication Locally Decidable?\\
+Information-Structure Limits in Distributed Formation Control}
+\author{Anonymous manuscript for internal review}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Control-aware communication assigns network resources according to the
+closed-loop consequence of an update.  This premise hides an information
+question: does the transmitting agent possess enough information to determine
+that consequence?  We study finite-dimensional sampled linear systems for
+which a communication action adds a fixed response to a finite-horizon
+performance output.  The exact quadratic action benefit is an affine
+functional of an augmented closed-loop state.  Building on functional
+observability, we characterize exact value identifiability from current and
+finite-history agent information by row-space conditions.  We then distinguish
+exact-value recovery from value-sign decisions, derive a local sign-ambiguity
+certificate, and prove that the minimum number of supplementary linear scalar
+statistics needed for several action values equals the rank of their
+unobservable coefficient projection.  Coalition ownership of those statistics
+and their communication acquisition cost are treated separately.
+
+The framework is instantiated on an implementation-derived, sampled
+five-UAV formation controller with delayed and lossy communication.  All ten
+controller-relevant action values violate sender-history identifiability in
+the evaluated information topology.  Two full, unsaturated, dynamically
+reachable histories---one ordinary payload and one pinned-leader
+payload---produce identical allowed sender observations and identical action
+responses but opposite exact action-value signs.  Although one scalar closes
+each fixed-action algebraic deficit, exhaustive coalition analysis requires
+all five agents to synthesize it in this topology.  Frozen development
+experiments further show why this distinction matters: centralized exact
+value has scheduling headroom in a formation-switching regime, whereas
+charging for the information needed to obtain that value can remove the
+headroom.  The results delimit exact local value-based communication; they do
+not rule out prior-specific Bayesian decisions or nonlinear policies.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Networked control systems, distributed control, information structures,
+functional observability, value of information, event-triggered control,
+multi-agent formation.
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Communication policies for networked control are increasingly asked to send
+the packet that matters most to the control objective, rather than simply the
+oldest packet or the packet with the largest state error.  Event-triggered
+control formalizes state- or error-dependent transmissions
+\cite{tabuada2007event,dimarogonas2012distributed,wang2011eventtriggering};
+age of information (AoI) formalizes freshness
+\cite{yates2021aoisurvey,rajaraman2021notjustage}; and value-of-information
+(VoI) formulations attach a control consequence to an update
+\cite{soleymani2023voiglobal}.  These approaches answer different questions.
+AoI describes how stale a record is, while a finite-horizon control value asks
+how the closed loop will change if that record is refreshed.
+
+The latter question is meaningful only relative to an information structure.
+In a distributed formation, the sender knows its own physical and controller
+state and its transmission history.  It need not know the packet currently
+held by a receiver, the receiver's other stale memories, or remote states that
+shape the no-action closed-loop trajectory.  Acknowledgments can reduce one
+part of this uncertainty, and ACK-free packet-memory beliefs can be calibrated
+under a known channel law.  Neither fact implies that the total control-action
+value is locally computable: the cross term between the action response and
+the global no-action response may remain hidden.
+
+This paper therefore asks a question prior to scheduler design:
+
+\begin{quote}
+Under what information structures is the exact control value of a
+communication action identifiable, and what additional information must be
+acquired when it is not?
+\end{quote}
+
+The question connects decentralized information structures
+\cite{witsenhausen1971information,ho1972team,nayyar2013common} with functional
+observability \cite{fernando2010functional,montanari2022functional}.  We do
+not claim the row-space test itself as new.  Rather, we expose the exact
+communication-action value as the target functional, show that inability to
+observe its magnitude can extend to its sign, separate the dimension of the
+missing statistic from the network cost of constructing it, and close these
+statements on an implemented formation-control model.
+
+The investigation was driven by falsification.  A deterministic
+communication-error bound was analytically valid but produced a Pareto
+frontier dominated by periodic communication.  An online centralized
+current-state oracle, using the exact action cross term but no future
+realizations, exposed substantial scheduling headroom in some nonstationary
+regimes and none in a congestion boundary.  Explicit receiver feedback often
+consumed that headroom.  Finally, an exact ACK-free receiver-memory belief was
+well calibrated but could not identify the baseline component of the action
+cross term.  These findings motivated an information-limit result rather than
+another trigger.
+
+The contributions are:
+
+\begin{enumerate}
+\item We derive the exact finite-horizon marginal communication-action value
+as an affine functional of an augmented state for a fixed action response.
+\item We specialize functional observability to this action value, cover
+finite local histories, and establish a value-sign ambiguity test on the
+information-compatible operating set.
+\item We prove that the minimum dimension of extra linear information for a
+family of action values is the rank of its projection outside the available
+information row space.  We separately characterize coalition ownership,
+because statistic dimension is not distributed acquisition cost.
+\item For the sampled N=5 formation architecture, we validate the affine map
+to machine precision, show sender-history nonidentifiability for all ten
+payloads, construct two reachable opposite-sign histories, and connect the
+missing information to a measured feedback break-even condition.
+\end{enumerate}
+
+The results are scoped to exact affine action-value identifiability in the
+stated sampled linear model.  They do not assert that distributed agents can
+never make useful stochastic decisions, that feedback is always uneconomic,
+or that adaptive communication is universally inferior to periodic service.
+
+\section{Related Work and Positioning}
+
+\subsection{From event conditions to stale receiver memories}
+
+Event-triggered control replaces periodic sampling by state-dependent
+conditions while retaining stability or performance guarantees
+\cite{tabuada2007event,wang2011eventtriggering,dimarogonas2012distributed,
+seyboth2013eventbased,nowzari2019eventtriggered}.  Loss and delay make the
+sender and receiver disagree about the control information in use.
+Decentralized double-integrator consensus under unreliable links is treated
+in \cite{garcia2016unreliable}; ACK and no-ACK event-triggered designs under
+packet loss appear in \cite{dolk2017packetlosses}; and model-based triggering
+without ACK appears in \cite{garcia2021modelbasedlossy}.  Most closely, Viel
+et al. maintain packet-loss hypotheses for neighbor-held states in distributed
+formation control \cite{viel2022packetlossformation}.  Thus no-ACK receiver
+memory inference is established prior art.  Our issue is what remains hidden
+after that receiver-memory uncertainty is represented exactly.
+
+\subsection{Freshness and control value}
+
+AoI measures time since generation of the freshest received update
+\cite{yates2021aoisurvey}.  Goal-oriented variants such as age of incorrect
+information refine freshness by state relevance
+\cite{maatouk2020aoii,rajaraman2021notjustage}.  These metrics are useful
+network summaries but are not generally sufficient statistics for the
+finite-horizon marginal value of an action.  VoI-based feedback control makes
+that marginal value explicit and can yield optimal threshold structures under
+its prescribed information model \cite{soleymani2023voiglobal}.  Formation
+scheduling has also combined value proxies, graph relevance, and resource
+allocation \cite{chiariotti2025voiformation}.  We neither introduce the VoI
+concept nor optimize a scheduler.  We test whether the exact value required by
+such a decision is observable to the deciding agent.
+
+\subsection{Information structures and functional observability}
+
+Who knows what and when is central to decentralized control
+\cite{witsenhausen1971information,ho1972team}.  Common-information methods can
+convert specific partial-history-sharing problems into coordinated stochastic
+control problems \cite{nayyar2013common}, but they require a declared
+probability model and information sharing architecture.  Functional
+observability asks whether selected linear functionals, rather than the full
+state, can be reconstructed \cite{fernando2010functional}.  Its row-space
+characterizations and target-sensor questions are established, including for
+large networks \cite{montanari2022functional}.  Our theoretical core uses
+that foundation with the exact quadratic communication-action value as the
+functional, then adds a decision-sign result and an acquisition-economics
+interpretation specific to control communication.
+
+\subsection{Control--communication co-design}
+
+Data-rate theorems and networked-control studies quantify how communication
+constrains stability and performance \cite{tatikonda2004control,
+nair2007feedback,hespanha2007survey}.  Modern surveys emphasize that
+information has several operational meanings in estimation and control
+\cite{franceschetti2023manyfacets}.  Feedback itself consumes network
+opportunities and can reverse freshness conclusions \cite{munari2025feedback}.
+Our break-even analysis is deliberately modest: it asks whether the measured
+performance headroom can pay for the messages needed to expose a hidden value
+statistic under a frozen packet-frequency accounting model.
+
+\begin{table*}[t]
+\caption{Closest research threads and the distinction of this paper.}
+\label{tab:prior}
+\centering
+\scriptsize
+\begin{tabular}{p{2.6cm}p{4.1cm}p{4.2cm}p{5.3cm}}
+\toprule
+Thread & Established capability & Remaining question & Position of this paper \\
+\midrule
+Event-triggered and lossy formation
+& Stability/performance triggers under distributed state error, loss, or delay
+& Is exact marginal action value available to the transmitter?
+& No new trigger; a valid bound-trigger counterexample motivates the information question. \\
+AoI / goal-oriented freshness
+& Timeliness and incorrectness metrics
+& Does freshness determine the closed-loop action cross term?
+& AoI is not treated as a sufficient control-value statistic. \\
+VoI scheduling
+& Marginal control benefit and threshold scheduling under specified information
+& Is the value statistic itself identifiable under a distributed sender map?
+& Studies this precondition; makes no optimal-scheduler claim. \\
+Decentralized information structures
+& Formal dependence of decisions on distributed histories
+& Which exact functional is missing for communication decisions?
+& Instantiates the information question with finite-horizon communication-action value. \\
+Functional observability
+& Row-space tests and target-state/sensor selection
+& What do these tests imply for action sign and acquisition economics?
+& Uses established theory, adds action-specific sign, statistic/acquisition separation, and formation closure. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\section{Sampled Distributed Formation and Communication Model}
+
+\subsection{Formation dynamics}
+
+Agent 1 is an analytical leader and
+\(\mathcal F=\{2,\ldots,N\}\) are followers.  At sample \(k\), follower i has
+position \(p_i\in\mathbb R^3\), velocity \(v_i\in\mathbb R^3\), and input
+\(u_i\).  The implemented semi-implicit double-integrator update is
+\begin{align}
+v_i(k+1)&=v_i(k)+hu_i(k),\\
+p_i(k+1)&=p_i(k)+hv_i(k)+h^2u_i(k).
+\end{align}
+For desired offset \(r_i\), define
+\begin{equation}
+e_i=p_i-p_1-r_i,\qquad w_i=v_i-v_1.
+\end{equation}
+The directed convention is \(A_{ij}=1\) when controller i uses a packet sent
+by j.  The evaluated graph is fixed and its follower-grounded dynamics are
+Schur under the declared gains.
+
+Receiver i stores the newest accepted ordinary neighbor payload
+\(\hat x_{ij}=(\hat p_{ij},\hat v_{ij})\).  Pinned followers separately store
+\((\hat p^L_{i1},\hat v^L_{i1},\hat a^L_{i1})\).  Newer-generation acceptance
+prevents an obsolete reordered packet from replacing newer memory.  DATA may
+be lost or delayed; an ACK architecture may separately report acceptance,
+but the information-limit theorem only uses the variables actually supplied
+to the sender.
+
+Before acceleration saturation, the implemented control law is
+\begin{align}
+u_i={}&-K_ps_i\sum_jA_{ij}\big[(p_i-\hat p_{ij})-(r_i-r_j)\big]\nonumber\\
+&-K_vs_i\sum_jA_{ij}(v_i-\hat v_{ij})
+-\pi_iK_{pL}[(p_i-\hat p^L_{i1})-r_i]\nonumber\\
+&-\pi_iK_{vL}(v_i-\hat v^L_{i1})+\pi_i\hat a^L_{i1}.
+\label{eq:controller}
+\end{align}
+Its exact-information part is
+\(u_F^\star=-H_pe-H_vw+\Pi\mathbf1a_1\); stale memories add a command residual
+\(d^c\).  With \(y=\col(e,hw)\), the exact unsaturated sampled update can be
+written
+\begin{equation}
+y_{k+1}=A_hy_k+D_h\col(\chi_k,\upsilon_k),
+\label{eq:sampled}
+\end{equation}
+where \(\chi_k\) is the analytical-leader position-step residual and
+\(\upsilon_k=h^2d^c_k+h^2\Pi\mathbf1a_1(k)
+-h\mathbf1[v_1(k+1)-v_1(k)]\).  This form follows from the actual
+velocity-first integrator; it is not a continuous-time approximation.
+
+\subsection{Information available at a sender}
+
+At a decision by source j, the strongest deterministic local information used
+in this paper contains its exact own position and velocity; every ordinary
+and pinned receiver memory feeding its own controller; its exact unsaturated
+command; graph, gains, offsets, clock, and channel law; and its own sent-DATA
+history.  The leader additionally knows its reference position, velocity, and
+acceleration.  It does not include state stored at another receiver or remote
+physical state that has not been communicated.  We express the state-dependent
+part as
+\begin{equation}
+o_j=C_j\xi+d_j.
+\label{eq:sender-map}
+\end{equation}
+Known packet histories or action labels change affine constants but do not add
+hidden-state rows.  Figure~\ref{fig:architecture} illustrates the distinction.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_information_architecture.pdf}
+\caption{Evaluated distributed information architecture.  The exact value of
+the highlighted candidate depends on the global no-action response, not only
+on the sender's own state and estimate of receiver memory.}
+\label{fig:architecture}
+\end{figure}
+
+\section{Finite-Horizon Value of a Communication Action}
+
+\subsection{Generic linear/affine closed loop}
+
+Consider a finite-dimensional affine closed loop
+\begin{equation}
+x_{k+1}=Ax_k+Bu_k+d.
+\end{equation}
+For a fixed decision point, collect the no-action performance output over a
+finite horizon as
+\begin{equation}
+z=Fx+r.
+\label{eq:baseline}
+\end{equation}
+A candidate communication action a induces a fixed response \(g_a\) in the
+same stacked output.  With symmetric \(Q\succeq0\), define benefit as
+no-action cost minus action cost:
+\begin{align}
+q_a(x)&=\|Fx+r\|_Q^2-\|Fx+r+g_a\|_Q^2\nonumber\\
+&=\ell_a^\top x+c_a,
+\label{eq:affine-value}
+\end{align}
+where
+\begin{equation}
+\ell_a=-2F^\top Qg_a,qquad
+c_a=-2r^\top Qg_a-g_a^\top Qg_a.
+\label{eq:value-coeff}
+\end{equation}
+Positive normalizations, including a delivery probability, do not change
+identifiability or sign.  If the response depends on an unknown state, that
+state must be augmented or the response must be conditioned on a hypothesis;
+otherwise \eqref{eq:affine-value} does not apply.
+
+\subsection{Formation action response}
+
+For the formation case, the augmented state contains exactly the variables
+needed to construct the frozen no-action response: follower formation error
+and scaled relative velocity, analytical-leader state, eight ordinary
+receiver memories, and two pinned-leader memories.  For one Cartesian axis,
+\begin{equation}
+\xi^a=\col\!\left(e^a,hw^a,p_L^a,hv_L^a,h^2a_L^a,
+\{\hat p_{ij}^a,h\hat v_{ij}^a\},
+\{\hat p_{iL}^a,h\hat v_{iL}^a,h^2\hat a_{iL}^a\}\right).
+\label{eq:aug-state}
+\end{equation}
+The one-axis dimension is 33 and
+\(\xi=\col(\xi^x,\xi^y,\xi^z)\in\mathbb R^{99}\).
+
+Recursion of \eqref{eq:sampled} over H samples yields implementation-derived
+matrices, not fitted matrices,
+\begin{equation}
+\operatorname{vec}(Z_k)=F_H\xi_k+r_H.
+\label{eq:FH}
+\end{equation}
+For link \(j\to i\), receiver-memory hypothesis s, successful-delivery
+probability \(p_s\), \(m=N-1\), and fixed output response \(g_{ij,s}),
+\begin{equation}
+q_{ij,s}=-\frac{2p_s}{m}g_{ij,s}^\top(F_H\xi_k+r_H)
+-\frac{p_s}{m}\|g_{ij,s}\|_2^2.
+\label{eq:formation-value}
+\end{equation}
+For a receiver-memory belief \(b(s)\), the exact conditional expression is
+\(\bar q_{ij}=\sum_s b(s)q_{ij,s}\).  The coefficient and constant are
+averaged across hypotheses.  We do not evaluate the nonlinear quadratic at
+an expected receiver state.
+
+\section{Information-Structure Identifiability}
+
+\subsection{Exact current value}
+
+The following is the action-value specialization of functional observability.
+
+\begin{theorem}[Exact action-value identifiability]
+\label{thm:exact}
+Let \(q_a(x)=\ell_a^\top x+c_a\) and \(o=Cx+d_o\).  On
+\(\mathbb R^n\), or locally on a feasible set containing an open relative
+neighborhood along \(\ker C\), the exact action value is a function of o if
+and only if
+\begin{equation}
+\ell_a\in\row(C).
+\label{eq:row-test}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+If \(\ell_a=C^\top\alpha\), then
+\(q_a=\alpha^\top(o-d_o)+c_a\).  Conversely, any \(v\in\ker C\) leaves o
+unchanged.  Identifiability requires
+\(q_a(x+v)-q_a(x)=\ell_a^\top v=0\) for every such v.  Hence
+\(\ell_a\in(\ker C)^\perp=\row(C)\).
+\end{proof}
+
+The normalized diagnostic used later is
+\begin{equation}
+\delta_C(\ell)=
+\frac{\|(I-C^\dagger C)\ell\|_2}{\max(\|\ell\|_2,\epsilon)}.
+\label{eq:residual}
+\end{equation}
+A positive numerical residual applies the theorem to a given matrix; it is
+not itself the theorem.
+
+\subsection{Finite local history}
+
+Suppose that during a declared interval the augmented dynamics and
+measurements are
+\begin{equation}
+x_{t+1}=A_0x_t+a_0,qquad o_t=Cx_t+d.
+\end{equation}
+Define
+\begin{equation}
+\mathcal O_L=\col(C,CA_0,\ldots,CA_0^L).
+\end{equation}
+
+\begin{theorem}[Finite-history action-value identifiability]
+\label{thm:history}
+At time L, an action value with coefficient \(\ell_a\) is identifiable from
+\(o_0,\ldots,o_L\) if and only if
+\begin{equation}
+(A_0^L)^\top\ell_a\in\row(\mathcal O_L).
+\label{eq:history-test}
+\end{equation}
+After the observability row space has stabilized, later samples add no
+observation direction.  They cannot recover a decision-time value whenever
+its propagated coefficient remains outside that stabilized row space.
+\end{theorem}
+
+\begin{proof}
+The affine solution gives
+\(x_L=A_0^Lx_0+\sum_{t=0}^{L-1}A_0^{L-1-t}a_0\).  Thus the coefficient of
+the time-L value in x0 is \((A_0^L)^\top\ell_a\), while the stacked history's
+state-dependent part is \(\mathcal O_Lx_0\).  Theorem~\ref{thm:exact} gives
+\eqref{eq:history-test}.  Cayley--Hamilton implies that the row span generated
+by \(C,CA_0,\ldots\) stabilizes in finite dimension.
+\end{proof}
+
+The last sentence is conditional on unchanged maps and a coefficient that
+retains its hidden component.  A hidden mode annihilated by the dynamics can
+cease to affect a later value; that is loss of dependence, not recovery of
+information.  A delivered packet, new sensor, or shared statistic changes the
+information structure.
+
+\subsection{Value-sign decidability}
+
+Exact magnitude is stronger than the sign needed by a transmit-if-beneficial
+rule.  Let \(\mathcal X\) be the declared operating set and
+\begin{equation}
+\mathcal X(o)=\{x\in\mathcal X:Cx+d_o=o\}.
+\end{equation}
+Define \(q_{\min}(o)=\inf_{x\in\mathcal X(o)}q(x)\) and
+\(q_{\max}(o)=\sup_{x\in\mathcal X(o)}q(x)\).
+
+\begin{theorem}[Sign ambiguity]
+\label{thm:sign}
+If \(q_{\min}(o)<0<q_{\max}(o)\), no deterministic policy based only on o
+can recover the sign of the exact action value for every state in
+\(\mathcal X(o)\).
+\end{theorem}
+
+\begin{proof}
+The same o is compatible with at least one negative-value state and one
+positive-value state.  A deterministic map of o returns the same decision in
+both cases and is therefore wrong in at least one.
+\end{proof}
+
+For \(q(x)=a^\top x+b\), let
+\(P_C=C^\dagger C\), \(a_\perp=(I-P_C)a\), and consider the Euclidean local
+fiber \(x=x_0+v\), \(v\in\ker C\), \(\|v\|_2\le\rho\).  Its exact interval is
+\begin{equation}
+\mathcal Q(o)=[q(x_0)-\rho\|a_\perp\|_2,
+q(x_0)+\rho\|a_\perp\|_2].
+\label{eq:sign-interval}
+\end{equation}
+The endpoints follow by choosing v parallel or antiparallel to
+\(a_\perp\).  Figure~\ref{fig:geometry} shows the geometry.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_information_geometry.pdf}
+\caption{The available row space determines the reconstructable component of
+the value coefficient.  Motion along the information null space is invisible
+to the sender but changes value when the missing projection is nonzero.}
+\label{fig:geometry}
+\end{figure}
+
+Theorem~\ref{thm:sign} is local to \(\mathcal X(o)\).  It does not rule out a
+Bayesian conditional expectation under a specified prior, nor does it say
+that every information fiber crosses zero.
+
+\section{Minimum Supplementary Information and Coalition Structure}
+
+\subsection{One or multiple candidate actions}
+
+Stack p action-value coefficients as rows of
+\(L\in\mathbb R^{p\times n}\) and define
+\begin{equation}
+L_\perp=L(I-C^\dagger C).
+\label{eq:Lperp}
+\end{equation}
+
+\begin{theorem}[Minimum linear-statistic dimension]
+\label{thm:min-stat}
+The minimum number of additional linear scalar statistics Hx required to
+identify all p exact action values is
+\begin{equation}
+r_\star=\rank(L_\perp).
+\label{eq:rstar}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+If all values are identifiable from \(\col(C,H)x\), the projections of the
+rows of H onto \(\ker C\) must span every row of \(L_\perp\).  Therefore H
+has at least \(\rank(L_\perp)\) independent scalar rows.  Conversely, choose
+the rows of H as any row basis of \(L_\perp\).  Each row of L is then the sum
+of a component in \(\row(C)\) and one in \(\row(H)\), satisfying
+Theorem~\ref{thm:exact} for all p values.
+\end{proof}
+
+For a single nonidentifiable value, one additional scalar
+\(\theta=\ell_\perp^\top x\) is sufficient.  This is statistic dimension,
+not packet count.  The coordinates of \(\ell_\perp\) may be distributed
+across many agents.
+
+\subsection{Information ownership}
+
+Let agent i's strongest map be \(C_i\).  For coalition \(\mathcal S\), define
+\(C_{\mathcal S}=\col_{i\in\mathcal S}C_i\).
+
+\begin{corollary}[Coalition identifiability]
+\label{cor:coalition}
+Coalition \(\mathcal S\) identifies a fixed action value if and only if
+\begin{equation}
+\ell\in\row(C_{\mathcal S}).
+\end{equation}
+A minimum owning coalition solves
+\begin{equation}
+\min_{\mathcal S}|\mathcal S|
+\quad\text{subject to}\quad
+\ell\in\row(C_{\mathcal S}).
+\label{eq:coalition}
+\end{equation}
+\end{corollary}
+
+Corollary~\ref{cor:coalition} is closely related to functional sensor
+selection.  We use exhaustive enumeration only for the N=5 case and do not
+claim a new generic combinatorial algorithm.  Even when a coalition owns the
+required rows, a causal aggregation protocol must still communicate them at a
+nonzero frequency, delay, and reliability cost.
+
+\section{Communication Cost of Acquiring Value Information}
+
+Let \(C_P(E)\) be the cost of the frozen periodic Pareto frontier interpolated
+at formation error E.  Suppose a policy informed by supplementary statistics
+uses DATA cost D and information streams t with rate \(R_t\) and normalized
+price \(\eta_t\).  A necessary accounting condition for performance-matched
+Pareto benefit is
+\begin{equation}
+D+\sum_t\eta_tR_t<C_P(E).
+\label{eq:econ-general}
+\end{equation}
+For a single feedback stream with rate A,
+\begin{equation}
+\eta^\star=\frac{C_P(E)-D}{A}
+\label{eq:eta-star}
+\end{equation}
+is its break-even price.  Negative \(\eta^\star\) means DATA alone is already
+more costly than periodic at matched error.  At feedback price \(\eta_f\), the
+affordable feedback fraction is \(f^\star=\eta^\star/\eta_f\), clipped to
+\([0,1]\) for operational interpretation.
+
+Equation~\eqref{eq:econ-general} is not an optimality theorem.  It prevents a
+common category error: a one-dimensional sufficient statistic is not free.
+Under a packet-frequency metric, piggybacking adds no packet only if an
+existing packet is sent anyway; bytes, airtime, collision risk, and joules
+remain outside that metric.
+
+\section{Formation-Control Case Study}
+
+\subsection{Implementation-derived matrices and validation}
+
+The case study uses N=5, \(h=0.02\) s, four followers, eight ordinary
+controller links, two pinned-leader streams, horizon H=25, and DATA delay
+D=4 samples.  The augmented state has 33 entries per axis and 99 in 3-D.
+The matrices \(F_H\), action responses, sender maps, and held-memory dynamics
+are assembled from the implemented graph, gains, controller, and integrator.
+Across all ten payloads, the maximum discrepancy between the affine
+representation and the centralized O1 computation is
+\(4.34\times10^{-16}\).
+
+For a fixed receiver-memory hypothesis, its coordinates are substituted from
+the free state.  Reduced dimensions are 93 for ordinary actions and 90 for
+pinned-leader actions.  The history analysis uses L=92 and L=89 respectively,
+which reaches the complete finite-dimensional held-memory observability
+horizon.
+
+\begin{table*}[t]
+\caption{N=5 finite-history action-value identifiability.  The residual is
+\(\delta_{\mathcal O_L}((A_0^L)^\top\ell)\) from
+\eqref{eq:residual}.  Every strictly positive entry implies
+nonidentifiability under the stated tolerance.}
+\label{tab:links}
+\centering
+\scriptsize
+\begin{tabular}{llrrrrl}
+\toprule
+Payload & Link & Reduced n & L & History rank & Normalized residual & Exact value identifiable? \\
+\midrule
+ordinary & $1\to2$ & 93 & 92 & 9  & 0.0560 & no \\
+ordinary & $1\to5$ & 93 & 92 & 9  & 0.0102 & no \\
+ordinary & $2\to3$ & 93 & 92 & 27 & 0.9999 & no \\
+ordinary & $3\to2$ & 93 & 92 & 18 & 0.9999 & no \\
+ordinary & $3\to4$ & 93 & 92 & 18 & 0.9999 & no \\
+ordinary & $4\to3$ & 93 & 92 & 27 & 0.9999 & no \\
+ordinary & $4\to5$ & 93 & 92 & 27 & 0.9999 & no \\
+ordinary & $5\to4$ & 93 & 92 & 18 & 0.9999 & no \\
+pinned leader & $1\to2$ & 90 & 89 & 9 & 0.0041 & no \\
+pinned leader & $1\to4$ & 90 & 89 & 9 & 0.0036 & no \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:links} shows that all ten value coefficients lie outside the
+strongest sender-history row spaces.  The small residuals for leader payloads
+are not treated as negligible: their missing projections are nonzero, and the
+dynamic witness below makes their decision consequence explicit.  Adding the
+single missing scalar closes the row-space test for every action.
+
+\subsection{Reachable value-sign witnesses}
+
+Affine nonidentifiability alone could be dismissed as an inadmissible state
+perturbation.  We therefore preselected one ordinary leader payload
+\(1\to5\) and one pinned-leader payload \(1\to4\).  The same small
+constant-velocity leader trajectory, sent packet, positive-probability
+no-delivery history, receiver-memory belief, and action response are imposed
+in each pair.  Follower initial conditions differ only along a null-space
+direction of the complete leader information history.  The existing
+formation controller and integrator then generate both full trajectories.
+
+For the ordinary payload, the belief-weighted exact values are
+\(-5.29704\times10^{-6}\) and \(+5.29704\times10^{-6}\); the values using
+the realized receiver memory are \(-5.33798\times10^{-6}\) and
+\(+5.34903\times10^{-6}\).  For the pinned payload, the corresponding
+belief-weighted values are \(\mp4.95740\times10^{-6}\).  The maximum sender
+observation and action-response differences are zero to stored precision.
+The affine trajectory residual is below \(3\times10^{-16}\), and the maximum
+unsaturated command is below 0.065 m/s$^2$ against a 2 m/s$^2$ limit.
+
+Figure~\ref{fig:witness} shows the two dynamically distinct but
+sender-indistinguishable histories.  Theorem~\ref{thm:sign} therefore applies
+at these two reachable information states.  We claim reachable sign ambiguity
+for these two payload classes; Table~\ref{tab:links} supplies affine
+nonidentifiability, not dynamic sign witnesses, for the remaining eight.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/fig6_reachable_sign_witnesses.pdf}
+\caption{Full unsaturated formation histories for the two preregistered
+witnesses.  The sender's complete allowed observation history and each
+candidate action response are identical, although hidden follower evolution
+and the exact action-value sign differ.}
+\label{fig:witness}
+\end{figure*}
+
+\subsection{Statistic dimension versus coalition size}
+
+For every fixed payload, \(\rank(L_\perp)=1\): one linear scalar closes its
+individual algebraic deficit.  However, no receiver alone and no
+sender--receiver pair identifies that scalar.  Exhaustive enumeration of all
+subsets of the five implemented agent maps finds that every sender needs four
+additional agents; the only minimum coalition contains all five UAVs.  This
+is a result for the evaluated graph and information topology, not a claim that
+all formations require global information.
+
+\begin{table*}[t]
+\caption{Information ownership and frozen feedback economics.  Coalition
+results hold for each of the ten fixed payloads.  Economic statistics cover
+only O1 points within the measured periodic performance domain.}
+\label{tab:economics}
+\centering
+\scriptsize
+\begin{tabular}{p{3.6cm}p{3.1cm}p{3.0cm}p{5.8cm}}
+\toprule
+Item & Statistic & Result & Interpretation \\
+\midrule
+Fixed-action supplementary dimension & $\rank(L_\perp)$ & 1 for 10/10 & One scalar is algebraically sufficient. \\
+Individual receiver / sender--receiver & row-space test & 0/10 / 0/10 & The scalar is not locally owned by the natural endpoint pair. \\
+Minimum coalition & exhaustive $C_{\mathcal S}$ test & 5 agents for 10/10 & In this N=5 topology all agent maps are required to synthesize it. \\
+\midrule
+S2 formation switching & eligible 4/14; median $\eta^\star$ & 0.726 (IQR 0.556--2.186) & Full feedback at price 0.25 is affordable for every eligible point. \\
+S3 burst loss & eligible 11/14; median $\eta^\star$ & 0.220 (0.186--0.249) & Median point cannot afford full feedback. \\
+S4 congestion & eligible 11/14; median $\eta^\star$ & -0.741 ($[-0.814,-0.173]$) & DATA alone is uneconomic throughout the eligible set. \\
+S5 topology perturbation & eligible 11/14; median $\eta^\star$ & -0.047 (-0.070--0.173) & Headroom is sparse and not robust to feedback cost. \\
+S6 dynamic excitation & eligible 11/14; median $\eta^\star$ & 0.095 (0.032--0.367) & Median affordable feedback fraction is 37.8\%. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Why the information result matters operationally}
+
+Figure~\ref{fig:bound} retains the mechanism that failed before this theory
+was formulated.  Its trigger uses a valid staleness-to-control uncertainty
+bound, yet the complete periodic frontier is better throughout the shared
+development domain.  Across a 101-point budget-matched grid, trigger-minus-
+periodic RMSE averages +0.03023 m and no point favors the trigger.  This is a
+counterexample to the inference that a safe uncertainty bound is automatically
+a useful scheduler; it is not a population comparison.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_bound_trigger_falsification.pdf}
+\caption{Frozen stationary development frontiers.  The analytically valid
+bound-based mechanism is dominated by the periodic frontier over their shared
+domain.}
+\label{fig:bound}
+\end{figure}
+
+To test whether valuable scheduling opportunities existed at all, a
+centralized online oracle used exact current plant and receiver memories but
+no future channel outcomes, disturbances, formation changes, or trajectories.
+It ranked actions only by \eqref{eq:formation-value}.  Figure~\ref{fig:oracle}
+shows a positive and a negative boundary.  In S2 formation switching, oracle
+minus periodic mean matched RMSE is -0.02381 m and mean matched cost is
+-1.7088 Hz/channel; the oracle is favored over the complete shared domains.
+In S4 time-varying congestion, the differences reverse to +0.02595 m and
++0.7135 Hz/channel, with zero shared-domain fraction favoring the oracle.
+The oracle is privileged and is not a proposed algorithm.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/fig3_oracle_headroom_boundary.pdf}
+\caption{Frozen centralized-current-information diagnostic.  Exact current
+value creates Pareto headroom in S2 but not in the S4 congestion boundary,
+demonstrating both usefulness and non-universality.}
+\label{fig:oracle}
+\end{figure*}
+
+Finally, Fig.~\ref{fig:economics} charges the information channel using
+\eqref{eq:eta-star}.  At the frozen ACK price 0.25, S2 can fund complete
+feedback at all four matchable points, while the median S6 point can fund
+feedback on only 37.8\% of eligible deliveries.  S4 has negative headroom
+even before feedback.  Table~\ref{tab:economics} reports all five scenarios.
+This accounting explains why mathematical sufficiency and deployable
+economic value must remain distinct.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_feedback_economics.pdf}
+\caption{Break-even feedback price over frozen performance-matchable O1
+points (median and IQR).  The dashed line is the preregistered price 0.25.}
+\label{fig:economics}
+\end{figure}
+
+\section{Discussion and Limitations}
+
+\subsection{What the result changes}
+
+Theorems~\ref{thm:exact}--\ref{thm:min-stat} suggest a three-stage audit for
+control-aware communication.  First derive the exact action value under the
+closed-loop model.  Second test whether that functional lies in the acting
+agent's information row space, including the complete permitted history.
+Third, if information is missing, distinguish the algebraic dimension of the
+missing statistic from the coalition and communication resources needed to
+construct it.  Scheduler design before these checks risks optimizing a
+surrogate that either lacks the decisive cross term or costs more to reveal
+than its scheduling benefit.
+
+The result also clarifies why receiver-memory estimation alone can be
+insufficient.  Such an estimator can correctly represent which packet the
+receiver may hold.  The finite-horizon action value additionally projects the
+action response onto the no-action closed-loop response, which includes
+formation components outside the sender's information.  Better calibration
+of the receiver-memory marginal cannot create measurements of those missing
+components.
+
+\subsection{Boundaries}
+
+The analytical formation case is the unsaturated sampled double-integrator
+subsystem with a fixed grounded graph.  It is not a theorem for nonlinear
+6-DOF UAV dynamics, saturation, arbitrary switching topology, or an
+interference-limited MAC.  The N=5 rank and coalition results depend on the
+implemented graph, gains, and observation maps.  Numerical rank uses a fixed
+tolerance and does not replace a symbolic proof for arbitrary parameters.
+
+The sign result is local to an information-compatible operating set.  A fully
+specified stochastic prior and nonlinear Bayesian estimator may produce a
+useful conditional expected value; that is a different information model and
+is not ruled out.  Randomized policies are likewise outside the deterministic
+exact-sign statement, although randomization cannot make the hidden exact
+sign observable.
+
+The frontier evidence uses five paired development seeds and is presented as
+mechanism falsification and counterexample evidence.  No held-out population
+superiority or statistical significance claim is made.  The communication
+axis counts DATA + 0.25 ACK packets per second per channel.  It omits payload
+length, shared-medium collisions, airtime, and energy, so feedback-economic
+numbers are conditional on this accounting.
+
+Functional observability and target-sensor selection are established fields.
+Our exact row-space and coalition conditions must be read as an action-value
+specialization, not a claim of discovering those linear-algebra principles.
+The intended contribution is the control-communication synthesis: exact
+action functional, sign decision, minimum statistic versus acquisition cost,
+and implementation-faithful reachable closure.
+
+\section{Conclusion}
+
+Control-aware communication is not locally decidable merely because a sender
+can estimate the receiver's memory.  For a fixed communication response in a
+linear sampled closed loop, quadratic finite-horizon benefit is an affine
+state functional.  Established functional-observability geometry then gives
+an exact identifiability test; its hidden projection quantifies local
+value-sign ambiguity and the minimum dimension of supplementary linear
+information.  The acquisition problem is separate: a one-scalar deficit may
+be distributed across a large coalition and may consume the Pareto headroom
+it is meant to exploit.
+
+In the evaluated five-UAV formation topology, all ten action values violate
+sender-history identifiability, and two reachable history pairs require
+opposite exact decisions while remaining indistinguishable to the sender.
+The result motivates information-structure and communication-cost audits
+before a value-based scheduler is engineered.  Future work may study
+structured priors, nonlinear functional observability, and sparse protocols
+for acquiring the missing statistic, but none is claimed here.
+
+\appendices
+\section{Detailed Formation Affine Map}
+
+For one axis, let \(T_y\xi=y\) and write the exact held-current communication
+input as \(T_\nu\xi+t_\nu\).  Starting with \(M_0=T_y\), \(b_0=0\), recurse
+\begin{align}
+M_r&=A_hM_{r-1}+\begin{bmatrix}I\\I\end{bmatrix}T_\nu,\\
+b_r&=A_hb_{r-1}+\begin{bmatrix}I\\I\end{bmatrix}t_\nu.
+\end{align}
+With \(C_e=[I\;0]\), stacking \(C_eM_r\) and \(C_eb_r\) for
+\(r=1,\ldots,H\) and then for three coordinates yields \(F_H\) and \(r_H\)
+in \eqref{eq:FH}.  Substitution of a fixed receiver memory removes its
+coordinates from the free state and moves them into the constant.  The action
+response is generated by the same \(A_h\), delay D, gains, and target row used
+by the centralized diagnostic.
+
+\section{Euclidean-Fiber Interval Proof}
+
+For \(v\in\ker C\), \(a^\top v=a_\perp^\top v\).  Cauchy--Schwarz gives
+\(|a_\perp^\top v|\le\rho\|a_\perp\|_2\).  If
+\(a_\perp\ne0\), equality is attained at
+\(v=\pm\rho a_\perp/\|a_\perp\|_2\), which lies in \(\ker C\).  If
+\(a_\perp=0\), the interval collapses to one point.  This proves
+\eqref{eq:sign-interval}.
+
+\section{Reproducibility Scope}
+
+The theorem validation entry point is
+\texttt{experiments/tcns\_information\_limits\_validation.m}; its unit test is
+\texttt{tests/test\_tcns\_information\_limits.m}.  Figure generation is
+\texttt{paper/tcns/manuscript/make\_gm\_figures.m}.  The authoritative GM
+theorem-validation run is
+\texttt{results/tcns\_information\_limits\_validation/2026-09-08\_060901}.
+Frozen Gate-5, O1, AB0, and FB0 result directories are named in the
+repository's GM claim--evidence ledger.  Each result records configuration,
+seed, source commit, MATLAB release, machine-readable tables, and a console
+log.  No held-out seed or new policy experiment is used in this manuscript.
+
+\bibliographystyle{IEEEtran}
+\bibliography{../../references}
+
+\end{document}

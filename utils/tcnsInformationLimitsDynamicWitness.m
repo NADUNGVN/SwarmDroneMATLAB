@@ -162,6 +162,10 @@ initialState = tcnsInformationLimitsState(model,P,V,leader0,net);
 predicted = initialState.xi;
 senderObservation = zeros(0,1);
 maxCommand = 0;
+time = (0:L)'*h;
+formationErrorNorm = zeros(L+1,1);
+senderPosition = zeros(L+1,3);
+senderVelocity = zeros(L+1,3);
 
 for k = 0:L
     tk = k*h;
@@ -169,6 +173,9 @@ for k = 0:L
     P(1,:) = leader.pos';
     V(1,:) = leader.vel';
     state = tcnsInformationLimitsState(model,P,V,leader,net);
+    formationErrorNorm(k+1) = norm(state.positionError,'fro');
+    senderPosition(k+1,:) = P(1,:);
+    senderVelocity(k+1,:) = V(1,:);
     if k==L
         break;
     end
@@ -208,6 +215,10 @@ R.affineTrajectoryResidual = norm(state.xi-predicted,inf);
 R.initialState = initialState.xi;
 R.followerInitialPerturbationNorm = norm(u,2);
 R.followerCount = m;
+R.time_s = time;
+R.formationErrorNorm = formationErrorNorm;
+R.senderPosition = senderPosition;
+R.senderVelocity = senderVelocity;
 
 end
 

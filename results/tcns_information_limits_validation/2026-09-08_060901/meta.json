@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_information_limits_validation",
+  "runId": "2026-09-08_060901",
+  "startedAt": "2026-09-08 06:09:01",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "f0ec934",
+  "notes": "IL1--IL9 theorem validation only: exact augmented affine model, sender row-space tests, minimal scalar, and reachable sign witnesses.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_information_limits_validation.m",
+  "finishedAt": "2026-09-08 06:09:13",
+  "elapsedSec": 11.6682127,
+  "elapsedText": "11.7 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": false
+}
