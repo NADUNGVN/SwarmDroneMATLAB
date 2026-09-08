@@ -1,0 +1,36 @@
+
+============================================================
+RUN  : tcns_r2_5_adversarial_validation
+ID   : 2026-09-08_174125
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_5_adversarial_validation\2026-09-08_174125
+WHEN : 2026-09-08 17:41:25
+============================================================
+
+R2.5 registry rows                 : 72
+R2.5 silent-exclusion failures     : 0
+R2.5 numeric rows/non-ID           : 6600 / 6600
+R2.5 raw-rank stable actions       : 608 / 1320
+R2.5 independent witness replay    : 10 / 10
+R2.5 fixed-response consistency    : 10 / 10
+R2.5 coalition-size mismatches     : 0
+           actionId             qMinus         qPlus       informationHistoryResidual    responseResidual    minimumSaturationMargin    replayPass
+    ______________________    ___________    __________    __________________________    ________________    _______________________    __________
+
+    "ordinary_1_to_2"         -3.4749e-06    3.4749e-06                     0                   0                     1.9584              true    
+    "ordinary_1_to_5"         -5.3435e-06    5.3435e-06                     0                   0                     1.9353              true    
+    "ordinary_2_to_3"         -5.3915e-06    5.3915e-06            1.0006e-21                   0                     1.9467              true    
+    "ordinary_3_to_2"         -8.5194e-08    8.5194e-08            8.4703e-22                   0                     1.3033              true    
+    "ordinary_3_to_4"         -3.1984e-06    3.1984e-06            8.3436e-22                   0                     1.9597              true    
+    "ordinary_4_to_3"         -5.2233e-06    5.2233e-06            7.9797e-20                   0                     1.9425              true    
+    "ordinary_4_to_5"         -1.3327e-07    1.3327e-07            7.9797e-20                   0                    0.95207              true    
+    "ordinary_5_to_4"         -3.3964e-06    3.3964e-06            1.6383e-20                   0                     1.9675              true    
+    "pinned_leader_1_to_2"     -3.449e-06     3.449e-06                     0                   0                     1.9531              true    
+    "pinned_leader_1_to_4"    -5.0024e-06    5.0024e-06                     0                   0                     1.9717              true    
+
+
+============================================================
+DONE : tcns_r2_5_adversarial_validation
+TIME : 6 m 27 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_5_adversarial_validation\2026-09-08_174125
+============================================================

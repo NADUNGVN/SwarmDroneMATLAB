@@ -1,0 +1,18 @@
+
+============================================================
+RUN  : tcns_r2_5_adversarial_validation
+ID   : 2026-09-08_173845
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_5_adversarial_validation\2026-09-08_173845
+WHEN : 2026-09-08 17:38:46
+============================================================
+
+{Error using fileread (line 10)
+Could not open file results\tcns_r2_generalization_validation\LATEST.txt. No such file or directory.
+
+Error in tcns_r2_5_adversarial_validation (line 11)
+r2Id = strtrim(fileread(fullfile(r2Root,'LATEST.txt')));
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 

@@ -1,0 +1,23 @@
+
+============================================================
+RUN  : tcns_r2_5_adversarial_validation
+ID   : 2026-09-08_173921
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_5_adversarial_validation\2026-09-08_173921
+WHEN : 2026-09-08 17:39:22
+============================================================
+
+{Unable to perform assignment because the size of the left side is 1-by-1 and the size of the right side is 0-by-0.
+
+Error in tcnsR25AdversarialAudit>localFragileVpaAudit (line 473)
+selected(end+1,1) = globalMinimum;
+^^^^^^^^^^^^^^^^^
+Error in tcnsR25AdversarialAudit (line 124)
+A.fragileVpaTable = localFragileVpaAudit(A.numericRankTable,R2,options);
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in tcns_r2_5_adversarial_validation (line 15)
+audit = tcnsR25AdversarialAudit(r2Directory);
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+} 
