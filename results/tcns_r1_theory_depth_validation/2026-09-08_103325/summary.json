@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "seed": 2.7020001E+7,
+  "horizonSamples": 25,
+  "delaySamples": 4,
+  "senderCount": 5,
+  "actionCount": 10,
+  "allRankConclusionsStable": true,
+  "numericRankStableLinkCount": 7,
+  "allVpaResidualsPositive": true,
+  "allAugmentedRanksIncreaseByOne": true,
+  "allMultiActionCoalitionsExist": true,
+  "bothWitnessRegretsPositive": true,
+  "classification": "R1_THEORY_DEPTH_PASS",
+  "noSchedulerImplemented": true,
+  "noPerformanceExperiment": true,
+  "noHeldOutSeedsUsed": true
+}

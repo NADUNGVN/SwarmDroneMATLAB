@@ -1,19 +1,22 @@
 \documentclass[journal]{IEEEtran}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{newtxtext,newtxmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{cite}
 \usepackage{xcolor}
+\usepackage{url}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{proposition}{Proposition}
 \newtheorem{remark}{Remark}
-\DeclareMathOperator{row}{row}
-\DeclareMathOperator{rank}{rank}
-\DeclareMathOperator{col}{col}
-\DeclareMathOperator{nullsp}{null}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\nullsp}{null}
 
 \title{When Is Control-Aware Communication Locally Decidable?\\
 Information-Structure Limits in Distributed Formation Control}
@@ -364,9 +367,11 @@ needed to construct the frozen no-action response: follower formation error
 and scaled relative velocity, analytical-leader state, eight ordinary
 receiver memories, and two pinned-leader memories.  For one Cartesian axis,
 \begin{equation}
-\xi^a=\col\!\left(e^a,hw^a,p_L^a,hv_L^a,h^2a_L^a,
-\{\hat p_{ij}^a,h\hat v_{ij}^a\},
-\{\hat p_{iL}^a,h\hat v_{iL}^a,h^2\hat a_{iL}^a\}\right).
+\begin{aligned}
+\xi^a=\col\!\big(&e^a,hw^a,p_L^a,hv_L^a,h^2a_L^a,\\
+&\{\hat p_{ij}^a,h\hat v_{ij}^a\},\\
+&\{\hat p_{iL}^a,h\hat v_{iL}^a,h^2\hat a_{iL}^a\}\big).
+\end{aligned}
 \label{eq:aug-state}
 \end{equation}
 The one-axis dimension is 33 and
@@ -453,7 +458,7 @@ its propagated coefficient remains outside that stabilized row space.
 \begin{proof}
 The affine solution gives
 \(x_L=A_0^Lx_0+\sum_{t=0}^{L-1}A_0^{L-1-t}a_0\).  Thus the coefficient of
-the time-L value in x0 is \((A_0^L)^\top\ell_a\), while the stacked history's
+the time-\(L\) value in \(x_0\) is \((A_0^L)^\top\ell_a\), while the stacked history's
 state-dependent part is \(\mathcal O_Lx_0\).  Theorem~\ref{thm:exact} gives
 \eqref{eq:history-test}.  Cayley--Hamilton implies that the row span generated
 by \(C,CA_0,\ldots\) stabilizes in finite dimension.
@@ -472,7 +477,7 @@ rule.  Let \(\mathcal X\) be the declared operating set,
 \begin{equation}
 \mathcal X(o)=\{x\in\mathcal X:Cx+d_o=o\},
 \end{equation}
-and assume its image under q is the finite interval
+and assume its image under \(q\) is the finite interval
 \begin{equation}
 \mathcal Q(o)=[q_-(o),q_+(o)].
 \end{equation}
@@ -485,7 +490,7 @@ q_c(o)=\frac{q_+(o)+q_-(o)}2,\qquad
 
 \begin{theorem}[Irreducible value and communication-decision uncertainty]
 \label{thm:sign}
-At a fixed information state o:
+At a fixed information state \(o\):
 \begin{enumerate}
 \item the minimax error of any sender-local point estimate is
 \begin{equation}
@@ -494,10 +499,10 @@ At a fixed information state o:
 \label{eq:minimax-value}
 \end{equation}
 and the midpoint \(\widehat q=q_c\) is optimal;
-\item if \(q_-<0<q_+\), no deterministic map of o recovers the exact value
+\item if \(q_-<0<q_+\), no deterministic map of \(o\) recovers the exact value
 sign for every compatible state;
 \item for a binary decision whose exact-information rule transmits iff
-\(q>0\), a sender-local randomized rule transmitting with probability p has
+\(q>0\), a sender-local randomized rule transmitting with probability \(p\) has
 local endpoint regrets
 \begin{equation}
 R_+(p)=(1-p)q_+,qquad R_-(p)=p(-q_-).
@@ -517,15 +522,15 @@ R_{\rm det}^*=\min\{q_+,-q_-\}>0.
 \end{theorem}
 
 \begin{proof}
-For any scalar estimate y,
+For any scalar estimate \(y\),
 \(q_+-q_-\le |q_+-y|+|y-q_-|\), so its worst endpoint error is at least
 \((q_+-q_-)/2\); the midpoint attains that bound throughout the interval.
 If the interval straddles zero, the same observation is compatible with
 opposite exact signs, proving the deterministic statement.  For the randomized
-action, regret over positive values is maximized at q+ and decreases with p;
-regret over negative values is maximized at q- and increases with p.  Equating
+action, regret over positive values is maximized at \(q_+\) and decreases with \(p\);
+regret over negative values is maximized at \(q_-\) and increases with \(p\).  Equating
 \((1-p)q_+=p(-q_-)\) yields \eqref{eq:random-regret}.  The deterministic
-choices p=0 and p=1 incur worst regrets q+ and -q-, respectively, proving
+choices \(p=0\) and \(p=1\) incur worst regrets \(q_+\) and \(-q_-\), respectively, proving
 \eqref{eq:det-regret}.
 \end{proof}
 
@@ -533,22 +538,15 @@ For \(q(x)=a^\top x+b\), let
 \(P_C=C^\dagger C\), \(a_\perp=(I-P_C)a\), and consider the Euclidean local
 fiber \(x=x_0+v\), \(v\in\ker C\), \(\|v\|_2\le\rho\).  Its exact interval is
 \begin{equation}
-\mathcal Q(o)=[q(x_0)-\rho\|a_\perp\|_2,
-q(x_0)+\rho\|a_\perp\|_2],
-\quad \Delta_q(o)=\rho\|a_\perp\|_2.
+\begin{aligned}
+\mathcal Q(o)&=[q(x_0)-\rho\|a_\perp\|_2,\\
+&\quad q(x_0)+\rho\|a_\perp\|_2],\\
+\Delta_q(o)&=\rho\|a_\perp\|_2.
+\end{aligned}
 \label{eq:sign-interval}
 \end{equation}
-The endpoints follow by choosing v parallel or antiparallel to
+The endpoints follow by choosing \(v\) parallel or antiparallel to
 \(a_\perp\).  Figure~\ref{fig:geometry} shows the geometry.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig5_information_geometry.pdf}
-\caption{The available row space determines the reconstructable component of
-the value coefficient.  Motion along the information null space is invisible
-to the sender but changes value when the missing projection is nonzero.}
-\label{fig:geometry}
-\end{figure}
 
 Theorem~\ref{thm:sign} is a local minimax statement over \(\mathcal X(o)\),
 not a universal stochastic-control lower bound.  It does not rule out a
@@ -559,7 +557,7 @@ that every information fiber crosses zero.
 
 \subsection{One or multiple candidate actions}
 
-Stack p action-value coefficients as rows of
+Stack \(p\) action-value coefficients as rows of
 \(L\in\mathbb R^{p\times n}\) and define
 \begin{equation}
 L_\perp=L(I-C^\dagger C).
@@ -568,8 +566,8 @@ L_\perp=L(I-C^\dagger C).
 
 \begin{theorem}[Minimum linear-statistic dimension]
 \label{thm:min-stat}
-The minimum number of additional linear scalar statistics Hx required to
-identify all p exact action values is
+The minimum number of additional linear scalar statistics \(Hx\) required to
+identify all \(p\) exact action values is
 \begin{equation}
 r_\star=\rank(L_\perp).
 \label{eq:rstar}
@@ -578,11 +576,11 @@ r_\star=\rank(L_\perp).
 
 \begin{proof}
 If all values are identifiable from \(\col(C,H)x\), the projections of the
-rows of H onto \(\ker C\) must span every row of \(L_\perp\).  Therefore H
+rows of \(H\) onto \(\ker C\) must span every row of \(L_\perp\).  Therefore \(H\)
 has at least \(\rank(L_\perp)\) independent scalar rows.  Conversely, choose
-the rows of H as any row basis of \(L_\perp\).  Each row of L is then the sum
+the rows of \(H\) as any row basis of \(L_\perp\).  Each row of \(L\) is then the sum
 of a component in \(\row(C)\) and one in \(\row(H)\), satisfying
-Theorem~\ref{thm:exact} for all p values.
+Theorem~\ref{thm:exact} for all \(p\) values.
 \end{proof}
 
 For a single nonidentifiable value, one additional scalar
@@ -592,8 +590,8 @@ across many agents.
 
 \begin{corollary}[Instantaneous linear supplementary messages]
 \label{cor:message-dimension}
-If the decision maker can receive r independent real-valued linear scalar
-statistics before deciding, exact identification of all p values requires
+If the decision maker can receive \(r\) independent real-valued linear scalar
+statistics before deciding, exact identification of all \(p\) values requires
 \(r\ge r_\star\).  Equality is algebraically achievable if the received
 statistics span \(\row(L_\perp)\).
 \end{corollary}
@@ -604,7 +602,7 @@ distributed cost of synthesizing each scalar are distinct quantities.
 
 \subsection{Information ownership}
 
-Let agent i's strongest map be \(C_i\).  For coalition \(\mathcal S\), define
+Let agent \(i\)'s strongest map be \(C_i\).  For coalition \(\mathcal S\), define
 \(C_{\mathcal S}=\col_{i\in\mathcal S}C_i\).
 
 \begin{corollary}[Coalition identifiability]
@@ -631,15 +629,15 @@ nonzero frequency, delay, and reliability cost.
 \section{Communication Cost of Acquiring Value Information}
 
 Let \(C_P(E)\) be the cost of the frozen periodic Pareto frontier interpolated
-at formation error E.  Suppose a policy informed by supplementary statistics
-uses DATA cost D and information streams t with rate \(R_t\) and normalized
+at formation error \(E\).  Suppose a policy informed by supplementary statistics
+uses DATA cost \(D\) and information streams \(t\) with rate \(R_t\) and normalized
 price \(\eta_t\).  A necessary accounting condition for performance-matched
 Pareto benefit is
 \begin{equation}
 D+\sum_t\eta_tR_t<C_P(E).
 \label{eq:econ-general}
 \end{equation}
-For a single feedback stream with rate A,
+For a single feedback stream with rate \(A\),
 \begin{equation}
 \eta^\star=\frac{C_P(E)-D}{A}
 \label{eq:eta-star}
@@ -656,6 +654,43 @@ existing packet is sent anyway; bytes, airtime, collision risk, and joules
 remain outside that metric.
 
 \section{Formation-Control Case Study}
+
+% Declare the six main evidence figures in their preregistered order.  Their
+% interpretation follows in the case-study subsections below.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_bound_trigger_falsification.pdf}
+\caption{Frozen stationary development frontiers.  The analytically valid
+bound-based mechanism is dominated by the periodic frontier over their shared
+domain.}
+\label{fig:bound}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/fig3_oracle_headroom_boundary.pdf}
+\caption{Frozen centralized-current-information diagnostic.  Exact current
+value creates Pareto headroom in S2 but not in the S4 congestion boundary,
+demonstrating both usefulness and non-universality.}
+\label{fig:oracle}
+\end{figure*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_feedback_economics.pdf}
+\caption{Break-even feedback price over frozen performance-matchable O1
+points (median and IQR).  The dashed line is the preregistered price 0.25.}
+\label{fig:economics}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_information_geometry.pdf}
+\caption{The available row space determines the reconstructable component of
+the value coefficient.  Motion along the information null space is invisible
+to the sender but changes value when the missing projection is nonzero.}
+\label{fig:geometry}
+\end{figure}
 
 \subsection{Implementation-derived matrices and validation}
 
@@ -745,7 +780,7 @@ the value-information radius, and the best deterministic rule incurs the full
 radius.  These are local losses at the constructed information states, not
 expected mission-level or universal stochastic-control bounds.
 
-\begin{table}[t]
+\begin{table*}[t]
 \caption{Reachable local value uncertainty and decision regret.}
 \label{tab:regret}
 \centering
@@ -758,7 +793,7 @@ ordinary $1\to5$ & $5.2970\times10^{-6}$ & 0.5000 & $2.6485\times10^{-6}$ & $5.2
 pin $1\to4$ & $4.9574\times10^{-6}$ & 0.5000 & $2.4787\times10^{-6}$ & $4.9574\times10^{-6}$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 Figure~\ref{fig:witness} shows the two dynamically distinct but
 sender-indistinguishable histories.  Theorem~\ref{thm:sign} therefore applies
@@ -768,7 +803,7 @@ nonidentifiability, not dynamic sign witnesses, for the remaining eight.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.96\textwidth]{figures/fig6_reachable_sign_witnesses.pdf}
+\includegraphics[width=0.84\textwidth]{figures/fig6_reachable_sign_witnesses.pdf}
 \caption{Full unsaturated formation histories for the two preregistered
 witnesses.  The sender's complete allowed observation history and each
 candidate action response are identical, although hidden follower evolution
@@ -852,15 +887,6 @@ periodic RMSE averages +0.03023 m and no point favors the trigger.  This is a
 counterexample to the inference that a safe uncertainty bound is automatically
 a useful scheduler; it is not a population comparison.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig2_bound_trigger_falsification.pdf}
-\caption{Frozen stationary development frontiers.  The analytically valid
-bound-based mechanism is dominated by the periodic frontier over their shared
-domain.}
-\label{fig:bound}
-\end{figure}
-
 To test whether valuable scheduling opportunities existed at all, a
 centralized online oracle used exact current plant and receiver memories but
 no future channel outcomes, disturbances, formation changes, or trajectories.
@@ -872,15 +898,6 @@ In S4 time-varying congestion, the differences reverse to +0.02595 m and
 +0.7135 Hz/channel, with zero shared-domain fraction favoring the oracle.
 The oracle is privileged and is not a proposed algorithm.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.96\textwidth]{figures/fig3_oracle_headroom_boundary.pdf}
-\caption{Frozen centralized-current-information diagnostic.  Exact current
-value creates Pareto headroom in S2 but not in the S4 congestion boundary,
-demonstrating both usefulness and non-universality.}
-\label{fig:oracle}
-\end{figure*}
-
 Finally, Fig.~\ref{fig:economics} charges the information channel using
 \eqref{eq:eta-star}.  At the frozen ACK price 0.25, S2 can fund complete
 feedback at all four matchable points, while the median S6 point can fund
@@ -888,14 +905,6 @@ feedback on only 37.8\% of eligible deliveries.  S4 has negative headroom
 even before feedback.  Table~\ref{tab:economics} reports all five scenarios.
 This accounting explains why mathematical sufficiency and deployable
 economic value must remain distinct.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig4_feedback_economics.pdf}
-\caption{Break-even feedback price over frozen performance-matchable O1
-points (median and IQR).  The dashed line is the preregistered price 0.25.}
-\label{fig:economics}
-\end{figure}
 
 \section{Discussion and Limitations}
 
@@ -970,7 +979,7 @@ In the evaluated five-UAV formation topology, all ten action values violate
 sender-history identifiability, and two reachable history pairs require
 opposite exact decisions while remaining indistinguishable to the sender.
 The corresponding local randomized minimax regrets are
-(2.65\times10^{-6}) and (2.48\times10^{-6}); deterministic regrets are
+\(2.65\times10^{-6}\) and \(2.48\times10^{-6}\); deterministic regrets are
 twice as large.  Four leader actions share three missing directions, while
 the other multi-action senders have no such compression.  The result motivates
 information-structure and communication-cost audits before a value-based
@@ -982,7 +991,8 @@ statistic, but none is claimed here.
 \section{Detailed Formation Affine Map}
 
 For one axis, let \(T_y\xi=y\) and write the exact held-current communication
-input as \(T_\nu\xi+t_\nu\).  Starting with \(M_0=T_y\), \(b_0=0\), recurse
+input as \(T_\nu\xi+t_\nu\).  Initialize \mbox{\(M_0=T_y\)} and
+\mbox{\(b_0=0\)}.  Then recurse as
 \begin{align}
 M_r&=A_hM_{r-1}+\begin{bmatrix}I\\I\end{bmatrix}T_\nu,\\
 b_r&=A_hb_{r-1}+\begin{bmatrix}I\\I\end{bmatrix}t_\nu.
@@ -1006,12 +1016,15 @@ For \(v\in\ker C\), \(a^\top v=a_\perp^\top v\).  Cauchy--Schwarz gives
 \section{Reproducibility Scope}
 
 The base theorem validation entry point is
-\texttt{experiments/tcns\_information\_limits\_validation.m}; the R1 depth
-audit is \texttt{experiments/tcns\_r1\_theory\_depth\_validation.m}, with
-unit test \texttt{tests/test\_tcns\_r1\_theory\_depth.m}.  Figure generation is
-\texttt{paper/tcns/manuscript/make\_gm\_figures.m}.  The authoritative GM
+\path{experiments/tcns_information_limits_validation.m}; the R1 depth
+audit is \path{experiments/tcns_r1_theory_depth_validation.m}, with
+unit test \path{tests/test_tcns_r1_theory_depth.m}.  Figure generation is
+\path{paper/tcns/manuscript/make_gm_figures.m}.  The authoritative GM
 theorem-validation run, generated from source commit \texttt{15177a8}, is
-\texttt{results/tcns\_information\_limits\_validation/2026-09-08\_095209}.
+\path{results/tcns_information_limits_validation/2026-09-08_095209}.
+The authoritative R1 rank/regret/multi-action audit, generated from source
+commit \texttt{05fa200}, is
+\path{results/tcns_r1_theory_depth_validation/2026-09-08_103325}.
 Frozen Gate-5, O1, AB0, and FB0 result directories are named in the
 repository's GM claim--evidence ledger.  Each result records configuration,
 seed, source commit, MATLAB release, machine-readable tables, and a console

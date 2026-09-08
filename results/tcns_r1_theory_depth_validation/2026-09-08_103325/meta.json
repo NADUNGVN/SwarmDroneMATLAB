@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_r1_theory_depth_validation",
+  "runId": "2026-09-08_103325",
+  "startedAt": "2026-09-08 10:33:25",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "05fa200",
+  "notes": "R1 theorem diagnostics only: local minimax regret, sender-wise multi-action missing dimension, coalition ownership, and 80-digit rank robustness.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_r1_theory_depth_validation.m",
+  "finishedAt": "2026-09-08 10:33:33",
+  "elapsedSec": 7.3110706,
+  "elapsedText": "7.3 s",
+  "figureCount": 1,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

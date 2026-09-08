@@ -1,0 +1,11 @@
+actionId,linkClass,receiver,sender
+ordinary:1->2,ordinary,2,1
+ordinary:1->5,ordinary,5,1
+ordinary:2->3,ordinary,3,2
+ordinary:3->2,ordinary,2,3
+ordinary:3->4,ordinary,4,3
+ordinary:4->3,ordinary,3,4
+ordinary:4->5,ordinary,5,4
+ordinary:5->4,ordinary,4,5
+pinned-leader:1->2,pinned-leader,2,1
+pinned-leader:1->4,pinned-leader,4,1

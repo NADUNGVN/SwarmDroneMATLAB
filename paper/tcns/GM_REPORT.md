@@ -1,5 +1,8 @@
 # GM generalization and manuscript gate report
 
+> Historical GM checkpoint. The current internal-review disposition is
+> `INTERNAL_REVIEW_PASS` after R1; see `R1_THEORY_DEPTH_REPORT.md`.
+
 **Classification:** `MANUSCRIPT_READY_FOR_INTERNAL_REVIEW`  
 **Scientific thesis:** frozen  
 **Policy engineering:** permanently closed  
