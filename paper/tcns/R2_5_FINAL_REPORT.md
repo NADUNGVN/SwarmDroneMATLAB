@@ -50,6 +50,64 @@ Generated evidence:
 Earlier R2.5 runs are preserved rather than hidden: `173845` and `173921`
 are explicitly invalid, and `174125` is labeled development-only.
 
+The exact 53-file Git manifest relative to pushed R2 commit `c1538ae` is:
+
+```text
+M ARTIFACT_README.md
+A experiments/tcns_r2_5_adversarial_validation.m
+M paper/tcns/GM_CLAIM_EVIDENCE_LEDGER.md
+M paper/tcns/GM_REVIEWER_RISKS.md
+A paper/tcns/R2_5_CLAIM_EVIDENCE_AUDIT.md
+A paper/tcns/R2_5_FINAL_REPORT.md
+A paper/tcns/R2_5_MANUSCRIPT_LANGUAGE_AUDIT.md
+A paper/tcns/R2_5_NOVELTY_STRESS_TEST.md
+A paper/tcns/R2_5_REGISTRY_RANK_AUDIT.md
+A paper/tcns/R2_5_WITNESS_NORMALIZATION_AUDIT.md
+M paper/tcns/manuscript/README.md
+M paper/tcns/manuscript/REPRODUCIBILITY.md
+M paper/tcns/manuscript/tcns_information_limits.pdf
+M paper/tcns/manuscript/tcns_information_limits.tex
+M results/INDEX.md
+A results/tcns_r2_5_adversarial_validation/2026-09-08_173845/INVALID_RUN.md
+A results/tcns_r2_5_adversarial_validation/2026-09-08_173845/console.log
+A results/tcns_r2_5_adversarial_validation/2026-09-08_173845/tcns_r2_5_adversarial_validation.m
+A results/tcns_r2_5_adversarial_validation/2026-09-08_173921/INVALID_RUN.md
+A results/tcns_r2_5_adversarial_validation/2026-09-08_173921/console.log
+A results/tcns_r2_5_adversarial_validation/2026-09-08_173921/tcns_r2_5_adversarial_validation.m
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/DEVELOPMENT_RUN.md
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/actual_witness_independent_replay.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/actual_witness_independent_replay.json
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/coalition_independent_audit.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/coalition_size_distribution.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/console.log
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/fragile_vpa_diagnostic.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/meta.json
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/numerical_rank_diagnostic.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/practical_normalization_sensitivity.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/registry_adversarial_audit.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/summary.json
+A results/tcns_r2_5_adversarial_validation/2026-09-08_174125/tcns_r2_5_adversarial_validation.m
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/actual_witness_independent_replay.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/actual_witness_independent_replay.json
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/coalition_independent_audit.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/coalition_size_distribution.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/console.log
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/fragile_vpa_diagnostic.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/meta.json
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/numerical_rank_diagnostic.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/practical_normalization_sensitivity.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/registry_adversarial_audit.csv
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/summary.json
+A results/tcns_r2_5_adversarial_validation/2026-09-08_175427/tcns_r2_5_adversarial_validation.m
+A results/tcns_r2_5_adversarial_validation/LATEST.txt
+A tests/test_tcns_r2_5_adversarial_artifact.m
+A tests/test_tcns_r2_5_persisted_witness_replay.m
+A utils/tcnsInformationLimitsReplayWitness.m
+A utils/tcnsR25AdversarialAudit.m
+A utils/tcnsR25ValidateWitnessPair.m
+A utils/tcnsR2RegistryConfiguration.m
+```
+
 ## 2. New functions
 
 `tcnsR2RegistryConfiguration` reconstructs one exact frozen R2 cell from its
