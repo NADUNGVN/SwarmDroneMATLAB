@@ -1,0 +1,34 @@
+
+============================================================
+RUN  : tcns_r2_generalization_validation
+ID   : 2026-09-08_155705
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_generalization_validation\2026-09-08_155705
+WHEN : 2026-09-08 15:57:06
+============================================================
+
+R2 configurations admissible : 72 / 72
+R2 structural action rows    : 1320
+R2 nonidentifiable rows       : 1320
+R2 full-coalition failures    : 0
+R2 actual witnesses           : 10 / 10
+           actionId           reachableWitnessFound      qMinus         qPlus       normalizedAmbiguity    failureReason
+    ______________________    _____________________    ___________    __________    ___________________    _____________
+
+    "ordinary_1_to_2"                 true             -3.4749e-06    3.4749e-06        1.5649e+10            "NONE"    
+    "ordinary_1_to_5"                 true             -5.3435e-06    5.3435e-06        2.4065e+10            "NONE"    
+    "ordinary_2_to_3"                 true             -5.3915e-06    5.3915e-06        2.4281e+10            "NONE"    
+    "ordinary_3_to_2"                 true             -8.5194e-08    8.5194e-08        3.8368e+08            "NONE"    
+    "ordinary_3_to_4"                 true             -3.1984e-06    3.1984e-06        1.4404e+10            "NONE"    
+    "ordinary_4_to_3"                 true             -5.2233e-06    5.2233e-06        2.3524e+10            "NONE"    
+    "ordinary_4_to_5"                 true             -1.3327e-07    1.3327e-07        6.0018e+08            "NONE"    
+    "ordinary_5_to_4"                 true             -3.3964e-06    3.3964e-06        1.5296e+10            "NONE"    
+    "pinned_leader_1_to_2"            true              -3.449e-06     3.449e-06        1.5533e+10            "NONE"    
+    "pinned_leader_1_to_4"            true             -5.0024e-06    5.0024e-06        2.2529e+10            "NONE"    
+
+
+============================================================
+DONE : tcns_r2_generalization_validation
+TIME : 4 m 02 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_generalization_validation\2026-09-08_155705
+============================================================

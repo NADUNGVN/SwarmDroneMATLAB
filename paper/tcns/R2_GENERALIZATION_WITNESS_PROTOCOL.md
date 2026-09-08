@@ -128,6 +128,22 @@ For the same reference grid, report descriptively:
 These are deterministic diagnostics of the selected operating neighborhood,
 not population probabilities and not a proposed local scheduling policy.
 
+### Dimensional amendment after the first execution
+
+The first execution (`2026-09-08_155705`) used a scalar Euclidean radius
+`0.05` directly in the mixed initial coordinate `[e; h w]`. This produced
+zero unsaturated reference states for every action: a component of size
+`0.05` in `h w` corresponds to `2.5 m/s` at `h=0.02 s`. The structural sweep
+and the ten witness constructions are valid and retained, but that execution's
+practical-scale normalization is invalid and must remain reported as `NaN`.
+
+Before rerunning that diagnostic, the reference grid is amended to use
+dimensionally explicit radii: position-error component norm `0.05 m` and
+physical relative-velocity component norm `0.05 m/s`, stored as
+`h times 0.05 m/s` in the scaled coordinate. The seed, count, witness radius,
+actions, and all acceptance tolerances remain unchanged. This amendment fixes
+an operating-set/unit error; it is not selected using an ambiguity outcome.
+
 ## 5. Outputs and stop rules
 
 The driver `experiments/tcns_r2_generalization_validation.m` must write CSV,
