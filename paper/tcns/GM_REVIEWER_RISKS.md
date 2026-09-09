@@ -107,8 +107,11 @@
     discard at most one common hidden offset. Adding the genuine
     no-transmission action `q0=0` removes that rank saving. Communication-only
     cancellation must not be used to claim transmit/no-transmit decidability.
-27. **No multi-action common-fiber witness.** R2.6 finds strict relative-rank
-    reduction in all 360 nontrivial sender sets, but none is fully
-    relative-identifiable. The ten reachable N=5 witnesses use action-specific
-    fibers and cannot establish a multi-action common-maximizer result. This is
-    the strongest remaining decision-identifiability evidence gap.
+27. **Common-fiber selection scope.** R2.7 directly instantiates the set-valued
+    decision theorem on all 30 predeclared combinations of ten previously
+    persisted N=5 witness centers and senders 1, 3, and 4. The 24 disjoint-
+    argmax outcomes are existence closure on deliberately retained centers,
+    not a prevalence estimate, random-state sample, registry-wide argmax audit,
+    or arbitrary-topology/controller result. The six remaining cases are exact
+    all-action flat ties with a nonempty common-optimal set, not unique winners
+    or examples of varying hidden relative values with a decidable argmax.

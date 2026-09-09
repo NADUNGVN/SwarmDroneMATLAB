@@ -81,7 +81,22 @@ pairwise projection residuals, and the N=5 sender summary. The artifact source
 is committed in `da97e01`; the exact rank-gap refinement is `d0edd2c`. No
 trajectory, graph, seed, policy, scheduler, or noise model is added.
 
-### 6. Principal paper figures
+### 6. R2.7 common multi-action fiber replay
+
+    matlab -batch "run('tests/test_tcns_r2_7_common_fiber.m')"
+
+The accepted artifact is:
+
+**results/tcns_r2_7_common_fiber/2026-09-09_121641/**
+
+The protocol was frozen in commit `55340bff657d8881482810b9ca457d736951c0b5`
+and the implementation/result in `105183e255df2849dbc6d00f35f312ce5d4d5f7a`.
+The audit deterministically replays the ten previously persisted N=5 centers
+for senders 1, 3, and 4, jointly preserving every candidate response in one
+at-most-one action family. It generates no trajectory, seed, topology, policy,
+scheduler, or noise model.
+
+### 7. Principal paper figures
 
     matlab -batch "run('paper/tcns/manuscript/make_gm_figures.m')"
 
@@ -89,7 +104,7 @@ The script reads only frozen machine-readable evidence and writes all six
 main figures to **paper/tcns/manuscript/figures/**. Scientific data are not
 edited manually.
 
-### 7. Build the paper
+### 8. Build the paper
 
 From **paper/tcns/manuscript/**:
 

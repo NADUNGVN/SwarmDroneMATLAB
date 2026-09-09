@@ -51,10 +51,11 @@ and two delays.  All 1320 unit-response functionals fail exact sender-history
 row-space identifiability.  Across its 448 sender/configuration cells, all 360
 nontrivial multi-action sets save exactly one relative-value dimension, but
 none is fully relative-identifiable.  In the frozen five-UAV instance, all ten
-controller-relevant action types admit independently replayed, unsaturated,
-dynamically reachable sender-indistinguishable history pairs with opposite
-binary decisions.  The results delimit exact local communication decisions
-without ruling out prior-specific Bayesian or nonlinear policies.
+binary action types retain reachable opposite-decision witnesses; a
+predeclared common-fiber replay over all 30 sender/center pairs yields 24 with
+disjoint full-information argmax sets while jointly preserving every candidate
+response.  The results delimit exact local communication decisions without
+ruling out prior-specific Bayesian or nonlinear policies.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -109,16 +110,12 @@ values are not exactly reconstructible.  We then separate missing-statistic
 dimension from network acquisition cost and close the statements on an
 implemented formation-control model.
 
-The investigation was driven by falsification.  A deterministic
-communication-error bound was analytically valid but produced a Pareto
-frontier dominated by periodic communication.  An online centralized
-current-state oracle, using the exact action cross term but no future
-realizations, exposed substantial scheduling headroom in some nonstationary
-regimes and none in a congestion boundary.  Explicit receiver feedback often
-consumed that headroom.  Finally, an exact ACK-free receiver-memory belief was
-well calibrated but could not identify the baseline component of the action
-cross term.  These findings motivated an information-limit result rather than
-another trigger.
+The investigation was driven by falsification.  A valid communication-error
+bound was dominated by periodic service; a privileged current-state oracle
+exposed scheduling headroom in one regime but not another; and receiver
+feedback could consume that headroom.  An exact ACK-free receiver-memory
+belief was calibrated yet still missed the baseline action cross term.  These
+findings motivated an information-limit result rather than another trigger.
 
 The contributions are:
 
@@ -138,9 +135,11 @@ dimensions and prove that ranking discards at most one dimension, exactly when
 the hidden value image contains a common offset.  Coalition ownership and
 acquisition cost are treated separately.
 \item For the sampled formation architecture, a frozen 72-cell registry gives
-1320/1320 unit-response functional nonidentifiability results.  R2.6 identifies
-one common-offset reduction in every sender-cell, while ten frozen N=5 actual
-actions retain independently replayed reachable binary ambiguity.
+1320/1320 unit-response functional nonidentifiability results.  Ten frozen N=5
+actual actions close the binary action-conditioned audit, and a predeclared
+common-state audit directly instantiates the fiberwise theorem using one
+jointly defined at-most-one family rather than separate action-conditioned
+fibers.
 \end{enumerate}
 
 The results are scoped to exact affine action-value identifiability in the
@@ -268,7 +267,7 @@ Decentralized information structures
 Functional and sample-based observability
 & Row-space/modal/structural tests, sampling conditions, observer design, and target-sensor selection
 & What irreducible value and decision loss follows when a communication-action functional is hidden?
-& Uses established tests; adds action-specific minimax regret, simultaneous-action dimension, acquisition separation, and formation closure. \\
+& Separates absolute/relative reconstruction from direct fiberwise decidability; adds minimax loss, statistic dimension, acquisition separation, and formation closure. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -893,16 +892,14 @@ sparse4 & 9 & 288/288 & 64 & (8,6,5) & 0.833 & every sender: 9 \\
 \end{tabular}
 \end{table*}
 
-At \(10^{-10}\), compressed-null and independent direct-row-space calculations
-agree for 1320/1320 rows; the normalized hidden residual spans
-\(3.03\times10^{-6}\)--0.99999.  Across the tolerance grid, raw rank is stable
-for only 608/1320 rows and raw \(\rank([C;\ell^\top])\) adds one in 1222 rows at
-\(10^{-6}\) and 614 at \(10^{-14}\).  An independent reconstruction matches all
-6600 stored decisions, while normalized-basis augmentation gives 1320/1320 at
-every cutoff.  Selected 80-digit checks, including each cell's minimum,
-remain positive.  The claim is therefore scale-controlled functional
-membership in a finite registry, not invariant raw-rank bookkeeping or an
-arbitrary-graph/gain theorem.
+At \(10^{-10}\), compressed-null and independent row-space calculations agree
+for 1320/1320 rows; the normalized hidden residual spans
+\(3.03\times10^{-6}\)--0.99999.  Raw information-map rank is stable for only
+608/1320 rows across the tolerance grid, but an independent reconstruction
+matches all 6600 stored membership decisions and normalized-basis augmentation
+gives 1320/1320 at every cutoff.  Selected 80-digit checks remain positive.
+This is scale-controlled functional membership in a finite registry, not
+invariant raw-rank bookkeeping or an arbitrary-graph/gain theorem.
 
 The fixed unit-response correction fixes \(g\) and must not be confused with a
 trajectory-realized scheduling action.  Zero response has zero value, and
@@ -990,6 +987,31 @@ for some actions is retained rather than interpreted as uniform practical impact
 \label{fig:witness}
 \end{figure*}
 
+\subsection{Common multi-action fibers}
+
+A protocol frozen before outcome inspection exhaustively combines the ten
+persisted N=5 ring2/even witness centers with senders \(\{1,3,4\}\) at
+\(H=25,D=4\).  All 30 predeclared attempts are eligible.  Each uses one
+physical state and jointly defined family \([q_0=0,q_1,\ldots,q_p]\), imposing
+complete sender history, reachability, target semantics, the unsaturated
+branch, and every candidate response simultaneously.  At every center,
+\(\dim K_{\rm common}=24,6,6\) for senders 1, 3, and 4.
+
+Independent replay gives A/B/C/D = 24/6/0/0; sender-wise ambiguous/nonempty-
+common-optimum counts are 4/6, 10/0, and 10/0.  Each A case has two states with
+disjoint full-information argmax sets.  Each B case is instead an exact
+all-action flat tie, \(q_{\rm aug}=[0,0,0,0,0]\), throughout the fiber---not a
+unique-winner or varying-relative-value example.  Maximum sender-information,
+joint-response, dynamic/reachability, and affine/oracle residuals are
+\(2.60\times10^{-18}\), \(3.47\times10^{-18}\), \(7.91\times10^{-16}\), and
+\(7.37\times10^{-18}\).  The smallest positive endpoint winner margin is
+\(1.21\times10^{-7}\), over 1200 times the predeclared \(10^{-10}\) tolerance.
+Thus the 24 A cases instantiate Theorem~\ref{thm:common-action} on common
+physical fibers.  These selected existence-witness centers are not random;
+the counts are not prevalence and do not extend to all registry cells,
+topologies, controllers, or stochastic schedulers.  Full q-vectors and replay
+diagnostics remain in the artifact.
+
 \subsection{Statistic dimension versus coalition size}
 
 For every fixed payload, \(\rank(M)=1\): one linear scalar closes its
@@ -1052,54 +1074,39 @@ row-space condition, not an all-agent rule.  Across 448 sender--cell rows,
 unique minima 5, 7, 8, and 9 occur 120, 120, 56, and 152 times; these counts do
 not imply packet or acquisition cost.
 
-These ranks concern reconstruction, not the actual argmax on one bounded
-fiber.  The ten persisted action witnesses below use action-specific
-conditioned fibers, so they are not combined into a multi-action
-common-maximizer claim.
+These ranks concern reconstruction, whereas the preceding common-fiber audit
+tests the set-valued argmax directly at only the declared N=5 centers.
 
 \subsection{Why the information result matters operationally}
 
-Figure~\ref{fig:bound} retains the mechanism that failed before this theory
-was formulated.  Its trigger uses a valid staleness-to-control uncertainty
-bound, yet the complete periodic frontier is better throughout the shared
-development domain.  Across a 101-point budget-matched grid, trigger-minus-
-periodic RMSE averages +0.03023 m and no point favors the trigger.  This is a
-counterexample to the inference that a safe uncertainty bound is automatically
-a useful scheduler; it is not a population comparison.
+Figure~\ref{fig:bound} retains the failed motivating mechanism: despite a valid
+staleness-to-control uncertainty bound, periodic service is better throughout
+the shared 101-point development domain (mean RMSE difference +0.03023 m).
+This is a counterexample, not a population comparison.
 
-To test whether valuable scheduling opportunities existed at all, a
-centralized online oracle used exact current plant and receiver memories but
-no future channel outcomes, disturbances, formation changes, or trajectories.
-It ranked actions only by \eqref{eq:formation-value}.  Figure~\ref{fig:oracle}
-shows a positive and a negative boundary.  In S2 formation switching, oracle
-minus periodic mean matched RMSE is -0.02381 m and mean matched cost is
--1.7088 Hz/channel; the oracle is favored over the complete shared domains.
-In S4 time-varying congestion, the differences reverse to +0.02595 m and
-+0.7135 Hz/channel, with zero shared-domain fraction favoring the oracle.
-The oracle is privileged and is not a proposed algorithm.
+A centralized online oracle then used exact current plant and receiver
+memories, but no future realizations, and ranked actions by
+\eqref{eq:formation-value}.  Figure~\ref{fig:oracle} shows headroom in S2
+(oracle-minus-periodic mean matched RMSE -0.02381 m and cost -1.7088
+Hz/channel) but not S4 (+0.02595 m and +0.7135 Hz/channel).  It is privileged,
+noninferential, and not a proposed algorithm.
 
-Finally, Fig.~\ref{fig:economics} applies \eqref{eq:eta-star} to an ACK-like
-receiver-information stream.  At the frozen ACK price 0.25, S2 can fund one
-such packet per accepted delivery at all four matchable points, while the
-median S6 point can fund it on only 37.8\% of eligible deliveries.  S4 has
-negative headroom even before feedback.  Across all five scenarios, the median
-break-even prices range from -0.741 to 0.726.  This is a necessary
-cost-sensitivity screen, not the measured
-cost of causally aggregating the all-agent statistic.  It explains why
-algebraic sufficiency and deployable economic value must remain distinct.
+Finally, Fig.~\ref{fig:economics} prices an ACK-like information stream.  At
+the frozen price 0.25, S2 funds one packet per delivery at all four matchable
+points, median S6 funds 37.8\%, and S4 has negative headroom before feedback.
+This is a cost-sensitivity screen, not the cost of causally aggregating the
+all-agent statistic.
 
 \section{Discussion and Limitations}
 
 \subsection{What the result changes}
 
 Theorems~\ref{thm:exact}--\ref{thm:min-stat} suggest a staged audit for
-control-aware communication: derive the fixed-response values; distinguish
-absolute reconstruction, relative reconstruction, and the direct
-common-maximizer test; then separate any missing linear-statistic dimension
-from the coalition and communication resources needed to construct it.
-Receiver-memory estimation alone may still miss the projection of the action
-response onto remote components of the no-action trajectory.  Calibrating
-that memory marginal cannot create measurements of those components.
+control-aware communication: derive fixed-response values; distinguish
+absolute reconstruction, relative reconstruction, and direct common-maximizer
+testing; then separate missing-statistic dimension from its acquisition cost.
+Receiver-memory estimation alone can still miss remote components of the
+no-action trajectory that determine the action cross term.
 
 \subsection{Boundaries}
 
@@ -1107,53 +1114,48 @@ The analytical case is an unsaturated sampled double integrator with a fixed
 graph within each decision history, not nonlinear 6-DOF dynamics, saturation,
 within-history switching, or an interference-limited MAC.  The 72-cell audit
 is a finite registry, not arbitrary-topology, arbitrary-gain, or arbitrary-N
-theory.  Tolerance sweeps and selected 80-digit projections strengthen, but do
-not replace, a symbolic parameter proof.  The minimum residual is only 3.03
-times the loosest tolerance, despite a conditional-basis check to \(10^{-16}\).
+theory.  Tolerance sweeps and selected 80-digit projections do not replace a
+symbolic parameter proof; the minimum residual is only 3.03 times the loosest
+tolerance, despite a conditional-basis check to \(10^{-16}\).
 
 Exact algebraic row-space nonidentifiability is not a robustness or noisy-
 observation impossibility theorem.  Relative-value nonidentifiability likewise
 does not by itself imply argmax ambiguity; the fiberwise common-maximizer
-condition is the direct decision test.  No multi-action reachable common-fiber
-experiment was constructed: the ten N=5 witnesses use action-specific fibers.
+condition is the direct decision test.  The common-fiber decision audit is
+confined to ten previously frozen N=5 centers for three multi-action senders.
+These deliberately persisted centers provide implementation closure and
+existence witnesses, not a population estimate or registry-wide argmax study.
 
 The value radius and regret are local to a declared compatible set.  R2.6 does
 not solve stochastic or Bayesian scheduling; a specified prior and estimator
-define a different, untested information model.  Randomization reduces
-worst-case binary regret but does not reveal the hidden sign, and the witnessed
-normalized ambiguity spans nearly three orders of magnitude.
+define a different information model.  Randomization reduces binary worst-case
+regret but does not reveal the hidden sign.
 
-The frontier uses five paired development seeds as mechanism/counterexample
-evidence, not held-out superiority or statistical significance.  Its DATA +
-0.25 ACK packet-frequency axis omits payload length, shared-medium collisions,
-airtime, and energy; the economics are conditional on that accounting.
+The five-seed frontier is mechanism/counterexample evidence, not held-out
+superiority or statistical significance.  Its packet-frequency accounting
+omits payload length, collisions, airtime, and energy.
 
-Functional-observability and sensor-selection theories are established
-fields.  Our row-space, history, and coalition conditions are action-value
-specializations, not new generic observability or placement theory.  The
-contribution is their control--communication synthesis with the decision
-ladder, local margin and loss, rank gap, acquisition cost, and reachable
-closure.
+Functional-observability and sensor-selection are established fields; our
+row-space, history, and coalition conditions are action-value specializations.
+The contribution is their control--communication synthesis with the decision
+ladder, local loss, rank gap, acquisition cost, and reachable closure.
 
 \section{Conclusion}
 
-For a fixed response in a linear sampled loop, finite-horizon quadratic benefit
-is affine.  Absolute reconstruction implies relative reconstruction, but the
-common-maximizer intersection directly governs local action selection.  Its
-Euclidean-fiber margins are closed form; strict binary threshold straddling
-has positive local minimax regret.  Relative-value recovery can save only the
-one common-offset dimension, and adding no transmission removes that saving.
+For a fixed response in a sampled linear loop, finite-horizon quadratic benefit
+is affine.  Absolute reconstruction implies relative reconstruction, while the
+common-maximizer intersection directly governs action selection.  Relative
+recovery can save only one common-offset dimension; strict binary straddling
+has positive local minimax regret.
 
-All 1320 fixed unit-response functionals in the 72-cell registry violate the
-declared sender-history row-space condition.  All 360 nontrivial action sets
-save one relative dimension, but none is fully relative-identifiable.  Each of
-ten N=5 action types has a reachable, unsaturated, sender-indistinguishable
-pair requiring opposite binary decisions; normalized radii range from
-\(2.67\times10^{-4}\) to 0.232.  The N=5 leader's four actions require three
-absolute and two relative missing directions, while coalition size varies
-with topology.  These results motivate information-structure and acquisition-
-cost audits; structured priors, nonlinear theory, and causal acquisition
-protocols remain future work.
+All 1320 unit-response functionals in the finite 72-cell registry violate the
+declared sender-history condition; all 360 nontrivial action sets save one
+relative dimension, but none is fully relative-identifiable.  In the frozen
+N=5 case, all ten action types have opposite binary witnesses, and 24 common-
+fiber pairs have disjoint multi-action argmax sets; six others are exact flat
+ties with a nonempty common-optimal set.  These are exact fixed-response,
+finite-instance information-structure results, not noisy-channel, generic
+stochastic-scheduling, or arbitrary-topology impossibility claims.
 
 \appendices
 \section{Detailed Formation Affine Map}
@@ -1197,6 +1199,11 @@ source snapshot is included there and committed in \texttt{da97e01}, with the
 rank-gap refinement in \texttt{d0edd2c}.  It reads only the frozen R2 matrices
 and witnesses; its test entry point is
 \path{tests/test_tcns_r2_6_decision_identifiability.m}.
+The R2.7 protocol was frozen in \texttt{55340bf}; its result implementation is
+\texttt{105183e}, and the accepted artifact is
+\path{results/tcns_r2_7_common_fiber/2026-09-09_121641}.  It exhaustively
+replays only the ten persisted N=5 centers for senders 1, 3, and 4; its test is
+\path{tests/test_tcns_r2_7_common_fiber.m}.
 Frozen negative-trigger, centralized-oracle, feedback-accounting, and
 feedback-economic result directories are named in the repository's
 claim--evidence ledger.  Each result records configuration, seed, source
