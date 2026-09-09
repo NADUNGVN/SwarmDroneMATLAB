@@ -1,0 +1,24 @@
+
+============================================================
+RUN  : tcns_r2_7_common_fiber
+ID   : 2026-09-09_121641
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_7_common_fiber\2026-09-09_121641
+WHEN : 2026-09-09 12:16:41
+============================================================
+
+Persisted centers                      : 10
+Sender/center attempts                 : 30
+Eligible / excluded                    : 30 / 0
+Outcomes A / B / C / D                 : 24 / 6 / 0 / 0
+Maximum sender-information residual    : 2.602e-18
+Maximum joint-response residual        : 3.469e-18
+Maximum reachability residual          : 7.910e-16
+Maximum affine/oracle mismatch         : 7.373e-18
+Minimum positive winner margin         : 1.207e-07
+
+============================================================
+DONE : tcns_r2_7_common_fiber
+TIME : 29.9 s
+FIGS : 0
+DIR  : D:\Research\Drone\SwarmDroneMATLAB\results\tcns_r2_7_common_fiber\2026-09-09_121641
+============================================================

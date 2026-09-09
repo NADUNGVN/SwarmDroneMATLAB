@@ -30,7 +30,11 @@ R2.6 layer post-processes those frozen matrices and witnesses;
 its accepted artifact is
 `results/tcns_r2_6_decision_identifiability/2026-09-08_232116/`, with source
 snapshot commit `da97e01` and rank-gap refinement `d0edd2c`. It adds no graph,
-seed, trajectory, policy, scheduler, or noise model. See
+seed, trajectory, policy, scheduler, or noise model. R2.7 then replays the ten
+persisted N=5 centers jointly for every multi-action sender under the frozen
+protocol `55340bf`; its current coauthor-review artifact is
+`results/tcns_r2_7_common_fiber/2026-09-09_121641/`. It generates no new
+closed-loop trajectory or random draw. See
 `paper/tcns/manuscript/REPRODUCIBILITY.md` for the minimal TCNS workflow.
 
 ---

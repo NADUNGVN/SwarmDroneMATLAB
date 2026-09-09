@@ -1,0 +1,18 @@
+{
+  "experiment": "tcns_r2_7_common_fiber",
+  "runId": "2026-09-09_121641",
+  "startedAt": "2026-09-09 12:16:41",
+  "matlabVersion": "MATLAB 25.1",
+  "matlabRelease": "(R2025a)",
+  "computer": "PCWIN64",
+  "projectRoot": "D:\\Research\\Drone\\SwarmDroneMATLAB",
+  "gitCommit": "55340bf",
+  "notes": "Deterministic replay/post-processing of ten frozen N=5 R2 centers for senders 1, 3, and 4. No new trajectory, seed, random search, scheduler, registry cell, or noise model.",
+  "sourceFile": "D:\\Research\\Drone\\SwarmDroneMATLAB\\experiments\\tcns_r2_7_common_fiber.m",
+  "finishedAt": "2026-09-09 12:17:11",
+  "elapsedSec": 29.9439843,
+  "elapsedText": "29.9 s",
+  "figureCount": 0,
+  "hasWorkspace": true,
+  "hasTidy": false
+}

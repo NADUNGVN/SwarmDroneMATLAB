@@ -316,3 +316,4 @@ superseded runs; the curated map above names the run that counts.
 | 2026-09-08_174125 | tcns_r2_5_adversarial_validation | 6 m 27 s | 0 | yes | - | (R2025a) | c1538ae |
 | 2026-09-08_175427 | tcns_r2_5_adversarial_validation | 6 m 26 s | 0 | yes | - | (R2025a) | edad129 |
 | 2026-09-08_232116 | tcns_r2_6_decision_identifiability | 4.5 s | 0 | yes | - | (R2025a) | 2fd1359 |
+| 2026-09-09_121641 | tcns_r2_7_common_fiber | 29.9 s | 0 | yes | - | (R2025a) | 55340bf |
