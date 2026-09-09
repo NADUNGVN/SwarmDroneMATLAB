@@ -28,32 +28,33 @@ Information-Structure Limits in Distributed Formation Control}
 \begin{abstract}
 Control-aware communication assigns resources according to an update's
 closed-loop consequence, but a distributed sender may lack the information
-needed to determine it.  We study
-finite-dimensional sampled linear systems in which a communication action adds
-a fixed response to a finite-horizon performance output.  For quadratic cost,
-this benefit is an affine functional of an augmented closed-loop state.
-Building on functional observability, we characterize exact value
-identifiability from current and finite-history agent information by row-space
-conditions.  When compatible values straddle zero, we quantify the
-irreducible estimation radius and strictly positive local minimax decision
-regret for deterministic and randomized sender rules.  For multiple actions,
-the minimum instantaneous noiseless linear-statistic dimension is the rank
-of the unobservable coefficient projection; algebraic dimension, coalition
-ownership, and acquisition cost remain distinct.
+needed to determine it.  Exact value reconstruction is sufficient but not
+necessary for an action decision.  We study finite-dimensional sampled linear
+systems in which a communication action adds a fixed response to a
+finite-horizon performance output, making its quadratic-cost benefit affine in
+an augmented closed-loop state.  We distinguish reconstructing absolute
+values, reconstructing relative values, and reproducing an optimal action on
+an information fiber.  Established functional-observability geometry gives
+the absolute and pairwise row-space tests.  A set-valued common-maximizer
+criterion then directly characterizes fiberwise decidability, with a closed
+form and decision margin on Euclidean fibers.  For threshold-straddling binary
+fibers we retain exact local minimax deterministic and randomized regret.
+The minimum noiseless linear-statistic dimensions for all absolute and all
+relative values differ by at most one; equality is lost precisely through a
+common hidden offset.  These dimensions remain distinct from coalition
+ownership and acquisition cost.
 
-We instantiate the framework on sampled formation controllers with delayed and
-lossy communication.  A predeclared deterministic registry, frozen before
-outcome inspection, spans 72 combinations of 5, 7, and 9 agents, three
-connected graphs, two pinning patterns, two horizons, and two delays; its 1320
-action functionals are structurally nonidentifiable.  In the frozen five-UAV
-instance, for each of ten controller-relevant action types we construct a
-nonzero state-generated response admitting an unsaturated, dynamically
-reachable history pair with identical allowed sender observations and fixed
-responses but opposite exact action-value signs, with independent replay.
-Leader action sets share missing-information directions, whereas
-tested follower sets do not, and minimum owning coalitions vary with topology.
-The results delimit exact local value-based communication without ruling out
-prior-specific Bayesian decisions or nonlinear policies.
+We instantiate the framework on sampled formation controllers with delayed
+and lossy communication.  A predeclared 72-cell deterministic registry covers
+5, 7, and 9 agents, three connected graphs, two pinning patterns, two horizons,
+and two delays.  All 1320 unit-response functionals fail exact sender-history
+row-space identifiability.  Across its 448 sender/configuration cells, all 360
+nontrivial multi-action sets save exactly one relative-value dimension, but
+none is fully relative-identifiable.  In the frozen five-UAV instance, all ten
+controller-relevant action types admit independently replayed, unsaturated,
+dynamically reachable sender-indistinguishable history pairs with opposite
+binary decisions.  The results delimit exact local communication decisions
+without ruling out prior-specific Bayesian or nonlinear policies.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -86,22 +87,27 @@ under a known channel law.  Neither fact implies that the total control-action
 value is locally computable: the cross term between the action response and
 the global no-action response may remain hidden.
 
-This paper therefore asks a question prior to scheduler design:
+This paper therefore asks questions prior to scheduler design:
 
 \begin{quote}
-Under what information structures is the conditional fixed-response,
-finite-horizon benefit of a communication action identifiable, and what
-additional information must be acquired when it is not?
+Under what information structures are absolute or relative fixed-response
+action values identifiable, when is an optimal action nevertheless constant
+on an information fiber, and what supplementary information recovers the
+missing values?
 \end{quote}
 
 The question connects decentralized information structures
 \cite{witsenhausen1971information,ho1972team,nayyar2013common} with functional
 observability \cite{fernando2010functional,montanari2022functional}.  We do
-not claim the row-space test itself as new.  Rather, we expose the exact
-communication-action value as the target functional, show that inability to
-observe its magnitude can extend to its sign, separate the dimension of the
-missing statistic from the network cost of constructing it, and close these
-statements on an implemented formation-control model.
+not claim the row-space tests themselves as new.  Rather, we expose the exact
+communication-action value as the target functional and separate three
+objects: absolute-value reconstruction, relative-value reconstruction, and
+fiberwise optimal-action selection.  Absolute identifiability implies relative
+identifiability, which is sufficient for exact ranking, but neither converse
+holds in general.  A fiberwise argmax may be decidable even when relative
+values are not exactly reconstructible.  We then separate missing-statistic
+dimension from network acquisition cost and close the statements on an
+implemented formation-control model.
 
 The investigation was driven by falsification.  A deterministic
 communication-error bound was analytically valid but produced a Pareto
@@ -119,21 +125,22 @@ The contributions are:
 \begin{enumerate}
 \item We derive the exact finite-horizon marginal communication-action value
 as an affine functional of an augmented state for a fixed action response.
-\item Using functional-observability geometry, we quantify the irreducible
-value-information radius and derive deterministic and randomized local minimax
-communication-decision regret when compatible exact values straddle zero.
-\item We prove that the minimum dimension of extra instantaneous linear
-information for a family of actions is the rank of its hidden projection, and
-apply it sender-wise to expose shared versus independent missing directions.
-We separately characterize coalition ownership because statistic dimension is
-not packet count or distributed acquisition cost.
-\item For the sampled formation architecture, a new 72-cell registry across
-\(N=5,7,9\), topology, pinning, horizon, and delay yields 1320/1320 structural
-nonidentifiability results stable over the declared tolerance grid.  In the
-frozen N=5 instance, for each of ten controller-relevant action types we
-construct and independently replay an actual state-generated nonzero response
-with an opposite-sign witness, quantify heterogeneous practical scale, and
-retain the ACK-like break-even diagnostic as acquisition-cost sensitivity only.
+\item We give the absolute and relative action-value row-space conditions,
+crediting them as functional-observability specializations rather than a new
+observability primitive.
+\item We give an exact set-valued fiberwise action-decision criterion and a
+closed-form local decision margin.  Exact value reconstruction is sufficient
+but not necessary for an action decision.
+\item On a genuinely threshold-straddling binary fiber, we quantify the
+irreducible value radius and deterministic and randomized local minimax loss.
+\item We derive the absolute and relative supplementary linear-statistic
+dimensions and prove that ranking discards at most one dimension, exactly when
+the hidden value image contains a common offset.  Coalition ownership and
+acquisition cost are treated separately.
+\item For the sampled formation architecture, a frozen 72-cell registry gives
+1320/1320 unit-response functional nonidentifiability results.  R2.6 identifies
+one common-offset reduction in every sender-cell, while ten frozen N=5 actual
+actions retain independently replayed reachable binary ambiguity.
 \end{enumerate}
 
 The results are scoped to exact affine action-value identifiability in the
@@ -178,8 +185,9 @@ scheduling has also combined value proxies, graph relevance, and resource
 allocation \cite{chiariotti2025voiformation}.  We neither introduce the VoI
 concept nor optimize a scheduler.  Bayesian and VoI policies may act optimally
 under their stated prior and information model without observing a realized
-clairvoyant value.  We instead test the narrower prerequisite for reproducing
-the full-information, fixed-response value or its sign at a decision.
+clairvoyant value.  We instead separate exact fixed-response value
+reconstruction from reproducing a full-information optimal action on a
+declared fiber.
 
 \subsection{Information structures and functional observability}
 
@@ -215,10 +223,10 @@ derived here is neither minimum sensor count nor functional-observer order.
 Our current-state test is specifically an instantaneous functional
 reconstructibility application; it is not a functional-observer existence,
 detectability, order, or pole-placement result.  Our addition is the
-communication-decision consequence: a conditional fixed-response action-value
-functional, its local minimax estimation and binary-decision regret, and the
-separation between simultaneous-action statistic dimension and network
-acquisition cost.
+communication-decision synthesis: a conditional fixed-response value, the
+absolute/relative/fiberwise-decision ladder, local binary minimax regret, the
+common-offset rank gap, and the separation between linear-statistic dimension
+and network acquisition cost.
 
 \subsection{Control--communication co-design}
 
@@ -458,6 +466,39 @@ unchanged.  Identifiability requires
 \(\ell_a\in(\ker C)^\perp=\row(C)\).
 \end{proof}
 
+For \(p\) actions, stack \(\ell_a^\top\) in
+\(L\in\mathbb R^{p\times n}\).  Let \(B\in\mathbb R^{(p-1)\times p}\)
+have full row rank and
+\(\ker B=\operatorname{span}\{\mathbf 1_p\}\); a reference-action difference
+basis is one choice.  Then \(L_{\rm rel}=BL\) contains a basis of pairwise
+value coefficients.
+
+\begin{proposition}[Relative action-value identifiability]
+\label{prop:relative}
+Under the same local-richness condition as Theorem~\ref{thm:exact}, all
+pairwise action-value differences are identifiable from \(o\) if and only if
+\begin{equation}
+BL(I-C^\dagger C)=0.
+\label{eq:relative-test}
+\end{equation}
+This condition is independent of the chosen full-rank difference basis.
+\end{proposition}
+
+\begin{proof}
+The vectors \(e_a-e_b\) span
+\(\mathbf 1_p^\perp=\row(B)\).  Thus every difference coefficient is in
+\(\row(C)\) exactly when every row of \(BL\) is, which is equivalent to
+\eqref{eq:relative-test}.  Two admissible bases differ by an invertible left
+factor and hence generate the same row space after multiplication by \(L\).
+\end{proof}
+
+Absolute-value identifiability implies relative-value identifiability, which
+is sufficient to recover the complete ranking and set-valued argmax.  Neither
+converse holds: an unobserved offset common to all values cancels from \(BL\),
+and a bounded information fiber can have a common optimal action even while a
+pairwise value varies on that fiber.  These are action-value applications of
+row-space geometry, not a new functional-observability primitive.
+
 The normalized diagnostic used later is
 \begin{equation}
 \delta_C(\ell)=
@@ -509,148 +550,201 @@ cease to affect a later value; that is loss of dependence, not recovery of
 information.  A delivered packet, new sensor, or shared statistic changes the
 information structure.
 
-\subsection{Irreducible value and decision uncertainty}
+\subsection{Fiberwise optimal actions and binary regret}
 
-Exact magnitude is stronger than the sign needed by a transmit-if-beneficial
-rule.  Let \(\mathcal X\) be the declared operating set,
+Let \(\mathcal X\) be the declared operating set and
 \begin{equation}
-\mathcal X(o)=\{x\in\mathcal X:Cx+d_o=o\},
+\mathcal X(o)=\{x\in\mathcal X:Cx+d_o=o\},\qquad
+\mathcal A^*(x)=\arg\max_{a\in\mathcal A}q_a(x).
 \end{equation}
-and assume its image under \(q\) is a nonempty closed finite interval
+
+\begin{theorem}[Exact fiberwise action decidability]
+\label{thm:common-action}
+A deterministic sender-local action can be full-information optimal for every
+state compatible with \(o\) if and only if
 \begin{equation}
-\mathcal Q(o)=[q_-(o),q_+(o)].
+\bigcap_{x\in\mathcal X(o)}\mathcal A^*(x)\ne\varnothing.
+\label{eq:common-action}
 \end{equation}
-Define the midpoint and value-information radius
+\end{theorem}
+
+\begin{proof}
+All states in the fiber produce the same \(o\), so a deterministic local rule
+must choose one action \(a_o\).  It is optimal for every compatible state
+exactly when \(a_o\in\mathcal A^*(x)\) for every \(x\), which is
+\eqref{eq:common-action}.
+\end{proof}
+
+This criterion preserves ties: any action in the intersection is valid.  A
+particular single-valued tie-break would additionally have to be constant on
+the fiber and is not imposed here.
+
+For the Euclidean local fiber
+\(\mathcal X(o)=\{x_0+v:v\in\ker C,\ \|v\|_2\le\rho\}\), let
+\(P_\perp=I-C^\dagger C\),
+\(d_{ab}=q_a-q_b\), and
+\(h_{ab}=P_\perp(\ell_a-\ell_b)\).
+
+\begin{proposition}[Euclidean-fiber decision margin]
+\label{prop:fiber-margin}
+For every action pair,
 \begin{equation}
-q_c(o)=\frac{q_+(o)+q_-(o)}2,\qquad
-\Delta_q(o)=\frac{q_+(o)-q_-(o)}2.
+d_{ab}(\mathcal X(o))=
+[d_{ab}(x_0)-\rho\|h_{ab}\|_2,
+ d_{ab}(x_0)+\rho\|h_{ab}\|_2].
+\label{eq:pairwise-interval}
+\end{equation}
+Action \(a\) is common-optimal if and only if, for every \(b\ne a\),
+\begin{equation}
+m_{ab}:=d_{ab}(x_0)-\rho\|h_{ab}\|_2\ge0.
+\label{eq:common-margin}
+\end{equation}
+Strict inequalities make \(a\) uniquely optimal throughout the fiber.
+\end{proposition}
+
+\begin{proof}
+For \(v\in\ker C\),
+\(d_{ab}(x_0+v)=d_{ab}(x_0)+h_{ab}^\top v\).
+Cauchy--Schwarz gives the endpoints, attained by
+\(v=\pm\rho h_{ab}/\|h_{ab}\|_2\) when \(h_{ab}\ne0\); the interval is a
+singleton otherwise.  Action \(a\) is optimal throughout exactly when the
+minimum of every difference against \(b\ne a\) is nonnegative.
+\end{proof}
+
+The scalar margin \(m_a=\min_{b\ne a}m_{ab}\) is positive for strict
+fiberwide optimality, zero at a tie boundary, and negative when optimality is
+not guaranteed.  Figure~\ref{fig:geometry} shows the corresponding hidden
+direction.  This margin does not introduce a noisy-observation model.
+
+Transmit/no-transmit is the two-action case.  With \(q_0=0\) and net transmit
+benefit \(q=q_1-\tau\), let its compatible image be the nonempty closed finite
+interval \(\mathcal Q(o)=[q_-,q_+]\).  A nonnegative lower endpoint makes
+transmit common-optimal; a nonpositive upper endpoint makes no-transmit
+common-optimal; strict zero straddling leaves no common action.  Define
+\begin{equation}
+q_c=\frac{q_++q_-}{2},\qquad
+\Delta_q=\frac{q_+-q_-}{2}.
 \label{eq:value-radius}
 \end{equation}
 
-\begin{theorem}[Irreducible value and communication-decision uncertainty]
+\begin{theorem}[Binary value radius and ambiguous-fiber regret]
 \label{thm:sign}
-At a fixed information state \(o\):
-\begin{enumerate}
-\item the minimax error of any sender-local point estimate is
+The minimax error of a sender-local point estimate is
 \begin{equation}
 \inf_{\widehat q(o)}\sup_{x\in\mathcal X(o)}
-|\widehat q(o)-q(x)|=\Delta_q(o),
+|\widehat q(o)-q(x)|=\Delta_q,
 \label{eq:minimax-value}
 \end{equation}
-and the midpoint \(\widehat q=q_c\) is optimal;
-\item if \(q_-<0<q_+\), no deterministic map of \(o\) recovers the exact value
-sign for every compatible state;
-\item for a binary decision whose exact-information rule transmits iff
-\(q>0\), a sender-local randomized rule transmitting with probability \(p\) has
-local endpoint regrets
+attained by \(\widehat q=q_c\).  If \(q_-<0<q_+\), a randomized rule that
+transmits with probability \(p\) has endpoint regrets
+\(R_+(p)=(1-p)q_+\) and \(R_-(p)=p(-q_-)\), with
 \begin{equation}
-R_+(p)=(1-p)q_+,\qquad R_-(p)=p(-q_-).
-\end{equation}
-Its minimax probability and unavoidable regret are
-\begin{equation}
-p^*=\frac{q_+}{q_++(-q_-)},\qquad
-R_{\rm rand}^*=\frac{q_+(-q_-)}{q_++(-q_-)}>0.
+p^*=\frac{q_+}{q_++(-q_-)},\quad
+R_{\rm rand}^*=\frac{q_+(-q_-)}{q_++(-q_-)}>0,
 \label{eq:random-regret}
 \end{equation}
-Restricting to deterministic rules gives
+while deterministic rules incur
 \begin{equation}
 R_{\rm det}^*=\min\{q_+,-q_-\}>0.
 \label{eq:det-regret}
 \end{equation}
-\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-For any scalar estimate \(y\),
-\(q_+-q_-\le |q_+-y|+|y-q_-|\), so its worst endpoint error is at least
-\((q_+-q_-)/2\); the midpoint attains that bound throughout the interval.
-If the interval straddles zero, the same observation is compatible with
-opposite exact signs, proving the deterministic statement.  For the randomized
-action, regret over positive values is maximized at \(q_+\) and decreases with \(p\);
-regret over negative values is maximized at \(q_-\) and increases with \(p\).  Equating
-\((1-p)q_+=p(-q_-)\) yields \eqref{eq:random-regret}.  The deterministic
-choices \(p=0\) and \(p=1\) incur worst regrets \(q_+\) and \(-q_-\), respectively, proving
-\eqref{eq:det-regret}.
+The inequality
+\(q_+-q_-\le |q_+-y|+|y-q_-|\) lower-bounds the worst endpoint error by
+\(\Delta_q\), attained by the midpoint.  Under strict straddling,
+Theorem~\ref{thm:common-action} rules out a common deterministic action.
+Positive-endpoint regret decreases with \(p\), while negative-endpoint regret
+increases; equalizing them proves \eqref{eq:random-regret}.  The choices
+\(p=0,1\) give \eqref{eq:det-regret}.
 \end{proof}
 
-The strict-straddling formulas above have transparent boundary cases.  If
-\(q_-=0<q_+\), choosing \(p=1\) gives zero minimax regret; if
-\(q_-<0=q_+\), choosing \(p=0\) does so; and if both endpoints are zero every
-choice has zero regret.  A non-straddling interval admits a deterministic
-common-sign decision with zero regret.  For the symmetric interval
-\([-a,a]\), \(p^*=1/2\), \(R_{\rm rand}^*=a/2\), and
-\(R_{\rm det}^*=a\).  If transmission instead requires a net benefit above
-threshold \(\tau\), apply the same theorem to
-\(v=q-\tau\) and the shifted interval
-\([q_--\tau,q_+-\tau]\).  The formation witnesses below use \(\tau=0\).
-
-For \(q(x)=a^\top x+b\), let
-\(P_C=C^\dagger C\), \(a_\perp=(I-P_C)a\), and consider the Euclidean local
-fiber \(x=x_0+v\), \(v\in\ker C\), \(\|v\|_2\le\rho\).  Its exact interval is
-\begin{equation}
-\begin{aligned}
-\mathcal Q(o)&=[q(x_0)-\rho\|a_\perp\|_2,\\
-&\quad q(x_0)+\rho\|a_\perp\|_2],\\
-\Delta_q(o)&=\rho\|a_\perp\|_2.
-\end{aligned}
-\label{eq:sign-interval}
-\end{equation}
-The endpoints follow by choosing \(v\) parallel or antiparallel to
-\(a_\perp\).  Figure~\ref{fig:geometry} shows the geometry.
-
-Theorem~\ref{thm:sign} is a local minimax statement over \(\mathcal X(o)\),
-not a universal stochastic-control lower bound.  It does not rule out a
-Bayesian conditional expectation under a specified prior, nor does it say
-that every information fiber crosses zero.
+If \(q_-=0<q_+\), transmit is common-optimal; if \(q_-<0=q_+\), no-transmit
+is common-optimal; and if both vanish, both are.  On \([-a,a]\),
+\(p^*=1/2\), \(R_{\rm rand}^*=a/2\), and \(R_{\rm det}^*=a\).  These are
+local one-decision minimax results, not Bayesian, dynamic-regret, or universal
+stochastic-control bounds.
 
 \section{Minimum Supplementary Information and Coalition Structure}
 
 \subsection{One or multiple candidate actions}
 
-Stack \(p\) action-value coefficients as rows of
-\(L\in\mathbb R^{p\times n}\) and define
+Using the action matrix and difference basis from
+Proposition~\ref{prop:relative}, define
 \begin{equation}
-L_\perp=L(I-C^\dagger C).
+M=LP_\perp,\qquad M_{\rm rel}=BLP_\perp.
 \label{eq:Lperp}
 \end{equation}
 
-\begin{theorem}[Minimum instantaneous linear-statistic dimension]
+\begin{theorem}[Absolute and relative linear-statistic dimensions]
 \label{thm:min-stat}
 Under an instantaneous, noiseless, arbitrary-precision real-valued linear
-supplementary map \(Hx\), the minimum number of scalar rows required to
-identify all \(p\) exact action values is
+supplementary map \(Hx\), the minimum scalar dimensions for recovering all
+absolute values and all relative values are, respectively,
 \begin{equation}
-r_\star=\rank(L_\perp).
+r_{\rm value}^*=\rank(M),\qquad
+r_{\rm rel}^*=\rank(M_{\rm rel}).
 \label{eq:rstar}
 \end{equation}
+Moreover,
+\begin{equation}
+r_{\rm value}^*-r_{\rm rel}^*
+=\dim\big(\operatorname{im}(M)\cap
+\operatorname{span}\{\mathbf1_p\}\big),
+\label{eq:rank-gap}
+\end{equation}
+so \(r_{\rm value}^*-1\le r_{\rm rel}^*\le r_{\rm value}^*\).
 \end{theorem}
 
 \begin{proof}
-If all values are identifiable from \(\col(C,H)x\), the projections of the
-rows of \(H\) onto \(\ker C\) must span every row of \(L_\perp\).  Therefore \(H\)
-has at least \(\rank(L_\perp)\) independent scalar rows.  Conversely, choose
-the rows of \(H\) as any row basis of \(L_\perp\).  Each row of \(L\) is then the sum
-of a component in \(\row(C)\) and one in \(\row(H)\), satisfying
-Theorem~\ref{thm:exact} for all \(p\) values.
+For either target matrix \(T=L\) or \(T=BL\), identifiability from
+\(\col(C,H)x\) requires the rows of \(HP_\perp\) to span those of
+\(TP_\perp\), giving the rank lower bound.  Choosing \(H\) as a row basis of
+\(TP_\perp\) attains it because \(T=TP_C+TP_\perp\).
+For the gap, restrict the linear map \(B\) to \(\operatorname{im}(M)\).
+Its image is \(\operatorname{im}(BM)\) and its kernel is
+\(\operatorname{im}(M)\cap\ker B\).  Rank--nullity and
+\(\ker B=\operatorname{span}\{\mathbf1_p\}\) give
+\eqref{eq:rank-gap}; the intersection has dimension zero or one.
 \end{proof}
 
-For a single nonidentifiable value, one additional scalar
-\(\theta=\ell_\perp^\top x\) is sufficient.  This is statistic dimension,
-not packet count.  The coordinates of \(\ell_\perp\) may be distributed
-across many agents.
+Strict reduction occurs exactly when
+\(\mathbf1_p\in\operatorname{im}(M)\): some hidden perturbation changes every
+action value by the same nonzero amount.  Indeed, \(Mz=\alpha\mathbf1_p\),
+\(\alpha\ne0\), is equivalent to the hidden perturbation
+\(v=P_\perp z\in\ker C\) satisfying \(Lv=\alpha\mathbf1_p\).
+Exactly-one-of-\(p\) ranking discards
+this common hidden offset.  The quantity \(r_{\rm rel}^*\) is the minimum
+linear-statistic dimension for recovering all relative action values, not the
+minimum information for argmax; Theorem~\ref{thm:common-action} can certify a
+fiber-specific winner with less.
 
-\begin{corollary}[Instantaneous linear supplementary statistics]
-\label{cor:message-dimension}
-Under the same noiseless arbitrary-precision linear model, if the decision
-maker can receive \(r\) independent real-valued scalar statistics before
-deciding, exact identification of all \(p\) values requires
-\(r\ge r_\star\).  Equality is algebraically achievable if those statistics
-span \(\row(L_\perp)\).
+\begin{corollary}[At-most-one action family]
+\label{cor:at-most-one}
+Augment the communication actions by the genuine no-transmission action
+\(q_0=0\).  Then the minimum relative-value dimension of the augmented family
+is \(r_{\rm rel,aug}^*=r_{\rm value}^*\).
 \end{corollary}
 
-This is a linear-statistic-dimension statement, not a data-rate theorem.  Scalar
-dimension, packet count, bits, latency, functional-observer order, and the
-distributed cost of synthesizing each scalar are distinct quantities.
+\begin{proof}
+The augmented hidden-value matrix is
+\(\widetilde M=[0;M]\).  Its image has zero first coordinate, hence has
+trivial intersection with
+\(\operatorname{span}\{\mathbf1_{p+1}\}\).  Equation~\eqref{eq:rank-gap}
+then gives no relative rank loss, while
+\(\rank(\widetilde M)=\rank(M)\).
+\end{proof}
+
+\emph{Scheduling semantics:} Exactly-one-of-\(p\) communication-action ranking may discard one common hidden
+offset.  At-most-one transmission includes the genuine no-transmission action
+\(q_0=0\), so action-to-action cancellation does not make transmit versus
+no-transmit locally decidable.  Fiber-specific dominance may still make a
+particular action decidable and is tested by Theorem~\ref{thm:common-action}.
+For a single nonidentifiable value, one extra scalar
+\(\ell_\perp^\top x\) suffices.  All these counts are linear-statistic
+dimensions, not packets, bits, rates, observer order, or distributed
+acquisition cost.
 
 \subsection{Information ownership}
 
@@ -756,7 +850,7 @@ controller links, two pinned-leader streams, H=25, and D=4 samples.  Its
 augmented state has 33 entries per axis and 99 in 3-D.  The matrices \(F_H\),
 action responses, sender maps, and held-memory dynamics are assembled directly
 from the implemented graph, gains, controller, and integrator.  For each
-controller-relevant payload, a structural command correction
+  controller-relevant payload, a fixed unit command correction
 \([1,0,0]^\top\) and fixed receiver-memory hypothesis define \(g\).  The
 maximum discrepancy between the affine representation and the centralized
 calculation is \(4.34\times10^{-16}\).
@@ -773,7 +867,7 @@ first connected radius graph on the deterministic lattice in the sequence
 Table~\ref{tab:links} summarizes all 1320 action rows.
 
 \begin{table*}[t]
-\caption{Cross-instance structural audit. ``Rows'' aggregates two pinning
+\caption{Cross-instance unit-response functional audit. ``Rows'' aggregates two pinning
 patterns, two H values, and two D values; every row is nonidentifiable, stable
 in membership over relative tolerances \(10^{-6}\)--\(10^{-14}\).  After the
 retained row space is orthonormalized and the value row is normalized, every
@@ -784,17 +878,17 @@ information-map rank itself does not change over that grid.}
 \scriptsize
 \begin{tabular}{llrrrrl}
 \toprule
-Graph & N & Rows/non-ID & Raw stable & Leader $(p_1,r_1^*)$ & $r_1^*/p_1$ & Minimum coalition pattern \\
+Graph & N & Rows/non-ID & Raw stable & Leader $(p_1,r_{\rm value}^*,r_{\rm rel}^*)$ & $r_{\rm rel}^*/r_{\rm value}^*$ & Minimum coalition pattern \\
 \midrule
-geometric & 5 & 48/48 & 48 & (6,4) & 0.667 & leader: 5 \\
-ring2 & 5 & 80/80 & 56 & (4,3) & 0.750 & every sender: 5 \\
-sparse4 & 5 & 144/144 & 96 & (6,4) & 0.667 & every sender: 5 \\
-geometric & 7 & 104/104 & 80 & (7,5) & 0.714 & leader: 7; followers: 5 \\
-ring2 & 7 & 120/120 & 80 & (5,4) & 0.800 & every sender: 7 \\
-sparse4 & 7 & 216/216 & 56 & (7,5) & 0.714 & every sender: 7 \\
-geometric & 9 & 160/160 & 80 & (8,6) & 0.750 & leader: 9; followers: 8 \\
-ring2 & 9 & 160/160 & 48 & (6,5) & 0.833 & every sender: 9 \\
-sparse4 & 9 & 288/288 & 64 & (8,6) & 0.750 & every sender: 9 \\
+geometric & 5 & 48/48 & 48 & (6,4,3) & 0.750 & leader: 5 \\
+ring2 & 5 & 80/80 & 56 & (4,3,2) & 0.667 & every sender: 5 \\
+sparse4 & 5 & 144/144 & 96 & (6,4,3) & 0.750 & every sender: 5 \\
+geometric & 7 & 104/104 & 80 & (7,5,4) & 0.800 & leader: 7; followers: 5 \\
+ring2 & 7 & 120/120 & 80 & (5,4,3) & 0.750 & every sender: 7 \\
+sparse4 & 7 & 216/216 & 56 & (7,5,4) & 0.800 & every sender: 7 \\
+geometric & 9 & 160/160 & 80 & (8,6,5) & 0.833 & leader: 9; followers: 8 \\
+ring2 & 9 & 160/160 & 48 & (6,5,4) & 0.800 & every sender: 9 \\
+sparse4 & 9 & 288/288 & 64 & (8,6,5) & 0.833 & every sender: 9 \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -810,7 +904,7 @@ remain positive.  The claim is therefore scale-controlled functional
 membership in a finite registry, not invariant raw-rank bookkeeping or an
 arbitrary-graph/gain theorem.
 
-The structural correction fixes \(g\) and must not be confused with a
+The fixed unit-response correction fixes \(g\) and must not be confused with a
 trajectory-realized scheduling action.  Zero response has zero value, and
 special nonzero responses can cancel a hidden projection.  The next subsection
 therefore audits actual state-generated corrections separately.
@@ -871,7 +965,10 @@ pin $1\to4$ & $-5.002\times10^{-6}$ & $5.002\times10^{-6}$ & $5.002\times10^{-6}
 \end{tabular}
 \end{table*}
 
-Because the endpoints are centered symmetrically, Theorem~\ref{thm:sign} gives
+All ten intervals strictly straddle zero, so
+Theorem~\ref{thm:common-action} leaves no common deterministic
+transmit/no-transmit action.  Because the endpoints are centered symmetrically,
+Theorem~\ref{thm:sign} gives
 \(p^*=1/2\), randomized minimax regret \(\Delta_q/2\), and deterministic
 minimax regret \(\Delta_q\) for every row.  These are local one-decision losses,
 not expected mission-level bounds.  Practical scale is heterogeneous: the
@@ -895,7 +992,7 @@ for some actions is retained rather than interpreted as uniform practical impact
 
 \subsection{Statistic dimension versus coalition size}
 
-For every fixed payload, \(\rank(L_\perp)=1\): one linear scalar closes its
+For every fixed payload, \(\rank(M)=1\): one linear scalar closes its
 individual algebraic deficit.  However, no receiver alone and no
 sender--receiver pair identifies that scalar.  Exhaustive enumeration of all
 subsets of the five implemented agent maps finds that every sender needs four
@@ -907,44 +1004,46 @@ coalition.  It is not a claim that all formations require global information.
 
 The fixed-action statement underuses Theorem~\ref{thm:min-stat}.  We therefore
 stack every controller-relevant current action of each actual sender in
-\(L_j\), using a common full 99-dimensional state and the structural unit
-command response.  Table~\ref{tab:multi-action} reports the simultaneous
-missing rank.  Sender 1 has four payloads but \(r_1^*=3\): its ordinary and
-pinned-leader unit actions into follower 2 induce the same output-response
-direction, so one hidden direction is shared.  Senders 3 and 4 each require
-two independent directions for two actions; the single-action senders require
-one.  Thus compression exists for the leader but is not universal.  The
-nonzero singular values shown in the table are those of
-\(L_j(I-C_j^\dagger C_j)\).
+\(L_j\), using a common full 99-dimensional state and the fixed unit command
+response.  Table~\ref{tab:multi-action} reports both absolute and relative
+missing ranks.  Sender 1 has four actions with
+\((r_{\rm value}^*,r_{\rm rel}^*)=(3,2)\); senders 3 and 4 have \((2,1)\).
+The \(p=1\) relative ranks are vacuous rankings, not evidence that a meaningful
+choice is identifiable.
 
 \begin{table*}[t]
-\caption{Sender-wise simultaneous-action missing dimension and ownership.}
+\caption{Frozen N=5 sender-wise absolute/relative missing dimension and ownership.}
 \label{tab:multi-action}
 \centering
 \scriptsize
-\begin{tabular}{rrrrp{6.5cm}ll}
+\begin{tabular}{rrrrrlp{5.0cm}}
 \toprule
-Sender j & $p_j$ & $r_j^*$ & $r_j^*/p_j$ & Retained singular values of $L_j^\perp$ & Minimum coalition & Interpretation \\
+Sender j & $p_j$ & $r_{\rm value}^*$ & $r_{\rm rel}^*$ & Ratio & Minimum coalition & Interpretation \\
 \midrule
-1 & 4 & 3 & 0.75 & 26.9758; 20.5237; 1.83164 & $\{1,2,3,4,5\}$ & one shared direction \\
-2 & 1 & 1 & 1.00 & 49.7427 & $\{1,2,3,4,5\}$ & single action \\
-3 & 2 & 2 & 1.00 & 55.0690; 16.5170 & $\{1,2,3,4,5\}$ & independent directions \\
-4 & 2 & 2 & 1.00 & 61.7396; 5.34031 & $\{1,2,3,4,5\}$ & independent directions \\
-5 & 1 & 1 & 1.00 & 45.7777 & $\{1,2,3,4,5\}$ & single action \\
+1 & 4 & 3 & 2 & 0.667 & $\{1,2,3,4,5\}$ & one common hidden offset removed \\
+2 & 1 & 1 & 0 & -- & $\{1,2,3,4,5\}$ & ranking vacuous \\
+3 & 2 & 2 & 1 & 0.500 & $\{1,2,3,4,5\}$ & one relative hidden direction \\
+4 & 2 & 2 & 1 & 0.500 & $\{1,2,3,4,5\}$ & one relative hidden direction \\
+5 & 1 & 1 & 0 & -- & $\{1,2,3,4,5\}$ & ranking vacuous \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Although \(r_1^*=3<4\), the minimum coalition for its entire missing subspace
+Although \(r_{\rm value,1}^*=3<4\), the minimum coalition for its entire missing subspace
 still contains all five agents.  The same coalition size holds for every
 other sender's full action set.  Compression of value directions therefore
-does not imply local ownership or three packets: Corollary~\ref{cor:message-dimension}
+does not imply local ownership or three packets: Theorem~\ref{thm:min-stat}
 counts independent real-valued statistics only if their operands can be
 assembled before the decision.
 
 The cross-instance audit qualifies the ownership result.  Leader compression
-recurs in every registry cell: \(r_1^*/p_1\) ranges from 2/3 to 5/6, while every
-tested follower has \(r_j^*=p_j\).  Ring2 and sparse4 require the complete
+of absolute values recurs in every registry cell, while every tested follower
+has \(r_{\rm value}^*=p_j\).  R2.6 post-processing finds
+\(r_{\rm rel}^*=r_{\rm value}^*-1\) and the equivalent common-hidden-offset
+condition in all 448 sender--cells.  All 360 nontrivial sets with \(p\ge2\)
+therefore have strict one-dimensional reduction, but none is fully
+relative-identifiable; the 88 single-action cases are excluded from that
+ordering interpretation.  Ring2 and sparse4 require the complete
 N-agent coalition for every sender.  On the geometric graph, however,
 follower-sender value sets require five of seven agents and eight of nine
 agents, while the leader still requires all agents.  Coalition ownership is
@@ -953,25 +1052,10 @@ row-space condition, not an all-agent rule.  Across 448 sender--cell rows,
 unique minima 5, 7, 8, and 9 occur 120, 120, 56, and 152 times; these counts do
 not imply packet or acquisition cost.
 
-\begin{table*}[t]
-\caption{Frozen ACK-like packet-frequency economics.  Statistics cover only
-centralized-oracle development points within the measured periodic performance domain and do
-not price a protocol for acquiring the all-agent missing value statistic.}
-\label{tab:economics}
-\centering
-\scriptsize
-\begin{tabular}{p{3.6cm}p{3.1cm}p{3.0cm}p{5.8cm}}
-\toprule
-Item & Statistic & Result & Interpretation \\
-\midrule
-S2 formation switching & eligible 4/14; median $\eta^\star$ & 0.726 (IQR 0.556--2.186) & Full feedback at price 0.25 is affordable for every eligible point. \\
-S3 burst loss & eligible 11/14; median $\eta^\star$ & 0.220 (0.186--0.249) & Median point cannot afford full feedback. \\
-S4 congestion & eligible 11/14; median $\eta^\star$ & -0.741 ($[-0.814,-0.173]$) & DATA alone is uneconomic throughout the eligible set. \\
-S5 topology perturbation & eligible 11/14; median $\eta^\star$ & -0.047 (-0.070--0.173) & Headroom is sparse and not robust to feedback cost. \\
-S6 dynamic excitation & eligible 11/14; median $\eta^\star$ & 0.095 (0.032--0.367) & Median affordable feedback fraction is 37.8\%. \\
-\bottomrule
-\end{tabular}
-\end{table*}
+These ranks concern reconstruction, not the actual argmax on one bounded
+fiber.  The ten persisted action witnesses below use action-specific
+conditioned fibers, so they are not combined into a multi-action
+common-maximizer claim.
 
 \subsection{Why the information result matters operationally}
 
@@ -998,8 +1082,9 @@ Finally, Fig.~\ref{fig:economics} applies \eqref{eq:eta-star} to an ACK-like
 receiver-information stream.  At the frozen ACK price 0.25, S2 can fund one
 such packet per accepted delivery at all four matchable points, while the
 median S6 point can fund it on only 37.8\% of eligible deliveries.  S4 has
-negative headroom even before feedback.  Table~\ref{tab:economics} reports all
-five scenarios.  This is a necessary cost-sensitivity screen, not the measured
+negative headroom even before feedback.  Across all five scenarios, the median
+break-even prices range from -0.741 to 0.726.  This is a necessary
+cost-sensitivity screen, not the measured
 cost of causally aggregating the all-agent statistic.  It explains why
 algebraic sufficiency and deployable economic value must remain distinct.
 
@@ -1007,93 +1092,68 @@ algebraic sufficiency and deployable economic value must remain distinct.
 
 \subsection{What the result changes}
 
-Theorems~\ref{thm:exact}--\ref{thm:min-stat} suggest a three-stage audit for
-control-aware communication.  First derive the conditional fixed-response
-action benefit under the closed-loop model.  Second test whether that
-functional lies in the acting
-agent's information row space, including the complete permitted history.
-Third, if information is missing, distinguish the algebraic dimension of the
-missing statistic from the coalition and communication resources needed to
-construct it.  Scheduler design before these checks risks optimizing a
-surrogate that either lacks the decisive cross term or costs more to reveal
-than its scheduling benefit.
-
-The result also clarifies why receiver-memory estimation alone can be
-insufficient.  Such an estimator can correctly represent which packet the
-receiver may hold.  The finite-horizon action value additionally projects the
-action response onto the no-action closed-loop response, which includes
-formation components outside the sender's information.  Better calibration
-of the receiver-memory marginal cannot create measurements of those missing
-components.
+Theorems~\ref{thm:exact}--\ref{thm:min-stat} suggest a staged audit for
+control-aware communication: derive the fixed-response values; distinguish
+absolute reconstruction, relative reconstruction, and the direct
+common-maximizer test; then separate any missing linear-statistic dimension
+from the coalition and communication resources needed to construct it.
+Receiver-memory estimation alone may still miss the projection of the action
+response onto remote components of the no-action trajectory.  Calibrating
+that memory marginal cannot create measurements of those components.
 
 \subsection{Boundaries}
 
-The analytical formation case is the unsaturated sampled double-integrator
-subsystem with a fixed graph during each decision history.  It is not a theorem
-for nonlinear 6-DOF UAV dynamics, saturation, switching topology within a
-history, or an interference-limited MAC.  The 72-cell audit establishes
-recurrence over a deterministic finite registry, not arbitrary N, gains, or
-graphs.  Its coalition results are explicitly heterogeneous.  Tolerance sweeps
-and selected 80-digit projections harden the numerical membership conclusions
-but do not replace a symbolic arbitrary-parameter proof.  The minimum residual
-is only 3.03 times the loosest declared tolerance, although its 80-digit
-conditional-basis check agrees to \(10^{-16}\); this is a numerical margin,
-not a structural lower bound.
+The analytical case is an unsaturated sampled double integrator with a fixed
+graph within each decision history, not nonlinear 6-DOF dynamics, saturation,
+within-history switching, or an interference-limited MAC.  The 72-cell audit
+is a finite registry, not arbitrary-topology, arbitrary-gain, or arbitrary-N
+theory.  Tolerance sweeps and selected 80-digit projections strengthen, but do
+not replace, a symbolic parameter proof.  The minimum residual is only 3.03
+times the loosest tolerance, despite a conditional-basis check to \(10^{-16}\).
 
-The value-radius and regret results are local to an information-compatible
-operating set.  A fully specified stochastic prior and nonlinear Bayesian
-estimator may produce a useful conditional expected value; that is a different
-information model and is not ruled out, and this paper does not compare against
-the best policy in that class.  Randomization reduces worst-case
-binary regret for the ten centered N=5 witnesses but cannot remove it or make
-the hidden exact sign observable.  Their normalized ambiguity varies by nearly
-three orders of magnitude, so existence is not uniform engineering impact.
+Exact algebraic row-space nonidentifiability is not a robustness or noisy-
+observation impossibility theorem.  Relative-value nonidentifiability likewise
+does not by itself imply argmax ambiguity; the fiberwise common-maximizer
+condition is the direct decision test.  No multi-action reachable common-fiber
+experiment was constructed: the ten N=5 witnesses use action-specific fibers.
 
-The frontier evidence uses five paired development seeds and is presented as
-mechanism falsification and counterexample evidence.  No held-out population
-superiority or statistical significance claim is made.  The communication
-axis counts DATA + 0.25 ACK packets per second per channel.  It omits payload
-length, shared-medium collisions, airtime, and energy, so feedback-economic
-numbers are conditional on this accounting.
+The value radius and regret are local to a declared compatible set.  R2.6 does
+not solve stochastic or Bayesian scheduling; a specified prior and estimator
+define a different, untested information model.  Randomization reduces
+worst-case binary regret but does not reveal the hidden sign, and the witnessed
+normalized ambiguity spans nearly three orders of magnitude.
 
-Functional, sample-based, and structural functional observability, functional
-observer design, and target-sensor selection are established fields.  Our
-exact row-space, finite-history, and coalition conditions must be read as
-action-value specializations, not as new generic observability or placement
-theory.  The intended contribution is the control-communication synthesis:
-the exact action functional, irreducible local value/decision loss, shared
-missing dimensions across simultaneous actions, acquisition cost, and
-implementation-faithful reachable closure.
+The frontier uses five paired development seeds as mechanism/counterexample
+evidence, not held-out superiority or statistical significance.  Its DATA +
+0.25 ACK packet-frequency axis omits payload length, shared-medium collisions,
+airtime, and energy; the economics are conditional on that accounting.
+
+Functional-observability and sensor-selection theories are established
+fields.  Our row-space, history, and coalition conditions are action-value
+specializations, not new generic observability or placement theory.  The
+contribution is their control--communication synthesis with the decision
+ladder, local margin and loss, rank gap, acquisition cost, and reachable
+closure.
 
 \section{Conclusion}
 
-Control-aware communication is not locally decidable merely because a sender
-can estimate the receiver's memory.  For a fixed communication response in a
-linear sampled closed loop, quadratic finite-horizon benefit is an affine
-state functional.  Established functional-observability geometry then gives
-an exact identifiability test; its hidden projection quantifies local minimax
-value error and strictly positive communication-decision regret when the
-compatible interval straddles zero.  For several action values, the rank of
-their joint hidden projection gives the minimum instantaneous linear-statistic
-dimension.  The acquisition problem is separate: even a compressed deficit
-may be distributed across a large coalition and may consume the Pareto
-headroom it is meant to exploit.
+For a fixed response in a linear sampled loop, finite-horizon quadratic benefit
+is affine.  Absolute reconstruction implies relative reconstruction, but the
+common-maximizer intersection directly governs local action selection.  Its
+Euclidean-fiber margins are closed form; strict binary threshold straddling
+has positive local minimax regret.  Relative-value recovery can save only the
+one common-offset dimension, and adding no transmission removes that saving.
 
-Across the 72-cell formation registry, all 1320 structural fixed-response
-functionals violate sender-history identifiability under the declared maps.
-In the evaluated five-UAV topology, for each of ten controller-relevant action
-types we construct an actual state-generated nonzero response admitting a
-reachable, unsaturated history pair requiring opposite exact decisions while
-remaining sender-indistinguishable with identical responses.  Their
-normalized information radii range from \(2.67\times10^{-4}\) to 0.232, so the
-existence result is not asserted to have uniform mission-level impact.  Four
-leader actions share three missing directions in N=5; leader compression
-recurs in the finite registry, whereas tested follower action sets have none.
-Coalition size varies with topology.  These results motivate information-
-structure and acquisition-cost audits before a value-based scheduler is
-engineered.  Future work may study structured priors, nonlinear functional
-observability, and causal protocols for acquiring the missing statistic, but
-none is claimed here.
+All 1320 fixed unit-response functionals in the 72-cell registry violate the
+declared sender-history row-space condition.  All 360 nontrivial action sets
+save one relative dimension, but none is fully relative-identifiable.  Each of
+ten N=5 action types has a reachable, unsaturated, sender-indistinguishable
+pair requiring opposite binary decisions; normalized radii range from
+\(2.67\times10^{-4}\) to 0.232.  The N=5 leader's four actions require three
+absolute and two relative missing directions, while coalition size varies
+with topology.  These results motivate information-structure and acquisition-
+cost audits; structured priors, nonlinear theory, and causal acquisition
+protocols remain future work.
 
 \appendices
 \section{Detailed Formation Affine Map}
@@ -1111,15 +1171,6 @@ in \eqref{eq:FH}.  Substitution of a fixed receiver memory removes its
 coordinates from the free state and moves them into the constant.  The action
 response is generated by the same \(A_h\), delay D, gains, and target row used
 by the centralized diagnostic.
-
-\section{Euclidean-Fiber Interval Proof}
-
-For \(v\in\ker C\), \(a^\top v=a_\perp^\top v\).  Cauchy--Schwarz gives
-\(|a_\perp^\top v|\le\rho\|a_\perp\|_2\).  If
-\(a_\perp\ne0\), equality is attained at
-\(v=\pm\rho a_\perp/\|a_\perp\|_2\), which lies in \(\ker C\).  If
-\(a_\perp=0\), the interval collapses to one point.  This proves
-\eqref{eq:sign-interval}.
 
 \section{Reproducibility Scope}
 
@@ -1140,6 +1191,12 @@ The independent R2.5 audit is
 \path{results/tcns_r2_5_adversarial_validation/2026-09-08_175427}.  Registry,
 witness-scenario, and reference-direction seeds are 27022001, 27020001, and
 27022001 plus action index; no stochastic draw enters the witness construction.
+The R2.6 decision-identifiability post-processing artifact is
+\path{results/tcns_r2_6_decision_identifiability/2026-09-08_232116}; its exact
+source snapshot is included there and committed in \texttt{da97e01}, with the
+rank-gap refinement in \texttt{d0edd2c}.  It reads only the frozen R2 matrices
+and witnesses; its test entry point is
+\path{tests/test_tcns_r2_6_decision_identifiability.m}.
 Frozen negative-trigger, centralized-oracle, feedback-accounting, and
 feedback-economic result directories are named in the repository's
 claim--evidence ledger.  Each result records configuration, seed, source

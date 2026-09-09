@@ -192,7 +192,7 @@ LaTeX Font Info:    Setting ntxTOsF sub-encoding to TS1/0 on input line 21.
 
 ntx@otftexttrue
 (fontspec.sty (xparse.sty (expl3.sty
-Package: expl3 2022-02-24 L3 programming layer (loader) 
+Package: expl3 2022-02-24 L3 programming layer (loader)
  (l3backend-xetex.def
 File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
 \c__kernel_sys_dvipdfmx_version_int=\count280
@@ -433,7 +433,7 @@ Requested font "[TeXGyreTermesX-Regular.otf]/OT" at 9.99997pt
  -> TeXGyreTermesX-Regular.otf
 Requested font "[TeXGyreTermesX-Regular.otf]/OT" at 10.00003pt
  -> TeXGyreTermesX-Regular.otf
-Requested font "[TeXGyreTermesX-Regular.otf]/OT:script=latn;language=dflt;" at 
+Requested font "[TeXGyreTermesX-Regular.otf]/OT:script=latn;language=dflt;" at
 10.00003pt
  -> TeXGyreTermesX-Regular.otf
 Requested font "[TeXGyreTermesX-Bold.otf]/OT:script=latn;language=dflt;" at 10.
@@ -442,10 +442,10 @@ Requested font "[TeXGyreTermesX-Bold.otf]/OT:script=latn;language=dflt;" at 10.
 Requested font "[TeXGyreTermesX-Italic.otf]/OT:script=latn;language=dflt;" at 1
 0.00003pt
  -> TeXGyreTermesX-Italic.otf
-Requested font "[TeXGyreTermesX-Slanted.otf]/OT:script=latn;language=dflt;" at 
+Requested font "[TeXGyreTermesX-Slanted.otf]/OT:script=latn;language=dflt;" at
 10.00003pt
  -> TeXGyreTermesX-Slanted.otf
-Requested font "[TeXGyreTermesX-BoldItalic.otf]/OT:script=latn;language=dflt;" 
+Requested font "[TeXGyreTermesX-BoldItalic.otf]/OT:script=latn;language=dflt;"
 at 10.00003pt
  -> TeXGyreTermesX-BoldItalic.otf
 Requested font "[TeXGyreTermesX-BoldSlanted.otf]/OT:script=latn;language=dflt;"
@@ -465,10 +465,10 @@ Package fontspec Info: Font family 'TeXGyreTermesX(0)' created for font
 (fontspec)             = *-Italic,BoldFont = *-Bold,BoldItalicFont =
 (fontspec)             *-BoldItalic,SlantedFont = *-Slanted,BoldSlantedFont=
 (fontspec)             *-BoldSlanted].
-(fontspec)              
+(fontspec)
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
-(fontspec)              
+(fontspec)
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->s*[1]"[TeXGyreTermesX-Regular.otf]/OT:script=latn;lan
 guage=dflt;-ss05;+tnum;+lnum;mapping=tex-text;"
@@ -540,7 +540,7 @@ LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 25.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line
 25.
  (untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
@@ -759,7 +759,7 @@ s05;+tnum;+lnum;mapping=tex-text;" at 24.0pt
 
 -- Lines per column: 58 (exact).
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 71.
+(Font)              scaled to size 10.0pt on input line 66.
 Requested font "[TeXGyreTermesX-Regular.otf]/OT:script=latn;language=dflt;-ss05
 ;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;" at 10.0pt
  -> TeXGyreTermesX-Regular.otf
@@ -772,139 +772,131 @@ Underfull \hbox (badness 10000) in paragraph at lines 126--128
  []
 
 
-Underfull \hbox (badness 3769) in paragraph at lines 128--131
-[]\TU/TeXGyreTermesX(0)/m/n/10 Using functional-observability geometry, we quan
--
- []
+Underfull \vbox (badness 1577) has occurred while \output is active []
 
-
-Underfull \hbox (badness 4084) in paragraph at lines 128--131
-\TU/TeXGyreTermesX(0)/m/n/10 rive deterministic and randomized local minimax
- []
-
+ [2]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
+(Font)              scaled to size 8.0pt on input line 244.
+Requested font "[TeXGyreTermesX-Regular.otf]/OT:script=latn;language=dflt;-ss05
+;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;" at 8.0pt
+ -> TeXGyreTermesX-Regular.otf
 LaTeX Font Info:    Trying to load font information for OT1+minntx on input lin
-e 137.
+e 248.
+
 (ot1minntx.fd
 File: ot1minntx.fd 2022/01/20 v1.0 font definition file for OT1/minntx
 )
-Requested font "ntx-Regular-tlf-ot1" at 10.0pt
- -> ntx-Regular-tlf-ot1
 Requested font "ntx-Regular-tlf-ot1" at 7.3pt
  -> ntx-Regular-tlf-ot1
 Requested font "ntx-Regular-tlf-ot1" at 5.5pt
  -> ntx-Regular-tlf-ot1
-Requested font "ntxmi" at 10.0pt
- -> ntxmi
 Requested font "ntxmi7" at 7.3pt
  -> ntxmi7
 Requested font "ntxmi5" at 5.5pt
  -> ntxmi5
-Requested font "ntxsy" at 10.0pt
- -> ntxsy
 Requested font "ntxsy7" at 7.3pt
  -> ntxsy7
 Requested font "ntxsy5" at 5.5pt
  -> ntxsy5
-Requested font "ntxexx" at 10.0pt
- -> ntxexx
 Requested font "ntxexx" at 7.3pt
  -> ntxexx
 Requested font "ntxexx" at 5.5pt
  -> ntxexx
-LaTeX Font Info:    Trying to load font information for U+msa on input line 137
+LaTeX Font Info:    Trying to load font information for U+msa on input line 248
 .
  (umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-Requested font "msam10" at 10.0pt
- -> msam10
 Requested font "msam7" at 7.3pt
  -> msam7
 Requested font "msam5" at 5.5pt
  -> msam5
-LaTeX Font Info:    Trying to load font information for U+msb on input line 137
+LaTeX Font Info:    Trying to load font information for U+msb on input line 248
 .
  (umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Requested font "msbm10" at 10.0pt
- -> msbm10
 Requested font "msbm7" at 7.3pt
  -> msbm7
 Requested font "msbm5" at 5.5pt
  -> msbm5
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-137.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line
+248.
  (untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-Requested font "ntxmia" at 10.0pt
- -> ntxmia
 Requested font "ntxmia" at 7.3pt
  -> ntxmia
 Requested font "ntxmia" at 5.5pt
  -> ntxmia
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-137.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line
+248.
  (untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-Requested font "ntxsym" at 10.0pt
- -> ntxsym
 Requested font "ntxsym" at 7.3pt
  -> ntxsym
 Requested font "ntxsym" at 5.5pt
  -> ntxsym
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-137.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line
+248.
  (untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
-Requested font "ntxsyc" at 10.0pt
- -> ntxsyc
 Requested font "ntxsyc" at 7.3pt
  -> ntxsyc
 Requested font "ntxsyc" at 5.5pt
  -> ntxsyc
-Requested font "ntxexa" at 10.0pt
- -> ntxexa
 Requested font "ntxexa" at 7.3pt
  -> ntxexa
 Requested font "ntxexa" at 5.5pt
  -> ntxexa
 
-[2]
-LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
-(Font)              scaled to size 8.0pt on input line 242.
-Requested font "[TeXGyreTermesX-Regular.otf]/OT:script=latn;language=dflt;-ss05
-;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;" at 8.0pt
- -> TeXGyreTermesX-Regular.otf
-
-Underfull \hbox (badness 7504) in paragraph at lines 261--262
+Underfull \hbox (badness 7504) in paragraph at lines 263--264
 []|\TU/TeXGyreTermesX(0)/m/n/7 Studies this precondition; makes no optimal-
  []
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 265--266
+Underfull \hbox (badness 1371) in paragraph at lines 267--268
 []|\TU/TeXGyreTermesX(0)/m/n/7 Instantiates the information question with finit
 e-
  []
 
 
-Underfull \hbox (badness 3590) in paragraph at lines 266--267
+Underfull \hbox (badness 3590) in paragraph at lines 268--269
 []|\TU/TeXGyreTermesX(0)/m/n/7 Functional and sample-
  []
 
 
-Underfull \hbox (badness 2057) in paragraph at lines 267--268
+Underfull \hbox (badness 2057) in paragraph at lines 269--270
 []|\TU/TeXGyreTermesX(0)/m/n/7 Row-space/modal/structural tests, sam-
  []
 
 
-Underfull \hbox (badness 3792) in paragraph at lines 268--269
+Underfull \hbox (badness 3792) in paragraph at lines 270--271
 \TU/TeXGyreTermesX(0)/m/n/7 follows when a communication-action
  []
 
+Requested font "ntx-Regular-tlf-ot1" at 10.0pt
+ -> ntx-Regular-tlf-ot1
+Requested font "ntxmi" at 10.0pt
+ -> ntxmi
+Requested font "ntxsy" at 10.0pt
+ -> ntxsy
+Requested font "ntxexx" at 10.0pt
+ -> ntxexx
+Requested font "msam10" at 10.0pt
+ -> msam10
+Requested font "msbm10" at 10.0pt
+ -> msbm10
+Requested font "ntxmia" at 10.0pt
+ -> ntxmia
+Requested font "ntxsym" at 10.0pt
+ -> ntxsym
+Requested font "ntxsyc" at 10.0pt
+ -> ntxsyc
+Requested font "ntxexa" at 10.0pt
+ -> ntxexa
 Requested font "ntx-Bold-tlf-ot1" at 10.0pt
  -> ntx-Bold-tlf-ot1
 Requested font "ntx-Bold-tlf-ot1" at 7.3pt
@@ -915,12 +907,12 @@ File: figures/fig1_information_architecture.pdf Graphic file (type pdf)
 <use figures/fig1_information_architecture.pdf>
 [3] [4] [5]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 7.3pt on input line 675.
+(Font)              scaled to size 7.3pt on input line 763.
 Requested font "[TeXGyreTermesX-Italic.otf]/OT:script=latn;language=dflt;-ss05;
 +tnum;+lnum;mapping=tex-text;" at 7.3pt
  -> TeXGyreTermesX-Italic.otf
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 5.5pt on input line 675.
+(Font)              scaled to size 5.5pt on input line 763.
 Requested font "[TeXGyreTermesX-Italic.otf]/OT:script=latn;language=dflt;-ss05;
 +tnum;+lnum;mapping=tex-text;" at 5.5pt
  -> TeXGyreTermesX-Italic.otf
@@ -932,6 +924,7 @@ File: figures/fig4_feedback_economics.pdf Graphic file (type pdf)
 <use figures/fig4_feedback_economics.pdf>
 File: figures/fig5_information_geometry.pdf Graphic file (type pdf)
 <use figures/fig5_information_geometry.pdf>
+ [6]
 Requested font "ntx-Regular-tlf-ot1" at 8.0pt
  -> ntx-Regular-tlf-ot1
 Requested font "ntx-Regular-tlf-ot1" at 6.2pt
@@ -976,127 +969,156 @@ Requested font "ntxexa" at 8.0pt
  -> ntxexa
 Requested font "ntxexa" at 6.2pt
  -> ntxexa
- [6]
 File: figures/fig6_reachable_sign_witnesses.pdf Graphic file (type pdf)
 <use figures/fig6_reachable_sign_witnesses.pdf>
  [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2343) has occurred while \output is active []
 
  [9]
-Underfull \hbox (badness 2790) in paragraph at lines 1031--1039
-[]\TU/TeXGyreTermesX(0)/m/n/10 The value-radius and regret results are local to
- an
- []
+Underfull \vbox (badness 1540) has occurred while \output is active []
 
-
-Underfull \hbox (badness 4621) in paragraph at lines 1031--1039
-\TU/TeXGyreTermesX(0)/m/n/10 information-compatible operating set. A fully spec
-ified
- []
-
-
-Underfull \hbox (badness 2173) in paragraph at lines 1047--1055
-\TU/TeXGyreTermesX(0)/m/n/10 sions across simultaneous actions, acquisition cos
-t, and
- []
-
-
-Underfull \hbox (badness 1990) in paragraph at lines 1058--1069
-[]\TU/TeXGyreTermesX(0)/m/n/10 Control-aware communication is not locally decid
-able
- []
-
+ [10]
 Requested font "[lmmono10-regular]:" at 10.0pt
  -> lmmono10-regular
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 []\TU/TeXGyreTermesX(0)/m/n/10 The base theorem validation entry point is
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 [][][][][][][][][][][] [] [][][][] [] [][][][][][][][][][][] [] [][][][][][] []
  [][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 []$\TU/TeXGyreTermesX(0)/m/n/10 ; the R1 depth audit is $[][][][][][][][][][][]
  [] [][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 [][] [] [][][][][][] [] [][][][][] [] [][][][][][][][][][] [] []$\TU/TeXGyreTer
 mesX(0)/m/n/10 , with unit test
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 is $[][][][][] [] [][][][] [] [][][][][][][][][][]
  [] [][][][] [] [][] [] [][][][][][][] [] []$. The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 authoritative base theorem-validation run, generat
 ed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 from source commit \TU/lmtt/m/n/10 15177a8\TU/TeXG
 yreTermesX(0)/m/n/10 , is $[][][][][][][] [] [][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 [][][][][][][][][][][] [] [][][][][][] [] [][][][][][][][][][] [] [][][][][][][
 ][][][][][] [] [][][][][][]$\TU/TeXGyreTermesX(0)/m/n/10 .
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 1113--1131
+Underfull \hbox (badness 5460) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 from source commit \TU/lmtt/m/n/10 05fa200\TU/TeXG
 yreTermesX(0)/m/n/10 , is $[][][][][][][] [] [][][][] [] [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 [][][][][][] [] [][][][][] [] [][][][][][][][][][] [] [][][][][][][][][][][][]
 [] [][][][][][]$\TU/TeXGyreTermesX(0)/m/n/10 . The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 authoritative R2 cross-instance and all-action wit
 ness
  []
 
 
-Underfull \hbox (badness 2302) in paragraph at lines 1113--1131
+Underfull \hbox (badness 2302) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 audit, generated from implementation commit \TU/lm
 tt/m/n/10 a2cec3b\TU/TeXGyreTermesX(0)/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1113--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
 \TU/TeXGyreTermesX(0)/m/n/10 is $[][][][][][][] [] [][][][] [] [][] [] [][][][]
 [][][][][][][][][][] [] [][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 3907) in paragraph at lines 1113--1131
-\TU/TeXGyreTermesX(0)/m/n/10 ledger. Each result records configuration, seed, s
-ource
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
+[][][][][][][][][][][][] [] [][][][][][]$\TU/TeXGyreTermesX(0)/m/n/10 . The ind
+ependent R2.5 audit
  []
 
-[10] (tcns_information_limits.bbl) [11] (tcns_information_limits.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
+\TU/TeXGyreTermesX(0)/m/n/10 is $[][][][][][][] [] [][][][] [] [][] [] [] [] []
+[][][][][][][][][][] [] [][][][][][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
+[][][][][][][][][][][][] [] [][][][][][]$\TU/TeXGyreTermesX(0)/m/n/10 . Registr
+y, witness-scenario, and
+ []
+
+
+Underfull \hbox (badness 3907) in paragraph at lines 1177--1205
+\TU/TeXGyreTermesX(0)/m/n/10 reference-direction seeds are 27022001, 27020001,
+and
+ []
+
+
+Underfull \hbox (badness 2142) in paragraph at lines 1177--1205
+\TU/TeXGyreTermesX(0)/m/n/10 27022001 plus action index; no stochastic draw ent
+ers
+ []
+
+
+Underfull \hbox (badness 1721) in paragraph at lines 1177--1205
+\TU/TeXGyreTermesX(0)/m/n/10 snapshot is included there and committed in \TU/lm
+tt/m/n/10 da97e01\TU/TeXGyreTermesX(0)/m/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
+[][][][][] [] [][][][] [] [][][][] [] [][] [] [] [] [][][][][][][][] [] [][][][
+][][][][][][][][][][][] [] []$\TU/TeXGyreTermesX(0)/m/n/10 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1205
+\TU/TeXGyreTermesX(0)/m/n/10 Frozen negative-trigger, centralized-oracle, feedb
+ack-
+ []
+
+
+Underfull \hbox (badness 1817) in paragraph at lines 1177--1205
+\TU/TeXGyreTermesX(0)/m/n/10 accounting, and feedback-economic result directori
+es are
+ []
+
+(tcns_information_limits.bbl [11]) [12
+
+] (tcns_information_limits.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  )
-Output written on tcns_information_limits.xdv (11 pages, 524244 bytes).
+Output written on tcns_information_limits.xdv (12 pages, 544296 bytes).

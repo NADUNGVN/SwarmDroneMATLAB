@@ -26,7 +26,7 @@ witnesses.
 | Fig. 1 information architecture | `paper/tcns/manuscript/make_gm_figures.m`, model from `tcnsGate6Scenario(27020001,'S1')` | generated schematic | N=5 implementation schematic |
 | Fig. 2 bound-trigger falsification | `make_gm_figures.m` reads Gate-5 frontiers | `results/tcns_gate5_stationary_frontiers/2026-09-07_010403/{frontier_periodic,frontier_control_aware}.csv` | five development seeds, frozen stationary stressed scenario |
 | Fig. 3 centralized headroom/boundary | `make_gm_figures.m` reads O1 Stage A/B | `results/tcns_o1_oracle_frontier_stage_a/2026-09-07_160426/frontiers.csv` and `...stage_b/2026-09-07_162102/frontiers.csv` | five development seeds; privileged O1; S2 positive and S4 negative boundary |
-| Fig. 4 and Table V ACK-like economics | `make_gm_figures.m`; `experiments/tcns_fb0_feedback_economics.m` | `results/tcns_fb0_feedback_economics/2026-09-07_175224/{feedback_economics_points,scenario_summary}.csv` | offline packet-frequency sensitivity; not a causal acquisition protocol |
+| Fig. 4 and Sec. VIII-D ACK-like economics | `make_gm_figures.m`; `experiments/tcns_fb0_feedback_economics.m` | `results/tcns_fb0_feedback_economics/2026-09-07_175224/{feedback_economics_points,scenario_summary}.csv` | offline packet-frequency sensitivity; not a causal acquisition protocol |
 | Fig. 5 information geometry | hand-coded geometry in `make_gm_figures.m` | no empirical data | explanatory schematic |
 | Fig. 6 reachable histories | `make_gm_figures.m` loads the newest IL `workspace.mat` | IL ordinary 1->5 and pin 1->4 witness structs | exactly two actual-response reachable witnesses |
 | Tables II--IV | values transcribed from IL/R1 artifacts above | IL/R1 CSV files | N=5 and stated map/response scopes |

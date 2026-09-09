@@ -1,19 +1,21 @@
 # TCNS submission QA report
 
-**Audit date:** 2026-09-08  
-**Scientific baseline:** `tcns_internal_science_pass` ->
-`7c679610af2098acc2aa5e8f005e81a898435f29`  
-**Audited submission-package commit:**
-`5340d0b34f2f828a9903e91d8ab669ec3070db81`  
+**Audit date:** 2026-09-09
+
+**Frozen manuscript baseline:** `2fd13592185377fbac65e0e5805418e225293647`
+
+**Approved R2.6 refinement:** `d0edd2c810c39a1795ceca0e3139e4ff81ea1cae`
+
+**Audited integration:** local coauthor-review commit reported at handoff; not pushed
 **Submission action:** not performed.
 
 ## Binary recommendation
 
-`READY_TO_SUBMIT`
+`READY_FOR_COAUTHOR_REVIEW`
 
-The scientific, novelty, theorem, reference, figure, reproducibility, and PDF
-QA gates pass. The only remaining input is verified human author metadata. The
-current PDF visibly contains placeholders and must not be uploaded as-is.
+The R2.6 theory integration, regression, reproducibility, and PDF QA gates
+pass. The current PDF visibly contains author placeholders and must not be
+uploaded as-is.
 After the Research Lead supplies the fields listed in
 `submission/AUTHOR_METADATA_CHECKLIST.md`, replace only
 `manuscript/submission_metadata.tex`, rebuild the PDF, and repeat the first-page
@@ -24,35 +26,40 @@ and page-count checks. No scientific revision is required or authorized.
 | Gate | Result | Evidence |
 |---|---|---|
 | SQ0 scientific freeze | Pass | Annotated tag `tcns_internal_science_pass` resolves to the accepted R1 commit and is pushed to `origin`. Later edits are confined to manuscript scope, references, figures, formatting, reproducibility, and submission metadata scaffolding. |
-| SQ1 hostile review | Pass after response | Three independent hostile reviews returned raw `MAJOR` verdicts from functional-observability, networked-control/VoI, and multi-agent/UAV perspectives. All scientifically valid objections were accepted and addressed. No theorem defect or unaddressed major criticism remains. See `SQ_HOSTILE_REVIEW.md`. |
-| SQ2 theorem audit | Pass | Fixed-response affine expansion, static/history row-space conditions, closed-interval minimax radius, strict-straddle randomized/deterministic regret including edge cases, multi-action linear-statistic lower bound/construction, and coalition specialization were rederived. See `SQ_THEOREM_AUDIT.md`. |
+| SQ1 hostile review | Pass after R2.6 response | The absolute-value/relative-value/decision distinction and direct common-maximizer criterion answer the independent decision-identifiability objection. See `GM_REVIEWER_RISKS.md` and `R2_6_DECISION_IDENTIFIABILITY_NOTE.md`. |
+| SQ2 theorem audit | Pass | Fixed-response affine expansion; absolute and relative row-space conditions; set-valued fiberwise argmax; Euclidean margins; binary minimax regret; absolute/relative statistic dimensions; common-offset rank gap; augmented no-transmission corollary; and coalition specialization were checked. |
 | SQ3 novelty audit | Pass | `NO_DIRECT_COLLISION_FOUND`. The search covered the 2025--2026 functional-observability literature, VoI/action-value work, and 2026 goal-oriented communication. This is an audit result, not proof of priority. See `SQ_NOVELTY_AUDIT.md`. |
-| SQ4 format | Pass | Official TCNS guidance checked. The source uses 10-point IEEEtran double-column format. The PDF is 11 letter-size pages; the main text ends and appendices start on page 10. Abstract is 289 words. See `SQ_FORMAT_COMPLIANCE.md`. |
+| SQ4 format | Pass | The source uses 10-point IEEEtran double-column format. The PDF is 12 letter-size pages; all main text ends on page 10 and appendices start on page 11. Abstract is 262 words. |
 | SQ5 author metadata | Human input isolated | Names, affiliations, addresses, phones, emails, ORCIDs, corresponding author, and funding were not present in the repository and were not invented. Explicit placeholders and a blocking checklist are supplied. |
 | SQ6 references | Pass | All 33 cited entries resolve to archival DOI/publisher records; metadata and neighboring claim support were audited. One ACC pagination error was corrected. See `SQ_REFERENCE_AUDIT.md`. |
-| SQ7 figures | Pass | Six figures were regenerated from frozen data, the complete 11-page PDF was rendered and inspected, and every font is embedded. Visual QA caught and removed one literal `qquad` source defect before the final build. See `SQ_FIGURE_AUDIT.md`. |
-| SQ8 claim scrub | Pass | Terms including *first*, *novel*, *optimal*, *fundamental*, *impossible*, *always*, *guarantee*, *universally*, *free*, and *minimum information* were checked against theorem scope. See `SQ_CLAIM_SCRUB.md`. |
+| SQ7 figures/PDF | Pass | No figure data were regenerated. The complete 12-page PDF was rendered at 120 dpi and every page was visually inspected; no crop, overlap, malformed heading, or unreadable equation was found. |
+| SQ8 claim scrub | Pass | The manuscript distinguishes exact unit-response row-space nonidentifiability from structural functional observability, and never calls the relative rank the minimum information for argmax. |
 | SQ9 reproducibility | Pass | A public-facing command map separates essential paper reproduction from historical research artifacts. See `manuscript/REPRODUCIBILITY.md`. |
 | SQ10 package | Pass subject to metadata | Source, bibliography, six vector figures, PDF, cover-letter draft, keywords, expertise areas, conflict checklist, and reproduction statement are prepared under `manuscript/` and `submission/`. No graphical abstract was added. |
 
 ## Verification executed
 
-The authorized frozen regression/theorem suite returned:
+The authorized frozen regression/theorem suite returned eight passes:
 
 - `test_lock_regression: PASS`;
 - `test_tcns_information_limits: PASS`, including affine residual
   `4.323e-16` and two opposite-sign reachable witnesses;
 - `test_tcns_r1_theory_depth: PASS`, including `10/10` tolerance-stable link
-  tests.
+  tests;
+- `test_tcns_r2_generalization: PASS`;
+- `test_tcns_actual_witness_audit: PASS`;
+- `test_tcns_r2_5_persisted_witness_replay: PASS`;
+- `test_tcns_r2_5_adversarial_artifact: PASS`;
+- `test_tcns_r2_6_decision_identifiability: PASS` (`6/6` base synthetic and
+  `4/4` rank-gap refinement cases).
 
 The final TeX build returned exit code zero. Log and PDF audit found:
 
 - 0 LaTeX errors;
 - 0 undefined citations or references;
 - 0 overfull boxes;
-- 25 underfull boxes, all visually inspected and harmless;
-- 11 pages at 612 x 792 pt;
-- all listed fonts embedded;
+- 28 underfull hboxes and 4 underfull vboxes, visually harmless;
+- 12 pages at 612 x 792 pt, with all main text ending on page 10;
 - no cropped or overlapping figure, table, equation, or caption.
 
 ## Exact submission artifact
@@ -63,7 +70,7 @@ Intended PDF path:
 
 SHA-256:
 
-`3E8D5AC5705DF798002322B37F0C8B758AF1094667D5905B237F134605B21F72`
+`4C02009DE59E01C42F70DD61638CFBF52AC409324758DAFD2BB999E15C76FD16`
 
 The matching source is
 `paper/tcns/manuscript/tcns_information_limits.tex`; author metadata is isolated
@@ -80,7 +87,7 @@ These are disclosed, scoped, and not QA blockers:
 2. The theorem concerns conditional fixed-response affine value in a sampled
    linear model; it is not a general Bellman-VoI, Bayesian-policy, nonlinear
    UAV, or arbitrary-code result.
-3. The all-five coalition and all-ten structural audit are conditional on the
+3. The all-five coalition and all-ten unit-response audit are conditional on the
    evaluated N=5 graph, global output, horizon, gains, information maps, and
    unit-response construction.
 4. Empirical frontiers use development data as counterexample/mechanism
@@ -90,6 +97,8 @@ These are disclosed, scoped, and not QA blockers:
 6. A terminology-adjacent, unarchived 2026 public working manuscript was found;
    no direct theorem collision was located, and the audit records it rather
    than making a priority claim.
+7. No reachable multi-action common-fiber experiment was constructed; the ten
+   persisted N=5 witnesses are binary and action-specific.
 
 ## Human release checklist
 

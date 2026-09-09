@@ -16,7 +16,7 @@ hand.
 | Table II identifiability/rank robustness | Does the condition fail on all N=5 structural unit-response payload functionals under tolerance and 80-digit checks? | IL/R1 10-link audit | all 10 structural unit responses; implementation-derived matrices, not every physical correction |
 | Table III reachable regret | How large is the unavoidable local binary-decision loss at the witnesses? | IL witnesses + R1 formulas | two preregistered payload classes only |
 | Table IV simultaneous actions/coalition | Do actions share missing directions, and who owns the joint subspace? | R1 sender-wise rank + coalition enumeration | N=5 topology/unit responses only |
-| Table V feedback economics | Can the frozen traffic budget pay for an ACK-like receiver-information stream? | FB0 | packet-frequency sensitivity only; not an acquisition protocol |
+| Fig. 4 / Sec. VIII-D feedback economics | Can the frozen traffic budget pay for an ACK-like receiver-information stream? | FB0 | packet-frequency sensitivity only; not an acquisition protocol |
 
 S6 O1 is supplemental.  The old AoI-policy development plots, calibration
 plots, and all other scenario frontiers remain reproducible but do not enter

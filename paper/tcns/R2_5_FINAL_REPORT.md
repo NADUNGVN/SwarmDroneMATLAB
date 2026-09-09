@@ -176,7 +176,7 @@ arbitrary-topology, or arbitrary-gain theorem is claimed.
 
 ## 7. Actual-witness coverage
 
-- Structural nonidentifiability: 10/10 frozen N=5 controller-relevant actions.
+- Unit-response functional nonidentifiability: 10/10 frozen N=5 controller-relevant actions.
 - Actual controller response tested: 10/10.
 - Dynamically reachable, unsaturated, opposite-sign witnesses: 10/10.
 - Failures: none (`failureReason=NONE` for every row).

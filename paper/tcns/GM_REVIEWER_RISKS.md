@@ -51,18 +51,19 @@
 14. **Multi-action unit response.** Sender-wise compression is evaluated for
     unit current action responses in the common 99-state model.  Sender 1's
     $r_1^*/p_1=3/4$ partly arises because ordinary and pinned-leader actions
-    into follower 2 share the same structural output-response direction.  No
+    into follower 2 share the same fixed output-response direction.  No
     universal compression claim is made.
 15. **Dimension versus transport.** $r_\star$ counts independent real-valued
    instantaneous linear statistics.  It is neither packet count, bit rate,
    data rate, nor functional-observer order; coalition ownership still leaves
    causal aggregation unsolved.
-16. **Structural unit responses versus physical actions.** The 1320-row
+16. **Unit responses versus physical actions.** The 1320-row
     generalization audit fixes a nonzero x-axis unit command correction; it
-    establishes hidden structural value directions, not nonidentifiability for
-    every possible physical correction. All ten N=5 trajectory witnesses use
-    actual state-generated responses. Zero and specially cancelling responses
-    remain excluded from any universal physical claim.
+    establishes exact row-space nonidentifiability of those unit-response
+    functionals, not a structural-functional-observability or every-physical-
+    correction claim. All ten N=5 trajectory witnesses use actual
+    state-generated responses. Zero and specially cancelling responses remain
+    excluded from any universal physical claim.
 17. **Global objective drives ownership.** The five-agent coalition is
     conditional on the global stacked formation-error output, identity
     weighting, H=25, graph, and current maps. A localized objective can reduce
@@ -97,3 +98,17 @@
     radius 0.232 drops to 0.145 with RMS and 0.175 with IQR/1.349. The maximum
     is partly denominator-sensitive; two follower actions remain order 1e-4
     under every audited scaling.
+25. **Value versus decision.** Absolute-value nonidentifiability does not imply
+    relative-value nonidentifiability, and relative-value nonidentifiability
+    does not imply argmax ambiguity on a bounded fiber. The set-valued
+    common-maximizer intersection, with ties retained, is the direct decision
+    test.
+26. **Exactly-one versus at-most-one.** Ranking communication actions can
+    discard at most one common hidden offset. Adding the genuine
+    no-transmission action `q0=0` removes that rank saving. Communication-only
+    cancellation must not be used to claim transmit/no-transmit decidability.
+27. **No multi-action common-fiber witness.** R2.6 finds strict relative-rank
+    reduction in all 360 nontrivial sender sets, but none is fully
+    relative-identifiable. The ten reachable N=5 witnesses use action-specific
+    fibers and cannot establish a multi-action common-maximizer result. This is
+    the strongest remaining decision-identifiability evidence gap.

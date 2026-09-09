@@ -138,7 +138,7 @@ PDF QA after manuscript update:
 ### Robust observations
 
 - admissible theorem-scope cells: 72/72;
-- structural nonidentifiability: 1320/1320 action rows;
+- unit-response functional nonidentifiability: 1320/1320 action rows;
 - membership conclusion stable from relative tolerance `1e-6` through
   `1e-14`: 1320/1320;
 - compressed-null/direct-row-space agreement: 1320/1320;
@@ -159,7 +159,7 @@ sender has `r_j*=p_j`.
 - all-agent ownership is not topology universal. Ring2 and sparse4 require
   all N agents for every sender. Geometric N=7 follower sets require 5/7,
   and geometric N=9 follower sets require 8/9; the leader still requires all.
-- no counterexample to structural nonidentifiability was found in the finite
+- no counterexample to exact unit-response row-space nonidentifiability was found in the finite
   registry, but that absence is not a proof for arbitrary graphs or gains.
 - pinning, H, and D did not change the categorical conclusions in the tested
   cells; this is recurrence evidence, not invariance theorem.

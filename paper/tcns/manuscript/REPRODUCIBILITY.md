@@ -67,7 +67,21 @@ practical normalizations, and independently enumerates all 448 sender-cell
 coalition results. Two earlier directories are explicitly marked invalid and
 one complete earlier run is labeled development-only.
 
-### 5. Principal paper figures
+### 5. R2.6 decision-identifiability post-processing
+
+    matlab -batch "run('tests/test_tcns_r2_6_decision_identifiability.m')"
+
+The accepted artifact is:
+
+**results/tcns_r2_6_decision_identifiability/2026-09-08_232116/**
+
+It post-processes only the frozen R2 affine matrices and witness endpoints.
+The 448 sender-cell table reports absolute and relative hidden ranks,
+pairwise projection residuals, and the N=5 sender summary. The artifact source
+is committed in `da97e01`; the exact rank-gap refinement is `d0edd2c`. No
+trajectory, graph, seed, policy, scheduler, or noise model is added.
+
+### 6. Principal paper figures
 
     matlab -batch "run('paper/tcns/manuscript/make_gm_figures.m')"
 
@@ -75,7 +89,7 @@ The script reads only frozen machine-readable evidence and writes all six
 main figures to **paper/tcns/manuscript/figures/**. Scientific data are not
 edited manually.
 
-### 6. Build the paper
+### 7. Build the paper
 
 From **paper/tcns/manuscript/**:
 

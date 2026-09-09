@@ -21,7 +21,12 @@ run('experiments/tcns_r2_generalization_validation.m')
 run('tests/test_tcns_r2_5_persisted_witness_replay.m')
 run('tests/test_tcns_r2_5_adversarial_artifact.m')
 run('experiments/tcns_r2_5_adversarial_validation.m')
+run('tests/test_tcns_r2_6_decision_identifiability.m')
 ```
+
+The accepted theory-only R2.6 post-processing artifact is
+`results/tcns_r2_6_decision_identifiability/2026-09-08_232116/`. It reads the
+frozen R2 registry and witnesses and does not run a new simulation.
 
 Compile from this directory in an IEEEtran-capable TeX installation:
 

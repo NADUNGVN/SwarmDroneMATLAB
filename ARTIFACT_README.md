@@ -25,7 +25,12 @@ expand that registry; it reconstructs its 72 cells, audits 6600
 action/tolerance rows, independently replays the ten frozen N=5 witnesses,
 and checks normalization and coalition bookkeeping.  Its authoritative
 artifact is
-`results/tcns_r2_5_adversarial_validation/2026-09-08_175427/`. See
+`results/tcns_r2_5_adversarial_validation/2026-09-08_175427/`. The theory-only
+R2.6 layer post-processes those frozen matrices and witnesses;
+its accepted artifact is
+`results/tcns_r2_6_decision_identifiability/2026-09-08_232116/`, with source
+snapshot commit `da97e01` and rank-gap refinement `d0edd2c`. It adds no graph,
+seed, trajectory, policy, scheduler, or noise model. See
 `paper/tcns/manuscript/REPRODUCIBILITY.md` for the minimal TCNS workflow.
 
 ---
